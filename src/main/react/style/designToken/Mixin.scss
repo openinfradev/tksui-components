@@ -1,0 +1,23 @@
+@mixin user-select-none {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+@mixin vertical-mid {
+    display: flex;
+    align-items: center;
+}
+
+@mixin ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@mixin icon-color($color) {
+    stroke: $color;
+    fill: $color;
+    color: $color;
+}

@@ -1,0 +1,60 @@
+
+.t-drop-holder {
+    display: inline-flex;
+    position: relative;
+
+    .t-drop-holder__holder {
+        cursor: pointer;
+    }
+
+    .t-drop-holder__anchor {
+        display: inline-block;
+        position: absolute;
+    }
+    .t-drop-holder__items {
+        position: absolute;
+        z-index: $t-z-index-drop-holder;
+        border: 1px solid $t-gray-color--06;
+        background: $t-white-color;
+        display: flex;
+        flex-direction: column;
+
+        .t-drop-holder__items__item {
+            cursor: pointer;
+            padding: 0 $t-padding-lr-16;
+            height: 56px;
+            //min-width: 120px;
+            outline: none;
+            display: flex;
+            align-items: center;
+            //justify-content: center;
+            @include user-select-none;
+            > div {
+                width: max-content;
+                align-items: center;
+            }
+            &.t-drop-holder__items__item--divider {
+                border-top: 1px dotted $t-gray-color--03;
+            }
+            &.t-drop-holder__items__item--selected {
+                background: $t-background-color--hover;
+                color: $t-font-color--selected;
+                font-weight: $t-font-weight--selected;
+            }
+            &.t-drop-holder__items__item--disabled {
+                pointer-events: none;
+                cursor: default;
+                color: $t-font-color--disabled;
+            }
+
+            .t-drop-holder__items__item__checkbox .t-checkbox__container:focus .t-checkbox__icon { outline: none; }
+
+            &.t-drop-holder__items__item--focused { background: $t-background-color--hover; }
+            &:hover { background: $t-background-color--hover; }
+            &:active { background: $t-background-color--active; }
+        }
+
+    }
+
+
+}

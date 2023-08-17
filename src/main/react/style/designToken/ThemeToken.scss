@@ -1,0 +1,229 @@
+// region [Color]
+
+$t-primary-color: $T-PRIMARY-COLOR-MINT !default;
+$t-point-color: $T-POINT-COLOR-NAVY !default;
+
+$t-primary-color--shade-1: shade($t-primary-color, 20%) !default;
+$t-primary-color--shade-2: shade($t-primary-color, 40%) !default;
+$t-primary-color--shade-3: shade($t-primary-color, 60%) !default;
+$t-primary-color--shade-4: shade($t-primary-color, 80%) !default;
+$t-primary-color--shade-5: shade($t-primary-color, 90%) !default;
+
+$t-primary-color--tint-1: tint($t-primary-color, 20%) !default;
+$t-primary-color--tint-2: tint($t-primary-color, 40%) !default;
+$t-primary-color--tint-3: tint($t-primary-color, 60%) !default;
+$t-primary-color--tint-4: tint($t-primary-color, 80%) !default;
+$t-primary-color--tint-5: tint($t-primary-color, 90%) !default;
+
+$t-point-color--shade-1: shade($t-point-color, 20%) !default;
+$t-point-color--shade-2: shade($t-point-color, 40%) !default;
+$t-point-color--shade-3: shade($t-point-color, 60%) !default;
+$t-point-color--shade-4: shade($t-point-color, 80%) !default;
+$t-point-color--shade-5: shade($t-point-color, 90%) !default;
+
+$t-point-color--tint-1: tint($t-point-color, 20%) !default;
+$t-point-color--tint-2: tint($t-point-color, 40%) !default;
+$t-point-color--tint-3: tint($t-point-color, 60%) !default;
+$t-point-color--tint-4: tint($t-point-color, 80%) !default;
+$t-point-color--tint-5: tint($t-point-color, 90%) !default;
+
+
+// 내려갈수록 진해짐
+
+$t-white-color: $T-GRAY-COLOR--00 !default; // #FFFFFF   black   0, white 100
+$t-gray-color--01: $T-GRAY-COLOR--01 !default; // #F7F9FA   black  10, white  90
+$t-gray-color--02: $T-GRAY-COLOR--02 !default; // #F6F6F6   black  20, white  80
+$t-gray-color--03: $T-GRAY-COLOR--03 !default; // #F2F2F2   black  30, white  70
+$t-gray-color--04: $T-GRAY-COLOR--04 !default; // #EEEEEE   black  40, white  60
+$t-gray-color--05: $T-GRAY-COLOR--05 !default; // #DDDDDD   black  50, white  50
+$t-gray-color--06: $T-GRAY-COLOR--06 !default; // #CCCCCC   black  60, white  40
+$t-gray-color--07: $T-GRAY-COLOR--07 !default; // #999999   black  70, white  30
+$t-gray-color--08: $T-GRAY-COLOR--08 !default; // #666666   black  80, white  20
+$t-gray-color--09: $T-GRAY-COLOR--09 !default; // #333333   black  90, white  10
+$t-black-color: $T-GRAY-COLOR--10 !default; // #000000   black 100, white   0
+
+$t-layout-background-color: $t-white-color;
+
+
+$t-status-color--required: $T-STATUS-COLOR--REQUIRED !default;
+$t-status-color--success: $T-STATUS-COLOR--SUCCESS !default;
+$t-status-color--error: $T-STATUS-COLOR--ERROR !default;
+$t-status-color--default: $T-STATUS-COLOR--DEFAULT !default;
+$t-status-color--processing: $T-STATUS-COLOR--PROCESSING !default;
+$t-status-color--warning: $T-STATUS-COLOR--WARNING !default;
+
+$t-background-color--hover: $t-primary-color--tint-5;
+$t-background-color--active: $t-primary-color--tint-4;
+$t-background-color--read-only: $t-gray-color--01;
+
+
+$t-font-color--selected: $t-primary-color;
+$t-font-weight--selected: $T-FONT-WEIGHT-MEDIUM;
+$t-font-color-placeholder: $t-gray-color--07;
+$t-font-color--read-only: $t-gray-color--09;
+$t-font-color--disabled: $t-gray-color--08;
+$t-font-color--default: $t-gray-color--09;
+$t-font-color--label: $t-gray-color--06;
+
+$t-border-color--default: $t-gray-color--06;
+
+// font color
+$t-font-color--black: $t-black-color !default;
+$t-font-color--gray-01: $t-gray-color--04 !default; // #999999
+$t-font-color--gray-02: $t-gray-color--06 !default; // #666666
+$t-font-color--gray-03: $t-gray-color--08 !default; // #333333
+
+// background color
+$t-background-color-01: #E5F8F6;
+$t-background-color-02: #F0F8F7;
+$t-background-color-03: #CBEEE9;
+$t-background-color-04: #F6F6F6;
+
+// chart color
+$t-chart-color-01: $t-primary-color--shade-1;
+$t-chart-color-02: $t-primary-color--shade-2;
+$t-chart-color-03: $t-primary-color--shade-3;
+$t-chart-color-04: $t-primary-color--shade-4;
+$t-chart-color-05: $t-primary-color--shade-5;
+$t-chart-color-06: shade($t-point-color, 20%);
+$t-chart-color-07: shade($t-point-color, 40%);
+$t-chart-color-08: shade($t-point-color, 60%);
+$t-chart-color-09: shade($t-point-color, 80%);
+$t-chart-color-10: shade($t-point-color, 90%);
+
+// grid color
+$t-grid-border-color--01: #DDDDDD;
+$t-grid-border-color--02: #EEEEEE;
+$t-grid-border-color--03: $t-black-color;
+$t-grid-background-color--01: #F7F9FA;
+
+$t-input-border-color--01: #CCCCCC;
+
+
+// endregion
+
+// region [Typography]
+
+$t-font-family: Roboto, 'Noto Sans', 'Noto Sans KR', '맑은 고딕', 'Malgun Gothic', 'Apple SD Gothic Neo', '돋움', Dotum, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+$t-font-size-base: $T-FONT-SIZE-BASE; // 기본 폰트 사이즈, 16px
+$t-font-size-xsmall: $T-FONT-SIZE-XSMALL; // 12px
+$t-font-size-small: $T-FONT-SIZE-SMALL; // 14px
+$t-font-size-medium: $T-FONT-SIZE-MEDIUM; // 16px
+$t-font-size-large: $T-FONT-SIZE-LARGE; // 20px
+$t-font-size-xlarge: $T-FONT-SIZE-XLARGE; // 21px
+$t-font-size-xxlarge: $T-FONT-SIZE-XXLARGE; // 29px
+
+$t-font-weight-normal: $T-FONT-WEIGHT-NORMAL;
+$t-font-weight-medium: $T-FONT-WEIGHT-MEDIUM;
+$t-font-weight-bold: $T-FONT-WEIGHT-BOLD;
+
+// h4 ~ h1
+$t-font-size-h4: $T-FONT-SIZE-H4; // 25px
+$t-font-weight-h4: $T-FONT-WEIGHT-BOLD; // 700
+
+$t-font-size-h3: $T-FONT-SIZE-H3; // 29px
+$t-font-weight-h3: $T-FONT-WEIGHT-BOLD; // 700
+
+$t-font-size-h2: $T-FONT-SIZE-H2; // 34px, 안씀
+$t-font-weight-h2: $T-FONT-WEIGHT-BOLD; // 700
+
+$t-font-size-h1: $T-FONT-SIZE-H1; // 45px
+$t-font-weight-h1: $T-FONT-WEIGHT-BOLD; // 700
+
+// menu lv 1 ~ 3
+$t-font-size-menu-lv-1: $T-FONT-SIZE-MEDIUM;
+$t-font-weight-menu-lv-1: $T-FONT-WEIGHT-BOLD;
+
+$t-font-size-menu-lv-2: $T-FONT-SIZE-SMALL;
+$t-font-weight-menu-lv-3: $T-FONT-WEIGHT-NORMAL;
+
+$t-font-size-menu-lv-3: $T-FONT-SIZE-XSMALL;
+$t-font-weight-menu-lv-3: $T-FONT-WEIGHT-NORMAL;
+
+// title
+$t-font-size-page-title: $T-FONT-SIZE-XXLARGE;
+$t-font-weight-page-title: $T-FONT-WEIGHT-BOLD;
+
+$t-font-size-page-subtitle: $T-FONT-SIZE-LARGE;
+$t-font-weight-page-subtitle: $T-FONT-WEIGHT-NORMAL;
+
+// content
+$t-font-size-body-1: $T-FONT-SIZE-MEDIUM;
+$t-font-weight-body-1: $T-FONT-WEIGHT-NORMAL;
+
+$t-font-size-body-2: $T-FONT-SIZE-SMALL;
+$t-font-weight-body-2: $T-FONT-WEIGHT-NORMAL;
+
+$t-font-size-body-3: $T-FONT-SIZE-XSMALL;
+$t-font-weight-body-3: $T-FONT-WEIGHT-NORMAL;
+
+$t-line-height-default: $T-LINE-HEIGHT-DEFAULT;
+$t-line-height-header: $T-LINE-HEIGHT-HEADER;
+$t-line-height-body: $T-LINE-HEIGHT-BODY;
+
+$t-font-size-table-content: $T-FONT-SIZE-SMALL;
+
+
+// endregion
+
+// region Spacing
+
+$t-margin-lr-4: $T-MARGIN-LR-4;
+$t-margin-lr-8: $T-MARGIN-LR-8;
+$t-margin-lr-10: $T-MARGIN-LR-10;
+$t-margin-lr-12: $T-MARGIN-LR-12;
+$t-margin-lr-16: $T-MARGIN-LR-16;
+$t-margin-lr-24: $T-MARGIN-LR-24;
+$t-margin-lr-32: $T-MARGIN-LR-32;
+$t-margin-lr-48: $T-MARGIN-LR-48;
+
+$t-margin-tb-8: $T-MARGIN-TB-8;
+$t-margin-tb-12: $T-MARGIN-TB-12;
+$t-margin-tb-16: $T-MARGIN-TB-16;
+$t-margin-tb-24: $T-MARGIN-TB-24;
+$t-margin-tb-32: $T-MARGIN-TB-32;
+$t-margin-tb-48: $T-MARGIN-TB-48;
+$t-margin-tb-60: $T-MARGIN-TB-60;
+
+$t-padding-lr-8: $T-PADDING-LR-8;
+$t-padding-lr-10: $T-PADDING-LR-10;
+$t-padding-lr-12: $T-PADDING-LR-12;
+$t-padding-lr-16: $T-PADDING-LR-16;
+$t-padding-lr-24: $T-PADDING-LR-24;
+$t-padding-lr-32: $T-PADDING-LR-32;
+$t-padding-lr-48: $T-PADDING-LR-48;
+$t-padding-lr-60: $T-PADDING-LR-60;
+$t-padding-lr-80: $T-PADDING-LR-80;
+
+$t-padding-tb-8: $T-PADDING-TB-8;
+$t-padding-tb-12: $T-PADDING-TB-12;
+$t-padding-tb-16: $T-PADDING-TB-16;
+$t-padding-tb-24: $T-PADDING-TB-24;
+$t-padding-tb-32: $T-PADDING-TB-32;
+$t-padding-tb-48: $T-PADDING-TB-48;
+$t-padding-tb-60: $T-PADDING-TB-60;
+$t-padding-tb-80: $T-PADDING-TB-80;
+
+// endregion
+
+// region [Layout]
+
+$t-layout-content-max-width: 1920px;
+$t-layout-content-min-width: 1440px;
+
+// endregion
+
+
+// region [Z-Index]
+
+// frame
+$t-z-index-header: 100;
+
+$t-z-index-tooltip: 900;
+$t-z-index-modal: 500;
+$t-z-index-dropdown: 300;
+$t-z-index-drop-holder: 300;
+$t-z-index-page-title: 1;
+
+// endregion

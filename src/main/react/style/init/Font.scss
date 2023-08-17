@@ -1,0 +1,51 @@
+// https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face
+// https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight
+
+@font-face {
+    font-family: 'Roboto';
+    font-weight: 400; // Normal | Regular
+    src: local('Roboto'),
+    url('~/asset/font/Roboto-Regular.subset.woff2') format('woff2'),
+    url('~/asset/font/Roboto-Regular.subset.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    font-weight: 500; // Medium
+    src: local('Roboto Medium'),
+    url('~/asset/font/Roboto-Medium.subset.woff2') format('woff2'),
+    url('~/asset/font/Roboto-Medium.subset.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    font-weight: 700; // Bold
+    src: local('Roboto Bold'),
+    url('~/asset/font/Roboto-Bold.subset.woff2') format('woff2'),
+    url('~/asset/font/Roboto-Bold.subset.woff') format('woff');
+}
+
+
+@font-face {
+    font-family: 'Noto Sans KR';
+    font-weight: 400; // Normal | Regular
+    src: local('Noto Sans KR'),
+    url('~/asset/font/NotoSansKR-Regular.subset.woff2') format('woff2'),
+    url('~/asset/font/NotoSansKR-Regular.subset.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Noto Sans KR';
+    font-weight: 500; // Medium
+    src: local('Noto Sans KR Medium'),
+    url('~/asset/font/NotoSansKR-Medium.subset.woff2') format('woff2'),
+    url('~/asset/font/NotoSansKR-Medium.subset.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Noto Sans KR';
+    font-weight: 700; // Bold
+    src: local('Noto Sans KR Bold'),
+    url('~/asset/font/NotoSansKR-Bold.subset.woff2') format('woff2'),
+    url('~/asset/font/NotoSansKR-Bold.subset.woff') format('woff');
+}

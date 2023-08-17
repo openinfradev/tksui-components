@@ -1,0 +1,148 @@
+
+.t-number-field {
+
+    display: inline-block;
+    width: 120px;
+    position: relative;
+
+    .t-number-field__label {
+        z-index: 0;
+        font-size: $t-font-size-medium;
+        font-weight: $t-font-weight-bold;
+        margin-bottom: 12px;
+        display: inline-block;
+
+        &.t-number-field__label--required::after {
+            content: '*';
+            color: $t-status-color--required;
+            margin-left: 6px;
+            font-weight: $t-font-weight-bold;
+        }
+    }
+
+
+    .t-number-field__container {
+        border: 1px solid $t-gray-color--06;
+        width: 100%;
+        padding: 0 $t-padding-lr-16;
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        height: 46px;
+        z-index: 0;
+
+
+        .t-number-field__container__input {
+            width: 100%;
+            color: $t-black-color;
+            border: none;
+            outline: none;
+            font-size: $t-font-size-body-1;
+            background: transparent;
+            padding: 0;
+
+            &.t-number-field__container__input--disabled {
+                pointer-events: none;
+            }
+
+            &::placeholder {
+                color: $t-font-color-placeholder;
+            }
+
+            // Remove default increment/decrement buttons
+            &::-webkit-outer-spin-button, &::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+            &[type=number] { -moz-appearance: textfield; }
+        }
+
+        .t-number-field__container__action-icon {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            color: $t-black-color;
+            font-size: 10px;
+
+            @include user-select-none;
+
+            .t-number-field__container__action-icon__increment, .t-number-field__container__action-icon__decrement {
+                cursor: pointer;
+                &:hover { color: $t-primary-color; }
+            }
+
+            .t-number-field__container__action-icon__increment--disabled, .t-number-field__container__action-icon__decrement--disabled {
+                cursor: default;
+                color: $t-gray-color--06;
+                pointer-events: none;
+            }
+
+
+            .t-number-field__container__action-icon__decrement {
+                transform: rotate(180deg);
+            }
+        }
+    }
+    .t-number-field__details {
+        display: flex;
+        font-size: $t-font-size-body-3;
+        height: 18px;
+        line-height: 18px;
+        color: $t-gray-color--07;
+        position: absolute;
+        width: 100%;
+        .t-number-field__details__message {
+            flex: 1 1 auto;
+            margin-right: $t-margin-lr-16;
+            @include ellipsis;
+        }
+    }
+
+    &.t-number-field--underline .t-number-field__container {
+        border-width: 0 0 1px 0;
+        padding: 0;
+
+        .t-number-field__label {
+            left: 0;
+            padding: 0;
+        }
+
+        &:focus-within {
+            border-color: $t-primary-color;
+            border-width: 0 0 2px 0;
+        }
+    }
+    &.t-number-field--outline .t-number-field__container {
+        border-width: 1px;
+        &:focus-within {
+            border-color: $t-primary-color;
+        }
+    }
+    &.t-number-field--disabled .t-number-field__container {
+        background: $t-gray-color--03;
+
+        .t-number-field__label {
+            color: $t-font-color--read-only;
+        }
+
+        .t-number-field__container__input {
+            color: $t-font-color--disabled;
+            cursor: default;
+        }
+
+        .t-number-field__container__action-icon__increment, .t-number-field__container__action-icon__decrement {
+            color: $t-gray-color--06;
+        }
+    }
+
+    &.t-number-field--failure {
+
+        @include animation-shake();
+
+        .t-number-field__container {border-color: $t-status-color--error;}
+        .t-number-field__details {color: $t-status-color--error;}
+    }
+    &.t-number-field--success {
+        .t-number-field__container {border-color: $t-status-color--success;}
+        .t-number-field__details {color: $t-status-color--success;}
+    }
+
+}

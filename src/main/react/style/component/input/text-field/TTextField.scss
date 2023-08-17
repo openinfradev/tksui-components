@@ -1,0 +1,129 @@
+.t-text-field {
+
+    display: inline-block;
+    width: 100%;
+    line-height: $t-line-height-default;
+    position: relative;
+
+
+    .t-text-field__label {
+        z-index: 0;
+        font-size: $t-font-size-medium;
+        font-weight: $t-font-weight-bold;
+        margin-bottom: 12px;
+        display: inline-block;
+
+        &.t-text-field__label--required::after {
+            content: '*';
+            color: $t-status-color--required;
+            margin-left: 6px;
+            font-weight: $t-font-weight-bold;
+        }
+    }
+
+    .t-text-field__container {
+        border: 1px solid $t-gray-color--06;
+        width: 100%;
+        padding: 0 20px 0 $t-padding-lr-16;
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        height: 46px;
+        z-index: 0;
+        background: $t-white-color;
+
+
+        .t-text-field__container__input {
+            font-family: $t-font-family;
+            width: 100%;
+            color: $t-black-color;
+            border: none;
+            outline: none;
+            font-size: $t-font-size-body-1;
+            padding: 0;
+
+            &[type='password'] {
+                font: large Verdana, sans-serif;
+                letter-spacing: 1px;
+            }
+
+            &::placeholder {
+                color: $t-font-color-placeholder;
+            }
+        }
+
+        .t-text-field__container__action-icon {
+            color: $t-black-color;
+            &:nth-child(2) { margin-left: 16px; }
+            &:not(:nth-child(2)) { margin-left: 4px; }
+        }
+    }
+    .t-text-field__details {
+        display: flex;
+        font-size: $t-font-size-small;
+        height: 18px;
+        line-height: 18px;
+        color: $t-gray-color--07;
+        margin-top: 2px;
+        position: absolute;
+        width: 100%;
+        .t-text-field__details__message {
+            flex: 1 1 auto;
+            margin-right: $t-margin-lr-16;
+            @include ellipsis;
+        }
+        .t-text-field__details__counter {
+            flex: 0 0 auto;
+            text-align: right;
+            display: none;
+        }
+    }
+
+    &.t-text-field--focused {
+        .t-text-field__details .t-text-field__details__counter { display: unset; }
+    }
+
+    &.t-text-field--underline .t-text-field__container {
+        border-width: 0 0 1px 0;
+        padding: 0;
+
+        .t-text-field__label {
+            left: 0;
+            padding: 0;
+        }
+
+        &:focus-within {
+            border-color: $t-primary-color;
+            border-width: 0 0 2px 0;
+        }
+    }
+    &.t-text-field--outline .t-text-field__container {
+        border-width: 1px;
+        &:focus-within {
+            border-color: $t-primary-color;
+        }
+    }
+    &.t-text-field--disabled .t-text-field__container {
+        background: $t-gray-color--03;
+
+        .t-text-field__container__input {
+            color: $t-font-color--disabled;
+            cursor: default;
+        }
+    }
+    &.t-text-field--failure {
+
+        @include animation-shake();
+
+        &.t-text-field--outline .t-text-field__container {border-color: $t-status-color--error;}
+        &.t-text-field--underline .t-text-field__container {border-color: $t-status-color--error;}
+        .t-text-field__details {color: $t-status-color--error;}
+    }
+    &.t-text-field--success {
+        &.t-text-field--outline .t-text-field__container {border-color: $t-status-color--success;}
+        &.t-text-field--underline .t-text-field__container {border-color: $t-status-color--success;}
+        .t-text-field__details {color: $t-status-color--success;}
+    }
+
+}

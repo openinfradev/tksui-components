@@ -1,0 +1,29 @@
+.t-checkbox-group {
+    outline: none;
+
+    .t-checkbox-group__container {
+        display: flex;
+        align-items: center;
+    }
+    .t-checkbox + .t-checkbox { margin-left: 62px; }
+
+    .t-checkbox-group__message {
+        font-size: $t-font-size-body-3;
+        height: 18px;
+        line-height: 18px;
+        color: $t-gray-color--07;
+    }
+
+    &.t-checkbox-group--disabled {
+        pointer-events: none;
+    }
+
+    &.t-checkbox-group--failure {
+        @include animation-shake();
+        .t-checkbox-group__message {color: $t-status-color--error;}
+    }
+    &.t-checkbox-group--success {
+        .t-checkbox-group__message {color: $t-status-color--success;}
+    }
+}
+

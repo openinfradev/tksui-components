@@ -1,0 +1,28 @@
+.t-input-validation-hint {
+    font-size: $t-font-size-small;
+
+    .t-input-validation-hint__description {
+        margin-bottom: $t-margin-tb-8;
+        font-weight: $t-font-weight-medium;
+    }
+
+    .t-input-validation-hint__rules {
+        display: flex;
+        flex-direction: column;
+
+        .t-input-validation-hint__rules__item {
+            &::before {
+                content: '・';
+                margin-right: $t-margin-lr-4;
+                font-weight: $t-font-weight-bold;
+            }
+
+            &.t-input-validation-hint__rules__item--valid {
+                color: $t-status-color--success;
+            }
+            &.t-input-validation-hint__rules__item--invalid {
+                color: $t-status-color--error;
+            }
+        }
+    }
+}

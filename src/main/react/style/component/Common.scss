@@ -1,0 +1,26 @@
+.screen-reader-only {
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0) }
+    33% { transform: translateX(1px) }
+    66% { transform: translateX(-1px) }
+    100% { transform: translateX(0) }
+}
+
+@mixin animation-shake($duration: 0.07s, $iteration-count: 4) {
+    animation: $duration ease-in shake $iteration-count;
+}
+
+@keyframes ripple {
+    0% { transform: scale(0.1); opacity: 0.3; }
+    100% { transform: scale(1); opacity: 0.1; }
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

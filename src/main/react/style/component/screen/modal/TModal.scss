@@ -1,0 +1,76 @@
+$t-modal__overlay__body--small-width: 464px;
+$t-modal__overlay__body--medium-width: 500px;
+$t-modal__overlay__body--large-width: 688px;
+$t-modal__overlay__body--xlarge-width: 944px;
+$t-modal__overlay__body--xxlarge-width: 1500px;
+
+.t-modal {
+
+    .t-modal__overlay {
+        z-index: $t-z-index-modal;
+        position: fixed;
+        inset: 0;
+        background: setOpacity($t-black-color, 40%);
+        opacity: 0;
+        transition: opacity 200ms ease-in-out;
+        &.ReactModal__Overlay--after-open { opacity: 1; }
+        &.ReactModal__Overlay--before-close { opacity: 0; }
+
+        .t-modal__overlay__body {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: $t-modal__overlay__body--medium-width;
+            max-height: calc(100% - 80px);
+
+            background: $t-white-color;
+            outline: none;
+
+            &.t-modal__overlay__body--small { width: $t-modal__overlay__body--small-width; }
+            &.t-modal__overlay__body--medium { width: $t-modal__overlay__body--medium-width; }
+            &.t-modal__overlay__body--large { width: $t-modal__overlay__body--large-width; }
+            &.t-modal__overlay__body--xlarge { width: $t-modal__overlay__body--xlarge-width; }
+            &.t-modal__overlay__body--xxlarge { width: $t-modal__overlay__body--xxlarge-width; }
+
+            .t-modal__overlay__body__close-icon {
+                position: absolute;
+                right: 20px;
+                top: 20px;
+                z-index: 1;
+            }
+
+            .t-modal__overlay__body__header {
+                position: relative;
+
+                padding: 48px 34px 0 34px;
+                display: flex;
+                gap: 8px;
+
+                .t-modal__overlay__body__header__text {
+                    text-align: left;
+                    font-size: $t-font-size-h3;
+                    font-weight: $t-font-weight-h3;
+                    flex: 1 0 auto;
+                    padding-bottom: 16px;
+                    border-bottom: 1px solid $t-black-color;
+                }
+
+            }
+            .t-modal__overlay__body__content {
+                flex: 0 1 auto;
+                overflow-y: auto;
+                padding: 16px 34px 20px 34px;
+                line-height: 1.59;
+                letter-spacing: -0.34;
+            }
+            .t-modal__overlay__body__footer {
+                flex: 0 0 64px;
+                padding: 16px 34px 48px 34px;
+                display: flex;
+                justify-content: center;
+            }
+        }
+    }
+}

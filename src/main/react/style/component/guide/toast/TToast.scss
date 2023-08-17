@@ -1,0 +1,13 @@
+.tks-toast {
+    .tks-toast__body {
+        font-family: $t-font-family;
+    }
+    .tks-toast__progress {
+        background: $t-primary-color;
+    }
+
+    @at-root .Toastify__toast-container--top-right {
+        top: 4em;
+    }
+
+}

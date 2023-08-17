@@ -1,0 +1,193 @@
+$t-button-font-size--xsmall: $T-FONT-SIZE-XSMALL;
+$t-button-font-size--small: $T-FONT-SIZE-SMALL;
+$t-button-font-size--medium: $T-FONT-SIZE-MEDIUM;
+$t-button-font-size--large: $T-FONT-SIZE-LARGE;
+
+$t-button-color--default: $t-black-color;
+$t-button-color--hover: $t-gray-color--09;
+$t-button-color--disabled: $t-gray-color--07;
+
+$t-button-background--default: $t-white-color;
+$t-button-background--hover: $t-gray-color--04;
+$t-button-background--disabled: $t-gray-color--03;
+
+$t-button-border--default: $t-gray-color--05;
+$t-button-border--hover: $t-gray-color--07;
+$t-button-border--disabled: $t-gray-color--05;
+
+
+.t-button {
+    border: 1px solid $t-button-border--default;
+    color: $t-button-color--default;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+    background-color: transparent;
+    white-space: nowrap;
+    font-family: $t-font-family;
+    @include user-select-none;
+
+    height: var(--t-button-height);
+    line-height: var(--t-button-height);
+    min-width: var(--t-button-min-width);
+    padding: var(--t-button-padding);
+    font-size: var(--t-button-font-size);
+    font-weight: var(--t-button-font-weight);
+
+    .t-button__content {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: calc(100% - 2px);
+        .t-button__content__icon {
+            margin-right: $t-margin-lr-8;
+        }
+        &.t-button__content--loading {
+            .t-button__content--loading__slice {
+                position: absolute;
+                top: calc(50% - (var(--t-button-loading-size) * 0.5));
+                left: calc(50% - (var(--t-button-loading-size) * 0.5));
+                width: var(--t-button-loading-size);
+                height: var(--t-button-loading-size);
+                border: var(--t-button-loading-thick) solid $t-primary-color;
+                border-radius: 50%;
+                animation: rotate 1.2s ease infinite;
+                border-color: $t-primary-color transparent transparent transparent;
+                &:nth-child(2) { animation-delay: 0.11s; }
+                &:nth-child(3) { animation-delay: 0.22s; }
+            }
+        }
+    }
+
+    // [ color ]
+    &.t-button--primary {
+        border: 1px solid $t-primary-color;
+        color: $t-primary-color;
+    }
+
+    &.t-button--main {
+        border: none;
+        color: $t-white-color;
+        background: $t-primary-color;
+
+        .t-button__content--loading .t-button__content--loading__slice {
+            border-color: $t-white-color transparent transparent transparent;
+        }
+    }
+
+    &.t-button--point {
+        border: none;
+        color: $t-white-color;
+        background: $t-point-color;
+
+        .t-button__content--loading .t-button__content--loading__slice {
+            border-color: $t-white-color transparent transparent transparent;
+        }
+    }
+
+    &:hover, &:focus-visible {
+        border: 1px solid $t-button-border--hover;
+        color: $t-button-color--hover;
+        background: $t-button-background--hover;
+        cursor: pointer;
+        &.t-button--primary {
+            border: 1px solid $t-primary-color;
+            color: $t-primary-color;
+            background: $t-primary-color--tint-5;
+            &.t-button--disabled {
+                border: 1px solid $t-button-border--disabled;
+                color: $t-button-color--disabled;
+                background: $t-button-background--disabled;
+            }
+        }
+        &.t-button--main {
+            border: none;
+            color: $t-white-color;
+            background: $t-primary-color--shade-1;
+        }
+        &.t-button--point {
+            border: none;
+            color: $t-white-color;
+            background: $t-point-color--shade-2;
+        }
+    }
+
+    &:focus-visible {
+        outline: none;
+    }
+
+    // [ Disabled ]
+    &.t-button--disabled {
+        cursor: default;
+        border: 1px solid $t-button-border--disabled;
+        color: $t-button-color--disabled;
+        background: $t-button-background--disabled;
+
+        &.t-button--main, &.t-button--point {
+            border: none;
+            color: $t-gray-color--05;
+            background: $t-button-color--disabled;
+        }
+
+    }
+
+
+    // [ Shape, Size ]
+    &.t-button--loading {
+        pointer-events: none;
+    }
+    &.t-button--rounded {
+        border-radius: 50px;
+    }
+
+    &.t-button--xsmall {
+        --t-button-height: 24px;
+        --t-button-min-width: 40px;
+        --t-button-padding: 0 #{$t-padding-lr-8};
+        --t-button-font-size: #{$t-button-font-size--xsmall};
+        --t-button-font-weight: #{$t-font-weight-normal};
+
+        --t-button-loading-size: 12px;
+        --t-button-loading-thick: 2px;
+    }
+    &.t-button--small {
+        --t-button-height: 28px;
+        --t-button-min-width: 48px;
+        --t-button-padding: 0 #{$t-padding-lr-16};
+        --t-button-font-size: #{$t-button-font-size--small};
+        --t-button-font-weight: #{$t-font-weight-normal};
+
+        --t-button-loading-size: 14px;
+        --t-button-loading-thick: 2px;
+    }
+    &.t-button--medium {
+        --t-button-height: 40px;
+        --t-button-min-width: 96px;
+        --t-button-padding: 0 #{$t-padding-lr-16};
+        --t-button-font-size: #{$t-button-font-size--small};
+        --t-button-font-weight: #{$t-font-weight-normal};
+
+        --t-button-loading-size: 16px;
+        --t-button-loading-thick: 3px;
+    }
+    &.t-button--large {
+        --t-button-height: 46px;
+        --t-button-min-width: 170px;
+        --t-button-padding: 0 #{$t-padding-lr-32};
+        --t-button-font-size: #{$t-button-font-size--large};
+        --t-button-font-weight: #{$t-font-weight-bold};
+
+        --t-button-loading-size: 32px;
+        --t-button-loading-thick: 4px;
+    }
+
+}
+
+
+.t-button--xsmall + .t-button--xsmall { MARGIN-LEFT: $t-margin-lr-4; }
+.t-button--small + .t-button--small { margin-left: $t-margin-lr-8; }
+.t-button--medium + .t-button--medium { margin-left: 10px; }
+.t-button--large + .t-button--large { margin-left: 10px; }
