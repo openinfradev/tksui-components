@@ -1,11 +1,11 @@
 import {render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import TSearchBox from '~/tks/component/data-container/search-box/TSearchBox';
-import TSearchBoxRow from '~/tks/component/data-container/search-box/TSearchBoxRow';
-import TSearchBoxItem from '~/tks/component/data-container/search-box/TSearchBoxItem';
+import TSearchBox from '~/data-container/search-box/TSearchBox';
+import TSearchBoxRow from '~/data-container/search-box/TSearchBoxRow';
+import TSearchBoxItem from '~/data-container/search-box/TSearchBoxItem';
 
 
-jest.mock('~/tks/component/common/util/ColorUtil', () => ({
+jest.mock('@/common/util/ColorUtil', () => ({
     shadeColor: jest.fn(() => 'blue'),
 }));
 

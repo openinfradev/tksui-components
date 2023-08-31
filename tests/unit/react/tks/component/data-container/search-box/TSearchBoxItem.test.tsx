@@ -1,7 +1,7 @@
 import {render, screen} from '@testing-library/react';
-import TSearchBoxItem from '~/tks/component/data-container/search-box/TSearchBoxItem';
-import TSearchBox from '~/tks/component/data-container/search-box/TSearchBox';
-import TSearchBoxRow from '~/tks/component/data-container/search-box/TSearchBoxRow';
+import TSearchBoxItem from '~/data-container/search-box/TSearchBoxItem';
+import TSearchBox from '~/data-container/search-box/TSearchBox';
+import TSearchBoxRow from '~/data-container/search-box/TSearchBoxRow';
 
 
 // span?: number,

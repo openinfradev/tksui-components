@@ -1,5 +1,5 @@
 import {render, screen} from '@testing-library/react';
-import TSearchBoxRow from '~/tks/component/data-container/search-box/TSearchBoxRow';
+import TSearchBoxRow from '~/data-container/search-box/TSearchBoxRow';
 
 
 describe('TSearchBoxRow', () => {

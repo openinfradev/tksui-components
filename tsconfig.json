@@ -1,0 +1,46 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "outDir": "./lib/esm",
+        "useDefineForClassFields": true,
+        "lib": ["ESNext", "DOM", "DOM.Iterable"],
+        "allowJs": true,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        
+        "strict": false, // strict 설정에 따라 아래 7개 설정이 결정됨
+        "noImplicitAny": false, // 'any' 타입으로 구현된 표현식 혹은 정의 에러처리 여부
+        "strictNullChecks": false, // 엄격한 null 확인 여부
+        "strictFunctionTypes": true, // 함수 타입에 대한 엄격한 확인 여부
+        "strictBindCallApply": true, // 함수에 엄격한 'bind', 'call' 그리고 'apply' 메소드 사용 여부
+        "strictPropertyInitialization": false, // 클래스의 값 초기화에 엄격한 확인 여부
+        "noImplicitThis": true, // 'any' 타입으로 구현된 'this' 표현식 에러처리 여부
+        "alwaysStrict": true, // strict mode로 분석하고 모든 소스 파일에 "use strict"를 추가할 지 여부
+        
+        "forceConsistentCasingInFileNames": true,
+        "module": "ESNext",
+        "moduleResolution": "Node",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": false,
+        "jsx": "react-jsx",
+        "declaration": true,
+        "typeRoots": ["index.d.ts", "node_modules/@types"],
+        "baseUrl": "./",
+        "paths": {
+            // For aliases recognition
+            "@/*": ["src/*"],
+            "~/*": ["src/components/*"],
+            "~style/*": ["src/styles/*"],
+        }
+    },
+    "tsc-alias": {
+        "verbose": true,
+        "fileExtensions": ["js"]
+    },
+    "files": ["index.ts"],
+    "include": ["src/main/react/**/*.tsx", "src/main/react/**/*.ts", "stories/components/**/*.tsx", "tests/unit/**/*.*"],
+    "exclude": ["node_modules"],
+    "references": [{"path": "./tsconfig.node.json"}]
+}

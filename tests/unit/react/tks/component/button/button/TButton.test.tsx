@@ -2,10 +2,10 @@ import {act, render, screen, within} from '@testing-library/react';
 import {useState} from 'react';
 
 import userEvent from '@testing-library/user-event';
-import TButton from '~/tks/component/button/button/TButton';
+import TButton from '~/button/button/TButton';
 
 
-jest.mock('~/tks/component/common/util/ColorUtil', () => ({
+jest.mock('@/common/util/ColorUtil', () => ({
     shadeColor: jest.fn(() => 'blue'),
 }));
 

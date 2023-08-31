@@ -1,8 +1,8 @@
 import {act, render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {CSSProperties} from 'react';
-import TNumberField from '~/tks/component/input/number-field/TNumberField';
-import useInputState from '~/tks/component/common/hook/UseInputState';
+import TNumberField from '~/input/number-field/TNumberField';
+import useInputState from '@/common/hook/UseInputState';
 
 
 describe('TNumberField', () => {

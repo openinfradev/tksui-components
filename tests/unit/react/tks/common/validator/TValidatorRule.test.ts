@@ -1,4 +1,4 @@
-import TValidatorRule from '~/tks/component/common/validator/TValidatorRule';
+import TValidatorRule from '@/common/validator/TValidatorRule';
 
 
 describe('TValidatorRule', () => {
