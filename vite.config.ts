@@ -24,15 +24,15 @@ const commonConfig = () => ({
             // IntelliJ doesn't recognize vite alias yet
             // Aliases should be set in tsconfig.json, main.ts as well
             // @See https://youtrack.jetbrains.com/issue/WEB-55332/Vite-aliases-in-vite.config-support
-            '@': resolve('src/main/rest'),
-            '~': resolve('src/main/react'),
-            '~style': resolve('src/main/react/style'),
+            '@': resolve('src'),
+            '~': resolve('src/components'),
+            '~style': resolve('src/styles'),
         },
     },
     css: {
         preprocessorOptions: {
             scss: {
-                additionalData: '@import "/src/main/react/style/designToken/Entry.scss";',
+                additionalData: '@import "/src/styles/designToken/Entry.scss";',
             },
         },
         devSourcemap: true,

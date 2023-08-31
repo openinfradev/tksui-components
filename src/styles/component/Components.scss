@@ -1,37 +1,37 @@
 // button
-@import 'TButton';
-@import 'TButtonGroup';
+@import 'button/button/TButton';
+@import 'button/button-group/TButtonGroup';
 
 // data-container
-@import 'TSearchBox';
-@import 'TFormBox';
-@import 'TDataGrid';
-@import 'TDropHolder';
-@import 'TTabBox';
-@import 'TPagination';
+@import 'data-container/search-box/TSearchBox.scss';
+@import 'data-container/form-box/TFormBox.scss';
+@import 'data-container/data-grid/TDataGrid.scss';
+@import 'data-container/drop-holder/TDropHolder.scss';
+@import 'data-container/tab-box/TTabBox.scss';
+@import 'data-container/pagination/TPagination.scss';
 
 // icon
-@import 'TIcon';
+@import 'icon/TIcon.scss';
 
 // input
-@import 'TCheckbox';
-@import 'TCheckboxGroup';
-@import 'TDropdown';
-@import 'TRadio';
-@import 'TRadioGroup';
-@import 'TSwitch';
-@import 'TTextField';
-@import 'TTextArea';
-@import 'TChip';
-@import 'TNumberField';
+@import 'input/checkbox/TCheckbox.scss';
+@import 'input/checkbox-group/TCheckboxGroup.scss';
+@import 'input/dropdown/TDropdown.scss';
+@import 'input/radio/TRadio.scss';
+@import 'input/radio-group/TRadioGroup.scss';
+@import 'input/switch/TSwitch.scss';
+@import 'input/text-field/TTextField.scss';
+@import 'input/text-area/TTextArea.scss';
+@import 'input/chip/TChip.scss';
+@import 'input/number-field/TNumberField.scss';
 
 // screen
-@import 'TModal';
-@import 'TPage';
+@import 'screen/modal/TModal.scss';
+@import 'screen/page/TPage.scss';
 
 // guide
-@import 'TToast';
-@import 'TProgress';
-@import 'TTooltip';
-@import 'TBadge';
-@import 'TInputValidationHint';
+@import 'guide/toast/TToast.scss';
+@import 'guide/progress/TProgress.scss';
+@import 'guide/tooltip/TTooltip.scss';
+@import 'guide/badge/TBadge.scss';
+@import 'guide/input-validation-hint/TInputValidationHint.scss';
