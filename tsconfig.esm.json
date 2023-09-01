@@ -1,7 +1,7 @@
 {
     "extends": "./tsconfig.json",
     "compilerOptions": {
-        "module": "commonjs",
+        "module": "ESNext"
     },
     "include": ["src/main/react/**/*.tsx"]
 }
