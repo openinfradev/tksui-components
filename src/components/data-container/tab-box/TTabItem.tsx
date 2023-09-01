@@ -8,7 +8,7 @@ const TTabItem = (props: TTabItemProps) => {
     // region [Hooks]
     
     const {value, index, label} = props;
-    const context = useContext<TTabBoxContext>(TTabBoxContext);
+    const context = useContext<typeof TTabBoxContext>(TTabBoxContext);
     const itemRef = useRef<HTMLLIElement>(null);
     const ripple = useRipple(itemRef);
     // endregion
