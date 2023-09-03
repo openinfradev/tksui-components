@@ -57,13 +57,25 @@ function TRadio(props: TRadioProps) {
     // region [Templates]
     
     function iconTemplate(): JSX.Element {
-        
+
         const status = props.selected ? 'selected' : 'deselected';
+
+        let iconType: string;
+
+        if (props.selected) {
+            iconType = 't_radio_on';
+        } else if (props.disabled) {
+            iconType = 't_radio_disabled_off'
+        } else {
+            iconType = 't_radio_off'
+        }
+
+
         
         
         return (
-            <TIcon className={`t-radio__icon t-radio__icon--${status}`}>
-                {props.selected ? 'radio_button_checked' : 'radio_button_unchecked'}
+            <TIcon small className={`t-radio__icon t-radio__icon--${status}`}>
+                {iconType}
             </TIcon>
         );
     }
