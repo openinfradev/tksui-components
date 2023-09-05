@@ -40,7 +40,7 @@
         "fileExtensions": ["js"]
     },
     "files": ["index.ts"],
-    "include": ["src/main/react/**/*.tsx", "src/main/react/**/*.ts", "stories/components/**/*.tsx", "tests/unit/**/*.*"],
+    "include": ["src/main/react/**/*.tsx", "src/main/react/**/*.ts", "stories/components/**/*.tsx", "tests/unit/**/*.*", ".storybook/*.*"],
     "exclude": ["node_modules"],
     "references": [{"path": "./tsconfig.node.json"}]
 }
