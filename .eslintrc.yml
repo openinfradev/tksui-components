@@ -1,0 +1,58 @@
+root: true
+env:
+  browser: true
+  es2021: true
+plugins:
+  - react
+  - '@typescript-eslint'
+  - "testing-library"
+  - "jest-dom"
+extends:
+  - airbnb-base
+  - plugin:react/recommended
+  - plugin:react-hooks/recommended
+  - plugin:@typescript-eslint/recommended
+  - plugin:testing-library/react
+  - plugin:jest-dom/recommended
+parser: '@typescript-eslint/parser'
+parserOptions:
+  ecmaVersion: latest
+  sourceType: module
+rules:
+  # eslint: https://runebook.dev/ko/docs/eslint/-index-
+  # react: https://github.com/jsx-eslint/eslint-plugin-react/tree/master/docs/rules
+  react/react-in-jsx-scope: off # import React from 'react' 구문 체크하지 않음
+  react/jsx-indent-props: [error, first] # JSX Element 내 attribute 정렬은 첫 attribute 시작점에 맞춤
+  indent: [error, 4, {'SwitchCase': 1, 'ignoredNodes': ['JSXAttribute']}] # 4칸 들여쓰기를 하지만 jsx 내 attribute 는 체크하지 않음
+  max-len: [warn, code: 140] # 라인당 140자까지 허용
+  no-tabs: error # 탭 문자 불허
+  no-multiple-empty-lines: [error, {max: 2, maxBOF: 1, maxEOF: 1}] # 파일의 시작과 끝에는 1줄씩 빈줄 허용, 중간에는 2줄 허용
+  object-curly-spacing: [error, never] # {} 내부에 공백 없게 입력  예) {foo: 'bar'}
+  object-curly-newline: [error, {consistent: true}] # {} 시작시 줄바꿈 했으면 종료할 때도 줄바꿈해야 함
+  no-trailing-spaces: [error, {skipBlankLines: true}] # 라인의 맨 뒤에 불필요한 공백 불허, 공백라인인 경우 허용
+  padded-blocks: off # { } 시작과 끝에 빈 줄을 삽입해도 되고 안해도 됨
+  import/extensions: off # import 구문에서 확장자 적지 않는것 허용
+  import/no-extraneous-dependencies: off # package.json 에 없는 library import 허용
+  import/no-unresolved: off # 찾을 수 없는 import 허용
+  jsx-quotes: [error, prefer-single] # 스트링 앞뒤로 '' 사용해야 함
+  camelcase: [error, {allow: ['$_*']}] # 변수, 함수는 camelCase 를 사용하지만, $_ 로 시작하는 것은 허용
+  no-use-before-define: [error, {variables: false, functions: false}] # 선언하기 전 사용 금지, 단 함수는 허용
+  no-plusplus: off # ++ 연산 사용 가능
+  arrow-body-style: off # arrow function 이 아니어도 됩
+  lines-between-class-members: off # 클래스 멤버변수 사이 한줄 띄우지 않아도 됨
+  '@typescript-eslint/no-explicit-any': off # any 사용 가능
+  '@typescript-eslint/ban-ts-comment': off
+
+
+overrides:
+  - files: '*.json'
+    plugins:
+      - eslint-plugin-json
+  - files: '*.stories.tsx'
+    plugins:
+      - eslint-plugin-storybook
+  - files: '*.test.tsx'
+    rules:
+      testing-library/prefer-screen-queries: off # screen query 가 아닌 container 부터 지정 가능
+      testing-library/no-unnecessary-act: off
+
