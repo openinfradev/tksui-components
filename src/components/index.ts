@@ -13,6 +13,8 @@ export * from './data-container/highlight-text';
 export * from './data-container/pagination';
 export * from './data-container/search-box';
 export * from './data-container/tab-box';
+export * from './data-container/step-box';
+
 
 // guide
 export * from './guide/badge';

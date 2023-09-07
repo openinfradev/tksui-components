@@ -1,0 +1,98 @@
+.t-step-box {
+    outline: 1px solid deepskyblue;
+}
+
+
+.t-step-box-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    height: 48px;
+    margin-bottom: $t-margin-tb-16;
+    border-bottom: 1px solid $t-border-color--default;
+    outline: 1px solid green;
+
+    .t-step-box-header__step {
+        display: flex;
+        align-items: center;
+        gap: $t-margin-tb-16;
+        position: relative;
+
+        .t-step-box-header__step__connector {
+            position: absolute;
+            top: 12px;
+            left: calc(-50% - 20px);
+            outline: 1px solid blue;
+            width: 20px;
+        }
+
+        .t-step-box-header__step__number {
+            border-radius: 50%;
+            border: 1px solid $t-primary-color;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &.t-step-box-header__step__number--prev {
+                border: 1px solid pink;
+            }
+            &.t-step-box-header__step__number--next {
+                border: 1px solid lightgray;
+                color: lightgray;
+            }
+        }
+
+        .t-step-box-header__step__label {
+
+        }
+    }
+
+}
+
+
+.t-step-item-label {
+    padding: $t-padding-tb-16 $t-padding-lr-16;
+    cursor: pointer;
+    min-width: 90px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+
+    .t-step-item-label__active-indicator {
+        width: 100%;
+        height: 3px;
+        position: absolute;
+        inset: calc(100% - 3px) 0;
+
+        background-color: $t-primary-color;
+        transform: scaleX(0);
+    }
+
+    &.t-step-item-label--active {
+        font-weight: $t-font-weight-medium;
+
+        .t-step-item-label__active-indicator {
+            transform: scaleX(1);
+            transition: 0.2s ease transform;
+            transform-origin: left;
+        }
+    }
+}
+
+
+.t-step-box-footer {
+    outline: 1px solid pink;
+    height: 48px;
+    display: flex;
+    align-items: center;
+
+    .t-step-box-footer__left-action {
+        flex: 1 0 auto;
+    }
+    .t-step-box-footer__right-action {
+        flex: 0 1 auto;
+    }
+}
