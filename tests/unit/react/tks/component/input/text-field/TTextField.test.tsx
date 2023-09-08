@@ -1,6 +1,6 @@
 import {act, render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import TTextField from '~/tks/component/input/text-field/TTextField';
+import TTextField from '~/input/text-field/TTextField';
 
 
 describe('TTextField', () => {

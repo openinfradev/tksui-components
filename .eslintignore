@@ -1,0 +1,2 @@
+# yml 은 eslint 가 제대로 체크를 못하는 관계로 제외함
+.eslintrc.yml

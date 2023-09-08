@@ -1,14 +1,14 @@
 import {act, getAllByRole, render, screen} from '@testing-library/react';
 import {CSSProperties} from 'react';
 import userEvent from '@testing-library/user-event';
-import TButtonGroup from '~/tks/component/button/button-group/TButtonGroup';
-import useInputState from '~/tks/component/common/hook/UseInputState';
+import TButtonGroup from '~/button/button-group/TButtonGroup';
+import useInputState from '@/common/hook/UseInputState';
 import {
     TButtonGroupItem,
     TButtonGroupValue,
-} from '~/tks/component/button/button-group/TButtonGroup.interface';
+} from '~/button/button-group/TButtonGroup.interface';
 
-jest.mock('~/tks/component/common/util/ColorUtil', () => ({
+jest.mock('@/common/util/ColorUtil', () => ({
     shadeColor: jest.fn(() => 'blue'),
 }));
 

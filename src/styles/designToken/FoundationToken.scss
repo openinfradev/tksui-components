@@ -1,0 +1,111 @@
+/********** Color **********/
+
+// https://www.sktelecom.com/view/introduce/brand.do
+$T-PRIMARY-COLOR-SK-RED: #EA002C !default;
+$T-PRIMARY-COLOR-SK-ORANGE: #FF7A00 !default;
+$T-PRIMARY-COLOR-SK-BLUE: #3535CE !default;
+
+$T-PRIMARY-COLOR-DARK-PURPLE: #68217A !default;
+$T-PRIMARY-COLOR-NAVY: #0E306D !default;
+$T-PRIMARY-COLOR-DARK-INDIGO: #323CA5 !default;
+$T-PRIMARY-COLOR-DEEP-BLUE: #2949B3 !default;
+$T-PRIMARY-COLOR-LIGHT-BLUE: #0072c6 !default;
+$T-PRIMARY-COLOR-CYAN: #0498DC !default;
+$T-PRIMARY-COLOR-MINT: #00A892 !default;
+$T-PRIMARY-COLOR-GREEN: #2DA379 !default;
+$T-PRIMARY-COLOR-LIME: #9BCF0B !default;
+$T-PRIMARY-COLOR-YELLOW: #FBBC06 !default;
+$T-PRIMARY-COLOR-ORANGE: #EB702D !default;
+$T-PRIMARY-COLOR-RED: #EA002C !default;
+$T-PRIMARY-COLOR-DARK-GRAY: #555761 !default;
+$T-PRIMARY-COLOR-DARK-COOL: #687182 !default;
+
+$T-POINT-COLOR-NAVY: #293443 !default;
+$T-POINT-COLOR-1: #77A8F2 !default;
+$T-POINT-COLOR-2: #FFF619 !default;
+$T-POINT-COLOR-3: #3BCDC7 !default;
+$T-POINT-COLOR-4: #17B675 !default;
+
+$T-STATUS-COLOR--REQUIRED: $T-PRIMARY-COLOR-MINT !default;
+$T-STATUS-COLOR--SUCCESS: #4874FF !default;
+$T-STATUS-COLOR--ERROR: #FF0000 !default;
+$T-STATUS-COLOR--DEFAULT: #959595 !default;
+$T-STATUS-COLOR--PROCESSING: #4874FF !default;
+$T-STATUS-COLOR--WARNING: #F7A443 !default;
+
+
+$T-GRAY-COLOR--00: #FFFFFF !default;
+$T-GRAY-COLOR--01: #F7F9FA !default;
+$T-GRAY-COLOR--02: #F6F6F6 !default;
+$T-GRAY-COLOR--03: #F2F2F2 !default;
+$T-GRAY-COLOR--04: #EEEEEE !default;
+$T-GRAY-COLOR--05: #DDDDDD !default;
+$T-GRAY-COLOR--06: #CCCCCC !default;
+$T-GRAY-COLOR--07: #999999 !default;
+$T-GRAY-COLOR--08: #666666 !default;
+$T-GRAY-COLOR--09: #333333 !default;
+$T-GRAY-COLOR--10: #000000 !default;
+
+
+/********** Typography **********/
+
+$T-FONT-WEIGHT-NORMAL: 400; // Regular | Normal
+$T-FONT-WEIGHT-MEDIUM: 500; // Medium
+$T-FONT-WEIGHT-BOLD: 700; // Bold
+
+$T-FONT-SIZE-BASE: 16px; // 1rem
+
+$T-FONT-SIZE-XSMALL: 0.75rem; //12px
+$T-FONT-SIZE-SMALL: 0.875rem; //14px
+$T-FONT-SIZE-MEDIUM: 1rem; // 16px
+$T-FONT-SIZE-LARGE: 1.125rem; // 18px
+$T-FONT-SIZE-XLARGE: 1.25rem; // 20px
+$T-FONT-SIZE-XXLARGE: 1.625rem; // 26px
+
+
+$T-FONT-SIZE-H4: 1.25rem; // 20px
+$T-FONT-SIZE-H3: 1.5rem; // 24px
+$T-FONT-SIZE-H2: 2rem; // 32px
+$T-FONT-SIZE-H1: 2.25rem; // 36px
+
+$T-LINE-HEIGHT-DEFAULT: 1; // 텍스트의 배수;
+$T-LINE-HEIGHT-HEADER: 1.5; // 텍스트의 배수;
+$T-LINE-HEIGHT-BODY: 1.75;
+
+
+/********** Spacing **********/
+$T-MARGIN-LR-4: 4px;
+$T-MARGIN-LR-8: 8px;
+$T-MARGIN-LR-10: 10px;
+$T-MARGIN-LR-12: 12px;
+$T-MARGIN-LR-16: 16px;
+$T-MARGIN-LR-24: 24px;
+$T-MARGIN-LR-32: 32px;
+$T-MARGIN-LR-48: 48px;
+
+$T-MARGIN-TB-8: 8px;
+$T-MARGIN-TB-12: 12px;
+$T-MARGIN-TB-16: 16px;
+$T-MARGIN-TB-24: 24px;
+$T-MARGIN-TB-32: 32px;
+$T-MARGIN-TB-48: 48px;
+$T-MARGIN-TB-60: 60px;
+
+$T-PADDING-LR-8: 8px;
+$T-PADDING-LR-10: 10px;
+$T-PADDING-LR-12: 12px;
+$T-PADDING-LR-16: 16px;
+$T-PADDING-LR-24: 24px;
+$T-PADDING-LR-32: 32px;
+$T-PADDING-LR-48: 48px;
+$T-PADDING-LR-60: 60px;
+$T-PADDING-LR-80: 80px;
+
+$T-PADDING-TB-8: 8px;
+$T-PADDING-TB-12: 12px;
+$T-PADDING-TB-16: 16px;
+$T-PADDING-TB-24: 24px;
+$T-PADDING-TB-32: 32px;
+$T-PADDING-TB-48: 48px;
+$T-PADDING-TB-60: 60px;
+$T-PADDING-TB-80: 80px;

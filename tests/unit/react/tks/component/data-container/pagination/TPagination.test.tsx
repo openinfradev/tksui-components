@@ -1,8 +1,8 @@
 import {act, render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {CSSProperties} from 'react';
-import useInputState from '~/tks/component/common/hook/UseInputState';
-import TPagination from '~/tks/component/data-container/pagination/TPagination';
+import useInputState from '@/common/hook/UseInputState';
+import TPagination from '~/data-container/pagination/TPagination';
 
 
 describe('TPagination', () => {

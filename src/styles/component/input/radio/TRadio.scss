@@ -1,0 +1,31 @@
+.t-radio {
+    line-height: $t-line-height-header;
+
+    .t-radio__container {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        outline: none;
+
+        .t-radio__icon {
+            border-radius: 2px;
+            &.t-radio__icon--selected { fill: $t-primary-color; stroke: $t-primary-color; }
+            &.t-radio__icon--deselected { fill: $t-gray-color--06; stroke: $t-gray-color--06; }
+        }
+        .t-radio__label {
+            margin-left: $t-margin-lr-10;
+        }
+
+        &:focus .t-radio__icon {
+            outline: 1px solid $t-primary-color;
+        }
+    }
+
+    &.t-radio--disabled .t-radio__container {
+        pointer-events: none;
+        color: $t-font-color--read-only;
+
+        .t-radio__icon--selected { fill: $t-gray-color--06; stroke: $t-gray-color--06; }
+        .t-radio__icon--deselected { fill: $t-gray-color--06; stroke: $t-gray-color--06; }
+    }
+}

@@ -1,6 +1,6 @@
 import {act, render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import TSwitch from '~/tks/component/input/switch/TSwitch';
+import TSwitch from '~/input/switch/TSwitch';
 
 describe('TSwitch', () => {
     const mockOnChange = jest.fn();

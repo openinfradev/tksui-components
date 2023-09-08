@@ -1,0 +1,104 @@
+.t-step-box {
+    outline: 1px solid deepskyblue;
+}
+
+
+.t-step-box-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    padding: 40px 70px;
+    margin-bottom: $t-margin-tb-16;
+    border-bottom: 1px solid $t-border-color--default;
+    outline: 1px solid green;
+
+
+    .t-step-box-header__connector {
+        height: 11px;
+        flex: 0 1 300px;
+        margin: 0 -9px;
+        background: $t-background-color-01;
+
+
+        &.t-step-box-header__connector--prev, &.t-step-box-header__connector--current {
+            background: $t-primary-color--tint-6;
+        }
+
+    }
+    .t-step-box-header__step {
+        display: flex;
+        align-items: center;
+        gap: $t-margin-tb-16;
+        position: relative;
+
+
+        .t-step-box-header__step__number {
+            border-radius: 50%;
+            width: 76px;
+            height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+
+            .t-step-box-header__step__number__inner {
+                border-radius: 50%;
+                width: 58px;
+                height: 58px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: $t-font-size-xxlarge;
+            }
+
+            .t-step-box-header__step__label {
+                position: absolute;
+                top: 95px;
+                font-weight: $t-font-weight-medium;
+                font-size: $t-font-size-xlarge;
+                width: max-content;
+            }
+
+
+            &.t-step-box-header__step__number--prev, &.t-step-box-header__step__number--current {
+                background: $t-primary-color--tint-6;
+
+                .t-step-box-header__step__number__inner {
+                    background: $t-primary-color;
+                    color: $t-font-color--white;
+                }
+            }
+
+            &.t-step-box-header__step__number--current .t-step-box-header__step__label {
+                color: $t-primary-color;
+            }
+
+            &.t-step-box-header__step__number--next {
+
+                .t-step-box-header__step__number__inner {
+                    background: $t-background-color-01;
+                    color: $t-font-color--primary-02;
+                }
+            }
+        }
+
+    }
+
+}
+
+
+
+.t-step-box-footer {
+    outline: 1px solid pink;
+    height: 48px;
+    display: flex;
+    align-items: center;
+
+    .t-step-box-footer__left-action {
+        flex: 1 0 auto;
+    }
+    .t-step-box-footer__right-action {
+        flex: 0 1 auto;
+    }
+}

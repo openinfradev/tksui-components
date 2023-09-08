@@ -1,17 +1,20 @@
 import {mergeConfig} from 'vite';
 import path from 'path';
 
+const resolve = (dir) => path.join(__dirname, '.', dir);
+
 module.exports = {
-    stories: ['../src/stories/components/**/*.stories.tsx'],
+    stories: ['../stories/components/**/*.stories.tsx'],
     addons: [
         '@storybook/addon-links', '@storybook/addon-essentials', '@storybook/addon-interactions', {
             name: '@storybook/preset-scss',
             options: {
                 sassLoaderOptions: {
-                    additionalData: '@import "/src/main/react/style/designToken/Entry.scss";',
+                    additionalData: '@import "/src/styles/designToken/Entry.scss";',
                 },
             },
-        }, '@storybook/addon-mdx-gfm'],
+        }
+    ],
     framework: {
         name: '@storybook/react-vite',
         options: {},
@@ -22,15 +25,15 @@ module.exports = {
         return mergeConfig(config, {
             resolve: {
                 alias: {
-                    '@': path.resolve('src/main/rest'),
-                    '~': path.resolve(__dirname, '/src/main/react'),
-                    '~style': path.resolve('/src/main/react/style'),
+                    '@': path.resolve('src'),
+                    '~': path.resolve('src/components'),
+                    '~style': path.resolve('src/styles'),
                 },
             },
             css: {
                 preprocessorOptions: {
                     scss: {
-                        additionalData: '@import "/src/main/react/style/designToken/Entry.scss";',
+                        additionalData: '@import "/src/styles/designToken/Entry.scss";',
                     },
                 },
             },

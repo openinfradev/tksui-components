@@ -1,5 +1,5 @@
 // components, interfaces
-export * from '~/tks/component';
+export * from 'src/components';
 // hooks
-export * from '~/tks/component/common/hook';
+export * from '@/common/hook';
 
