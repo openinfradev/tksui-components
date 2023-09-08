@@ -28,6 +28,20 @@ const TStepBoxHeader = (props: TStepBoxHeaderProps) => {
         return clazz.join(' ');
     }, [context.currentStep]);
 
+    const connectorClass = useCallback((stepNumber: number): string => {
+        const clazz: string[] = [];
+
+        if (stepNumber < context.currentStep) {
+            clazz.push('t-step-box-header__connector--prev');
+        } else if (stepNumber === context.currentStep) {
+            clazz.push('t-step-box-header__connector--current');
+        } else {
+            clazz.push('t-step-box-header__connector--next');
+        }
+
+        return clazz.join(' ');
+    }, [context.currentStep]);
+
     // endregion
 
 
@@ -41,20 +55,21 @@ const TStepBoxHeader = (props: TStepBoxHeaderProps) => {
         <ul className={'t-step-box-header'}>
             {
                 props.content.map((item, index) => {
-                    return (
-                        <li key={item.stepNumber} className={'t-step-box-header__step'}>
-                            {
-                                (index > 0) && (
-                                    <div className={'t-step-box-header__step__connector'}/>
-                                )
-                            }
+                    return (<>
+                        {
+                            (index > 0) && (
+                                <div className={`t-step-box-header__connector ${connectorClass(item.stepNumber)}`}/>
+                            )
+                        }
 
-                            <div>
+                        <li key={item.stepNumber} className={'t-step-box-header__step'}>
+
+                            <div className={`t-step-box-header__step__number ${numberClass(item.stepNumber)}`}>
                                 {/* Number */}
-                                <div className={`t-step-box-header__step__number ${numberClass(item.stepNumber)}`}>
+                                <div className={'t-step-box-header__step__number__inner'}>
                                     {
                                         (item.stepNumber < context.currentStep)
-                                            ? <TIcon color={'pink'}>done</TIcon>
+                                            ? <TIcon size={'xlarge'}>t_done</TIcon>
                                             : item.stepNumber
                                     }
                                 </div>
@@ -62,7 +77,9 @@ const TStepBoxHeader = (props: TStepBoxHeaderProps) => {
                                 {/* Label */}
                                 <div className={'t-step-box-header__step__label'}>{item.label}</div>
                             </div>
+
                         </li>
+                    </>
                     );
                 })
             }

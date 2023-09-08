@@ -32,7 +32,7 @@ const Template = (args) => {
     return (<>
 
         <TStepBox value={stepNumber} onChange={setStepNumber} {...args} >
-            <TStepBoxItem label={'One'}
+            <TStepBoxItem label={'긴 레이블입니다'}
                           content={<div>Step 1 Content</div>}
             />
             <TStepBoxItem label={'Two'}
@@ -42,23 +42,49 @@ const Template = (args) => {
                               </div>
                           }
             />
+            <TStepBoxItem label={'Two'}
+                          content={
+                              <div>
+                                  Step 2 Content
+                              </div>
+                          }
+            />
+            <TStepBoxItem label={'Two'}
+                          content={
+                              <div>
+                                  Step 2 Content
+                              </div>
+                          }
+            />
+            <TStepBoxItem label={'Two'}
+                          content={
+                              <div>
+                                  Step 2 Content
+                              </div>
+                          }
+            />
             <TStepBoxItem label={'Three'}
-                          content={<>
-                              <TFormBox>
-                                  <TFormSection label={'Step 3 Content'} column={1}>
-                                      <TFormRow>
-                                          <TFormItem label={'꼭 입력해야 하는 값'} required>
-                                              <TTextField value={text}
-                                                          onChange={setText}
-                                                          ref={textRef}
-                                                          rules={[TValidatorRule.required()]}
-                                              />
-                                          </TFormItem>
-
-                                      </TFormRow>
-                                  </TFormSection>
-                              </TFormBox>
-                          </>}
+                          content={
+                              <div>
+                                  Step 2 Content
+                              </div>
+                          }
+                          // content={<>
+                          //     <TFormBox>
+                          //         <TFormSection label={'Step 3 Content'} column={1}>
+                          //             <TFormRow>
+                          //                 <TFormItem label={'꼭 입력해야 하는 값'} required>
+                          //                     <TTextField value={text}
+                          //                                 onChange={setText}
+                          //                                 ref={textRef}
+                          //                                 rules={[TValidatorRule.required()]}
+                          //                     />
+                          //                 </TFormItem>
+                          //
+                          //             </TFormRow>
+                          //         </TFormSection>
+                          //     </TFormBox>
+                          // </>}
                           validateStep={() => { return textRef.current?.validate() === true; }}
                           onClickNext={() => { /* */ }}
                           customNextButton={<><TButton large>Hello</TButton><TButton large>World</TButton></>}

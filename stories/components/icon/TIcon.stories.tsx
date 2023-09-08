@@ -36,6 +36,7 @@ const Template = (args: TIconProps) => {
         't_navigate_right_double',
         't_list',
         't_information',
+        't_done',
     ];
 
 

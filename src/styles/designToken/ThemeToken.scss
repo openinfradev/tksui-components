@@ -3,30 +3,49 @@
 $t-primary-color: $T-PRIMARY-COLOR-SK-BLUE !default;
 $t-point-color: $T-POINT-COLOR-NAVY !default;
 
-$t-primary-color--shade-1: shade($t-primary-color, 20%) !default;
-$t-primary-color--shade-2: shade($t-primary-color, 40%) !default;
-$t-primary-color--shade-3: shade($t-primary-color, 60%) !default;
-$t-primary-color--shade-4: shade($t-primary-color, 80%) !default;
-$t-primary-color--shade-5: shade($t-primary-color, 90%) !default;
+$t-primary-color--shade-1: shade($t-primary-color, 10%) !default;
+$t-primary-color--shade-2: shade($t-primary-color, 20%) !default;
+$t-primary-color--shade-3: shade($t-primary-color, 30%) !default;
+$t-primary-color--shade-4: shade($t-primary-color, 40%) !default;
+$t-primary-color--shade-5: shade($t-primary-color, 50%) !default;
+$t-primary-color--shade-6: shade($t-primary-color, 60%) !default;
+$t-primary-color--shade-7: shade($t-primary-color, 70%) !default;
+$t-primary-color--shade-8: shade($t-primary-color, 80%) !default;
+$t-primary-color--shade-9: shade($t-primary-color, 90%) !default;
 
-$t-primary-color--tint-1: tint($t-primary-color, 20%) !default;
-$t-primary-color--tint-2: tint($t-primary-color, 40%) !default;
-$t-primary-color--tint-3: tint($t-primary-color, 60%) !default;
-$t-primary-color--tint-4: tint($t-primary-color, 80%) !default;
-$t-primary-color--tint-5: tint($t-primary-color, 90%) !default;
+$t-primary-color--tint-1: tint($t-primary-color, 10%) !default;
+$t-primary-color--tint-2: tint($t-primary-color, 20%) !default;
+$t-primary-color--tint-3: tint($t-primary-color, 30%) !default;
+$t-primary-color--tint-4: tint($t-primary-color, 40%) !default;
+$t-primary-color--tint-5: tint($t-primary-color, 50%) !default;
+$t-primary-color--tint-6: tint($t-primary-color, 60%) !default;
+$t-primary-color--tint-7: tint($t-primary-color, 70%) !default;
+$t-primary-color--tint-8: tint($t-primary-color, 80%) !default;
+$t-primary-color--tint-9: tint($t-primary-color, 90%) !default;
+$t-primary-color--tint-10: tint($t-primary-color, 95%) !default;
+$t-primary-color--tint-11: tint($t-primary-color, 98%) !default;
 
-$t-point-color--shade-1: shade($t-point-color, 20%) !default;
-$t-point-color--shade-2: shade($t-point-color, 40%) !default;
-$t-point-color--shade-3: shade($t-point-color, 60%) !default;
-$t-point-color--shade-4: shade($t-point-color, 80%) !default;
-$t-point-color--shade-5: shade($t-point-color, 90%) !default;
+$t-point-color--shade-1: shade($t-point-color, 10%) !default;
+$t-point-color--shade-2: shade($t-point-color, 20%) !default;
+$t-point-color--shade-3: shade($t-point-color, 30%) !default;
+$t-point-color--shade-4: shade($t-point-color, 40%) !default;
+$t-point-color--shade-5: shade($t-point-color, 50%) !default;
+$t-point-color--shade-6: shade($t-point-color, 60%) !default;
+$t-point-color--shade-7: shade($t-point-color, 70%) !default;
+$t-point-color--shade-8: shade($t-point-color, 80%) !default;
+$t-point-color--shade-9: shade($t-point-color, 90%) !default;
 
-$t-point-color--tint-1: tint($t-point-color, 20%) !default;
-$t-point-color--tint-2: tint($t-point-color, 40%) !default;
-$t-point-color--tint-3: tint($t-point-color, 60%) !default;
-$t-point-color--tint-4: tint($t-point-color, 80%) !default;
-$t-point-color--tint-5: tint($t-point-color, 90%) !default;
-
+$t-point-color--tint-1: tint($t-point-color, 10%) !default;
+$t-point-color--tint-2: tint($t-point-color, 20%) !default;
+$t-point-color--tint-3: tint($t-point-color, 30%) !default;
+$t-point-color--tint-4: tint($t-point-color, 40%) !default;
+$t-point-color--tint-5: tint($t-point-color, 50%) !default;
+$t-point-color--tint-6: tint($t-point-color, 60%) !default;
+$t-point-color--tint-7: tint($t-point-color, 70%) !default;
+$t-point-color--tint-8: tint($t-point-color, 80%) !default;
+$t-point-color--tint-9: tint($t-point-color, 90%) !default;
+$t-point-color--tint-10: tint($t-point-color, 95%) !default;
+$t-point-color--tint-11: tint($t-point-color, 98%) !default;
 
 // 내려갈수록 진해짐
 
@@ -56,28 +75,32 @@ $t-background-color--hover: $t-primary-color--tint-5;
 $t-background-color--active: $t-primary-color--tint-4;
 $t-background-color--read-only: $t-gray-color--01;
 
+// font color
+$t-font-color--white: $t-white-color !default;
+$t-font-color--black: $t-black-color !default;
+$t-font-color--gray-01: $t-gray-color--04 !default; // #999999
+$t-font-color--gray-02: $t-gray-color--06 !default; // #666666
+$t-font-color--gray-03: $t-gray-color--08 !default; // #333333
+$t-font-color--primary-01: $t-primary-color !default; // #333333
+$t-font-color--primary-02: $t-primary-color--tint-6 !default; // #333333
+$t-font-color--primary-03: $t-gray-color--08 !default; // #333333
 
 $t-font-color--selected: $t-primary-color;
-$t-font-weight--selected: $T-FONT-WEIGHT-MEDIUM;
 $t-font-color-placeholder: $t-gray-color--07;
 $t-font-color--read-only: $t-gray-color--09;
 $t-font-color--disabled: $t-gray-color--08;
 $t-font-color--default: $t-gray-color--09;
 $t-font-color--label: $t-gray-color--06;
 
+
+
+$t-font-weight--selected: $T-FONT-WEIGHT-MEDIUM;
 $t-border-color--default: $t-gray-color--06;
 
-// font color
-$t-font-color--black: $t-black-color !default;
-$t-font-color--gray-01: $t-gray-color--04 !default; // #999999
-$t-font-color--gray-02: $t-gray-color--06 !default; // #666666
-$t-font-color--gray-03: $t-gray-color--08 !default; // #333333
-
 // background color
-$t-background-color-01: #E5F8F6;
-$t-background-color-02: #F0F8F7;
-$t-background-color-03: #CBEEE9;
-$t-background-color-04: #F6F6F6;
+$t-background-color-01: $t-primary-color--tint-9;
+$t-background-color-02: $t-primary-color--tint-10;
+$t-background-color-03: $t-primary-color--tint-11;
 
 // chart color
 $t-chart-color-01: $t-primary-color--shade-1;
