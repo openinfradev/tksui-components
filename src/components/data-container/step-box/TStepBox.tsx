@@ -95,7 +95,11 @@ const TStepBox = (props: TStepBoxProps) => {
     );
 };
 
-TStepBox.defaultProps = {};
+TStepBox.defaultProps = {
+    prevButtonLabel: 'Previous',
+    nextButtonLabel: 'Next',
+    completeButtonLabel: 'Complete',
+};
 
 TStepBox.displayName = 'TStepBox';
 
