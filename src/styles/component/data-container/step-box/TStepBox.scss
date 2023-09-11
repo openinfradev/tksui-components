@@ -1,5 +1,4 @@
 .t-step-box {
-    outline: 1px solid deepskyblue;
 }
 
 
@@ -10,9 +9,6 @@
     height: 200px;
     padding: 40px 70px;
     margin-bottom: $t-margin-tb-16;
-    border-bottom: 1px solid $t-border-color--default;
-    outline: 1px solid green;
-
 
     .t-step-box-header__connector {
         height: 11px;
@@ -90,7 +86,6 @@
 
 
 .t-step-box-footer {
-    outline: 1px solid pink;
     height: 48px;
     display: flex;
     align-items: center;
