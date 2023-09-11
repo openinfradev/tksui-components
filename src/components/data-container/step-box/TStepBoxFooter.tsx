@@ -14,21 +14,13 @@ const TStepBoxFooter = (props: TStepBoxFooterProps) => {
 
     // region [Privates]
 
-    const currentStepContent = useMemo(() => {
-        return (
-            props.content.filter(
-                (item) => item.stepNumber === context.currentStep,
-            )
-        )[0];
-    }, [context.currentStep, props.content]);
-
     const validateStep = useCallback(() => {
-        if (!currentStepContent.validateStep) {
+        if (!props.validateStep) {
             return true;
         }
 
-        return currentStepContent.validateStep();
-    }, [currentStepContent]);
+        return props.validateStep();
+    }, [props]);
 
 
     // endregion
@@ -64,8 +56,8 @@ const TStepBoxFooter = (props: TStepBoxFooterProps) => {
             </div>
             <div className={'t-step-box-footer__right-action'}>
                 {
-                    currentStepContent.customNextButton
-                        ? currentStepContent.customNextButton
+                    props.customNextButton
+                        ? props.customNextButton
                         : <TButton large onClick={onClickNext}>
                             {
                                 (context.currentStep < context.totalStep)

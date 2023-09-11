@@ -6,6 +6,7 @@ export type TStepBoxValue = number;
 export interface TStepBoxProps extends TBaseProps {
     children: ReactElement[],
     value: number,
+    stepLabels: (string | ReactElement)[],
     onChange: (value: TStepBoxValue) => void,
     prevButtonLabel?: string,
     nextButtonLabel?: string,
@@ -13,17 +14,15 @@ export interface TStepBoxProps extends TBaseProps {
 }
 
 export interface TStepBoxHeaderProps extends TBaseProps {
-    content: {
-        stepNumber: number,
-        label: string,
-    }[],
+    content: {stepNumber: number, label: string | ReactElement}[],
 }
 
 export interface TStepBoxItemProps {
-    label?: string | ReactElement,
-    content?: ReactElement,
-    previousButtonLabel?: string,
+    children?: ReactElement,
+    label?: string | ReactElement, // delete
+    prevButtonLabel?: string,
     nextButtonLabel?: string,
+    completeButtonLabel?: string,
     customNextButton?: ReactElement,
     validateStep?: () => boolean,
     onClickNext?: () => void,
@@ -34,12 +33,9 @@ export interface TStepBoxFooterProps {
     prevButtonLabel: string,
     nextButtonLabel: string,
     completeButtonLabel: string,
-    content: {
-        stepNumber: number,
-        validateStep?: () => boolean,
-        onClickNext?: () => void,
-        onClickPrev?: () => void
-        customNextButton?: ReactElement,
-    }[],
+    customNextButton?: ReactElement,
+    validateStep?: () => boolean,
+    onClickNext?: () => void,
+    onClickPrev?: () => void
 }
 

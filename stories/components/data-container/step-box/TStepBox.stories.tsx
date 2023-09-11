@@ -11,6 +11,7 @@ import TFormSection from '~/data-container/form-box/TFormSection';
 import TFormRow from '~/data-container/form-box/TFormRow';
 import TFormItem from '~/data-container/form-box/TFormItem';
 import TButton from '~/button/button/TButton';
+import StackCreateCspStep from './StackCreateCspStep';
 
 
 const meta: Meta<typeof TStepBox> = {
@@ -31,65 +32,18 @@ const Template = (args) => {
 
     return (<>
 
-        <TStepBox value={stepNumber} onChange={setStepNumber} {...args} >
-            <TStepBoxItem label={'긴 레이블입니다'}
-                          content={<div>Step 1 Content</div>}
-            />
-            <TStepBoxItem label={'Two'}
-                          content={
-                              <div>
-                                  Step 2 Content
-                              </div>
-                          }
-            />
-            <TStepBoxItem label={'Two'}
-                          content={
-                              <div>
-                                  Step 2 Content
-                              </div>
-                          }
-            />
-            <TStepBoxItem label={'Two'}
-                          content={
-                              <div>
-                                  Step 2 Content
-                              </div>
-                          }
-            />
-            <TStepBoxItem label={'Two'}
-                          content={
-                              <div>
-                                  Step 2 Content
-                              </div>
-                          }
-            />
-            <TStepBoxItem label={'Three'}
-                          content={
-                              <div>
-                                  Step 2 Content
-                              </div>
-                          }
-                          // content={<>
-                          //     <TFormBox>
-                          //         <TFormSection label={'Step 3 Content'} column={1}>
-                          //             <TFormRow>
-                          //                 <TFormItem label={'꼭 입력해야 하는 값'} required>
-                          //                     <TTextField value={text}
-                          //                                 onChange={setText}
-                          //                                 ref={textRef}
-                          //                                 rules={[TValidatorRule.required()]}
-                          //                     />
-                          //                 </TFormItem>
-                          //
-                          //             </TFormRow>
-                          //         </TFormSection>
-                          //     </TFormBox>
-                          // </>}
-                          validateStep={() => { return textRef.current?.validate() === true; }}
-                          onClickNext={() => { /* */ }}
-                          customNextButton={<><TButton large>Hello</TButton><TButton large>World</TButton></>}
+        <TStepBox value={stepNumber} onChange={setStepNumber} stepLabels={['step 1', 'step 2']} {...args} >
+            <TStepBoxItem>
+                <div>
+                    Step 1 Content
+                </div>
+            </TStepBoxItem>
+            <TStepBoxItem>
+                <div>
+                    Step 2 Content
+                </div>
+            </TStepBoxItem>
 
-            />
         </TStepBox>
     </>);
 };

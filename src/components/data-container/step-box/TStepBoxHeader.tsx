@@ -54,7 +54,7 @@ const TStepBoxHeader = (props: TStepBoxHeaderProps) => {
 
         <ul className={'t-step-box-header'}>
             {
-                props.content.map((item, index) => {
+                props.content?.map((item, index) => {
                     return (<>
                         {
                             (index > 0) && (
@@ -69,7 +69,7 @@ const TStepBoxHeader = (props: TStepBoxHeaderProps) => {
                                 <div className={'t-step-box-header__step__number__inner'}>
                                     {
                                         (item.stepNumber < context.currentStep)
-                                            ? <TIcon size={'xlarge'}>t_done</TIcon>
+                                            ? <TIcon size={'medium'}>t_done</TIcon>
                                             : item.stepNumber
                                     }
                                 </div>

@@ -6,12 +6,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 200px;
+    height: 48px;
     padding: 40px 70px;
-    margin-bottom: $t-margin-tb-16;
+    margin-bottom: calc($t-margin-tb-16 + 30px);
 
     .t-step-box-header__connector {
-        height: 11px;
+        height: 6px;
         flex: 0 1 300px;
         margin: 0 -9px;
         background: $t-background-color-01;
@@ -31,8 +31,8 @@
 
         .t-step-box-header__step__number {
             border-radius: 50%;
-            width: 76px;
-            height: 76px;
+            width: 48px;
+            height: 48px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -40,19 +40,20 @@
 
             .t-step-box-header__step__number__inner {
                 border-radius: 50%;
-                width: 58px;
-                height: 58px;
+                width: 35px;
+                height: 35px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                font-size: $t-font-size-xxlarge;
+                font-size: $t-font-size-medium;
+                font-weight: $t-font-weight-bold;
             }
 
             .t-step-box-header__step__label {
                 position: absolute;
-                top: 95px;
+                top: 64px;
                 font-weight: $t-font-weight-medium;
-                font-size: $t-font-size-xlarge;
+                font-size: $t-font-size-medium;
                 width: max-content;
             }
 
@@ -83,6 +84,8 @@
 
 }
 
+.t-step-box-item {
+}
 
 
 .t-step-box-footer {
