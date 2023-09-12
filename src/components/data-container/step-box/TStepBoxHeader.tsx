@@ -1,4 +1,4 @@
-import {useCallback, useContext} from 'react';
+import {Fragment, useCallback, useContext} from 'react';
 import {TStepBoxHeaderProps} from './TStepBox.interface';
 import TStepBoxContext from './TStepBoxContext';
 import TIcon from '~/icon/TIcon';
@@ -55,7 +55,7 @@ const TStepBoxHeader = (props: TStepBoxHeaderProps) => {
         <ul className={'t-step-box-header'}>
             {
                 props.content?.map((item, index) => {
-                    return (<>
+                    return (<Fragment key={index}>
                         {
                             (index > 0) && (
                                 <div className={`t-step-box-header__connector ${connectorClass(item.stepNumber)}`}/>
@@ -79,7 +79,7 @@ const TStepBoxHeader = (props: TStepBoxHeaderProps) => {
                             </div>
 
                         </li>
-                    </>
+                    </Fragment>
                     );
                 })
             }
