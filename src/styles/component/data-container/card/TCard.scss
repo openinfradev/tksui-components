@@ -1,0 +1,25 @@
+.t-card {
+    width: 605px;
+    height: 300px;
+    border: 1px solid #DBE2F0;
+    border-radius: 12px;
+}
+
+.t-card-header {
+    outline: 1px solid pink;
+    margin: 32px 32px 16px 32px;
+
+
+    .t-card-header__title {
+
+    }
+    .t-card-header__sub-title {
+        margin-top: $t-margin-tb-12;
+        color: $t-gray-color--08;
+    }
+}
+
+.t-card-content {
+    outline: 1px solid lightgreen;
+    margin: 16px 32px;
+}
