@@ -5,8 +5,6 @@ const TCard = (props: TCardProps) => {
 
     // region [Hooks]
 
-    const {className, style} = props;
-
 
     // region [Privates]
 
@@ -19,15 +17,20 @@ const TCard = (props: TCardProps) => {
     const rootClass = useMemo((): string => {
         const clazz: string[] = [];
 
-        if (className) { clazz.push(className); }
+        if (props.className) { clazz.push(props.className); }
 
         return clazz.join(' ');
-    }, [className]);
+    }, [props.className]);
 
     const rootStyle = useMemo((): CSSProperties => {
-        if (style) { return style; }
-        return {};
-    }, [style]);
+        let style: CSSProperties = {};
+
+        if (props.width) { style = {...style, width: props.width}; }
+        if (props.height) { style = {...style, height: props.height}; }
+        if (props.style) { style = {...style, ...props.style}; }
+
+        return style;
+    }, [props.height, props.style, props.width]);
 
     // endregion
 

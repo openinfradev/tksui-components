@@ -2,7 +2,9 @@ import {ReactElement} from 'react';
 import {TBaseProps} from '@/common/base/TBase.interface';
 
 export interface TCardProps extends TBaseProps {
-    children: ReactElement | ReactElement[],
+    children: string | ReactElement | ReactElement[],
+    width?: string,
+    height?: string,
 }
 
 export interface TCardHeaderProps extends TBaseProps {
