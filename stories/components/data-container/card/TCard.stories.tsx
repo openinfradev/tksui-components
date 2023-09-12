@@ -21,7 +21,7 @@ const Template = (args) => {
 
     return (<>
 
-        <TCard>
+        <TCard clickable>
             <TCardHeader title={'AWS'} subTitle={'fff'}></TCardHeader>
 
             {/* <CardDivider /> */}

@@ -5,6 +5,8 @@ export interface TCardProps extends TBaseProps {
     children: string | ReactElement | ReactElement[],
     width?: string,
     height?: string,
+
+    clickable?: boolean,
 }
 
 export interface TCardHeaderProps extends TBaseProps {
