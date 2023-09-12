@@ -1,6 +1,3 @@
-.t-step-box {
-}
-
 
 .t-step-box-header {
     display: flex;
@@ -12,7 +9,7 @@
 
     .t-step-box-header__connector {
         height: 6px;
-        flex: 0 1 300px;
+        flex: 0 1 250px;
         margin: 0 -9px;
         background: $t-background-color-01;
 
@@ -92,6 +89,7 @@
     height: 48px;
     display: flex;
     align-items: center;
+    margin-top: 40px;
 
     .t-step-box-footer__left-action {
         flex: 1 0 auto;
