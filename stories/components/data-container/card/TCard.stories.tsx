@@ -35,6 +35,9 @@ const Template = (args) => {
             {/* </CardAction> */}
             <TCardContent>
                 Lorem ipsum dolor
+                Lorem ipsum dolor
+                Lorem ipsum dolor
+                Lorem ipsum dolor
             </TCardContent>
 
         </TCard>

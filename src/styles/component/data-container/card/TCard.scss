@@ -6,7 +6,6 @@
 }
 
 .t-card-header {
-    outline: 1px solid pink;
     margin: 32px 32px 16px 32px;
 
 
@@ -20,6 +19,6 @@
 }
 
 .t-card-content {
-    outline: 1px solid lightgreen;
     margin: 16px 32px;
+    line-height: $t-line-height-body;
 }
