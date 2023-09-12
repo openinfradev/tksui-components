@@ -19,9 +19,10 @@ const TCard = (props: TCardProps) => {
 
         if (props.className) { clazz.push(props.className); }
         if (props.clickable) { clazz.push('t-card--clickable'); }
+        if (props.selected) { clazz.push('t-card--selected'); }
 
         return clazz.join(' ');
-    }, [props.className, props.clickable]);
+    }, [props.className, props.clickable, props.selected]);
 
     const rootStyle = useMemo((): CSSProperties => {
         let style: CSSProperties = {};
