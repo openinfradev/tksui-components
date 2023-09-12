@@ -37,7 +37,7 @@ const TCard = (props: TCardProps) => {
     // endregion
 
     return (
-        <div className={`t-card ${rootClass}`} style={rootStyle}>
+        <div className={`t-card ${rootClass}`} style={rootStyle} onClick={props.onClick}>
             {props.children}
         </div>
     );

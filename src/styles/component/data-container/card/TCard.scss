@@ -7,7 +7,7 @@
         &:hover {background: $t-primary-color--tint-9;}
     }
     &.t-card--selected {
-        border: 5px solid $t-primary-color;
+        outline: 3px solid $t-primary-color;
     }
 
 }

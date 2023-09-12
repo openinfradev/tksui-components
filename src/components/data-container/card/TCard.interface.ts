@@ -6,8 +6,10 @@ export interface TCardProps extends TBaseProps {
     width?: string,
     height?: string,
 
-    clickable?: boolean,
     selected?: boolean,
+    clickable?: boolean,
+
+    onClick?: () => void,
 }
 
 export interface TCardHeaderProps extends TBaseProps {
