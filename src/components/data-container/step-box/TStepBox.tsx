@@ -27,17 +27,16 @@ const TStepBox = (props: TStepBoxProps) => {
             let content = null;
 
             if (children?.length === undefined) {
-                if (!children) {
+                if (!children) { // children 안들어옴
                     return null;
                 }
-
-                content = children;
-            } else {
+                content = children; // children 1개
+            } else { // children 2개 이상
                 content = children[value - 1];
             }
 
             if (!content.props.children) {
-                content = content.type();
+                return content;
             }
 
             return (
@@ -82,6 +81,9 @@ const TStepBox = (props: TStepBoxProps) => {
                 currentStep: value,
                 totalStep: children?.length,
                 onChangeCurrentStep: props.onChange,
+                nextButtonLabel: props.nextButtonLabel,
+                prevButtonLabel: props.prevButtonLabel,
+                completeButtonLabel: props.completeButtonLabel,
             }}>
                 {/* Header */}
                 <TStepBoxHeader content={headerContent}/>

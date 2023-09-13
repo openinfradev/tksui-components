@@ -19,7 +19,6 @@ export interface TStepBoxHeaderProps extends TBaseProps {
 
 export interface TStepBoxItemProps extends TBaseProps {
     children?: any,
-    label?: string | ReactElement, // delete
     prevButtonLabel?: string,
     nextButtonLabel?: string,
     completeButtonLabel?: string,

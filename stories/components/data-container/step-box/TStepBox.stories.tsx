@@ -32,10 +32,11 @@ const Template = (args) => {
 
     return (<>
 
-        <TStepBox value={stepNumber} onChange={setStepNumber} stepLabels={['step 1', 'step 2']} {...args} >
+        <TStepBox value={stepNumber} onChange={setStepNumber} stepLabels={['csp', 'step 2']} {...args} >
+            <StackCreateCspStep />
             <TStepBoxItem>
                 <div>
-                    Step 1 Content
+                    Step 2 Content
                 </div>
             </TStepBoxItem>
             <TStepBoxItem>

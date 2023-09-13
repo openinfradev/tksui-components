@@ -1,32 +1,42 @@
-import {CSSProperties, useMemo} from 'react';
+import {CSSProperties, useContext, useMemo} from 'react';
 import {TStepBoxItemProps} from './TStepBox.interface';
 import TStepBoxFooter from '~/data-container/step-box/TStepBoxFooter';
+import TStepBoxContext from '~/data-container/step-box/TStepBoxContext';
 
 const TStepBoxItem = (props: TStepBoxItemProps) => {
 
-    const {className, style} = props;
+    // region [Hooks]
+
+    const stepBoxContext = useContext(TStepBoxContext);
+
+    // endregion
+
+
+    // region [Styles]
 
     const rootClass = useMemo((): string => {
         const clazz: string[] = [];
 
-        if (className) { clazz.push(className); }
+        if (props.className) { clazz.push(props.className); }
 
         return clazz.join(' ');
-    }, [className]);
+    }, [props.className]);
 
     const rootStyle = useMemo((): CSSProperties => {
-        if (style) { return style; }
+        if (props.style) { return props.style; }
         return {};
-    }, [style]);
+    }, [props.style]);
+
+    // endregion
 
 
     return (
         <div className={`t-step-box-item ${rootClass}`} style={rootStyle}>
-            {props.children}
-        
-            <TStepBoxFooter prevButtonLabel={props.prevButtonLabel}
-                            nextButtonLabel={props.nextButtonLabel}
-                            completeButtonLabel={props.completeButtonLabel}
+            {props.children ?? props.children}
+
+            <TStepBoxFooter prevButtonLabel={props.prevButtonLabel ?? stepBoxContext.prevButtonLabel}
+                            nextButtonLabel={props.nextButtonLabel ?? stepBoxContext.nextButtonLabel}
+                            completeButtonLabel={props.completeButtonLabel ?? stepBoxContext.completeButtonLabel }
                             customNextButton={props.customNextButton}
                             validateStep={props.validateStep}
                             onClickNext={props.onClickNext}

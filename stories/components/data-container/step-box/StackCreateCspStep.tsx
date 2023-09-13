@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import React, {useState} from 'react';
 import TStepBoxItem from '~/data-container/step-box/TStepBoxItem';
 
 
@@ -6,45 +6,12 @@ const StackCreateCspStep = () => {
 
     // region [Hooks]
 
+    const [cloudService, setCloudService] = useState<string>('');
 
     // endregion
-
-    // region [Routes]
-
-
-    // endregion
-
-
-    // region [Privates]
-
-
-    // endregion
-
-
-    // region [Transactions]
-
-    // endregion
-
-
-    // region [Events]
-
-
-    // endregion
-
-
-    // region [Hooks - Lifecycle]
-
-
-    // endregion
-
-
-    // region [Templates]
-
-    // endregion
-
     return (
-        <TStepBoxItem label={'설치환경 선택'}>
-            <div>hello step 1</div>
+        <TStepBoxItem>
+            <div>렌더링 되어라</div>
         </TStepBoxItem>
     );
 };

@@ -21,7 +21,7 @@ const Template = (args) => {
 
     return (<>
 
-        <TCard clickable selected>
+        <TCard clickable selected onClick={() => { console.log('!!!'); }}>
             <TCardHeader title={'AWS'} subTitle={'fff'}></TCardHeader>
 
             {/* <CardDivider /> */}
