@@ -32,12 +32,12 @@ export default function useRipple(
                 .getPropertyValue('background-color');
             ripple.style.background = colorUtil.shadeColor(baseColor, 100);
             ripple.style.borderRadius = '50%';
-            ripple.style.animation = '0.3s ripple linear';
+            ripple.style.animation = '0.35s ripple linear';
             ref.current.append(ripple);
             
             setTimeout(() => {
                 resolve(null);
-            }, 300);
+            }, 350);
         });
     }
     
