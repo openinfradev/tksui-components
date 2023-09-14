@@ -30,22 +30,24 @@
         &.react-tooltip__place-top > .react-tooltip-arrow {
             border-bottom: 1px solid $t-gray-color--08;
             border-right: 1px solid $t-gray-color--08;
+            bottom: -6px !important;
         }
 
         &.react-tooltip__place-right > .react-tooltip-arrow {
             border-bottom: 1px solid $t-gray-color--08;
-            border-left: 1px solid $t-gray-color--08;
+            border-right: 1px solid $t-gray-color--08;
             left: -6px !important;
         }
 
         &.react-tooltip__place-bottom > .react-tooltip-arrow {
-            border-top: 1px solid $t-gray-color--08;
-            border-left: 1px solid $t-gray-color--08;
+            border-bottom: 1px solid $t-gray-color--08;
+            border-right: 1px solid $t-gray-color--08;
             top: -6px !important;
         }
 
         &.react-tooltip__place-left > .react-tooltip-arrow {
-            border-top: 1px solid $t-gray-color--08;
+            border-bottom: 1px solid $t-gray-color--08;
+            border-right: 1px solid $t-gray-color--08;
             right: -6px !important;
         }
     }
