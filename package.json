@@ -1,6 +1,6 @@
 {
     "name": "tksui-components",
-    "version": "0.2.15",
+    "version": "0.2.16",
     "private": false,
     "type": "module",
     "module": "lib/esm/index.js",
