@@ -16,6 +16,7 @@ export interface TFormSectionProps extends TBaseProps {
     children: ReactNode,
 
     column?: number,
+    required?: boolean,
     label?: TFormLabel,
     information?: string,
     gridType?: boolean,

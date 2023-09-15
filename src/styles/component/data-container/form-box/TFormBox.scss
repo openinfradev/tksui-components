@@ -30,6 +30,12 @@
     display: flex;
     flex-direction: column;
 
+    &.t-form-section--required .t-form-section__label::after {
+        content: '*';
+        color: $t-status-color--required;
+        margin-left: $t-margin-lr-4;
+    }
+
     .t-form-section__label {
         padding-bottom: $t-padding-tb-16;
         border-bottom: 2px solid $t-black-color;

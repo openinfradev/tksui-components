@@ -14,6 +14,7 @@ function TFormSection(props: TFormSectionProps) {
 
         if (props.className) { clazz.push(props.className); }
         if (props.gridType) { clazz.push('t-form-section--grid-type'); }
+        if (props.required) { clazz.push('t-form-section--required'); }
 
         return clazz.join(' ');
     }, [props.className, props.gridType]);
