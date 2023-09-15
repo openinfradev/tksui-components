@@ -4,8 +4,8 @@
 
     &.t-card--clickable {
         cursor: pointer;
-        &:hover {background: $t-primary-color--tint-9;}
-        &:active {background: $t-primary-color--tint-8;}
+        &:hover {background: $t-background-color--hover;}
+        &:active {background: $t-background-color--active;}
     }
     &.t-card--selected {
         outline: 3px solid $t-primary-color;
