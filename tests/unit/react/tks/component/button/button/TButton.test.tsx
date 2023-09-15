@@ -155,14 +155,14 @@ describe('TButton', () => {
         });
 
 
-        it('When the size prop is used, button width will be it', () => {
+        it('When the width prop is used, button width will be it', () => {
             const widthValue = '50%';
             render(<TButton icon={'link'} width={widthValue}>icon test</TButton>);
 
             const button = screen.getByRole('button');
 
             expect(button)
-                .toHaveStyle({width: widthValue});
+                .toHaveStyle({width: widthValue, minWidth: widthValue});
         });
 
 

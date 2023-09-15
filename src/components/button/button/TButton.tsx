@@ -101,7 +101,7 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
     const rootStyle: CSSProperties = useMemo(() => {
         let style: CSSProperties = {};
 
-        if (props.width) { style = {...style, width: props.width}; }
+        if (props.width) { style = {...style, width: props.width, minWidth: props.width}; }
         if (props.style) { style = {...style, ...props.style}; }
 
         return style;
