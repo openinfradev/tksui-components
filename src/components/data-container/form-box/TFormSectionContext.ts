@@ -5,6 +5,7 @@ export const formSectionContext = createContext({
     gridType: {
         value: false,
         rowHeight: '96px',
+        labelWidth: '170px',
     },
 });
 

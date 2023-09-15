@@ -17,7 +17,7 @@ function TFormSection(props: TFormSectionProps) {
         if (props.required) { clazz.push('t-form-section--required'); }
 
         return clazz.join(' ');
-    }, [props.className, props.gridType]);
+    }, [props.className, props.gridType, props.required]);
 
 
     // endregion
@@ -49,7 +49,14 @@ function TFormSection(props: TFormSectionProps) {
                 }
 
                 <FormContext.Provider
-                    value={{column: props.column, gridType: {value: props.gridType, rowHeight: props.gridTypeRowHeight ?? '96px'}}}>
+                    value={{
+                        column: props.column,
+                        gridType: {
+                            value: props.gridType,
+                            rowHeight: props.gridTypeRowHeight ?? '96px',
+                            labelWidth: props.gridTypeLabelWidth ?? '170px',
+                        },
+                    }}>
                     {props.children}
                 </FormContext.Provider>
             </div>

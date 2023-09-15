@@ -6,7 +6,7 @@ function TFormItem(props: TFormItemProps) {
 
     // region [Hooks]
 
-    const {column} = useContext(FormContext);
+    const {column, gridType} = useContext(FormContext);
 
 
     // endregion
@@ -33,8 +33,14 @@ function TFormItem(props: TFormItemProps) {
     }, [column, props.span, props.style]);
 
     const labelStyle = useMemo((): CSSProperties => {
-        return {marginBottom: props.labelMarginBottom};
-    }, [props.labelMarginBottom]);
+        let style: CSSProperties = {marginBottom: props.labelMarginBottom};
+
+        if (gridType.value) {
+            style = {...style, flex: `0 0 ${gridType.labelWidth}`};
+        }
+
+        return style;
+    }, [gridType.labelWidth, gridType.value, props.labelMarginBottom]);
 
     const contentStyle = useMemo((): CSSProperties => {
         let style: CSSProperties = {};

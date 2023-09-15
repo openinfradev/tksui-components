@@ -21,6 +21,7 @@ export interface TFormSectionProps extends TBaseProps {
     information?: string,
     gridType?: boolean,
     gridTypeRowHeight?: string,
+    gridTypeLabelWidth?: string,
 }
 
 
@@ -35,7 +36,6 @@ export interface TFormItemProps extends TBaseProps {
     required?: boolean,
     label?: TFormLabel,
 
-    // TODO. 디자인 수정하면서 제거
     labelMarginBottom?: string,
     contentStyle?: CSSProperties,
 }

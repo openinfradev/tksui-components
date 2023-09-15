@@ -91,7 +91,7 @@ const Template = (args: TFormBoxProps) => {
                     </TFormRow>
                 </TFormSection>
 
-                <TFormSection label={'Properties'} column={2} gridType>
+                <TFormSection label={'Properties'} column={2} gridType gridTypeLabelWidth={'180px'}>
                     <TFormRow>
                         <TFormItem label={'Artifact URL'} required>
                             <TTextField {...artifactUrl} />
