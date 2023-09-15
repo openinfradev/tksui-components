@@ -90,6 +90,26 @@ const Template = (args: TFormBoxProps) => {
                         </TFormItem>
                     </TFormRow>
                 </TFormSection>
+
+                <TFormSection label={'Properties'} column={2} gridType>
+                    <TFormRow>
+                        <TFormItem label={'Artifact URL'} required>
+                            <TTextField {...artifactUrl} />
+                        </TFormItem>
+                        <TFormItem label={'Port'}>
+                            <TTextField counter={20} {...port} placeholder={'123.123.123.123'}/>
+                        </TFormItem>
+                    </TFormRow>
+
+                    <TFormRow>
+                        <TFormItem label={'Profile'}>
+                            <TTextField counter={20} {...profile} />
+                        </TFormItem>
+                        <TFormItem label={'Resource Spec'}>
+                            <TDropdown items={resourceSpecItems} {...resourceSpec} />
+                        </TFormItem>
+                    </TFormRow>
+                </TFormSection>
             </TFormBox>
         </>
     );

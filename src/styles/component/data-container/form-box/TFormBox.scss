@@ -33,7 +33,7 @@
     &.t-form-section--required .t-form-section__label::after {
         content: '*';
         color: $t-status-color--required;
-        margin-left: $t-margin-lr-4;
+        margin-left: $t-margin-lr-8;
     }
 
     .t-form-section__label {
@@ -66,6 +66,11 @@
 
     &.t-form-section--grid-type {
 
+        .t-form-section__label {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
         .t-form-section__content {
             border-top: 2px solid $t-black-color;
             border-bottom: none;
@@ -73,7 +78,6 @@
             padding-bottom: 0;
         }
         .t-form-row {
-            //flex: 1 0 96px;
             border-bottom: 1px solid $t-gray-color--05;
             &.t-form-row + .t-form-row { margin-top: 0; }
         }
