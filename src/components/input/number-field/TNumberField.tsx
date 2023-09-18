@@ -247,11 +247,8 @@ const TNumberField = forwardRef((props: TNumberFieldProps, ref: Ref<TNumberField
                 }
             </div>
             <div className={'t-number-field__details'}>
-                <div className={'t-number-field__details__message'}>
-                    {
-                        validator.message
-                        && `${validator.message}`
-                    }
+                <div className={'t-number-field__details__message'} data-testid={'number-field-message'}>
+                    {validator.message || props.hint}
                 </div>
             </div>
         </div>

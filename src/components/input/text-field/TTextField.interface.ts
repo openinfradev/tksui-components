@@ -18,6 +18,7 @@ export interface TTextFieldProps extends TValidatorProps, TBaseProps {
 
     placeholder?: string,
     label?: string,
+    hint?: string,
     counter?: number,
     value: string,
     width?: string,

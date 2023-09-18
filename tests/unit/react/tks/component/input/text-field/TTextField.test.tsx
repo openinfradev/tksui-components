@@ -166,7 +166,7 @@ describe('TTextField', () => {
     // endregion
 
 
-    // region [Blur, Trim, Counter]
+    // region [Blur, Trim, Counter, Hint]
 
     it('When noTrim prop is not applied, the input value is not trimmed', async () => {
         // Arrange
@@ -188,7 +188,7 @@ describe('TTextField', () => {
         expect(mockOnBlur).toBeCalledTimes(1);
     });
 
-    it('When noTrim prop is not applied, the input value is not trimmed', async () => {
+    it('When noTrim prop is applied, the input value is trimmed', async () => {
         // Arrange
         const mockOnBlur = jest.fn();
         render(<TTextField noTrim value={' a '} onChange={mockOnChange} onBlur={mockOnBlur}/>);
@@ -220,6 +220,19 @@ describe('TTextField', () => {
 
         // Assert
         expect(counterElement).toHaveTextContent(`${trimmedLength} / ${lengthLimit}`);
+    });
+
+    it('When hint prop is applied, the detail message shows the hint', () => {
+        // Arrange
+        const hintText = 'hint text';
+
+
+        // Act
+        render(<TTextField {...baseProps} hint={hintText}/>);
+        const message = screen.getByTestId('text-field-message');
+
+        // Assert
+        expect(message).toHaveTextContent(hintText);
     });
 
 

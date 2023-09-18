@@ -19,6 +19,7 @@ export interface TNumberFieldProps extends TBaseProps, TValidatorProps {
 
     placeholder?: string,
     label?: string,
+    hint?: string,
     value: string,
     width?: string,
 

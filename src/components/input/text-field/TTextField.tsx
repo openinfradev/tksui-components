@@ -233,11 +233,8 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
             </div>
 
             <div className={'t-text-field__details'}>
-                <div className={'t-text-field__details__message'}>
-                    {
-                        validator.message
-                        && `${validator.message}`
-                    }
+                <div className={'t-text-field__details__message'} data-testid={'text-field-message'}>
+                    {validator.message || props.hint}
                 </div>
                 <div className={'t-text-field__details__counter'} data-testid={'text-field-counter'}>
                     {

@@ -30,6 +30,7 @@ const NormalTemplate = (args: TNumberFieldProps) => {
     const numberField4 = useInputState('');
     const numberField5 = useInputState('');
     const numberField6 = useInputState('');
+    const numberField7 = useInputState('');
 
     const containerStyle: CSSProperties = {
         width: '500px',
@@ -58,6 +59,8 @@ const NormalTemplate = (args: TNumberFieldProps) => {
                 <TNumberField {...args} label={'커스텀 너비'} {...numberField5} width={'200px'}/>
 
                 <TNumberField {...args} label={'필수 값'} {...numberField6} required/>
+
+                <TNumberField {...args} label={'가이드 메시지'} {...numberField7} width={'400px'} hint={'개수를 줄이시면 가장 마지막 호스트네임부터 삭제 됩니다.'}/>
 
             </div>
         </div>
@@ -126,6 +129,7 @@ const ValidationTemplate = (args: TTextFieldProps) => {
                               required
                               type={'underline'}
                               label={'필수 값'}
+                              hint={'개수를 줄이시면 가장 마지막 호스트네임부터 삭제 됩니다.'}
                 />
             </div>
 

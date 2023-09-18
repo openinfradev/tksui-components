@@ -142,6 +142,20 @@ describe('TNumberField', () => {
 
         });
 
+        it('When hint prop is applied, the detail message shows the hint', () => {
+            // Arrange
+            const hintText = 'hint text';
+
+
+            // Act
+            render(<TNumberField value={''} onChange={null} hint={hintText}/>);
+            const message = screen.getByTestId('number-field-message');
+
+            // Assert
+            expect(message).toHaveTextContent(hintText);
+        });
+
+
     });
 
     describe('min/max/step', () => {
