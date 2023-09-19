@@ -4,8 +4,8 @@ import {TBaseProps, TBaseTooltipProps} from '@/common/base/TBase.interface';
 const iconType = ['outlined', 'filled'] as const;
 export type TIconSource = 'original' | 'material';
 export type TIconType = typeof iconType[number];
-const iconSize = ['small', 'medium', 'large', 'xlarge'] as const;
-export type TIconSize = typeof iconSize[number];
+export const iconSize = {small: 'small', medium: 'medium', large: 'large', xlarge: 'xlarge'};
+type TIconSize = typeof iconSize[keyof typeof iconSize];
 
 export interface TIconProps extends TBaseProps, TBaseTooltipProps {
     children: string,

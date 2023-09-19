@@ -5,7 +5,7 @@
 // import 'material-icons/iconfont/sharp.css';
 
 import {CSSProperties, KeyboardEvent, ReactElement, useCallback, useMemo} from 'react';
-import {TIconSource, TIconType, TIconProps, TIconSize} from './TIcon.interface';
+import {TIconSource, TIconType, TIconProps, iconSize} from './TIcon.interface';
 import TOriginalImage from './TIconOriginal';
 
 /**
@@ -23,8 +23,8 @@ function TIcon(props: TIconProps): ReactElement {
         return 'material';
     }, [props.children]);
 
-    const $_size: TIconSize = useMemo((): TIconSize => {
-        if (props.size) { return props.size; }
+    const $_size = useMemo(() => {
+        if (props.size && props.size in iconSize) { return props.size; }
         if (props.small) { return 'small'; }
         if (props.medium) { return 'medium'; }
         if (props.large) { return 'large'; }
@@ -70,7 +70,19 @@ function TIcon(props: TIconProps): ReactElement {
 
     // region [Events]
 
+    const onClickRoot = useCallback((): void => {
+        if (props.disabled) {
+            return;
+        }
+
+        props.onClick();
+    }, [props]);
+
     const onKeyDown = useCallback((event: KeyboardEvent<HTMLInputElement>): void => {
+        if (props.disabled) {
+            return;
+        }
+
         if (event.key === 'Enter' && props.onKeyDownEnter) {
             props.onKeyDownEnter(event);
         }
@@ -94,11 +106,12 @@ function TIcon(props: TIconProps): ReactElement {
               data-tooltip-place={props.tooltipPlace}
               data-tooltip-hidden={props.tooltipHidden}
               tabIndex={(!props.disabled && (props.onKeyDownEnter || props.onKeyDownSpace)) ? 0 : -1}
-              onClick={props.onClick}
+              onClick={onClickRoot}
               onKeyDown={onKeyDown}
               role={'img'}
               aria-label={props.children}
               style={rootStyle}
+              id={props.id}
         >
             {
                 (iconSource === 'original')
