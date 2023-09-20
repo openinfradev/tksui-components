@@ -57,7 +57,7 @@ function TIcon(props: TIconProps): ReactElement {
 
         if (props.style) style = {...props.style};
 
-        if (props.color) {
+        if (props.color && !props.disabled) {
             style.color = props.color;
             style.fill = props.color;
             style.stroke = props.color;
@@ -75,7 +75,7 @@ function TIcon(props: TIconProps): ReactElement {
             return;
         }
 
-        props.onClick();
+        props.onClick?.();
     }, [props]);
 
     const onKeyDown = useCallback((event: KeyboardEvent<HTMLInputElement>): void => {

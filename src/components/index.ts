@@ -4,6 +4,7 @@ export * from '@/common/base/TBase.interface';
 // button
 export * from './button/button';
 export * from './button/button-group';
+export * from './button/icon-button';
 
 // data-container
 export * from './data-container/data-grid';
