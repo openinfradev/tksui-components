@@ -38,24 +38,33 @@ const Template = (args: TSearchBoxProps) => {
                         onReset={onReset}
                         onSearch={() => notify.info('검색 이벤트 발생')}
                         {...args}
+                        expandableZone={<>
+                            <TSearchBoxRow>
+                                <TSearchBoxItem label={'설명'}>
+                                    <TTextField {...name} />
+                                </TSearchBoxItem>
+                            </TSearchBoxRow>
+                            <TSearchBoxRow>
+                                <TSearchBoxItem label={'상태'}>
+                                    <TCheckboxGroup {...status}
+                                                    items={[
+                                                        {value: 'CREATED', text: '조치 전'},
+                                                        {value: 'INPROGRESS', text: '조치 중'},
+                                                        {value: 'CLOSED', text: '종료'},
+                                                        {value: 'ERROR', text: '에러'},
+                                                    ]}
+                                    />
+                                </TSearchBoxItem>
+                            </TSearchBoxRow>
+                        </>}
             >
+
                 <TSearchBoxRow>
                     <TSearchBoxItem label={'아이디'}>
                         <TTextField {...name} />
                     </TSearchBoxItem>
                 </TSearchBoxRow>
-                <TSearchBoxRow>
-                    <TSearchBoxItem label={'상태'}>
-                        <TCheckboxGroup {...status}
-                                        items={[
-                                            {value: 'CREATED', text: '조치 전'},
-                                            {value: 'INPROGRESS', text: '조치 중'},
-                                            {value: 'CLOSED', text: '종료'},
-                                            {value: 'ERROR', text: '에러'}
-                                        ]}
-                        />
-                    </TSearchBoxItem>
-                </TSearchBoxRow>
+
             </TSearchBox>
         </>
     );

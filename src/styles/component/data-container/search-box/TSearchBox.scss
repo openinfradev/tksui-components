@@ -5,6 +5,60 @@
         flex-direction: column;
         background-color: $t-background-color-01;
         padding: 0 $t-padding-tb-32;
+
+        & > .t-search-box-row {
+            &:first-child { padding-top: $t-padding-tb-32; }
+            &:last-child { padding-bottom: $t-padding-tb-32; }
+        }
+
+        .t-search-box__content__expand-zone {
+
+            .t-search-box__content__expand-zone__panel {
+                height: 30px;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                position: relative;
+                margin-bottom: $t-margin-tb-32;
+                .t-search-box__content__expand-zone__panel__divider {
+                    border-bottom: 1px solid $t-gray-color--05;
+                    width: 100%;
+                }
+
+                .t-search-box__content__expand-zone__panel__expand-button-wrapper {
+                    position: absolute;
+                    width: 128px;
+                    left: calc(50% - 64px) ;
+                    background: $t-primary-color--tint-9;
+                    padding: 0 $t-margin-lr-32;
+                    color: $t-primary-color;
+
+                    .t-search-box__content__expand-zone__panel__expand-button {
+                        display: flex;
+                        gap: $t-margin-lr-8;
+                        align-items: center;
+                        @include user-select-none;
+
+                        .t-icon {
+                            transform: rotate(0deg);
+                            transition: 0.2s;
+                        }
+
+                        &:hover {
+                            cursor: pointer;
+                            font-weight: $t-font-weight-medium;
+                        }
+                    }
+                }
+            }
+
+            &.t-search-box__content__expand-zone--expanded {
+                .t-search-box__content__expand-zone__panel .t-search-box__content__expand-zone__panel__expand-button .t-icon {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+
     }
 
     .t-search-box__action-bar {
@@ -30,9 +84,9 @@
         display: flex;
         align-items: flex-start;
         gap: 0;
-        padding: $t-padding-tb-32 0;
+        padding: $t-padding-tb-16 0;
     }
-    .t-search-box-row + .t-search-box-row { border-top: 1px solid $t-gray-color--05; }
+
 
 }
 

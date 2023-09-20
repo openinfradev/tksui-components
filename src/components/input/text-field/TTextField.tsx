@@ -97,7 +97,7 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
     }, [props]);
 
     const onClickClear = useCallback((event: MouseEvent): void => {
-        event.stopPropagation();
+        event?.stopPropagation();
         if (props.onChange) { props.onChange(''); }
         if (props.onClear) { props.onClear(); }
     }, [props]);

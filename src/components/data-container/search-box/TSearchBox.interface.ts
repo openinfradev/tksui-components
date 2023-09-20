@@ -9,6 +9,8 @@ export interface TSearchBoxProps extends TBaseProps {
     column?: number,
     labelWidth?: string,
 
+    expandableZone?: ReactNode,
+
     onSearch?: () => void,
     onReset?: () => void,
 }
