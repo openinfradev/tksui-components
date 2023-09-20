@@ -108,6 +108,7 @@
         gap: $t-margin-lr-8;
         min-height: 46px;
         line-height: $t-line-height-body;
+        padding-right: $t-padding-lr-60;
     }
 
     &.t-search-box-item--required .t-search-box-item__label::after {

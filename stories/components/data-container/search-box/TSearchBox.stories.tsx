@@ -40,7 +40,7 @@ const Template = (args: TSearchBoxProps) => {
                         {...args}
                         expandableZone={<>
                             <TSearchBoxRow>
-                                <TSearchBoxItem label={'설명'}>
+                                <TSearchBoxItem label={'이름'}>
                                     <TTextField {...name} />
                                 </TSearchBoxItem>
                             </TSearchBoxRow>
@@ -61,6 +61,9 @@ const Template = (args: TSearchBoxProps) => {
 
                 <TSearchBoxRow>
                     <TSearchBoxItem label={'아이디'}>
+                        <TTextField {...name} />
+                    </TSearchBoxItem>
+                    <TSearchBoxItem label={'설명'}>
                         <TTextField {...name} />
                     </TSearchBoxItem>
                 </TSearchBoxRow>
