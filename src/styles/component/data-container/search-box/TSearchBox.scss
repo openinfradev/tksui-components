@@ -37,16 +37,13 @@
                         display: flex;
                         gap: $t-margin-lr-8;
                         align-items: center;
+                        font-weight: $t-font-weight-medium;
+                        cursor: pointer;
                         @include user-select-none;
 
                         .t-icon {
                             transform: rotate(0deg);
                             transition: 0.2s;
-                        }
-
-                        &:hover {
-                            cursor: pointer;
-                            font-weight: $t-font-weight-medium;
                         }
                     }
                 }
