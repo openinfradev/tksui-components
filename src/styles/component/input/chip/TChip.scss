@@ -28,7 +28,7 @@
 
     &.t-chip--outlined {
         border: 1px solid $t-border-color--default;
-
+        background-color: $t-white-color;
         color: $t-gray-color--08;
 
         &.t-chip--primary {
