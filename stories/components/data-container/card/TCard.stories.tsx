@@ -1,6 +1,6 @@
 import {Meta, StoryObj} from '@storybook/react';
 
-import React from 'react';
+import React, {useState} from 'react';
 import TStepBox from '~/data-container/step-box/TStepBox';
 import TCard from '~/data-container/card/TCard';
 import TCardHeader from '~/data-container/card/TCardHeader';
@@ -19,37 +19,26 @@ type Story = StoryObj<typeof TStepBox>;
 
 const Template = (args) => {
 
-    return (<>
+    const [val, setVal] = useState('');
 
-        <TCard clickable selected onClick={() => { console.log('!!!'); }}>
-            <TCardHeader title={'AWS'} subTitle={'fff'}></TCardHeader>
+    return (<div style={{display: 'flex', alignItems: 'center', gap: '20px'}}>
 
+        <TCard {...args} clickable onClick={() => setVal('1')} width={'300px'} selected={val === '1'}>
+            <TCardHeader title={'AWS'} subTitle={'Lorem ipsum dolor sit'}></TCardHeader>
             {/* <CardDivider /> */}
-
-            {/* <CardContent> */}
-            {/*     Lorem Ipsum ... */}
-            {/* </CardContent> */}
-            {/* <CardAction> */}
-            {/*     <Button>dd</Button> */}
-            {/*     <Button>dd</Button> */}
-            {/* </CardAction> */}
-            <TCardContent>
-                Lorem ipsum dolor
-                Lorem ipsum dolor
-                Lorem ipsum dolor
-                Lorem ipsum dolor
-            </TCardContent>
-
+            <TCardContent>Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor</TCardContent>
         </TCard>
-    </>);
+
+        <TCard clickable onClick={() => setVal('2')} width={'300px'} selected={val === '2'}>
+            <TCardHeader title={'BYOH'} subTitle={'Lorem ipsum dolor sit'}></TCardHeader>
+            {/* <CardDivider /> */}
+            <TCardContent>Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor</TCardContent>
+        </TCard>
+    </div>);
 };
 
 
 export const Default: Story = {
     render: Template,
-    args: {
-        prevButtonLabel: '이전',
-        nextButtonLabel: '다음',
-        completeButtonLabel: '저장하기',
-    },
+    args: {},
 };

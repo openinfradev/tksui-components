@@ -4,10 +4,16 @@
 
     &.t-card--clickable {
         cursor: pointer;
-        &:hover {background: $t-background-color--hover;}
-        &:active {background: $t-background-color--active;}
+        &:hover {
+            outline: 3px solid $t-primary-color;
+            border: none;
+        }
     }
+
+
+
     &.t-card--selected {
+        border: none;
         outline: 3px solid $t-primary-color;
     }
 
