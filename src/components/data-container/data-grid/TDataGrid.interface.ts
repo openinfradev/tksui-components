@@ -4,8 +4,8 @@ import {TBaseProps} from '@/common/base/TBase.interface';
 
 
 export interface TPageRequestVO {
-    pageNumber: number,
-    pageSize: number,
+    pageNumber?: number,
+    pageSize?: number,
 }
 
 export interface TPageResponseVO extends TPageRequestVO {
