@@ -5,16 +5,14 @@
     &.t-card--clickable {
         cursor: pointer;
         &:hover {
-            outline: 3px solid $t-primary-color;
+            outline: 2px solid $t-primary-color;
             border-color: $t-primary-color;
         }
     }
 
-
-
     &.t-card--selected {
-        border: none;
-        outline: 3px solid $t-primary-color;
+        border-color: $t-primary-color;
+        outline: 2px solid $t-primary-color;
     }
 
 }
