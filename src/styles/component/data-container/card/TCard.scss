@@ -6,7 +6,7 @@
         cursor: pointer;
         &:hover {
             outline: 3px solid $t-primary-color;
-            border: none;
+            border-color: $t-primary-color;
         }
     }
 
