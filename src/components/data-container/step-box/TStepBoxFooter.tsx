@@ -39,8 +39,8 @@ const TStepBoxFooter = (props: TStepBoxFooterProps) => {
 
         if (props.onClickNext) {
             props.onClickNext();
-            context.onChangeCurrentStep(context.currentStep + 1);
-        } else if (context.currentStep < context.totalStep) {
+        }
+        if (context.currentStep < context.totalStep) {
             context.onChangeCurrentStep(context.currentStep + 1);
         }
     }, [context, props, validateStep]);
