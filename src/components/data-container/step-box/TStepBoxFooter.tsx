@@ -37,10 +37,13 @@ const TStepBoxFooter = (props: TStepBoxFooterProps) => {
             return;
         }
 
-        if (context.currentStep < context.totalStep) {
+        if (props.onClickNext) {
+            props.onClickNext();
+            context.onChangeCurrentStep(context.currentStep + 1);
+        } else if (context.currentStep < context.totalStep) {
             context.onChangeCurrentStep(context.currentStep + 1);
         }
-    }, [context, validateStep]);
+    }, [context, props, validateStep]);
 
     // endregion
 
