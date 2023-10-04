@@ -88,6 +88,7 @@ const TIconButton = forwardRef((props: TIconButtonProps, ref: Ref<TIconButtonRef
     // endregion
 
     return (
+
         <div ref={rootRef}
              style={rootStyle}
              className={`t-icon-button ${rootClass}`}
@@ -106,6 +107,10 @@ const TIconButton = forwardRef((props: TIconButtonProps, ref: Ref<TIconButtonRef
                    xlarge={props.xlarge}
                    disabled={props.disabled}
                    color={props.color}
+                   tooltipId={props.tooltipId}
+                   tooltipContent={props.tooltipContent}
+                   tooltipPlace={props.tooltipPlace}
+                   tooltipHidden={props.tooltipHidden}
             >{props.children}</TIcon>
         </div>
     );
