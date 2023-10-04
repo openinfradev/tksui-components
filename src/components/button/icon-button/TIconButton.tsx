@@ -98,6 +98,10 @@ const TIconButton = forwardRef((props: TIconButtonProps, ref: Ref<TIconButtonRef
              onKeyDown={onKeyDown}
              onKeyUp={onKeyUp}
              tabIndex={props.disabled ? -1 : 0}
+             data-tooltip-id={props.tooltipId}
+             data-tooltip-content={props.tooltipContent}
+             data-tooltip-place={props.tooltipPlace}
+             data-tooltip-hidden={props.tooltipHidden}
         >
             <TIcon className={`t-icon-button__inner ${rootClass}`}
                    size={props.size}
@@ -107,10 +111,6 @@ const TIconButton = forwardRef((props: TIconButtonProps, ref: Ref<TIconButtonRef
                    xlarge={props.xlarge}
                    disabled={props.disabled}
                    color={props.color}
-                   tooltipId={props.tooltipId}
-                   tooltipContent={props.tooltipContent}
-                   tooltipPlace={props.tooltipPlace}
-                   tooltipHidden={props.tooltipHidden}
             >{props.children}</TIcon>
         </div>
     );
