@@ -85,6 +85,10 @@ const TIconButton = forwardRef((props: TIconButtonProps, ref: Ref<TIconButtonRef
         }
     }, [props, ripple]);
 
+    const onClick = useCallback((event: MouseEvent): void => {
+        event.stopPropagation();
+    }, []);
+
     // endregion
 
     return (
@@ -97,6 +101,7 @@ const TIconButton = forwardRef((props: TIconButtonProps, ref: Ref<TIconButtonRef
              onMouseLeave={onMouseLeave}
              onKeyDown={onKeyDown}
              onKeyUp={onKeyUp}
+             onClick={onClick}
              tabIndex={props.disabled ? -1 : 0}
              data-tooltip-id={props.tooltipId}
              data-tooltip-content={props.tooltipContent}
