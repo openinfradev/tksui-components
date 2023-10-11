@@ -1,51 +1,30 @@
+
 // region [Color]
 
-$t-primary-color: $T-PRIMARY-COLOR-SK-BLUE !default;
-$t-point-color: $T-POINT-COLOR-NAVY !default;
+$t-primary-color: var(--t-primary-color) !default;
+$t-point-color: var(--t-point-color) !default;
 
-$t-primary-color--shade-1: shade($t-primary-color, 10%) !default;
-$t-primary-color--shade-2: shade($t-primary-color, 20%) !default;
-$t-primary-color--shade-3: shade($t-primary-color, 30%) !default;
-$t-primary-color--shade-4: shade($t-primary-color, 40%) !default;
-$t-primary-color--shade-5: shade($t-primary-color, 50%) !default;
-$t-primary-color--shade-6: shade($t-primary-color, 60%) !default;
-$t-primary-color--shade-7: shade($t-primary-color, 70%) !default;
-$t-primary-color--shade-8: shade($t-primary-color, 80%) !default;
-$t-primary-color--shade-9: shade($t-primary-color, 90%) !default;
+$t-primary-color--shade-1: var(--t-primary-color--shade-1) !default;
+$t-primary-color--shade-2: var(--t-primary-color--shade-2) !default;
+$t-primary-color--shade-3: var(--t-primary-color--shade-3) !default;
+$t-primary-color--shade-4: var(--t-primary-color--shade-4) !default;
+$t-primary-color--shade-5: var(--t-primary-color--shade-5) !default;
+$t-primary-color--shade-6: var(--t-primary-color--shade-6) !default;
+$t-primary-color--shade-7: var(--t-primary-color--shade-7) !default;
+$t-primary-color--shade-8: var(--t-primary-color--shade-8) !default;
+$t-primary-color--shade-9: var(--t-primary-color--shade-9) !default;
 
-$t-primary-color--tint-1: tint($t-primary-color, 10%) !default;
-$t-primary-color--tint-2: tint($t-primary-color, 20%) !default;
-$t-primary-color--tint-3: tint($t-primary-color, 30%) !default;
-$t-primary-color--tint-4: tint($t-primary-color, 40%) !default;
-$t-primary-color--tint-5: tint($t-primary-color, 50%) !default;
-$t-primary-color--tint-6: tint($t-primary-color, 60%) !default;
-$t-primary-color--tint-7: tint($t-primary-color, 70%) !default;
-$t-primary-color--tint-8: tint($t-primary-color, 80%) !default;
-$t-primary-color--tint-9: tint($t-primary-color, 90%) !default;
-$t-primary-color--tint-10: tint($t-primary-color, 95%) !default;
-$t-primary-color--tint-11: tint($t-primary-color, 98%) !default;
-
-$t-point-color--shade-1: shade($t-point-color, 10%) !default;
-$t-point-color--shade-2: shade($t-point-color, 20%) !default;
-$t-point-color--shade-3: shade($t-point-color, 30%) !default;
-$t-point-color--shade-4: shade($t-point-color, 40%) !default;
-$t-point-color--shade-5: shade($t-point-color, 50%) !default;
-$t-point-color--shade-6: shade($t-point-color, 60%) !default;
-$t-point-color--shade-7: shade($t-point-color, 70%) !default;
-$t-point-color--shade-8: shade($t-point-color, 80%) !default;
-$t-point-color--shade-9: shade($t-point-color, 90%) !default;
-
-$t-point-color--tint-1: tint($t-point-color, 10%) !default;
-$t-point-color--tint-2: tint($t-point-color, 20%) !default;
-$t-point-color--tint-3: tint($t-point-color, 30%) !default;
-$t-point-color--tint-4: tint($t-point-color, 40%) !default;
-$t-point-color--tint-5: tint($t-point-color, 50%) !default;
-$t-point-color--tint-6: tint($t-point-color, 60%) !default;
-$t-point-color--tint-7: tint($t-point-color, 70%) !default;
-$t-point-color--tint-8: tint($t-point-color, 80%) !default;
-$t-point-color--tint-9: tint($t-point-color, 90%) !default;
-$t-point-color--tint-10: tint($t-point-color, 95%) !default;
-$t-point-color--tint-11: tint($t-point-color, 98%) !default;
+$t-primary-color--tint-1: var(--t-primary-color--tint-1) !default;
+$t-primary-color--tint-2: var(--t-primary-color--tint-2) !default;
+$t-primary-color--tint-3: var(--t-primary-color--tint-3) !default;
+$t-primary-color--tint-4: var(--t-primary-color--tint-4) !default;
+$t-primary-color--tint-5: var(--t-primary-color--tint-5) !default;
+$t-primary-color--tint-6: var(--t-primary-color--tint-6) !default;
+$t-primary-color--tint-7: var(--t-primary-color--tint-7) !default;
+$t-primary-color--tint-8: var(--t-primary-color--tint-8) !default;
+$t-primary-color--tint-9: var(--t-primary-color--tint-9) !default;
+$t-primary-color--tint-10: var(--t-primary-color--tint-10) !default;
+$t-primary-color--tint-11: var(--t-primary-color--tint-11) !default;
 
 // 내려갈수록 진해짐
 
@@ -70,7 +49,6 @@ $t-status-color--error: $T-STATUS-COLOR--ERROR !default;
 $t-status-color--default: $T-STATUS-COLOR--DEFAULT !default;
 $t-status-color--processing: $T-STATUS-COLOR--PROCESSING !default;
 $t-status-color--warning: $T-STATUS-COLOR--WARNING !default;
-$t-status-color--favorite: $T-PRIMARY-COLOR-YELLOW !default;
 
 $t-background-color--hover: $t-primary-color--tint-9;
 $t-background-color--active: $t-primary-color--tint-8;
@@ -88,15 +66,13 @@ $t-font-color--primary-03: $t-gray-color--08 !default; // #333333
 
 $t-font-color--selected: $t-primary-color;
 $t-font-color-placeholder: $t-gray-color--07;
-$t-font-color--read-only: $t-gray-color--09;
-$t-font-color--disabled: $t-gray-color--08;
+$t-font-color--read-only: $t-gray-color--05;
+$t-font-color--disabled: $t-gray-color--05;
 $t-font-color--default: $t-gray-color--09;
 $t-font-color--label: $t-gray-color--06;
 
 
 $t-font-weight--selected: $T-FONT-WEIGHT-MEDIUM;
-
-$t-border-color--divider: $t-gray-color--05;
 $t-border-color--default: $t-gray-color--06;
 
 // background color
@@ -110,11 +86,11 @@ $t-chart-color-02: $t-primary-color--shade-2;
 $t-chart-color-03: $t-primary-color--shade-3;
 $t-chart-color-04: $t-primary-color--shade-4;
 $t-chart-color-05: $t-primary-color--shade-5;
-$t-chart-color-06: shade($t-point-color, 20%);
-$t-chart-color-07: shade($t-point-color, 40%);
-$t-chart-color-08: shade($t-point-color, 60%);
-$t-chart-color-09: shade($t-point-color, 80%);
-$t-chart-color-10: shade($t-point-color, 90%);
+$t-chart-color-06: color-mix(in srgb, var(--t-point-color), black 20%);
+$t-chart-color-07: color-mix(in srgb, var(--t-point-color), black 20%);
+$t-chart-color-08: color-mix(in srgb, var(--t-point-color), black 20%);
+$t-chart-color-09: color-mix(in srgb, var(--t-point-color), black 20%);
+$t-chart-color-10: color-mix(in srgb, var(--t-point-color), black 20%);
 
 // grid color
 $t-grid-border-color--01: #DDDDDD;

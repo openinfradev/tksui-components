@@ -111,7 +111,7 @@ $t-button-border--disabled: $t-gray-color--05;
         &.t-button--point {
             border: none;
             color: $t-white-color;
-            background: $t-point-color--shade-2;
+            background: color-mix(in srgb, var(--t-point-color), black 20%);
         }
     }
 

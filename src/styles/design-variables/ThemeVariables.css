@@ -1,0 +1,28 @@
+:root {
+    --t-primary-color: #3535CE;
+    --t-point-color: #293443;
+
+    --t-primary-color--tint-1: color-mix(in srgb, var(--t-primary-color), white 10%);
+    --t-primary-color--tint-2: color-mix(in srgb, var(--t-primary-color), white 20%);
+    --t-primary-color--tint-3: color-mix(in srgb, var(--t-primary-color), white 30%);
+    --t-primary-color--tint-4: color-mix(in srgb, var(--t-primary-color), white 40%);
+    --t-primary-color--tint-5: color-mix(in srgb, var(--t-primary-color), white 50%);
+    --t-primary-color--tint-6: color-mix(in srgb, var(--t-primary-color), white 60%);
+    --t-primary-color--tint-7: color-mix(in srgb, var(--t-primary-color), white 70%);
+    --t-primary-color--tint-8: color-mix(in srgb, var(--t-primary-color), white 80%);
+    --t-primary-color--tint-9: color-mix(in srgb, var(--t-primary-color), white 90%);
+    --t-primary-color--tint-10: color-mix(in srgb, var(--t-primary-color), white 95%);
+    --t-primary-color--tint-11: color-mix(in srgb, var(--t-primary-color), white 98%);
+
+    --t-primary-color--shade-1: color-mix(in srgb, var(--t-primary-color), black 10%);
+    --t-primary-color--shade-2: color-mix(in srgb, var(--t-primary-color), black 20%);
+    --t-primary-color--shade-3: color-mix(in srgb, var(--t-primary-color), black 30%);
+    --t-primary-color--shade-4: color-mix(in srgb, var(--t-primary-color), black 40%);
+    --t-primary-color--shade-5: color-mix(in srgb, var(--t-primary-color), black 50%);
+    --t-primary-color--shade-6: color-mix(in srgb, var(--t-primary-color), black 60%);
+    --t-primary-color--shade-7: color-mix(in srgb, var(--t-primary-color), black 70%);
+    --t-primary-color--shade-8: color-mix(in srgb, var(--t-primary-color), black 80%);
+    --t-primary-color--shade-9: color-mix(in srgb, var(--t-primary-color), black 90%);
+
+
+}
