@@ -1,54 +1,53 @@
-
 // region [Color]
 
 $t-primary-color: var(--t-primary-color) !default;
 $t-point-color: var(--t-point-color) !default;
 
-$t-primary-color--shade-1: var(--t-primary-color--shade-1) !default;
-$t-primary-color--shade-2: var(--t-primary-color--shade-2) !default;
-$t-primary-color--shade-3: var(--t-primary-color--shade-3) !default;
-$t-primary-color--shade-4: var(--t-primary-color--shade-4) !default;
-$t-primary-color--shade-5: var(--t-primary-color--shade-5) !default;
-$t-primary-color--shade-6: var(--t-primary-color--shade-6) !default;
-$t-primary-color--shade-7: var(--t-primary-color--shade-7) !default;
-$t-primary-color--shade-8: var(--t-primary-color--shade-8) !default;
-$t-primary-color--shade-9: var(--t-primary-color--shade-9) !default;
+$t-primary-color--shade-1: color-mix(in srgb, var(--t-primary-color), black 10%) !default;
+$t-primary-color--shade-2: color-mix(in srgb, var(--t-primary-color), black 20%) !default;
+$t-primary-color--shade-3: color-mix(in srgb, var(--t-primary-color), black 30%) !default;
+$t-primary-color--shade-4: color-mix(in srgb, var(--t-primary-color), black 40%) !default;
+$t-primary-color--shade-5: color-mix(in srgb, var(--t-primary-color), black 50%) !default;
+$t-primary-color--shade-6: color-mix(in srgb, var(--t-primary-color), black 60%) !default;
+$t-primary-color--shade-7: color-mix(in srgb, var(--t-primary-color), black 70%) !default;
+$t-primary-color--shade-8: color-mix(in srgb, var(--t-primary-color), black 80%) !default;
+$t-primary-color--shade-9: color-mix(in srgb, var(--t-primary-color), black 90%) !default;
 
-$t-primary-color--tint-1: var(--t-primary-color--tint-1) !default;
-$t-primary-color--tint-2: var(--t-primary-color--tint-2) !default;
-$t-primary-color--tint-3: var(--t-primary-color--tint-3) !default;
-$t-primary-color--tint-4: var(--t-primary-color--tint-4) !default;
-$t-primary-color--tint-5: var(--t-primary-color--tint-5) !default;
-$t-primary-color--tint-6: var(--t-primary-color--tint-6) !default;
-$t-primary-color--tint-7: var(--t-primary-color--tint-7) !default;
-$t-primary-color--tint-8: var(--t-primary-color--tint-8) !default;
-$t-primary-color--tint-9: var(--t-primary-color--tint-9) !default;
-$t-primary-color--tint-10: var(--t-primary-color--tint-10) !default;
-$t-primary-color--tint-11: var(--t-primary-color--tint-11) !default;
+$t-primary-color--tint-1: color-mix(in srgb, var(--t-primary-color), white 10%) !default;
+$t-primary-color--tint-2: color-mix(in srgb, var(--t-primary-color), white 20%) !default;
+$t-primary-color--tint-3: color-mix(in srgb, var(--t-primary-color), white 30%) !default;
+$t-primary-color--tint-4: color-mix(in srgb, var(--t-primary-color), white 40%) !default;
+$t-primary-color--tint-5: color-mix(in srgb, var(--t-primary-color), white 50%) !default;
+$t-primary-color--tint-6: color-mix(in srgb, var(--t-primary-color), white 60%) !default;
+$t-primary-color--tint-7: color-mix(in srgb, var(--t-primary-color), white 70%) !default;
+$t-primary-color--tint-8: color-mix(in srgb, var(--t-primary-color), white 80%) !default;
+$t-primary-color--tint-9: color-mix(in srgb, var(--t-primary-color), white 90%) !default;
+$t-primary-color--tint-10: color-mix(in srgb, var(--t-primary-color), white 95%) !default;
+$t-primary-color--tint-11: color-mix(in srgb, var(--t-primary-color), white 98%) !default;
 
 // 내려갈수록 진해짐
 
-$t-white-color: $T-GRAY-COLOR--00 !default; // #FFFFFF   black   0, white 100
-$t-gray-color--01: $T-GRAY-COLOR--01 !default; // #F7F9FA   black  10, white  90
-$t-gray-color--02: $T-GRAY-COLOR--02 !default; // #F6F6F6   black  20, white  80
-$t-gray-color--03: $T-GRAY-COLOR--03 !default; // #F2F2F2   black  30, white  70
-$t-gray-color--04: $T-GRAY-COLOR--04 !default; // #EEEEEE   black  40, white  60
-$t-gray-color--05: $T-GRAY-COLOR--05 !default; // #DDDDDD   black  50, white  50
-$t-gray-color--06: $T-GRAY-COLOR--06 !default; // #CCCCCC   black  60, white  40
-$t-gray-color--07: $T-GRAY-COLOR--07 !default; // #999999   black  70, white  30
-$t-gray-color--08: $T-GRAY-COLOR--08 !default; // #666666   black  80, white  20
-$t-gray-color--09: $T-GRAY-COLOR--09 !default; // #333333   black  90, white  10
-$t-black-color: $T-GRAY-COLOR--10 !default; // #000000   black 100, white   0
+$t-white-color: var(--t-white-color) !default; // #FFFFFF   black   0, white 100
+$t-gray-color--01: var(--t-gray-color--1) !default; // #F7F9FA   black  10, white  90
+$t-gray-color--02: var(--t-gray-color--2) !default; // #F6F6F6   black  20, white  80
+$t-gray-color--03: var(--t-gray-color--3) !default; // #F2F2F2   black  30, white  70
+$t-gray-color--04: var(--t-gray-color--4) !default; // #EEEEEE   black  40, white  60
+$t-gray-color--05: var(--t-gray-color--5) !default; // #DDDDDD   black  50, white  50
+$t-gray-color--06: var(--t-gray-color--6) !default; // #CCCCCC   black  60, white  40
+$t-gray-color--07: var(--t-gray-color--7) !default; // #999999   black  70, white  30
+$t-gray-color--08: var(--t-gray-color--8) !default; // #666666   black  80, white  20
+$t-gray-color--09: var(--t-gray-color--9) !default; // #333333   black  90, white  10
+$t-black-color: var(--t-black-color) !default; // #000000   black 100, white   0
 
-$t-layout-background-color: $t-white-color;
+$t-layout-background-color: var(--t-white-color) !default;
 
 
-$t-status-color--required: $T-STATUS-COLOR--REQUIRED !default;
-$t-status-color--success: $T-STATUS-COLOR--SUCCESS !default;
-$t-status-color--error: $T-STATUS-COLOR--ERROR !default;
-$t-status-color--default: $T-STATUS-COLOR--DEFAULT !default;
-$t-status-color--processing: $T-STATUS-COLOR--PROCESSING !default;
-$t-status-color--warning: $T-STATUS-COLOR--WARNING !default;
+$t-status-color--required: var(--t-status-color--required) !default;
+$t-status-color--success: var(--t-status-color--success) !default;
+$t-status-color--error: var(--t-status-color--error) !default;
+$t-status-color--default: var(--t-status-color--default) !default;
+$t-status-color--processing: var(--t-status-color--processing) !default;
+$t-status-color--warning: var(--t-status-color--warning) !default;
 
 $t-background-color--hover: $t-primary-color--tint-9;
 $t-background-color--active: $t-primary-color--tint-8;
@@ -72,7 +71,7 @@ $t-font-color--default: $t-gray-color--09;
 $t-font-color--label: $t-gray-color--06;
 
 
-$t-font-weight--selected: $T-FONT-WEIGHT-MEDIUM;
+$t-font-weight--selected: var(--t-font-weight-medium);
 $t-border-color--default: $t-gray-color--06;
 
 // background color
@@ -105,113 +104,105 @@ $t-input-border-color--01: #CCCCCC;
 
 // region [Typography]
 
-$t-font-family: Roboto, 'Noto Sans', 'Noto Sans KR', '맑은 고딕', 'Malgun Gothic', 'Apple SD Gothic Neo', '돋움', Dotum, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$t-font-family: var(--t-font-family);
 
-$t-font-size-base: $T-FONT-SIZE-BASE; // 기본 폰트 사이즈, 16px
-$t-font-size-xsmall: $T-FONT-SIZE-XSMALL; // 12px
-$t-font-size-small: $T-FONT-SIZE-SMALL; // 14px
-$t-font-size-medium: $T-FONT-SIZE-MEDIUM; // 16px
-$t-font-size-large: $T-FONT-SIZE-LARGE; // 20px
-$t-font-size-xlarge: $T-FONT-SIZE-XLARGE; // 21px
-$t-font-size-xxlarge: $T-FONT-SIZE-XXLARGE; // 29px
+$t-font-size-base: var(--t-font-size-base); // 기본 폰트 사이즈, 16px
+$t-font-size-xsmall: var(--t-font-size-xsmall); // 12px
+$t-font-size-small: var(--t-font-size-small); // 14px
+$t-font-size-medium: var(--t-font-size-medium); // 16px
+$t-font-size-large: var(--t-font-size-large); // 20px
+$t-font-size-xlarge: var(--t-font-size-xlarge); // 21px
+$t-font-size-xxlarge: var(--t-font-size-xxlarge); // 29px
 
-$t-font-weight-normal: $T-FONT-WEIGHT-NORMAL;
-$t-font-weight-medium: $T-FONT-WEIGHT-MEDIUM;
-$t-font-weight-bold: $T-FONT-WEIGHT-BOLD;
+$t-font-weight-normal: var(--t-font-weight-normal);
+$t-font-weight-medium: var(--t-font-weight-medium);
+$t-font-weight-bold: var(--t-font-weight-bold);
 
 // h4 ~ h1
-$t-font-size-h4: $T-FONT-SIZE-H4; // 25px
-$t-font-weight-h4: $T-FONT-WEIGHT-BOLD; // 700
+$t-font-size-h4: 1.25rem; // 20px
+$t-font-weight-h4: var(--t-font-weight-bold); // 700
 
-$t-font-size-h3: $T-FONT-SIZE-H3; // 29px
-$t-font-weight-h3: $T-FONT-WEIGHT-BOLD; // 700
+$t-font-size-h3: 1.5rem; // 24px
+$t-font-weight-h3: var(--t-font-weight-bold); // 700
 
-$t-font-size-h2: $T-FONT-SIZE-H2; // 34px, 안씀
-$t-font-weight-h2: $T-FONT-WEIGHT-BOLD; // 700
+$t-font-size-h2: 2rem; // 32px, 안씀
+$t-font-weight-h2: var(--t-font-weight-bold); // 700
 
-$t-font-size-h1: $T-FONT-SIZE-H1; // 45px
-$t-font-weight-h1: $T-FONT-WEIGHT-BOLD; // 700
+$t-font-size-h1: 2.25rem; // 36px
+$t-font-weight-h1: var(--t-font-weight-bold); // 700
 
 // menu lv 1 ~ 3
-$t-font-size-menu-lv-1: $T-FONT-SIZE-MEDIUM;
-$t-font-weight-menu-lv-1: $T-FONT-WEIGHT-BOLD;
+$t-font-size-menu-lv-1: $t-font-size-medium;
+$t-font-weight-menu-lv-1: var(--t-font-weight-bold);
 
-$t-font-size-menu-lv-2: $T-FONT-SIZE-SMALL;
-$t-font-weight-menu-lv-3: $T-FONT-WEIGHT-NORMAL;
+$t-font-size-menu-lv-2: $t-font-size-small;
+$t-font-weight-menu-lv-3: var(--t-font-weight-normal);
 
-$t-font-size-menu-lv-3: $T-FONT-SIZE-XSMALL;
-$t-font-weight-menu-lv-3: $T-FONT-WEIGHT-NORMAL;
+$t-font-size-menu-lv-3: $t-font-size-xsmall;
+$t-font-weight-menu-lv-3: var(--t-font-weight-normal);
 
 // title
-$t-font-size-page-title: $T-FONT-SIZE-XXLARGE;
-$t-font-weight-page-title: $T-FONT-WEIGHT-BOLD;
+$t-font-size-page-title: $t-font-size-xxlarge;
+$t-font-weight-page-title: var(--t-font-weight-bold);
 
-$t-font-size-page-subtitle: $T-FONT-SIZE-LARGE;
-$t-font-weight-page-subtitle: $T-FONT-WEIGHT-NORMAL;
+$t-font-size-page-subtitle: $t-font-size-large;
+$t-font-weight-page-subtitle: var(--t-font-weight-normal);
 
 // content
-$t-font-size-body-1: $T-FONT-SIZE-MEDIUM;
-$t-font-weight-body-1: $T-FONT-WEIGHT-NORMAL;
+$t-font-size-body-1: $t-font-size-medium;
+$t-font-weight-body-1: var(--t-font-weight-normal);
 
-$t-font-size-body-2: $T-FONT-SIZE-SMALL;
-$t-font-weight-body-2: $T-FONT-WEIGHT-NORMAL;
+$t-font-size-body-2: $t-font-size-small;
+$t-font-weight-body-2: var(--t-font-weight-normal);
 
-$t-font-size-body-3: $T-FONT-SIZE-XSMALL;
-$t-font-weight-body-3: $T-FONT-WEIGHT-NORMAL;
+$t-font-size-body-3: $t-font-size-xsmall;
+$t-font-weight-body-3: var(--t-font-weight-normal);
 
-$t-line-height-default: $T-LINE-HEIGHT-DEFAULT;
-$t-line-height-header: $T-LINE-HEIGHT-HEADER;
-$t-line-height-body: $T-LINE-HEIGHT-BODY;
+$t-line-height-default: var(--t-line-height-default);
+$t-line-height-header: var(--t-line-height-header);
+$t-line-height-body: var(--t-line-height-body);
 
-$t-font-size-table-content: $T-FONT-SIZE-SMALL;
-
+$t-font-size-table-content: $t-font-size-small;
 
 // endregion
 
 // region Spacing
 
-$t-margin-lr-4: $T-MARGIN-LR-4;
-$t-margin-lr-8: $T-MARGIN-LR-8;
-$t-margin-lr-10: $T-MARGIN-LR-10;
-$t-margin-lr-12: $T-MARGIN-LR-12;
-$t-margin-lr-16: $T-MARGIN-LR-16;
-$t-margin-lr-24: $T-MARGIN-LR-24;
-$t-margin-lr-32: $T-MARGIN-LR-32;
-$t-margin-lr-48: $T-MARGIN-LR-48;
+$t-margin-lr-4: 4px;
+$t-margin-lr-8: 8px;
+$t-margin-lr-10: 10px;
+$t-margin-lr-12: 12px;
+$t-margin-lr-16: 16px;
+$t-margin-lr-24: 24px;
+$t-margin-lr-32: 32px;
+$t-margin-lr-48: 48px;
 
-$t-margin-tb-8: $T-MARGIN-TB-8;
-$t-margin-tb-12: $T-MARGIN-TB-12;
-$t-margin-tb-16: $T-MARGIN-TB-16;
-$t-margin-tb-24: $T-MARGIN-TB-24;
-$t-margin-tb-32: $T-MARGIN-TB-32;
-$t-margin-tb-48: $T-MARGIN-TB-48;
-$t-margin-tb-60: $T-MARGIN-TB-60;
+$t-margin-tb-8: 8px;
+$t-margin-tb-12: 12px;
+$t-margin-tb-16: 16px;
+$t-margin-tb-24: 24px;
+$t-margin-tb-32: 32px;
+$t-margin-tb-48: 48px;
+$t-margin-tb-60: 60px;
 
-$t-padding-lr-8: $T-PADDING-LR-8;
-$t-padding-lr-10: $T-PADDING-LR-10;
-$t-padding-lr-12: $T-PADDING-LR-12;
-$t-padding-lr-16: $T-PADDING-LR-16;
-$t-padding-lr-24: $T-PADDING-LR-24;
-$t-padding-lr-32: $T-PADDING-LR-32;
-$t-padding-lr-48: $T-PADDING-LR-48;
-$t-padding-lr-60: $T-PADDING-LR-60;
-$t-padding-lr-80: $T-PADDING-LR-80;
+$t-padding-lr-8: 8px;
+$t-padding-lr-10: 10px;
+$t-padding-lr-12: 12px;
+$t-padding-lr-16: 16px;
+$t-padding-lr-24: 24px;
+$t-padding-lr-32: 32px;
+$t-padding-lr-48: 48px;
+$t-padding-lr-60: 60px;
+$t-padding-lr-80: 80px;
 
-$t-padding-tb-8: $T-PADDING-TB-8;
-$t-padding-tb-12: $T-PADDING-TB-12;
-$t-padding-tb-16: $T-PADDING-TB-16;
-$t-padding-tb-24: $T-PADDING-TB-24;
-$t-padding-tb-32: $T-PADDING-TB-32;
-$t-padding-tb-48: $T-PADDING-TB-48;
-$t-padding-tb-60: $T-PADDING-TB-60;
-$t-padding-tb-80: $T-PADDING-TB-80;
-
-// endregion
-
-// region [Layout]
-
-$t-layout-content-max-width: 1920px;
-$t-layout-content-min-width: 1440px;
+$t-padding-tb-8: 8px;
+$t-padding-tb-12: 12px;
+$t-padding-tb-16: 16px;
+$t-padding-tb-24: 24px;
+$t-padding-tb-32: 32px;
+$t-padding-tb-48: 48px;
+$t-padding-tb-60: 60px;
+$t-padding-tb-80: 80px;
 
 // endregion
 
@@ -221,10 +212,10 @@ $t-layout-content-min-width: 1440px;
 // frame
 $t-z-index-header: 100;
 
-$t-z-index-tooltip: 900;
-$t-z-index-modal: 500;
-$t-z-index-dropdown: 300;
-$t-z-index-drop-holder: 300;
-$t-z-index-page-title: 1;
+$t-z-index-tooltip: var(--t-z-index-tooltip);
+$t-z-index-modal: var(--t-z-index-modal);
+$t-z-index-dropdown: var(--t-z-index-dropdown);
+$t-z-index-drop-holder: var(--t-z-index-drop-holder);
+$t-z-index-page-title: var(--t-z-index-page-title);
 
 // endregion

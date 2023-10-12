@@ -2,11 +2,5 @@
 /* This file import all official tokens, functions and mixins */
 
 @import 'Function';
-@import 'FoundationToken';
 @import 'ThemeToken';
 @import 'Mixin';
-
-/* Define experimental tokens */
-// 임시로 넣을 토큰이 있다면 여기에
-// $TKS_PRIMARY_COLOR_DARK_GRAY: #555761;
-

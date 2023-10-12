@@ -1,28 +1,52 @@
 :root {
+
+    // Color
     --t-primary-color: #3535CE;
     --t-point-color: #293443;
 
-    --t-primary-color--tint-1: color-mix(in srgb, var(--t-primary-color), white 10%);
-    --t-primary-color--tint-2: color-mix(in srgb, var(--t-primary-color), white 20%);
-    --t-primary-color--tint-3: color-mix(in srgb, var(--t-primary-color), white 30%);
-    --t-primary-color--tint-4: color-mix(in srgb, var(--t-primary-color), white 40%);
-    --t-primary-color--tint-5: color-mix(in srgb, var(--t-primary-color), white 50%);
-    --t-primary-color--tint-6: color-mix(in srgb, var(--t-primary-color), white 60%);
-    --t-primary-color--tint-7: color-mix(in srgb, var(--t-primary-color), white 70%);
-    --t-primary-color--tint-8: color-mix(in srgb, var(--t-primary-color), white 80%);
-    --t-primary-color--tint-9: color-mix(in srgb, var(--t-primary-color), white 90%);
-    --t-primary-color--tint-10: color-mix(in srgb, var(--t-primary-color), white 95%);
-    --t-primary-color--tint-11: color-mix(in srgb, var(--t-primary-color), white 98%);
+    --t-white-color: #FFFFFF;
+    --t-gray-color--1: #F7F9FA;
+    --t-gray-color--2: #F6F6F6;
+    --t-gray-color--3: #F2F2F2;
+    --t-gray-color--4: #EEEEEE;
+    --t-gray-color--5: #DDDDDD;
+    --t-gray-color--6: #CCCCCC;
+    --t-gray-color--7: #999999;
+    --t-gray-color--8: #666666;
+    --t-gray-color--9: #333333;
+    --t-black-color: #000000;
 
-    --t-primary-color--shade-1: color-mix(in srgb, var(--t-primary-color), black 10%);
-    --t-primary-color--shade-2: color-mix(in srgb, var(--t-primary-color), black 20%);
-    --t-primary-color--shade-3: color-mix(in srgb, var(--t-primary-color), black 30%);
-    --t-primary-color--shade-4: color-mix(in srgb, var(--t-primary-color), black 40%);
-    --t-primary-color--shade-5: color-mix(in srgb, var(--t-primary-color), black 50%);
-    --t-primary-color--shade-6: color-mix(in srgb, var(--t-primary-color), black 60%);
-    --t-primary-color--shade-7: color-mix(in srgb, var(--t-primary-color), black 70%);
-    --t-primary-color--shade-8: color-mix(in srgb, var(--t-primary-color), black 80%);
-    --t-primary-color--shade-9: color-mix(in srgb, var(--t-primary-color), black 90%);
+    --t-status-color--required: #FF0000;
+    --t-status-color--success: #4874FF;
+    --t-status-color--error: #FF0000;
+    --t-status-color--default: #959595;
+    --t-status-color--processing: #4874FF;
+    --t-status-color--warning: #F7A443;
 
+    // Typography
+    --t-font-family: Roboto, 'Noto Sans', 'Noto Sans KR', '맑은 고딕', 'Malgun Gothic', 'Apple SD Gothic Neo', '돋움', Dotum, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+    --t-font-weight-normal: 400; // Regular | Normal
+    --t-font-weight-medium: 500; // Medium
+    --t-font-weight-bold: 700; // Bold
+
+    --t-font-size-base: 16px; // 1rem
+    --t-font-size-xsmall: 0.75rem; //12px
+    --t-font-size-small: 0.875rem; //14px
+    --t-font-size-medium: 1rem; // 16px
+    --t-font-size-large: 1.125rem; // 18px
+    --t-font-size-xlarge: 1.25rem; // 20px
+    --t-font-size-xxlarge: 1.625rem; // 26px
+
+    --t-line-height-default: 1; // 텍스트의 배수;
+    --t-line-height-header: 1.5; // 텍스트의 배수;
+    --t-line-height-body: 1.75;
+
+    // z-index
+    --t-z-index-tooltip: 900;
+    --t-z-index-modal: 500;
+    --t-z-index-dropdown: 300;
+    --t-z-index-drop-holder: 300;
+    --t-z-index-page-title: 1;
 
 }
