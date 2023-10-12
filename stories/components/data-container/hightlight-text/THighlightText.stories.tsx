@@ -2,7 +2,6 @@ import {Meta, StoryObj} from '@storybook/react';
 import {useState} from 'react';
 import THighlightText from '@/components/data-container/highlight-text/THighlightText';
 import TTextField from '@/components/input/text-field/TTextField';
-import TDropHolder from '@/components/data-container/drop-holder/TDropHolder';
 
 
 const meta: Meta<typeof THighlightText> = {
@@ -31,16 +30,16 @@ const Template = () => {
 
     const [searchText, setSearchText] = useState('');
 
-    return (<>
-        <TTextField onChange={setSearchText} value={searchText} placeholder={'하이라이트 할 텍스트를 입력해주세요'}/>
+    return (<div style={{lineHeight: 1.5}}>
+        <TTextField onChange={setSearchText} value={searchText} placeholder={'하이라이트 할 텍스트를 입력해주세요'} style={{marginBottom: '24px'}}/>
         <THighlightText keyword={searchText}>{dummyText}</THighlightText>
         <br/>
         <br/>
         <THighlightText keyword={searchText}>{koreanDummyText}</THighlightText>
-    </>);
+    </div>);
 };
 
 
-export const SearchBox: Story = {
+export const Default: Story = {
     render: Template,
 };
