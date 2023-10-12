@@ -21,7 +21,7 @@ export interface TIconButtonProps extends TBaseProps, TBaseTooltipProps {
 
     color?: string,
 
-    onClick?: (event?: MouseEvent | KeyboardEvent) => void,
+    onClick?: (event?: MouseEvent | KeyboardEvent) => any,
 }
 
 
