@@ -6,8 +6,10 @@
     position: relative;
     display: flex;
     overflow: hidden;
+    outline: none;
 
-    &:not(.t-icon-button--disabled):hover {
+    &:not(.t-icon-button--disabled):hover,
+    &:not(.t-icon-button--disabled):focus {
         background: $t-gray-color--02;
 
         &.t-icon-button--primary {
