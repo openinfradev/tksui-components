@@ -59,13 +59,6 @@ const TIconButton = forwardRef((props: TIconButtonProps, ref: Ref<TIconButtonRef
         }
     }, [props.disabled, ripple]);
 
-    const onMouseUp = useCallback((event): void => {
-        ripple.remove();
-        if (!props.disabled && props.onClick) {
-            props.onClick(event);
-        }
-    }, [props, ripple]);
-
     const onMouseLeave = useCallback((): void => {
         ripple.remove();
     }, [ripple]);
@@ -86,8 +79,11 @@ const TIconButton = forwardRef((props: TIconButtonProps, ref: Ref<TIconButtonRef
     }, [props, ripple]);
 
     const onClick = useCallback((event: MouseEvent): void => {
-        event.stopPropagation();
-    }, []);
+        ripple.remove();
+        if (!props.disabled && props.onClick) {
+            props.onClick(event);
+        }
+    }, [props, ripple]);
 
     // endregion
 
@@ -97,7 +93,6 @@ const TIconButton = forwardRef((props: TIconButtonProps, ref: Ref<TIconButtonRef
              style={rootStyle}
              className={`t-icon-button ${rootClass}`}
              onMouseDown={onMouseDown}
-             onMouseUp={onMouseUp}
              onMouseLeave={onMouseLeave}
              onKeyDown={onKeyDown}
              onKeyUp={onKeyUp}
