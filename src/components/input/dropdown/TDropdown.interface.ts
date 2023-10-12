@@ -1,4 +1,5 @@
 import {TValidatorProps} from '@/common/validator/TValidator.interface';
+import {TBaseProps} from '@/common/base/TBase.interface';
 
 type dropdownType = 'outline' | 'underline';
 
@@ -8,10 +9,8 @@ export interface TDropdownItem {
 
 export type TDropdownValue = string | string[];
 
-export interface TDropdownProps extends TValidatorProps {
-    className?: string,
+export interface TDropdownProps extends TValidatorProps, TBaseProps {
     itemsClassName?: string,
-    style?: { [key: string]: string },
     type?: dropdownType,
     width?: string,
 

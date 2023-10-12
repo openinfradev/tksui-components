@@ -1,10 +1,11 @@
 .t-dropdown {
 
-    $t-dropdown-item-height: 32px;
+    $t-dropdown-item-height: 46px;
     $t-dropdown-detail-height: 18px;
 
     width: 100%;
     position: relative;
+
 
     .t-dropdown__control {
         border: 1px solid $t-gray-color--06;
@@ -17,11 +18,12 @@
         gap: $t-margin-lr-8;
         cursor: pointer;
         min-height: $t-dropdown-item-height;
-        color: $t-gray-color--07;
         height: 46px;
+        outline: none;
         &:focus-within {
             border-color: $t-primary-color;
         }
+
 
         .t-dropdown__control__selected {
             padding: $t-padding-tb-8 0;
@@ -35,21 +37,7 @@
             }
         }
 
-        .t-dropdown__control__filter-text.t-text-field {
-            flex: 1 0 auto;
-            width: min-content;
-            margin-left: $t-margin-lr-4;
-            .t-text-field__container {
-                outline: none;
-                border: none;
-                padding: 0;
-                height: unset;
-            }
-            .t-text-field__details {
-                display: none;
-            }
 
-        }
 
         .t-dropdown__control__opener {
             font-size: 26px;
@@ -68,6 +56,17 @@
         background: $t-white-color;
         max-height: $t-dropdown-item-height * 5.6;
         overflow-y: auto;
+
+        .t-dropdown__items__filter-text.t-text-field {
+            .t-text-field__container {
+                border: none;
+                border-bottom: 1px solid $t-gray-color--06;
+            }
+            .t-text-field__details {
+                display: none;
+            }
+        }
+
 
         &.t-dropdown__items--no-detail { top: 100%; }
 

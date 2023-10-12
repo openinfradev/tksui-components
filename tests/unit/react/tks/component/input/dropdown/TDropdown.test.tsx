@@ -1,12 +1,13 @@
 import {act, render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import TTextField from '~/input/text-field/TTextField';
+import TDropdown from '~/input/dropdown/TDropdown';
 
 
-describe('TTextField', () => {
+describe('TDropdown', () => {
 
     const mockOnChange = jest.fn();
-    const baseProps = {value: 'hello', onChange: mockOnChange};
+    const baseProps = {value: 'hello', onChange: mockOnChange, items: []};
 
     beforeEach(() => { mockOnChange.mockClear(); });
 
@@ -14,17 +15,17 @@ describe('TTextField', () => {
     // region [Styles]
 
     it('renders without errors', () => {
-        render(<TTextField value={'hello'} onChange={mockOnChange}/>);
-        expect(screen.getByTestId('text-field-root')).toBeInTheDocument();
+        render(<TDropdown {...baseProps}/>);
+        expect(screen.getByTestId('dropdown-root')).toBeInTheDocument();
     });
 
     it('Classname prop applies to root', () => {
 
         // Arrange
-        render(<TTextField {...baseProps} className={'class-name-prop'}/>);
+        render(<TDropdown {...baseProps} className={'class-name-prop'}/>);
 
         // Assert
-        const root = screen.getByTestId('text-field-root');
+        const root = screen.getByTestId('dropdown-root');
 
         expect(root)
             .toHaveClass('class-name-prop');
@@ -33,10 +34,10 @@ describe('TTextField', () => {
     it('Style prop applies to root', () => {
 
         // Arrange
-        render(<TTextField {...baseProps} style={{width: '300px'}}/>);
+        render(<TDropdown {...baseProps} style={{width: '300px'}}/>);
 
         // Assert
-        const root = screen.getByTestId('text-field-root');
+        const root = screen.getByTestId('dropdown-root');
 
         expect(root).toHaveStyle({width: '300px'});
     });
@@ -44,10 +45,10 @@ describe('TTextField', () => {
     it('Width prop applies to root', () => {
 
         // Arrange
-        render(<TTextField {...baseProps} width={'300px'}/>);
+        render(<TDropdown {...baseProps} width={'300px'}/>);
 
         // Assert
-        const root = screen.getByTestId('text-field-root');
+        const root = screen.getByTestId('dropdown-root');
 
         expect(root)
             .toHaveStyle({width: '300px'});
@@ -57,24 +58,24 @@ describe('TTextField', () => {
 
         // Arrange
         const idProp = 'my-id';
-        render(<TTextField {...baseProps} id={idProp}/>);
+        render(<TDropdown {...baseProps} id={idProp}/>);
 
         // Assert
-        const root = screen.getByTestId('text-field-root');
+        const root = screen.getByTestId('dropdown-root');
 
         expect(root).toHaveAttribute('id', idProp);
     });
 
-    it('When type prop is set to underline, root has t-text-field--underline class', () => {
+    it('When type prop is set to underline, root has t-dropdown--underline class', () => {
 
         // Arrange
-        render(<TTextField {...baseProps} type={'underline'}/>);
+        render(<TDropdown {...baseProps} type={'underline'}/>);
 
         // Assert
-        const root = screen.getByTestId('text-field-root');
+        const root = screen.getByTestId('dropdown-root');
 
         expect(root)
-            .toHaveClass('t-text-field--underline');
+            .toHaveClass('t-dropdown--underline');
     });
 
 

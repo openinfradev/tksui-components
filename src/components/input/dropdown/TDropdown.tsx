@@ -2,7 +2,6 @@ import {
     CSSProperties,
     forwardRef,
     KeyboardEvent,
-    ReactElement,
     Ref,
     useCallback,
     useEffect,
@@ -27,6 +26,7 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
     const validator = useValidator(props.value, props.rules, props.successMessage);
 
     const inputRef = useRef(null);
+    const controlRef = useRef<HTMLDivElement>(null);
     const rootRef = useRef(null);
     const [filterText, setFilterText] = useState('');
     const [isOpened, setIsOpened] = useState(false);
@@ -34,47 +34,97 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
 
 
     useImperativeHandle(ref, () => ({
-        focus() { inputRef?.current?.focus(); },
+        focus() { controlRef?.current?.focus(); },
         validate() { return validator.validate(); },
     }));
+
+    // endregion
+
+    // region [Privates]
+
+    const focusToControl = useCallback(() => {
+        controlRef.current.focus();
+    }, []);
+
+    const modifyValue = useCallback((newItem: any): void => {
+
+        props.onChange(newItem);
+
+        if (props.multiple) {
+            if (props.value.includes(newItem)) {
+                props.onChange((props.value as string[]).filter((v) => v !== newItem));
+            } else {
+                props.onChange([...props.value, newItem]);
+            }
+        } else {
+            props.onChange(newItem);
+        }
+    }, [props]);
+
+    const initItemMap = useCallback(() => {
+        const map = new Map();
+        props.items.forEach((item) => {
+            map.set(item[props.valueKey], item);
+        });
+        setItemMap(map);
+    }, [props.items, props.valueKey]);
+
+    const close = useCallback((): void => {
+        setIsOpened(false);
+        setFilterText('');
+        focusToControl();
+    }, [focusToControl]);
+
+    const open = useCallback((): void => {
+        setIsOpened(true);
+        validator.clearValidation();
+    }, [validator]);
+
+    const toggleIsOpened = useCallback((): void => {
+        if (isOpened) {
+            close();
+        } else {
+            open();
+        }
+    }, [close, isOpened, open]);
 
     // endregion
 
 
     // region [Styles]
 
-    const getListItemContent = useCallback((item: TDropdownItem): string => {
+    const getItemTemplate = useCallback((item: TDropdownItem): string => {
         if (!item) { return ''; }
 
         return props.itemTemplate ? props.itemTemplate(item) : item[props.textKey];
     }, [props]);
 
 
-    const getFilteredItem = useCallback((): TDropdownItem[] => {
-        if (!props.multiple && filterText === getListItemContent(itemMap.get(props.value))) {
+    const getFilteredItems = useCallback((): TDropdownItem[] => {
+        if (!props.multiple && filterText === getItemTemplate(itemMap.get(props.value))) {
             return props.items;
         }
 
         return props.items.filter(
-            (item) => getListItemContent(item)
+            (item) => getItemTemplate(item)
                 .toLowerCase()
                 .includes(filterText?.toLowerCase()),
         );
-    }, [filterText, getListItemContent, itemMap, props.items, props.multiple, props.value]);
-
+    }, [filterText, getItemTemplate, itemMap, props.items, props.multiple, props.value]);
 
     const rootClass = useMemo((): string => {
         const clazz: string[] = [];
 
-        if (isOpened) clazz.push('t-dropdown--open');
-        if (props.disabled) clazz.push('t-dropdown--disabled');
-        if (!validator.result) clazz.push('t-dropdown--failure');
-        if (validator.result && validator.message) clazz.push('t-dropdown--success');
+        if (props.className) { clazz.push(props.className); }
+        if (isOpened) { clazz.push('t-dropdown--open'); }
+        if (props.disabled) { clazz.push('t-dropdown--disabled'); }
+        if (!validator.result) { clazz.push('t-dropdown--failure'); }
+        if (validator.result && validator.message) { clazz.push('t-dropdown--success'); }
 
         clazz.push(`t-dropdown--${props.type}`);
 
         return clazz.join(' ');
-    }, [isOpened, props.disabled, props.type, validator.message, validator.result]);
+    }, [isOpened, props.className, props.disabled, props.type, validator.message, validator.result]);
 
     const selectedClass = useMemo((): string => {
         const clazz: string[] = [];
@@ -89,10 +139,10 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
 
         if (isOpened) clazz.push('t-dropdown__items--open');
         if (props.noDetail) clazz.push('t-dropdown__items--no-detail');
-        if (getFilteredItem().length === 0) clazz.push('t-dropdown__items--empty');
+        if (getFilteredItems().length === 0) clazz.push('t-dropdown__items--empty');
 
         return clazz.join(' ');
-    }, [getFilteredItem, isOpened, props.noDetail]);
+    }, [getFilteredItems, isOpened, props.noDetail]);
 
     const itemClass = useCallback((item: TDropdownItem): string => {
         const clazz: string[] = [];
@@ -120,117 +170,51 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
 
     // region [Events]
 
-    const onClickControl = (): void => {
+    const onClickControl = useCallback((): void => {
         toggleIsOpened();
-        focusToInput();
-    };
+        focusToControl();
+    }, [focusToControl, toggleIsOpened]);
 
-    const onClickItem = (itemValue: string): void => {
+    const onClickItem = useCallback((itemValue: string): void => {
         modifyValue(itemValue);
-        focusToInput();
         if (!props.multiple) { close(); }
-    };
+    }, [close, modifyValue, props.multiple]);
 
-    const onFocus = (): void => {
-        validator.clearValidation();
-    };
-
-    const onblur = (): void => {
+    const onblur = useCallback((): void => {
         if (!isOpened && !props.lazy) {
             validator.validate();
-            resetFilterText();
         }
-    };
+    }, [isOpened, props.lazy, validator]);
 
-    const onChangeFilterText = (value: string): void => {
+    const onChangeFilterText = useCallback((value: string): void => {
         setFilterText(value);
+    }, []);
 
-        if (value.length > 0) {
-            toggleIsOpened(true);
-        } else {
-            toggleIsOpened(false);
-        }
-    };
-
-    const onKeyDownFilterText = (event: KeyboardEvent<HTMLInputElement>): void => {
+    const onKeyDownFilterText = useCallback((event: KeyboardEvent<HTMLInputElement>): void => {
         if (event.key === 'Escape') { close(); }
-        if (event.key === 'Enter') { open(); }
-    };
+    }, [close]);
 
-    const onKeyDownItem = (event: KeyboardEvent<HTMLDivElement>, itemValue: string): void => {
+    const onKeyDownControl = useCallback((event: KeyboardEvent<HTMLInputElement>): void => {
+        if (event.key === 'Escape') { close(); }
+        if (event.key === 'Enter' || event.key === ' ') { toggleIsOpened(); }
+    }, [close, toggleIsOpened]);
+
+    const onKeyDownItem = useCallback((event: KeyboardEvent<HTMLDivElement>, itemValue: string): void => {
         if (event.key === 'Escape') { close(); }
         if (event.key === 'Enter') {
             modifyValue(itemValue);
             if (!props.multiple) {
-                focusToInput();
+                focusToControl();
                 close();
             }
         }
-    };
+    }, [close, focusToControl, modifyValue, props.multiple]);
 
-    const onClearFilterText = (): void => {
+    const onClearFilterText = useCallback((): void => {
         if (!props.multiple) {
             props.onChange('');
         }
-    };
-
-    // endregion
-
-
-    // region [ETC]
-
-    const focusToInput = () => {
-        inputRef.current.focus();
-    };
-
-    const resetFilterText = () => {
-        if (!props.multiple) {
-            setFilterText(getListItemContent(itemMap.get(props.value)));
-        }
-    };
-
-    const modifyValue = (newItem: any): void => {
-
-        if (props.multiple) {
-            if (props.value.includes(newItem)) {
-                props.onChange((props.value as string[]).filter((v) => v !== newItem));
-            } else {
-                props.onChange([...props.value, newItem]);
-            }
-        } else {
-            props.onChange(newItem);
-        }
-    };
-
-    const registerItemMap = () => {
-        const map = new Map();
-        props.items.forEach((item) => {
-            map.set(item[props.valueKey], item);
-        });
-        setItemMap(map);
-    };
-
-
-    const close = (): void => {
-        setIsOpened(false);
-    };
-
-    const open = (): void => {
-        setIsOpened(true);
-        validator.clearValidation();
-    };
-
-    const toggleIsOpened = (value?: boolean): void => {
-        if (value === true) {
-            open();
-        } else if (value === false) {
-            close();
-        } else if (isOpened) {
-            close();
-        } else {
-            open();
-        }
-    };
+    }, [props]);
 
     // endregion
 
@@ -243,38 +227,6 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
         return null;
     }, [props.value, props.placeholder]);
 
-    const getSelectedItemTemplate = (): ReactElement => {
-
-        if (props.multiple) {
-            if (props.chip) {
-                return (<>{
-                    (props.value as string[]).map((value) => (
-                        <TChip key={value}
-                               small
-                               onRemove={props.disabled ? null : () => onClickItem(value)}
-                        >{getListItemContent(itemMap.get(value))}</TChip>
-                    ))
-                }</>);
-            }
-
-            return (<>{
-                (props.value as string[])
-                    .map((value) => (getListItemContent(itemMap.get(value))))
-                    .join(', ')
-
-            }</>);
-
-        }
-
-        return (<></>);
-    };
-
-    const getListItemTemplate = (item: TDropdownItem): ReactElement => (
-        <THighlightText keyword={filterText}>
-            {getListItemContent(item)}
-        </THighlightText>
-    );
-
     // endregion
 
 
@@ -282,8 +234,10 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
 
     useClickOutside(rootRef, close);
 
-    useEffect(registerItemMap, [props.items, props.valueKey]);
-    useEffect(resetFilterText, [getListItemContent, itemMap, props.multiple, props.value]);
+    useEffect(() => {
+        initItemMap();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [props.items, props.valueKey]);
 
     // endregion
 
@@ -291,32 +245,41 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
         <div ref={rootRef}
              className={`t-dropdown ${rootClass}`}
              style={rootStyle}
-             onFocus={onFocus}
-             onBlur={onblur}>
+             onBlur={onblur}
+             id={props.id}
+             data-testid={'dropdown-root'}>
 
             {/* Control */}
-            <div className={'t-dropdown__control'} onClick={onClickControl}>
+            <div className={'t-dropdown__control'}
+                 tabIndex={props.disabled ? -1 : 0}
+                 onKeyDown={onKeyDownControl}
+                 ref={controlRef}
+                 onClick={onClickControl}>
 
-                {/* Control - Selected Items for multiple */}
-                {
-                    <div className={`t-dropdown__control__selected ${selectedClass}`}>
-                        {getSelectedItemTemplate()}
-
-                        {/* Control - Filter Text */}
-                        <TTextField ref={inputRef}
-                                    className={'t-dropdown__control__filter-text'}
-                                    value={filterText}
-                                    clearable
-                                    placeholder={filterTextPlaceholder}
-                                    disabled={props.disabled}
-                                    noTrim
-                                    onChange={onChangeFilterText}
-                                    onKeyDown={onKeyDownFilterText}
-                                    onClear={onClearFilterText}
-                        />
-                    </div>
-                }
-
+                {/* Control - Selected Items */}
+                <div className={`t-dropdown__control__selected ${selectedClass}`}>
+                    {
+                        props.multiple && props.chip && (
+                            props.value as string[]).map((value) => (
+                            <TChip key={value}
+                                   small
+                                   onRemove={props.disabled ? null : () => onClickItem(value)}
+                            >{getItemTemplate(itemMap.get(value))}</TChip>
+                        ))
+                    }
+                    {
+                        props.multiple && !props.chip && (
+                            (props.value as string[])
+                                .map((value) => (getItemTemplate(itemMap.get(value))))
+                                .join(', ')
+                        )
+                    }
+                    {
+                        !props.multiple && (
+                            getItemTemplate(itemMap.get(props.value))
+                        )
+                    }
+                </div>
 
                 {/* Control - Opener */}
                 <TIcon className={`t-dropdown__control__opener ${isOpened ? 't-dropdown__control__opener--open' : ''}`}
@@ -327,8 +290,20 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
 
             {/* Floating */}
             <div className={`t-dropdown__items ${itemsClass}`}>
+                {/* Control - Filter Text */}
+                <TTextField ref={inputRef}
+                            className={'t-dropdown__items__filter-text'}
+                            value={filterText}
+                            placeholder={filterTextPlaceholder}
+                            disabled={props.disabled}
+                            noTrim
+                            searchable
+                            onChange={onChangeFilterText}
+                            onClear={onClearFilterText}
+                            onKeyDown={onKeyDownFilterText}
+                />
                 {
-                    isOpened && getFilteredItem()
+                    isOpened && getFilteredItems()
                         .map((item) => (
                             <div key={item[props.valueKey]}
                                  className={`t-dropdown__items__item ${itemClass(item)}`}
@@ -341,7 +316,9 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
                                                   checked={(props.value as string[]).includes(item[props.valueKey])}
                                     />
                                 }
-                                {getListItemTemplate(item)}
+                                <THighlightText keyword={filterText}>
+                                    {getItemTemplate(item)}
+                                </THighlightText>
                             </div>
                         ))
                 }
@@ -366,7 +343,7 @@ TDropdown.defaultProps = {
     type: 'outline',
     valueKey: 'value',
     textKey: 'text',
-    placeholder: '선택',
+    placeholder: '검색어를 입력해주세요',
     chip: true,
     lazy: true,
 };

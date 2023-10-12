@@ -50,8 +50,7 @@ const TChip = forwardRef((props: TChipProps, ref: Ref<TChipRef>) => {
     // region [Events]
     
     const onClickRemove = (event?: MouseEvent) => {
-        event.stopPropagation();
-        props.onRemove();
+        props.onRemove(event);
     };
     
     // endregion

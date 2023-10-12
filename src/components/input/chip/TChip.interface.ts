@@ -25,7 +25,7 @@ export interface TChipProps extends TBaseProps {
     large?: boolean,
     xlarge?: boolean,
     
-    onRemove?: () => void,
+    onRemove?: (event?: MouseEvent) => void,
 }
 
 
