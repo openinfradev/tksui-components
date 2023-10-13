@@ -27,11 +27,26 @@ function TFormSection(props: TFormSectionProps) {
 
     return (
         <section className={`t-form-section ${rootClass}`}>
-            {
-                props.label && (
-                    <h3 className={'t-form-section__label'}>{props.label}</h3>
-                )
-            }
+
+            <header className={'t-form-section__header'}>
+                {
+                    props.label && (
+                        <h3 className={'t-form-section__header__label'}>{props.label}</h3>
+                    )
+                }
+                {
+                    (props.leftAction || props.rightAction) && (
+                        <div className={'t-form-section__header__action'}>
+                            <div className={'t-form-section__header__action__left-action'}>
+                                {props.leftAction && (props.leftAction)}
+                            </div>
+                            <div className={'t-form-section__header__action__right-action'}>
+                                {props.rightAction && (props.rightAction)}
+                            </div>
+                        </div>
+                    )
+                }
+            </header>
             <div className={'t-form-section__content'}>
                 {
                     props.information && (

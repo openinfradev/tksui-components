@@ -1,6 +1,6 @@
 .t-form-box {
 
-    &:first-child .t-form-box__content:first-child .t-form-section__label {
+    &:first-child .t-form-box__content:first-child .t-form-section__header__label {
         padding-top: 32px;
     }
 
@@ -30,17 +30,39 @@
     display: flex;
     flex-direction: column;
 
-    &.t-form-section--required .t-form-section__label::after {
+    &.t-form-section--required .t-form-section__header__label::after {
         content: '*';
         color: $t-status-color--required;
         margin-left: $t-margin-lr-8;
     }
 
-    .t-form-section__label {
-        padding-bottom: $t-padding-tb-16;
+    .t-form-section__header {
+        display: flex;
+        align-items: center;
         border-bottom: 2px solid $t-black-color;
+        padding-bottom: $t-padding-tb-16;
         margin-bottom: $t-margin-tb-24;
+
+        .t-form-section__header__label {
+            margin-right: $t-margin-lr-16;
+        }
+
+        .t-form-section__header__action {
+            display: flex;
+            align-items: center;
+            flex: 1 0 auto;
+
+            .t-form-section__header__action__left-action {
+                flex: 1 0 auto;
+            }
+            .t-form-section__header__action__right-action {
+                display: flex;
+                flex: 0 1 auto;
+            }
+        }
+
     }
+
     .t-form-section__content {
         flex: 1 1 auto;
         display: flex;
@@ -66,7 +88,7 @@
 
     &.t-form-section--grid-type {
 
-        .t-form-section__label {
+        .t-form-section__header__label {
             border-bottom: none;
             margin-bottom: 0;
         }

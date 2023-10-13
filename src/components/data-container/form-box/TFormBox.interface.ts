@@ -12,7 +12,7 @@ export interface TFormBoxProps extends TBaseProps {
 }
 
 
-export interface TFormSectionProps extends TBaseProps {
+export interface  TFormSectionProps extends TBaseProps {
     children: ReactNode,
 
     column?: number,
@@ -22,6 +22,9 @@ export interface TFormSectionProps extends TBaseProps {
     gridType?: boolean,
     gridTypeRowHeight?: string,
     gridTypeLabelWidth?: string,
+
+    leftAction?: ReactNode,
+    rightAction?: ReactNode,
 }
 
 
