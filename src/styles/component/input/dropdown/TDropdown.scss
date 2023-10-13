@@ -33,7 +33,7 @@
             outline: none;
             flex-wrap: wrap;
             &.t-dropdown__control__selected--empty {
-                color: $t-font-color-placeholder;
+                color: $t-font-color--placeholder;
             }
         }
 
@@ -54,8 +54,6 @@
         border: 1px solid $t-gray-color--06;
         width: 100%;
         background: $t-white-color;
-        max-height: $t-dropdown-item-height * 5.6;
-        overflow-y: auto;
 
         .t-dropdown__items__filter-text.t-text-field {
             .t-text-field__container {
@@ -65,6 +63,17 @@
             .t-text-field__details {
                 display: none;
             }
+            .t-icon {
+                color: $t-font-color--placeholder;
+                cursor: default;
+            }
+
+        }
+
+        .t-dropdown__items__wrapper {
+            max-height: $t-dropdown-item-height * 5.5;
+            overflow-y: auto;
+
         }
 
 
@@ -76,15 +85,8 @@
 
         &.t-dropdown__items--empty.t-dropdown__items--open {
             pointer-events: none;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            color: $t-font-color--read-only;
+            color: $t-font-color--placeholder;
 
-            &::after {
-                content: '검색 결과가 없습니다';
-                padding-left: $t-margin-lr-16;
-            }
         }
 
         .t-dropdown__items__item {

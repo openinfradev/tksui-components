@@ -34,8 +34,12 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
 
 
     useImperativeHandle(ref, () => ({
-        focus() { controlRef?.current?.focus(); },
-        validate() { return validator.validate(); },
+        focus() {
+            controlRef?.current?.focus();
+        },
+        validate() {
+            return validator.validate();
+        },
     }));
 
     // endregion
@@ -94,7 +98,9 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
     // region [Styles]
 
     const getItemTemplate = useCallback((item: TDropdownItem): string => {
-        if (!item) { return ''; }
+        if (!item) {
+            return '';
+        }
 
         return props.itemTemplate ? props.itemTemplate(item) : item[props.textKey];
     }, [props]);
@@ -177,7 +183,9 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
 
     const onClickItem = useCallback((itemValue: string): void => {
         modifyValue(itemValue);
-        if (!props.multiple) { close(); }
+        if (!props.multiple) {
+            close();
+        }
     }, [close, modifyValue, props.multiple]);
 
     const onblur = useCallback((): void => {
@@ -191,16 +199,24 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
     }, []);
 
     const onKeyDownFilterText = useCallback((event: KeyboardEvent<HTMLInputElement>): void => {
-        if (event.key === 'Escape') { close(); }
+        if (event.key === 'Escape') {
+            close();
+        }
     }, [close]);
 
     const onKeyDownControl = useCallback((event: KeyboardEvent<HTMLInputElement>): void => {
-        if (event.key === 'Escape') { close(); }
-        if (event.key === 'Enter' || event.key === ' ') { toggleIsOpened(); }
+        if (event.key === 'Escape') {
+            close();
+        }
+        if (event.key === 'Enter' || event.key === ' ') {
+            toggleIsOpened();
+        }
     }, [close, toggleIsOpened]);
 
     const onKeyDownItem = useCallback((event: KeyboardEvent<HTMLDivElement>, itemValue: string): void => {
-        if (event.key === 'Escape') { close(); }
+        if (event.key === 'Escape') {
+            close();
+        }
         if (event.key === 'Enter') {
             modifyValue(itemValue);
             if (!props.multiple) {
@@ -221,9 +237,12 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
 
     // region [Templates]
 
-    const filterTextPlaceholder = useMemo((): string => {
 
-        if (props.value?.length === 0) { return props.placeholder; }
+    const placeholder = useMemo((): string => {
+
+        if (props.value?.length === 0) {
+            return props.placeholder;
+        }
         return null;
     }, [props.value, props.placeholder]);
 
@@ -258,15 +277,21 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
 
                 {/* Control - Selected Items */}
                 <div className={`t-dropdown__control__selected ${selectedClass}`}>
+
+                    {/* Placeholder */}
+                    {placeholder}
+
+                    {/* Multiple Chip */}
                     {
                         props.multiple && props.chip && (
                             props.value as string[]).map((value) => (
-                            <TChip key={value}
-                                   small
-                                   onRemove={props.disabled ? null : () => onClickItem(value)}
-                            >{getItemTemplate(itemMap.get(value))}</TChip>
+                            <TChip key={value} small onRemove={props.disabled ? null : () => onClickItem(value)}>
+                                {getItemTemplate(itemMap.get(value))}
+                            </TChip>
                         ))
                     }
+
+                    {/* Multiple Text */}
                     {
                         props.multiple && !props.chip && (
                             (props.value as string[])
@@ -274,6 +299,8 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
                                 .join(', ')
                         )
                     }
+
+                    {/* Single Text */}
                     {
                         !props.multiple && (
                             getItemTemplate(itemMap.get(props.value))
@@ -294,7 +321,7 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
                 <TTextField ref={inputRef}
                             className={'t-dropdown__items__filter-text'}
                             value={filterText}
-                            placeholder={filterTextPlaceholder}
+                            placeholder={props.filterPlaceholder}
                             disabled={props.disabled}
                             noTrim
                             searchable
@@ -302,26 +329,36 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
                             onClear={onClearFilterText}
                             onKeyDown={onKeyDownFilterText}
                 />
-                {
-                    isOpened && getFilteredItems()
-                        .map((item) => (
-                            <div key={item[props.valueKey]}
-                                 className={`t-dropdown__items__item ${itemClass(item)}`}
-                                 tabIndex={props.multiple ? -1 : 0}
-                                 onClickCapture={() => onClickItem(item[props.valueKey])}
-                                 onKeyDown={(event: KeyboardEvent<HTMLDivElement>) => onKeyDownItem(event, item[props.valueKey])}>
-                                {
-                                    props.multiple
-                                    && <TCheckbox className={'t-dropdown__items__item__checkbox'}
-                                                  checked={(props.value as string[]).includes(item[props.valueKey])}
-                                    />
-                                }
-                                <THighlightText keyword={filterText}>
-                                    {getItemTemplate(item)}
-                                </THighlightText>
+                <div className={'t-dropdown__items__wrapper'}>
+                    {
+
+                        isOpened && getFilteredItems()
+                            .map((item) => (
+                                <div key={item[props.valueKey]}
+                                     className={`t-dropdown__items__item ${itemClass(item)}`}
+                                     tabIndex={props.multiple ? -1 : 0}
+                                     onClickCapture={() => onClickItem(item[props.valueKey])}
+                                     onKeyDown={(event: KeyboardEvent<HTMLDivElement>) => onKeyDownItem(event, item[props.valueKey])}>
+                                    {
+                                        props.multiple
+                                        && <TCheckbox className={'t-dropdown__items__item__checkbox'}
+                                                      checked={(props.value as string[]).includes(item[props.valueKey])}
+                                        />
+                                    }
+                                    <THighlightText keyword={filterText}>
+                                        {getItemTemplate(item)}
+                                    </THighlightText>
+                                </div>
+                            ))
+                    }
+                    {
+                        (isOpened && getFilteredItems().length === 0) && (
+                            <div className={`t-dropdown__items__item`}>
+                                검색 결과가 없습니다.
                             </div>
-                        ))
-                }
+                        )
+                    }
+                </div>
             </div>
 
             {/* Details */}
@@ -343,7 +380,8 @@ TDropdown.defaultProps = {
     type: 'outline',
     valueKey: 'value',
     textKey: 'text',
-    placeholder: '검색어를 입력해주세요',
+    placeholder: '목록에서 선택해 주세요',
+    filterPlaceholder: '검색어를 입력해 주세요',
     chip: true,
     lazy: true,
 };

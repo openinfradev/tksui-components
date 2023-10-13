@@ -62,10 +62,10 @@ const NormalTemplate = (args: TDropdownProps) => {
                     <TDropdown {...args} {...singleSelect2} disabled/>
 
                     placeholder (value: {singleSelect3.value})
-                    <TDropdown {...args} {...singleSelect3} placeholder={'Choose your favorite fruit'}/>
+                    <TDropdown {...args} {...singleSelect3} filterPlaceholder={'Choose your favorite fruit'}/>
 
                     textKey (value: {singleSelect4.value})
-                    <TDropdown {...args} {...singleSelect4} placeholder={'좋아하는 과일을 선택해주세요'} textKey={'koreanText'}/>
+                    <TDropdown {...args} {...singleSelect4} filterPlaceholder={'좋아하는 과일을 선택해주세요'} textKey={'koreanText'}/>
 
                     valueKey (value: {singleSelect5.value})
                     <TDropdown {...args} {...singleSelect5} valueKey={'value2'}/>
@@ -89,10 +89,10 @@ const NormalTemplate = (args: TDropdownProps) => {
                     <TDropdown {...args} {...multiSelect2} multiple disabled/>
 
                     placeholder (value: {multiSelect3.value.join(', ')})
-                    <TDropdown {...args} {...multiSelect3} multiple placeholder={'Choose your favorite fruits'}/>
+                    <TDropdown {...args} {...multiSelect3} multiple filterPlaceholder={'Choose your favorite fruits'}/>
 
                     textKey (value: {multiSelect4.value.join(', ')})
-                    <TDropdown {...args} {...multiSelect4} multiple placeholder={'좋아하는 과일들을 선택해주세요'} textKey={'koreanText'}/>
+                    <TDropdown {...args} {...multiSelect4} multiple filterPlaceholder={'좋아하는 과일들을 선택해주세요'} textKey={'koreanText'}/>
 
                     valueKey (value: {multiSelect5.value.join(', ')})
                     <TDropdown {...args} {...multiSelect5} multiple valueKey={'value2'}/>
@@ -154,7 +154,7 @@ const ValidationTemplate = (args: TDropdownProps) => {
 
                     placeholder (value: {singleSelect3.value})
                     <TDropdown ref={singleSelect3Ref} rules={[rule.required()]} {...args} {...singleSelect3}
-                               placeholder={'Choose your favorite fruit'}/>
+                               filterPlaceholder={'Choose your favorite fruit'}/>
 
                     default (value: {multiSelect1.value.join(', ')})
                     <TDropdown ref={multiSelect1Ref} rules={[rule.requiredArr()]} {...args} type={'underline'} {...multiSelect1} multiple/>
@@ -165,7 +165,7 @@ const ValidationTemplate = (args: TDropdownProps) => {
 
                     placeholder (value: {multiSelect3.value.join(', ')})
                     <TDropdown ref={multiSelect3Ref} rules={[rule.requiredArr()]} {...args} type={'underline'} {...multiSelect3} multiple
-                               placeholder={'Choose your favorite fruits'}/>
+                               filterPlaceholder={'Choose your favorite fruits'}/>
                 </div>
             </div>
         </div>
