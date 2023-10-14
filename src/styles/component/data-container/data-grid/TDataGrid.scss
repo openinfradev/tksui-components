@@ -111,6 +111,10 @@
             align-items: center;
             @include ellipsis;
             &::selection { color: transparent; background: transparent;}
+
+            &.ag-right-aligned-cell {
+                justify-content: flex-end;
+            }
         }
 
         .ag-overlay-no-rows-wrapper {

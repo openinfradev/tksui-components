@@ -51,7 +51,7 @@ const Template = () => {
             showDisabledCheckboxes: true,
         },
         {headerName: '브랜드', field: 'make'},
-        {headerName: '가격', field: 'price'},
+        {headerName: '가격', field: 'price', type: 'rightAligned'},
         {headerName: '과일', field: 'fruit', flex: 1},
     ]);
 
