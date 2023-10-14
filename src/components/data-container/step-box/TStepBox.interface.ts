@@ -21,6 +21,7 @@ export interface TStepBoxItemProps extends TBaseProps {
     children?: any,
     prevButtonLabel?: string,
     nextButtonLabel?: string,
+    nextButtonDisabled?: boolean,
     completeButtonLabel?: string,
     customNextButton?: ReactElement,
     validateStep?: () => boolean,
@@ -31,6 +32,7 @@ export interface TStepBoxItemProps extends TBaseProps {
 export interface TStepBoxFooterProps {
     prevButtonLabel: string,
     nextButtonLabel: string,
+    nextButtonDisabled?: boolean,
     completeButtonLabel: string,
     customNextButton?: ReactElement,
     validateStep?: () => boolean,

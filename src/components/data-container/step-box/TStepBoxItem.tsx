@@ -36,6 +36,7 @@ const TStepBoxItem = (props: TStepBoxItemProps) => {
 
             <TStepBoxFooter prevButtonLabel={props.prevButtonLabel ?? stepBoxContext.prevButtonLabel}
                             nextButtonLabel={props.nextButtonLabel ?? stepBoxContext.nextButtonLabel}
+                            nextButtonDisabled={props.nextButtonDisabled}
                             completeButtonLabel={props.completeButtonLabel ?? stepBoxContext.completeButtonLabel }
                             customNextButton={props.customNextButton}
                             validateStep={props.validateStep}

@@ -33,8 +33,7 @@ const Template = (args) => {
     return (<>
 
         <TStepBox value={stepNumber} onChange={setStepNumber} stepLabels={['csp', 'step 2']} {...args} >
-            <StackCreateCspStep />
-            <TStepBoxItem>
+            <TStepBoxItem nextButtonDisabled>
                 <div>
                     Step 2 Content
                 </div>
