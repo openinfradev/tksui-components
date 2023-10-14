@@ -54,9 +54,11 @@ function TFormSection(props: TFormSectionProps) {
                             <TIcon small className={'t-form-section__content__info__icon'} color={'#666666'}>t_information</TIcon>
                             <div className={'t-form-section__content__info__content'}>
                                 {
-                                    props.information
-                                        .split('\n')
-                                        .map((token, index) => <div key={index}>{token}</div>)
+                                    props.customInformation
+                                        ? (props.customInformation)
+                                        : props.information
+                                            .split('\n')
+                                            .map((token, index) => <div key={index}>{token}</div>)
                                 }
                             </div>
                         </div>
