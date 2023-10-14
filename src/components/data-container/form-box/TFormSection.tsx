@@ -49,7 +49,7 @@ function TFormSection(props: TFormSectionProps) {
             </header>
             <div className={'t-form-section__content'}>
                 {
-                    props.information && (
+                    (props.information || props.customInformation) && (
                         <div className={'t-form-section__content__info'}>
                             <TIcon small className={'t-form-section__content__info__icon'} color={'#666666'}>t_information</TIcon>
                             <div className={'t-form-section__content__info__content'}>

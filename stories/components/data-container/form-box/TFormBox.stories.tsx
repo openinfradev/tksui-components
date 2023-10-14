@@ -55,7 +55,8 @@ const Template = (args: TFormBoxProps) => {
                       {...args}>
                 <TFormSection label={'Basic Properties'}
                               column={2}
-                              information={'앱 생성 양식 예제입니다.'}>
+                              customInformation={'앱 생성 양식 예제입니다.'}
+                >
                     <TFormRow>
                         <TFormItem label={'Name'} required>
                             <TTextField counter={30} {...name} />
@@ -71,7 +72,7 @@ const Template = (args: TFormBoxProps) => {
                     </TFormRow>
                 </TFormSection>
 
-                <TFormSection label={'Properties'} column={2} required leftAction={'hello'} rightAction={'world'}>
+                <TFormSection label={'Properties'} column={2} required>
                     <TFormRow>
                         <TFormItem label={'Artifact URL'} required>
                             <TTextField {...artifactUrl} />
