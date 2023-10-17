@@ -73,10 +73,12 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
         setItemMap(map);
     }, [props.items, props.valueKey]);
 
-    const close = useCallback((): void => {
+    const close = useCallback((setFocus: boolean): void => {
         setIsOpened(false);
         setFilterText('');
-        focusToControl();
+        if (setFocus) {
+            focusToControl();
+        }
     }, [focusToControl]);
 
     const open = useCallback((): void => {
@@ -86,7 +88,7 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
 
     const toggleIsOpened = useCallback((): void => {
         if (isOpened) {
-            close();
+            close(true);
         } else {
             open();
         }
@@ -184,7 +186,7 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
     const onClickItem = useCallback((itemValue: string): void => {
         modifyValue(itemValue);
         if (!props.multiple) {
-            close();
+            close(true);
         }
     }, [close, modifyValue, props.multiple]);
 
@@ -200,13 +202,13 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
 
     const onKeyDownFilterText = useCallback((event: KeyboardEvent<HTMLInputElement>): void => {
         if (event.key === 'Escape') {
-            close();
+            close(true);
         }
     }, [close]);
 
     const onKeyDownControl = useCallback((event: KeyboardEvent<HTMLInputElement>): void => {
         if (event.key === 'Escape') {
-            close();
+            close(true);
         }
         if (event.key === 'Enter' || event.key === ' ') {
             toggleIsOpened();
@@ -215,13 +217,13 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
 
     const onKeyDownItem = useCallback((event: KeyboardEvent<HTMLDivElement>, itemValue: string): void => {
         if (event.key === 'Escape') {
-            close();
+            close(true);
         }
         if (event.key === 'Enter') {
             modifyValue(itemValue);
             if (!props.multiple) {
                 focusToControl();
-                close();
+                close(true);
             }
         }
     }, [close, focusToControl, modifyValue, props.multiple]);
@@ -251,7 +253,7 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
 
     // region [Hooks - Lifecycle]
 
-    useClickOutside(rootRef, close);
+    useClickOutside(rootRef, () => close(false));
 
     useEffect(() => {
         initItemMap();
@@ -353,7 +355,7 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
                     }
                     {
                         (isOpened && getFilteredItems().length === 0) && (
-                            <div className={`t-dropdown__items__item`}>
+                            <div className={'t-dropdown__items__item'}>
                                 검색 결과가 없습니다.
                             </div>
                         )
