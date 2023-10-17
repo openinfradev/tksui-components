@@ -19,12 +19,10 @@
 
 .t-card-header {
     margin: 0 32px;
-    padding: 32px 0 16px;
+    padding: $t-padding-tb-32 0 0 0;
 
 
-    .t-card-header__title {
-
-    }
+    .t-card-header__title {}
     .t-card-header__sub-title {
         margin-top: $t-margin-tb-12;
         color: $t-gray-color--08;
@@ -32,6 +30,6 @@
 }
 
 .t-card-content {
-    padding: 16px 32px;
+    padding: $t-padding-tb-32 $t-padding-lr-32;
     line-height: $t-line-height-body;
 }
