@@ -10,7 +10,7 @@ $t-modal__overlay__body--xxlarge-width: 1500px;
         z-index: $t-z-index-modal;
         position: fixed;
         inset: 0;
-        background: setOpacity($t-black-color, 40%);
+        background: rgba(black, 40%);
         opacity: 0;
         transition: opacity 200ms ease-in-out;
         &.ReactModal__Overlay--after-open { opacity: 1; }
