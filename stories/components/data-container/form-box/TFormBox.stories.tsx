@@ -74,7 +74,7 @@ const Template = (args: TFormBoxProps) => {
 
                 <TFormSection label={'Properties'} column={2} information={'컨트롤플레인 노드는 이런겁니다.\n인프라 노드는 이런겁니다.\n사용자 노드는 이런겁니다.'}>
                     <TFormRow>
-                        <TFormItem label={'Artifact URL'} required>
+                        <TFormItem label={'Artifact URL'} required information={'form item에 설명이 필요하면 \n information 기능을 사용하면 됩니다.'}>
                             <TTextField {...artifactUrl} />
                         </TFormItem>
                         <TFormItem label={'Port'}>

@@ -12,7 +12,7 @@ export interface TFormBoxProps extends TBaseProps {
 }
 
 
-export interface  TFormSectionProps extends TBaseProps {
+export interface TFormSectionProps extends TBaseProps {
     children: ReactNode,
 
     column?: number,
@@ -36,6 +36,8 @@ export interface TFormRowProps extends TBaseProps {
 export interface TFormItemProps extends TBaseProps {
     children: ReactNode,
 
+    customInformation?: ReactNode,
+    information?: string,
     span?: number,
     required?: boolean,
     label?: TFormLabel,

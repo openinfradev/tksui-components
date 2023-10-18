@@ -1,12 +1,15 @@
-import {CSSProperties, useContext, useMemo} from 'react';
+import {CSSProperties, useContext, useId, useMemo} from 'react';
 import {TFormItemProps} from './TFormBox.interface';
 import FormContext from './TFormSectionContext';
+import {TIcon} from '~/icon';
+import TTooltip from '~/guide/tooltip/TTooltip';
 
 function TFormItem(props: TFormItemProps) {
 
     // region [Hooks]
 
     const {column, gridType} = useContext(FormContext);
+    const tooltipId = useId();
 
 
     // endregion
@@ -63,7 +66,19 @@ function TFormItem(props: TFormItemProps) {
                 props.label && (
                     <label className={'t-form-item__label'}
                            style={labelStyle}>
-                        {props.label}
+                        <span className={'t-form-item__label__text'}>
+                            {props.label}
+                        </span>
+                        {
+                            (props.information) && (
+                                <TIcon className={'t-form-item__label__info-icon'}
+                                       xsmall
+                                       tooltipContent={props.information}
+                                       tooltipId={tooltipId}
+                                       clickable
+                                >t_information</TIcon>
+                            )
+                        }
                     </label>
                 )
             }
@@ -71,6 +86,12 @@ function TFormItem(props: TFormItemProps) {
                  style={contentStyle}>
                 {props.children}
             </div>
+
+            {
+                props.information && (
+                    <TTooltip id={tooltipId} openOnClick/>
+                )
+            }
         </span>
     );
 

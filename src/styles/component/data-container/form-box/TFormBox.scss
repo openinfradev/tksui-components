@@ -77,7 +77,6 @@
             align-items: center;
             background: $t-grid-background-color--01;
             font-size: $t-font-size-medium;
-            line-height: var(--t-line-height-default);
             color: $t-gray-color--08;
             padding: $t-padding-tb-24 $t-padding-lr-24;
             display: flex;
@@ -158,9 +157,15 @@
 
     .t-form-item__label {
         font-weight: $t-font-weight-normal;
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
         margin-bottom: $t-margin-tb-8;
-        color: $t-gray-color--08;
+        color: $t-black-color;
+        .t-form-item__label__info-icon {
+            margin-left: $t-margin-lr-8;
+            stroke: $t-gray-color--08;
+            fill: $t-gray-color--08;
+        }
     }
     .t-form-item__content {
         display: flex;
@@ -169,7 +174,7 @@
         line-height: $t-line-height-body;
     }
 
-    &.t-form-item--required .t-form-item__label::after {
+    &.t-form-item--required .t-form-item__label__text::after {
         content: '*';
         color: $t-status-color--required;
         margin-left: $t-margin-lr-4;
