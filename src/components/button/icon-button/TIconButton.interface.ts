@@ -8,6 +8,7 @@ export interface TIconButtonProps extends TBaseProps, TBaseTooltipProps {
     children: string,
 
     size?: TIconButtonSize,
+    xsmall?: boolean,
     small?: boolean,
     medium?: boolean,
     large?: boolean,

@@ -105,6 +105,7 @@ const TIconButton = forwardRef((props: TIconButtonProps, ref: Ref<TIconButtonRef
         >
             <TIcon className={`t-icon-button__inner ${rootClass}`}
                    size={props.size}
+                   xsmall={props.xsmall}
                    small={props.small}
                    medium={props.medium}
                    large={props.large}
