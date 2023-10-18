@@ -74,13 +74,14 @@
         .t-form-section__content__info {
             .t-icon {margin-top: 2px;}
 
+            align-items: center;
             background: $t-grid-background-color--01;
-            font-size: $t-font-size-small;
+            font-size: $t-font-size-medium;
+            line-height: var(--t-line-height-default);
             color: $t-gray-color--08;
-            padding: 24px 16px;
+            padding: $t-padding-tb-24 $t-padding-lr-24;
             display: flex;
-            align-items: flex-start;
-            gap: $t-margin-lr-8;
+            gap: $t-padding-lr-16;
             line-height: $t-line-height-body;
 
         }

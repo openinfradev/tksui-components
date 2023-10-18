@@ -72,7 +72,7 @@ const Template = (args: TFormBoxProps) => {
                     </TFormRow>
                 </TFormSection>
 
-                <TFormSection label={'Properties'} column={2} required>
+                <TFormSection label={'Properties'} column={2} information={'컨트롤플레인 노드는 이런겁니다.\n인프라 노드는 이런겁니다.\n사용자 노드는 이런겁니다.'}>
                     <TFormRow>
                         <TFormItem label={'Artifact URL'} required>
                             <TTextField {...artifactUrl} />
