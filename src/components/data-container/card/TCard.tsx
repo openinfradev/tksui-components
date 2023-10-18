@@ -3,15 +3,6 @@ import {TCardProps} from './TCard.interface';
 
 const TCard = (props: TCardProps) => {
 
-    // region [Hooks]
-
-
-    // region [Privates]
-
-
-    // endregion
-
-
     // region [Templates]
 
     const rootClass = useMemo((): string => {
