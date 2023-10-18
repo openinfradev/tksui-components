@@ -11,7 +11,7 @@
     --rt-color-white: #{$t-gray-color--01};
     --rt-opacity: 0.9;
     font-family: $t-font-family;
-    font-size: $t-font-size-medium;
+    font-size: $t-font-size-small;
     word-break: keep-all;
     word-wrap: break-word;
     z-index: $t-z-index-tooltip;
@@ -21,6 +21,7 @@
     &.react-tooltip {
         border: 1px solid $t-gray-color--08;
         padding: $t-padding-tb-16 $t-padding-lr-16;
+        line-height: $t-line-height-body;
 
         & > .react-tooltip-arrow {
             width: 12px;
