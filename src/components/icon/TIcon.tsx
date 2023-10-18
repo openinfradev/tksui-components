@@ -25,6 +25,7 @@ function TIcon(props: TIconProps): ReactElement {
 
     const $_size = useMemo(() => {
         if (props.size && props.size in iconSize) { return props.size; }
+        if (props.xsmall) { return 'xsmall'; }
         if (props.small) { return 'small'; }
         if (props.medium) { return 'medium'; }
         if (props.large) { return 'large'; }

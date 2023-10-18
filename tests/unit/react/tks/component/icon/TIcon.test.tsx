@@ -59,6 +59,7 @@ describe('TIcon', () => {
 
         it('When valid size is entered, it will be applied in the classname', () => {
             render(<>
+                <TIcon size={'xsmall'}>close</TIcon>
                 <TIcon size={'small'}>close</TIcon>
                 <TIcon size={'medium'}>close</TIcon>
                 <TIcon size={'large'}>close</TIcon>
@@ -67,10 +68,11 @@ describe('TIcon', () => {
 
             const icons = screen.getAllByRole('img');
 
-            expect(icons[0]).toHaveClass('t-icon--small');
-            expect(icons[1]).toHaveClass('t-icon--medium');
-            expect(icons[2]).toHaveClass('t-icon--large');
-            expect(icons[3]).toHaveClass('t-icon--xlarge');
+            expect(icons[0]).toHaveClass('t-icon--xsmall');
+            expect(icons[1]).toHaveClass('t-icon--small');
+            expect(icons[2]).toHaveClass('t-icon--medium');
+            expect(icons[3]).toHaveClass('t-icon--large');
+            expect(icons[4]).toHaveClass('t-icon--xlarge');
         });
 
 

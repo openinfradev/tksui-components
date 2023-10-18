@@ -95,6 +95,13 @@ export const Filled: Story = {
 };
 
 
+export const XSmall: Story = {
+    render: Template,
+    args: {
+        xsmall: true,
+    },
+};
+
 export const Small: Story = {
     render: Template,
     args: {
