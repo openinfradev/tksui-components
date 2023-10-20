@@ -4,7 +4,7 @@
 
 
     .t-progress__overlay.t-modal__overlay {
-        z-index: $t-z-index-modal + 1;
+        z-index: calc($t-z-index-modal + 1);
     }
 
     .t-progress__modal-body.t-modal__overlay__body {
