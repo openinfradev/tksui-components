@@ -166,6 +166,10 @@
             stroke: $t-gray-color--08;
             fill: $t-gray-color--08;
         }
+
+        .t-form-item__label__text {
+            color: $t-gray-color--08;
+        }
     }
     .t-form-item__content {
         display: flex;
