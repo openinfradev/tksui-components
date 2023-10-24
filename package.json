@@ -11,7 +11,7 @@
     "scripts": {
         "clean": "rimraf lib",
         "build-tsc": "tsc --project tsconfig.esm.json && tsc-alias -p tsconfig.esm.json",
-        "build-sass": "sass src/styles/Entry.scss lib/styles/index.css",
+        "build-sass": "sass --no-source-map src/styles/Entry.scss lib/styles/index.css",
         "minify-js": "esbuild lib/esm/**/*.js --minify --allow-overwrite --outdir=lib/esm",
         "build-all": "npm run clean && npm run build-tsc && npm run minify-js && npm run build-sass",
         "patch": "npm run build-all && npm version patch && npm publish && npm run clean",
