@@ -1,0 +1,121 @@
+
+.t-carousel-wrapper {
+    position: relative;
+
+    .t-carousel-arrow {
+        position: absolute;
+        z-index: 1;
+        width: 44px;
+        height: 44px;
+        padding: 0;
+
+        top: calc(50% - 22px);
+
+        &.t-carousel-arrow--show-hover {
+            opacity: 0;
+            transition: opacity 0.25s;
+        }
+        .t-icon-button {
+            background: var(--t-gray-color--2)
+        }
+    }
+    &:hover .t-carousel-arrow--show-hover {
+        opacity: 1;
+    }
+
+
+    .t-carousel-prev { left: 40px;}
+    .t-carousel-next { right: 40px;}
+
+
+    .t-carousel.slick-slider {
+        height: 100%;
+        position: relative;
+
+        img {
+            //object-fit: cover;
+        }
+
+        display: block;
+        box-sizing: border-box;
+
+        .slick-list {
+            position: relative;
+
+            display: block;
+            overflow: hidden;
+
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            .slick-track {
+                position: relative;
+                top: 0;
+                left: 0;
+                height: 100%;
+
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    }
+}
+
+.slick-slide {
+    display: block;
+    float: left;
+
+    height: 100%;
+    min-height: 1px;
+
+    & > div {
+        height: 100%;
+    }
+}
+
+
+.t-carousel-item {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img {
+        max-width: 100%;
+        height: 100%;
+    }
+
+    &.t-carousel-item--cover img {
+        object-fit: cover;
+    }
+}
+
+
+.t-carousel-nav-points {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    gap: $t-margin-lr-16;
+
+    text-align: center;
+
+    li {display: inline-block;}
+    li + li {margin-left: 16px;}
+
+
+    .t-carousel-nav-points__point {
+        width: 12px;
+        height: 12px;
+        background: $t-white-color;
+        opacity: 0.4;
+        cursor: pointer;
+        border-radius: 50%;
+    }
+
+    .slick-active .t-carousel-nav-points__point {
+        opacity: 1;
+    }
+}
