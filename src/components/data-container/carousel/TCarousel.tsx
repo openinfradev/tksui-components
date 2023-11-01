@@ -73,7 +73,7 @@ const TCarousel = (props: TCarouselProps) => {
                     autoplay={props.autoplay}
                     autoplaySpeed={props.autoplaySpeed}
             >
-                {props.children}
+                {/* {props.children} */}
             </Slider>
 
             {
