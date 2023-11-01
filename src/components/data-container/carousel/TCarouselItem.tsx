@@ -15,5 +15,6 @@ const TCarouselItem = (props: TCarouselItemProps) => {
     </div>);
 };
 
+TCarouselItem.displayName = 'TCarouselItem';
 
 export default TCarouselItem;
