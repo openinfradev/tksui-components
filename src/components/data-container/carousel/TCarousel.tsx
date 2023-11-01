@@ -63,18 +63,18 @@ const TCarousel = (props: TCarouselProps) => {
                     </div>
                 )
             }
-            {/* <Slider className={'t-carousel'} */}
-            {/*         dotsClass={'t-carousel-nav-points'} */}
-            {/*         adaptiveHeight={false} */}
-            {/*         arrows={false} */}
-            {/*         customPaging={() => <div className={'t-carousel-nav-points__point'}/>} */}
-            {/*         ref={slickRef} */}
-            {/*         dots={!props.noDots} */}
-            {/*         autoplay={props.autoplay} */}
-            {/*         autoplaySpeed={props.autoplaySpeed} */}
-            {/* > */}
-            {/*     {props.children} */}
-            {/* </Slider> */}
+            <Slider className={'t-carousel'}
+                    dotsClass={'t-carousel-nav-points'}
+                    adaptiveHeight={false}
+                    arrows={false}
+                    customPaging={() => <div className={'t-carousel-nav-points__point'}/>}
+                    ref={slickRef}
+                    dots={!props.noDots}
+                    autoplay={props.autoplay}
+                    autoplaySpeed={props.autoplaySpeed}
+            >
+                {props.children}
+            </Slider>
 
             {
                 props.showArrow !== 'never' && (
