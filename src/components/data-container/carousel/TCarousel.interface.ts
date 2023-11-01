@@ -9,8 +9,8 @@ export interface TCarouselProps extends TBaseProps {
     children: ReactElement[],
     height: string,
 
-    showArrow: arrowType,
-    noDots: boolean,
+    showArrow?: arrowType,
+    noDots?: boolean,
     autoplay?: boolean,
     autoplaySpeed?: number,
 }
