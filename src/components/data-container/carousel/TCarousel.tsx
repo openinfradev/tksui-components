@@ -1,5 +1,5 @@
 import {CSSProperties, useCallback, useMemo, useRef} from 'react';
-import Slider from 'react-slick/';
+import Slider from 'react-slick';
 import {TCarouselProps, TIconButton} from '@/components';
 
 const TCarousel = (props: TCarouselProps) => {
