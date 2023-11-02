@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 const TOriginalImage = {
     t_check_on: (
         <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'>
@@ -137,6 +138,18 @@ const TOriginalImage = {
             <g mask='url(#mask0_1030_1924)'>
                 <circle cx='40' cy='76' r='32' fill='#F5F5FD'/>
             </g>
+        </svg>
+    ),
+    t_double_quotes_open: (
+        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 27 60' >
+            <path d='M12 17H0V10.6199C0 6.75376 2.51213 3.21308 7.53423 0L10.1995 2.14229C8.13535 4.16443 7.01114 6.00986 6.82907 7.67508H12V17Z'/>
+            <path d='M26.9993 17H15V10.6199C15 6.75376 17.5215 3.21308 22.5682 0L25.245 2.14229C23.152 4.16443 22.014 6.00986 21.8291 7.67508H27V17H26.9993Z'/>
+        </svg>
+    ),
+    t_double_quotes_close: (
+        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 27 60' style={{rotate: '180deg'}}>
+            <path d='M12 17H0V10.6199C0 6.75376 2.51213 3.21308 7.53423 0L10.1995 2.14229C8.13535 4.16443 7.01114 6.00986 6.82907 7.67508H12V17Z'/>
+            <path d='M26.9993 17H15V10.6199C15 6.75376 17.5215 3.21308 22.5682 0L25.245 2.14229C23.152 4.16443 22.014 6.00986 21.8291 7.67508H27V17H26.9993Z'/>
         </svg>
     ),
 };
