@@ -128,13 +128,13 @@ const TOriginalImage = {
         </svg>
     ),
     t_person: (
-        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80' >
-            <circle cx='40' cy='40' r='40' />
+        <svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80' >
+            <circle cx='40' cy='40' r='39' />
             <circle cx='40' cy='25' r='15' fill='#F5F5FD'/>
-            <mask id='mask0_1030_1886' style={{maskType: 'alpha'}} maskUnits='userSpaceOnUse' x='0' y='0' width='80' height='80'>
-                <circle cx='40' cy='40' r='40' fill='#3535CE'/>
+            <mask id='mask0_1030_1924' style={{maskType: 'alpha'}} maskUnits='userSpaceOnUse' x='0' y='0' width='80' height='80'>
+                <circle cx='40' cy='40' r='39' fill='#3535CE'/>
             </mask>
-            <g mask='url(#mask0_1030_1886)'>
+            <g mask='url(#mask0_1030_1924)'>
                 <circle cx='40' cy='76' r='32' fill='#F5F5FD'/>
             </g>
         </svg>
