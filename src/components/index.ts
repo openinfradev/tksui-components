@@ -16,7 +16,6 @@ export * from './data-container/search-box';
 export * from './data-container/tab-box';
 export * from './data-container/step-box';
 export * from './data-container/card';
-export * from './data-container/carousel';
 
 
 // guide
