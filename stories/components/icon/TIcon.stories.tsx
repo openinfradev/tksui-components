@@ -37,6 +37,7 @@ const Template = (args: TIconProps) => {
         't_list',
         't_information',
         't_done',
+        't_person',
     ];
 
 

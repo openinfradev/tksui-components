@@ -127,6 +127,18 @@ const TOriginalImage = {
                     15.8902 29.6327 15.8262 29.6945Z' style={{fill: 'white', stroke: 'white'}} strokeWidth='0.5'/>
         </svg>
     ),
+    t_person: (
+        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80' >
+            <circle cx='40' cy='40' r='40' />
+            <circle cx='40' cy='25' r='15' fill='#F5F5FD'/>
+            <mask id='mask0_1030_1886' style={{maskType: 'alpha'}} maskUnits='userSpaceOnUse' x='0' y='0' width='80' height='80'>
+                <circle cx='40' cy='40' r='40' fill='#3535CE'/>
+            </mask>
+            <g mask='url(#mask0_1030_1886)'>
+                <circle cx='40' cy='76' r='32' fill='#F5F5FD'/>
+            </g>
+        </svg>
+    ),
 };
 
 export default TOriginalImage;
