@@ -26,6 +26,7 @@ export interface TTextFieldProps extends TValidatorProps, TBaseProps {
 
     onChange(value: string): void,
     onBlur?(): void,
+    onFocus?(): void,
     onKeyDown?(event: KeyboardEvent<HTMLInputElement>): void,
     onKeyDownEnter?(event: KeyboardEvent<HTMLInputElement>): void,
     onClickSearch?(event: MouseEvent): void,
