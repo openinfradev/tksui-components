@@ -7,7 +7,7 @@ export * from './button/button-group';
 export * from './button/icon-button';
 
 // data-container
-// export * from './data-container/data-grid';
+export * from './data-container/data-grid';
 export * from './data-container/drop-holder';
 export * from './data-container/form-box';
 export * from './data-container/highlight-text';
