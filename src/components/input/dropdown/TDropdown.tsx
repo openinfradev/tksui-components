@@ -10,7 +10,6 @@ import {
     useRef,
     useState,
 } from 'react';
-import TIcon from '../../icon/TIcon';
 import useValidator from '@/common/hook/UseValidator';
 import {TDropdownItem, TDropdownProps, TDropdownRef} from './TDropdown.interface';
 import useClickOutside from '@/common/hook/UseClickOutside';
@@ -18,6 +17,7 @@ import TCheckbox from '../checkbox/TCheckbox';
 import TTextField from '../text-field/TTextField';
 import THighlightText from '../../data-container/highlight-text/THighlightText';
 import TChip from '../chip/TChip';
+import TIconButton from '~/button/icon-button/TIconButton';
 
 const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => {
 
@@ -63,6 +63,11 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
         } else {
             props.onChange(newItem);
         }
+    }, [props]);
+
+    const clearValue = useCallback((): void => {
+        props.onChange('');
+
     }, [props]);
 
     const initItemMap = useCallback(() => {
@@ -182,6 +187,12 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
         toggleIsOpened();
         focusToControl();
     }, [focusToControl, toggleIsOpened]);
+
+    const onClickClear = useCallback((event) => {
+        event.stopPropagation();
+        clearValue();
+    }, [clearValue]);
+
 
     const onClickItem = useCallback((itemValue: string): void => {
         modifyValue(itemValue);
@@ -310,11 +321,17 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
                     }
                 </div>
 
-                {/* Control - Opener */}
-                <TIcon className={`t-dropdown__control__opener ${isOpened ? 't-dropdown__control__opener--open' : ''}`}
-                       small
-                       clickable
-                       color={props.disabled ? '#CCCCCC' : '#000000'}>keyboard_arrow_down</TIcon>
+                {/* Control - Remover, Opener */}
+                {
+                    (!props.multiple && props.value) && (
+                        <TIconButton className={'t-dropdown__control__remover'}
+                                     medium
+                                     onClick={onClickClear}>clear</TIconButton>
+                    )
+                }
+                <TIconButton className={`t-dropdown__control__opener ${isOpened ? 't-dropdown__control__opener--open' : ''}`}
+                             medium
+                             color={props.disabled ? '#CCCCCC' : '#000000'}>keyboard_arrow_down</TIconButton>
             </div>
 
             {/* Floating */}
@@ -382,8 +399,8 @@ TDropdown.defaultProps = {
     type: 'outline',
     valueKey: 'value',
     textKey: 'text',
-    placeholder: '목록에서 선택해 주세요',
-    filterPlaceholder: '검색어를 입력해 주세요',
+    placeholder: '선택',
+    filterPlaceholder: '검색',
     chip: true,
     lazy: true,
 };
