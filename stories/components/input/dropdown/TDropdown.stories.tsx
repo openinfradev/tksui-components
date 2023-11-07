@@ -62,10 +62,10 @@ const NormalTemplate = (args: TDropdownProps) => {
                     <TDropdown {...args} {...singleSelect2} disabled/>
 
                     placeholder (value: {singleSelect3.value})
-                    <TDropdown {...args} {...singleSelect3} filterPlaceholder={'Choose your favorite fruit'}/>
+                    <TDropdown {...args} {...singleSelect3} placeholder={'Choose your favorite fruit'}/>
 
                     textKey (value: {singleSelect4.value})
-                    <TDropdown {...args} {...singleSelect4} filterPlaceholder={'좋아하는 과일을 선택해주세요'} textKey={'koreanText'}/>
+                    <TDropdown {...args} {...singleSelect4} placeholder={'좋아하는 과일을 선택해주세요'} textKey={'koreanText'}/>
 
                     valueKey (value: {singleSelect5.value})
                     <TDropdown {...args} {...singleSelect5} valueKey={'value2'}/>
