@@ -70,7 +70,11 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
     const onFocus = useCallback((): void => {
         validator.clearValidation();
         setHasFocus(true);
-    }, [validator]);
+
+        if (props.onFocus) {
+            props.onFocus();
+        }
+    }, [props, validator]);
 
     const onBlur = useCallback((): void => {
         if (!props.noTrim && props.value !== props.value.trim()) {

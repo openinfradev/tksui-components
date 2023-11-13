@@ -1,6 +1,5 @@
 import {useCallback, useState} from 'react';
-import {TPageRequestVO, TPageResponseVO} from '../../components';
-
+import {TPageRequestVO, TPageResponseVO} from '~/data-container/data-grid';
 
 
 export default function usePagination() {

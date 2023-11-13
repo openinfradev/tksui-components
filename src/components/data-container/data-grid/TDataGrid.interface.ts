@@ -25,12 +25,7 @@ export interface TDataGridProps extends TBaseProps, AgReactUiProps {
     noPagination?: boolean,
     noHeader?: boolean,
 
-    paging?: {
-        pageNumber: number,
-        pageSize: number,
-        totalPages: number,
-        totalRows: number,
-    }
+    paging?: TPageResponseVO,
     maxRowsWithoutScroll?: number,
 
     noDataText?: string,

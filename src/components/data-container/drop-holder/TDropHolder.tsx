@@ -1,15 +1,32 @@
-import {CSSProperties, MouseEvent, MouseEventHandler, ReactNode, useCallback, useMemo, useRef, useState} from 'react';
-import {DropHolderAlignment, TDropHolderItem, TDropHolderProps} from './TDropHolder.interface';
+import {
+    CSSProperties,
+    ForwardedRef,
+    forwardRef,
+    MouseEvent,
+    MouseEventHandler,
+    ReactNode,
+    useCallback, useImperativeHandle,
+    useMemo,
+    useRef,
+    useState,
+} from 'react';
+import {DropHolderAlignment, TDropHolderItem, TDropHolderProps, TDropHolderRef} from './TDropHolder.interface';
 import useClickOutside from '@/common/hook/UseClickOutside';
 
 
-const TDropHolder = (props: TDropHolderProps) => {
+const TDropHolder = forwardRef((props: TDropHolderProps, ref: ForwardedRef<TDropHolderRef>) => {
 
     // region [Hooks]
 
     const [isOpened, setIsOpened] = useState(false);
     const rootRef = useRef<HTMLDivElement>(null);
     useClickOutside(rootRef, () => close());
+
+
+    useImperativeHandle(ref, () => ({
+        open() { open(); },
+        close() { close(); },
+    }));
 
     // endregion
 
@@ -155,7 +172,7 @@ const TDropHolder = (props: TDropHolderProps) => {
         </div>
     );
 
-};
+});
 
 TDropHolder.defaultProps = {
     alignment: 'bottom-center' as DropHolderAlignment,

@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 const TOriginalImage = {
     t_check_on: (
         <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'>
@@ -125,6 +126,30 @@ const TOriginalImage = {
                   28.0025 31.4353 24.9211 34.4985C24.751 34.3179 24.5813 34.1377 24.4119 33.9579C22.4068 31.829 20.4442 29.7453
                    18.3894 27.5702L18.2159 27.3866L18.0341 27.5618C17.206 28.3601 16.5387 29.0054 16.0267 29.5007C15.957 29.5681
                     15.8902 29.6327 15.8262 29.6945Z' style={{fill: 'white', stroke: 'white'}} strokeWidth='0.5'/>
+        </svg>
+    ),
+    t_person: (
+        <svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80' >
+            <circle cx='40' cy='40' r='39' />
+            <circle cx='40' cy='25' r='15' fill='#F5F5FD'/>
+            <mask id='mask0_1030_1924' style={{maskType: 'alpha'}} maskUnits='userSpaceOnUse' x='0' y='0' width='80' height='80'>
+                <circle cx='40' cy='40' r='39' fill='#3535CE'/>
+            </mask>
+            <g mask='url(#mask0_1030_1924)'>
+                <circle cx='40' cy='76' r='32' fill='#F5F5FD'/>
+            </g>
+        </svg>
+    ),
+    t_double_quotes_open: (
+        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 27 18' >
+            <path d='M12 17H0V10.6199C0 6.75376 2.51213 3.21308 7.53423 0L10.1995 2.14229C8.13535 4.16443 7.01114 6.00986 6.82907 7.67508H12V17Z'/>
+            <path d='M26.9993 17H15V10.6199C15 6.75376 17.5215 3.21308 22.5682 0L25.245 2.14229C23.152 4.16443 22.014 6.00986 21.8291 7.67508H27V17H26.9993Z'/>
+        </svg>
+    ),
+    t_double_quotes_close: (
+        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 27 18' style={{rotate: '180deg'}}>
+            <path d='M12 17H0V10.6199C0 6.75376 2.51213 3.21308 7.53423 0L10.1995 2.14229C8.13535 4.16443 7.01114 6.00986 6.82907 7.67508H12V17Z'/>
+            <path d='M26.9993 17H15V10.6199C15 6.75376 17.5215 3.21308 22.5682 0L25.245 2.14229C23.152 4.16443 22.014 6.00986 21.8291 7.67508H27V17H26.9993Z'/>
         </svg>
     ),
 };
