@@ -58,15 +58,20 @@
         .t-number-field__container__action-icon {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 8px;
             color: $t-black-color;
             font-size: 10px;
 
             @include user-select-none;
 
             .t-number-field__container__action-icon__increment, .t-number-field__container__action-icon__decrement {
+                width: 0;
+                height: 0;
                 cursor: pointer;
-                &:hover { color: $t-primary-color; }
+                border-left: 4px solid transparent;
+                border-right: 4px solid transparent;
+                border-bottom: 6px solid $t-black-color;
+                &:hover { border-bottom-color: $t-primary-color; }
             }
 
             .t-number-field__container__action-icon__increment--disabled, .t-number-field__container__action-icon__decrement--disabled {
