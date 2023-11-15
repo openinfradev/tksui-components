@@ -79,7 +79,7 @@ const TNumberField = forwardRef((props: TNumberFieldProps, ref: Ref<TNumberField
         if (props.required) { clazz.push('t-number-field__label--required'); }
 
         return clazz.join(' ');
-    }, [hasFocus, props.value, props.required]);
+    }, [props.required]);
 
 
     const rootStyle: CSSProperties = useMemo((): CSSProperties => {
@@ -235,14 +235,14 @@ const TNumberField = forwardRef((props: TNumberFieldProps, ref: Ref<TNumberField
                     <div className={'t-number-field__container__action-icon'}>
                         <div className={`t-number-field__container__action-icon__increment ${incrementButtonClass}`}
                              onClick={onClickStepUp}
-                             data-testid={'number-field__increment-button'}>
-                            ▴
-                        </div>
+                             data-testid={'number-field__increment-button'}
+
+                        />
+
                         <div className={`t-number-field__container__action-icon__decrement ${decrementButtonClass}`}
                              onClick={onClickStepDown}
-                             data-testid={'number-field__decrement-button'}>
-                            ▴
-                        </div>
+                             data-testid={'number-field__decrement-button'}
+                        />
                     </div>
                 }
             </div>
