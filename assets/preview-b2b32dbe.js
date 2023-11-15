@@ -1,2 +1,2 @@
 const e={parameters:{layout:"fullscreen"}};export{e as default};
-//# sourceMappingURL=preview-e9e94ead.js.map
+//# sourceMappingURL=preview-b2b32dbe.js.map
