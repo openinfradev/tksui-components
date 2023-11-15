@@ -76,7 +76,7 @@
 
             .t-number-field__container__action-icon__increment--disabled, .t-number-field__container__action-icon__decrement--disabled {
                 cursor: default;
-                color: $t-gray-color--06;
+                border-bottom-color: $t-gray-color--06;
                 pointer-events: none;
             }
 
