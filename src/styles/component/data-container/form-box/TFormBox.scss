@@ -124,7 +124,7 @@
             }
             .t-form-item__content {
                 flex: 1 1 auto;
-                padding: 0 24px;
+                padding: $t-margin-tb-24 $t-margin-lr-24;
                 color: $t-gray-color--09;
             }
         }
