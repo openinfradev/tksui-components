@@ -50,7 +50,7 @@ const NormalTemplate = (args: TNumberFieldProps) => {
 
                 <TNumberField {...args} label={'0-10, step 1'} {...numberField2} min={0} max={10} step={1}/>
 
-                <TNumberField {...args} label={'0-10, step 2'}{...numberField3} min={0} max={10} step={2}/>
+                <TNumberField {...args} label={'3-99, step 3'}{...numberField3} min={3} max={99} step={3}/>
 
                 <TNumberField {...args} label={'-10-10, step 5'} {...numberField4} min={-10} max={10} step={5}/>
 

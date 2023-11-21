@@ -367,6 +367,23 @@ describe('TNumberField', () => {
                 .toHaveValue(6);
         });
 
+        it('When value is not multiple of step and nearest multiple is smaller than min, value is adjusted to min', async () => {
+
+            // Arrange
+            render(<NumberField min={6} max={20} step={5} initialValue={''}/>);
+            const inputElement = screen.getByRole('spinbutton');
+
+            // Act
+            await act(async () => {
+                await userEvent.type(inputElement, '3');
+                await userEvent.tab();
+            });
+
+            // Assert
+            expect(inputElement)
+                .toHaveValue(6);
+        });
+
     });
 
 

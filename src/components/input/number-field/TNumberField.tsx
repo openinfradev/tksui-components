@@ -55,7 +55,6 @@ const TNumberField = forwardRef((props: TNumberFieldProps, ref: Ref<TNumberField
 
     const incrementButtonClass: string = useMemo((): string => {
 
-
         if ((props.max !== undefined && Number.parseInt(props.value, 10) >= props.max) || props.disabled) {
             return 't-number-field__container__action-icon__increment--disabled';
         }
@@ -149,10 +148,10 @@ const TNumberField = forwardRef((props: TNumberFieldProps, ref: Ref<TNumberField
 
         if (Number.isNaN(value)) { return false; }
 
-        return value >= props.min && value <= props.max;
+        return value <= props.max;
 
 
-    }, [props.max, props.min]);
+    }, [props.max]);
 
     const onChange = useCallback((e): void => {
 
