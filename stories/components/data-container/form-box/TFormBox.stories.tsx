@@ -10,6 +10,7 @@ import TTextField from '@/components/input/text-field/TTextField';
 import useInputState from '@/common/hook/UseInputState';
 import TDropdown from '@/components/input/dropdown/TDropdown';
 import TToast, {notify} from '@/components/guide/toast/TToast';
+import TTextArea from '~/input/text-area/TTextArea';
 
 
 const meta: Meta<typeof TFormBox> = {
@@ -108,6 +109,12 @@ const Template = (args: TFormBoxProps) => {
                         </TFormItem>
                         <TFormItem label={'Resource Spec'}>
                             <TDropdown items={resourceSpecItems} {...resourceSpec} />
+                        </TFormItem>
+                    </TFormRow>
+
+                    <TFormRow>
+                        <TFormItem label={'Description'} span={2}>
+                            <TTextArea counter={100} {...profile} />
                         </TFormItem>
                     </TFormRow>
                 </TFormSection>
