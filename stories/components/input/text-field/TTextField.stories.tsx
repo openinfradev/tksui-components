@@ -47,7 +47,8 @@ const NormalTemplate = (args: TTextFieldProps) => {
                                 clearable/>
                     <TTextField {...args} value={value} onChange={setValue} label={'Counter'} counter={20}/>
                     <TTextField {...args} value={value} onChange={setValue} label={'Guide Message'} hint={'개수를 줄이시면 가장 마지막 호스트네임부터 삭제 됩니다.'}/>
-                    <TTextField {...args} value={'읽을 수만 있는 값'} label={'Read-only'} disabled/>
+                    <TTextField {...args} value={'입력 불가능한 값'} label={'Disabled'} disabled/>
+                    <TTextField {...args} value={'읽을 수만 있는 값'} label={'Read-only'} readOnly/>
                     <TTextField {...args} value={value} onChange={setValue} label={'너비-400'} width={'400px'}/>
                     <TTextField {...args} value={value} onChange={setValue} label={'너비-300'} width={'300px'}/>
                     <TTextField {...args} value={value} onChange={setValue} label={'너비-200'} width={'200px'}/>

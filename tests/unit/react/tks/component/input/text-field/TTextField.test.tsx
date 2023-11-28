@@ -135,6 +135,18 @@ describe('TTextField', () => {
             .toHaveClass('t-text-field--disabled');
     });
 
+    it('When readOnly prop is applies, root has t-text-field--read-only class', () => {
+
+        // Arrange
+        render(<TTextField {...baseProps} readOnly/>);
+
+        // Assert
+        const root = screen.getByTestId('text-field-root');
+
+        expect(root)
+            .toHaveClass('t-text-field--read-only');
+    });
+
 
     it('When placeholder prop is applies, input has placeholder attribute', () => {
 
@@ -154,6 +166,19 @@ describe('TTextField', () => {
         // Arrange
         const placeholderText = 'foo';
         render(<TTextField {...baseProps} placeholder={placeholderText} disabled/>);
+
+        // Assert
+        const inputElement = screen.getByTestId('text-field-input');
+
+        expect(inputElement)
+            .not.toHaveAttribute('placeholder', placeholderText);
+    });
+
+    it('When placeholder and readOnly prop is applies , input has NOT placeholder attribute', () => {
+
+        // Arrange
+        const placeholderText = 'foo';
+        render(<TTextField {...baseProps} placeholder={placeholderText} readOnly/>);
 
         // Assert
         const inputElement = screen.getByTestId('text-field-input');
