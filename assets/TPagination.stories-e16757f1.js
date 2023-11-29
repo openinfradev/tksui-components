@@ -4,4 +4,3 @@ import{j as e}from"./jsx-runtime-ffb262ed.js";import{r as l}from"./index-76fb7be
     totalPages: 23
   }
 }`,...(o=(a=r.parameters)==null?void 0:a.docs)==null?void 0:o.source}}};const P=["Default"];export{r as Default,P as __namedExportsOrder,h as default};
-//# sourceMappingURL=TPagination.stories-e16757f1.js.map

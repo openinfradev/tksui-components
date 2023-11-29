@@ -19,4 +19,3 @@ import{j as e}from"./jsx-runtime-ffb262ed.js";import{T as d}from"./TIconButton-f
     xlarge: true
   }
 }`,...(v=(f=i.parameters)==null?void 0:f.docs)==null?void 0:v.source}}};const O=["Small","Medium","Large","XLarge"];export{n as Large,a as Medium,t as Small,i as XLarge,O as __namedExportsOrder,B as default};
-//# sourceMappingURL=TIconButton.stories-a593771e.js.map

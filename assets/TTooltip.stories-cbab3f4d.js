@@ -9,4 +9,3 @@ import{j as t}from"./jsx-runtime-ffb262ed.js";import{T as o}from"./TIcon-06114f0
     place: 'top'
   }
 }`,...(m=(c=r.parameters)==null?void 0:c.docs)==null?void 0:m.source}}};const P=["Normal","HtmlCustom"];export{r as HtmlCustom,e as Normal,P as __namedExportsOrder,I as default};
-//# sourceMappingURL=TTooltip.stories-cbab3f4d.js.map

@@ -34,4 +34,3 @@ import{j as t}from"./jsx-runtime-ffb262ed.js";import{r as n}from"./index-76fb7be
     multiSelect: true
   }
 }`,...(S=(j=c.parameters)==null?void 0:j.docs)==null?void 0:S.source}}};const O=["SingleSelect","MultiSelect"];export{c as MultiSelect,o as SingleSelect,O as __namedExportsOrder,B as default};
-//# sourceMappingURL=TButtonGroup.stories-bca370c8.js.map

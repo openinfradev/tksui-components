@@ -39,4 +39,3 @@ import{j as e}from"./jsx-runtime-ffb262ed.js";import{T as M}from"./TIcon-06114f0
     color: '#3617CE'
   }
 }`,...(D=(w=i.parameters)==null?void 0:w.docs)==null?void 0:D.source}}};const K=["Outline","Filled","XSmall","Small","Medium","Large","XLarge","Colored"];export{i as Colored,t as Filled,c as Large,l as Medium,s as Outline,n as Small,d as XLarge,o as XSmall,K as __namedExportsOrder,J as default};
-//# sourceMappingURL=TIcon.stories-0c0ac448.js.map

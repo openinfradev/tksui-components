@@ -10,4 +10,3 @@ import{j as s}from"./jsx-runtime-ffb262ed.js";import{T as j,n as e}from"./TToast
     draggable: false
   }
 }`,...(u=(x=a.parameters)==null?void 0:x.docs)==null?void 0:u.source}}};const I=["Default"];export{a as Default,I as __namedExportsOrder,E as default};
-//# sourceMappingURL=TToast.stories-2dcbc8b1.js.map

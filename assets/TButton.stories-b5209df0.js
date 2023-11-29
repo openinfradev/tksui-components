@@ -19,4 +19,3 @@ import{j as e}from"./jsx-runtime-ffb262ed.js";import{T as r}from"./TButton-aead8
     large: true
   }
 }`,...(S=(g=d.parameters)==null?void 0:g.docs)==null?void 0:S.source}}};const X=["XSmall","Small","Medium","Large"];export{d as Large,s as Medium,a as Small,t as XSmall,X as __namedExportsOrder,M as default};
-//# sourceMappingURL=TButton.stories-b5209df0.js.map

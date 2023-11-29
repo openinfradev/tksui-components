@@ -2,4 +2,3 @@ import{j as r}from"./jsx-runtime-ffb262ed.js";import{r as s}from"./index-76fb7be
   render: Template,
   args: {}
 }`,...(f=(p=d.parameters)==null?void 0:p.docs)==null?void 0:f.source}}};const q=["Default"];export{d as Default,q as __namedExportsOrder,V as default};
-//# sourceMappingURL=TCard.stories-4300528b.js.map

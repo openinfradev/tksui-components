@@ -5,4 +5,3 @@ import{j as t}from"./jsx-runtime-ffb262ed.js";import{r as a}from"./index-76fb7be
   render: Template,
   args: {}
 }`,...(T=(v=u.parameters)==null?void 0:v.docs)==null?void 0:T.source}}};const M=["Alignment","CustomItem"];export{d as Alignment,u as CustomItem,M as __namedExportsOrder,z as default};
-//# sourceMappingURL=TDropHolder.stories-7df3295c.js.map

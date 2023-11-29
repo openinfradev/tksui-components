@@ -24,4 +24,3 @@ import{j as r}from"./jsx-runtime-ffb262ed.js";import{r as w}from"./index-76fb7be
     xxlarge: true
   }
 }`,...(M=(X=n.parameters)==null?void 0:X.docs)==null?void 0:M.source}}};const A=["Small","Medium","Large","XLarge","XXLarge"];export{t as Large,s as Medium,a as Small,o as XLarge,n as XXLarge,A as __namedExportsOrder,z as default};
-//# sourceMappingURL=TModal.stories-6a899f46.js.map

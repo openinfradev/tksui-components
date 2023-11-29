@@ -6,4 +6,3 @@ import{j as e}from"./jsx-runtime-ffb262ed.js";import{r}from"./index-76fb7be0.js"
     completeButtonLabel: '저장하기'
   }
 }`,...(a=(s=t.parameters)==null?void 0:s.docs)==null?void 0:a.source}}};const h=["Default"];export{t as Default,h as __namedExportsOrder,f as default};
-//# sourceMappingURL=TStepBox.stories-49a837de.js.map

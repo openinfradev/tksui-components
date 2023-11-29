@@ -29,4 +29,3 @@ import{j as e}from"./jsx-runtime-ffb262ed.js";import{T as o}from"./TChip-da2a9bd
     xlarge: true
   }
 }`,...(N=(I=c.parameters)==null?void 0:I.docs)==null?void 0:N.source}}};const b=["XSmall","Small","Medium","Large","XLarge"];export{s as Large,i as Medium,m as Small,c as XLarge,a as XSmall,b as __namedExportsOrder,O as default};
-//# sourceMappingURL=TChip.stories-d4c0e5e5.js.map

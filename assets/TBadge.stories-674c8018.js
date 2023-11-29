@@ -3,4 +3,3 @@ import{j as e}from"./jsx-runtime-ffb262ed.js";import{r as l}from"./index-76fb7be
 }`,...(m=(x=i.parameters)==null?void 0:x.docs)==null?void 0:m.source}}};var u,j,h;d.parameters={...d.parameters,docs:{...(u=d.parameters)==null?void 0:u.docs,source:{originalSource:`{
   render: InlineTemplate
 }`,...(h=(j=d.parameters)==null?void 0:j.docs)==null?void 0:h.source}}};const V=["WithAnchor","WithoutAnchor"];export{i as WithAnchor,d as WithoutAnchor,V as __namedExportsOrder,I as default};
-//# sourceMappingURL=TBadge.stories-674c8018.js.map
