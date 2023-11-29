@@ -190,7 +190,7 @@ describe('TTextField', () => {
     it('When readonly and searchable props are applied , search icon is shown', () => {
 
         // Arrange
-        render(<TTextField {...baseProps}  readOnly searchable/>);
+        render(<TTextField {...baseProps} readOnly searchable/>);
 
         // Assert
         const root = screen.getByTestId('text-field-root');
