@@ -59,3 +59,9 @@ export const Large: Story = {
     },
 };
 
+export const XLarge: Story = {
+    render: Template,
+    args: {
+        xlarge: true,
+    },
+};

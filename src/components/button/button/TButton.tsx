@@ -71,14 +71,16 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
         if (props.small) { return buttonSize.small; }
         if (props.medium) { return buttonSize.medium; }
         if (props.large) { return buttonSize.large; }
+        if (props.xlarge) { return buttonSize.xlarge; }
         return buttonSize.medium;
-    }, [props.size, props.xsmall, props.small, props.medium, props.large]);
+    }, [props.size, props.xsmall, props.small, props.medium, props.large, props.xlarge]);
 
     const contentIconSize = useMemo(() => {
         if ($_size === 'xsmall') { return 'small'; }
         if ($_size === 'small') { return 'small'; }
         if ($_size === 'medium') { return 'small'; }
         if ($_size === 'large') { return 'large'; }
+        if ($_size === 'xlarge') { return 'large'; }
         return 'medium';
     }, [$_size]);
 
