@@ -154,8 +154,8 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
     const inputClass = useMemo((): string => {
         const clazz: string[] = [];
 
-        if (props.disabled) clazz.push('t-text-field__container__input--disabled');
-        if (props.readOnly) clazz.push('t-text-field__container__input--read-only');
+        if (props.disabled) { clazz.push('t-text-field__container__input--disabled'); }
+        if (props.readOnly) { clazz.push('t-text-field__container__input--read-only'); }
 
         return clazz.join(' ');
     }, [props.disabled, props.readOnly]);
@@ -195,10 +195,8 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
                        type={inputType}
                        tabIndex={(props.disabled || props.readOnly) ? -1 : 0}
                        className={`t-text-field__container__input ${inputClass}`}
-                       disabled={props.disabled}
-                       readOnly={props.readOnly}
-
-                       placeholder={(!props.disabled && !props.readOnly)  ? props.placeholder : ''}
+                       disabled={props.disabled || props.readOnly}
+                       placeholder={(!props.disabled && !props.readOnly) ? props.placeholder : ''}
                        value={props.value}
                        onChange={onChange}
                        onKeyDown={onKeyDown}
