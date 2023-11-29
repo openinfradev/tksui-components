@@ -112,6 +112,18 @@
             cursor: default;
         }
     }
+    &.t-text-field--read-only .t-text-field__container {
+        background: $t-gray-color--03;
+
+        &:focus-within {
+            border-color: $t-gray-color--06;
+        }
+        .t-text-field__container__input {
+            background-color: $t-gray-color--03;
+            color: $t-font-color--read-only;
+            cursor: default;
+        }
+    }
     &.t-text-field--failure {
 
         @include animation-shake();

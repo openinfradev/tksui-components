@@ -141,6 +141,7 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
         if (props.className) { clazz.push(props.className); }
 
         if (props.disabled) { clazz.push('t-text-field--disabled'); }
+        if (props.readOnly) { clazz.push('t-text-field--read-only'); }
         if (!validator.result) { clazz.push('t-text-field--failure'); }
         if (validator.result && validator.message) { clazz.push('t-text-field--success'); }
         if (hasFocus) { clazz.push('t-text-field--focused'); }
@@ -148,15 +149,16 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
         clazz.push(`t-text-field--${props.type}`);
 
         return clazz.join(' ');
-    }, [props.className, props.disabled, props.type, validator.result, validator.message, hasFocus]);
+    }, [props.className, props.disabled, props.readOnly, props.type, validator.result, validator.message, hasFocus]);
 
     const inputClass = useMemo((): string => {
         const clazz: string[] = [];
 
-        if (props.disabled) clazz.push('t-text-field__container__input--disabled');
+        if (props.disabled) { clazz.push('t-text-field__container__input--disabled'); }
+        if (props.readOnly) { clazz.push('t-text-field__container__input--read-only'); }
 
         return clazz.join(' ');
-    }, [props.disabled]);
+    }, [props.disabled, props.readOnly]);
 
     const labelClass = useMemo((): string => {
         const clazz: string[] = [];
@@ -191,11 +193,10 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
                 <input id={inputUuid}
                        ref={inputRef}
                        type={inputType}
-                       tabIndex={props.disabled ? -1 : 0}
+                       tabIndex={(props.disabled || props.readOnly) ? -1 : 0}
                        className={`t-text-field__container__input ${inputClass}`}
-                       disabled={props.disabled}
-
-                       placeholder={!props.disabled ? props.placeholder : ''}
+                       disabled={props.disabled || props.readOnly}
+                       placeholder={(props.disabled || props.readOnly)  ? '' : props.placeholder}
                        value={props.value}
                        onChange={onChange}
                        onKeyDown={onKeyDown}

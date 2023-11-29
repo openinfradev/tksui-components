@@ -81,7 +81,7 @@ describe('TTextField', () => {
     // endregion
 
 
-    // region [Label, Required, Placeholder, Disabled]
+    // region [Label, Required, Placeholder, Disabled, ReadOnly]
 
 
     it('When label prop is applies, label is shown', () => {
@@ -135,6 +135,18 @@ describe('TTextField', () => {
             .toHaveClass('t-text-field--disabled');
     });
 
+    it('When readOnly prop is applies, root has t-text-field--read-only class', () => {
+
+        // Arrange
+        render(<TTextField {...baseProps} readOnly/>);
+
+        // Assert
+        const root = screen.getByTestId('text-field-root');
+
+        expect(root)
+            .toHaveClass('t-text-field--read-only');
+    });
+
 
     it('When placeholder prop is applies, input has placeholder attribute', () => {
 
@@ -149,7 +161,7 @@ describe('TTextField', () => {
             .toHaveAttribute('placeholder', placeholderText);
     });
 
-    it('When placeholder and disabled prop is applies , input has NOT placeholder attribute', () => {
+    it('When placeholder and disabled props are applied , input has NOT placeholder attribute', () => {
 
         // Arrange
         const placeholderText = 'foo';
@@ -160,6 +172,32 @@ describe('TTextField', () => {
 
         expect(inputElement)
             .not.toHaveAttribute('placeholder', placeholderText);
+    });
+
+    it('When placeholder and readOnly props are applied , input has NOT placeholder attribute', () => {
+
+        // Arrange
+        const placeholderText = 'foo';
+        render(<TTextField {...baseProps} placeholder={placeholderText} readOnly/>);
+
+        // Assert
+        const inputElement = screen.getByTestId('text-field-input');
+
+        expect(inputElement)
+            .not.toHaveAttribute('placeholder', placeholderText);
+    });
+
+    it('When readonly and searchable props are applied , search icon is shown', () => {
+
+        // Arrange
+        render(<TTextField {...baseProps} readOnly searchable/>);
+
+        // Assert
+        const root = screen.getByTestId('text-field-root');
+        const searchIcon = screen.getByLabelText('search');
+
+        expect(root).toHaveClass('t-text-field--read-only');
+        expect(searchIcon).toBeInTheDocument();
     });
 
 
