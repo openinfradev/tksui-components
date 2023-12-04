@@ -1,6 +1,6 @@
 {
     "name": "tksui-components",
-    "version": "0.4.33",
+    "version": "0.4.36",
     "private": false,
     "type": "module",
     "module": "lib/esm/index.js",
@@ -87,7 +87,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/openinfradev/tksui-components.git"
+        "url": "git+https://github.com/openinfradev/tksui-components.git"
     },
     "bugs": {
         "url": "https://github.com/openinfradev/tksui-components/issues"

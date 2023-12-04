@@ -1,7 +1,8 @@
-$t-button-font-size--xsmall: $t-font-size-xsmall;
-$t-button-font-size--small: $t-font-size-small;
-$t-button-font-size--medium: $t-font-size-medium;
-$t-button-font-size--large: $t-font-size-large;
+$t-button-font-size--xsmall: $t-font-size-xxsmall;
+$t-button-font-size--small: $t-font-size-xxsmall;
+$t-button-font-size--medium: $t-font-size-xsmall;
+$t-button-font-size--large: $t-font-size-small;
+$t-button-font-size--xlarge: $t-font-size-medium;
 
 $t-button-color--default: $t-black-color;
 $t-button-color--hover: $t-gray-color--09;
@@ -28,6 +29,7 @@ $t-button-border--disabled: $t-gray-color--05;
     background-color: transparent;
     white-space: nowrap;
     font-family: $t-font-family;
+    border-radius: 4px;
     @include user-select-none;
 
     height: var(--t-button-height);
@@ -43,7 +45,7 @@ $t-button-border--disabled: $t-gray-color--05;
         justify-content: center;
         height: calc(100% - 2px);
         .t-button__content__icon {
-            margin-right: $t-margin-lr-8;
+            margin-right: $t-margin-lr-4;
         }
         &.t-button__content--loading {
             .t-button__content--loading__slice {
@@ -106,7 +108,7 @@ $t-button-border--disabled: $t-gray-color--05;
         &.t-button--main {
             border: none;
             color: $t-white-color;
-            background: $t-primary-color--shade-1;
+            background: $t-primary-color--shade-2;
         }
         &.t-button--point {
             border: none;
@@ -144,8 +146,8 @@ $t-button-border--disabled: $t-gray-color--05;
     }
 
     &.t-button--xsmall {
-        --t-button-height: 24px;
-        --t-button-min-width: 40px;
+        --t-button-height: 20px;
+        --t-button-min-width: 48px;
         --t-button-padding: 0 #{$t-padding-lr-8};
         --t-button-font-size: #{$t-button-font-size--xsmall};
         --t-button-font-weight: #{$t-font-weight-normal};
@@ -154,40 +156,51 @@ $t-button-border--disabled: $t-gray-color--05;
         --t-button-loading-thick: 2px;
     }
     &.t-button--small {
-        --t-button-height: 28px;
-        --t-button-min-width: 48px;
+        --t-button-height: 24px;
+        --t-button-min-width: 64px;
         --t-button-padding: 0 #{$t-padding-lr-16};
-        --t-button-font-size: #{$t-button-font-size--small};
+        --t-button-font-size: #{$t-button-font-size--xsmall};
         --t-button-font-weight: #{$t-font-weight-normal};
 
         --t-button-loading-size: 14px;
         --t-button-loading-thick: 2px;
     }
     &.t-button--medium {
-        --t-button-height: 40px;
+        --t-button-height: 32px;
         --t-button-min-width: 96px;
-        --t-button-padding: 0 #{$t-padding-lr-16};
+        --t-button-padding: 0 #{$t-padding-lr-32};
         --t-button-font-size: #{$t-button-font-size--small};
-        --t-button-font-weight: #{$t-font-weight-normal};
+        --t-button-font-weight: #{$t-font-weight-medium};
 
         --t-button-loading-size: 16px;
         --t-button-loading-thick: 3px;
     }
     &.t-button--large {
-        --t-button-height: 46px;
-        --t-button-min-width: 170px;
+        --t-button-height: 40px;
+        --t-button-min-width: 104px;
         --t-button-padding: 0 #{$t-padding-lr-32};
         --t-button-font-size: #{$t-button-font-size--large};
-        --t-button-font-weight: #{$t-font-weight-bold};
+        --t-button-font-weight: #{$t-font-weight-medium};
 
-        --t-button-loading-size: 32px;
-        --t-button-loading-thick: 4px;
+        --t-button-loading-size: 20px;
+        --t-button-loading-thick: 3px;
+    }
+    &.t-button--xlarge {
+        --t-button-height: 48px;
+        --t-button-min-width: 144px;
+        --t-button-padding: 0 #{$t-padding-lr-48};
+        --t-button-font-size: #{$t-button-font-size--xlarge};
+        --t-button-font-weight: #{$t-font-weight-medium};
+
+        --t-button-loading-size: 24px;
+        --t-button-loading-thick: 3px;
     }
 
 }
 
 
 .t-button--xsmall + .t-button--xsmall { MARGIN-LEFT: $t-margin-lr-4; }
-.t-button--small + .t-button--small { margin-left: $t-margin-lr-8; }
-.t-button--medium + .t-button--medium { margin-left: 10px; }
-.t-button--large + .t-button--large { margin-left: 10px; }
+.t-button--small + .t-button--small { margin-left: $t-margin-lr-4; }
+.t-button--medium + .t-button--medium { margin-left: $t-margin-lr-8; }
+.t-button--large + .t-button--large { margin-left: $t-margin-lr-8; }
+.t-button--xlarge + .t-button--xlarge { margin-left: $t-margin-lr-8; }
