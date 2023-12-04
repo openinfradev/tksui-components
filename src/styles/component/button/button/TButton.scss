@@ -45,7 +45,7 @@ $t-button-border--disabled: $t-gray-color--05;
         justify-content: center;
         height: calc(100% - 2px);
         .t-button__content__icon {
-            margin-right: $t-margin-lr-8;
+            margin-right: $t-margin-lr-4;
         }
         &.t-button__content--loading {
             .t-button__content--loading__slice {
@@ -108,7 +108,7 @@ $t-button-border--disabled: $t-gray-color--05;
         &.t-button--main {
             border: none;
             color: $t-white-color;
-            background: $t-primary-color--shade-1;
+            background: $t-primary-color--shade-2;
         }
         &.t-button--point {
             border: none;
@@ -147,7 +147,7 @@ $t-button-border--disabled: $t-gray-color--05;
 
     &.t-button--xsmall {
         --t-button-height: 20px;
-        --t-button-min-width: 40px;
+        --t-button-min-width: 48px;
         --t-button-padding: 0 #{$t-padding-lr-8};
         --t-button-font-size: #{$t-button-font-size--xsmall};
         --t-button-font-weight: #{$t-font-weight-normal};
@@ -157,9 +157,9 @@ $t-button-border--disabled: $t-gray-color--05;
     }
     &.t-button--small {
         --t-button-height: 24px;
-        --t-button-min-width: 48px;
+        --t-button-min-width: 64px;
         --t-button-padding: 0 #{$t-padding-lr-16};
-        --t-button-font-size: #{$t-button-font-size--small};
+        --t-button-font-size: #{$t-button-font-size--xsmall};
         --t-button-font-weight: #{$t-font-weight-normal};
 
         --t-button-loading-size: 14px;
@@ -168,29 +168,29 @@ $t-button-border--disabled: $t-gray-color--05;
     &.t-button--medium {
         --t-button-height: 32px;
         --t-button-min-width: 96px;
-        --t-button-padding: 0 #{$t-padding-lr-16};
+        --t-button-padding: 0 #{$t-padding-lr-32};
         --t-button-font-size: #{$t-button-font-size--small};
-        --t-button-font-weight: #{$t-font-weight-normal};
+        --t-button-font-weight: #{$t-font-weight-medium};
 
         --t-button-loading-size: 16px;
         --t-button-loading-thick: 3px;
     }
     &.t-button--large {
         --t-button-height: 40px;
-        --t-button-min-width: 170px;
+        --t-button-min-width: 104px;
         --t-button-padding: 0 #{$t-padding-lr-32};
         --t-button-font-size: #{$t-button-font-size--large};
-        --t-button-font-weight: #{$t-font-weight-normal};
+        --t-button-font-weight: #{$t-font-weight-medium};
 
         --t-button-loading-size: 20px;
         --t-button-loading-thick: 3px;
     }
     &.t-button--xlarge {
         --t-button-height: 48px;
-        --t-button-min-width: 170px;
-        --t-button-padding: 0 #{$t-padding-lr-32};
+        --t-button-min-width: 144px;
+        --t-button-padding: 0 #{$t-padding-lr-48};
         --t-button-font-size: #{$t-button-font-size--xlarge};
-        --t-button-font-weight: #{$t-font-weight-normal};
+        --t-button-font-weight: #{$t-font-weight-medium};
 
         --t-button-loading-size: 24px;
         --t-button-loading-thick: 3px;
@@ -200,7 +200,7 @@ $t-button-border--disabled: $t-gray-color--05;
 
 
 .t-button--xsmall + .t-button--xsmall { MARGIN-LEFT: $t-margin-lr-4; }
-.t-button--small + .t-button--small { margin-left: $t-margin-lr-8; }
-.t-button--medium + .t-button--medium { margin-left: $t-margin-lr-10; }
-.t-button--large + .t-button--large { margin-left: $t-margin-lr-10; }
-.t-button--xlarge + .t-button--xlarge { margin-left: $t-margin-lr-12; }
+.t-button--small + .t-button--small { margin-left: $t-margin-lr-4; }
+.t-button--medium + .t-button--medium { margin-left: $t-margin-lr-8; }
+.t-button--large + .t-button--large { margin-left: $t-margin-lr-8; }
+.t-button--xlarge + .t-button--xlarge { margin-left: $t-margin-lr-8; }
