@@ -1,7 +1,7 @@
 import {ReactNode} from 'react';
-import {TBaseProps} from '@/common/base/TBase.interface';
+import {TBaseProps, TBaseTooltipProps} from '@/common/base/TBase.interface';
 
-export interface TCardProps extends TBaseProps {
+export interface TCardProps extends TBaseProps, TBaseTooltipProps {
     children: ReactNode,
     width?: string,
     height?: string,

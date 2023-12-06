@@ -28,7 +28,13 @@ const TCard = (props: TCardProps) => {
     // endregion
 
     return (
-        <div className={`t-card ${rootClass}`} style={rootStyle} onClick={props.onClick}>
+        <div className={`t-card ${rootClass}`}
+             style={rootStyle}
+             onClick={props.onClick}
+             data-tooltip-id={props.tooltipId}
+             data-tooltip-content={props.tooltipContent}
+             data-tooltip-place={props.tooltipPlace}
+             data-tooltip-hidden={props.tooltipHidden}>
             {props.children}
         </div>
     );
