@@ -5,11 +5,11 @@
     stroke: $t-black-color;
     fill: $t-black-color;
 
-    $t-icon--size-xsmall: 16px;
+    $t-icon--size-xsmall: 20px;
     $t-icon--size-small: 24px;
     $t-icon--size-medium: 32px;
-    $t-icon--size-large: 36px;
-    $t-icon--size-xlarge: 48px;
+    $t-icon--size-large: 48px;
+    $t-icon--size-xlarge: 48px; // deprecated
 
     &.t-icon--clickable {
         cursor: pointer;
