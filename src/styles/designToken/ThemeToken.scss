@@ -41,8 +41,8 @@ $t-font-family: var(--t-font-family);
 // Headline
 $t-font-size-h1: var(--t-font-size-h1);
 $t-line-height-h1: var(--t-line-height-h1);
-$t-font-weight-h1: var(--t-font-weight-bold)
-;
+$t-font-weight-h1: var(--t-font-weight-bold);
+
 $t-font-size-h2: var(--t-font-size-h2);
 $t-line-height-h2: var(--t-line-height-h2);
 $t-font-weight-h2: var(--t-font-weight-bold);
@@ -116,44 +116,17 @@ $t-font-size-medium: var(--t-font-size-medium);
 $t-font-size-large: var(--t-font-size-large);
 $t-font-size-xlarge: var(--t-font-size-xlarge);
 
-$t-font-weight-normal: var(--t-font-weight-normal);
+$t-font-weight-regular: var(--t-font-weight-regular);
 $t-font-weight-medium: var(--t-font-weight-medium);
 $t-font-weight-bold: var(--t-font-weight-bold);
 
 
-
-// menu lv 1 ~ 3
-$t-font-size-menu-lv-1: $t-font-size-medium;
-$t-font-weight-menu-lv-1: var(--t-font-weight-bold);
-
-$t-font-size-menu-lv-2: $t-font-size-small;
-$t-font-weight-menu-lv-3: var(--t-font-weight-normal);
-
-$t-font-size-menu-lv-3: $t-font-size-xsmall;
-$t-font-weight-menu-lv-3: var(--t-font-weight-normal);
-
-// title
-$t-font-size-page-title: $t-font-size-xlarge;
-$t-font-weight-page-title: var(--t-font-weight-bold);
-
-$t-font-size-page-subtitle: $t-font-size-large;
-$t-font-weight-page-subtitle: var(--t-font-weight-normal);
-
 // content
-$t-font-size-body-1: $t-font-size-medium;
-$t-font-weight-body-1: var(--t-font-weight-normal);
-
-$t-font-size-body-2: $t-font-size-small;
-$t-font-weight-body-2: var(--t-font-weight-normal);
-
-$t-font-size-body-3: $t-font-size-xsmall;
-$t-font-weight-body-3: var(--t-font-weight-normal);
 
 $t-line-height-default: var(--t-line-height-default);
 $t-line-height-header: var(--t-line-height-header);
 $t-line-height-body: var(--t-line-height-body);
 
-$t-font-size-table-content: $t-font-size-small;
 
 // endregion
 
@@ -246,8 +219,6 @@ $t-input-border-color--01: #CCCCCC;
 
 
 // endregion
-
-
 
 
 
