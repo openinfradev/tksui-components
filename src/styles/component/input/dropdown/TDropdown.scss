@@ -8,7 +8,7 @@
 
 
     .t-dropdown__control {
-        border: 1px solid $t-gray-color--06;
+        border: 1px solid $t-gray-color-3;
         background: $t-white-color;
         width: 100%;
         padding: 0 20px 0 $t-padding-lr-16;
@@ -64,14 +64,14 @@
         position: absolute;
         top: 100%;
         z-index: $t-z-index-dropdown;
-        border: 1px solid $t-gray-color--06;
+        border: 1px solid $t-gray-color-3;
         width: 100%;
         background: $t-white-color;
 
         .t-dropdown__items__filter-text.t-text-field {
             .t-text-field__container {
                 border: none;
-                border-bottom: 1px solid $t-gray-color--06;
+                border-bottom: 1px solid $t-gray-color-3;
             }
             .t-text-field__details {
                 display: none;
@@ -132,7 +132,7 @@
         font-size: $t-font-size-body-3;
         height: $t-dropdown-detail-height;
         line-height: $t-dropdown-detail-height;
-        color: $t-gray-color--07;
+        color: $t-gray-color-4;
         position: absolute;
         width: 100%;
         .t-text-field__details__message {
@@ -166,7 +166,7 @@
             pointer-events: none;
 
             //background: $t-background-color--read-only;
-            background: $t-gray-color--03;
+            background: $t-gray-color-2;
             color: $t-font-color--disabled;
 
         }

@@ -14,7 +14,7 @@
     .t-drop-holder__items {
         position: absolute;
         z-index: $t-z-index-drop-holder;
-        border: 1px solid $t-gray-color--06;
+        border: 1px solid $t-gray-color-3;
         background: $t-white-color;
         display: flex;
         flex-direction: column;
@@ -34,7 +34,7 @@
                 align-items: center;
             }
             &.t-drop-holder__items__item--divider {
-                border-top: 1px dotted $t-gray-color--03;
+                border-top: 1px dotted $t-gray-color-2;
             }
             &.t-drop-holder__items__item--selected {
                 background: $t-background-color--hover;

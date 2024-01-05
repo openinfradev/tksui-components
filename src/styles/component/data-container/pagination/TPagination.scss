@@ -12,13 +12,13 @@
         gap: 16px;
 
         .t-icon.t-pagination__nav-button-container__button {
-            @include icon-color($t-gray-color--07);
+            @include icon-color($t-gray-color-4);
 
             &:hover { cursor: pointer; @include icon-color($t-primary-color);}
             &:active { @include icon-color($t-primary-color--shade-2)}
 
             &.t-pagination__nav-button-container__button--disabled {
-                @include icon-color($t-gray-color--05);
+                @include icon-color($t-gray-color-2);
                 pointer-events: none;
             }
 
@@ -45,7 +45,7 @@
                 padding: 0 3px;
                 border: none;
                 background: none;
-                color: $t-gray-color--07;
+                color: $t-gray-color-4;
                 font-size: $t-font-size-medium;
                 cursor: pointer;
 

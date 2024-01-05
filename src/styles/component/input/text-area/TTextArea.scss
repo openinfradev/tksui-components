@@ -21,7 +21,7 @@
     }
 
     .t-text-area__container {
-        border: 1px solid $t-gray-color--06;
+        border: 1px solid $t-gray-color-3;
         width: 100%;
         padding: 16px 20px 16px $t-padding-lr-16;
         position: relative;
@@ -47,7 +47,7 @@
         }
 
         .t-text-area__container__action-icon {
-            color: $t-gray-color--08;
+            color: $t-gray-color-5;
             &:nth-child(2) { margin-left: 16px; }
             &:not(:nth-child(2)) { margin-left: 4px; }
         }
@@ -57,7 +57,7 @@
         font-size: $t-font-size-small;
         height: 18px;
         line-height: 18px;
-        color: $t-gray-color--07;
+        color: $t-gray-color-4;
         margin-top: 2px;
         position: absolute;
         width: 100%;
@@ -93,7 +93,7 @@
         }
     }
     &.t-text-area--disabled .t-text-area__container {
-        background: $t-gray-color--03;
+        background: $t-gray-color-2;
 
         .t-text-area__container__input {
             color: $t-font-color--disabled;

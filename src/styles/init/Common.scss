@@ -4,11 +4,6 @@
     color: $t-white-color;
 }
 
-html {
-    height: 100%;
-    font-size: $t-font-size-base;
-}
-
 body, #root, .app {
     height: 100%;
     font-size: $t-font-size-medium;
@@ -17,9 +12,9 @@ body, #root, .app {
     line-height: $t-line-height-default;
 }
 
-h1 { font-size: $t-font-size-h1; font-weight: $t-font-weight-h1; }
-h3 { font-size: $t-font-size-h3; font-weight: $t-font-weight-h3; }
-h4 { font-size: $t-font-size-h4; font-weight: $t-font-weight-h4; }
+//h1 { font-size: $t-font-size-h1; font-weight: $t-font-weight-h1; }
+//h3 { font-size: $t-font-size-h3; font-weight: $t-font-weight-h3; }
+//h4 { font-size: $t-font-size-h4; font-weight: $t-font-weight-h4; }
 
 
 .clickable {

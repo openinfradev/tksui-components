@@ -7,8 +7,8 @@
 
 
 .t-tooltip {
-    --rt-color-dark: #{$t-gray-color--09};
-    --rt-color-white: #{$t-gray-color--01};
+    --rt-color-dark: #{$t-gray-color-6};
+    --rt-color-white: #{$t-gray-color-1};
     --rt-opacity: 0.9;
     font-family: $t-font-family;
     font-size: $t-font-size-small;
@@ -19,7 +19,7 @@
     align-items: center;
 
     &.react-tooltip {
-        border: 1px solid $t-gray-color--08;
+        border: 1px solid $t-gray-color-5;
         padding: $t-padding-tb-16 $t-padding-lr-16;
         line-height: $t-line-height-body;
 
@@ -29,26 +29,26 @@
         }
 
         &.react-tooltip__place-top > .react-tooltip-arrow {
-            border-bottom: 1px solid $t-gray-color--08;
-            border-right: 1px solid $t-gray-color--08;
+            border-bottom: 1px solid $t-gray-color-5;
+            border-right: 1px solid $t-gray-color-5;
             bottom: -6px !important;
         }
 
         &.react-tooltip__place-right > .react-tooltip-arrow {
-            border-bottom: 1px solid $t-gray-color--08;
-            border-right: 1px solid $t-gray-color--08;
+            border-bottom: 1px solid $t-gray-color-5;
+            border-right: 1px solid $t-gray-color-5;
             left: -6px !important;
         }
 
         &.react-tooltip__place-bottom > .react-tooltip-arrow {
-            border-bottom: 1px solid $t-gray-color--08;
-            border-right: 1px solid $t-gray-color--08;
+            border-bottom: 1px solid $t-gray-color-5;
+            border-right: 1px solid $t-gray-color-5;
             top: -6px !important;
         }
 
         &.react-tooltip__place-left > .react-tooltip-arrow {
-            border-bottom: 1px solid $t-gray-color--08;
-            border-right: 1px solid $t-gray-color--08;
+            border-bottom: 1px solid $t-gray-color-5;
+            border-right: 1px solid $t-gray-color-5;
             right: -6px !important;
         }
     }

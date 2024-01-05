@@ -1,114 +1,43 @@
 // region [Color]
 
 $t-primary-color: var(--t-primary-color) !default;
-$t-point-color: var(--t-point-color) !default;
 
-$t-primary-color--shade-1: color-mix(in srgb, var(--t-primary-color), black 10%) !default;
-$t-primary-color--shade-2: color-mix(in srgb, var(--t-primary-color), black 20%) !default;
-$t-primary-color--shade-3: color-mix(in srgb, var(--t-primary-color), black 30%) !default;
-$t-primary-color--shade-4: color-mix(in srgb, var(--t-primary-color), black 40%) !default;
-$t-primary-color--shade-5: color-mix(in srgb, var(--t-primary-color), black 50%) !default;
-$t-primary-color--shade-6: color-mix(in srgb, var(--t-primary-color), black 60%) !default;
-$t-primary-color--shade-7: color-mix(in srgb, var(--t-primary-color), black 70%) !default;
-$t-primary-color--shade-8: color-mix(in srgb, var(--t-primary-color), black 80%) !default;
-$t-primary-color--shade-9: color-mix(in srgb, var(--t-primary-color), black 90%) !default;
+$t-secondary-color-red: var(--t-secondary-color-red) !default;
+$t-secondary-color-salmon: var(--t-secondary-color-salmon) !default;
+$t-secondary-color-yellow: var(--t-secondary-color-yellow) !default;
+$t-secondary-color-blue: var(--t-secondary-color-blue) !default;
+$t-secondary-color-purple-1: var(--t-secondary-color-purple-1) !default;
+$t-secondary-color-purple-2: var(--t-secondary-color-purple-2) !default;
+$t-secondary-color-purple-3: var(--t-secondary-color-purple-3) !default;
+$t-secondary-color-purple-4: var(--t-secondary-color-purple-4) !default;
+$t-secondary-color-pink-1: var(--t-secondary-color-pink-1) !default;
+$t-secondary-color-pink-2: var(--t-secondary-color-pink-2) !default;
 
-$t-primary-color--tint-1: color-mix(in srgb, var(--t-primary-color), white 10%) !default;
-$t-primary-color--tint-2: color-mix(in srgb, var(--t-primary-color), white 20%) !default;
-$t-primary-color--tint-3: color-mix(in srgb, var(--t-primary-color), white 30%) !default;
-$t-primary-color--tint-4: color-mix(in srgb, var(--t-primary-color), white 40%) !default;
-$t-primary-color--tint-5: color-mix(in srgb, var(--t-primary-color), white 50%) !default;
-$t-primary-color--tint-6: color-mix(in srgb, var(--t-primary-color), white 60%) !default;
-$t-primary-color--tint-7: color-mix(in srgb, var(--t-primary-color), white 70%) !default;
-$t-primary-color--tint-8: color-mix(in srgb, var(--t-primary-color), white 80%) !default;
-$t-primary-color--tint-9: color-mix(in srgb, var(--t-primary-color), white 90%) !default;
-$t-primary-color--tint-10: color-mix(in srgb, var(--t-primary-color), white 95%) !default;
-$t-primary-color--tint-11: color-mix(in srgb, var(--t-primary-color), white 98%) !default;
+$t-white-color: var(--t-white-color) !default; // #FFFFFF
 
-// 내려갈수록 진해짐
+$t-gray-color-1: var(--t-gray-color--1) !default; // #F7F7F7
+$t-gray-color-2: var(--t-gray-color--2) !default; // #E3E3E4
+$t-gray-color-3: var(--t-gray-color--3) !default; // #B8BABC
+$t-gray-color-4: var(--t-gray-color--4) !default; // #999999
+$t-gray-color-5: var(--t-gray-color--5) !default; // #71747A
+$t-gray-color-6: var(--t-gray-color--6) !default; // #54575D
 
-$t-white-color: var(--t-white-color) !default; // #FFFFFF   black   0, white 100
-$t-gray-color--01: var(--t-gray-color--1) !default; // #F7F9FA   black  10, white  90
-$t-gray-color--02: var(--t-gray-color--2) !default; // #F6F6F6   black  20, white  80
-$t-gray-color--03: var(--t-gray-color--3) !default; // #F2F2F2   black  30, white  70
-$t-gray-color--04: var(--t-gray-color--4) !default; // #EEEEEE   black  40, white  60
-$t-gray-color--05: var(--t-gray-color--5) !default; // #DDDDDD   black  50, white  50
-$t-gray-color--06: var(--t-gray-color--6) !default; // #CCCCCC   black  60, white  40
-$t-gray-color--07: var(--t-gray-color--7) !default; // #999999   black  70, white  30
-$t-gray-color--08: var(--t-gray-color--8) !default; // #666666   black  80, white  20
-$t-gray-color--09: var(--t-gray-color--9) !default; // #333333   black  90, white  10
+$t-blue-gray-color-1: var(--blue-gray-color-1) !default; // #F9FAFD
+$t-blue-gray-color-2: var(--blue-gray-color-2) !default; // #EFF2FF
+$t-blue-gray-color-3: var(--blue-gray-color-3) !default; // #E1E5F7
+$t-blue-gray-color-4: var(--blue-gray-color-4) !default; // #4B5563
+$t-blue-gray-color-5: var(--blue-gray-color-5) !default; // #2B394E
+
 $t-black-color: var(--t-black-color) !default; // #121821
-
-$t-layout-background-color: var(--t-white-color) !default;
-
-
-$t-status-color--required: var(--t-status-color--required) !default;
-$t-status-color--success: var(--t-status-color--success) !default;
-$t-status-color--error: var(--t-status-color--error) !default;
-$t-status-color--default: var(--t-status-color--default) !default;
-$t-status-color--processing: var(--t-status-color--processing) !default;
-$t-status-color--warning: var(--t-status-color--warning) !default;
-
-$t-background-color--hover: $t-primary-color--tint-9;
-$t-background-color--active: $t-primary-color--tint-8;
-$t-background-color--read-only: $t-gray-color--01;
-
-// font color
-$t-font-color--white: $t-white-color !default;
-$t-font-color--black: $t-black-color !default;
-$t-font-color--gray-01: $t-gray-color--04 !default; // #999999
-$t-font-color--gray-02: $t-gray-color--06 !default; // #666666
-$t-font-color--gray-03: $t-gray-color--08 !default; // #333333
-$t-font-color--primary-01: $t-primary-color !default; // #333333
-$t-font-color--primary-02: $t-primary-color--tint-6 !default; // #333333
-$t-font-color--primary-03: $t-gray-color--08 !default; // #333333
-
-$t-font-color--selected: $t-primary-color;
-$t-font-color--placeholder: $t-gray-color--07;
-$t-font-color--read-only: $t-gray-color--09;
-$t-font-color--disabled: $t-gray-color--06;
-$t-font-color--default: $t-gray-color--09;
-$t-font-color--label: $t-gray-color--06;
-
-
-$t-font-weight--selected: var(--t-font-weight-medium);
-$t-border-color--default: $t-gray-color--06;
-
-// background color
-$t-background-color-01: $t-primary-color--tint-9;
-$t-background-color-02: $t-primary-color--tint-10;
-$t-background-color-03: $t-primary-color--tint-11;
-
-// chart color
-$t-chart-color-01: $t-primary-color--shade-1;
-$t-chart-color-02: $t-primary-color--shade-2;
-$t-chart-color-03: $t-primary-color--shade-3;
-$t-chart-color-04: $t-primary-color--shade-4;
-$t-chart-color-05: $t-primary-color--shade-5;
-$t-chart-color-06: color-mix(in srgb, var(--t-point-color), black 20%);
-$t-chart-color-07: color-mix(in srgb, var(--t-point-color), black 20%);
-$t-chart-color-08: color-mix(in srgb, var(--t-point-color), black 20%);
-$t-chart-color-09: color-mix(in srgb, var(--t-point-color), black 20%);
-$t-chart-color-10: color-mix(in srgb, var(--t-point-color), black 20%);
-
-// grid color
-$t-grid-border-color--01: #DDDDDD;
-$t-grid-border-color--02: #EEEEEE;
-$t-grid-border-color--03: $t-black-color;
-$t-grid-background-color--01: $t-gray-color--02;
-
-$t-input-border-color--01: #CCCCCC;
 
 
 // endregion
+
 
 // region [Typography]
 
 $t-font-family: var(--t-font-family);
 
-$t-font-size-base: var(--t-font-size-base); // 기본 폰트 사이즈, 16px
-
-$t-font-size-xxsmall: var(--t-font-size-xxsmall); // 11px
 $t-font-size-xsmall: var(--t-font-size-xsmall); // 12px
 $t-font-size-small: var(--t-font-size-small); // 14px
 $t-font-size-medium: var(--t-font-size-medium); // 16px
@@ -167,6 +96,107 @@ $t-line-height-body: var(--t-line-height-body);
 $t-font-size-table-content: $t-font-size-small;
 
 // endregion
+
+
+$t-point-color: var(--t-point-color) !default;
+
+$t-primary-color--shade-1: color-mix(in srgb, var(--t-primary-color), black 10%) !default;
+$t-primary-color--shade-2: color-mix(in srgb, var(--t-primary-color), black 20%) !default;
+$t-primary-color--shade-3: color-mix(in srgb, var(--t-primary-color), black 30%) !default;
+$t-primary-color--shade-4: color-mix(in srgb, var(--t-primary-color), black 40%) !default;
+$t-primary-color--shade-5: color-mix(in srgb, var(--t-primary-color), black 50%) !default;
+$t-primary-color--shade-6: color-mix(in srgb, var(--t-primary-color), black 60%) !default;
+$t-primary-color--shade-7: color-mix(in srgb, var(--t-primary-color), black 70%) !default;
+$t-primary-color--shade-8: color-mix(in srgb, var(--t-primary-color), black 80%) !default;
+$t-primary-color--shade-9: color-mix(in srgb, var(--t-primary-color), black 90%) !default;
+
+$t-primary-color--tint-1: color-mix(in srgb, var(--t-primary-color), white 10%) !default;
+$t-primary-color--tint-2: color-mix(in srgb, var(--t-primary-color), white 20%) !default;
+$t-primary-color--tint-3: color-mix(in srgb, var(--t-primary-color), white 30%) !default;
+$t-primary-color--tint-4: color-mix(in srgb, var(--t-primary-color), white 40%) !default;
+$t-primary-color--tint-5: color-mix(in srgb, var(--t-primary-color), white 50%) !default;
+$t-primary-color--tint-6: color-mix(in srgb, var(--t-primary-color), white 60%) !default;
+$t-primary-color--tint-7: color-mix(in srgb, var(--t-primary-color), white 70%) !default;
+$t-primary-color--tint-8: color-mix(in srgb, var(--t-primary-color), white 80%) !default;
+$t-primary-color--tint-9: color-mix(in srgb, var(--t-primary-color), white 90%) !default;
+$t-primary-color--tint-10: color-mix(in srgb, var(--t-primary-color), white 95%) !default;
+$t-primary-color--tint-11: color-mix(in srgb, var(--t-primary-color), white 98%) !default;
+
+
+
+$t-layout-background-color: var(--t-white-color) !default;
+
+
+$t-status-color--required: var(--t-status-color--required) !default;
+$t-status-color--success: var(--t-status-color--success) !default;
+$t-status-color--error: var(--t-status-color--error) !default;
+$t-status-color--default: var(--t-status-color--default) !default;
+$t-status-color--processing: var(--t-status-color--processing) !default;
+$t-status-color--warning: var(--t-status-color--warning) !default;
+
+$t-background-color--hover: $t-primary-color--tint-9;
+$t-background-color--active: $t-primary-color--tint-8;
+$t-background-color--read-only: $t-gray-color-1;
+
+// font color
+$t-font-color--white: $t-white-color !default;
+$t-font-color--black: $t-black-color !default;
+$t-font-color--gray-01: $t-gray-color-2 !default; // #999999
+$t-font-color--gray-02: $t-gray-color-3 !default; // #666666
+$t-font-color--gray-03: $t-gray-color-5 !default; // #333333
+$t-font-color--primary-01: $t-primary-color !default; // #333333
+$t-font-color--primary-02: $t-primary-color--tint-6 !default; // #333333
+$t-font-color--primary-03: $t-gray-color-5 !default; // #333333
+
+$t-font-color--selected: $t-primary-color;
+$t-font-color--placeholder: $t-gray-color-4;
+$t-font-color--read-only: $t-gray-color-6;
+$t-font-color--disabled: $t-gray-color-3;
+$t-font-color--default: $t-gray-color-6;
+$t-font-color--label: $t-gray-color-3;
+
+
+$t-font-weight--selected: var(--t-font-weight-medium);
+$t-border-color--default: $t-gray-color-3;
+
+// background color
+$t-background-color-01: $t-primary-color--tint-9;
+$t-background-color-02: $t-primary-color--tint-10;
+$t-background-color-03: $t-primary-color--tint-11;
+
+// chart color
+$t-chart-color-01: $t-primary-color--shade-1;
+$t-chart-color-02: $t-primary-color--shade-2;
+$t-chart-color-03: $t-primary-color--shade-3;
+$t-chart-color-04: $t-primary-color--shade-4;
+$t-chart-color-05: $t-primary-color--shade-5;
+$t-chart-color-06: color-mix(in srgb, var(--t-point-color), black 20%);
+$t-chart-color-07: color-mix(in srgb, var(--t-point-color), black 20%);
+$t-chart-color-08: color-mix(in srgb, var(--t-point-color), black 20%);
+$t-chart-color-09: color-mix(in srgb, var(--t-point-color), black 20%);
+$t-chart-color-10: color-mix(in srgb, var(--t-point-color), black 20%);
+
+// grid color
+$t-grid-border-color--01: #DDDDDD;
+$t-grid-border-color--02: #EEEEEE;
+$t-grid-border-color--03: $t-black-color;
+$t-grid-background-color--01: $t-gray-color-2;
+
+$t-input-border-color--01: #CCCCCC;
+
+
+// endregion
+
+
+
+
+
+
+
+
+
+
+
 
 // region Spacing
 

@@ -22,7 +22,7 @@
 
 
     .t-number-field__container {
-        border: 1px solid $t-gray-color--06;
+        border: 1px solid $t-gray-color-3;
         width: 100%;
         padding: 0 $t-padding-lr-16;
         position: relative;
@@ -76,7 +76,7 @@
 
             .t-number-field__container__action-icon__increment--disabled, .t-number-field__container__action-icon__decrement--disabled {
                 cursor: default;
-                border-bottom-color: $t-gray-color--06;
+                border-bottom-color: $t-gray-color-3;
                 pointer-events: none;
             }
 
@@ -91,7 +91,7 @@
         font-size: $t-font-size-small;
         height: 18px;
         line-height: 18px;
-        color: $t-gray-color--07;
+        color: $t-gray-color-4;
         margin-top: 2px;
         position: absolute;
         width: 100%;
@@ -123,7 +123,7 @@
         }
     }
     &.t-number-field--disabled .t-number-field__container {
-        background: $t-gray-color--03;
+        background: $t-gray-color-2;
 
         .t-number-field__label {
             color: $t-font-color--read-only;
@@ -135,7 +135,7 @@
         }
 
         .t-number-field__container__action-icon__increment, .t-number-field__container__action-icon__decrement {
-            color: $t-gray-color--06;
+            color: $t-gray-color-3;
         }
     }
 

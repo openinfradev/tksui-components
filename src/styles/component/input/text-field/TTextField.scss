@@ -22,7 +22,7 @@
     }
 
     .t-text-field__container {
-        border: 1px solid $t-gray-color--06;
+        border: 1px solid $t-gray-color-3;
         width: 100%;
         padding: 0 20px 0 $t-padding-lr-16;
         position: relative;
@@ -64,7 +64,7 @@
         font-size: $t-font-size-small;
         height: 18px;
         line-height: 18px;
-        color: $t-gray-color--07;
+        color: $t-gray-color-4;
         margin-top: 2px;
         position: absolute;
         width: 100%;
@@ -105,7 +105,7 @@
         }
     }
     &.t-text-field--disabled .t-text-field__container {
-        background: $t-gray-color--03;
+        background: $t-gray-color-2;
 
         .t-text-field__container__input {
             color: $t-font-color--disabled;
@@ -113,13 +113,13 @@
         }
     }
     &.t-text-field--read-only .t-text-field__container {
-        background: $t-gray-color--03;
+        background: $t-gray-color-2;
 
         &:focus-within {
-            border-color: $t-gray-color--06;
+            border-color: $t-gray-color-3;
         }
         .t-text-field__container__input {
-            background-color: $t-gray-color--03;
+            background-color: $t-gray-color-2;
             color: $t-font-color--read-only;
             cursor: default;
         }
