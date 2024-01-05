@@ -129,9 +129,8 @@
 
     .t-dropdown__details {
         display: flex;
-        font-size: $t-font-size-xsmall;
+        @include typo-element-3;
         height: $t-dropdown-detail-height;
-        line-height: $t-dropdown-detail-height;
         color: $t-gray-color-4;
         position: absolute;
         width: 100%;

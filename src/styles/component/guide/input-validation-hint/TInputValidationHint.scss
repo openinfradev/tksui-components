@@ -1,5 +1,5 @@
 .t-input-validation-hint {
-    font-size: $t-font-size-small;
+    @include typo-element-4;
 
     .t-input-validation-hint__description {
         margin-bottom: $t-margin-tb-8;

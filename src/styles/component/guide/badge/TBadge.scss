@@ -10,7 +10,7 @@
         color: $t-white-color;
 
         &.t-badge-content--detail {
-            font-size: $t-font-size-xsmall;
+            @include typo-element-5;
             top: -8px;
             left: calc(50%);
             padding: 4px 6px;

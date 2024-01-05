@@ -11,7 +11,7 @@
     --rt-color-white: #{$t-gray-color-1};
     --rt-opacity: 0.9;
     font-family: $t-font-family;
-    font-size: $t-font-size-small;
+    @include typo-element-4;
     word-break: keep-all;
     word-wrap: break-word;
     z-index: $t-z-index-tooltip;

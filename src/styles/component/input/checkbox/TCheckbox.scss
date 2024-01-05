@@ -13,8 +13,7 @@
         }
         .t-checkbox__label {
             margin-left: $t-margin-lr-8 * 1.25;
-            font-size: $t-font-size-medium;
-            line-height: 20px;
+            @include typo-body-3;
             color: $t-gray-color-6;
         }
 
@@ -24,9 +23,8 @@
     }
 
     .t-checkbox__message {
-        font-size: $t-font-size-xsmall;
+        @include typo-element-3;
         height: 18px;
-        line-height: 18px;
         color: $t-gray-color-4;
         .t-text-field__details__message {
             margin-right: $t-margin-lr-16;

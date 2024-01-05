@@ -36,11 +36,11 @@
 
         .t-text-field__container__input {
             font-family: $t-font-family;
+            @include typo-body-3;
             width: 100%;
             color: $t-black-color;
             border: none;
             outline: none;
-            font-size: $t-font-size-medium;
             padding: 0;
 
             &[type='password'] {
@@ -61,9 +61,8 @@
     }
     .t-text-field__details {
         display: flex;
-        font-size: $t-font-size-small;
+        @include typo-element-3;
         height: 18px;
-        line-height: 18px;
         color: $t-gray-color-4;
         margin-top: 2px;
         position: absolute;

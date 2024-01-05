@@ -88,7 +88,7 @@
     }
     .t-number-field__details {
         display: flex;
-        font-size: $t-font-size-small;
+        @include typo-element-3;
         height: 18px;
         line-height: 18px;
         color: $t-gray-color-4;
