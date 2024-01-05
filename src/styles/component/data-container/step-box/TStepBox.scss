@@ -42,15 +42,13 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                font-size: $t-font-size-medium;
-                font-weight: $t-font-weight-bold;
+                @include typo-subtitle-4;
             }
 
             .t-step-box-header__step__label {
                 position: absolute;
                 top: 64px;
-                font-weight: $t-font-weight-medium;
-                font-size: $t-font-size-medium;
+                @include typo-body-3;
                 width: max-content;
             }
 

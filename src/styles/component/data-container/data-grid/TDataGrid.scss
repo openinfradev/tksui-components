@@ -44,7 +44,7 @@
     .t-data-grid__body.ag-theme-material {
         --ag-material-primary-color: #{$t-primary-color};
         --ag-font-family: #{$t-font-family};
-        --ag-font-size: #{$t-font-size-medium};
+        --ag-font-size: var(--t-font-size-medium);
 
         --ag-checkbox-checked-color: #{$t-primary-color};
         --ag-checkbox-indeterminate-color: #{$t-primary-color};

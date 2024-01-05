@@ -31,9 +31,7 @@
     flex-direction: column;
 
     &.t-form-section--required .t-form-section__header__label::after {
-        content: '*';
-        color: $t-status-color--required;
-        margin-left: $t-margin-lr-8;
+        @include require-mark;
     }
 
     .t-form-section__header {
@@ -76,12 +74,11 @@
 
             align-items: center;
             background: $t-grid-background-color--01;
-            font-size: $t-font-size-medium;
+            @include typo-element-3;
             color: $t-gray-color-5;
             padding: $t-padding-tb-24 $t-padding-lr-24;
             display: flex;
             gap: $t-padding-lr-16;
-            line-height: $t-line-height-body;
 
         }
     }
@@ -179,8 +176,6 @@
     }
 
     &.t-form-item--required .t-form-item__label__text::after {
-        content: '*';
-        color: $t-status-color--required;
-        margin-left: $t-margin-lr-4;
+        @include require-mark;
     }
 }

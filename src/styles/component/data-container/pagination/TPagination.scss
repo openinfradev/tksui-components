@@ -46,7 +46,7 @@
                 border: none;
                 background: none;
                 color: $t-gray-color-4;
-                font-size: $t-font-size-medium;
+                @include typo-element-3;
                 cursor: pointer;
 
                 &:hover {

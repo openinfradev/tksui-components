@@ -109,8 +109,6 @@
     }
 
     &.t-search-box-item--required .t-search-box-item__label::after {
-        content: '*';
-        color: $t-status-color--required;
-        margin-left: $t-margin-lr-4;
+        @include require-mark;
     }
 }
