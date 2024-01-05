@@ -15,12 +15,15 @@ $page-padding-lr: $t-padding-lr-32;
             position: sticky;
             top: 0;
             z-index: $t-z-index-page-title;
-            background: $t-white-color;
             line-height: $t-line-height-header;
             margin-bottom: $t-margin-tb-32;
 
             @include vertical-mid;
             gap: 10px;
+
+            .t-page__title-area__title {
+                @include typo-h3;
+            }
         }
 
         .t-page__content-area {
