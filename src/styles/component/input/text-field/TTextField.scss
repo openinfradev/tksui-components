@@ -8,21 +8,17 @@
 
     .t-text-field__label {
         z-index: 0;
-        font-size: $t-font-size-medium;
-        font-weight: $t-font-weight-bold;
+        @include typo-body-3;
         margin-bottom: 12px;
         display: inline-block;
 
         &.t-text-field__label--required::after {
-            content: '*';
-            color: $t-status-color--required;
-            margin-left: 6px;
-            font-weight: $t-font-weight-bold;
+            @include require-mark;
         }
     }
 
     .t-text-field__container {
-        border: 1px solid $t-gray-color--06;
+        border: 1px solid $t-gray-color-3;
         width: 100%;
         padding: 0 20px 0 $t-padding-lr-16;
         position: relative;
@@ -36,11 +32,11 @@
 
         .t-text-field__container__input {
             font-family: $t-font-family;
+            @include typo-body-3;
             width: 100%;
             color: $t-black-color;
             border: none;
             outline: none;
-            font-size: $t-font-size-body-1;
             padding: 0;
 
             &[type='password'] {
@@ -61,10 +57,9 @@
     }
     .t-text-field__details {
         display: flex;
-        font-size: $t-font-size-small;
+        @include typo-element-3;
         height: 18px;
-        line-height: 18px;
-        color: $t-gray-color--07;
+        color: $t-gray-color-4;
         margin-top: 2px;
         position: absolute;
         width: 100%;
@@ -105,7 +100,7 @@
         }
     }
     &.t-text-field--disabled .t-text-field__container {
-        background: $t-gray-color--03;
+        background: $t-gray-color-2;
 
         .t-text-field__container__input {
             color: $t-font-color--disabled;
@@ -113,13 +108,13 @@
         }
     }
     &.t-text-field--read-only .t-text-field__container {
-        background: $t-gray-color--03;
+        background: $t-gray-color-2;
 
         &:focus-within {
-            border-color: $t-gray-color--06;
+            border-color: $t-gray-color-3;
         }
         .t-text-field__container__input {
-            background-color: $t-gray-color--03;
+            background-color: $t-gray-color-2;
             color: $t-font-color--read-only;
             cursor: default;
         }

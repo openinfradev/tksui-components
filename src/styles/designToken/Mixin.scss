@@ -21,3 +21,25 @@
     fill: $color;
     color: $color;
 }
+
+@mixin require-mark { content: '*'; color: $t-status-color--required; margin-left: 6px; font-weight: $t-font-weight-bold; }
+
+@mixin typo-h1 {font-size: $t-font-size-h1; line-height: $t-line-height-h1; font-weight: $t-font-weight-h1; }
+@mixin typo-h2 {font-size: $t-font-size-h2; line-height: $t-line-height-h2; font-weight: $t-font-weight-h2; }
+@mixin typo-h3 {font-size: $t-font-size-h3; line-height: $t-line-height-h3; font-weight: $t-font-weight-h3; }
+@mixin typo-h4 {font-size: $t-font-size-h4; line-height: $t-line-height-h4; font-weight: $t-font-weight-h4; }
+
+@mixin typo-subtitle-1 {font-size: $t-font-size-subtitle-1; line-height: $t-line-height-subtitle-1; font-weight: $t-font-weight-subtitle-1; }
+@mixin typo-subtitle-2 {font-size: $t-font-size-subtitle-2; line-height: $t-line-height-subtitle-2; font-weight: $t-font-weight-subtitle-2; }
+@mixin typo-subtitle-3 {font-size: $t-font-size-subtitle-3; line-height: $t-line-height-subtitle-3; font-weight: $t-font-weight-subtitle-3; }
+@mixin typo-subtitle-4 {font-size: $t-font-size-subtitle-4; line-height: $t-line-height-subtitle-4; font-weight: $t-font-weight-subtitle-4; }
+
+@mixin typo-body-1 {font-size: $t-font-size-body-1; line-height: $t-line-height-body-1; font-weight: $t-font-weight-body-1; }
+@mixin typo-body-2 {font-size: $t-font-size-body-2; line-height: $t-line-height-body-2; font-weight: $t-font-weight-body-2; }
+@mixin typo-body-3 {font-size: $t-font-size-body-3; line-height: $t-line-height-body-3; font-weight: $t-font-weight-body-3; }
+
+@mixin typo-element-1 {font-size: $t-font-size-element-1; line-height: $t-line-height-element-1; font-weight: $t-font-weight-element-1; }
+@mixin typo-element-2 {font-size: $t-font-size-element-2; line-height: $t-line-height-element-2; font-weight: $t-font-weight-element-2; }
+@mixin typo-element-3 {font-size: $t-font-size-element-3; line-height: $t-line-height-element-3; font-weight: $t-font-weight-element-3; }
+@mixin typo-element-4 {font-size: $t-font-size-element-4; line-height: $t-line-height-element-4; font-weight: $t-font-weight-element-4; }
+@mixin typo-element-5 {font-size: $t-font-size-element-5; line-height: $t-line-height-element-5; font-weight: $t-font-weight-element-5; }

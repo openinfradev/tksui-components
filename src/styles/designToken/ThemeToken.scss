@@ -1,6 +1,130 @@
 // region [Color]
 
 $t-primary-color: var(--t-primary-color) !default;
+
+$t-secondary-color-red: var(--t-secondary-color-red) !default;
+$t-secondary-color-salmon: var(--t-secondary-color-salmon) !default;
+$t-secondary-color-yellow: var(--t-secondary-color-yellow) !default;
+$t-secondary-color-blue: var(--t-secondary-color-blue) !default;
+$t-secondary-color-purple-1: var(--t-secondary-color-purple-1) !default;
+$t-secondary-color-purple-2: var(--t-secondary-color-purple-2) !default;
+$t-secondary-color-purple-3: var(--t-secondary-color-purple-3) !default;
+$t-secondary-color-purple-4: var(--t-secondary-color-purple-4) !default;
+$t-secondary-color-pink-1: var(--t-secondary-color-pink-1) !default;
+$t-secondary-color-pink-2: var(--t-secondary-color-pink-2) !default;
+
+$t-white-color: var(--t-white-color) !default; // #FFFFFF
+
+$t-gray-color-1: var(--t-gray-color--1) !default; // #F7F7F7
+$t-gray-color-2: var(--t-gray-color--2) !default; // #E3E3E4
+$t-gray-color-3: var(--t-gray-color--3) !default; // #B8BABC
+$t-gray-color-4: var(--t-gray-color--4) !default; // #999999
+$t-gray-color-5: var(--t-gray-color--5) !default; // #71747A
+$t-gray-color-6: var(--t-gray-color--6) !default; // #54575D
+
+$t-blue-gray-color-1: var(--blue-gray-color-1) !default; // #F9FAFD
+$t-blue-gray-color-2: var(--blue-gray-color-2) !default; // #EFF2FF
+$t-blue-gray-color-3: var(--blue-gray-color-3) !default; // #E1E5F7
+$t-blue-gray-color-4: var(--blue-gray-color-4) !default; // #4B5563
+$t-blue-gray-color-5: var(--blue-gray-color-5) !default; // #2B394E
+
+$t-black-color: var(--t-black-color) !default; // #121821
+
+
+// endregion
+
+
+// region [Typography]
+
+$t-font-family: var(--t-font-family);
+
+// Headline
+$t-font-size-h1: var(--t-font-size-h1);
+$t-line-height-h1: var(--t-line-height-h1);
+$t-font-weight-h1: var(--t-font-weight-bold);
+
+$t-font-size-h2: var(--t-font-size-h2);
+$t-line-height-h2: var(--t-line-height-h2);
+$t-font-weight-h2: var(--t-font-weight-bold);
+
+$t-font-size-h3: var(--t-font-size-h3);
+$t-line-height-h3: var(--t-line-height-h3);
+$t-font-weight-h3: var(--t-font-weight-bold);
+
+$t-font-size-h4: var(--t-font-size-h4);
+$t-line-height-h4: var(--t-line-height-h4);
+$t-font-weight-h4: var(--t-font-weight-bold);
+
+// Subtitle
+$t-font-size-subtitle-1: var(--t-font-size-xlarge);
+$t-line-height-subtitle-1: var(--t-line-height-xlarge);
+$t-font-weight-subtitle-1: var(--t-font-weight-medium);
+
+$t-font-size-subtitle-2: var(--t-font-size-xlarge);
+$t-line-height-subtitle-2: var(--t-line-height-xlarge);
+$t-font-weight-subtitle-2: var(--t-font-weight-bold);
+
+$t-font-size-subtitle-3: var(--t-font-size-large);
+$t-line-height-subtitle-3: var(--t-line-height-large-2);
+$t-font-weight-subtitle-3: var(--t-font-weight-bold);
+
+$t-font-size-subtitle-4: var(--t-font-size-medium);
+$t-line-height-subtitle-4: var(--t-line-height-medium-1);
+$t-font-weight-subtitle-4: var(--t-font-weight-bold);
+
+// Body
+$t-font-size-body-1: var(--t-font-size-xlarge);
+$t-line-height-body-1: var(--t-line-height-xlarge);
+$t-font-weight-body-1: var(--t-font-weight-regular);
+
+$t-font-size-body-2: var(--t-font-size-large);
+$t-line-height-body-2: var(--t-line-height-large-2);
+$t-font-weight-body-2: var(--t-font-weight-medium);
+
+$t-font-size-body-3: var(--t-font-size-large);
+$t-line-height-body-3: var(--t-line-height-large-2);
+$t-font-weight-body-3: var(--t-font-weight-regular);
+
+// Element
+$t-font-size-element-1: var(--t-font-size-large);
+$t-line-height-element-1: var(--t-line-height-large-1);
+$t-font-weight-element-1: var(--t-font-weight-bold);
+
+$t-font-size-element-2: var(--t-font-size-medium);
+$t-line-height-element-2: var(--t-line-height-medium-2);
+$t-font-weight-element-2: var(--t-font-weight-medium);
+
+$t-font-size-element-3: var(--t-font-size-medium);
+$t-line-height-element-3: var(--t-line-height-medium-2);
+$t-font-weight-element-3: var(--t-font-weight-regular);
+
+$t-font-size-element-4: var(--t-font-size-small);
+$t-line-height-element-4: var(--t-line-height-small);
+$t-font-weight-element-4: var(--t-font-weight-regular);
+
+$t-font-size-element-5: var(--t-font-size-xsmall);
+$t-line-height-element-5: var(--t-line-height-xsmall);
+$t-font-weight-element-5: var(--t-font-weight-bold);
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////  Deprecated  ////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+$t-font-weight-regular: var(--t-font-weight-regular);
+$t-font-weight-medium: var(--t-font-weight-medium);
+$t-font-weight-bold: var(--t-font-weight-bold);
+
+
+// content
+
+$t-line-height-default: var(--t-line-height-default);
+$t-line-height-header: var(--t-line-height-header);
+$t-line-height-body: var(--t-line-height-body);
+
+
+// endregion
+
+
 $t-point-color: var(--t-point-color) !default;
 
 $t-primary-color--shade-1: color-mix(in srgb, var(--t-primary-color), black 10%) !default;
@@ -25,19 +149,7 @@ $t-primary-color--tint-9: color-mix(in srgb, var(--t-primary-color), white 90%) 
 $t-primary-color--tint-10: color-mix(in srgb, var(--t-primary-color), white 95%) !default;
 $t-primary-color--tint-11: color-mix(in srgb, var(--t-primary-color), white 98%) !default;
 
-// 내려갈수록 진해짐
 
-$t-white-color: var(--t-white-color) !default; // #FFFFFF   black   0, white 100
-$t-gray-color--01: var(--t-gray-color--1) !default; // #F7F9FA   black  10, white  90
-$t-gray-color--02: var(--t-gray-color--2) !default; // #F6F6F6   black  20, white  80
-$t-gray-color--03: var(--t-gray-color--3) !default; // #F2F2F2   black  30, white  70
-$t-gray-color--04: var(--t-gray-color--4) !default; // #EEEEEE   black  40, white  60
-$t-gray-color--05: var(--t-gray-color--5) !default; // #DDDDDD   black  50, white  50
-$t-gray-color--06: var(--t-gray-color--6) !default; // #CCCCCC   black  60, white  40
-$t-gray-color--07: var(--t-gray-color--7) !default; // #999999   black  70, white  30
-$t-gray-color--08: var(--t-gray-color--8) !default; // #666666   black  80, white  20
-$t-gray-color--09: var(--t-gray-color--9) !default; // #333333   black  90, white  10
-$t-black-color: var(--t-black-color) !default; // #121821
 
 $t-layout-background-color: var(--t-white-color) !default;
 
@@ -51,28 +163,28 @@ $t-status-color--warning: var(--t-status-color--warning) !default;
 
 $t-background-color--hover: $t-primary-color--tint-9;
 $t-background-color--active: $t-primary-color--tint-8;
-$t-background-color--read-only: $t-gray-color--01;
+$t-background-color--read-only: $t-gray-color-1;
 
 // font color
 $t-font-color--white: $t-white-color !default;
 $t-font-color--black: $t-black-color !default;
-$t-font-color--gray-01: $t-gray-color--04 !default; // #999999
-$t-font-color--gray-02: $t-gray-color--06 !default; // #666666
-$t-font-color--gray-03: $t-gray-color--08 !default; // #333333
+$t-font-color--gray-01: $t-gray-color-2 !default; // #999999
+$t-font-color--gray-02: $t-gray-color-3 !default; // #666666
+$t-font-color--gray-03: $t-gray-color-5 !default; // #333333
 $t-font-color--primary-01: $t-primary-color !default; // #333333
 $t-font-color--primary-02: $t-primary-color--tint-6 !default; // #333333
-$t-font-color--primary-03: $t-gray-color--08 !default; // #333333
+$t-font-color--primary-03: $t-gray-color-5 !default; // #333333
 
 $t-font-color--selected: $t-primary-color;
-$t-font-color--placeholder: $t-gray-color--07;
-$t-font-color--read-only: $t-gray-color--09;
-$t-font-color--disabled: $t-gray-color--06;
-$t-font-color--default: $t-gray-color--09;
-$t-font-color--label: $t-gray-color--06;
+$t-font-color--placeholder: $t-gray-color-4;
+$t-font-color--read-only: $t-gray-color-6;
+$t-font-color--disabled: $t-gray-color-3;
+$t-font-color--default: $t-gray-color-6;
+$t-font-color--label: $t-gray-color-3;
 
 
 $t-font-weight--selected: var(--t-font-weight-medium);
-$t-border-color--default: $t-gray-color--06;
+$t-border-color--default: $t-gray-color-3;
 
 // background color
 $t-background-color-01: $t-primary-color--tint-9;
@@ -95,78 +207,21 @@ $t-chart-color-10: color-mix(in srgb, var(--t-point-color), black 20%);
 $t-grid-border-color--01: #DDDDDD;
 $t-grid-border-color--02: #EEEEEE;
 $t-grid-border-color--03: $t-black-color;
-$t-grid-background-color--01: $t-gray-color--02;
+$t-grid-background-color--01: $t-gray-color-2;
 
 $t-input-border-color--01: #CCCCCC;
 
 
 // endregion
 
-// region [Typography]
 
-$t-font-family: var(--t-font-family);
 
-$t-font-size-base: var(--t-font-size-base); // 기본 폰트 사이즈, 16px
 
-$t-font-size-xxsmall: var(--t-font-size-xxsmall); // 11px
-$t-font-size-xsmall: var(--t-font-size-xsmall); // 12px
-$t-font-size-small: var(--t-font-size-small); // 14px
-$t-font-size-medium: var(--t-font-size-medium); // 16px
-$t-font-size-large: var(--t-font-size-large); // 20px
-$t-font-size-xlarge: var(--t-font-size-xlarge); // 21px
-$t-font-size-xxlarge: var(--t-font-size-xxlarge); // 29px
 
-$t-font-weight-normal: var(--t-font-weight-normal);
-$t-font-weight-medium: var(--t-font-weight-medium);
-$t-font-weight-bold: var(--t-font-weight-bold);
 
-// h4 ~ h1
-$t-font-size-h4: 1.25rem; // 20px
-$t-font-weight-h4: var(--t-font-weight-bold); // 700
 
-$t-font-size-h3: 1.5rem; // 24px
-$t-font-weight-h3: var(--t-font-weight-bold); // 700
 
-$t-font-size-h2: 2rem; // 32px, 안씀
-$t-font-weight-h2: var(--t-font-weight-bold); // 700
 
-$t-font-size-h1: 2.25rem; // 36px
-$t-font-weight-h1: var(--t-font-weight-bold); // 700
-
-// menu lv 1 ~ 3
-$t-font-size-menu-lv-1: $t-font-size-medium;
-$t-font-weight-menu-lv-1: var(--t-font-weight-bold);
-
-$t-font-size-menu-lv-2: $t-font-size-small;
-$t-font-weight-menu-lv-3: var(--t-font-weight-normal);
-
-$t-font-size-menu-lv-3: $t-font-size-xsmall;
-$t-font-weight-menu-lv-3: var(--t-font-weight-normal);
-
-// title
-$t-font-size-page-title: $t-font-size-xxlarge;
-$t-font-weight-page-title: var(--t-font-weight-bold);
-
-$t-font-size-page-subtitle: $t-font-size-large;
-$t-font-weight-page-subtitle: var(--t-font-weight-normal);
-
-// content
-$t-font-size-body-1: $t-font-size-medium;
-$t-font-weight-body-1: var(--t-font-weight-normal);
-
-$t-font-size-body-2: $t-font-size-small;
-$t-font-weight-body-2: var(--t-font-weight-normal);
-
-$t-font-size-body-3: $t-font-size-xsmall;
-$t-font-weight-body-3: var(--t-font-weight-normal);
-
-$t-line-height-default: var(--t-line-height-default);
-$t-line-height-header: var(--t-line-height-header);
-$t-line-height-body: var(--t-line-height-body);
-
-$t-font-size-table-content: $t-font-size-small;
-
-// endregion
 
 // region Spacing
 

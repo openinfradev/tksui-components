@@ -7,22 +7,18 @@
 
     .t-number-field__label {
         z-index: 0;
-        font-size: $t-font-size-medium;
-        font-weight: $t-font-weight-bold;
+        @include typo-body-3;
         margin-bottom: 12px;
         display: inline-block;
 
         &.t-number-field__label--required::after {
-            content: '*';
-            color: $t-status-color--required;
-            margin-left: 6px;
-            font-weight: $t-font-weight-bold;
+            @include require-mark;
         }
     }
 
 
     .t-number-field__container {
-        border: 1px solid $t-gray-color--06;
+        border: 1px solid $t-gray-color-3;
         width: 100%;
         padding: 0 $t-padding-lr-16;
         position: relative;
@@ -38,7 +34,7 @@
             color: $t-black-color;
             border: none;
             outline: none;
-            font-size: $t-font-size-body-1;
+            @include typo-body-3;
             background: transparent;
             padding: 0;
 
@@ -76,7 +72,7 @@
 
             .t-number-field__container__action-icon__increment--disabled, .t-number-field__container__action-icon__decrement--disabled {
                 cursor: default;
-                border-bottom-color: $t-gray-color--06;
+                border-bottom-color: $t-gray-color-3;
                 pointer-events: none;
             }
 
@@ -88,10 +84,10 @@
     }
     .t-number-field__details {
         display: flex;
-        font-size: $t-font-size-small;
+        @include typo-element-3;
         height: 18px;
         line-height: 18px;
-        color: $t-gray-color--07;
+        color: $t-gray-color-4;
         margin-top: 2px;
         position: absolute;
         width: 100%;
@@ -123,7 +119,7 @@
         }
     }
     &.t-number-field--disabled .t-number-field__container {
-        background: $t-gray-color--03;
+        background: $t-gray-color-2;
 
         .t-number-field__label {
             color: $t-font-color--read-only;
@@ -135,7 +131,7 @@
         }
 
         .t-number-field__container__action-icon__increment, .t-number-field__container__action-icon__decrement {
-            color: $t-gray-color--06;
+            color: $t-gray-color-3;
         }
     }
 

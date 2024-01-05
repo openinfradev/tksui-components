@@ -31,9 +31,7 @@
     flex-direction: column;
 
     &.t-form-section--required .t-form-section__header__label::after {
-        content: '*';
-        color: $t-status-color--required;
-        margin-left: $t-margin-lr-8;
+        @include require-mark;
     }
 
     .t-form-section__header {
@@ -69,19 +67,18 @@
         flex-direction: column;
         gap: $t-margin-tb-32;
         padding-bottom: 24px;
-        border-bottom: 1px solid $t-gray-color--05;
+        border-bottom: 1px solid $t-gray-color-2;
 
         .t-form-section__content__info {
             .t-icon {margin-top: 2px;}
 
             align-items: center;
             background: $t-grid-background-color--01;
-            font-size: $t-font-size-medium;
-            color: $t-gray-color--08;
+            @include typo-element-3;
+            color: $t-gray-color-5;
             padding: $t-padding-tb-24 $t-padding-lr-24;
             display: flex;
             gap: $t-padding-lr-16;
-            line-height: $t-line-height-body;
 
         }
     }
@@ -100,7 +97,7 @@
             padding-bottom: 0;
         }
         .t-form-row {
-            border-bottom: 1px solid $t-gray-color--05;
+            border-bottom: 1px solid $t-gray-color-2;
             &.t-form-row + .t-form-row { margin-top: 0; }
         }
         .t-form-item {
@@ -114,18 +111,18 @@
                 height: 100%;
 
                 flex: 0 0 170px;
-                background: $t-gray-color--01;
+                background: $t-gray-color-1;
                 margin: 0;
                 padding: 0 24px;
 
-                border-right: 1px solid $t-gray-color--05;
+                border-right: 1px solid $t-gray-color-2;
                 color: $t-black-color;
                 font-weight: $t-font-weight-bold;
             }
             .t-form-item__content {
                 flex: 1 1 auto;
                 padding: $t-margin-tb-24 $t-margin-lr-24;
-                color: $t-gray-color--09;
+                color: $t-gray-color-6;
             }
         }
         &.t-form-section + .t-form-section {
@@ -156,19 +153,19 @@
     &:not(:first-child) {padding-left: 8px;}
 
     .t-form-item__label {
-        font-weight: $t-font-weight-normal;
+        font-weight: $t-font-weight-regular;
         display: inline-flex;
         align-items: center;
         margin-bottom: $t-margin-tb-8;
         color: $t-black-color;
         .t-form-item__label__info-icon {
             margin-left: $t-margin-lr-8;
-            stroke: $t-gray-color--08;
-            fill: $t-gray-color--08;
+            stroke: $t-gray-color-5;
+            fill: $t-gray-color-5;
         }
 
         .t-form-item__label__text {
-            color: $t-gray-color--08;
+            color: $t-gray-color-5;
         }
     }
     .t-form-item__content {
@@ -179,8 +176,6 @@
     }
 
     &.t-form-item--required .t-form-item__label__text::after {
-        content: '*';
-        color: $t-status-color--required;
-        margin-left: $t-margin-lr-4;
+        @include require-mark;
     }
 }

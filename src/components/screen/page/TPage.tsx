@@ -105,7 +105,7 @@ export default function TPage(props: TPageProps) {
              ref={rootRef}>
             <div className={'t-page__content-container'}>
                 <div className={'t-page__title-area'}>
-                    <h1>{props.title}</h1> {isInfoPanelOpened}
+                    <h3 className={'t-page__title-area__title'}>{props.title}</h3> {isInfoPanelOpened}
 
                     {
                         props.infoPanelContent && (

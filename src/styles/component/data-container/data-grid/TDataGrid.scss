@@ -21,7 +21,7 @@
         gap: $t-margin-lr-16;
 
         .t-data-grid__header__pagination {
-            color: $t-gray-color--08;
+            color: $t-gray-color-5;
             strong { color: $t-primary-color; }
         }
         .t-data-grid__header__select-indicator {
@@ -44,7 +44,7 @@
     .t-data-grid__body.ag-theme-material {
         --ag-material-primary-color: #{$t-primary-color};
         --ag-font-family: #{$t-font-family};
-        --ag-font-size: #{$t-font-size-medium};
+        --ag-font-size: var(--t-font-size-medium);
 
         --ag-checkbox-checked-color: #{$t-primary-color};
         --ag-checkbox-indeterminate-color: #{$t-primary-color};
@@ -67,11 +67,11 @@
                 font-size: var(--ag-font-size);
                 font-weight: $t-font-weight-bold;
                 color: $t-black-color;
-                background-color: $t-gray-color--01;
+                background-color: $t-gray-color-1;
             }
 
             .ag-header-viewport {
-                background: $t-gray-color--01;
+                background: $t-gray-color-1;
             }
         }
 
@@ -89,8 +89,8 @@
                 pointer-events: all;
                 .t-data-grid__body__no-rows-template {
                     .t-data-grid__body__no-rows-template__guide-message {
-                        font-size: $t-font-size-large;
-                        color: $t-gray-color--07;
+                        @include typo-body-3;
+                        color: $t-gray-color-4;
                         margin-bottom: $t-margin-tb-32;
                     }
 

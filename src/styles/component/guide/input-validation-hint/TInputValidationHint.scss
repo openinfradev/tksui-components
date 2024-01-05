@@ -1,5 +1,5 @@
 .t-input-validation-hint {
-    font-size: $t-font-size-small;
+    @include typo-element-4;
 
     .t-input-validation-hint__description {
         margin-bottom: $t-margin-tb-8;
@@ -12,9 +12,9 @@
 
         .t-input-validation-hint__rules__item {
             &::before {
+                @include typo-element-5;
                 content: '・';
                 margin-right: $t-margin-lr-4;
-                font-weight: $t-font-weight-bold;
             }
 
             &.t-input-validation-hint__rules__item--valid {

@@ -9,13 +9,12 @@
 
         .t-checkbox__icon {
             &.t-checkbox__icon--check, &.t-checkbox__icon--indeterminate { fill: $t-primary-color; stroke: $t-primary-color; }
-            &.t-checkbox__icon--uncheck { fill: $t-gray-color--06; stroke: $t-gray-color--06; }
+            &.t-checkbox__icon--uncheck { fill: $t-gray-color-3; stroke: $t-gray-color-3; }
         }
         .t-checkbox__label {
             margin-left: $t-margin-lr-8 * 1.25;
-            font-size: $t-font-size-medium;
-            line-height: 20px;
-            color: $t-gray-color--09;
+            @include typo-body-3;
+            color: $t-gray-color-6;
         }
 
         &:focus .t-checkbox__icon {
@@ -24,10 +23,9 @@
     }
 
     .t-checkbox__message {
-        font-size: $t-font-size-body-3;
+        @include typo-element-3;
         height: 18px;
-        line-height: 18px;
-        color: $t-gray-color--07;
+        color: $t-gray-color-4;
         .t-text-field__details__message {
             margin-right: $t-margin-lr-16;
             @include ellipsis;
@@ -39,8 +37,8 @@
         pointer-events: none;
         color: $t-font-color--read-only;
 
-        .t-checkbox__icon--check, .t-checkbox__icon--indeterminate { fill: $t-gray-color--06; stroke: $t-gray-color--06; }
-        .t-checkbox__icon--uncheck { fill: $t-gray-color--06; stroke: $t-gray-color--06; }
+        .t-checkbox__icon--check, .t-checkbox__icon--indeterminate { fill: $t-gray-color-3; stroke: $t-gray-color-3; }
+        .t-checkbox__icon--uncheck { fill: $t-gray-color-3; stroke: $t-gray-color-3; }
     }
 
     &.t-checkbox--failure {

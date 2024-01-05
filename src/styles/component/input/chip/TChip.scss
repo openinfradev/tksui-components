@@ -18,7 +18,7 @@
         border: none;
 
         color: $t-black-color;
-        background-color: $t-gray-color--06;
+        background-color: $t-gray-color-3;
 
         &.t-chip--primary {
             color: $t-primary-color;
@@ -29,7 +29,7 @@
     &.t-chip--outlined {
         border: 1px solid $t-border-color--default;
         background-color: $t-white-color;
-        color: $t-gray-color--08;
+        color: $t-gray-color-5;
 
         &.t-chip--primary {
             border: 1px solid $t-primary-color--tint-2;
@@ -47,43 +47,42 @@
     .t-chip__remove-icon {
         margin-left: $t-margin-lr-4;
         border-radius: 50%;
-        color: $t-gray-color--07;
-        &:hover { color: $t-gray-color--08; }
-        &:active { color: $t-gray-color--08; }
+        color: $t-gray-color-4;
+        &:hover { color: $t-gray-color-5; }
+        &:active { color: $t-gray-color-5; }
     }
 
     &.t-chip--xsmall {
         height: 20px;
-        font-size: $t-font-size-xsmall;
+        @include typo-element-4;
         padding: 0 $t-padding-lr-8;
         .t-chip__prev-icon { margin-left: -4px; }
         .t-chip__remove-icon { margin-right: -4px; }
     }
     &.t-chip--small {
         height: 26px;
-        font-size: $t-font-size-small;
+        @include typo-element-4;
         padding: 0 10px;
         .t-chip__prev-icon { margin-left: -5px; }
         .t-chip__remove-icon { margin-right: -5px; }
     }
     &.t-chip--medium {
         height: 32px;
-        line-height: 32px;
-        font-size: $t-font-size-medium;
+        @include typo-element-3;
         padding: 0 12px;
         .t-chip__prev-icon { line-height: 32px; margin-left: -6px; }
         .t-chip__remove-icon { line-height: 32px; margin-right: -6px; }
     }
     &.t-chip--large {
         height: 38px;
-        font-size: $t-font-size-large;
+        @include typo-element-2;
         padding: 0 14px;
         .t-chip__prev-icon { margin-left: -7px; }
         .t-chip__remove-icon { margin-right: -7px; }
     }
     &.t-chip--xlarge {
         height: 44px;
-        font-size: $t-font-size-xlarge;
+        @include typo-element-2;
         padding: 0 $t-padding-lr-16;
         .t-chip__prev-icon { margin-left: -8px; }
         .t-chip__remove-icon { margin-right: -8px; }

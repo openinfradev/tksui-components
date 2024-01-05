@@ -1,20 +1,82 @@
 :root {
 
-    // Color
+    // region [Color]
+
     --t-primary-color: #3617CE;
-    --t-point-color: #121821;
+
+    --t-secondary-color-red: #E74C3C;
+    --t-secondary-color-salmon: #F2918D;
+    --t-secondary-color-yellow: #FFDA7C;
+    --t-secondary-color-blue: #95A8FF;
+    --t-secondary-color-purple-1: #704AEC;
+    --t-secondary-color-purple-2: #B098FF;
+    --t-secondary-color-purple-3: #C65DEB;
+    --t-secondary-color-purple-4: #E4DDFF;
+    --t-secondary-color-pink-1: #FA70B0;
+    --t-secondary-color-pink-2: #FFB4FF;
 
     --t-white-color: #FFFFFF;
-    --t-gray-color--1: #F7F9FA;
-    --t-gray-color--2: #F6F6F6;
-    --t-gray-color--3: #F2F2F2;
-    --t-gray-color--4: #EEEEEE;
-    --t-gray-color--5: #DDDDDD;
-    --t-gray-color--6: #CCCCCC;
-    --t-gray-color--7: #999999;
-    --t-gray-color--8: #666666;
-    --t-gray-color--9: #333333;
+
+    --t-gray-color--1: #F7F7F7;
+    --t-gray-color--2: #E3E3E4;
+    --t-gray-color--3: #B8BABC;
+    --t-gray-color--4: #999999;
+    --t-gray-color--5: #71747A;
+    --t-gray-color--6: #54575D;
+
+    --blue-gray-color-1: #F9FAFD;
+    --blue-gray-color-2: #EFF2FF;
+    --blue-gray-color-3: #E1E5F7;
+    --blue-gray-color-4: #4B5563;
+    --blue-gray-color-5: #2B394E;
+
     --t-black-color: #121821;
+
+    // endregion
+
+
+    // region [Typography]
+
+    --t-font-family: Roboto, 'Noto Sans', 'Noto Sans KR', '맑은 고딕', 'Malgun Gothic', 'Apple SD Gothic Neo', '돋움', Dotum, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+    --t-font-weight-regular: 400; // Regular | Normal
+    --t-font-weight-medium: 500; // Medium
+    --t-font-weight-bold: 700; // Bold
+
+    --t-font-size-xsmall: 10px;
+    --t-font-size-small: 11px;
+    --t-font-size-medium: 12px;
+    --t-font-size-large: 14px;
+    --t-font-size-xlarge: 16px;
+
+    --t-font-size-h4: 22px;
+    --t-font-size-h3: 28px;
+    --t-font-size-h2: 32px;
+    --t-font-size-h1: 48px;
+
+    --t-line-height-xsmall: 12px;
+    --t-line-height-small: 13px;
+    --t-line-height-medium-1: 14px;
+    --t-line-height-medium-2: 20px;
+    --t-line-height-large-1: 16px;
+    --t-line-height-large-2: 22px;
+    --t-line-height-xlarge: 24px;
+
+    --t-line-height-h1: 30px;
+    --t-line-height-h2: 36px;
+    --t-line-height-h3: 40px;
+    --t-line-height-h4: 56px;
+
+    --t-line-height-default: 1; // 텍스트의 배수;
+    --t-line-height-header: 1.5; // 텍스트의 배수;
+    --t-line-height-body: 1.75;
+
+    ////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////  Deprecated  ////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////
+
+
+    --t-point-color: #121821;
 
     --t-status-color--required: #FF0000;
     --t-status-color--success: #4874FF;
@@ -23,25 +85,7 @@
     --t-status-color--processing: #4874FF;
     --t-status-color--warning: #F7A443;
 
-    // Typography
-    --t-font-family: Roboto, 'Noto Sans', 'Noto Sans KR', '맑은 고딕', 'Malgun Gothic', 'Apple SD Gothic Neo', '돋움', Dotum, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
-    --t-font-weight-normal: 400; // Regular | Normal
-    --t-font-weight-medium: 500; // Medium
-    --t-font-weight-bold: 700; // Bold
-
-    --t-font-size-base: 16px; // 1rem
-    --t-font-size-xxsmall: 0.6875rem; // 11px;
-    --t-font-size-xsmall: 0.75rem; //12px
-    --t-font-size-small: 0.875rem; //14px
-    --t-font-size-medium: 1rem; // 16px
-    --t-font-size-large: 1.125rem; // 18px
-    --t-font-size-xlarge: 1.25rem; // 20px
-    --t-font-size-xxlarge: 1.625rem; // 26px
-
-    --t-line-height-default: 1; // 텍스트의 배수;
-    --t-line-height-header: 1.5; // 텍스트의 배수;
-    --t-line-height-body: 1.75;
 
     // z-index
     --t-z-index-tooltip: 900;
