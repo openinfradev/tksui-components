@@ -1,5 +1,3 @@
-$page-padding-tb: 80px;
-$page-padding-lr: $t-padding-lr-32;
 
 .t-page {
     flex: 1 1 auto;
@@ -8,7 +6,7 @@ $page-padding-lr: $t-padding-lr-32;
     display: flex;
 
     .t-page__content-container {
-        padding: $page-padding-tb $page-padding-lr;
+        padding: $t-spacing-40 $t-spacing-48;
         flex: 1 1 auto;
 
         .t-page__title-area {
