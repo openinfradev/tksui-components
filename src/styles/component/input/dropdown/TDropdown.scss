@@ -1,6 +1,6 @@
 .t-dropdown {
 
-    $t-dropdown-item-height: 46px;
+    $t-dropdown-item-height: 40px;
     $t-dropdown-detail-height: 18px;
 
     width: 100%;
@@ -17,9 +17,10 @@
         align-items: center;
         gap: $t-spacing-4;
         cursor: pointer;
-        min-height: $t-dropdown-item-height;
-        height: 46px;
+        //min-height: $t-dropdown-item-height;
+        height: 40px;
         outline: none;
+        border-radius: 4px;
         &:focus-within {
             border-color: $t-primary-color;
         }
@@ -38,15 +39,8 @@
         }
 
         .t-dropdown__control__remover {
-            opacity: 0;
+            //opacity: 0;
             transition: opacity 0.2s;
-            .t-icon {
-                font-size: 20px;
-                line-height: 28px;
-                text-align: center;
-                width: 28px;
-                height: 28px;
-            }
         }
         &:hover .t-dropdown__control__remover {
             opacity: 1;

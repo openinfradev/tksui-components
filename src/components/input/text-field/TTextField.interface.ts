@@ -2,12 +2,7 @@ import {MouseEvent, KeyboardEvent} from 'react';
 import {TValidatorProps} from '@/common/validator/TValidator.interface';
 import {TBaseProps} from '@/common/base/TBase.interface';
 
-const textFieldType = ['outline', 'underline'] as const;
-type textFieldType = typeof textFieldType[number];
-
 export interface TTextFieldProps extends TValidatorProps, TBaseProps {
-
-    type?: textFieldType,
 
     disabled?: boolean,
     password?: boolean,

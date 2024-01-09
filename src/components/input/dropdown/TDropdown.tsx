@@ -16,8 +16,8 @@ import useClickOutside from '@/common/hook/UseClickOutside';
 import TCheckbox from '../checkbox/TCheckbox';
 import TTextField from '../text-field/TTextField';
 import THighlightText from '../../data-container/highlight-text/THighlightText';
-import TChip from '../chip/TChip';
-import TIconButton from '~/button/icon-button/TIconButton';
+import TIcon from "~/icon/TIcon";
+import TChip from "~/input/chip/TChip";
 
 const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => {
 
@@ -128,11 +128,21 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
     const rootClass = useMemo((): string => {
         const clazz: string[] = [];
 
-        if (props.className) { clazz.push(props.className); }
-        if (isOpened) { clazz.push('t-dropdown--open'); }
-        if (props.disabled) { clazz.push('t-dropdown--disabled'); }
-        if (!validator.result) { clazz.push('t-dropdown--failure'); }
-        if (validator.result && validator.message) { clazz.push('t-dropdown--success'); }
+        if (props.className) {
+            clazz.push(props.className);
+        }
+        if (isOpened) {
+            clazz.push('t-dropdown--open');
+        }
+        if (props.disabled) {
+            clazz.push('t-dropdown--disabled');
+        }
+        if (!validator.result) {
+            clazz.push('t-dropdown--failure');
+        }
+        if (validator.result && validator.message) {
+            clazz.push('t-dropdown--success');
+        }
 
         clazz.push(`t-dropdown--${props.type}`);
 
@@ -323,15 +333,16 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
 
                 {/* Control - Remover, Opener */}
                 {
-                    (!props.multiple && props.value) && (
-                        <TIconButton className={'t-dropdown__control__remover'}
-                                     medium
-                                     onClick={onClickClear}>clear</TIconButton>
-                    )
+                    // (!props.multiple && props.value) && (
+                        <TIcon className={'t-dropdown__control__remover'}
+                               xsmall
+                               type={'filled'}
+                               onClick={onClickClear}>cancel</TIcon>
+                    // )
                 }
-                <TIconButton className={`t-dropdown__control__opener ${isOpened ? 't-dropdown__control__opener--open' : ''}`}
-                             medium
-                             color={props.disabled ? '#CCCCCC' : '#000000'}>keyboard_arrow_down</TIconButton>
+                <TIcon className={`t-dropdown__control__opener ${isOpened ? 't-dropdown__control__opener--open' : ''}`}
+                       small
+                       color={props.disabled ? '#CCCCCC' : '#000000'}>arrow_drop_down</TIcon>
             </div>
 
             {/* Floating */}

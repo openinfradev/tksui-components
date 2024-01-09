@@ -106,21 +106,9 @@ $t-font-size-element-5: var(--t-font-size-xsmall);
 $t-line-height-element-5: var(--t-line-height-xsmall);
 $t-font-weight-element-5: var(--t-font-weight-bold);
 
-////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////  Deprecated  ////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////
-
 $t-font-weight-regular: var(--t-font-weight-regular);
 $t-font-weight-medium: var(--t-font-weight-medium);
 $t-font-weight-bold: var(--t-font-weight-bold);
-
-
-// content
-
-$t-line-height-default: var(--t-line-height-default);
-$t-line-height-header: var(--t-line-height-header);
-$t-line-height-body: var(--t-line-height-body);
-
 
 // endregion
 
@@ -144,6 +132,18 @@ $t-spacing-64: 64px;
 $t-spacing-72: 72px;
 
 // endregion
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////  Deprecated  ////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// content
+
+$t-line-height-default: var(--t-line-height-default);
+$t-line-height-header: var(--t-line-height-header);
+$t-line-height-body: var(--t-line-height-body);
 
 
 $t-point-color: var(--t-point-color) !default;
@@ -171,10 +171,6 @@ $t-primary-color--tint-10: color-mix(in srgb, var(--t-primary-color), white 95%)
 $t-primary-color--tint-11: color-mix(in srgb, var(--t-primary-color), white 98%) !default;
 
 
-
-$t-layout-background-color: var(--t-white-color) !default;
-
-
 $t-status-color--required: var(--t-status-color--required) !default;
 $t-status-color--success: var(--t-status-color--success) !default;
 $t-status-color--error: var(--t-status-color--error) !default;
@@ -187,11 +183,6 @@ $t-background-color--active: $t-primary-color--tint-8;
 $t-background-color--read-only: $t-gray-color-1;
 
 // font color
-$t-font-color--white: $t-white-color !default;
-$t-font-color--black: $t-black-color !default;
-$t-font-color--gray-01: $t-gray-color-2 !default; // #999999
-$t-font-color--gray-02: $t-gray-color-3 !default; // #666666
-$t-font-color--gray-03: $t-gray-color-5 !default; // #333333
 $t-font-color--primary-01: $t-primary-color !default; // #333333
 $t-font-color--primary-02: $t-primary-color--tint-6 !default; // #333333
 $t-font-color--primary-03: $t-gray-color-5 !default; // #333333

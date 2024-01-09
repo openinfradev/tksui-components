@@ -146,10 +146,8 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
         if (validator.result && validator.message) { clazz.push('t-text-field--success'); }
         if (hasFocus) { clazz.push('t-text-field--focused'); }
 
-        clazz.push(`t-text-field--${props.type}`);
-
         return clazz.join(' ');
-    }, [props.className, props.disabled, props.readOnly, props.type, validator.result, validator.message, hasFocus]);
+    }, [props.className, props.disabled, props.readOnly, validator.result, validator.message, hasFocus]);
 
     const inputClass = useMemo((): string => {
         const clazz: string[] = [];
@@ -207,7 +205,7 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
                 />
                 {
                     props.clearable && props.value && props.value.length > 0 && !props.disabled && (
-                        <TIcon small
+                        <TIcon xsmall
                                className={'t-text-field__container__action-icon'}
                                clickable
                                onClick={onClickClear}>
@@ -217,7 +215,7 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
                 }
                 {
                     props.searchable && !props.disabled && (
-                        <TIcon small
+                        <TIcon xsmall
                                className={'t-text-field__container__action-icon'}
                                clickable
                                onClick={props.onClickSearch}>
@@ -227,7 +225,7 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
                 }
                 {
                     props.password && !props.disabled && (
-                        <TIcon small
+                        <TIcon xsmall
                                className={'t-text-field__container__action-icon'}
                                clickable
                                onClick={togglePasswordVisibility}>
@@ -254,7 +252,6 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
 });
 
 TTextField.defaultProps = {
-    type: 'outline',
     lazy: true,
 };
 

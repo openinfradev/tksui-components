@@ -58,18 +58,9 @@ const NormalTemplate = (args: TTextFieldProps) => {
     </>);
 };
 
-
-export const Outline: Story = {
-    render: NormalTemplate,
-    args: {
-        type: 'outline',
-    },
-};
-
 export const Underline: Story = {
     render: NormalTemplate,
     args: {
-        type: 'underline',
         label: 'Hello World',
     },
 };
@@ -201,7 +192,6 @@ const ValidationTemplate = (args: TTextFieldProps) => {
                             counter={12}
                             {...textField4}
                             ref={textField4Ref}
-                            type={'underline'}
                 />
                 <TTextField {...args}
                             label={'Underline Custom Long Message'}
@@ -214,7 +204,6 @@ const ValidationTemplate = (args: TTextFieldProps) => {
                             counter={12}
                             {...textField5}
                             ref={textField5Ref}
-                            type={'underline'}
                 />
                 <TTextField {...args}
                             label={'Underline Success Message'}
@@ -226,7 +215,6 @@ const ValidationTemplate = (args: TTextFieldProps) => {
                             successMessage={'사용할 수 있는 아이디입니다'}
                             {...textField6}
                             ref={textField6Ref}
-                            type={'underline'}
                 />
             </div>
 
