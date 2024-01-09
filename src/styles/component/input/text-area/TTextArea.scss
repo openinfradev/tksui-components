@@ -19,7 +19,7 @@
     .t-text-area__container {
         border: 1px solid $t-gray-color-3;
         width: 100%;
-        padding: 16px 20px 16px $t-padding-lr-16;
+        padding: 16px 20px 16px $t-spacing-16;
         position: relative;
         display: flex;
         align-items: center;
@@ -57,7 +57,7 @@
         width: 100%;
         .t-text-area__details__message {
             flex: 1 1 auto;
-            margin-right: $t-margin-lr-16;
+            margin-right: $t-spacing-16;
             @include ellipsis;
         }
         .t-text-area__details__counter {

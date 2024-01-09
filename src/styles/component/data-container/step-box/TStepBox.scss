@@ -5,7 +5,7 @@
     justify-content: center;
     height: 48px;
     padding: 40px 70px;
-    margin-bottom: calc($t-margin-tb-16 + 30px);
+    margin-bottom: calc($t-spacing-16 + 30px);
 
     .t-step-box-header__connector {
         height: 6px;
@@ -22,7 +22,7 @@
     .t-step-box-header__step {
         display: flex;
         align-items: center;
-        gap: $t-margin-tb-16;
+        gap: $t-spacing-16;
         position: relative;
 
 

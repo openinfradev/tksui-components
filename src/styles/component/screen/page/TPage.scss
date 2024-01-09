@@ -88,7 +88,7 @@
 
         .t-page__information-area__content {
             position: absolute;
-            padding: 20px $t-padding-lr-32;
+            padding: 20px $t-spacing-32;
             line-height: $t-line-height-body;
             width: 100%;
             height: calc(100% - $information-header-height);

@@ -33,7 +33,7 @@ $t-button-border--disabled: $t-gray-color-2;
         justify-content: center;
         height: calc(100% - 2px);
         .t-button__content__icon {
-            margin-right: $t-margin-lr-4;
+            margin-right: $t-spacing-4;
         }
         &.t-button__content--loading {
             .t-button__content--loading__slice {
@@ -136,7 +136,7 @@ $t-button-border--disabled: $t-gray-color-2;
     &.t-button--xsmall {
         height: 20px;
         min-width: 48px;
-        padding: 0 #{$t-padding-lr-8};
+        padding: 0 #{$t-spacing-8};
         @include typo-element-4;
 
         --t-button-loading-size: 12px;
@@ -145,7 +145,7 @@ $t-button-border--disabled: $t-gray-color-2;
     &.t-button--small {
         height: 24px;
         min-width: 64px;
-        padding: 0 #{$t-padding-lr-16};
+        padding: 0 #{$t-spacing-16};
         @include typo-element-4;
 
         --t-button-loading-size: 14px;
@@ -154,7 +154,7 @@ $t-button-border--disabled: $t-gray-color-2;
     &.t-button--medium {
         height:  32px;
         min-width: 96px;
-        padding: 0 #{$t-padding-lr-32};
+        padding: 0 #{$t-spacing-32};
         @include typo-element-2;
 
         --t-button-loading-size: 16px;
@@ -163,7 +163,7 @@ $t-button-border--disabled: $t-gray-color-2;
     &.t-button--large {
         height: 40px;
         min-width: 104px;
-        padding: 0 #{$t-padding-lr-32};
+        padding: 0 #{$t-spacing-32};
         @include typo-body-2;
 
         --t-button-loading-size: 20px;
@@ -172,7 +172,7 @@ $t-button-border--disabled: $t-gray-color-2;
     &.t-button--xlarge {
         height: 48px;
         min-width: 144px;
-        padding: 0 #{$t-padding-lr-48};
+        padding: 0 #{$t-spacing-48};
         @include typo-subtitle-1;
 
         --t-button-loading-size: 24px;
@@ -182,8 +182,8 @@ $t-button-border--disabled: $t-gray-color-2;
 }
 
 
-.t-button--xsmall + .t-button--xsmall { MARGIN-LEFT: $t-margin-lr-4; }
-.t-button--small + .t-button--small { margin-left: $t-margin-lr-4; }
-.t-button--medium + .t-button--medium { margin-left: $t-margin-lr-8; }
-.t-button--large + .t-button--large { margin-left: $t-margin-lr-8; }
-.t-button--xlarge + .t-button--xlarge { margin-left: $t-margin-lr-8; }
+.t-button--xsmall + .t-button--xsmall { MARGIN-LEFT: $t-spacing-4; }
+.t-button--small + .t-button--small { margin-left: $t-spacing-4; }
+.t-button--medium + .t-button--medium { margin-left: $t-spacing-8; }
+.t-button--large + .t-button--large { margin-left: $t-spacing-8; }
+.t-button--xlarge + .t-button--xlarge { margin-left: $t-spacing-8; }

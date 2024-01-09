@@ -10,15 +10,15 @@
     flex-direction: column;
 
     &:not(:first-child) {
-        margin-top: $t-margin-tb-32;
+        margin-top: $t-spacing-32;
     }
 
     .t-data-grid__header {
         height: 46px;
-        margin-bottom: $t-margin-tb-8;
+        margin-bottom: $t-spacing-8;
         display: flex;
         align-items: center;
-        gap: $t-margin-lr-16;
+        gap: $t-spacing-16;
 
         .t-data-grid__header__pagination {
             color: $t-gray-color-5;
@@ -91,7 +91,7 @@
                     .t-data-grid__body__no-rows-template__guide-message {
                         @include typo-body-3;
                         color: $t-gray-color-4;
-                        margin-bottom: $t-margin-tb-32;
+                        margin-bottom: $t-spacing-32;
                     }
 
                     .t-data-grid__body__no-rows-template__add-button {

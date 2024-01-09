@@ -11,11 +11,11 @@
         border: 1px solid $t-gray-color-3;
         background: $t-white-color;
         width: 100%;
-        padding: 0 20px 0 $t-padding-lr-16;
+        padding: 0 20px 0 $t-spacing-16;
         position: relative;
         display: flex;
         align-items: center;
-        gap: $t-margin-lr-4;
+        gap: $t-spacing-4;
         cursor: pointer;
         min-height: $t-dropdown-item-height;
         height: 46px;
@@ -26,7 +26,7 @@
 
 
         .t-dropdown__control__selected {
-            padding: $t-padding-tb-8 0;
+            padding: $t-spacing-8 0;
             display: flex;
             align-items: center;
             flex: 1 1 auto;
@@ -105,7 +105,7 @@
         .t-dropdown__items__item {
             flex: 1 0 auto;
             cursor: pointer;
-            padding: 0 $t-padding-lr-16;
+            padding: 0 $t-spacing-16;
             height: $t-dropdown-item-height;
             outline: none;
             display: flex;
@@ -136,7 +136,7 @@
         width: 100%;
         .t-text-field__details__message {
             flex: 1 1 auto;
-            margin-right: $t-margin-lr-16;
+            margin-right: $t-spacing-16;
             @include ellipsis;
         }
     }
