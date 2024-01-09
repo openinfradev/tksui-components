@@ -125,6 +125,27 @@ $t-line-height-body: var(--t-line-height-body);
 // endregion
 
 
+// region [Spacing]
+
+$t-spacing-2: 2px;
+$t-spacing-4: 4px;
+$t-spacing-6: 6px;
+$t-spacing-8: 8px;
+$t-spacing-10: 10px;
+$t-spacing-12: 12px;
+$t-spacing-16: 16px;
+$t-spacing-20: 20px;
+$t-spacing-24: 24px;
+$t-spacing-32: 32px;
+$t-spacing-40: 40px;
+$t-spacing-48: 48px;
+$t-spacing-56: 56px;
+$t-spacing-64: 64px;
+$t-spacing-72: 72px;
+
+// endregion
+
+
 $t-point-color: var(--t-point-color) !default;
 
 $t-primary-color--shade-1: color-mix(in srgb, var(--t-primary-color), black 10%) !default;
@@ -273,6 +294,5 @@ $t-z-index-tooltip: var(--t-z-index-tooltip);
 $t-z-index-modal: var(--t-z-index-modal);
 $t-z-index-dropdown: var(--t-z-index-dropdown);
 $t-z-index-drop-holder: var(--t-z-index-drop-holder);
-$t-z-index-page-title: var(--t-z-index-page-title);
 
 // endregion
