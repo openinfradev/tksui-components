@@ -1,0 +1,43 @@
+.t-section {
+    border-radius: 8px;
+    border: 1px solid $t-blue-gray-color-3;
+    background: $t-white-color;
+
+    .t-section__header, .t-section__content {
+        padding: 24px; // TODO: [junhee] ThemeToken
+    }
+    .t-section__header {
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid $t-blue-gray-color-3;
+
+        .t-section__header__label {
+            margin-right: 16px; // TODO: [junhee] ThemeToken
+            @include typo-subtitle-2;
+        }
+
+        .t-section__header__action {
+            display: flex;
+            align-items: center;
+            flex: 1 0 auto;
+
+            .t-section__header__action__left-action {
+                flex: 1 0 auto;
+            }
+            .t-section__header__action__right-action {
+                display: flex;
+                flex: 0 1 auto;
+            }
+        }
+    }
+
+    .t-form-section {
+        .t-form-section__content {
+            padding: 0;
+        }
+    }
+}
+
+.t-section + .t-section {
+    margin-top: 24px; // TODO: [junhee] ThemeToken
+}

@@ -1,0 +1,77 @@
+.t-form-section {
+    display: flex;
+    flex-direction: column;
+
+    .t-form-section__content {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+
+        .t-form-section__content__info {
+            .t-icon {margin-top: 2px;} // TODO: [junhee] ThemeToken
+
+            display: flex;
+            align-items: center;
+            gap: 16px; // TODO: [junhee] ThemeToken
+            padding: 24px 24px; // TODO: [junhee] ThemeToken
+            color: $t-gray-color-5;
+            background: $t-grid-background-color--01;
+            @include typo-element-3;
+        }
+    }
+}
+
+.t-section.t-form-section {
+    .t-section__content {
+        padding: 0;
+    }
+}
+
+.t-form-section-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    width: 100%;
+    padding: 16px 24px; // TODO: [junhee] ThemeToken
+
+    &:not(:last-child) {
+        border-bottom: 1px solid $t-blue-gray-color-3;
+    }
+    &:first-child {
+        padding-top: 24px; // TODO: [junhee] ThemeToken
+    }
+    &:last-child {
+        padding-bottom: 24px; // TODO: [junhee] ThemeToken
+    }
+}
+
+.t-form-section-item {
+    position: relative;
+    display: inline-flex;
+    flex: 0 0 auto;
+    white-space: pre-wrap;
+    padding-right: 8px; // TODO: [junhee] ThemeToken
+    color: $t-black-color;
+
+    &:not(:first-child) {padding-left: 8px;} // TODO: [junhee] ThemeToken
+
+
+    .t-form-section-item__label {
+        display: inline-flex;
+        align-items: center;
+        @include typo-subtitle-3;
+
+        .t-form-section-item__label__info-icon {
+            margin-left: 8px; // TODO: [junhee] ThemeToken
+            stroke: $t-gray-color-5;
+            fill: $t-gray-color-5;
+        }
+
+    }
+    .t-form-section-item__content {
+        display: flex;
+        gap: 8px; // TODO: [junhee] ThemeToken
+        width: 100%;
+        @include typo-body-3;
+    }
+}
