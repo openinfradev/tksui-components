@@ -1,4 +1,3 @@
-import './TSection.scss';
 import {CSSProperties, useMemo} from 'react';
 import {TSectionProps} from './TSection.interface';
 
@@ -25,7 +24,7 @@ function TSection(props: TSectionProps) {
 
 
     return (
-        <section className={`t-section ${rootClass}`} style={rootStyle} id={props.id}>
+        <section className={`t-section ${rootClass}`} style={rootStyle} id={props.id} role={'region'}>
             {
                 (props.label || props.customLabel || props.leftAction || props.rightAction) && (
                     <header className={'t-section__header'}>
