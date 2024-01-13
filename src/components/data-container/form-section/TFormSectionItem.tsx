@@ -1,5 +1,7 @@
 import {CSSProperties, useContext, useId, useMemo} from 'react';
-import {TIcon, TTooltip, TFormSectionItemProps} from '../../index';
+import TIcon from '~/icon/TIcon';
+import TTooltip from '~/guide/tooltip/TTooltip';
+import {TFormSectionItemProps} from '@/components';
 import FormContext from './TFormSectionContext';
 
 const TFormSectionItem = (props: TFormSectionItemProps) => {
@@ -17,7 +19,7 @@ const TFormSectionItem = (props: TFormSectionItemProps) => {
         const clazz: string[] = [];
 
         if (props.className) { clazz.push(props.className); }
-        if (props.required) { clazz.push('t-form-item--required'); }
+        if (props.required) { clazz.push('t-form-section-item--required'); }
 
         return clazz.join(' ');
     }, [props.className, props.required]);
@@ -31,7 +33,7 @@ const TFormSectionItem = (props: TFormSectionItemProps) => {
     }, [column, props.span, props.style]);
 
     const labelStyle = useMemo((): CSSProperties => {
-        const style: CSSProperties = {};
+        const style: CSSProperties = {marginBottom: props.labelMarginBottom};
 
         style.flex = `0 0 ${labelWidth}`;
 
@@ -47,8 +49,7 @@ const TFormSectionItem = (props: TFormSectionItemProps) => {
 
     return (
         <span className={`t-form-section-item ${rootClass}`}
-              style={rootStyle}
-        >
+              style={rootStyle} role={'group'}>
             {
                 props.label && (
                     <label className={'t-form-section-item__label'}

@@ -74,4 +74,8 @@
         width: 100%;
         @include typo-body-3;
     }
+
+    &.t-form-section-item--required .t-form-section-item__label__text::after {
+        @include require-mark;
+    }
 }

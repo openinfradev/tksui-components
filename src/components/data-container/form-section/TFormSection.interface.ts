@@ -22,7 +22,6 @@ export interface TFormSectionRowProps extends TBaseProps {
 export interface TFormSectionItemProps extends TBaseProps {
     children: ReactNode,
 
-    customInformation?: ReactElement,
     information?: string,
     span?: number,
     required?: boolean,

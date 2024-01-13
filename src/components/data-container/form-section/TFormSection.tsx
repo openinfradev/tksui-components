@@ -1,7 +1,8 @@
 import {CSSProperties, useMemo} from 'react';
-import {TIcon, TFormSectionProps} from '../../index';
+import TIcon from '~/icon/TIcon';
+import {TFormSectionProps} from '@/components';
 import FormContext from './TFormSectionContext';
-import TSection from '../section/TSection';
+import TSection from '~/data-container/section/TSection';
 
 const TFormSection = (props: TFormSectionProps) => {
 
