@@ -1,5 +1,5 @@
 import {ReactElement, ReactNode} from 'react';
-import {TBaseProps} from '../../../common/base/TBase.interface';
+import {TBaseProps} from '@/common/base/TBase.interface';
 
 export interface TSectionProps extends TBaseProps {
 
