@@ -38,7 +38,7 @@ function TActionBar(props: TActionBarProps) {
 
     return (
 
-        <div className={`t-action-bar ${rootClass}`} style={rootStyle} id={props.id}>
+        <div className={`t-action-bar ${rootClass}`} style={rootStyle} id={props.id} role={'group'}>
             {
 
                 (props.leftAction || props.rightAction || props.centerAction) && (
