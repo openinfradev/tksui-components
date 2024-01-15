@@ -1,7 +1,7 @@
-import {CSSProperties, useCallback, useMemo} from 'react';
-import {TFormRowProps} from '../form-box/TFormBox.interface';
+import {CSSProperties, useMemo} from 'react';
+import {TSearchBoxRowProps} from '@/components';
 
-function TSearchBoxRow(props: TFormRowProps) {
+function TSearchBoxRow(props: TSearchBoxRowProps) {
 
     // region [Styles]
 

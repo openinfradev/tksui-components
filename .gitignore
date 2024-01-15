@@ -11,6 +11,7 @@ lerna-debug.log*
 # Bundling directories
 node_modules
 package-lock.json
+yarn.lock
 dist
 dist-ssr
 *.local

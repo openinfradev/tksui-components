@@ -1,8 +1,8 @@
 import {CSSProperties, useContext, useMemo} from 'react';
-import {TFormItemProps} from '../form-box/TFormBox.interface';
 import TSearchBoxContext from './TSearchBoxContext';
+import {TSearchBoxItemProps} from '@/components';
 
-function TSearchBoxItem(props: TFormItemProps) {
+function TSearchBoxItem(props: TSearchBoxItemProps) {
 
     // region [Hooks]
 

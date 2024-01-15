@@ -5,7 +5,6 @@
 
 // data-container
 @import 'data-container/search-box/TSearchBox.scss';
-@import 'data-container/form-box/TFormBox.scss';
 @import 'data-container/data-grid/TDataGrid.scss';
 @import 'data-container/highlight-text/THighlightText.scss';
 @import 'data-container/drop-holder/TDropHolder.scss';
@@ -13,6 +12,9 @@
 @import 'data-container/pagination/TPagination.scss';
 @import 'data-container/step-box/TStepBox.scss';
 @import 'data-container/card/TCard.scss';
+@import 'data-container/action-bar/TActionBar.scss';
+@import 'data-container/form-section/TFormSection.scss';
+@import 'data-container/section/TSection.scss';
 
 // icon
 @import 'icon/TIcon.scss';

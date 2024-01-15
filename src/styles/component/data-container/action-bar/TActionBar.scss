@@ -1,0 +1,28 @@
+.t-action-bar {
+
+        .t-action-bar__container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+
+        .t-action-bar__container__center-action {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        &.t-action-bar__container--center-alone {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .t-action-bar__container__center-action {
+                position: static;
+                left: auto;
+                transform: none;
+            }
+        }
+    }
+
+}
