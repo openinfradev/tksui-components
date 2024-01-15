@@ -1,7 +1,5 @@
 import {render, screen} from '@testing-library/react';
-import {CSSProperties} from 'react';
 import TSection from '~/data-container/section/TSection';
-import TSearchBox from '../../../../../../../src/components/data-container/search-box/TSearchBox';
 
 
 describe('TSection', () => {
@@ -12,7 +10,7 @@ describe('TSection', () => {
 
             // Arrange
             render(<TSection className={'class-name-prop'}>section content</TSection>);
-            const root = screen.getByRole('region');
+            const root = screen.getByTestId('t-section-root');
 
             // Assert
 
@@ -25,7 +23,7 @@ describe('TSection', () => {
 
             // Arrange
             render(<TSection style={{width: '100%'}}>section content</TSection>);
-            const root = screen.getByRole('region');
+            const root = screen.getByTestId('t-section-root');
 
             // Assert
 
@@ -99,4 +97,4 @@ describe('TSection', () => {
         });
 
     });
-})
+});

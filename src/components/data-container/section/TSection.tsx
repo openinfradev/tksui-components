@@ -24,7 +24,7 @@ function TSection(props: TSectionProps) {
 
 
     return (
-        <section className={`t-section ${rootClass}`} style={rootStyle} id={props.id} role={'region'}>
+        <section className={`t-section ${rootClass}`} style={rootStyle} id={props.id} data-testid={'t-section-root'}>
             {
                 (props.label || props.customLabel || props.leftAction || props.rightAction) && (
                     <header className={'t-section__header'}>

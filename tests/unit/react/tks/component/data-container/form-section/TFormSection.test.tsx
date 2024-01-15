@@ -15,7 +15,7 @@ describe('TFormSection', () => {
 
             // Arrange
             render(<TFormSection className={'class-name-prop'}>search box content</TFormSection>);
-            const root = screen.getByRole('region');
+            const root = screen.getByTestId('t-section-root');
 
             // Assert
 
@@ -28,7 +28,7 @@ describe('TFormSection', () => {
 
             // Arrange
             render(<TFormSection style={{width: '100%'}}>search box content</TFormSection>);
-            const root = screen.getByRole('region');
+            const root = screen.getByTestId('t-section-root');
 
             // Assert
 
