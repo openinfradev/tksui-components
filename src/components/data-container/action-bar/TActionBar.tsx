@@ -20,29 +20,21 @@ function TActionBar(props: TActionBarProps) {
 
     const containerClass = useMemo(() => {
         if (!props.leftAction && !props.rightAction && props.centerAction) {
-            return 't-action-bar__container--center';
+            return 't-action-bar__container--center-alone';
         }
 
-        return 't-action-bar__container';
-    }, [props.leftAction, props.centerAction, props.rightAction]);
-
-    const centerActionClass = useMemo(() => {
-        if (!props.leftAction && !props.rightAction && props.centerAction) {
-            return 't-action-bar__container__center-action--alone';
-        }
-
-        return 't-action-bar__container__center-action';
+        return '';
     }, [props.leftAction, props.centerAction, props.rightAction]);
 
     // endregion
 
     return (
 
-        <div className={`t-action-bar ${rootClass}`} style={rootStyle} id={props.id} role={'group'}>
+        <div className={`t-action-bar ${rootClass}`} style={rootStyle} id={props.id}>
             {
 
                 (props.leftAction || props.rightAction || props.centerAction) && (
-                    <div className={containerClass}>
+                    <div className={`t-action-bar__container ${containerClass}`}>
                         {
                             (props.leftAction || props.rightAction) && (
                                 <div className={'t-action-bar__container__left-action'}>
@@ -52,7 +44,7 @@ function TActionBar(props: TActionBarProps) {
                         }
                         {
                             props.centerAction && (
-                                <div className={centerActionClass}>
+                                <div className={'t-action-bar__container__center-action'}>
                                     {props.centerAction && (props.centerAction)}
                                 </div>
                             )
@@ -60,7 +52,7 @@ function TActionBar(props: TActionBarProps) {
                         {
                             (props.leftAction || props.rightAction) && (
                                 <div className={'t-action-bar__container__right-action'}>
-                                    {props.rightAction && (props.rightAction)}
+                                    {/* {props.rightAction && (props.rightAction)} */}
                                 </div>
                             )
                         }
