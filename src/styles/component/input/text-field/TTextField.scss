@@ -88,6 +88,7 @@
 
         .t-text-field__container__input {
             color: $t-font-color--disabled;
+            background-color: $t-gray-color-2;
             cursor: default;
         }
     }
@@ -98,8 +99,8 @@
             border-color: $t-gray-color-3;
         }
         .t-text-field__container__input {
-            background-color: $t-gray-color-2;
             color: $t-font-color--read-only;
+            background-color: $t-gray-color-2;
             cursor: default;
         }
     }
