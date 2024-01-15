@@ -30,11 +30,11 @@ function TActionBar(props: TActionBarProps) {
 
     return (
 
-        <div className={`t-action-bar ${rootClass}`} style={rootStyle} id={props.id}>
+        <div className={`t-action-bar ${rootClass}`} style={rootStyle} id={props.id} data-testid={'t-action-bar-root'}>
             {
 
                 (props.leftAction || props.rightAction || props.centerAction) && (
-                    <div className={`t-action-bar__container ${containerClass}`}>
+                    <div className={`t-action-bar__container ${containerClass}`} data-testid={'t-action-bar__container'}>
                         {
                             (props.leftAction || props.rightAction) && (
                                 <div className={'t-action-bar__container__left-action'}>
@@ -52,7 +52,7 @@ function TActionBar(props: TActionBarProps) {
                         {
                             (props.leftAction || props.rightAction) && (
                                 <div className={'t-action-bar__container__right-action'}>
-                                    {/* {props.rightAction && (props.rightAction)} */}
+                                    {props.rightAction && (props.rightAction)}
                                 </div>
                             )
                         }

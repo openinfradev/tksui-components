@@ -7,19 +7,19 @@ jest.mock('@/common/util/ColorUtil', () => ({
     shadeColor: jest.fn(() => 'blue'),
 }));
 
-describe('TPagination', () => {
+describe('TActionBar', () => {
 
     const mockFn = jest.fn();
 
     beforeEach(() => { mockFn.mockClear(); });
 
-    describe('style', () => {
+    describe('Style', () => {
 
         it('Classname prop applies to root', () => {
 
             // Arrange
             render(<TActionBar className={'class-name-prop'}/>);
-            const root = screen.getByRole('group');
+            const root = screen.getByTestId('t-action-bar-root');
 
             // Assert
 
@@ -32,7 +32,7 @@ describe('TPagination', () => {
 
             // Arrange
             render(<TActionBar style={{width: '100%'}}/>);
-            const root = screen.getByRole('group');
+            const root = screen.getByTestId('t-action-bar-root');
 
             // Assert
 
@@ -40,7 +40,7 @@ describe('TPagination', () => {
                 .toHaveStyle({width: '100%'});
         });
 
-        it('leftAction prop applies to root', () => {
+        it('LeftAction prop applies to root', () => {
 
 
             // Arrange
@@ -53,17 +53,17 @@ describe('TPagination', () => {
             expect(root).toHaveClass('t-action-bar__container__left-action');
         });
 
-        it('centerAction prop applies to root', () => {
+        it('CenterAction prop applies to root', () => {
 
 
             // Arrange
             render(<TActionBar centerAction={<TButton>center action button</TButton>}/>);
 
             // eslint-disable-next-line testing-library/no-node-access
-            const root = screen.getByRole('button').parentElement;
+            const container = screen.getByTestId('t-action-bar__container');
             // Assert
 
-            expect(root).toHaveClass('t-action-bar__container__center-action--alone');
+            expect(container).toHaveClass('t-action-bar__container--center-alone');
         });
 
         it('rightAction prop applies to root', () => {
@@ -81,16 +81,16 @@ describe('TPagination', () => {
 
     });
 
-    describe('action button', () => {
+    describe('Action button', () => {
 
-        it('leftAction button click invokes the provided onClick handler', async () => {
+        it('LeftAction button click invokes the provided onClick handler', async () => {
 
             // Arrange
             const user = userEvent.setup();
             render(<TActionBar leftAction={<TButton onClick={mockFn}>left action button</TButton>}/>);
             const root = screen.getByText('left action button');
-            // Assert
 
+            // Assert
             expect(mockFn).toHaveBeenCalledTimes(0);
 
             // Act
@@ -101,14 +101,14 @@ describe('TPagination', () => {
 
         });
 
-        it('centerAction button click invokes the provided onClick handler', async () => {
+        it('CenterAction button click invokes the provided onClick handler', async () => {
 
             // Arrange
             const user = userEvent.setup();
             render(<TActionBar centerAction={<TButton onClick={mockFn}>left action button</TButton>}/>);
             const root = screen.getByText('left action button');
-            // Assert
 
+            // Assert
             expect(mockFn).toHaveBeenCalledTimes(0);
 
             // Act
@@ -119,14 +119,14 @@ describe('TPagination', () => {
 
         });
 
-        it('rightAction button click invokes the provided onClick handler', async () => {
+        it('RightAction button click invokes the provided onClick handler', async () => {
 
             // Arrange
             const user = userEvent.setup();
             render(<TActionBar rightAction={<TButton onClick={mockFn}>left action button</TButton>}/>);
             const root = screen.getByText('left action button');
-            // Assert
 
+            // Assert
             expect(mockFn).toHaveBeenCalledTimes(0);
 
             // Act
