@@ -9,9 +9,9 @@ export * from './button/icon-button';
 // data-container
 export * from './data-container/data-grid';
 export * from './data-container/drop-holder';
-// export * from './data-container/form-box';
 export * from './data-container/section';
 export * from './data-container/form-section';
+export * from './data-container/action-bar';
 export * from './data-container/highlight-text';
 export * from './data-container/pagination';
 export * from './data-container/search-box';
