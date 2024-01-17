@@ -1,4 +1,4 @@
-import {CSSProperties, ReactNode} from 'react';
+import {CSSProperties} from 'react';
 
 export interface TBaseProps {
     className?: string,

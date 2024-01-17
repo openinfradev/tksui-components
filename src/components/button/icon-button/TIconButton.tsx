@@ -8,7 +8,7 @@ const TIconButton = forwardRef((props: TIconButtonProps, ref: Ref<TIconButtonRef
 
     // region [Hooks]
 
-    const rootRef = useRef<HTMLDivElement>(null);
+    const rootRef = useRef<HTMLButtonElement>(null);
 
     const ripple = useRipple(rootRef);
 
@@ -26,27 +26,22 @@ const TIconButton = forwardRef((props: TIconButtonProps, ref: Ref<TIconButtonRef
         const clazz = [];
 
         if (props.className) { clazz.push(props.className); }
-        if (props.primary) { clazz.push('t-icon-button--primary'); }
-        if (props.point) { clazz.push('t-icon-button--point'); }
+
+        clazz.push(`t-icon-button--shape-${props.shape}`);
+        clazz.push(`t-icon-button--outline-${props.outline}`);
+
         if (props.disabled) { clazz.push('t-icon-button--disabled'); }
-        if (props.outlined) { clazz.push('t-icon-button--outlined'); }
 
         return clazz.join(' ');
-    }, [props.className, props.primary, props.point, props.disabled, props.outlined]);
+    }, [props.className, props.shape, props.outline, props.disabled]);
 
     const rootStyle: CSSProperties = useMemo(() => {
         let style: CSSProperties = {};
 
         if (props.style) { style = {...style, ...props.style}; }
 
-        if (props.color && !props.disabled) {
-            style.color = props.color;
-            style.fill = props.color;
-            style.stroke = props.color;
-        }
-
         return style;
-    }, [props.color, props.disabled, props.style]);
+    }, [props.style]);
 
     // endregion
 
@@ -58,6 +53,13 @@ const TIconButton = forwardRef((props: TIconButtonProps, ref: Ref<TIconButtonRef
             ripple.register(event);
         }
     }, [props.disabled, ripple]);
+
+    const onMouseUp = useCallback((event: MouseEvent<Element, globalThis.MouseEvent> | KeyboardEvent<Element>): void => {
+        ripple.remove();
+        if (!props.disabled && props.onClick) {
+            props.onClick(event);
+        }
+    }, [props, ripple]);
 
     const onMouseLeave = useCallback((): void => {
         ripple.remove();
@@ -78,45 +80,39 @@ const TIconButton = forwardRef((props: TIconButtonProps, ref: Ref<TIconButtonRef
         }
     }, [props, ripple]);
 
-    const onClick = useCallback((event: MouseEvent): void => {
-        ripple.remove();
-        if (!props.disabled && props.onClick) {
-            props.onClick(event);
-        }
-    }, [props, ripple]);
-
     // endregion
 
     return (
 
-        <div ref={rootRef}
-             style={rootStyle}
-             className={`t-icon-button ${rootClass}`}
-             onMouseDown={onMouseDown}
-             onMouseLeave={onMouseLeave}
-             onKeyDown={onKeyDown}
-             onKeyUp={onKeyUp}
-             onClick={onClick}
-             tabIndex={props.disabled ? -1 : 0}
-             data-tooltip-id={props.tooltipId}
-             data-tooltip-content={props.tooltipContent}
-             data-tooltip-place={props.tooltipPlace}
-             data-tooltip-hidden={props.tooltipHidden}
+        <button ref={rootRef}
+                style={rootStyle}
+                className={`t-icon-button ${rootClass}`}
+                id={props.id}
+                onMouseDown={onMouseDown}
+                onMouseUp={onMouseUp}
+                onMouseLeave={onMouseLeave}
+                onKeyDown={onKeyDown}
+                onKeyUp={onKeyUp}
+                tabIndex={props.disabled ? -1 : 0}
+                data-tooltip-id={props.tooltipId}
+                data-tooltip-content={props.tooltipContent}
+                data-tooltip-place={props.tooltipPlace}
+                data-tooltip-hidden={props.tooltipHidden}
         >
             <TIcon className={'t-icon-button__inner'}
-                   size={props.size}
-                   xsmall={props.xsmall}
-                   small={props.small}
-                   medium={props.medium}
-                   large={props.large}
-                   xlarge={props.xlarge}
+                   xsmall
+                   color={'#71747A'} /* FIXME. themetoken 으로 교체 */
                    disabled={props.disabled}
-                   color={props.color}
             >{props.children}</TIcon>
-        </div>
+        </button>
     );
 });
 
 TIconButton.displayName = 'TIconButton';
+
+TIconButton.defaultProps = {
+    shape: 'circle',
+    outline: 'elevation',
+};
 
 export default TIconButton;
