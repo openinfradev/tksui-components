@@ -1,3 +1,4 @@
+import {MouseEvent} from 'react';
 import {render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {TIcon} from '~/icon';
@@ -138,13 +139,14 @@ describe('TIcon', () => {
         it('When icon is clicked, onClick event handler will be executed', async () => {
 
             // Arrange
+            const user = userEvent.setup();
             const mockOnClick = jest.fn(() => { /* Just test */ });
             render(<TIcon onClick={mockOnClick}>close</TIcon>);
 
             const root = screen.getByRole('img');
 
             // Act
-            await userEvent.click(root);
+            await user.click(root);
 
             // Assert
             expect(mockOnClick).toBeCalledTimes(1);
@@ -154,21 +156,44 @@ describe('TIcon', () => {
         it('When icon is disabled, onClick event handler will be NOT executed', async () => {
 
             // Arrange
+            const user = userEvent.setup();
             const mockOnClick = jest.fn(() => { /* Just test */ });
             render(<TIcon disabled onClick={mockOnClick}>close</TIcon>);
 
             const root = screen.getByRole('img');
 
             // Act
-            await userEvent.click(root);
+            await user.click(root);
 
             // Assert
             expect(mockOnClick).toBeCalledTimes(0);
         });
 
+        it('When the icon is clicked, the onClick event handler should receive the event parameter', async () => {
+
+            // Arrange
+            const user = userEvent.setup();
+            const mockOnClick = jest.fn();
+            render(<TIcon onClick={mockOnClick}>Parameter Test</TIcon>);
+
+            const root = screen.getByRole('img');
+
+            // Act
+            await user.click(root);
+            expect(mockOnClick).toHaveBeenCalled();
+
+            // Arrange
+            const eventParameter = mockOnClick.mock.calls[0][0];
+
+            // Assert
+            expect(eventParameter).toBeTruthy();
+            expect(eventParameter.target).toBe(root);
+        });
+
         it('When icon has focused and user type something, onKeyDown event handler will be executed', async () => {
 
             // Arrange
+            const user = userEvent.setup();
             const mockOnKeyDown = jest.fn(() => { /* Just test */ });
             const mockOnKeyDownEnter = jest.fn(() => { /* Just test */ });
             const mockOnKeyDownSpace = jest.fn(() => { /* Just test */ });
@@ -181,9 +206,9 @@ describe('TIcon', () => {
             );
 
             // Act
-            await userEvent.tab();
-            await userEvent.keyboard('{enter}');
-            await userEvent.keyboard(' ');
+            await user.tab();
+            await user.keyboard('{enter}');
+            await user.keyboard(' ');
 
             // Assert
             expect(mockOnKeyDown).toBeCalledTimes(2);
@@ -194,6 +219,7 @@ describe('TIcon', () => {
         it('When icon is disabled and user type something on Icon, onKeyDown event handler will be NOT executed', async () => {
 
             // Arrange
+            const user = userEvent.setup()
             const mockOnKeyDown = jest.fn(() => { /* Just test */ });
             const mockOnKeyDownEnter = jest.fn(() => { /* Just test */ });
             const mockOnKeyDownSpace = jest.fn(() => { /* Just test */ });
@@ -207,9 +233,9 @@ describe('TIcon', () => {
             );
 
             // Act
-            await userEvent.tab();
-            await userEvent.keyboard('{enter}');
-            await userEvent.keyboard(' ');
+            await user.tab();
+            await user.keyboard('{enter}');
+            await user.keyboard(' ');
 
             // Assert
             expect(mockOnKeyDown).toBeCalledTimes(0);
