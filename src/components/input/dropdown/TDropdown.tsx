@@ -19,6 +19,7 @@ import TTextField from '../text-field/TTextField';
 import THighlightText from '../../data-container/highlight-text/THighlightText';
 import TIcon from '~/icon/TIcon';
 import TChip from '~/input/chip/TChip';
+import themeToken from '@/styles/designToken/ThemeToken.module.scss';
 
 const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => {
 
@@ -337,13 +338,14 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
                     (!props.multiple && props.value) && (
                         <TIcon className={'t-dropdown__control__remover'}
                                xsmall
+                               color={themeToken.tGrayColor3}
                                type={'filled'}
                                onClick={onClickClear}>cancel</TIcon>
                     )
                 }
                 <TIcon className={`t-dropdown__control__opener ${isOpened ? 't-dropdown__control__opener--open' : ''}`}
                        small
-                       color={props.disabled ? '#CCCCCC' : '#000000'}>arrow_drop_down</TIcon>
+                       color={props.disabled ? themeToken.tGrayColor4 : themeToken.tGrayColor6}>arrow_drop_down</TIcon>
             </div>
 
             {/* Floating */}
