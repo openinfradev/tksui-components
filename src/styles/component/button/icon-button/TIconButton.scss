@@ -1,40 +1,53 @@
 
 .t-icon-button {
     cursor: pointer;
-    border-radius: 50%;
+
     padding: 4px;
     position: relative;
-    display: flex;
     overflow: hidden;
     outline: none;
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: $t-white-color;
 
     &:not(.t-icon-button--disabled):hover,
-    &:not(.t-icon-button--disabled):focus {
+    &:not(.t-icon-button--disabled):focus-visible {
         background: $t-gray-color-2;
-
-        &.t-icon-button--primary {
-            background: $t-primary-color--tint-9;
-        }
     }
+
+    /* Shape */
+    &.t-icon-button--shape-rectangle {
+        border-radius: 4px;
+    }
+    &.t-icon-button--shape-circle {
+        border-radius: 50%;
+    }
+
+    /* Outline */
+    &.t-icon-button--outline-flat {
+        border: 1px solid $t-gray-color-4;
+    }
+    &.t-icon-button--outline-elevation {
+        border: none;
+        box-shadow: $t-shadow--box;
+    }
+    &.t-icon-button--outline-none {
+        border: none;
+    }
+
 
     &.t-icon-button--disabled {
         cursor: default;
         color: $t-font-color--disabled;
     }
 
-
-    &.t-icon-button--primary:not(.t-icon-button--disabled) {
-        color: $t-primary-color;
-    }
-
-    &.t-icon-button--point:not(.t-icon-button--disabled) {
-        color: $t-point-color;
-    }
-
     &.t-icon-button--outlined {
         border-width: 1px;
         border-style: solid;
     }
-
-
 }
