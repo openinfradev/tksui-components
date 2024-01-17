@@ -33,7 +33,7 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
         }
     }, [props.disabled, ripple]);
 
-    const onMouseUp = useCallback((event): void => {
+    const onMouseUp = useCallback((event: MouseEvent<Element, globalThis.MouseEvent> | KeyboardEvent<Element>): void => {
         ripple.remove();
         if (!props.disabled && props.onClick) {
             props.onClick(event);

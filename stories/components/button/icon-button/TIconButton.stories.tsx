@@ -1,7 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react';
 import {ReactElement} from 'react';
 import TIconButton from '~/button/icon-button/TIconButton';
-import TIcon from '../../../../src/components/icon/TIcon';
 
 
 const meta: Meta<typeof TIconButton> = {
@@ -13,7 +12,7 @@ export default meta;
 
 type Story = StoryObj<typeof TIconButton>;
 
-const Showcase = (props: { children: ReactElement, label: string }): ReactElement => {
+const Showcase = (props: { children: ReactElement}): ReactElement => {
     return (<div style={{display: 'flex', flexDirection: 'column', fontSize: '14px', gap: '8px', alignItems: 'center'}}>
         {props.children}
     </div>
@@ -22,59 +21,35 @@ const Showcase = (props: { children: ReactElement, label: string }): ReactElemen
 
 
 const Template = (args) => <>
-    <div style={{display: 'grid', gridTemplateColumns: 'repeat(5, 150px)', marginTop: '32px', rowGap: '40px', alignItems: 'center', textAlign: 'center'}}>
+    <div style={{display: 'grid', gridTemplateColumns: 'repeat(4, 150px)', marginTop: '32px', rowGap: '40px', alignItems: 'center', textAlign: 'center'}}>
         <div></div>
-        <div>Default</div>
-        <div>Disabled</div>
-        <div>Outlined</div>
-        <div>Outlined Disabled</div>
+        <div>Elevation</div>
+        <div>Flat</div>
+        <div>None</div>
 
+        <div>Rectangle</div>
+        <Showcase><TIconButton {...args} shape={'rectangle'} outline={'elevation'}>add</TIconButton></Showcase>
+        <Showcase><TIconButton {...args} shape={'rectangle'} outline={'flat'}>add</TIconButton></Showcase>
+        <Showcase><TIconButton {...args} shape={'rectangle'} outline={'none'}>add</TIconButton></Showcase>
 
-        <div>Default</div>
-        <Showcase label={'default'}><TIconButton {...args}>add</TIconButton></Showcase>
-        <Showcase label={'disabled'}><TIconButton {...args} disabled>add</TIconButton></Showcase>
-        <Showcase label={'outlined'}><TIconButton {...args} outlined>add</TIconButton></Showcase>
-        <Showcase label={'outlined'}><TIconButton {...args} disabled outlined>add</TIconButton></Showcase>
+        <div>Circle</div>
+        <Showcase><TIconButton {...args} shape={'circle'} outline={'elevation'}>add</TIconButton></Showcase>
+        <Showcase><TIconButton {...args} shape={'circle'} outline={'flat'}>add</TIconButton></Showcase>
+        <Showcase><TIconButton {...args} shape={'circle'} outline={'none'}>add</TIconButton></Showcase>
 
-        <div>Primary</div>
-        <Showcase label={'default'}><TIconButton {...args} primary>add</TIconButton></Showcase>
-        <Showcase label={'disabled'}><TIconButton {...args} primary disabled>add</TIconButton></Showcase>
-        <Showcase label={'outlined'}><TIconButton {...args} primary outlined>add</TIconButton></Showcase>
-        <Showcase label={'disabled'}><TIconButton {...args} primary disabled outlined>add</TIconButton></Showcase>
-
-        <div>Point</div>
-        <Showcase label={'default'}><TIconButton {...args} point>add</TIconButton></Showcase>
-        <Showcase label={'disabled'}><TIconButton {...args} point disabled>add</TIconButton></Showcase>
-        <Showcase label={'outlined'}><TIconButton {...args} point outlined>add</TIconButton></Showcase>
-        <Showcase label={'disabled'}><TIconButton {...args} point disabled outlined>add</TIconButton></Showcase>
     </div>
 
 </>;
-export const Small: Story = {
+export const Default: Story = {
     render: Template,
     args: {
-        small: true,
     },
 };
 
-export const Medium: Story = {
+export const Disabled: Story = {
     render: Template,
     args: {
-        medium: true,
-    },
-};
-
-export const Large: Story = {
-    render: Template,
-    args: {
-        large: true,
-    },
-};
-
-export const XLarge: Story = {
-    render: Template,
-    args: {
-        xlarge: true,
+        disabled: true,
     },
 };
 
