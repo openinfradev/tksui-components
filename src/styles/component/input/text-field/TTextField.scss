@@ -23,10 +23,8 @@
         position: relative;
         display: flex;
         align-items: center;
-        gap: 2px;
         height: 40px;
         background: $t-white-color;
-
 
         .t-text-field__container__input {
             font-family: $t-font-family;
@@ -50,15 +48,48 @@
         .t-text-field__container__action-icon {
             color: $t-black-color;
             &:nth-child(2) { margin-left: 16px; }
-            &:not(:nth-child(2)) { margin-left: 4px; }
+            &:not(:nth-child(2)) { margin-left: $t-spacing-4; }
+        }
+
+        .t-text-field__container__action-icon ~ .t-text-field__container__counter { margin-left: $t-spacing-8; }
+
+        .t-text-field__container__counter {
+            flex: 0 0 auto;
+            text-align: right;
+            display: none;
+            @include typo-element-3;
+
+            .t-text-field__container__counter__counted, .t-text-field__container__counter__slash, .t-text-field__container__counter__limit {
+                display: inline-block;
+            }
         }
     }
+
+    &.t-text-field__multiline {
+
+        .t-text-field__container {
+            height: auto;
+            padding: 9px $t-spacing-16;
+        }
+        .t-text-field__container__text-area {
+            font-family: $t-font-family;
+            @include typo-body-3;
+            width: 100%;
+            height: 100%;
+            color: $t-black-color;
+            border: none;
+            outline: none;
+            padding: 0;
+            resize: none;
+        }
+    }
+
     .t-text-field__details {
         display: flex;
         @include typo-element-3;
         height: 18px;
         color: $t-gray-color-4;
-        margin-top: 2px;
+        margin-top: $t-spacing-4;
         position: absolute;
         width: 100%;
         .t-text-field__details__message {
@@ -66,26 +97,22 @@
             margin-right: $t-spacing-16;
             @include ellipsis;
         }
-        .t-text-field__details__counter {
-            flex: 0 0 auto;
-            text-align: right;
-            display: none;
-        }
     }
 
-    &.t-text-field--focused {
-        .t-text-field__details .t-text-field__details__counter { display: unset; }
+    &:is(.t-text-field--focused, .t-text-field--success, .t-text-field--failure) {
+        .t-text-field__container .t-text-field__container__counter { display: unset; }
     }
 
     .t-text-field__container {
         border-width: 1px;
-        &:focus-within {
-            border-color: $t-primary-color;
-        }
+        &:focus-within { border-color: $t-primary-color; }
     }
+    .t-text-field__container:hover { border-color: $t-primary-color; }
+
     &.t-text-field--disabled .t-text-field__container {
         background: $t-gray-color-2;
 
+        &:hover { border-color: transparent; }
         .t-text-field__container__input {
             color: $t-font-color--disabled;
             background-color: $t-gray-color-2;
@@ -95,9 +122,7 @@
     &.t-text-field--read-only .t-text-field__container {
         background: $t-gray-color-2;
 
-        &:focus-within {
-            border-color: $t-gray-color-3;
-        }
+        &:hover { border-color: transparent; }
         .t-text-field__container__input {
             color: $t-font-color--read-only;
             background-color: $t-gray-color-2;
@@ -108,10 +133,12 @@
 
         @include animation-shake();
         .t-text-field__container {border-color: $t-status-color--error;}
+        .t-text-field__container__counter__counted {color: $t-status-color--error;}
         .t-text-field__details {color: $t-status-color--error;}
     }
     &.t-text-field--success {
-        .t-text-field__container {border-color: $t-status-color--success;}
+        .t-text-field__container { border-color: $t-status-color--success !important; }
+        .t-text-field__container__counter__counted {color: $t-status-color--success;}
         .t-text-field__details {color: $t-status-color--success;}
     }
 
