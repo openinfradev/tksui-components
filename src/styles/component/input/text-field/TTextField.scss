@@ -59,7 +59,7 @@
             display: none;
             @include typo-element-3;
 
-            .t-text-field__container__counter__counted, .t-text-field__container__counter__slash, .t-text-field__container__counter__limit {
+            .t-text-field__container__counter__counted, span {
                 display: inline-block;
             }
         }

@@ -27,7 +27,7 @@ const NormalTemplate = (args: TTextFieldProps) => {
     useEffect(() => {
         errorTextFieldRef.current.validate();
         successTextFieldRef.current.validate();
-        errorTextAreaRef.current.validate();
+        // errorTextAreaRef.current.validate();
         successTextAreaRef.current.validate();
     }, []);
 
@@ -67,10 +67,12 @@ const NormalTemplate = (args: TTextFieldProps) => {
                     <TTextField {...args} ref={successTextAreaRef} multiline value={value} onChange={setValue}
                                 label={'Multi-line - Success'} row={3}
                                 rules={[() => true]}
-                                successMessage={'사용 할 수 있는 이름 입니다.'} lazy={false}/>
+                                successMessage={'사용 할 수 있는 이름 입니다.'} lazy={false}
+                                placeholder={'placeholder'}/>
                     <TTextField {...args} ref={errorTextAreaRef} multiline value={value} onChange={setValue} label={'Multi-line - Error'}
                                 row={3}
-                                rules={[rule.required('이미 사용중인 네임스페이스 입니다.')]}
+                                placeholder={'placeholder'}
+                                readOnly rules={[rule.required('이미 사용중인 네임스페이스 입니다.')]}
                                 successMessage={'사용 할 수 있는 이름 입니다.'} lazy={false}/>
                     <TTextField {...args} value={value} onChange={setValue} label={'너비-400'} width={'400px'}/>
                     <TTextField {...args} value={value} onChange={setValue} label={'너비-300'} width={'300px'}/>

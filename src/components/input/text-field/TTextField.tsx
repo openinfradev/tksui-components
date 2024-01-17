@@ -262,8 +262,7 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
                             <span className={'t-text-field__container__counter__counted'}>
                                 {counterLength}
                             </span>
-                            <span className={'t-text-field__container__counter__slash'}>/</span>
-                            <span className={'t-text-field__container__counter__limit'}>{props.counter}</span>
+                            <span>{`/${props.counter}`}</span>
                         </div>
                     )
                 }

@@ -22,7 +22,7 @@ export interface TIconProps extends TBaseProps, TBaseTooltipProps {
 
     color?: string,
 
-    onClick?: (event?: MouseEvent) => void,
+    onClick?: (event?: MouseEvent<HTMLSpanElement>) => void,
     onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void,
     onKeyDownEnter?: (event: KeyboardEvent<HTMLInputElement>) => void,
     onKeyDownSpace?: (event: KeyboardEvent<HTMLInputElement>) => void,
