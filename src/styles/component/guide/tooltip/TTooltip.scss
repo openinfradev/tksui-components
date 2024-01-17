@@ -20,7 +20,7 @@
 
     &.react-tooltip {
         border: 1px solid $t-gray-color-5;
-        padding: $t-padding-tb-16 $t-padding-lr-16;
+        padding: $t-spacing-16 $t-spacing-16;
         line-height: $t-line-height-body;
 
         & > .react-tooltip-arrow {

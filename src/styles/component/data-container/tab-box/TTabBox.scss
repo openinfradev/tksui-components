@@ -4,14 +4,14 @@
         display: flex;
         align-items: center;
         height: 48px;
-        margin-bottom: $t-margin-tb-16;
+        margin-bottom: $t-spacing-16;
         border-bottom: 1px solid $t-border-color--default;
     }
 }
 
 
 .t-tab-item-label {
-    padding: $t-padding-tb-16 $t-padding-lr-16;
+    padding: $t-spacing-16 $t-spacing-16;
     cursor: pointer;
     min-width: 90px;
     text-align: center;
@@ -40,5 +40,5 @@
 }
 
 .t-tab-item-content {
-    padding: $t-padding-tb-16 $t-padding-lr-16;
+    padding: $t-spacing-16 $t-spacing-16;
 }

@@ -4,7 +4,7 @@
 // import 'material-icons/iconfont/two-tone.css';
 // import 'material-icons/iconfont/sharp.css';
 
-import {CSSProperties, KeyboardEvent, ReactElement, useCallback, useMemo} from 'react';
+import {CSSProperties, KeyboardEvent, MouseEvent, ReactElement, useCallback, useMemo} from 'react';
 import {TIconSource, TIconType, TIconProps, iconSize} from './TIcon.interface';
 import TOriginalImage from './TIconOriginal';
 
@@ -71,12 +71,12 @@ function TIcon(props: TIconProps): ReactElement {
 
     // region [Events]
 
-    const onClickRoot = useCallback((): void => {
+    const onClickRoot = useCallback((event: MouseEvent<HTMLSpanElement>): void => {
         if (props.disabled) {
             return;
         }
 
-        props.onClick?.();
+        props.onClick?.(event);
     }, [props]);
 
     const onKeyDown = useCallback((event: KeyboardEvent<HTMLInputElement>): void => {

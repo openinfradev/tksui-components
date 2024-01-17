@@ -2,12 +2,7 @@ import {MouseEvent, KeyboardEvent} from 'react';
 import {TValidatorProps} from '@/common/validator/TValidator.interface';
 import {TBaseProps} from '@/common/base/TBase.interface';
 
-const textFieldType = ['outline', 'underline'] as const;
-type textFieldType = typeof textFieldType[number];
-
 export interface TTextFieldProps extends TValidatorProps, TBaseProps {
-
-    type?: textFieldType,
 
     disabled?: boolean,
     password?: boolean,
@@ -24,12 +19,14 @@ export interface TTextFieldProps extends TValidatorProps, TBaseProps {
     value: string,
     width?: string,
     autoComplete?: 'new-password' | 'off' | undefined,
+    multiline?: boolean
+    row?: number
 
     onChange(value: string): void,
     onBlur?(): void,
     onFocus?(): void,
-    onKeyDown?(event: KeyboardEvent<HTMLInputElement>): void,
-    onKeyDownEnter?(event: KeyboardEvent<HTMLInputElement>): void,
+    onKeyDown?(event: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>): void,
+    onKeyDownEnter?(event: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>): void,
     onClickSearch?(event: MouseEvent): void,
     onClear?(): void,
 }

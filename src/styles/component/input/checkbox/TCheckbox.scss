@@ -12,7 +12,7 @@
             &.t-checkbox__icon--uncheck { fill: $t-gray-color-3; stroke: $t-gray-color-3; }
         }
         .t-checkbox__label {
-            margin-left: $t-margin-lr-8 * 1.25;
+            margin-left: $t-spacing-8 * 1.25;
             @include typo-body-3;
             color: $t-gray-color-6;
         }
@@ -27,7 +27,7 @@
         height: 18px;
         color: $t-gray-color-4;
         .t-text-field__details__message {
-            margin-right: $t-margin-lr-16;
+            margin-right: $t-spacing-16;
             @include ellipsis;
         }
     }

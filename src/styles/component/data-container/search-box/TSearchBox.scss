@@ -4,11 +4,11 @@
         display: flex;
         flex-direction: column;
         background-color: $t-background-color-01;
-        padding: 0 $t-padding-tb-32;
+        padding: 0 $t-spacing-32;
 
         & > .t-search-box-row {
-            &:first-child { padding-top: $t-padding-tb-32; }
-            &:last-child { padding-bottom: $t-padding-tb-32; }
+            &:first-child { padding-top: $t-spacing-32; }
+            &:last-child { padding-bottom: $t-spacing-32; }
         }
 
         .t-search-box__content__expand-zone {
@@ -19,7 +19,7 @@
                 display: flex;
                 align-items: center;
                 position: relative;
-                margin-bottom: $t-margin-tb-32;
+                margin-bottom: $t-spacing-32;
                 .t-search-box__content__expand-zone__panel__divider {
                     border-bottom: 1px solid $t-gray-color-2;
                     width: 100%;
@@ -30,12 +30,12 @@
                     width: 128px;
                     left: calc(50% - 64px) ;
                     background: $t-primary-color--tint-9;
-                    padding: 0 $t-margin-lr-32;
+                    padding: 0 $t-spacing-32;
                     color: $t-primary-color;
 
                     .t-search-box__content__expand-zone__panel__expand-button {
                         display: flex;
-                        gap: $t-margin-lr-8;
+                        gap: $t-spacing-8;
                         align-items: center;
                         font-weight: $t-font-weight-medium;
                         cursor: pointer;
@@ -59,7 +59,7 @@
     }
 
     .t-search-box__action-bar {
-        margin-top: $t-margin-tb-48;
+        margin-top: $t-spacing-48;
         display: flex;
         justify-content: center;
     }
@@ -81,7 +81,7 @@
         display: flex;
         align-items: flex-start;
         gap: 0;
-        padding: $t-padding-tb-16 0;
+        padding: $t-spacing-16 0;
     }
 
 
@@ -102,10 +102,10 @@
         flex: 1 0 auto;
         display: flex;
         align-items: center;
-        gap: $t-margin-lr-8;
+        gap: $t-spacing-8;
         min-height: 46px;
         line-height: $t-line-height-body;
-        padding-right: $t-padding-lr-60;
+        padding-right: $t-spacing-56;
     }
 
     &.t-search-box-item--required .t-search-box-item__label::after {

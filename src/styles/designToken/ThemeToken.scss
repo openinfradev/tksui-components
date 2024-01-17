@@ -106,13 +106,37 @@ $t-font-size-element-5: var(--t-font-size-xsmall);
 $t-line-height-element-5: var(--t-line-height-xsmall);
 $t-font-weight-element-5: var(--t-font-weight-bold);
 
-////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////  Deprecated  ////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////
-
 $t-font-weight-regular: var(--t-font-weight-regular);
 $t-font-weight-medium: var(--t-font-weight-medium);
 $t-font-weight-bold: var(--t-font-weight-bold);
+
+// endregion
+
+
+// region [Spacing]
+
+$t-spacing-2: 2px;
+$t-spacing-4: 4px;
+$t-spacing-6: 6px;
+$t-spacing-8: 8px;
+$t-spacing-10: 10px;
+$t-spacing-12: 12px;
+$t-spacing-16: 16px;
+$t-spacing-20: 20px;
+$t-spacing-24: 24px;
+$t-spacing-32: 32px;
+$t-spacing-40: 40px;
+$t-spacing-48: 48px;
+$t-spacing-56: 56px;
+$t-spacing-64: 64px;
+$t-spacing-72: 72px;
+
+// endregion
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////  Deprecated  ////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 // content
@@ -120,9 +144,6 @@ $t-font-weight-bold: var(--t-font-weight-bold);
 $t-line-height-default: var(--t-line-height-default);
 $t-line-height-header: var(--t-line-height-header);
 $t-line-height-body: var(--t-line-height-body);
-
-
-// endregion
 
 
 $t-point-color: var(--t-point-color) !default;
@@ -150,10 +171,6 @@ $t-primary-color--tint-10: color-mix(in srgb, var(--t-primary-color), white 95%)
 $t-primary-color--tint-11: color-mix(in srgb, var(--t-primary-color), white 98%) !default;
 
 
-
-$t-layout-background-color: var(--t-white-color) !default;
-
-
 $t-status-color--required: var(--t-status-color--required) !default;
 $t-status-color--success: var(--t-status-color--success) !default;
 $t-status-color--error: var(--t-status-color--error) !default;
@@ -166,19 +183,14 @@ $t-background-color--active: $t-primary-color--tint-8;
 $t-background-color--read-only: $t-gray-color-1;
 
 // font color
-$t-font-color--white: $t-white-color !default;
-$t-font-color--black: $t-black-color !default;
-$t-font-color--gray-01: $t-gray-color-2 !default; // #999999
-$t-font-color--gray-02: $t-gray-color-3 !default; // #666666
-$t-font-color--gray-03: $t-gray-color-5 !default; // #333333
 $t-font-color--primary-01: $t-primary-color !default; // #333333
 $t-font-color--primary-02: $t-primary-color--tint-6 !default; // #333333
 $t-font-color--primary-03: $t-gray-color-5 !default; // #333333
 
 $t-font-color--selected: $t-primary-color;
 $t-font-color--placeholder: $t-gray-color-4;
-$t-font-color--read-only: $t-gray-color-6;
-$t-font-color--disabled: $t-gray-color-3;
+$t-font-color--read-only: $t-black-color;
+$t-font-color--disabled: $t-gray-color-4;
 $t-font-color--default: $t-gray-color-6;
 $t-font-color--label: $t-gray-color-3;
 
@@ -216,54 +228,6 @@ $t-input-border-color--01: #CCCCCC;
 
 
 
-
-
-
-
-
-
-
-// region Spacing
-
-$t-margin-lr-4: 4px;
-$t-margin-lr-8: 8px;
-$t-margin-lr-10: 10px;
-$t-margin-lr-12: 12px;
-$t-margin-lr-16: 16px;
-$t-margin-lr-24: 24px;
-$t-margin-lr-32: 32px;
-$t-margin-lr-48: 48px;
-
-$t-margin-tb-8: 8px;
-$t-margin-tb-12: 12px;
-$t-margin-tb-16: 16px;
-$t-margin-tb-24: 24px;
-$t-margin-tb-32: 32px;
-$t-margin-tb-48: 48px;
-$t-margin-tb-60: 60px;
-
-$t-padding-lr-8: 8px;
-$t-padding-lr-10: 10px;
-$t-padding-lr-12: 12px;
-$t-padding-lr-16: 16px;
-$t-padding-lr-24: 24px;
-$t-padding-lr-32: 32px;
-$t-padding-lr-48: 48px;
-$t-padding-lr-60: 60px;
-$t-padding-lr-80: 80px;
-
-$t-padding-tb-8: 8px;
-$t-padding-tb-12: 12px;
-$t-padding-tb-16: 16px;
-$t-padding-tb-24: 24px;
-$t-padding-tb-32: 32px;
-$t-padding-tb-48: 48px;
-$t-padding-tb-60: 60px;
-$t-padding-tb-80: 80px;
-
-// endregion
-
-
 // region [Z-Index]
 
 // frame
@@ -273,6 +237,5 @@ $t-z-index-tooltip: var(--t-z-index-tooltip);
 $t-z-index-modal: var(--t-z-index-modal);
 $t-z-index-dropdown: var(--t-z-index-dropdown);
 $t-z-index-drop-holder: var(--t-z-index-drop-holder);
-$t-z-index-page-title: var(--t-z-index-page-title);
 
 // endregion

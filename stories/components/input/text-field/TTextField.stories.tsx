@@ -1,8 +1,8 @@
 import {Meta, StoryObj} from '@storybook/react';
 
-import {CSSProperties, useState} from 'react';
+import {CSSProperties, useEffect, useState} from 'react';
 import TTextField from '@/components/input/text-field/TTextField';
-import {TTextFieldProps} from '@/components/input/text-field/TTextField.interface';
+import {TTextFieldProps, TTextFieldRef} from '@/components/input/text-field/TTextField.interface';
 import rule from '@/common/validator/TValidatorRule';
 import useInputState from '@/common/hook/UseInputState';
 import TButton from '@/components/button/button/TButton';
@@ -17,12 +17,19 @@ export default meta;
 
 type Story = StoryObj<typeof TTextField>;
 
-
 // region [Normal]
 
 const NormalTemplate = (args: TTextFieldProps) => {
 
     const [value, setValue] = useState('');
+    const [errorTextFieldRef, successTextFieldRef, successTextAreaRef, errorTextAreaRef] = useRefs<TTextFieldRef>(4);
+
+    useEffect(() => {
+        errorTextFieldRef.current.validate();
+        successTextFieldRef.current.validate();
+        // errorTextAreaRef.current.validate();
+        successTextAreaRef.current.validate();
+    }, []);
 
     const containerStyle: CSSProperties = {
         width: '500px',
@@ -31,7 +38,7 @@ const NormalTemplate = (args: TTextFieldProps) => {
         marginTop: '16px',
         display: 'flex',
         flexDirection: 'column',
-        gap: '16px',
+        gap: '24px',
     };
 
     return (<>
@@ -46,9 +53,27 @@ const NormalTemplate = (args: TTextFieldProps) => {
                     <TTextField {...args} value={value} onChange={setValue} label={'Searchable'} searchable placeholder={'검색어를 입력해주세요'}
                                 clearable/>
                     <TTextField {...args} value={value} onChange={setValue} label={'Counter'} counter={20}/>
-                    <TTextField {...args} value={value} onChange={setValue} label={'Guide Message'} hint={'개수를 줄이시면 가장 마지막 호스트네임부터 삭제 됩니다.'}/>
+                    <TTextField {...args} value={value} onChange={setValue} label={'Guide Message'}
+                                hint={'개수를 줄이시면 가장 마지막 호스트네임부터 삭제 됩니다.'}/>
+                    <TTextField {...args} ref={errorTextFieldRef} value={value} onChange={setValue} label={'Error'}
+                                rules={[rule.required('이미 사용중인 네임스페이스 입니다.')]} successMessage={'사용 할 수 있는 네임스페이스 입니다.'}
+                                counter={200} lazy={false} clearable/>
+                    <TTextField {...args} ref={successTextFieldRef} value={value} onChange={setValue} rules={[() => true]}
+                                successMessage={'사용 할 수 있는 이름 입니다.'} label={'Success'} lazy={false} counter={10}/>
                     <TTextField {...args} value={'입력 불가능한 값'} label={'Disabled'} disabled/>
                     <TTextField {...args} value={'읽을 수만 있는 값'} label={'Read-only'} readOnly/>
+                    <TTextField {...args} multiline value={value} onChange={setValue} label={'Multi-line'} row={3}/>
+                    <TTextField {...args} multiline value={value} onChange={setValue} label={'Multi-line'} row={3}/>
+                    <TTextField {...args} ref={successTextAreaRef} multiline value={value} onChange={setValue}
+                                label={'Multi-line - Success'} row={3}
+                                rules={[() => true]}
+                                successMessage={'사용 할 수 있는 이름 입니다.'} lazy={false}
+                                placeholder={'placeholder'}/>
+                    <TTextField {...args} ref={errorTextAreaRef} multiline value={value} onChange={setValue} label={'Multi-line - Error'}
+                                row={3}
+                                placeholder={'placeholder'}
+                                readOnly rules={[rule.required('이미 사용중인 네임스페이스 입니다.')]}
+                                successMessage={'사용 할 수 있는 이름 입니다.'} lazy={false}/>
                     <TTextField {...args} value={value} onChange={setValue} label={'너비-400'} width={'400px'}/>
                     <TTextField {...args} value={value} onChange={setValue} label={'너비-300'} width={'300px'}/>
                     <TTextField {...args} value={value} onChange={setValue} label={'너비-200'} width={'200px'}/>
@@ -58,18 +83,9 @@ const NormalTemplate = (args: TTextFieldProps) => {
     </>);
 };
 
-
-export const Outline: Story = {
+export const Default: Story = {
     render: NormalTemplate,
     args: {
-        type: 'outline',
-    },
-};
-
-export const Underline: Story = {
-    render: NormalTemplate,
-    args: {
-        type: 'underline',
         label: 'Hello World',
     },
 };
@@ -201,7 +217,6 @@ const ValidationTemplate = (args: TTextFieldProps) => {
                             counter={12}
                             {...textField4}
                             ref={textField4Ref}
-                            type={'underline'}
                 />
                 <TTextField {...args}
                             label={'Underline Custom Long Message'}
@@ -214,7 +229,6 @@ const ValidationTemplate = (args: TTextFieldProps) => {
                             counter={12}
                             {...textField5}
                             ref={textField5Ref}
-                            type={'underline'}
                 />
                 <TTextField {...args}
                             label={'Underline Success Message'}
@@ -226,7 +240,6 @@ const ValidationTemplate = (args: TTextFieldProps) => {
                             successMessage={'사용할 수 있는 아이디입니다'}
                             {...textField6}
                             ref={textField6Ref}
-                            type={'underline'}
                 />
             </div>
 

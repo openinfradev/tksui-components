@@ -24,14 +24,17 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
     const [hasFocus, setHasFocus] = useState<boolean>(false);
     const validator = useValidator(props.noTrim ? props.value : props.value.trim(), props.rules, props.successMessage);
     const inputRef = useRef<HTMLInputElement>(null);
+    const textareaRef = useRef<HTMLTextAreaElement>(null);
     const inputUuid = uniqueId();
 
     useImperativeHandle(ref, () => ({
         focus() {
             inputRef?.current?.focus();
+            textareaRef?.current?.focus();
         },
         blur() {
             inputRef?.current?.blur();
+            textareaRef?.current?.blur();
         },
         validate() {
             return validator.validate();
@@ -90,7 +93,7 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
 
     }, [props, validator]);
 
-    const onKeyDown = useCallback((event: KeyboardEvent<HTMLInputElement>): void => {
+    const onKeyDown = useCallback((event: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
         if (event.key === 'Enter' && props.onKeyDownEnter) {
             props.onKeyDownEnter(event);
         }
@@ -140,16 +143,15 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
 
         if (props.className) { clazz.push(props.className); }
 
+        if (props.multiline) { clazz.push('t-text-field__multiline'); }
         if (props.disabled) { clazz.push('t-text-field--disabled'); }
         if (props.readOnly) { clazz.push('t-text-field--read-only'); }
         if (!validator.result) { clazz.push('t-text-field--failure'); }
         if (validator.result && validator.message) { clazz.push('t-text-field--success'); }
         if (hasFocus) { clazz.push('t-text-field--focused'); }
 
-        clazz.push(`t-text-field--${props.type}`);
-
         return clazz.join(' ');
-    }, [props.className, props.disabled, props.readOnly, props.type, validator.result, validator.message, hasFocus]);
+    }, [props.className, props.disabled, props.readOnly, validator.result, validator.message, hasFocus]);
 
     const inputClass = useMemo((): string => {
         const clazz: string[] = [];
@@ -177,7 +179,6 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
         return style;
     }, [props.style, props.width]);
 
-
     // endregion
 
     return (
@@ -190,24 +191,44 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
                 )
             }
             <div className={'t-text-field__container'}>
-                <input id={inputUuid}
-                       ref={inputRef}
-                       type={inputType}
-                       tabIndex={(props.disabled || props.readOnly) ? -1 : 0}
-                       className={`t-text-field__container__input ${inputClass}`}
-                       disabled={props.disabled || props.readOnly}
-                       placeholder={(props.disabled || props.readOnly)  ? '' : props.placeholder}
-                       value={props.value}
-                       onChange={onChange}
-                       onKeyDown={onKeyDown}
-                       onFocus={onFocus}
-                       onBlur={onBlur}
-                       autoComplete={props.autoComplete}
-                       data-testid={'text-field-input'}
-                />
+                {
+                    !props.multiline
+                        ? <input id={inputUuid}
+                                 ref={inputRef}
+                                 type={inputType}
+                                 tabIndex={(props.disabled || props.readOnly) ? -1 : 0}
+                                 className={`t-text-field__container__input ${inputClass}`}
+                                 disabled={props.disabled || props.readOnly}
+                                 placeholder={(props.disabled || props.readOnly) ? '' : props.placeholder}
+                                 value={props.value}
+                                 onChange={onChange}
+                                 onKeyDown={onKeyDown}
+                                 onFocus={onFocus}
+                                 onBlur={onBlur}
+                                 autoComplete={props.autoComplete}
+                                 data-testid={'text-field-input'}
+                        />
+                        : <textarea
+                            id={inputUuid}
+                            ref={textareaRef}
+                            tabIndex={(props.disabled || props.readOnly) ? -1 : 0}
+                            className={`t-text-field__container__text-area ${inputClass}`}
+                            disabled={props.disabled || props.readOnly}
+                            placeholder={(props.disabled || props.readOnly) ? '' : props.placeholder}
+                            value={props.value}
+                            onChange={onChange}
+                            onKeyDown={onKeyDown}
+                            onFocus={onFocus}
+                            onBlur={onBlur}
+                            autoComplete={props.autoComplete}
+                            data-testid={'text-field-text-area'}
+                            rows={props.row}
+                        />
+                }
+
                 {
                     props.clearable && props.value && props.value.length > 0 && !props.disabled && (
-                        <TIcon small
+                        <TIcon xsmall
                                className={'t-text-field__container__action-icon'}
                                clickable
                                onClick={onClickClear}>
@@ -217,7 +238,7 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
                 }
                 {
                     props.searchable && !props.disabled && (
-                        <TIcon small
+                        <TIcon xsmall
                                className={'t-text-field__container__action-icon'}
                                clickable
                                onClick={props.onClickSearch}>
@@ -227,12 +248,22 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
                 }
                 {
                     props.password && !props.disabled && (
-                        <TIcon small
+                        <TIcon xsmall
                                className={'t-text-field__container__action-icon'}
                                clickable
                                onClick={togglePasswordVisibility}>
                             {isPasswordVisible ? 'visibility_off' : 'visibility'}
                         </TIcon>
+                    )
+                }
+                {
+                    (props.counter && !props.disabled && !props.multiline && (hasFocus || validator.message)) && (
+                        <div className={'t-text-field__container__counter'} data-testid={'text-field-counter'}>
+                            <span className={'t-text-field__container__counter__counted'}>
+                                {counterLength}
+                            </span>
+                            <span>{`/${props.counter}`}</span>
+                        </div>
                     )
                 }
             </div>
@@ -241,12 +272,6 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
                 <div className={'t-text-field__details__message'} data-testid={'text-field-message'}>
                     {validator.message || props.hint}
                 </div>
-                <div className={'t-text-field__details__counter'} data-testid={'text-field-counter'}>
-                    {
-                        props.counter && !props.disabled
-                        && `${counterLength} / ${props.counter}`
-                    }
-                </div>
             </div>
 
         </div>
@@ -254,8 +279,8 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
 });
 
 TTextField.defaultProps = {
-    type: 'outline',
     lazy: true,
+    row: 1,
 };
 
 TTextField.displayName = 'TTextField';

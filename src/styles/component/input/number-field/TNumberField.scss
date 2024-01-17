@@ -20,7 +20,7 @@
     .t-number-field__container {
         border: 1px solid $t-gray-color-3;
         width: 100%;
-        padding: 0 $t-padding-lr-16;
+        padding: 0 $t-spacing-16;
         position: relative;
         display: flex;
         align-items: center;
@@ -93,7 +93,7 @@
         width: 100%;
         .t-number-field__details__message {
             flex: 1 1 auto;
-            margin-right: $t-margin-lr-16;
+            margin-right: $t-spacing-16;
             @include ellipsis;
         }
     }

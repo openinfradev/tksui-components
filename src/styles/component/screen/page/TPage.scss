@@ -1,5 +1,3 @@
-$page-padding-tb: 80px;
-$page-padding-lr: $t-padding-lr-32;
 
 .t-page {
     flex: 1 1 auto;
@@ -8,15 +6,11 @@ $page-padding-lr: $t-padding-lr-32;
     display: flex;
 
     .t-page__content-container {
-        padding: $page-padding-tb $page-padding-lr;
+        padding: $t-spacing-40 $t-spacing-48;
         flex: 1 1 auto;
 
         .t-page__title-area {
-            position: sticky;
-            top: 0;
-            z-index: $t-z-index-page-title;
-            line-height: $t-line-height-header;
-            margin-bottom: $t-margin-tb-32;
+            margin-bottom: $t-spacing-24;
 
             @include vertical-mid;
             gap: 10px;
@@ -27,7 +21,7 @@ $page-padding-lr: $t-padding-lr-32;
         }
 
         .t-page__content-area {
-            //padding-top: $title-padding-tb;
+            @include typo-body-3;
         }
     }
 
@@ -94,7 +88,7 @@ $page-padding-lr: $t-padding-lr-32;
 
         .t-page__information-area__content {
             position: absolute;
-            padding: 20px $t-padding-lr-32;
+            padding: 20px $t-spacing-32;
             line-height: $t-line-height-body;
             width: 100%;
             height: calc(100% - $information-header-height);
