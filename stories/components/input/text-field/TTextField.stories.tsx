@@ -83,7 +83,7 @@ const NormalTemplate = (args: TTextFieldProps) => {
     </>);
 };
 
-export const Underline: Story = {
+export const Default: Story = {
     render: NormalTemplate,
     args: {
         label: 'Hello World',

@@ -65,19 +65,6 @@ describe('TTextField', () => {
         expect(root).toHaveAttribute('id', idProp);
     });
 
-    it('When type prop is set to underline, root has t-text-field--underline class', () => {
-
-        // Arrange
-        render(<TTextField {...baseProps} type={'underline'}/>);
-
-        // Assert
-        const root = screen.getByTestId('text-field-root');
-
-        expect(root)
-            .toHaveClass('t-text-field--underline');
-    });
-
-
     // endregion
 
 
@@ -246,7 +233,7 @@ describe('TTextField', () => {
     });
 
 
-    it('When input element is clicked, the counter shows the trimmed length and length limit', () => {
+    it('When input element has focused, the counter shows the trimmed length and length limit', async () => {
         // Arrange
         const mockOnBlur = jest.fn();
         const value = ' foo ';
@@ -254,11 +241,18 @@ describe('TTextField', () => {
         const trimmedLength = value.trim().length;
 
         render(<TTextField value={value} onChange={mockOnChange} onBlur={mockOnBlur} counter={lengthLimit}/>);
+        const inputElement = screen.getByTestId('text-field-input');
+
+        // Act
+        await act(async () => {
+            await userEvent.click(inputElement);
+        });
         const counterElement = screen.getByTestId('text-field-counter');
 
         // Assert
-        expect(counterElement).toHaveTextContent(`${trimmedLength} / ${lengthLimit}`);
+        expect(counterElement).toHaveTextContent(`${trimmedLength}/${lengthLimit}`);
     });
+
 
     it('When hint prop is applied, the detail message shows the hint', () => {
         // Arrange
