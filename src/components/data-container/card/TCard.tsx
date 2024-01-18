@@ -34,7 +34,9 @@ const TCard = (props: TCardProps) => {
              data-tooltip-id={props.tooltipId}
              data-tooltip-content={props.tooltipContent}
              data-tooltip-place={props.tooltipPlace}
-             data-tooltip-hidden={props.tooltipHidden}>
+             data-tooltip-hidden={props.tooltipHidden}
+             data-testid={'card-root'}
+        >
             {props.children}
         </div>
     );
