@@ -50,7 +50,7 @@ function TSection(props: TSectionProps) {
                     </header>
                 )
             }
-            <div className='t-section__content'>
+            <div className={`t-section__content ${props.contentClassName}`}>
                 {props.children}
             </div>
         </section>
