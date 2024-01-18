@@ -64,8 +64,8 @@ export default function TModal(props: TModalProps): JSX.Element {
     return createPortal(
         (
             // Official document: https://reactcommunity.org/react-modal/
-            <ReactModal ref={modalRef}
-                        isOpen={props.isOpen}
+            <ReactModal isOpen={props.isOpen}
+                        id={props.id}
                         contentLabel={props.contentLabel}
                         onAfterOpen={props.onAfterOpen}
                         onAfterClose={() => props.onAfterClose?.()}
@@ -75,13 +75,10 @@ export default function TModal(props: TModalProps): JSX.Element {
                         overlayClassName={`t-modal__overlay ${props.overlayClassName ?? ''}`.trim()}
                         className={`t-modal__overlay__body ${bodyClassName ?? ''}`.trim()}
                         closeTimeoutMS={200}
-                        shouldCloseOnOverlayClick={false}
-            >
+                        shouldCloseOnOverlayClick={false}>
                 {/* Close Button */}
-                {/* FIXME. color: themeToken gray5로 교체 */}
                 <TIcon className={'t-modal__overlay__body__close-icon'}
-                       color={'#71747A'}
-                       small clickable onClick={(e) => { closeModal(e); }}>close</TIcon>
+                       medium clickable onClick={(e) => { closeModal(e); }}>close</TIcon>
                 {/* Modal Header */}
                 <header className={'t-modal__overlay__body__header'}>
                     {

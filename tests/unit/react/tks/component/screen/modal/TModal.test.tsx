@@ -5,22 +5,25 @@ import TModal from '~/screen/modal/TModal';
 describe('TDropdown', () => {
 
     const mockFn = jest.fn();
-    let $root: HTMLDivElement;
-    let $modalContainer: HTMLDivElement;
+    let root: HTMLDivElement;
+    let modalContainer: HTMLDivElement;
 
     beforeEach(() => {
-        $root = document.createElement('div');
-        $root.id = 'root';
-        $modalContainer = document.createElement('div');
-        $modalContainer.id = 'modal-div';
-        document.body.appendChild($root);
-        document.body.appendChild($modalContainer);
+        root = document.createElement('div');
+        modalContainer = document.createElement('div');
+
+        root.id = 'root';
+        modalContainer.id = 'modal-div';
+
+        document.body.appendChild(root);
+        document.body.appendChild(modalContainer);
+
         mockFn.mockClear();
     });
 
     afterEach(() => {
-        document.body.removeChild($root);
-        document.body.removeChild($modalContainer);
+        document.body.removeChild(root);
+        document.body.removeChild(modalContainer);
     });
 
     describe('style', () => {
@@ -64,6 +67,26 @@ describe('TDropdown', () => {
             expect(modalRoot).toHaveClass(modalClass);
         });
 
+        it('Id prop applies to root', () => {
+
+            // Arrange
+            const modalId = 'modal-id-test';
+            render(
+                <TModal
+                    title={'Modal Title'}
+                    isOpen={true}
+                    id={modalId}
+                    onRequestClose={mockFn}
+                >
+                    Modal Content
+                </TModal>,
+            );
+            const modalRoot = screen.getByRole('dialog');
+
+            // Assert
+            expect(modalRoot).toHaveAttribute('id', modalId);
+        });
+
         it('Size prop applies to root', () => {
 
             // Arrange
@@ -84,23 +107,49 @@ describe('TDropdown', () => {
             expect(modalRoot).toHaveClass(`t-modal__overlay__body--${modalSize}`);
         });
 
-        it('Other Size prop applies to root', () => {
+        it('Xxlarge prop applies to root', () => {
 
             // Arrange
-            render(
-                <TModal
-                    title={'Modal Title'}
-                    isOpen={true}
-                    xlarge={true}
-                    onRequestClose={mockFn}
-                >
-                    Modal Content
-                </TModal>,
-            );
-            const modalRoot = screen.getByRole('dialog');
+            render(<TModal title={'Hi'} isOpen xxlarge onRequestClose={mockFn}>Modal Content</TModal>);
 
             // Assert
-            expect(modalRoot).toHaveClass('t-modal__overlay__body--xlarge');
+            expect(screen.getByRole('dialog')).toHaveClass('t-modal__overlay__body--xxlarge');
+        });
+
+        it('Xlarge prop applies to root', () => {
+
+            // Arrange
+            render(<TModal title={'Hi'} isOpen xlarge onRequestClose={mockFn}>Modal Content</TModal>);
+
+            // Assert
+            expect(screen.getByRole('dialog')).toHaveClass('t-modal__overlay__body--xlarge');
+        });
+
+        it('Large prop applies to root', () => {
+
+            // Arrange
+            render(<TModal title={'Hi'} isOpen large onRequestClose={mockFn}>Modal Content</TModal>);
+
+            // Assert
+            expect(screen.getByRole('dialog')).toHaveClass('t-modal__overlay__body--large');
+        });
+
+        it('Medium prop applies to root', () => {
+
+            // Arrange
+            render(<TModal title={'Hi'} isOpen medium onRequestClose={mockFn}>Modal Content</TModal>);
+
+            // Assert
+            expect(screen.getByRole('dialog')).toHaveClass('t-modal__overlay__body--medium');
+        });
+
+        it('Small prop applies to root', () => {
+
+            // Arrange
+            render(<TModal title={'Hi'} isOpen small onRequestClose={mockFn}>Modal Content</TModal>);
+
+            // Assert
+            expect(screen.getByRole('dialog')).toHaveClass('t-modal__overlay__body--small');
         });
 
         it('Children prop applies to root', () => {
