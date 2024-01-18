@@ -345,7 +345,7 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
                 <TIcon className={`t-dropdown__control__opener ${isOpened ? 't-dropdown__control__opener--open' : ''}`}
                        small
                        color={props.disabled ? '#999999' : '#54575D'}>arrow_drop_down</TIcon>
-                        // FIXME. themeToken(gray-4, gray-6) 으로 교체
+                {/* FIXME. themeToken(gray-4, gray-6) 으로 교체 */}
             </div>
 
             {/* Floating */}
