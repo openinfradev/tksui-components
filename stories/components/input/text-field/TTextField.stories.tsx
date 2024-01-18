@@ -62,18 +62,22 @@ const NormalTemplate = (args: TTextFieldProps) => {
                                 successMessage={'사용 할 수 있는 이름 입니다.'} label={'Success'} lazy={false} counter={10}/>
                     <TTextField {...args} value={'입력 불가능한 값'} label={'Disabled'} disabled/>
                     <TTextField {...args} value={'읽을 수만 있는 값'} label={'Read-only'} readOnly/>
-                    <TTextField {...args} multiline value={value} onChange={setValue} label={'Multi-line'} row={3}/>
-                    <TTextField {...args} multiline value={value} onChange={setValue} label={'Multi-line'} row={3}/>
+                    <TTextField {...args} multiline value={value} onChange={setValue} label={'Multi-line'} rows={3}/>
+                    <TTextField {...args} multiline value={value} onChange={setValue} label={'Multi-line'} rows={3}/>
                     <TTextField {...args} ref={successTextAreaRef} multiline value={value} onChange={setValue}
-                                label={'Multi-line - Success'} row={3}
+                                label={'Multi-line - Success'} rows={3}
                                 rules={[() => true]}
                                 successMessage={'사용 할 수 있는 이름 입니다.'} lazy={false}
-                                placeholder={'placeholder'}/>
-                    <TTextField {...args} ref={errorTextAreaRef} multiline value={value} onChange={setValue} label={'Multi-line - Error'}
-                                row={3}
                                 placeholder={'placeholder'}
-                                readOnly rules={[rule.required('이미 사용중인 네임스페이스 입니다.')]}
-                                successMessage={'사용 할 수 있는 이름 입니다.'} lazy={false}/>
+                                counter={10}
+                    />
+                    <TTextField {...args} ref={errorTextAreaRef} multiline value={value} onChange={setValue} label={'Multi-line - Error'}
+                                rows={3}
+                                placeholder={'placeholder'}
+                                rules={[rule.required('이미 사용중인 네임스페이스 입니다.')]}
+                                successMessage={'사용 할 수 있는 이름 입니다.'} lazy={false}
+                                counter={10}
+                    />
                     <TTextField {...args} value={value} onChange={setValue} label={'너비-400'} width={'400px'}/>
                     <TTextField {...args} value={value} onChange={setValue} label={'너비-300'} width={'300px'}/>
                     <TTextField {...args} value={value} onChange={setValue} label={'너비-200'} width={'200px'}/>

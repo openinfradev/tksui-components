@@ -337,13 +337,15 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
                     (!props.multiple && props.value) && (
                         <TIcon className={'t-dropdown__control__remover'}
                                xsmall
+                               color={'#E1E5F7'} /* FIXME. themetoken.tGrayColor3 으로 교체 */
                                type={'filled'}
                                onClick={onClickClear}>cancel</TIcon>
                     )
                 }
                 <TIcon className={`t-dropdown__control__opener ${isOpened ? 't-dropdown__control__opener--open' : ''}`}
                        small
-                       color={props.disabled ? '#CCCCCC' : '#000000'}>arrow_drop_down</TIcon>
+                       color={props.disabled ? '#999999' : '#54575D'}>arrow_drop_down</TIcon>
+                {/* FIXME. themeToken(gray-4, gray-6) 으로 교체 */}
             </div>
 
             {/* Floating */}

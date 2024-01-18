@@ -40,9 +40,7 @@
                 letter-spacing: 1px;
             }
 
-            &::placeholder {
-                color: $t-font-color--placeholder;
-            }
+            &::placeholder { color: $t-font-color--placeholder; }
         }
 
         .t-text-field__container__action-icon {
@@ -82,6 +80,12 @@
             padding: 0;
             resize: none;
         }
+
+        &:is(.t-text-field--read-only, .t-text-field--disabled) {
+            .t-text-field__container__text-area {
+                background: $t-gray-color-2;
+            }
+        }
     }
 
     .t-text-field__details {
@@ -97,6 +101,9 @@
             margin-right: $t-spacing-16;
             @include ellipsis;
         }
+        .t-text-field__details__text-area__counter { white-space: nowrap; }
+        .t-text-field__details__text-area__counter__counted ~ span { color: $t-gray-color-4; }
+
     }
 
     &:is(.t-text-field--focused, .t-text-field--success, .t-text-field--failure) {

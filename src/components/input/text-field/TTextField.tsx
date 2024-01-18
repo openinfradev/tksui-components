@@ -15,6 +15,7 @@ import TIcon from '../../icon/TIcon';
 import {TTextFieldProps, TTextFieldRef} from './TTextField.interface';
 import useValidator from '@/common/hook/UseValidator';
 
+
 const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) => {
 
 
@@ -222,7 +223,7 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
                             onBlur={onBlur}
                             autoComplete={props.autoComplete}
                             data-testid={'text-field-text-area'}
-                            rows={props.row}
+                            rows={props.rows}
                         />
                 }
 
@@ -241,6 +242,8 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
                         <TIcon xsmall
                                className={'t-text-field__container__action-icon'}
                                clickable
+                               // FIXME. themeToken(gray-6, gray-4) 으로 교체
+                               color={props.value ? '#54575D' : '#999999'}
                                onClick={props.onClickSearch}>
                             search
                         </TIcon>
@@ -272,6 +275,16 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
                 <div className={'t-text-field__details__message'} data-testid={'text-field-message'}>
                     {validator.message || props.hint}
                 </div>
+                {
+                    props.counter && !props.disabled && props.multiline && (
+                        <div className={'t-text-field__details__text-area__counter'}>
+                            <span className={'t-text-field__details__text-area__counter__counted'}>
+                                {counterLength}
+                            </span>
+                            <span>{`/${props.counter}`}</span>
+                        </div>
+                    )
+                }
             </div>
 
         </div>
@@ -280,7 +293,7 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
 
 TTextField.defaultProps = {
     lazy: true,
-    row: 1,
+    rows: 1,
 };
 
 TTextField.displayName = 'TTextField';

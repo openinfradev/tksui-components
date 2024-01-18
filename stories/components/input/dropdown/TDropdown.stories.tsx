@@ -46,7 +46,7 @@ const NormalTemplate = (args: TDropdownProps) => {
         marginTop: '16px',
         display: 'flex',
         flexDirection: 'column',
-        gap: '16px',
+        gap: '20px',
     };
 
 
