@@ -1,5 +1,6 @@
 import {CSSProperties, useMemo} from 'react';
 import {TCardProps} from './TCard.interface';
+import {TIcon} from '~/icon';
 
 const TCard = (props: TCardProps) => {
 
@@ -9,6 +10,9 @@ const TCard = (props: TCardProps) => {
         const clazz: string[] = [];
 
         if (props.className) { clazz.push(props.className); }
+        if (props.type) { clazz.push(`t-card--${props.type}`); }
+        if (props.dashed) { clazz.push('t-card--dashed'); }
+        if (props.center) { clazz.push('t-card--center'); }
         if (props.clickable) { clazz.push('t-card--clickable'); }
         if (props.selected) { clazz.push('t-card--selected'); }
 
@@ -37,13 +41,19 @@ const TCard = (props: TCardProps) => {
              data-tooltip-hidden={props.tooltipHidden}
              data-testid={'card-root'}
         >
+            {props.icon && (
+                <TIcon className={'t-card-header__icon'} size={props.iconSize ? props.iconSize : 'medium'}
+                       type={props.iconType ? props.iconType : 'outlined'}>
+                    {props.icon}
+                </TIcon>
+            )
+            }
             {props.children}
         </div>
     );
 };
 
-TCard.defaultProps = {
-};
+TCard.defaultProps = {};
 
 TCard.displayName = 'TCard';
 
