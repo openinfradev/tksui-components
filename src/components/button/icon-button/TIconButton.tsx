@@ -101,7 +101,7 @@ const TIconButton = forwardRef((props: TIconButtonProps, ref: Ref<TIconButtonRef
         >
             <TIcon className={'t-icon-button__inner'}
                    xsmall
-                   color={'#71747A'} /* FIXME. themetoken 으로 교체 */
+                   color={'#71747A'} /* FIXME. themeToken 으로 교체 */
                    disabled={props.disabled}
             >{props.children}</TIcon>
         </button>

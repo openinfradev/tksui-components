@@ -14,7 +14,6 @@ import uniqueId from 'lodash/uniqueId';
 import TIcon from '../../icon/TIcon';
 import {TTextFieldProps, TTextFieldRef} from './TTextField.interface';
 import useValidator from '@/common/hook/UseValidator';
-import themeToken from '@/styles/designToken/ThemeToken.module.scss';
 
 
 const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) => {
@@ -243,7 +242,8 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
                         <TIcon xsmall
                                className={'t-text-field__container__action-icon'}
                                clickable
-                               color={props.value ? themeToken.tGrayColor6 : themeToken.tGrayColor4}
+                               // FIXME. themeToken(gray-6, gray-4) 으로 교체
+                               color={props.value ? '#54575D' : '#999999'}
                                onClick={props.onClickSearch}>
                             search
                         </TIcon>
