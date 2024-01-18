@@ -1,4 +1,4 @@
-import 'react-toastify/dist/ReactToastify.css';
+// import 'react-toastify/dist/ReactToastify.css';
 import {CSSProperties, useMemo} from 'react';
 import {TBadgeProps} from './TBadge.interface';
 
@@ -61,12 +61,15 @@ const TBadge = (props: TBadgeProps) => {
 
 
     return (
-        <div className={`t-badge ${rootClass}`} style={rootStyle}>
+        <div className={`t-badge ${rootClass}`}
+             id={props.id}
+             style={rootStyle}
+             data-testid={'t-badge-root'}>
             {props.children && props.children}
 
             {
                 (props.content > 0 || (props.content === 0 && props.showZero)) && (
-                    <div className={`t-badge-content ${badgeClass}`} style={badgeStyle}>
+                    <div className={`t-badge-content ${badgeClass}`} style={badgeStyle} data-testid={'t-badge-content'}>
                         {!props.dot && badgeContent}
                     </div>
 
