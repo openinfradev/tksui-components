@@ -12,27 +12,28 @@ describe('TTooltip', () => {
         it('Classname prop applies to root', () => {
 
             // Arrange
-            const testData = 'class-name-prop'
+            const testData = 'class-name-prop';
 
             render(<TTooltip className={testData} isOpen={true} content={testData} id={'tooltip-test'}/>);
 
-            const content = screen.getByText(testData)
+            const content = screen.getByText(testData);
 
             // Assert
-            expect(content).toHaveClass(testData)
+            expect(content).toHaveClass(testData);
 
-        })
+        });
 
-    })
+    });
 
     describe('Event', () => {
 
         it('When you hover over a icon, tooltip is displayed', async () => {
 
             // Arrange
-            const testData = 'tooltip content test'
-            const tooltipId = 'tooltip-test'
-            const spanContent = 'span content'
+            const testData = 'tooltip content test';
+            const tooltipId = 'tooltip-test';
+            const spanContent = 'span content';
+
             render(
                 <>
                     <TTooltip id={tooltipId}/>
@@ -41,22 +42,21 @@ describe('TTooltip', () => {
                           data-tooltip-place={'left'}
                           children={spanContent}/>
                 </>
-            )
+            );
 
             const item = screen.getByText(spanContent);
 
             const user = userEvent.setup();
 
             // Act
-            await user.hover(item)
+            await user.hover(item);
 
             // Arrange
-            const content = screen.getByText(testData)
+            const content = screen.getByText(testData);
 
             // Assert
-            expect(content).toBeInTheDocument()
-        })
-
+            expect(content).toBeInTheDocument();
+        });
 
     })
 
@@ -65,16 +65,17 @@ describe('TTooltip', () => {
         it('Renders without errors', () => {
 
             // Assign
-            const testData = 'test content'
+            const testData = 'test content';
 
             render(<TTooltip isOpen={true} content={testData} id={'tooltip-test'}/>);
 
-            const content = screen.getByText(testData)
+            const content = screen.getByText(testData);
 
             // Assert
-            expect(content).toBeInTheDocument()
+            expect(content).toBeInTheDocument();
 
-        })
+        });
 
-    })
-})
+    });
+
+});

@@ -9,7 +9,7 @@ describe('TToast', () => {
         it('Renders normal message without errors', async () => {
 
             // Arrange
-            const message = 'test message'
+            const message = 'test message';
 
             render(<TToast/>);
             notify(message);
@@ -24,7 +24,7 @@ describe('TToast', () => {
         it('Render success message without errors', async () => {
 
             // Arrange
-            const message = 'test message'
+            const message = 'test message';
 
             render(<TToast/>);
             notify.success(message);
@@ -39,7 +39,7 @@ describe('TToast', () => {
         it('Render error message without errors', async () => {
 
             // Arrange
-            const message = 'test message'
+            const message = 'test message';
 
             render(<TToast/>);
             notify.error(message);
@@ -54,7 +54,7 @@ describe('TToast', () => {
         it('Render warning message without errors', async () => {
 
             // Arrange
-            const message = 'test message'
+            const message = 'test message';
 
             render(<TToast/>);
             notify.warn(message);
@@ -69,7 +69,7 @@ describe('TToast', () => {
         it('Render info message without errors', async () => {
 
             // Arrange
-            const message = 'test message'
+            const message = 'test message';
 
             render(<TToast/>);
             notify.info(message);
@@ -86,7 +86,7 @@ describe('TToast', () => {
             it('When normal toast rendered, it should be displayed message on message area', async () => {
 
                 // Arrange
-                const message = 'test message'
+                const message = 'test message';
 
                 render(<TToast/>);
                 notify(message);
@@ -101,7 +101,7 @@ describe('TToast', () => {
             it('When success toast rendered, it should be displayed message on message area', async () => {
 
                 // Arrange
-                const message = 'test message'
+                const message = 'test message';
 
                 render(<TToast/>);
                 notify.success(message);
@@ -116,7 +116,7 @@ describe('TToast', () => {
             it('When error toast rendered, it should be displayed message on message area', async () => {
 
                 // Arrange
-                const message = 'test message'
+                const message = 'test message';
 
                 render(<TToast/>);
                 notify.error(message);
@@ -131,7 +131,7 @@ describe('TToast', () => {
             it('When warning toast rendered, it should be displayed message on message area', async () => {
 
                 // Arrange
-                const message = 'test message'
+                const message = 'test message';
 
                 render(<TToast/>);
                 notify.warn(message);
@@ -157,7 +157,8 @@ describe('TToast', () => {
                 expect(toastElement).toHaveTextContent(message);
 
             });
-        })
-    })
+        });
+
+    });
 
 });

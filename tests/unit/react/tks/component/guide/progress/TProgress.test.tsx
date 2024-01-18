@@ -15,14 +15,14 @@ describe('TProgress', () => {
             const testData = 'test message';
             render(<TProgress isOpen={true} message={testData}/>);
 
-            const message = screen.getByText(testData)
+            const message = screen.getByText(testData);
 
             // Assert
             expect(message).toBeInTheDocument();
 
-        })
+        });
 
-    })
+    });
 
     describe('Content', () => {
 
@@ -37,12 +37,13 @@ describe('TProgress', () => {
 
             render(<TProgress isOpen={true} message={testData} />);
 
-            const message = screen.getByText(testData)
+            const message = screen.getByText(testData);
 
             // Assert
             expect(message).toHaveTextContent(testData);
 
-        })
-    })
+        });
 
-})
+    });
+
+});
