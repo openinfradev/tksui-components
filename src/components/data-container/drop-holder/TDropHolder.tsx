@@ -138,7 +138,9 @@ const TDropHolder = forwardRef((props: TDropHolderProps, ref: ForwardedRef<TDrop
         <div className={`t-drop-holder ${rootClass}`}
              style={rootStyle}
              ref={rootRef}
-             onClick={onClickRoot}>
+             onClick={onClickRoot}
+             data-testid={'drop-holder-root'}
+        >
             <div className={'t-drop-holder__anchor'} style={anchorStyle}>
                 {
                     isOpened && (
