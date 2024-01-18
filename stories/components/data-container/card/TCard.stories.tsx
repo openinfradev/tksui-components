@@ -21,7 +21,7 @@ const Container = ({children, label}: { children: ReactNode, label?: string }) =
     return (
         <div style={{display: 'flex', flexDirection: 'column', gap: '12px', width: '100%'}}>
             {label && <p style={{fontSize: '14px'}}>{label}</p>}
-            <div style={{display: 'flex', alignItems: 'center', gap: '12px', width: '100%'}}>
+            <div style={{display: 'flex', alignItems: 'flex-start', gap: '12px', width: '100%'}}>
                 {children}
             </div>
         </div>
@@ -36,47 +36,19 @@ const Template = (args) => {
     return (
         <div style={{display: 'flex', alignItems: 'flex-start', gap: '20px', flexDirection: 'column'}}>
             <TTooltip id={'card-tooltip'}/>
-            <Container label={'Type White'}>
-                <TCard {...args}>
-                    <TCardHeader title={'AWS'} subTitle={'Lorem ipsum dolor sit'}></TCardHeader>
-                    {/* <CardDivider /> */}
-                    <TCardContent>Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor</TCardContent>
-                </TCard>
+            <Container label={'Normal / Normal Dashed'}>
+                <TCard {...args} width={'200px'} height={'200px'}/>
+                <TCard {...args} width={'200px'} height={'200px'} dashed/>
             </Container>
 
-            <Container label={'Type Blue'}>
+            <Container label={'Normal with alone Header'}>
                 <TCard {...args} type={'blue'}>
                     <TCardHeader title={'AWS'} subTitle={'Lorem ipsum dolor sit'}></TCardHeader>
-                    {/* <CardDivider /> */}
-                    <TCardContent>Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor</TCardContent>
                 </TCard>
             </Container>
 
-            <Container label={'Header alone + Type White'}>
+            <Container label={'Normal with alone Content'}>
                 <TCard {...args} >
-                    <TCardHeader title={'AWS'} subTitle={'Lorem ipsum dolor sit'}></TCardHeader>
-                </TCard>
-            </Container>
-
-            <Container label={'Content alone + Type Blue'}>
-                <TCard {...args} type={'blue'}>
-                    <TCardContent>Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor</TCardContent>
-                </TCard>
-            </Container>
-
-
-            <Container label={'Type White + Dashed'}>
-                <TCard {...args} dashed>
-                    <TCardHeader title={'AWS'} subTitle={'Lorem ipsum dolor sit'}></TCardHeader>
-                    {/* <CardDivider /> */}
-                    <TCardContent>Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor</TCardContent>
-                </TCard>
-            </Container>
-
-            <Container label={'Type Blue + Dashed'}>
-                <TCard {...args} type={'blue'} dashed>
-                    <TCardHeader title={'AWS'} subTitle={'Lorem ipsum dolor sit'}></TCardHeader>
-                    {/* <CardDivider /> */}
                     <TCardContent>Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor</TCardContent>
                 </TCard>
             </Container>
@@ -94,37 +66,34 @@ const Template = (args) => {
                     <TCardContent>Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor</TCardContent>
                 </TCard>
             </Container>
-            <Container label={'Center'}>
-                <TCard {...args} width={360} height={240} dashed center>
-                    <TIcon color={'#aaa'}>add</TIcon>
-                </TCard>
-            </Container>
-            <Container label={'Custom'}>
-                <TCard {...args} type={'blue'} width={'100%'} dashed center clickable>
-                    <div style={{display: 'flex', alignItems: 'center', gap: '4px'}}>
-                        <TIcon small>post_add</TIcon>
-                        <div style={{marginTop: '4px'}}>행 추가</div>
-                    </div>
-                </TCard>
-            </Container>
 
-            <Container label={'Custom'}>
-                <TCard {...args} type={'blue'} width={'100%'} dashed center clickable>
-                    <div style={{display: 'flex', alignItems: 'center', gap: '4px'}}>
-                        <TIcon small>post_add</TIcon>
-                        <div style={{marginTop: '4px'}}>행 추가</div>
-                    </div>
-                </TCard>
-            </Container>
-
-            <Container label={'Cards Case1. txt / ico+txt / txt+chart'}>
+            <Container label={'Only Text / Card Icon + Text / Header Icon + Text'}>
                 <TCard {...args} width={'343px'}>
                     <TCardHeader title={'title'} subTitle={'Sub Title'}></TCardHeader>
                     <TCardContent>Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum
                         dolor Lorem ipsum dolor Lorem ipsum dolorLorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum
                         dolor</TCardContent>
                 </TCard>
+
+                <TCard {...args} width={'343px'} icon={'edit'} iconSize={'large'} iconColor={'#3617CE'}>
+                    <TCardHeader title={'title'} subTitle={'Sub Title'}></TCardHeader>
+                    <TCardContent>Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum
+                        dolor Lorem ipsum dolor Lorem ipsum dolorLorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum
+                        dolor</TCardContent>
+                </TCard>
+
+                <TCard {...args} width={'343px'}>
+                    <TCardHeader title={'title'} subTitle={'Sub Title'} icon={'alarm'} iconColor={'violet'}/>
+                    <TCardContent>Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum
+                        dolor Lorem ipsum dolor Lorem ipsum dolorLorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum
+                        dolor</TCardContent>
+                </TCard>
             </Container>
+
+            <Container label={'Widget Card'}>
+                <TCard {...args} width={360} height={240} dashed center icon={'add'} iconSize={'large'} iconColor={'#71747A'} clickable/>
+            </Container>
+
         </div>
     );
 };

@@ -13,14 +13,13 @@ const TCardHeader = (props: TCardHeaderProps) => {
 
 
     // endregion
-
-
     // region [Templates]
 
     const rootClass = useMemo((): string => {
         const clazz: string[] = [];
 
         if (className) { clazz.push(className); }
+        if (props.icon) { clazz.push('t-card-header--with-icon'); }
 
         return clazz.join(' ');
     }, [className]);
@@ -33,16 +32,24 @@ const TCardHeader = (props: TCardHeaderProps) => {
     // endregion
 
     return (
-        <header className={`t-card-header ${rootClass}`} style={rootStyle}>
+        <header className={`t-card-header ${rootClass}`} style={rootStyle} data-testid={'card-header-root'}>
             {props.icon && (
                 <TIcon className={'t-card-header__icon'} size={props.iconSize ? props.iconSize : 'medium'}
-                       type={props.iconType ? props.iconType : 'outlined'}>
+                       type={props.iconType ? props.iconType : 'outlined'} color={props.iconColor}>
                     {props.icon}
                 </TIcon>
             )
             }
-            <h4 className={'t-card-header__title'}>{props.title}</h4>
-            <div className={'t-card-header__sub-title'}>{props.subTitle}</div>
+            {props.title && !props.subTitle && (<h4 className={'t-card-header__text__title'}>{props.title}</h4>)}
+            {!props.title && props.subTitle && (<div className={'t-card-header__text__sub-title'}>{props.subTitle}</div>)}
+            {
+                props.title && props.subTitle && (
+                    <div className={'t-card-header__text'}>
+                        <h4 className={'t-card-header__text__title'}>{props.title}</h4>
+                        <div className={'t-card-header__text__sub-title'}>{props.subTitle}</div>
+                    </div>
+                )
+            }
         </header>
     );
 };

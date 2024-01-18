@@ -2,12 +2,9 @@
     border: 1px solid $t-blue-gray-color-3;
     border-radius: 8px;
     background: $t-white-color;
-    padding: $t-spacing-12;
+    padding: $t-spacing-24;
     font-size: 0;
 
-    &.t-card--blue {
-        background: $t-blue-gray-color-2;
-    }
 
     &.t-card--clickable {
         cursor: pointer;
@@ -45,39 +42,36 @@
         align-items: center;
     }
 
-    .t-card-header__icon {
-        padding-top: $t-spacing-12;
-
-        & ~ :is(.t-card-header, .t-card-content) {
-            padding-top: $t-spacing-16;
-        }
-    }
+    & .t-card-header__icon ~ .t-card-header{ padding-top: $t-spacing-16; }
 
     &:hover {
         border-color: $t-primary-color;
         box-shadow: $t-shadow--focused-element;
     }
-
 }
 
 .t-card-header {
-    padding: $t-spacing-12;
 
-
-    .t-card-header__title {
+    .t-card-header__text__title {
         @include typo-subtitle-1;
         color: $t-black-color;
     }
-    .t-card-header__sub-title {
+    .t-card-header__text__sub-title {
         @include typo-element-3;
         color: $t-gray-color-6;
+    }
+
+    &.t-card-header--with-icon {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: $t-spacing-8;
     }
 }
 
 .t-card-content {
     @include typo-body-3;
-    padding: $t-spacing-12 $t-spacing-12 $t-spacing-12 $t-spacing-12;
     line-height: $t-line-height-body;
 }
 
-.t-card-header ~ .t-card-content { padding-top: $t-spacing-4;}
+.t-card-header ~ .t-card-content { padding-top: $t-spacing-16;}

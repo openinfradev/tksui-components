@@ -10,7 +10,6 @@ const TCard = (props: TCardProps) => {
         const clazz: string[] = [];
 
         if (props.className) { clazz.push(props.className); }
-        if (props.type) { clazz.push(`t-card--${props.type}`); }
         if (props.dashed) { clazz.push('t-card--dashed'); }
         if (props.center) { clazz.push('t-card--center'); }
         if (props.clickable) { clazz.push('t-card--clickable'); }
@@ -42,8 +41,8 @@ const TCard = (props: TCardProps) => {
              data-testid={'card-root'}
         >
             {props.icon && (
-                <TIcon className={'t-card-header__icon'} size={props.iconSize ? props.iconSize : 'medium'}
-                       type={props.iconType ? props.iconType : 'outlined'}>
+                <TIcon className={'t-card-top__icon'} size={props.iconSize ? props.iconSize : 'medium'}
+                       type={props.iconType ? props.iconType : 'outlined'} color={props.iconColor} >
                     {props.icon}
                 </TIcon>
             )
