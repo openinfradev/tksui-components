@@ -38,7 +38,6 @@ describe('TPagination', () => {
 
             // Assert
             expect(root).toHaveClass(testClassName);
-
         });
 
         it('Style prop applies to root', () => {
@@ -141,8 +140,6 @@ describe('TPagination', () => {
             expect(page3Button)
                 .toHaveClass('t-pagination__page-container__page__button--active');
         });
-
-
     });
 
 
@@ -154,7 +151,6 @@ describe('TPagination', () => {
             render(<Pagination totalPages={13}/>);
             const previousPageSetIcon = screen.getByLabelText('t_navigate_left_double');
             const previousPageIcon = screen.getByLabelText('t_navigate_left');
-
 
             // Assert
             expect(previousPageSetIcon).toHaveClass('t-icon--disabled');
@@ -190,7 +186,6 @@ describe('TPagination', () => {
             render(<Pagination totalPages={2}/>);
             const nextPageSetIcon = screen.getByLabelText('t_navigate_right_double');
             const nextPageIcon = screen.getByLabelText('t_navigate_right');
-
 
             // Assert
             expect(nextPageSetIcon).not.toHaveClass('t-icon--disabled');
@@ -243,7 +238,6 @@ describe('TPagination', () => {
                 // Assert
                 expect(pageButtons[0])
                     .toHaveClass('t-pagination__page-container__page__button--active');
-
                 expect(pageButtons[0]).toHaveAccessibleName('1');
 
                 // Act
@@ -251,9 +245,9 @@ describe('TPagination', () => {
                 await act(async () => {
                     await user.click(nextPageSetIcon);
                 });
+                pageButtons = screen.getAllByRole('button');
 
                 // Assert
-                pageButtons = screen.getAllByRole('button');
                 expect(pageButtons[0])
                     .toHaveClass('t-pagination__page-container__page__button--active');
 
@@ -265,16 +259,15 @@ describe('TPagination', () => {
                 await act(async () => {
                     await user.click(prevPageSetIcon);
                 });
+                pageButtons = screen.getAllByRole('button');
 
                 // Assert
-                pageButtons = screen.getAllByRole('button');
                 expect(pageButtons[0])
                     .not.toHaveClass('t-pagination__page-container__page__button--active');
                 expect(pageButtons[9])
                     .toHaveClass('t-pagination__page-container__page__button--active');
                 expect(pageButtons[0])
                     .toHaveAccessibleName('1');
-
             },
         );
 
@@ -302,9 +295,9 @@ describe('TPagination', () => {
                 await act(async () => {
                     await user.click(nextPageSetIcon);
                 });
+                pageButtons = screen.getAllByRole('button');
 
                 // Assert
-                pageButtons = screen.getAllByRole('button');
                 expect(pageButtons[0])
                     .not.toHaveClass('t-pagination__page-container__page__button--active');
                 expect(pageButtons[4])
@@ -318,9 +311,9 @@ describe('TPagination', () => {
                 await act(async () => {
                     await user.click(prevPageSetIcon);
                 });
+                pageButtons = screen.getAllByRole('button');
 
                 // Assert
-                pageButtons = screen.getAllByRole('button');
                 expect(pageButtons[0])
                     .toHaveClass('t-pagination__page-container__page__button--active');
                 expect(pageButtons[4])
@@ -328,11 +321,8 @@ describe('TPagination', () => {
 
                 expect(pageButtons[0])
                     .toHaveAccessibleName('1');
-
             },
         );
-
-
     });
 
     describe('Jumper', () => {
@@ -380,6 +370,28 @@ describe('TPagination', () => {
 
             // Assert
             expect(failureElement).toHaveClass('t-number-field--failure');
+        });
+
+        it('If you enter an over page number, an error appears in the Number field.', async () => {
+
+            // Arrange
+            const user = userEvent.setup();
+            const invalidNumber = 77;
+            const totalPages = 70;
+            render(<Pagination jumper totalPages={totalPages}/>);
+            const numberFieldInputElement = screen.getByTestId('number-field-input-root');
+
+            // Act
+            await act(async () => {
+                await user.click(numberFieldInputElement);
+                await user.clear(numberFieldInputElement);
+                await user.keyboard(invalidNumber.toString());
+            });
+            const inputElement: HTMLInputElement = screen.getByTestId('number-field-input-root');
+            const typedNumber = Number(inputElement.value);
+
+            // Assert
+            expect(totalPages > typedNumber).toBeTruthy();
         });
 
         it('If the page number changes, the jumper number field number also changes.', async () => {

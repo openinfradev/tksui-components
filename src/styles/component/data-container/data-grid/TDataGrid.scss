@@ -14,8 +14,8 @@
     }
 
     .t-data-grid__header {
-        height: 46px;
-        margin-bottom: $t-spacing-8;
+        //height: 46px;
+        margin-bottom: $t-spacing-10;
         display: flex;
         align-items: center;
         gap: $t-spacing-16;
@@ -29,8 +29,8 @@
             }
         }
         .t-data-grid__header__select-indicator {
+            @include typo-element-3;
             color: $t-primary-color;
-            font-weight: $t-font-weight-medium;
         }
         .t-data-grid__header__left-action {
             flex: 1 1 auto;
@@ -75,10 +75,7 @@
                 & .ag-header-cell {
                     padding: 0 $t-spacing-20;
 
-                    .ag-header-cell-label {
-                        position: relative;
-                        top: 1px;
-                    }
+                    .ag-header-cell-label { position: relative; }
                 }
             }
 
