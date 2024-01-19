@@ -65,6 +65,7 @@ describe('TDataGrid', () => {
             // Assert
             expect(root).toHaveStyle(testStyle);
         });
+
     });
 
     describe('Render', () => {
@@ -81,5 +82,58 @@ describe('TDataGrid', () => {
             expect(await findByText(root, 'Count')).toBeInTheDocument();
             expect(await findByText(root, 'Color')).toBeInTheDocument();
         });
+
+        it('If noHeader property is false, grid header is displayed.', () => {
+
+            // Arrange
+            render(<TDataGrid {...baseProps} noHeader={false}/>);
+            const root = screen.getByTestId('data-grid-root');
+
+            // Assert
+            expect(root.getElementsByClassName('t-data-grid__header').length).toBe(1);
+        });
+
+        it('If noPagination property is false, pagination is displayed.', () => {
+
+            // Arrange
+            render(<TDataGrid {...baseProps} noPagination={false}/>);
+            const root = screen.getByTestId('data-grid-root');
+
+            // Assert
+            expect(root.getElementsByClassName('t-data-grid__pagination').length).toBe(1);
+        });
+
+        it('If noTotalRows property is false, header total rows is displayed.', () => {
+
+            // Arrange
+            render(<TDataGrid {...baseProps} noTotalRows={false}/>);
+            const root = screen.getByTestId('data-grid-root');
+
+            // Assert
+            expect(root.getElementsByClassName('t-data-grid__header__pagination').length).toBe(1);
+        });
+
+        it('If leftAction exists, the left action area is exposed.', () => {
+
+            // Arrange
+            const leftAction = <button>left button</button>
+            render(<TDataGrid {...baseProps} leftAction={leftAction}/>);
+            const root = screen.getByTestId('data-grid-root');
+
+            // Assert
+            expect(root.getElementsByClassName('t-data-grid__header__left-action').length).toBe(1);
+        });
+
+        it('If rightAction exists, the right action area is exposed.', () => {
+
+            // Arrange
+            const rightAction = <button>right button</button>
+            render(<TDataGrid {...baseProps} rightAction={rightAction}/>);
+            const root = screen.getByTestId('data-grid-root');
+
+            // Assert
+            expect(root.getElementsByClassName('t-data-grid__header__right-action').length).toBe(1);
+        });
+
     });
 });
