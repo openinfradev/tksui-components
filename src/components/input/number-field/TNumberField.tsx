@@ -228,6 +228,7 @@ const TNumberField = forwardRef((props: TNumberFieldProps, ref: Ref<TNumberField
                        onKeyDown={onKeyDown}
                        onFocus={onFocus}
                        onBlur={onBlur}
+                       data-testid={'number-field-input-root'}
                 />
                 {
 

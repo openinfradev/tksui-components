@@ -4,6 +4,8 @@ export interface TPaginationProps extends TBaseProps {
 
     totalPages: number,
     pageNumber: number,
+    jumper?: boolean,
+    jumperText?: string,
 
     onChangePageNumber(value: number): void,
 }

@@ -3,13 +3,14 @@
 
     display: flex;
     justify-content: center;
+    align-items: center;
     height: 24px;
     width: 100%;
 
     .t-pagination__nav-button-container {
         display: flex;
         align-items: center;
-        gap: 16px;
+        gap: $t-spacing-8;
 
         .t-icon.t-pagination__nav-button-container__button {
             @include icon-color($t-gray-color-4);
@@ -32,38 +33,81 @@
     .t-pagination__page-container {
         display: flex;
         align-items: center;
-        gap: 28px;
-        padding: 0 36px;
+        gap: $t-spacing-8;
+        margin: 0 $t-spacing-8;
 
         .t-pagination__page-container__page {
             min-width: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
+
             .t-pagination__page-container__page__button {
-                height: 24px;
-                padding: 0 3px;
+                width: 28px;
+                height: 28px;
                 border: none;
                 background: none;
-                color: $t-gray-color-4;
+                color: $t-gray-color-5;
                 @include typo-element-3;
                 cursor: pointer;
 
-                &:hover {
-                    color: $t-primary-color;
-                }
-                &:focus-visible {
-                    outline: 1px solid $t-primary-color;
-                }
+                &:hover { color: $t-primary-color; }
+                &:focus-visible { outline: 1px solid $t-primary-color; }
 
                 &.t-pagination__page-container__page__button--active {
                     color: $t-primary-color;
-                    font-weight: $t-font-weight-bold;
-                    border-bottom: 2px solid $t-primary-color;
+                    @include typo-subtitle-4
                 }
             }
         }
 
+    }
+
+    .t-pagination__jumper__container {
+        display: flex;
+        align-items: center;
+        gap: $t-spacing-4;
+        margin-left: $t-spacing-24;
+
+        .t-pagination__jumper__container__page__field {
+            width: $t-spacing-48;
+
+            .t-number-field__container {
+                height: $t-spacing-24;
+                padding: 0 $t-spacing-2;
+                border-radius: $t-spacing-4;
+                border-color: $t-gray-color-2;
+            }
+
+            &.t-number-field--failure {
+                .t-number-field__container {
+                    border-color: $t-status-color--error;
+                }
+            }
+
+
+            .t-number-field__container__action-icon { display: none; }
+            .t-number-field__container__input {
+                text-align: center;
+                @include typo-element-3;
+            }
+        }
+
+        .t-pagination__jumper__container__short-cut__button {
+            min-width: 71px;
+            height: 24px;
+            border: 1px solid $t-gray-color-4;
+            border-radius: $t-spacing-2;
+            padding: 0;
+            @include typo-element-4;
+
+            .t-button__content {
+                position: relative;
+                top: 1px;
+            }
+        }
+
+        .t-number-field__details { display: none; }
     }
 
 }
