@@ -1,4 +1,4 @@
-// import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css';
 import {CSSProperties, useMemo} from 'react';
 import {TBadgeProps} from './TBadge.interface';
 

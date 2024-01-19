@@ -1,4 +1,4 @@
-// import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css';
 import {Theme, toast, ToastContainer} from 'react-toastify';
 import {ToastPosition} from 'react-toastify/dist/types';
 import {TToastProps} from './TToast.interface';
