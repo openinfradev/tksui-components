@@ -1,9 +1,8 @@
 import {render, screen} from '@testing-library/react';
-import ReactModal from 'react-modal';
 import TProgress from '~/guide/progress/TProgress';
 describe('TProgress', () => {
 
-    describe('Render', () => {
+    describe('Style', () => {
 
         it('Renders without errors', () => {
 

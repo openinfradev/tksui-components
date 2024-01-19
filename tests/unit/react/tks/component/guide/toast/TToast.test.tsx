@@ -4,7 +4,7 @@ import TToast, {notify} from '~/guide/toast/TToast';
 
 describe('TToast', () => {
 
-    describe('Render', () => {
+    describe('Style', () => {
 
         it('Renders normal message without errors', async () => {
 

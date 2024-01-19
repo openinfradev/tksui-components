@@ -23,6 +23,20 @@ describe('TTooltip', () => {
 
         });
 
+        it('Renders without errors', () => {
+
+            // Assign
+            const testData = 'test content';
+
+            render(<TTooltip isOpen={true} content={testData} id={'tooltip-test'}/>);
+
+            const content = screen.getByText(testData);
+
+            // Assert
+            expect(content).toBeInTheDocument();
+
+        });
+
     });
 
     describe('Event', () => {
@@ -56,24 +70,6 @@ describe('TTooltip', () => {
 
             // Assert
             expect(content).toBeInTheDocument();
-        });
-
-    })
-
-    describe('Render', () => {
-
-        it('Renders without errors', () => {
-
-            // Assign
-            const testData = 'test content';
-
-            render(<TTooltip isOpen={true} content={testData} id={'tooltip-test'}/>);
-
-            const content = screen.getByText(testData);
-
-            // Assert
-            expect(content).toBeInTheDocument();
-
         });
 
     });
