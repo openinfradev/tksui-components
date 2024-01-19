@@ -1,4 +1,4 @@
-import React, {MouseEvent, useCallback, useEffect, useMemo, useRef} from 'react';
+import React, {MouseEvent, useCallback, useMemo, useRef, useEffect} from 'react';
 import {createPortal} from 'react-dom';
 import ReactModal from 'react-modal';
 import TIcon from '../../icon/TIcon';
@@ -76,7 +76,8 @@ export default function TModal(props: TModalProps): JSX.Element {
                         overlayClassName={`t-modal__overlay ${props.overlayClassName ?? ''}`.trim()}
                         className={`t-modal__overlay__body ${bodyClassName ?? ''}`.trim()}
                         closeTimeoutMS={200}
-                        shouldCloseOnOverlayClick={false}>
+                        shouldCloseOnOverlayClick={false}
+            >
                 {/* Close Button */}
                 {/* FIXME. color: themeToken gray5로 교체 */}
                 <TIcon className={'t-modal__overlay__body__close-icon'}
