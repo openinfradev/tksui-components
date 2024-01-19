@@ -41,8 +41,8 @@ const TCard = (props: TCardProps) => {
              data-testid={'card-root'}
         >
             {props.icon && (
-                <TIcon className={'t-card-top__icon'} size={props.iconSize ? props.iconSize : 'medium'}
-                       type={props.iconType ? props.iconType : 'outlined'} color={props.iconColor} >
+                <TIcon className={'t-card-top__icon'} size={props.iconSize}
+                       type={props.iconType} color={props.iconColor} >
                     {props.icon}
                 </TIcon>
             )
@@ -52,7 +52,10 @@ const TCard = (props: TCardProps) => {
     );
 };
 
-TCard.defaultProps = {};
+TCard.defaultProps = {
+    iconSize: 'medium',
+    iconType: 'outlined',
+};
 
 TCard.displayName = 'TCard';
 

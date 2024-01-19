@@ -34,8 +34,8 @@ const TCardHeader = (props: TCardHeaderProps) => {
     return (
         <header className={`t-card-header ${rootClass}`} style={rootStyle} data-testid={'card-header-root'}>
             {props.icon && (
-                <TIcon className={'t-card-header__icon'} size={props.iconSize ? props.iconSize : 'medium'}
-                       type={props.iconType ? props.iconType : 'outlined'} color={props.iconColor}>
+                <TIcon className={'t-card-header__icon'} size={props.iconSize}
+                       type={props.iconType} color={props.iconColor}>
                     {props.icon}
                 </TIcon>
             )
@@ -54,7 +54,10 @@ const TCardHeader = (props: TCardHeaderProps) => {
     );
 };
 
-TCardHeader.defaultProps = {};
+TCardHeader.defaultProps = {
+    iconSize: 'medium',
+    iconType: 'outlined',
+};
 
 TCardHeader.displayName = 'TCard';
 
