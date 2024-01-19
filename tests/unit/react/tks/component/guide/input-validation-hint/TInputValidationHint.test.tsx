@@ -1,6 +1,5 @@
 import {render, screen} from '@testing-library/react';
 import TInputValidationHint from '~/guide/input-validation-hint/TInputValidationHint';
-import userEvent from '@testing-library/user-event';
 
 describe('TInputValidationHint', () => {
 
@@ -99,7 +98,7 @@ describe('TInputValidationHint', () => {
 
         });
 
-        it('When value invalid, it should be displayed description with (X) on hint area', () => {
+        it('When value is an invalid, it should be displayed description with (X) on hint area', () => {
 
             // Arrange
             const description = '8자에서 16자 사이로 입력해 주세요.';
