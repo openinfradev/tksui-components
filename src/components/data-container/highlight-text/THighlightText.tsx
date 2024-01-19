@@ -15,14 +15,15 @@ function THighlightText(props: THighlightTextProps) {
             const tokens = props.children.toString()
                 .split(new RegExp(`(${escapedKeyword})`, 'gi'));
 
-            return (<>
+            return (
+                <div data-testid={'highlighted-text-root'}>
                 {
                     tokens.map((token: string, index: number) => (token.toLowerCase() === keyword
                         ? <mark key={index}>{token}</mark>
                         : token
                     ))
                 }
-            </>);
+            </div>);
         }
 
         return <span>{props.children}</span>;
