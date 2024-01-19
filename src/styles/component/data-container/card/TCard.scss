@@ -42,7 +42,7 @@
         align-items: center;
     }
 
-    & .t-card-header__icon ~ .t-card-header{ padding-top: $t-spacing-16; }
+    & .t-card-top__icon ~ .t-card-header { padding-top: $t-spacing-16; }
 
     &:hover {
         border-color: $t-primary-color;
@@ -69,9 +69,6 @@
     }
 }
 
-.t-card-content {
-    @include typo-body-3;
-    line-height: $t-line-height-body;
-}
+.t-card-content { @include typo-body-3;}
 
 .t-card-header ~ .t-card-content { padding-top: $t-spacing-16;}

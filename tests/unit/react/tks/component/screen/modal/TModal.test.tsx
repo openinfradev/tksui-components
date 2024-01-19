@@ -1,6 +1,9 @@
 import {render, screen} from '@testing-library/react';
 import * as Modal from 'react-modal';
 import TModal from '~/screen/modal/TModal';
+import {modalSize as modalSizeList} from '@/components';
+
+const sizeList = Object.values(modalSizeList);
 
 describe('TDropdown', () => {
 
@@ -33,11 +36,7 @@ describe('TDropdown', () => {
             // Arrange
             Modal.setAppElement = () => null;
             render(
-                <TModal
-                    title={'Modal Title'}
-                    isOpen={true}
-                    onRequestClose={mockFn}
-                >
+                <TModal title={'Modal Title'} isOpen onRequestClose={mockFn}>
                     Modal Content
                 </TModal>,
             );
@@ -52,12 +51,7 @@ describe('TDropdown', () => {
             // Arrange
             const modalClass = 'modal-classname';
             render(
-                <TModal
-                    title={'Modal Title'}
-                    isOpen={true}
-                    bodyClassName={modalClass}
-                    onRequestClose={mockFn}
-                >
+                <TModal title={'Hi'} isOpen bodyClassName={modalClass} onRequestClose={mockFn}>
                     Modal Content
                 </TModal>,
             );
@@ -72,12 +66,7 @@ describe('TDropdown', () => {
             // Arrange
             const modalId = 'modal-id-test';
             render(
-                <TModal
-                    title={'Modal Title'}
-                    isOpen={true}
-                    id={modalId}
-                    onRequestClose={mockFn}
-                >
+                <TModal title={'Hi'} isOpen id={modalId} onRequestClose={mockFn}>
                     Modal Content
                 </TModal>,
             );
@@ -87,69 +76,35 @@ describe('TDropdown', () => {
             expect(modalRoot).toHaveAttribute('id', modalId);
         });
 
-        it('Size prop applies to root', () => {
+
+        it.each(sizeList)('All size prop applies to root ', (size) => {
 
             // Arrange
-            const modalSize = 'large';
             render(
-                <TModal
-                    title={'Modal Title'}
-                    isOpen={true}
-                    onRequestClose={mockFn}
-                    size={modalSize}
-                >
+                <TModal title={'Hi'} isOpen onRequestClose={mockFn} size={size}>
                     Modal Content
                 </TModal>,
             );
             const modalRoot = screen.getByRole('dialog');
 
             // Assert
-            expect(modalRoot).toHaveClass(`t-modal__overlay__body--${modalSize}`);
+            expect(modalRoot).toHaveClass(`t-modal__overlay__body--${size}`);
         });
 
-        it('Xxlarge prop applies to root', () => {
+        it.each(sizeList)('All sizes in the boolean type are applies to the root', (size) => {
 
             // Arrange
-            render(<TModal title={'Hi'} isOpen xxlarge onRequestClose={mockFn}>Modal Content</TModal>);
+            const sizeProp = {};
+            sizeProp[size] = true;
+            render(
+                <TModal title={'Hi'} isOpen onRequestClose={mockFn} {...sizeProp}>
+                    Modal Content
+                </TModal>,
+            );
+            const modalRoot = screen.getByRole('dialog');
 
             // Assert
-            expect(screen.getByRole('dialog')).toHaveClass('t-modal__overlay__body--xxlarge');
-        });
-
-        it('Xlarge prop applies to root', () => {
-
-            // Arrange
-            render(<TModal title={'Hi'} isOpen xlarge onRequestClose={mockFn}>Modal Content</TModal>);
-
-            // Assert
-            expect(screen.getByRole('dialog')).toHaveClass('t-modal__overlay__body--xlarge');
-        });
-
-        it('Large prop applies to root', () => {
-
-            // Arrange
-            render(<TModal title={'Hi'} isOpen large onRequestClose={mockFn}>Modal Content</TModal>);
-
-            // Assert
-            expect(screen.getByRole('dialog')).toHaveClass('t-modal__overlay__body--large');
-        });
-
-        it('Medium prop applies to root', () => {
-
-            // Arrange
-            render(<TModal title={'Hi'} isOpen medium onRequestClose={mockFn}>Modal Content</TModal>);
-
-            // Assert
-            expect(screen.getByRole('dialog')).toHaveClass('t-modal__overlay__body--medium');
-        });
-
-        it('Small prop applies to root', () => {
-
-            // Arrange
-            render(<TModal title={'Hi'} isOpen small onRequestClose={mockFn}>Modal Content</TModal>);
-
-            // Assert
-            expect(screen.getByRole('dialog')).toHaveClass('t-modal__overlay__body--small');
+            expect(modalRoot).toHaveClass(`t-modal__overlay__body--${size}`);
         });
 
         it('Children prop applies to root', () => {
@@ -157,11 +112,7 @@ describe('TDropdown', () => {
             // Arrange
             const contentText = 'Modal Content';
             render(
-                <TModal
-                    title={'Modal Title'}
-                    isOpen={true}
-                    onRequestClose={mockFn}
-                >
+                <TModal title={'Modal Title'} isOpen onRequestClose={mockFn}>
                     {contentText}
                 </TModal>,
             );
@@ -176,11 +127,7 @@ describe('TDropdown', () => {
             // Arrange
             const modalTitle = 'Modal Title Test';
             render(
-                <TModal
-                    title={modalTitle}
-                    isOpen={true}
-                    onRequestClose={mockFn}
-                >
+                <TModal title={modalTitle} isOpen onRequestClose={mockFn}>
                     Modal Content
                 </TModal>,
             );
@@ -200,7 +147,7 @@ describe('TDropdown', () => {
             render(
                 <TModal
                     title={'Modal Title'}
-                    isOpen={true}
+                    isOpen
                     onRequestClose={mockFn}
                     header={<Header/>}
                     footer={<Footer/>}
@@ -223,7 +170,7 @@ describe('TDropdown', () => {
             render(
                 <TModal
                     title={'Modal Title'}
-                    isOpen={true}
+                    isOpen
                     onRequestClose={mockFn}
                     contentLabel={ContentLabel}
                 >
@@ -243,7 +190,7 @@ describe('TDropdown', () => {
             render(
                 <TModal
                     title={'Modal Title'}
-                    isOpen={true}
+                    isOpen
                     onRequestClose={mockFn}
                     testId={testId}
                     contentLabel={testId}
