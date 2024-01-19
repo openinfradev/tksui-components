@@ -29,29 +29,27 @@ const TFormSection = (props: TFormSectionProps) => {
         <TSection className={`t-form-section ${rootClass}`} style={rootStyle} id={props.id}
                   label={props.label} customLabel={props.customLabel}
                   rightAction={props.rightAction} leftAction={props.leftAction}
+                  contentClassName={'t-form-section__content'}
         >
-            <div className={'t-form-section__content'}>
-                {
-                    (props.information || props.customInformation) && (
-                        <div className={'t-form-section__content__info'}>
-                            <TIcon small className={'t-form-section__content__info__icon'} color={'#666666'}>t_information</TIcon>
-                            <div className={'t-form-section__content__info__content'}>
-                                {
-                                    props.customInformation
-                                        ? (props.customInformation)
-                                        : props.information
-                                            .split('\n')
-                                            .map((token, index) => <div key={index}>{token}</div>)
-                                }
-                            </div>
+            {
+                (props.information || props.customInformation) && (
+                    <div className={'t-form-section__content__info'}>
+                        <TIcon small className={'t-form-section__content__info__icon'} color={'#666666'}>t_information</TIcon>
+                        <div className={'t-form-section__content__info__content'}>
+                            {
+                                props.customInformation
+                                    ? (props.customInformation)
+                                    : props.information
+                                        .split('\n')
+                                        .map((token, index) => <div key={index}>{token}</div>)
+                            }
                         </div>
-                    )
-                }
-                <FormContext.Provider
-                    value={{column: props.column, labelWidth: props.labelWidth}}>
-                    {props.children}
-                </FormContext.Provider>
-            </div>
+                    </div>
+                )
+            }
+            <FormContext.Provider value={{column: props.column, labelWidth: props.labelWidth}}>
+                {props.children}
+            </FormContext.Provider>
         </TSection>
     );
 

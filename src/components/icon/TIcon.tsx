@@ -31,7 +31,7 @@ function TIcon(props: TIconProps): ReactElement {
         if (props.large) { return 'large'; }
         if (props.xlarge) { return 'xlarge'; }
         return 'medium';
-    }, [props.large, props.medium, props.size, props.small, props.xlarge]);
+    }, [props.large, props.medium, props.size, props.small, props.xlarge, props.xsmall]);
 
     const rootClass: string = useMemo((): string => {
         const clazz = [];
@@ -65,7 +65,7 @@ function TIcon(props: TIconProps): ReactElement {
         }
 
         return style;
-    }, [props.color, props.style]);
+    }, [props.color, props.disabled, props.style]);
 
     // endregion
 
