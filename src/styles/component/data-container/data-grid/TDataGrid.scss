@@ -22,7 +22,11 @@
 
         .t-data-grid__header__pagination {
             color: $t-gray-color-5;
-            strong { color: $t-primary-color; }
+            @include typo-element-3;
+            strong {
+                color: $t-black-color;
+                font-weight: $t-font-weight-regular;
+            }
         }
         .t-data-grid__header__select-indicator {
             color: $t-primary-color;
@@ -44,7 +48,7 @@
     .t-data-grid__body.ag-theme-material {
         --ag-material-primary-color: #{$t-primary-color};
         --ag-font-family: #{$t-font-family};
-        --ag-font-size: var(--t-font-size-medium);
+        --ag-font-size: var(--t-font-size-large);
 
         --ag-checkbox-checked-color: #{$t-primary-color};
         --ag-checkbox-indeterminate-color: #{$t-primary-color};
@@ -55,19 +59,27 @@
         --ag-input-focus-box-shadow: none;
 
         --ag-cell-horizontal-padding: 32px;
-        --ag-row-border-color: #{$t-grid-border-color--01};
+        --ag-row-border-color: #{$t-grid-border-color--02};
 
-        border-top: 2px solid $t-grid-border-color--03;
+        --ag-header-cell-hover-background-color: #{$t-blue-gray-color-3};
+        --ag-border-color: none;
+        --ag-foreground-color: #{$t-gray-color-6};
 
         .ag-header {
 
-            border-bottom: 1px solid $t-border-color--default;
-
             .ag-header-row {
-                font-size: var(--ag-font-size);
-                font-weight: $t-font-weight-bold;
                 color: $t-black-color;
-                background-color: $t-gray-color-1;
+                background-color: $t-blue-gray-color-2;
+                @include typo-subtitle-4;
+
+                & .ag-header-cell {
+                    padding: 0 $t-spacing-20;
+
+                    .ag-header-cell-label {
+                        position: relative;
+                        top: 1px;
+                    }
+                }
             }
 
             .ag-header-viewport {
@@ -105,10 +117,12 @@
             min-width: 100%;
         }
 
+        .ag-cell { padding: 0 $t-spacing-20; }
 
         .ag-cell, .ag-cell-wrapper {
             display: flex;
             align-items: center;
+
             @include ellipsis;
             &::selection { color: transparent; background: transparent;}
 
@@ -129,6 +143,6 @@
 
 
     .t-data-grid__pagination.t-pagination {
-        margin-top: 64px;
+        margin-top: $t-spacing-40;
     }
 }

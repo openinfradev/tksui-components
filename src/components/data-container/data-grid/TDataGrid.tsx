@@ -160,6 +160,8 @@ const TDataGrid = forwardRef((props: TDataGridProps, ref: Ref<AgGridReact>) => {
                                  totalPages={props.paging?.totalPages || 1}
                                  pageNumber={props.paging?.pageNumber || 1}
                                  onChangePageNumber={(value) => props.onChangePageNumber(value)}
+                                 jumper={props.jumper}
+                                 jumperText={props.jumperText}
                     />
                 )
             }
@@ -180,8 +182,8 @@ TDataGrid.defaultProps = {
     suppressRowClickSelection: true,
     enableCellTextSelection: true,
     noDataText: '검색 조건에 맞는 데이터가 없습니다',
-    headerHeight: 48,
-    rowHeight: 76,
+    headerHeight: 32,
+    rowHeight: 40,
 };
 
 TDataGrid.displayName = 'TDataGrid';
