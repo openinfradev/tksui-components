@@ -35,15 +35,6 @@ describe('TDataGrid', () => {
 
     describe('Style', () => {
 
-        it('renders without errors', () => {
-
-            // Arrange
-            render(<TDataGrid {...baseProps} />);
-
-            // Assert
-            expect(screen.getByTestId('data-grid-root')).toBeInTheDocument();
-        });
-
         it('Classname prop applies to root', () => {
 
             // Arrange
@@ -69,6 +60,15 @@ describe('TDataGrid', () => {
     });
 
     describe('Render', () => {
+
+        it('renders without errors', () => {
+
+            // Arrange
+            render(<TDataGrid {...baseProps} />);
+
+            // Assert
+            expect(screen.getByTestId('data-grid-root')).toBeInTheDocument();
+        });
 
         it('ColumnDefs prop applies to root', async () => {
 
