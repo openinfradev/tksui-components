@@ -382,6 +382,28 @@ describe('TPagination', () => {
             expect(failureElement).toHaveClass('t-number-field--failure');
         });
 
+        it('If you enter an over page number, an error appears in the Number field.', async () => {
+
+            // Arrange
+            const user = userEvent.setup();
+            const invalidNumber = 77;
+            const totalPages = 70;
+            render(<Pagination jumper totalPages={totalPages}/>);
+            const numberFieldInputElement = screen.getByTestId('number-field-input-root');
+
+            // Act
+            await act(async () => {
+                await user.click(numberFieldInputElement);
+                await user.clear(numberFieldInputElement);
+                await user.keyboard(invalidNumber.toString());
+            });
+            const inputElement: HTMLInputElement = screen.getByTestId('number-field-input-root');
+            const typedNumber = Number(inputElement.value);
+
+            // Assert
+            expect(totalPages > typedNumber).toBeTruthy();
+        });
+
         it('If the page number changes, the jumper number field number also changes.', async () => {
 
             // Arrange

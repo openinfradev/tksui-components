@@ -1,4 +1,4 @@
-import {CSSProperties, forwardRef, Ref, useCallback, useEffect, useImperativeHandle, useMemo, useState, useRef} from 'react';
+import {CSSProperties, forwardRef, Ref, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState} from 'react';
 
 import {TPaginationProps, TPaginationRef} from './TPagination.interface';
 import TIcon from '../../icon/TIcon';
@@ -53,7 +53,6 @@ const TPagination = forwardRef((props: TPaginationProps, ref: Ref<TPaginationRef
     const getPageRange = useCallback((currentPage: number, totalPages: number) => {
         const min = Math.floor((currentPage - 1) / 10) * 10 + 1;
         const max = Math.min(totalPages, min + 9);
-
         return {min, max};
     }, []);
 
@@ -118,7 +117,7 @@ const TPagination = forwardRef((props: TPaginationProps, ref: Ref<TPaginationRef
 
     const onClickJumper = useCallback(() => {
         const validResult = numberFieldRef.current?.validate();
-        if (validResult === true) { onChangePageNumber(Number(jumpPage)); }
+        if (validResult === true && onChangePageNumber) { onChangePageNumber(jumpPage); }
     }, [jumpPage, pageRange, onChangePageNumber]);
 
     // endregion
@@ -136,7 +135,7 @@ const TPagination = forwardRef((props: TPaginationProps, ref: Ref<TPaginationRef
 
 
     return (
-        <nav className={`t-pagination ${rootClass}`} style={rootStyle}>
+        <nav className={`t-pagination ${rootClass}`} style={rootStyle} data-testid={'pagination-root'}>
 
             <span className={'t-pagination__nav-button-container'}>
                 <TIcon className={`t-pagination__nav-button-container__button ${prevPageButtonClass}`}
@@ -189,8 +188,8 @@ const TPagination = forwardRef((props: TPaginationProps, ref: Ref<TPaginationRef
                     <div className={'t-pagination__jumper__container'} data-testid={'pagination-jumper-root'}>
                         <TNumberField ref={numberFieldRef} className={'t-pagination__jumper__container__page__field'}
                                       value={jumpPage.toString()} onChange={onChangeJumperPageNumber}
-                                      min={pageRange.min} max={pageRange.max}
-                                      rules={[rule.valueMin(pageRange.min), rule.valueMax(pageRange.max)]}
+                                      min={pageRange.min} max={props.totalPages}
+                                      rules={[rule.valueMin(pageRange.min), rule.valueMax(props.totalPages)]}
                         />
                         <TButton className={'t-pagination__jumper__container__short-cut__button'} onClick={onClickJumper}>
                             {props.jumperText ? props.jumperText : '바로가기'}
