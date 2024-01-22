@@ -4,35 +4,35 @@
     align-items: center;
 
     .t-switch__container {
-        $t-switch-width: 70px;
-        $t-switch-height: 40px;
-        $t-switch-padding: 6px;
-        $t-switch__thumb-width: 28px;
+        $t-switch-width: 44px;
+        $t-switch-height: 24px;
+        $t-switch-padding: 2px;
+        $t-switch__thumb-width: 20px;
 
+        position: relative;
         width: $t-switch-width;
         height: $t-switch-height;
-        position: relative;
-        cursor: pointer;
         padding: $t-switch-padding;
-        border-radius: 50px;
+        border-radius: 12px;
+        cursor: pointer;
 
         .t-switch__container__thumb {
             width: $t-switch__thumb-width;
             height: $t-switch__thumb-width;
-            border-radius: 50px;
+            border-radius: 50%;
             background: $t-white-color;
             position: absolute;
             transition: 0.1s transform linear;
             box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.05);
 
-            &:hover, &:focus { background: $t-gray-color-2; outline: none; }
+            &:hover, &:focus { outline: none; }
         }
 
         &.t-switch__container--on {
             background: $t-primary-color;
 
             .t-switch__container__thumb {
-                transform: translateX(30px);
+                transform: translateX(calc($t-switch-width - ($t-switch-padding * 2) - $t-switch__thumb-width));
             }
         }
 
@@ -40,16 +40,32 @@
             background: $t-gray-color-2;
 
             .t-switch__container__thumb {
+                transform: none;
             }
         }
     }
 
     .t-switch__label {
-        margin-left: $t-spacing-10;
+        @include typo-body-3;
+        color: $t-black-color;
+        margin-left: $t-spacing-8;
     }
 
     &.t-switch--disabled {
         pointer-events: none;
         opacity: 0.3;
+
+        .t-switch__container {
+            background: $t-gray-color-2;
+        }
+
+        .t-switch__container__thumb {
+            background: $t-gray-color-1;
+        }
+
+        .t-switch__label {
+            color: $t-gray-color-4;
+        }
+
     }
 }

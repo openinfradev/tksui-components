@@ -96,12 +96,13 @@ describe('TSwitch', () => {
     it('When clicking the root, onChange handler is called', async () => {
 
         // Arrange
+        const user = userEvent.setup();
         render(<TSwitch {...baseProps} />);
         const root = screen.getByTestId('t-switch-root');
 
         // Act
         await act(async () => {
-            await userEvent.click(root);
+            await user.click(root);
         });
 
         // Assert
@@ -112,12 +113,13 @@ describe('TSwitch', () => {
     it('When pressing Enter on the thumb, onChange handler is called', async () => {
 
         // Arrange
+        const user = userEvent.setup();
         render(<TSwitch {...baseProps} />);
 
         // Act
         await act(async () => {
-            await userEvent.tab();
-            await userEvent.keyboard('{enter}');
+            await user.tab();
+            await user.keyboard('{enter}');
         });
 
         // Assert
@@ -128,12 +130,13 @@ describe('TSwitch', () => {
     it('When pressing Space on the thumb, onChange handler is called', async () => {
 
         // Arrange
+        const user = userEvent.setup();
         render(<TSwitch {...baseProps} />);
 
         // Act
         await act(async () => {
-            await userEvent.tab();
-            await userEvent.keyboard(' ');
+            await user.tab();
+            await user.keyboard(' ');
         });
 
         // Assert
@@ -145,12 +148,13 @@ describe('TSwitch', () => {
     it('When switch is disabled, pressing Tab should not focus on the thumb', async () => {
 
         // Arrange
+        const user = userEvent.setup();
         render(<TSwitch {...baseProps} disabled/>);
         const thumb = screen.getByTestId('t-switch-thumb');
 
         // Act
         await act(async () => {
-            await userEvent.tab();
+            await user.tab();
         });
 
         // Assert
@@ -161,13 +165,13 @@ describe('TSwitch', () => {
     it('When disabled, pressing Enter on the thumb does not trigger onChange', async () => {
 
         // Arrange
+        const user = userEvent.setup();
         render(<TSwitch {...baseProps} disabled/>);
-
 
         // Act
         await act(async () => {
-            await userEvent.tab();
-            await userEvent.keyboard('{enter}');
+            await user.tab();
+            await user.keyboard('{enter}');
         });
 
         // Assert

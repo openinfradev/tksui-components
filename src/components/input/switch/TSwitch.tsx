@@ -77,8 +77,7 @@ function TSwitch(props: TSwitchProps) {
                 />
             </div>
             {
-                props.label
-                && <label className={'t-switch__label'}> {props.label} </label>
+                props.label && <label className={'t-switch__label'}> {props.label} </label>
             }
         </div>
     );
