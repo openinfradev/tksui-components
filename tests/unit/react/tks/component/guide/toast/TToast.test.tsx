@@ -4,6 +4,25 @@ import TToast, {notify} from '~/guide/toast/TToast';
 
 describe('TToast', () => {
 
+    describe('Style', () => {
+
+        it('Renders without errors', async () => {
+
+            // Arrange
+            const message = 'test message';
+
+            render(<TToast/>);
+            notify(message);
+
+            const toastElement = await screen.findByText(message);
+
+            // Assert
+            expect(toastElement).toBeInTheDocument();
+
+        });
+
+    });
+
     describe('Event', () => {
 
         it('When normal toast rendered, it should be displayed message on message area', async () => {
