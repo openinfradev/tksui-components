@@ -8,10 +8,6 @@ const TCardContent = (props: TCardContentProps) => {
     const {className, style} = props;
 
 
-    // region [Privates]
-    // endregion
-
-
     // region [Templates]
 
     const rootClass = useMemo((): string => {
@@ -30,7 +26,7 @@ const TCardContent = (props: TCardContentProps) => {
     // endregion
 
     return (
-        <section className={`t-card-content ${rootClass}`} style={rootStyle} data-testid={'card-content-root'}>
+        <section className={`t-card-content ${rootClass}`} style={rootStyle} id={props.id} data-testid={'card-content-root'}>
             {props.children}
         </section>
     );

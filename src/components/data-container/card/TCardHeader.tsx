@@ -32,7 +32,7 @@ const TCardHeader = (props: TCardHeaderProps) => {
     // endregion
 
     return (
-        <header className={`t-card-header ${rootClass}`} style={rootStyle} data-testid={'card-header-root'}>
+        <header className={`t-card-header ${rootClass}`} style={rootStyle} id={props.id} data-testid={'card-header-root'}>
             {props.icon && (
                 <TIcon className={'t-card-header__icon'} size={props.iconSize}
                        type={props.iconType} color={props.iconColor}>

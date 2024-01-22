@@ -1,3 +1,4 @@
-import {TextEncoder} from 'util';
+import {TextEncoder, TextDecoder} from 'util';
 
-global.TextEncoder = TextEncoder;
+// When this code is missing, we will be faced error "ReferenceError: TextEncoder is not defined"
+Object.assign(global, {TextDecoder, TextEncoder});
