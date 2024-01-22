@@ -53,8 +53,9 @@ describe('TTooltip', () => {
                     <TTooltip id={tooltipId}/>
                     <span data-tooltip-id={tooltipId}
                           data-tooltip-content={testData}
-                          data-tooltip-place={'left'}
-                          children={spanContent}/>
+                          data-tooltip-place={'left'}>
+                        {spanContent}
+                    </span>
                 </>
             );
 

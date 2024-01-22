@@ -99,7 +99,7 @@ describe('TBadge', () => {
             // Arrange
             const testData = 'test Message';
 
-            render(<TBadge content={0} children={testData}/>);
+            render(<TBadge content={0}>{testData}</TBadge>);
 
             const content = screen.getByText(testData);
 
