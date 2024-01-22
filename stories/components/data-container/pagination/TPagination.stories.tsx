@@ -18,9 +18,9 @@ type Story = StoryObj<typeof TPagination>;
 
 const Container = ({label, children}: { label?: string, children: ReactNode }) => {
     return (
-        <div style={{display: 'flex', alignItems: 'flex-start', flexDirection: 'column', gap: '16px'}}>
+        <div style={{display: 'flex', alignItems: 'flex-start', flexDirection: 'column', gap: '16px', width: '100%'}}>
             <p style={{fontSize: '14px'}}>{label}</p>
-            <div style={{display: 'flex', alignItems: 'center', height: '120px', border: '1px solid lightgray', padding: '16px'}}>
+            <div style={{display: 'flex', alignItems: 'center', border: '1px solid lightgray', padding: '32px 16px', width: '100%'}}>
                 {children}
             </div>
         </div>
@@ -31,17 +31,17 @@ const NormalTemplate = (args: TPaginationProps) => {
     const [pageNumber, setPageNumber] = useState<number>(1);
 
     return (
-        <div style={{display: 'flex', flexDirection: 'column', gap: '16px'}}>
+        <div style={{display: 'flex', flexDirection: 'column', gap: '16px', width: '100%'}}>
             <Container label={'Normal'}>
                 <TPagination {...args} pageNumber={pageNumber} onChangePageNumber={(number) => { setPageNumber(number); }}/>
             </Container>
 
             <Container label={'Jumper'}>
-                <TPagination {...args} pageNumber={pageNumber} jumper onChangePageNumber={(number) => { setPageNumber(number); }}/>
+                <TPagination {...args} pageNumber={pageNumber} onChangePageNumber={(number) => { setPageNumber(number); }}/>
             </Container>
 
             <Container label={'Custom Jumper Text'}>
-                <TPagination {...args} pageNumber={pageNumber} jumper jumperText={'Go'}
+                <TPagination {...args} pageNumber={pageNumber} jumperText={'Go'}
                              onChangePageNumber={(number) => { setPageNumber(number); }}/>
             </Container>
         </div>);
