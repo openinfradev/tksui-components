@@ -14,7 +14,7 @@ describe('TTooltip', () => {
             // Arrange
             const testData = 'class-name-prop';
 
-            render(<TTooltip className={testData} isOpen={true} content={testData} id={'tooltip-test'}/>);
+            render(<TTooltip className={testData} isOpen={true} content={testData}/>);
 
             const content = screen.getByText(testData);
 
@@ -28,7 +28,7 @@ describe('TTooltip', () => {
             // Assign
             const testData = 'test content';
 
-            render(<TTooltip isOpen={true} content={testData} id={'tooltip-test'}/>);
+            render(<TTooltip isOpen={true} content={testData}/>);
 
             const content = screen.getByText(testData);
 
