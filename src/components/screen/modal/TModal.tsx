@@ -1,4 +1,4 @@
-import React, {MouseEvent, useCallback, useMemo} from 'react';
+import React, {MouseEvent, useCallback, useMemo, useRef, useEffect} from 'react';
 import {createPortal} from 'react-dom';
 import ReactModal from 'react-modal';
 import TIcon from '../../icon/TIcon';
@@ -8,7 +8,7 @@ import {modalSize, TModalProps} from './TModal.interface';
 export default function TModal(props: TModalProps): JSX.Element {
 
     // region [Consts]
-
+    const modalRef = useRef(null);
     const {onRequestClose} = props;
 
     const documentRoot: HTMLElement = document.getElementById(props.containerId) as HTMLElement;
@@ -50,11 +50,23 @@ export default function TModal(props: TModalProps): JSX.Element {
 
     // endregion
 
+    // region [Effect]
+
+    useEffect(() => {
+        if (props.testId) {
+            modalRef.current?.node.setAttribute('data-testid', props.testId);
+        }
+    }, [props.testId]);
+
+    // endregion
+
 
     return createPortal(
         (
             // Official document: https://reactcommunity.org/react-modal/
-            <ReactModal isOpen={props.isOpen}
+            <ReactModal ref={modalRef}
+                        id={props.id}
+                        isOpen={props.isOpen}
                         contentLabel={props.contentLabel}
                         onAfterOpen={props.onAfterOpen}
                         onAfterClose={() => props.onAfterClose?.()}
@@ -64,10 +76,13 @@ export default function TModal(props: TModalProps): JSX.Element {
                         overlayClassName={`t-modal__overlay ${props.overlayClassName ?? ''}`.trim()}
                         className={`t-modal__overlay__body ${bodyClassName ?? ''}`.trim()}
                         closeTimeoutMS={200}
-                        shouldCloseOnOverlayClick={false}>
+                        shouldCloseOnOverlayClick={false}
+            >
                 {/* Close Button */}
+                {/* FIXME. color: themeToken gray5로 교체 */}
                 <TIcon className={'t-modal__overlay__body__close-icon'}
-                       medium clickable onClick={(e) => { closeModal(e); }}>close</TIcon>
+                       color={'#71747A'}
+                       small clickable onClick={(e) => { closeModal(e); }}>close</TIcon>
                 {/* Modal Header */}
                 <header className={'t-modal__overlay__body__header'}>
                     {

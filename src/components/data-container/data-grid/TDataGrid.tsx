@@ -104,7 +104,7 @@ const TDataGrid = forwardRef((props: TDataGridProps, ref: Ref<AgGridReact>) => {
 
 
     return (
-        <div className={`t-data-grid ${rootClass}`} style={rootStyle}>
+        <div className={`t-data-grid ${rootClass}`} style={rootStyle} data-testid={'data-grid-root'}>
             {
                 !props.noHeader && (
                     <div className={'t-data-grid__header'}>

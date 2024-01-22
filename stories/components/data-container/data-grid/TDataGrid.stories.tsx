@@ -65,6 +65,7 @@ const Template = () => {
     return (<>
         <TDataGrid ref={gridRef}
                    rowData={rowData}
+                   height={'300px'}
                    rowSelection={'multiple'}
                    columnDefs={columnDefs}
                    rightAction={gridRightAction}

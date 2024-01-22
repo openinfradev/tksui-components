@@ -1,5 +1,6 @@
 import {CSSProperties, useMemo} from 'react';
 import {TCardHeaderProps} from './TCard.interface';
+import {TIcon} from '~/icon';
 
 const TCardHeader = (props: TCardHeaderProps) => {
 
@@ -12,14 +13,13 @@ const TCardHeader = (props: TCardHeaderProps) => {
 
 
     // endregion
-
-
     // region [Templates]
 
     const rootClass = useMemo((): string => {
         const clazz: string[] = [];
 
         if (className) { clazz.push(className); }
+        if (props.icon) { clazz.push('t-card-header--with-icon'); }
 
         return clazz.join(' ');
     }, [className]);
@@ -32,14 +32,31 @@ const TCardHeader = (props: TCardHeaderProps) => {
     // endregion
 
     return (
-        <header className={`t-card-header ${rootClass}`} style={rootStyle}>
-            <h4 className={'t-card-header__title'}>{props.title}</h4>
-            <div className={'t-card-header__sub-title'}>{props.subTitle}</div>
+        <header className={`t-card-header ${rootClass}`} style={rootStyle} data-testid={'card-header-root'}>
+            {props.icon && (
+                <TIcon className={'t-card-header__icon'} size={props.iconSize}
+                       type={props.iconType} color={props.iconColor}>
+                    {props.icon}
+                </TIcon>
+            )
+            }
+            {props.title && !props.subTitle && (<h4 className={'t-card-header__text__title'}>{props.title}</h4>)}
+            {!props.title && props.subTitle && (<div className={'t-card-header__text__sub-title'}>{props.subTitle}</div>)}
+            {
+                props.title && props.subTitle && (
+                    <div className={'t-card-header__text'}>
+                        <h4 className={'t-card-header__text__title'}>{props.title}</h4>
+                        <div className={'t-card-header__text__sub-title'}>{props.subTitle}</div>
+                    </div>
+                )
+            }
         </header>
     );
 };
 
 TCardHeader.defaultProps = {
+    iconSize: 'medium',
+    iconType: 'outlined',
 };
 
 TCardHeader.displayName = 'TCard';

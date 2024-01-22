@@ -5,7 +5,7 @@ const iconType = ['outlined', 'filled'] as const;
 export type TIconSource = 'original' | 'material';
 export type TIconType = typeof iconType[number];
 export const iconSize = {xsmall: 'xsmall', small: 'small', medium: 'medium', large: 'large', xlarge: 'xlarge'};
-type TIconSize = typeof iconSize[keyof typeof iconSize];
+export type TIconSize = typeof iconSize[keyof typeof iconSize];
 
 export interface TIconProps extends TBaseProps, TBaseTooltipProps {
     children: string,

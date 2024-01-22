@@ -23,8 +23,8 @@ const Template = (args) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const footer = (<>
-        <TButton width={'50%'} onClick={() => setIsOpen(false)}>취소</TButton>
-        <TButton width={'50%'} main>저장</TButton>
+        <TButton size={'large'} onClick={() => setIsOpen(false)}>취소</TButton>
+        <TButton size={'large'} main>저장</TButton>
     </>);
 
     return (
@@ -35,7 +35,7 @@ const Template = (args) => {
                     isOpen={isOpen}
                     onRequestClose={() => setIsOpen(false)}
                     footer={footer}>
-
+                    클러스터 생성 모달입니다.
             </TModal>
         </>
     );

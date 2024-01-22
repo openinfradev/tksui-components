@@ -1,6 +1,10 @@
 .t-card {
-    border: 1px solid #DBE2F0;
-    border-radius: 12px;
+    border: 1px solid $t-blue-gray-color-3;
+    border-radius: 8px;
+    background: $t-white-color;
+    padding: $t-spacing-24;
+    font-size: 0;
+
 
     &.t-card--clickable {
         cursor: pointer;
@@ -15,21 +19,56 @@
         outline: 2px solid $t-primary-color;
     }
 
-}
+    &.t-card--dashed {
+        border-style: dashed;
+        border-color: $t-secondary-color-blue;
 
-.t-card-header {
-    margin: 0 32px;
-    padding: $t-spacing-32 0 0 0;
+        &.t-card--clickable {
+            &:hover {
+                outline: 2px dashed $t-primary-color;
+                border-color: transparent;
+            }
+        }
 
+        &.t-card--selected {
+            border-color: transparent;
+            outline: 2px dashed $t-primary-color;
+        }
+    }
 
-    .t-card-header__title {}
-    .t-card-header__sub-title {
-        margin-top: $t-spacing-12;
-        color: $t-gray-color-5;
+    &.t-card--center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    & .t-card-top__icon ~ .t-card-header { padding-top: $t-spacing-16; }
+
+    &:hover {
+        border-color: $t-primary-color;
+        box-shadow: $t-shadow--focused-element;
     }
 }
 
-.t-card-content {
-    padding: $t-spacing-32 $t-spacing-32;
-    line-height: $t-line-height-body;
+.t-card-header {
+
+    .t-card-header__text__title {
+        @include typo-subtitle-1;
+        color: $t-black-color;
+    }
+    .t-card-header__text__sub-title {
+        @include typo-element-3;
+        color: $t-gray-color-6;
+    }
+
+    &.t-card-header--with-icon {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: $t-spacing-8;
+    }
 }
+
+.t-card-content { @include typo-body-3;}
+
+.t-card-header ~ .t-card-content { padding-top: $t-spacing-16;}

@@ -1,5 +1,5 @@
 import {CSSProperties, useMemo} from 'react';
-import {TCardContentProps, TCardHeaderProps} from './TCard.interface';
+import {TCardContentProps} from './TCard.interface';
 
 const TCardContent = (props: TCardContentProps) => {
 
@@ -9,8 +9,6 @@ const TCardContent = (props: TCardContentProps) => {
 
 
     // region [Privates]
-
-
     // endregion
 
 
@@ -32,14 +30,13 @@ const TCardContent = (props: TCardContentProps) => {
     // endregion
 
     return (
-        <section className={`t-card-content ${rootClass}`} style={rootStyle}>
+        <section className={`t-card-content ${rootClass}`} style={rootStyle} data-testid={'card-content-root'}>
             {props.children}
         </section>
     );
 };
 
-TCardContent.defaultProps = {
-};
+TCardContent.defaultProps = {};
 
 TCardContent.displayName = 'TCard';
 
