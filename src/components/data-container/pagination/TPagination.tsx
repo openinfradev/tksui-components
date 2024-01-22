@@ -145,14 +145,14 @@ const TPagination = forwardRef((props: TPaginationProps, ref: Ref<TPaginationRef
                        disabled={props.pageNumber === 1}
                        onClick={onClickPreviousPageSet}
                        onKeyDownEnter={onClickPreviousPageSet}
-                       onKeyDownSpace={onClickPreviousPageSet}>t_navigate_left_double</TIcon>
+                       onKeyDownSpace={onClickPreviousPageSet}>keyboard_double_arrow_left</TIcon>
                 <TIcon className={`t-pagination__nav-button-container__button ${prevPageButtonClass}`}
                        clickable
                        small
                        disabled={props.pageNumber === 1}
                        onClick={onClickPreviousPage}
                        onKeyDownEnter={onClickPreviousPage}
-                       onKeyDownSpace={onClickPreviousPage}>t_navigate_left</TIcon>
+                       onKeyDownSpace={onClickPreviousPage}>keyboard_arrow_left</TIcon>
             </span>
 
             <ul className={'t-pagination__page-container'}>
@@ -175,14 +175,14 @@ const TPagination = forwardRef((props: TPaginationProps, ref: Ref<TPaginationRef
                        disabled={props.pageNumber === props.totalPages}
                        onClick={onClickNextPage}
                        onKeyDownEnter={onClickNextPage}
-                       onKeyDownSpace={onClickNextPage}>t_navigate_right</TIcon>
+                       onKeyDownSpace={onClickNextPage}>keyboard_arrow_right</TIcon>
                 <TIcon className={`t-pagination__nav-button-container__button ${nextPageButtonClass}`}
                        clickable
                        small
                        disabled={props.pageNumber === props.totalPages}
                        onClick={onClickNextPageSet}
                        onKeyDownEnter={onClickNextPageSet}
-                       onKeyDownSpace={onClickNextPageSet}>t_navigate_right_double</TIcon>
+                       onKeyDownSpace={onClickNextPageSet}>keyboard_double_arrow_right</TIcon>
             </span>
             {
                 !props.noJumper && (
