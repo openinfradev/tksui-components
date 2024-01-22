@@ -1,15 +1,12 @@
-// import 'material-icons/iconfont/filled.css';
-// import 'material-icons/iconfont/outlined.css';
-// import 'material-icons/iconfont/round.css';
-// import 'material-icons/iconfont/two-tone.css';
-// import 'material-icons/iconfont/sharp.css';
+
+import '@material-symbols/font-300/outlined.css';
 
 import {CSSProperties, KeyboardEvent, MouseEvent, ReactElement, useCallback, useMemo} from 'react';
-import {TIconSource, TIconType, TIconProps, iconSize} from './TIcon.interface';
+import {TIconSource, TIconProps, iconSize} from './TIcon.interface';
 import TOriginalImage from './TIconOriginal';
 
 /**
- * We are using Google Material Icons {@link https://fonts.google.com/icons?icon.set=Material+Icons} <br/>
+ * We are using Google Material Symbols {@link https://fonts.google.com/icons?icon.set=Material+Symbols} <br/>
  * If you want to know the list of icons, please visit the link
  */
 function TIcon(props: TIconProps): ReactElement {
@@ -40,18 +37,19 @@ function TIcon(props: TIconProps): ReactElement {
         if (props.disabled) { clazz.push('t-icon--disabled'); }
 
         // Material icon
+
         if (iconSource === 'material') {
-            const materialIconType = (props.type === 'filled' || props.type === undefined) ? '' : `-${props.type}`;
-            clazz.push(`t-icon--material material-icons${materialIconType}`);
+            clazz.push('t-icon-material');
+            if (props.fill) { clazz.push('t-icon-material--fill'); }
         } else {
-            clazz.push('t-icon--original');
+            clazz.push('t-icon-original');
         }
 
         // icon size
         clazz.push(`t-icon--${$_size}`);
 
         return clazz.join(' ');
-    }, [$_size, iconSource, props.className, props.clickable, props.disabled, props.type]);
+    }, [$_size, iconSource, props.className, props.clickable, props.disabled, props.fill]);
 
     const rootStyle: CSSProperties = useMemo((): CSSProperties => {
         let style: CSSProperties = {};
@@ -101,7 +99,7 @@ function TIcon(props: TIconProps): ReactElement {
     // endregion
 
     return (
-        <span className={`t-icon ${rootClass}`}
+        <span className={`t-icon material-symbols-outlined ${rootClass}`}
               data-tooltip-id={props.tooltipId}
               data-tooltip-content={props.tooltipContent}
               data-tooltip-place={props.tooltipPlace}
@@ -124,7 +122,6 @@ function TIcon(props: TIconProps): ReactElement {
 }
 
 TIcon.defaultProps = {
-    type: 'outlined' as TIconType,
 };
 
 export default TIcon;

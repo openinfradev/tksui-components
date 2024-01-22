@@ -109,8 +109,7 @@ export default function TPage(props: TPageProps) {
 
                     {
                         props.infoPanelContent && (
-                            <TIcon type={'outlined'}
-                                   small
+                            <TIcon small
                                    clickable
                                    onClick={() => { setIsInfoPanelOpened(!isInfoPanelOpened); }}>t_information</TIcon>
                         )

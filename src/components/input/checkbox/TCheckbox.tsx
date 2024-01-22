@@ -118,7 +118,7 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
         }
 
         return (
-            <TIcon small type={'filled'} className={`t-checkbox__icon t-checkbox__icon--${status}`}>{iconType}</TIcon>
+            <TIcon small fill className={`t-checkbox__icon t-checkbox__icon--${status}`}>{iconType}</TIcon>
         );
     }
 

@@ -83,7 +83,7 @@ const TChip = forwardRef((props: TChipProps, ref: Ref<TChipRef>) => {
     
             {
                 props.icon && (
-                    <TIcon type={'filled'}
+                    <TIcon fill
                            className={'t-chip__prev-icon'}
                            style={deleteIconStyle}>{props.icon}</TIcon>
                 )
@@ -93,7 +93,7 @@ const TChip = forwardRef((props: TChipProps, ref: Ref<TChipRef>) => {
         
             {
                 !!props.onRemove && (
-                    <TIcon type={'filled'}
+                    <TIcon fill
                            className={'t-chip__remove-icon'}
                            style={deleteIconStyle}
                            clickable
