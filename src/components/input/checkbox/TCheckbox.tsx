@@ -1,4 +1,15 @@
-import {CSSProperties, forwardRef, KeyboardEvent, ReactElement, Ref, useEffect, useImperativeHandle, useRef, useState} from 'react';
+import {
+    CSSProperties,
+    forwardRef,
+    KeyboardEvent,
+    ReactElement,
+    Ref,
+    useCallback,
+    useEffect,
+    useImperativeHandle,
+    useRef,
+    useState,
+} from 'react';
 import TIcon from '../../icon/TIcon';
 import {TCheckboxProps, TCheckboxRef} from './TCheckbox.interface';
 import useValidator from '@/common/hook/UseValidator';
@@ -22,10 +33,9 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
 
     // endregion
 
-
     // region [Styles]
 
-    function getRootClass(): string {
+    const getRootClass = useCallback(() => {
         const clazz: string[] = [];
 
         if (props.className) clazz.push(props.className);
@@ -34,44 +44,22 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
         if (validator.result && validator.message) clazz.push('t-checkbox--success');
 
         return clazz.join(' ');
-    }
+    }, [props.className, props.disabled, validator.result, validator.message]);
 
-    function getRootStyle(): CSSProperties {
+    const getRootStyle = useCallback(() => {
         let style: CSSProperties = {};
 
         if (props.style) style = {...props.style};
 
         return style;
-    }
+    }, [props.style]);
 
     // endregion
 
 
-    // region [Events]
+    // region [Privates]
 
-    function onClickCheckbox(): void {
-        emitChange();
-    }
-
-    function onBlur(): void {
-        if (!props.lazy) {
-            validator.validate();
-        }
-    }
-
-    function onKeyDown(event: KeyboardEvent): void {
-        if (event.key === 'Enter' || event.key === ' ') {
-            event.preventDefault();
-            emitChange();
-        }
-    }
-
-    // endregion
-
-
-    // region [ETC]
-
-    function emitChange(): void {
+    const emitChange = useCallback(() => {
         if (typeof props.onChange !== 'function') {
             return;
         }
@@ -82,7 +70,7 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
             props.onChange(props.positiveValue);
         }
 
-    }
+    }, [status, props.onChange]);
 
     function modifyStatus(): void {
         if (props.checked === true) {
@@ -100,6 +88,26 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
 
     // endregion
 
+    // region [Events]
+
+    const onClickCheckbox = useCallback(() => {
+        emitChange();
+    }, [emitChange]);
+
+    const onBlur = useCallback(() => {
+        if (!props.lazy) {
+            validator.validate();
+        }
+    }, [props.lazy, validator]);
+
+    const onKeyDown = useCallback((event: KeyboardEvent) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            emitChange();
+        }
+    }, [emitChange]);
+
+    // endregion
 
     // region [Templates]
 
