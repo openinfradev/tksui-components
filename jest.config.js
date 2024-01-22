@@ -8,5 +8,4 @@ export default {
     },
     setupFiles: ['<rootDir>/jest.setup.js'],
     setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
-    globals: { TextEncoder: TextEncoder, TextDecoder: TextDecoder },
 };
