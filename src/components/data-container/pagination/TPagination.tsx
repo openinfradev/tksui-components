@@ -19,11 +19,13 @@ const TPagination = forwardRef((props: TPaginationProps, ref: Ref<TPaginationRef
         nextPageSet(): void { onClickNextPageSet(); },
         previousPage(): void { onClickPreviousPage(); },
         previousPageSet(): void { onClickPreviousPageSet(); },
+        jumpToPage(): void { onClickJumperButton(); },
     }));
 
     const [pageRange, setPageRange] = useState<{ min: number, max: number }>({min: 1, max: 1});
-    const [jumpPage, setJumpPage] = useState<number>(props.pageNumber);
+    const [jumperPage, setJumperPage] = useState<number>(props.pageNumber);
     const numberFieldRef = useRef(null);
+    const jumperTextFieldMin = 1;
     // endregion
 
 
@@ -112,13 +114,13 @@ const TPagination = forwardRef((props: TPaginationProps, ref: Ref<TPaginationRef
     }, [onChangePageNumber, pageRange.min, props.pageNumber]);
 
     const onChangeJumperPageNumber = useCallback((pageNumber: string) => {
-        setJumpPage(Number(pageNumber));
+        setJumperPage(Number(pageNumber));
     }, [pageRange]);
 
-    const onClickJumper = useCallback(() => {
+    const onClickJumperButton = useCallback(() => {
         const validResult = numberFieldRef.current?.validate();
-        if (validResult === true && onChangePageNumber) { onChangePageNumber(jumpPage); }
-    }, [jumpPage, pageRange, onChangePageNumber]);
+        if (validResult === true && onChangePageNumber) { onChangePageNumber(jumperPage); }
+    }, [jumperPage, pageRange, onChangePageNumber]);
 
     // endregion
 
@@ -127,9 +129,8 @@ const TPagination = forwardRef((props: TPaginationProps, ref: Ref<TPaginationRef
     useEffect(() => {
         const range = getPageRange(props.pageNumber, props.totalPages);
         setPageRange(range);
-        setJumpPage(props.pageNumber);
+        setJumperPage(props.pageNumber);
     }, [getPageRange, props.pageNumber, props.totalPages]);
-
 
     // endregion
 
@@ -184,15 +185,15 @@ const TPagination = forwardRef((props: TPaginationProps, ref: Ref<TPaginationRef
                        onKeyDownSpace={onClickNextPageSet}>t_navigate_right_double</TIcon>
             </span>
             {
-                props.jumper && (
+                !props.noJumper && (
                     <div className={'t-pagination__jumper__container'} data-testid={'pagination-jumper-root'}>
                         <TNumberField ref={numberFieldRef} className={'t-pagination__jumper__container__page__field'}
-                                      value={jumpPage.toString()} onChange={onChangeJumperPageNumber}
-                                      min={pageRange.min} max={props.totalPages}
-                                      rules={[rule.valueMin(pageRange.min), rule.valueMax(props.totalPages)]}
+                                      value={jumperPage.toString()} min={jumperTextFieldMin} max={props.totalPages}
+                                      rules={[rule.valueMin(jumperTextFieldMin), rule.valueMax(props.totalPages)]}
+                                      onChange={onChangeJumperPageNumber} onKeyDownEnter={onClickJumperButton}
                         />
-                        <TButton className={'t-pagination__jumper__container__short-cut__button'} onClick={onClickJumper}>
-                            {props.jumperText ? props.jumperText : '바로가기'}
+                        <TButton className={'t-pagination__jumper__container__short-cut__button'} onClick={onClickJumperButton}>
+                            {props.jumperText}
                         </TButton>
                     </div>
                 )
@@ -201,7 +202,9 @@ const TPagination = forwardRef((props: TPaginationProps, ref: Ref<TPaginationRef
         </nav>
     );
 });
-TPagination.defaultProps = {};
+TPagination.defaultProps = {
+    jumperText: '바로가기',
+};
 
 TPagination.displayName = 'TPagination';
 

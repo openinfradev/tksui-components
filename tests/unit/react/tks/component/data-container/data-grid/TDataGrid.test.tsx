@@ -101,11 +101,24 @@ describe('TDataGrid', () => {
             expect(await findByText(root, 'Color')).toBeInTheDocument();
         });
 
-        it('jumper prop applies to root', async () => {
+        it('NoJumper prop applies to root', async () => {
+
+            // Arrange
+            render(<TDataGrid rowData={[]} noJumper/>);
+
+            const root = screen.getByTestId('pagination-root');
+            const jumperRoot = root.querySelector('.t-pagination__jumper__container');
+
+            // // Assert
+            expect(root).toBeInTheDocument();
+            expect(jumperRoot).toBeNull();
+        });
+
+        it('JumperText prop applies to root', async () => {
 
             // Arrange
             const jumperText = 'Jumper Text';
-            render(<TDataGrid rowData={[]} jumper jumperText={jumperText}/>);
+            render(<TDataGrid rowData={[]} jumperText={jumperText}/>);
 
             const root = screen.getByTestId('pagination-jumper-root');
             const jumperElement = screen.getByText(jumperText);
@@ -171,7 +184,7 @@ describe('TDataGrid', () => {
         it('If rightAction exists, the right action area is exposed.', () => {
 
             // Arrange
-            const rightAction = <button>right button</button>
+            const rightAction = <button>right button</button>;
             render(<TDataGrid {...baseProps} rightAction={rightAction}/>);
             const root = screen.getByTestId('data-gird-right-action-root');
 

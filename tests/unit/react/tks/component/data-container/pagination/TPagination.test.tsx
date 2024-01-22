@@ -15,7 +15,7 @@ describe('TPagination', () => {
         totalPages: number,
         className?: string,
         style?: CSSProperties,
-        jumper?: boolean,
+        noJumper?: boolean,
         jumperText?: string,
     }) => {
         const pageNumber = useInputState<number>(1);
@@ -51,10 +51,10 @@ describe('TPagination', () => {
             expect(root).toHaveStyle(testStyle);
         });
 
-        it('jumper prop applies to root', async () => {
+        it('NoJumper prop applies to root', async () => {
 
             // Arrange
-            render(<Pagination jumper totalPages={13}/>);
+            render(<Pagination totalPages={13}/>);
             const jumperRoot = screen.getByTestId('pagination-jumper-root');
 
             // Assert
@@ -66,7 +66,7 @@ describe('TPagination', () => {
 
             // Arrange
             const jumperText = 'Go Page';
-            render(<Pagination jumper jumperText={jumperText} totalPages={13}/>);
+            render(<Pagination jumperText={jumperText} totalPages={13}/>);
             const jumperButtonElement = screen.getByText(jumperText);
 
             // Assert
@@ -332,7 +332,7 @@ describe('TPagination', () => {
             // Arrange
             const user = userEvent.setup();
             const testPageNumber = '7';
-            render(<Pagination jumper totalPages={13}/>);
+            render(<Pagination totalPages={13}/>);
             const jumperButtonElement = screen.getByText('바로가기');
             const numberFieldElement = screen.getByTestId('number-field-input-root');
 
@@ -355,7 +355,7 @@ describe('TPagination', () => {
             // Arrange
             const user = userEvent.setup();
             const invalidNumber = '0';
-            render(<Pagination jumper totalPages={13}/>);
+            render(<Pagination totalPages={13}/>);
             const jumperButtonElement = screen.getByText('바로가기');
             const numberFieldInputElement = screen.getByTestId('number-field-input-root');
 
@@ -378,7 +378,7 @@ describe('TPagination', () => {
             const user = userEvent.setup();
             const invalidNumber = 77;
             const totalPages = 70;
-            render(<Pagination jumper totalPages={totalPages}/>);
+            render(<Pagination totalPages={totalPages}/>);
             const numberFieldInputElement = screen.getByTestId('number-field-input-root');
 
             // Act
@@ -399,7 +399,7 @@ describe('TPagination', () => {
             // Arrange
             const user = userEvent.setup();
             const targetNumberPage = '7';
-            render(<Pagination jumper totalPages={13}/>);
+            render(<Pagination totalPages={13}/>);
             const targetPageNumberElement = screen.getByText(targetNumberPage);
 
             // Act
@@ -410,6 +410,31 @@ describe('TPagination', () => {
 
             // Assert
             expect(numberFieldInputElement?.value).toBe(targetNumberPage);
+        });
+
+        it('After navigating to a different page, return to a lower page number.', async () => {
+
+            // Arrange
+            const user = userEvent.setup();
+            const targetNumberPage = '7';
+            render(<Pagination totalPages={77}/>);
+            const jumperNumberFieldElement = screen.getByTestId('number-field-input-root');
+            const jumperButtonElement = screen.getByText('바로가기');
+
+            // Act
+            await act(async () => {
+                await user.click(jumperNumberFieldElement);
+                await user.keyboard('70');
+                await user.click(jumperButtonElement);
+                await user.clear(jumperNumberFieldElement);
+                await user.click(jumperNumberFieldElement);
+                await user.keyboard(targetNumberPage);
+                await user.click(jumperButtonElement);
+            });
+            const activeNumberElement = screen.getByText(targetNumberPage);
+
+            // Assert
+            expect(activeNumberElement).toHaveClass('t-pagination__page-container__page__button--active');
         });
 
     });

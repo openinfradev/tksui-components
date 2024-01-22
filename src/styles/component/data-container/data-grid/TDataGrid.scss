@@ -14,7 +14,6 @@
     }
 
     .t-data-grid__header {
-        //height: 46px;
         margin-bottom: $t-spacing-10;
         display: flex;
         align-items: center;
@@ -48,7 +47,7 @@
     .t-data-grid__body.ag-theme-material {
         --ag-material-primary-color: #{$t-primary-color};
         --ag-font-family: #{$t-font-family};
-        --ag-font-size: var(--t-font-size-large);
+        --ag-font-size: #{$t-font-size-body-3};
 
         --ag-checkbox-checked-color: #{$t-primary-color};
         --ag-checkbox-indeterminate-color: #{$t-primary-color};
