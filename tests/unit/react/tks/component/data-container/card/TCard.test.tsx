@@ -126,14 +126,14 @@ describe('TCard', () => {
 
             // Arrange
             const iconSize = 'large';
-            const iconType = 'outlined';
+            const iconFill = true;
             const iconColor = 'red';
-            render(<TCard iconSize={iconSize} iconType={iconType} iconColor={iconColor} {...baseProps}>Card Content</TCard>);
+            render(<TCard iconSize={iconSize} iconFill={iconFill} iconColor={iconColor} {...baseProps}>Card Content</TCard>);
             const iconRoot = screen.getByRole('img');
 
             // Assert
             expect(iconRoot).toHaveClass('t-icon--large');
-            expect(iconRoot).toHaveClass('material-icons-outlined');
+            expect(iconRoot).toHaveClass('t-icon-material--fill');
             expect(iconRoot).toHaveStyle({color: iconColor});
         });
 
@@ -238,18 +238,18 @@ describe('TCard', () => {
 
             // Arrange
             const iconSize = 'large';
-            const iconType = 'outlined';
+            const iconFill = true;
             const iconColor = 'red';
             render(
                 <TCard>
-                    <TCardHeader title={'Card Title'} icon={'edit'} iconSize={iconSize} iconType={iconType} iconColor={iconColor}/>
+                    <TCardHeader title={'Card Title'} icon={'edit'} iconSize={iconSize} iconFill={iconFill} iconColor={iconColor}/>
                 </TCard>,
             );
             const iconRoot = screen.getByRole('img');
 
             // Assert
             expect(iconRoot).toHaveClass('t-icon--large');
-            expect(iconRoot).toHaveClass('material-icons-outlined');
+            expect(iconRoot).toHaveClass('t-icon-material--fill');
             expect(iconRoot).toHaveStyle({color: iconColor});
         });
 

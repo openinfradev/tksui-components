@@ -1,6 +1,6 @@
 import {ReactNode} from 'react';
 import {TBaseProps, TBaseTooltipProps} from '@/common/base/TBase.interface';
-import {TIconSize, TIconType} from '~/icon';
+import {TIconSize} from '~/icon';
 
 export interface TCardProps extends TBaseProps, TBaseTooltipProps {
     children?: ReactNode,
@@ -10,7 +10,7 @@ export interface TCardProps extends TBaseProps, TBaseTooltipProps {
     center?: boolean,
 
     icon?: string
-    iconType?: TIconType,
+    iconFill?: boolean,
     iconSize?: TIconSize,
     iconColor?: string,
 
@@ -25,7 +25,7 @@ export interface TCardHeaderProps extends TBaseProps {
     subTitle?: string,
 
     icon?: string
-    iconType?: TIconType,
+    iconFill?: boolean,
     iconSize?: TIconSize,
     iconColor?: string,
 }

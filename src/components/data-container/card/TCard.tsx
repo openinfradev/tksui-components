@@ -59,7 +59,7 @@ const TCard = (props: TCardProps) => {
             {
                 props.icon && (
                     <TIcon className={'t-card-top__icon'} size={props.iconSize}
-                           type={props.iconType} color={props.iconColor}>
+                           fill={props.iconFill} color={props.iconColor}>
                         {props.icon}
                     </TIcon>
                 )
