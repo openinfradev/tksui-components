@@ -75,12 +75,13 @@ const TInputValidationHint = forwardRef((props: TInputValidationHintProps, ref: 
 
     return (
         <div className={`t-input-validation-hint ${rootClass}`}
+             id={props.id}
              style={rootStyle}
-        >
+             data-testid={'t-input-validation-hint-root'}>
 
             {
                 props.description && (
-                    <div className={'t-input-validation-hint__description'}>
+                    <div className={'t-input-validation-hint__description'} data-testid={'t-input-validation-hint-description'}>
                         {props.description}
                     </div>
                 )
