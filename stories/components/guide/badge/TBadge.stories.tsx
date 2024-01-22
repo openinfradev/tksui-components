@@ -18,7 +18,7 @@ const Template = () => {
 
     const [content, setContent] = useState<number>(1);
 
-    const BadgeAnchor = () => <TIcon type={'filled'}>notifications</TIcon>;
+    const BadgeAnchor = () => <TIcon fill>notifications</TIcon>;
 
     return (<>
         <TNumberField onChange={(value) => setContent(Number.parseInt(value, 10))} value={content.toString()} min={0}/>

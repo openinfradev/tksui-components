@@ -337,8 +337,8 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
                     (!props.multiple && props.value) && (
                         <TIcon className={'t-dropdown__control__remover'}
                                xsmall
+                               fill
                                color={'#E1E5F7'} /* FIXME. themetoken.tGrayColor3 으로 교체 */
-                               type={'filled'}
                                onClick={onClickClear}>cancel</TIcon>
                     )
                 }
