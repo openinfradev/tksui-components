@@ -1,6 +1,5 @@
 import {render, screen} from '@testing-library/react';
 import TCardContent from '~/data-container/card/TCardContent';
-import TCardHeader from '../../../../../../../src/components/data-container/card/TCardHeader';
 
 describe('TCardContent', () => {
 
@@ -11,7 +10,7 @@ describe('TCardContent', () => {
             render(<TCardContent>Test Content</TCardContent>);
 
             // Assert
-            expect(screen.getByTestId('t-card-content')).toBeInTheDocument();
+            expect(screen.getByTestId('card-content-root')).toBeInTheDocument();
         });
 
         it('applies className prop to root', () => {
