@@ -4,7 +4,7 @@ import THighlightText from '~/data-container/highlight-text/THighlightText';
 describe('THighlightText', () => {
 
     describe('Render', () => {
-        it('renders without errors', () => {
+        it('Renders without errors', () => {
 
             // Arrange
             render(<THighlightText keyword="Test Text">Render Test</THighlightText>);
@@ -13,7 +13,7 @@ describe('THighlightText', () => {
             expect(screen.getByText('Render Test')).toBeInTheDocument();
         });
 
-        it('renders the children with highlighting when a keyword is provided', () => {
+        it('Renders the children with highlighting when a keyword is provided', () => {
 
             // Arrange
             render(<THighlightText keyword="sample">Sample Text</THighlightText>);
@@ -24,7 +24,7 @@ describe('THighlightText', () => {
             expect(highlightedText).toContainHTML('<mark>Sample</mark> Text');
         });
 
-        it('correctly handles case-insensitive highlighting', () => {
+        it('Correctly handles case-insensitive highlighting', () => {
 
             // Arrange
             render(<THighlightText keyword="sample">Sample sample</THighlightText>);
@@ -35,7 +35,7 @@ describe('THighlightText', () => {
             expect(highlightedText.innerHTML).toBe('<mark>Sample</mark> <mark>sample</mark>');
         });
 
-        it('renders the children without highlighting when keyword is not present', () => {
+        it('Renders the children without highlighting when keyword is not present', () => {
 
             // Arrange
             render(<THighlightText keyword="noKeyword">Sample Text</THighlightText>);

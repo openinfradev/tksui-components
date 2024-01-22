@@ -137,6 +137,7 @@ const TDropHolder = forwardRef((props: TDropHolderProps, ref: ForwardedRef<TDrop
     return (
         <div className={`t-drop-holder ${rootClass}`}
              style={rootStyle}
+             id={props.id}
              ref={rootRef}
              onClick={onClickRoot}
              data-testid={'drop-holder-root'}

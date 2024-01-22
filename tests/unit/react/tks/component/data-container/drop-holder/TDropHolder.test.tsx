@@ -1,6 +1,7 @@
 import {act, render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import TDropHolder from '~/data-container/drop-holder/TDropHolder';
+import TButton from "../../../../../../../src/components/button/button/TButton";
 
 describe('TDropHolder', () => {
     const mockOnClickItem = jest.fn();
@@ -16,9 +17,50 @@ describe('TDropHolder', () => {
     beforeEach(() => {
         mockOnClickItem.mockClear();
     });
+
+
+    describe('Style', () => {
+
+        it('ClassName Prop applies to root', () => {
+            const testData = 'test-class'
+            render(<TDropHolder {...baseProps} className={testData}>button test</TDropHolder>);
+
+
+            const root = screen.getByTestId('drop-holder-root')
+
+            expect(root)
+                .toHaveClass('test-class');
+        })
+
+        it('Style Prop applies to root', () => {
+            const testData = {border: '1px solid blue'}
+            render(<TDropHolder {...baseProps} style={testData}>button test</TDropHolder>);
+
+
+            const root = screen.getByTestId('drop-holder-root');
+
+            expect(root)
+                .toHaveStyle(testData);
+
+        })
+
+        it('ID Prop applies to root', () => {
+            const testData = 'test-id'
+            render(<TDropHolder {...baseProps} id={testData}>button test</TDropHolder>);
+
+
+            const root = screen.getByTestId('drop-holder-root')
+
+            expect(root)
+            expect(root).toHaveProperty('id');
+            expect(root.id).toEqual(testData);
+        })
+
+    })
+
     describe('Render', () => {
 
-        it('renders without errors', () => {
+        it('Renders without errors', () => {
 
             // Arrange
             render(<TDropHolder {...baseProps} >Test DropHolder</TDropHolder>);
@@ -27,7 +69,7 @@ describe('TDropHolder', () => {
             expect(screen.getByTestId('drop-holder-root')).toBeInTheDocument();
         });
 
-        it('child nodes render without error : t-drop-holder__anchor ', () => {
+        it('Child nodes render without error : t-drop-holder__anchor ', () => {
 
             // Arrange
             render(<TDropHolder {...baseProps} >Test DropHolder</TDropHolder>);
@@ -38,7 +80,7 @@ describe('TDropHolder', () => {
 
         });
 
-        it('child nodes render without error : t-drop-holder__holder ', () => {
+        it('Child nodes render without error : t-drop-holder__holder ', () => {
 
             // Arrange
             render(<TDropHolder {...baseProps} >Test DropHolder</TDropHolder>);
@@ -52,7 +94,7 @@ describe('TDropHolder', () => {
     });
 
     describe('Event', () => {
-        it('opens and closes on click', async () => {
+        it('When user clicks root, TDropHolder opens and then closes', async () => {
 
             // Arrange
             const user = userEvent.setup();
@@ -79,7 +121,7 @@ describe('TDropHolder', () => {
             expect(root).not.toHaveClass('t-drop-holder--open');
         });
 
-        it('closes on outside click', async () => {
+        it('When user clicks outside, TDropHolder closes', async () => {
 
             // Arrange
             const user = userEvent.setup();
@@ -105,7 +147,7 @@ describe('TDropHolder', () => {
             expect(root).not.toHaveClass('t-drop-holder--open');
         });
 
-        it('renders items with correct text', async () => {
+        it('When user clicks and opens TDropHolder, item elements are displayed', async () => {
 
             // Arrange
             const user = userEvent.setup();
@@ -124,26 +166,31 @@ describe('TDropHolder', () => {
             });
         });
 
-        it('calls onClickItem when an item is clicked', async () => {
+        it('When user clicks an item, onClickItem is called', async () => {
 
             // Arrange
             const user = userEvent.setup();
             render(<TDropHolder {...baseProps} >Test DropHolder</TDropHolder>);
             const root = screen.getByTestId('drop-holder-root');
 
-            // Act
-            await act(async () => {
-                await user.click(root);
-            });
 
-            // Assert
-            baseProps.items.forEach(async (item) => {
+
+            // Act
+            for (const item of baseProps.items) {
+
+                await act(async () => {
+                    await user.click(root);
+                });
+
                 const itemElement = screen.getByText(item.text);
+
                 await act(async () => {
                     await userEvent.click(itemElement);
-                });
-                expect(mockOnClickItem).toHaveBeenCalledWith(expect.anything());
-            });
+                })
+            }
+
+            // Assert
+            expect(mockOnClickItem).toHaveBeenCalledTimes(baseProps.items.length);
         });
     });
 

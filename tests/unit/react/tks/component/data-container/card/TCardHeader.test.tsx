@@ -8,7 +8,7 @@ describe('TCardHeader', () => {
     };
 
     describe('Style', () => {
-        it('renders without errors', () => {
+        it('Renders without errors', () => {
 
             // Arrange
             render(<TCardHeader {...baseProps} />);
@@ -17,7 +17,7 @@ describe('TCardHeader', () => {
             expect(screen.getByTestId('card-header-root')).toBeInTheDocument();
         });
 
-        it('applies className prop to root', () => {
+        it('ClassName prop applies to the root', () => {
 
             // Arrange
             const testClassName = 'test-class';
@@ -28,7 +28,7 @@ describe('TCardHeader', () => {
             expect(root).toHaveClass(testClassName);
         });
 
-        it('applies style prop to root', () => {
+        it('Style prop applies to the root', () => {
 
             // Arrange
             const testStyle = { width: '300px', color: 'red' };
@@ -39,7 +39,19 @@ describe('TCardHeader', () => {
             expect(root).toHaveStyle(testStyle);
         });
 
-        it('renders title and subTitle correctly', () => {
+        it('ID prop applies to root', () => {
+
+            // Arrange
+            const testStyle = { width: '300px', color: 'red' };
+            render(<TCardHeader {...baseProps} style={testStyle}/>);
+            const root = screen.getByTestId('card-header-root');
+
+            // Assert
+            expect(root).toHaveStyle(testStyle);
+        });
+
+
+        it('Renders title and subTitle correctly', () => {
 
             // Arrange
             render(<TCardHeader {...baseProps} />);

@@ -57,11 +57,21 @@ describe('TDataGrid', () => {
             expect(root).toHaveStyle(testStyle);
         });
 
-    });
 
-    describe('Render', () => {
+        it('ID prop applies to root', () => {
 
-        it('renders without errors', () => {
+            // Arrange
+            const testId = 'test-class';
+            render(<TDataGrid {...baseProps} id={testId}/>);
+            const root = screen.getByTestId('data-grid-root');
+
+            // Assert
+            expect(root).toHaveProperty('id');
+            expect(root.id).toEqual(testId);
+
+        });
+
+        it('Renders without errors', () => {
 
             // Arrange
             render(<TDataGrid {...baseProps} />);
@@ -69,6 +79,13 @@ describe('TDataGrid', () => {
             // Assert
             expect(screen.getByTestId('data-grid-root')).toBeInTheDocument();
         });
+
+
+    });
+
+    describe('Render', () => {
+
+
 
         it('ColumnDefs prop applies to root', async () => {
 

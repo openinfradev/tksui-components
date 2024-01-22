@@ -4,7 +4,7 @@ import TCardContent from '~/data-container/card/TCardContent';
 describe('TCardContent', () => {
 
     describe('Style', () => {
-        it('renders without errors', () => {
+        it('Renders without errors', () => {
 
             // Arrange
             render(<TCardContent>Test Content</TCardContent>);
@@ -13,7 +13,7 @@ describe('TCardContent', () => {
             expect(screen.getByTestId('card-content-root')).toBeInTheDocument();
         });
 
-        it('applies className prop to root', () => {
+        it('Classname prop applies to root', () => {
 
             // Arrange
             const testClassName = 'test-class';
@@ -24,7 +24,7 @@ describe('TCardContent', () => {
             expect(root).toHaveClass(testClassName);
         });
 
-        it('applies style prop to root', () => {
+        it('Style prop applies to root', () => {
 
             // Arrange
             const testStyle = { width: '300px' };
@@ -34,10 +34,26 @@ describe('TCardContent', () => {
             // Assert
             expect(root).toHaveStyle(testStyle);
         });
+
+        it('ID prop applies to root', () => {
+
+            // Arrange
+            const testData = 'test-id';
+
+            render(<TCardContent id={testData}>Test Content</TCardContent>);
+
+            const root = screen.getByTestId('card-content-root');
+
+            // Assert
+            expect(root).toHaveProperty('id');
+            expect(root.id).toEqual(testData);
+
+        });
     });
 
     describe('Children', () => {
-        it('renders children', () => {
+
+        it('Renders children without error', () => {
 
             // Arrange
             const testContent = 'Test Content';
@@ -47,6 +63,7 @@ describe('TCardContent', () => {
             // Assert
             expect(root).toHaveTextContent(testContent);
         });
+
     });
 
 });
