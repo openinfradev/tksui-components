@@ -80,8 +80,8 @@ describe('TPagination', () => {
             // Arrange
             const user = userEvent.setup();
             render(<Pagination totalPages={13}/>);
-            const nextPageIcon = screen.getByLabelText('t_navigate_right');
-            const prevPageIcon = screen.getByLabelText('t_navigate_left');
+            const nextPageIcon = screen.getByLabelText('keyboard_arrow_right');
+            const prevPageIcon = screen.getByLabelText('keyboard_arrow_left');
             const page1Button = screen.getByRole('button', {name: '1'});
             const page2Button = screen.getByRole('button', {name: '2'});
 
@@ -149,8 +149,8 @@ describe('TPagination', () => {
 
             // Arrange
             render(<Pagination totalPages={13}/>);
-            const previousPageSetIcon = screen.getByLabelText('t_navigate_left_double');
-            const previousPageIcon = screen.getByLabelText('t_navigate_left');
+            const previousPageSetIcon = screen.getByLabelText('keyboard_double_arrow_left');
+            const previousPageIcon = screen.getByLabelText('keyboard_arrow_left');
 
             // Assert
             expect(previousPageSetIcon).toHaveClass('t-icon--disabled');
@@ -163,7 +163,7 @@ describe('TPagination', () => {
             // Arrange
             const user = userEvent.setup();
             render(<Pagination totalPages={2}/>);
-            const nextPageIcon = screen.getByLabelText('t_navigate_right');
+            const nextPageIcon = screen.getByLabelText('keyboard_arrow_right');
 
             // Act
             await act(async () => {
@@ -171,8 +171,8 @@ describe('TPagination', () => {
             });
 
             // Arrange
-            const previousPageSetIcon = screen.getByLabelText('t_navigate_left_double');
-            const previousPageIcon = screen.getByLabelText('t_navigate_left');
+            const previousPageSetIcon = screen.getByLabelText('keyboard_double_arrow_left');
+            const previousPageIcon = screen.getByLabelText('keyboard_arrow_left');
 
             // Assert
             expect(previousPageSetIcon).not.toHaveClass('t-icon--disabled');
@@ -184,8 +184,8 @@ describe('TPagination', () => {
 
             // Arrange
             render(<Pagination totalPages={2}/>);
-            const nextPageSetIcon = screen.getByLabelText('t_navigate_right_double');
-            const nextPageIcon = screen.getByLabelText('t_navigate_right');
+            const nextPageSetIcon = screen.getByLabelText('keyboard_double_arrow_right');
+            const nextPageIcon = screen.getByLabelText('keyboard_arrow_right');
 
             // Assert
             expect(nextPageSetIcon).not.toHaveClass('t-icon--disabled');
@@ -198,8 +198,8 @@ describe('TPagination', () => {
             // Arrange
             const user = userEvent.setup();
             render(<Pagination totalPages={2}/>);
-            const nextPageIcon = screen.getByLabelText('t_navigate_right');
-            const nextPageSetIcon = screen.getByLabelText('t_navigate_right_double');
+            const nextPageIcon = screen.getByLabelText('keyboard_arrow_right');
+            const nextPageSetIcon = screen.getByLabelText('keyboard_double_arrow_right');
 
             // Act
             await act(async () => {
@@ -215,8 +215,8 @@ describe('TPagination', () => {
 
             // Arrange
             render(<Pagination totalPages={2}/>);
-            const nextPageIcon = screen.getByLabelText('t_navigate_right');
-            const nextPageSetIcon = screen.getByLabelText('t_navigate_right_double');
+            const nextPageIcon = screen.getByLabelText('keyboard_arrow_right');
+            const nextPageSetIcon = screen.getByLabelText('keyboard_double_arrow_right');
 
             // Assert
             expect(nextPageSetIcon).not.toHaveClass('t-icon--disabled');
@@ -230,8 +230,8 @@ describe('TPagination', () => {
                 // Arrange
                 const user = userEvent.setup();
                 render(<Pagination totalPages={13}/>);
-                const nextPageSetIcon = screen.getByLabelText('t_navigate_right_double');
-                const prevPageSetIcon = screen.getByLabelText('t_navigate_left_double');
+                const nextPageSetIcon = screen.getByLabelText('keyboard_double_arrow_right');
+                const prevPageSetIcon = screen.getByLabelText('keyboard_double_arrow_left');
 
                 let pageButtons = screen.getAllByRole('button');
 
@@ -278,8 +278,8 @@ describe('TPagination', () => {
                 // Arrange
                 const user = userEvent.setup();
                 render(<Pagination totalPages={5}/>);
-                const nextPageSetIcon = screen.getByLabelText('t_navigate_right_double');
-                const prevPageSetIcon = screen.getByLabelText('t_navigate_left_double');
+                const nextPageSetIcon = screen.getByLabelText('keyboard_double_arrow_right');
+                const prevPageSetIcon = screen.getByLabelText('keyboard_double_arrow_left');
 
                 let pageButtons = screen.getAllByRole('button');
 
