@@ -23,12 +23,12 @@ const NormalTemplate = (args: TSwitchProps) => {
     const switch3 = useInputState(true);
     const switch4 = useInputState(false);
 
-    return (<>
+    return (<div style={{background: '#f9fafd'}}>
         <TSwitch {...switch1} label={`Normal (${switch1.value})`}/> <br/>
         <TSwitch {...switch2} label={`Custom Value (${switch2.value})`} positiveValue={'Y'} negativeValue={'N'}/> <br/>
         <TSwitch {...switch3} label={`Disabled On (${switch3.value})`} disabled/> <br/>
         <TSwitch {...switch4} label={`Disabled Off (${switch4.value})`} disabled/> <br/>
-    </>);
+    </div>);
 };
 
 export const Default: Story = {
