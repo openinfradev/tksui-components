@@ -1,4 +1,3 @@
-import {MouseEvent} from 'react';
 import {render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {TIcon} from '~/icon';
@@ -12,7 +11,7 @@ describe('TIcon', () => {
 
             // Arrange
             const testData = 'class-name-prop';
-            render(<TIcon className={'class-name-prop'}>close</TIcon>);
+            render(<TIcon className={'class-name-prop'}>image</TIcon>);
             const root = screen.getByRole('img');
 
 
@@ -54,9 +53,20 @@ describe('TIcon', () => {
             expect(button).toHaveStyle({color: 'blue', stroke: 'blue', fill: 'blue'});
         });
 
+        it('Fill prop applies to root', () => {
+
+            // Arrange
+            render(<TIcon fill>close</TIcon>);
+            const root = screen.getByRole('img');
+
+            // Assert
+
+            expect(root).toHaveClass('t-icon-material--fill');
+        });
+
     });
 
-    describe('size', () => {
+    describe('Size', () => {
 
         it('When valid size is entered, it will be applied in the classname', () => {
             render(<>
@@ -219,7 +229,7 @@ describe('TIcon', () => {
         it('When icon is disabled and user type something on Icon, onKeyDown event handler will be NOT executed', async () => {
 
             // Arrange
-            const user = userEvent.setup()
+            const user = userEvent.setup();
             const mockOnKeyDown = jest.fn(() => { /* Just test */ });
             const mockOnKeyDownEnter = jest.fn(() => { /* Just test */ });
             const mockOnKeyDownSpace = jest.fn(() => { /* Just test */ });
