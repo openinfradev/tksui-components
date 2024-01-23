@@ -10,9 +10,7 @@ import useInputState from '@/common/hook/UseInputState';
 const meta: Meta<typeof TDataGrid> = {
     title: 'DataContainer/TDataGrid',
     component: TDataGrid,
-    parameters: {
-        layout: 'fullscreen',
-    },
+    parameters: {layout: 'fullscreen'},
 };
 
 export default meta;
@@ -71,9 +69,6 @@ const Template = () => {
                    rightAction={gridRightAction}
                    onChange={selectedRows.onChange}
         />
-
-        <br/><br/>
-
     </>);
 };
 

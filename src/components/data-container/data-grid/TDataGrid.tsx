@@ -5,6 +5,7 @@ import {SelectionChangedEvent} from 'ag-grid-community';
 import {TDataGridProps} from './TDataGrid.interface';
 import TButton from '../../button/button/TButton';
 import TPagination from '../pagination/TPagination';
+import TActionBar from '~/data-container/action-bar/TActionBar';
 
 const TDataGrid = forwardRef((props: TDataGridProps, ref: Ref<AgGridReact>) => {
 
@@ -73,11 +74,11 @@ const TDataGrid = forwardRef((props: TDataGridProps, ref: Ref<AgGridReact>) => {
 
     const noRowsOverlayComponent = useCallback(() => (<>
         <div className={'t-data-grid__body__no-rows-template'}>
-            <svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 100 100'>
-                <circle cx='44' cy='44' r='44' transform='translate(6.5 6.5)'
+            <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 100 100">
+                <circle cx="44" cy="44" r="44" transform="translate(6.5 6.5)"
                         style={{fill: '#f2f2f2', stroke: '#ddd', strokeMiterlimit: 10, strokeWidth: '2px'}}/>
-                <path transform='translate(49 35)' style={{fill: '#999'}} d='M0 0h4v24H0z'/>
-                <path transform='translate(49 62.953)' style={{fill: '#999'}} d='M0 0h4v4H0z'/>
+                <path transform="translate(49 35)" style={{fill: '#999'}} d="M0 0h4v24H0z"/>
+                <path transform="translate(49 62.953)" style={{fill: '#999'}} d="M0 0h4v4H0z"/>
             </svg>
 
             {
@@ -107,7 +108,7 @@ const TDataGrid = forwardRef((props: TDataGridProps, ref: Ref<AgGridReact>) => {
         <div className={`t-data-grid ${rootClass}`} style={rootStyle} id={props.id} data-testid={'data-grid-root'}>
             {
                 !props.noHeader && (
-                    <div className={'t-data-grid__header'}>
+                    <div className={'t-data-grid__header'} data-testid={'data-grid-header-root'}>
                         {
                             !props.noTotalRows && (
                                 <div className={'t-data-grid__header__pagination'}>
@@ -125,17 +126,11 @@ const TDataGrid = forwardRef((props: TDataGridProps, ref: Ref<AgGridReact>) => {
                         }
 
                         {
-                            props.leftAction && (
-                                <div className={'t-data-grid__header__left-action'}>
-                                    {props.leftAction}
-                                </div>
-                            )
-                        }
-                        {
-                            props.rightAction && (
-                                <div className={'t-data-grid__header__right-action'}>
-                                    {props.rightAction}
-                                </div>
+                            (props.leftAction || props.rightAction || props.centerAction) && (
+                                <TActionBar className={'t-data-grid__header__action-bar'}
+                                            leftAction={props.leftAction}
+                                            centerAction={props.centerAction}
+                                            rightAction={props.rightAction}/>
                             )
                         }
                     </div>
@@ -143,7 +138,7 @@ const TDataGrid = forwardRef((props: TDataGridProps, ref: Ref<AgGridReact>) => {
             }
 
 
-            <div className={'t-data-grid__body ag-theme-material'}
+            <div className={'t-data-grid__body ag-theme-material'} data-testid={'data-grid-body-root'}
                  style={{height: generatedHeightProps.height}}>
                 <AgGridReact className={''}
                              ref={gridRef}
@@ -160,6 +155,8 @@ const TDataGrid = forwardRef((props: TDataGridProps, ref: Ref<AgGridReact>) => {
                                  totalPages={props.paging?.totalPages || 1}
                                  pageNumber={props.paging?.pageNumber || 1}
                                  onChangePageNumber={(value) => props.onChangePageNumber(value)}
+                                 noJumper={props.noJumper}
+                                 jumperText={props.jumperText}
                     />
                 )
             }
@@ -180,8 +177,8 @@ TDataGrid.defaultProps = {
     suppressRowClickSelection: true,
     enableCellTextSelection: true,
     noDataText: '검색 조건에 맞는 데이터가 없습니다',
-    headerHeight: 48,
-    rowHeight: 76,
+    headerHeight: 32,
+    rowHeight: 40,
 };
 
 TDataGrid.displayName = 'TDataGrid';

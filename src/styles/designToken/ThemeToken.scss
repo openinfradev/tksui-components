@@ -226,7 +226,7 @@ $t-chart-color-10: color-mix(in srgb, var(--t-point-color), black 20%);
 
 // grid color
 $t-grid-border-color--01: #DDDDDD;
-$t-grid-border-color--02: #EEEEEE;
+$t-grid-border-color--02: $t-blue-gray-color-2;
 $t-grid-border-color--03: $t-black-color;
 $t-grid-background-color--01: $t-gray-color-2;
 

@@ -14,37 +14,31 @@
     }
 
     .t-data-grid__header {
-        height: 46px;
-        margin-bottom: $t-spacing-8;
+        margin-bottom: $t-spacing-10;
         display: flex;
         align-items: center;
         gap: $t-spacing-16;
 
         .t-data-grid__header__pagination {
             color: $t-gray-color-5;
-            strong { color: $t-primary-color; }
+            white-space: nowrap;
+            @include typo-element-3;
+
+            strong {
+                color: $t-black-color;
+                font-weight: $t-font-weight-regular;
+            }
         }
         .t-data-grid__header__select-indicator {
+            @include typo-element-3;
             color: $t-primary-color;
-            font-weight: $t-font-weight-medium;
-        }
-        .t-data-grid__header__left-action {
-            flex: 1 1 auto;
-            display: flex;
-            align-items: center;
-        }
-        .t-data-grid__header__right-action {
-            flex: 1 1 auto;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
         }
     }
 
     .t-data-grid__body.ag-theme-material {
         --ag-material-primary-color: #{$t-primary-color};
         --ag-font-family: #{$t-font-family};
-        --ag-font-size: var(--t-font-size-medium);
+        --ag-font-size: #{$t-font-size-body-3};
 
         --ag-checkbox-checked-color: #{$t-primary-color};
         --ag-checkbox-indeterminate-color: #{$t-primary-color};
@@ -55,19 +49,24 @@
         --ag-input-focus-box-shadow: none;
 
         --ag-cell-horizontal-padding: 32px;
-        --ag-row-border-color: #{$t-grid-border-color--01};
+        --ag-row-border-color: #{$t-grid-border-color--02};
 
-        border-top: 2px solid $t-grid-border-color--03;
+        --ag-header-cell-hover-background-color: #{$t-blue-gray-color-3};
+        --ag-border-color: none;
+        --ag-foreground-color: #{$t-gray-color-6};
 
         .ag-header {
 
-            border-bottom: 1px solid $t-border-color--default;
-
             .ag-header-row {
-                font-size: var(--ag-font-size);
-                font-weight: $t-font-weight-bold;
                 color: $t-black-color;
-                background-color: $t-gray-color-1;
+                background-color: $t-blue-gray-color-2;
+                @include typo-subtitle-4;
+
+                & .ag-header-cell {
+                    padding: 0 $t-spacing-20;
+
+                    .ag-header-cell-label { position: relative; }
+                }
             }
 
             .ag-header-viewport {
@@ -105,10 +104,12 @@
             min-width: 100%;
         }
 
+        .ag-cell { padding: 0 $t-spacing-20; }
 
         .ag-cell, .ag-cell-wrapper {
             display: flex;
             align-items: center;
+
             @include ellipsis;
             &::selection { color: transparent; background: transparent;}
 
@@ -129,6 +130,6 @@
 
 
     .t-data-grid__pagination.t-pagination {
-        margin-top: 64px;
+        margin-top: $t-spacing-40;
     }
 }

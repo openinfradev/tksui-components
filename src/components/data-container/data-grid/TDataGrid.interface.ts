@@ -18,6 +18,7 @@ export interface TDataGridProps extends TBaseProps, AgReactUiProps {
     height?: string,
 
     leftAction?: ReactElement
+    centerAction?: ReactElement,
     rightAction?: ReactElement
 
     onChange?: (value: any[]) => void
@@ -27,6 +28,9 @@ export interface TDataGridProps extends TBaseProps, AgReactUiProps {
 
     paging?: TPageResponseVO,
     maxRowsWithoutScroll?: number,
+
+    noJumper?: boolean,
+    jumperText?: string,
 
     noDataText?: string,
     noDataContent?: {

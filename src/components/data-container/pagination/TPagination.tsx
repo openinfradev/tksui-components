@@ -1,7 +1,10 @@
-import {CSSProperties, forwardRef, Ref, useCallback, useEffect, useImperativeHandle, useMemo, useState} from 'react';
+import {CSSProperties, forwardRef, Ref, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState} from 'react';
 
 import {TPaginationProps, TPaginationRef} from './TPagination.interface';
 import TIcon from '../../icon/TIcon';
+import TButton from '~/button/button/TButton';
+import TNumberField from '~/input/number-field/TNumberField';
+import rule from '@/common/validator/TValidatorRule';
 
 
 const TPagination = forwardRef((props: TPaginationProps, ref: Ref<TPaginationRef>) => {
@@ -16,10 +19,13 @@ const TPagination = forwardRef((props: TPaginationProps, ref: Ref<TPaginationRef
         nextPageSet(): void { onClickNextPageSet(); },
         previousPage(): void { onClickPreviousPage(); },
         previousPageSet(): void { onClickPreviousPageSet(); },
+        jumpToPage(): void { onClickJumperButton(); },
     }));
 
     const [pageRange, setPageRange] = useState<{ min: number, max: number }>({min: 1, max: 1});
-
+    const [jumperPage, setJumperPage] = useState<number>(props.pageNumber);
+    const numberFieldRef = useRef(null);
+    const jumperTextFieldMin = 1;
     // endregion
 
 
@@ -49,7 +55,6 @@ const TPagination = forwardRef((props: TPaginationProps, ref: Ref<TPaginationRef
     const getPageRange = useCallback((currentPage: number, totalPages: number) => {
         const min = Math.floor((currentPage - 1) / 10) * 10 + 1;
         const max = Math.min(totalPages, min + 9);
-
         return {min, max};
     }, []);
 
@@ -108,6 +113,14 @@ const TPagination = forwardRef((props: TPaginationProps, ref: Ref<TPaginationRef
         onChangePageNumber(targetPage);
     }, [onChangePageNumber, pageRange.min, props.pageNumber]);
 
+    const onChangeJumperPageNumber = useCallback((pageNumber: string) => {
+        setJumperPage(Number(pageNumber));
+    }, [pageRange]);
+
+    const onClickJumperButton = useCallback(() => {
+        const validResult = numberFieldRef.current?.validate();
+        if (validResult === true && onChangePageNumber) { onChangePageNumber(jumperPage); }
+    }, [jumperPage, pageRange, onChangePageNumber]);
 
     // endregion
 
@@ -116,14 +129,14 @@ const TPagination = forwardRef((props: TPaginationProps, ref: Ref<TPaginationRef
     useEffect(() => {
         const range = getPageRange(props.pageNumber, props.totalPages);
         setPageRange(range);
+        setJumperPage(props.pageNumber);
     }, [getPageRange, props.pageNumber, props.totalPages]);
-
 
     // endregion
 
 
     return (
-        <nav className={`t-pagination ${rootClass}`} style={rootStyle}>
+        <nav className={`t-pagination ${rootClass}`} style={rootStyle} data-testid={'pagination-root'}>
 
             <span className={'t-pagination__nav-button-container'}>
                 <TIcon className={`t-pagination__nav-button-container__button ${prevPageButtonClass}`}
@@ -132,14 +145,14 @@ const TPagination = forwardRef((props: TPaginationProps, ref: Ref<TPaginationRef
                        disabled={props.pageNumber === 1}
                        onClick={onClickPreviousPageSet}
                        onKeyDownEnter={onClickPreviousPageSet}
-                       onKeyDownSpace={onClickPreviousPageSet}>t_navigate_left_double</TIcon>
+                       onKeyDownSpace={onClickPreviousPageSet}>keyboard_double_arrow_left</TIcon>
                 <TIcon className={`t-pagination__nav-button-container__button ${prevPageButtonClass}`}
                        clickable
                        small
                        disabled={props.pageNumber === 1}
                        onClick={onClickPreviousPage}
                        onKeyDownEnter={onClickPreviousPage}
-                       onKeyDownSpace={onClickPreviousPage}>t_navigate_left</TIcon>
+                       onKeyDownSpace={onClickPreviousPage}>keyboard_arrow_left</TIcon>
             </span>
 
             <ul className={'t-pagination__page-container'}>
@@ -162,19 +175,36 @@ const TPagination = forwardRef((props: TPaginationProps, ref: Ref<TPaginationRef
                        disabled={props.pageNumber === props.totalPages}
                        onClick={onClickNextPage}
                        onKeyDownEnter={onClickNextPage}
-                       onKeyDownSpace={onClickNextPage}>t_navigate_right</TIcon>
+                       onKeyDownSpace={onClickNextPage}>keyboard_arrow_right</TIcon>
                 <TIcon className={`t-pagination__nav-button-container__button ${nextPageButtonClass}`}
                        clickable
                        small
                        disabled={props.pageNumber === props.totalPages}
                        onClick={onClickNextPageSet}
                        onKeyDownEnter={onClickNextPageSet}
-                       onKeyDownSpace={onClickNextPageSet}>t_navigate_right_double</TIcon>
+                       onKeyDownSpace={onClickNextPageSet}>keyboard_double_arrow_right</TIcon>
             </span>
+            {
+                !props.noJumper && (
+                    <div className={'t-pagination__jumper__container'} data-testid={'pagination-jumper-root'}>
+                        <TNumberField ref={numberFieldRef} className={'t-pagination__jumper__container__page__field'}
+                                      value={jumperPage.toString()} min={jumperTextFieldMin} max={props.totalPages}
+                                      rules={[rule.valueMin(jumperTextFieldMin), rule.valueMax(props.totalPages)]}
+                                      onChange={onChangeJumperPageNumber} onKeyDownEnter={onClickJumperButton}
+                        />
+                        <TButton className={'t-pagination__jumper__container__button'} onClick={onClickJumperButton}>
+                            {props.jumperText}
+                        </TButton>
+                    </div>
+                )
+            }
+
         </nav>
     );
 });
-TPagination.defaultProps = {};
+TPagination.defaultProps = {
+    jumperText: '바로가기',
+};
 
 TPagination.displayName = 'TPagination';
 
