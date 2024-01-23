@@ -1,7 +1,7 @@
 import {act, render, screen} from '@testing-library/react';
-import TCheckbox from '~/input/checkbox/TCheckbox';
 import userEvent from '@testing-library/user-event';
 import React, {createRef} from 'react';
+import TCheckbox from '~/input/checkbox/TCheckbox';
 import TValidatorRule from '@/common/validator/TValidatorRule';
 import {TCheckboxRef} from '@/components';
 
@@ -90,7 +90,7 @@ describe('TCheckbox', () => {
                     rules={[TValidatorRule.required('test error message')]}
                 >
                     Test
-                </TCheckbox>
+                </TCheckbox>,
             );
 
             const root = screen.getByTestId('t-checkbox-root');
@@ -118,7 +118,7 @@ describe('TCheckbox', () => {
                     rules={[TValidatorRule.required('test error message')]}
                 >
                     Test
-                </TCheckbox>
+                </TCheckbox>,
             );
 
             const root = screen.getByTestId('t-checkbox-root');
@@ -196,7 +196,7 @@ describe('TCheckbox', () => {
 
             // Arrange
             const testData = 'test success message';
-            let testValue = true;
+            const testValue = true;
             const checkboxRef = createRef<TCheckboxRef>();
 
             render(
@@ -207,7 +207,7 @@ describe('TCheckbox', () => {
                     rules={[TValidatorRule.required('test error message')]}
                 >
                     Test
-                </TCheckbox>
+                </TCheckbox>,
             );
 
             // Act
@@ -238,7 +238,7 @@ describe('TCheckbox', () => {
                     value={true}
                 >
                     {testChildren}
-                </TCheckbox>
+                </TCheckbox>,
             );
 
             const content = screen.getByText(testChildren);
@@ -255,7 +255,7 @@ describe('TCheckbox', () => {
 
             // Arrange
             let negativeValue = null;
-            let positiveValue = null
+            let positiveValue = null;
             const testChildren = 'test children';
 
             const checkboxRef = createRef<TCheckboxRef>();
@@ -267,12 +267,12 @@ describe('TCheckbox', () => {
                     ref={checkboxRef}
                     value={true}
                     onChange={(negative, positive) => {
-                        negativeValue = negative
-                        positiveValue = positive
+                        negativeValue = negative;
+                        positiveValue = positive;
                     }}
                 >
                     {testChildren}
-                </TCheckbox>
+                </TCheckbox>,
             );
 
             const content = screen.getByText(testChildren);
@@ -290,7 +290,7 @@ describe('TCheckbox', () => {
 
             // Arrange
             let negativeValue = null;
-            let positiveValue = null
+            let positiveValue = null;
             const testChildren = 'test children';
 
             const checkboxRef = createRef<TCheckboxRef>();
@@ -302,12 +302,12 @@ describe('TCheckbox', () => {
                     ref={checkboxRef}
                     value={false}
                     onChange={(positive, negative) => {
-                        negativeValue = negative
-                        positiveValue = positive
+                        negativeValue = negative;
+                        positiveValue = positive;
                     }}
                 >
                     {testChildren}
-                </TCheckbox>
+                </TCheckbox>,
             );
 
             const content = screen.getByText(testChildren);
@@ -361,7 +361,7 @@ describe('TCheckbox', () => {
                     onChange={mockFn}
                 >
                     {testChildren}
-                </TCheckbox>
+                </TCheckbox>,
             );
 
             const content = screen.getByText(testChildren);
@@ -381,7 +381,7 @@ describe('TCheckbox', () => {
         it('When pressing Space on the thumb, onChange handler is called', async () => {
 
             // Arrange
-            const testChildren = 'test children'
+            const testChildren = 'test children';
 
             const checkboxRef = createRef<TCheckboxRef>();
 
@@ -394,7 +394,7 @@ describe('TCheckbox', () => {
                     onChange={mockFn}
                 >
                     {testChildren}
-                </TCheckbox>
+                </TCheckbox>,
             );
 
             const content = screen.getByText(testChildren);
@@ -426,7 +426,7 @@ describe('TCheckbox', () => {
                     rules={[TValidatorRule.required('test error message')]}
                 >
                     Test
-                </TCheckbox>
+                </TCheckbox>,
             );
 
             const container = screen.getByTestId('t-checkbox-container');
@@ -461,7 +461,7 @@ describe('TCheckbox', () => {
                     rules={[TValidatorRule.required('test error message')]}
                 >
                     Test
-                </TCheckbox>
+                </TCheckbox>,
             );
 
             const container = screen.getByTestId('t-checkbox-container');
@@ -498,7 +498,7 @@ describe('TCheckbox', () => {
                     rules={[TValidatorRule.required(testData)]}
                 >
                     Test
-                </TCheckbox>
+                </TCheckbox>,
             );
 
             // Act
@@ -529,7 +529,7 @@ describe('TCheckbox', () => {
                     rules={[TValidatorRule.required('test error message')]}
                 >
                     Test
-                </TCheckbox>
+                </TCheckbox>,
             );
 
             // Act
@@ -601,7 +601,7 @@ describe('TCheckbox', () => {
                                testData = positiveValue;
                            }}>
                     Test
-                </TCheckbox>
+                </TCheckbox>,
             );
 
             const icon = screen.getByRole('img');
@@ -629,7 +629,7 @@ describe('TCheckbox', () => {
                                testData = negative;
                            }}>
                     Test
-                </TCheckbox>
+                </TCheckbox>,
             );
 
             const icon = screen.getByRole('img');

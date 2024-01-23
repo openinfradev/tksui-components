@@ -1,9 +1,9 @@
 import {act, render, screen} from '@testing-library/react';
-import TRadioGroup from '~/input/radio-group/TRadioGroup';
 import React, {createRef} from 'react';
+import userEvent from '@testing-library/user-event';
+import TRadioGroup from '~/input/radio-group/TRadioGroup';
 import {TRadioGroupRef} from '@/components';
 import TValidatorRule from '@/common/validator/TValidatorRule';
-import userEvent from '@testing-library/user-event';
 
 describe('TRadioGroup', () => {
 
@@ -106,7 +106,7 @@ describe('TRadioGroup', () => {
                              value={testValue}
                              items={items}
                              rules={[TValidatorRule.required('가장 좋아하는 과일을 선택해 주세요')]}
-                />
+                />,
             );
 
             const root = screen.getByTestId('t-radio-group-root');
@@ -135,7 +135,7 @@ describe('TRadioGroup', () => {
                              items={items}
                              successMessage={'test success message'}
                              rules={[TValidatorRule.required('가장 좋아하는 과일을 선택해 주세요')]}
-                />
+                />,
             );
 
             const root = screen.getByTestId('t-radio-group-root');
@@ -168,7 +168,7 @@ describe('TRadioGroup', () => {
                              onChange={mockFn}
                              value={testValue}
                              items={items}
-                />
+                />,
             );
 
             const item = screen.getByText('Apple');
@@ -195,7 +195,7 @@ describe('TRadioGroup', () => {
                              items={items}
                              successMessage={testData}
                              rules={[TValidatorRule.required('가장 좋아하는 과일을 선택해 주세요')]}
-                />
+                />,
             );
 
             const root = screen.getByTestId('t-radio-group-root');
@@ -231,7 +231,7 @@ describe('TRadioGroup', () => {
                              successMessage={testData}
                              lazy={false}
                              rules={[TValidatorRule.required('가장 좋아하는 과일을 선택해 주세요')]}
-                />
+                />,
             );
 
             const root = screen.getByTestId('t-radio-group-root');
@@ -270,7 +270,7 @@ describe('TRadioGroup', () => {
                              value={testValue}
                              items={items}
                              rules={[TValidatorRule.required(testData)]}
-                />
+                />,
             );
 
             // Act
@@ -286,7 +286,7 @@ describe('TRadioGroup', () => {
 
         });
 
-        it('When successMessage prop is applied and value is an valid, it should be displayed on content aria when value is an invalid', () => {
+        it('When successMessage prop is applied and value is an valid, it should be displayed on content area area', () => {
 
             // Arrange
             const testData = 'test success message';
@@ -301,7 +301,7 @@ describe('TRadioGroup', () => {
                              items={items}
                              successMessage={testData}
                              rules={[TValidatorRule.required('가장 좋아하는 과일을 선택해 주세요')]}
-                />
+                />,
             );
 
             // Act
@@ -326,7 +326,7 @@ describe('TRadioGroup', () => {
                 <TRadioGroup onChange={mockFn}
                              value={testValue}
                              items={items}
-                />
+                />,
             );
 
             const apple = screen.getByText('Apple');
@@ -347,10 +347,10 @@ describe('TRadioGroup', () => {
                 <TRadioGroup onChange={mockFn}
                              value={testValue}
                              items={items}
-                />
+                />,
             );
 
-            const radioButtons = screen.getAllByTestId('t-radio-root')
+            const radioButtons = screen.getAllByTestId('t-radio-root');
 
             // Assert
             expect(radioButtons[2]).toHaveClass('t-radio--disabled');
@@ -372,7 +372,7 @@ describe('TRadioGroup', () => {
                              value={testValue}
                              items={items}
                              textKey={'koreanText'}
-                />
+                />,
             );
 
             const item = screen.getByText(testData);
@@ -395,7 +395,7 @@ describe('TRadioGroup', () => {
                              value={testValue}
                              valueKey={'value2'}
                              items={items}
-                />
+                />,
             );
 
             const icons = screen.getAllByRole('img');
@@ -405,7 +405,7 @@ describe('TRadioGroup', () => {
 
         });
 
-        it('When labelTemplate prop is applied, it should be displayed on content aria ', () => {
+        it('When labelTemplate prop is applied, it should be displayed on content area', () => {
 
             // Arrange
             const testData = 'a';
@@ -419,7 +419,7 @@ describe('TRadioGroup', () => {
                              value={testValue}
                              items={items}
                              labelTemplate={(item) => item.value2}
-                />
+                />,
             );
 
             const item = screen.getByText(testData);

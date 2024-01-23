@@ -1,7 +1,7 @@
 import {act, render, screen} from '@testing-library/react';
-import TCheckboxGroup from '~/input/checkbox-group/TCheckboxGroup';
 import React, {createRef} from 'react';
 import userEvent from '@testing-library/user-event';
+import TCheckboxGroup from '~/input/checkbox-group/TCheckboxGroup';
 import {TRadioGroupRef} from '@/components';
 import TValidatorRule from '@/common/validator/TValidatorRule';
 
@@ -98,7 +98,7 @@ describe('TCheckboxGroup', () => {
             // Arrange
             const testValue = [];
 
-            const radioGroupRef = createRef<TRadioGroupRef>()
+            const radioGroupRef = createRef<TRadioGroupRef>();
 
             render(
                 <TCheckboxGroup ref={radioGroupRef}
@@ -106,7 +106,7 @@ describe('TCheckboxGroup', () => {
                                 value={testValue}
                                 items={items}
                                 rules={[TValidatorRule.requiredArr('과일을 선택해 주세요')]}
-                />
+                />,
             );
 
             const root = screen.getByTestId('t-checkbox-group-root');
@@ -126,7 +126,7 @@ describe('TCheckboxGroup', () => {
             // Arrange
             const testValue = ['apple'];
 
-            const radioGroupRef = createRef<TRadioGroupRef>()
+            const radioGroupRef = createRef<TRadioGroupRef>();
 
             render(
                 <TCheckboxGroup ref={radioGroupRef}
@@ -135,7 +135,7 @@ describe('TCheckboxGroup', () => {
                                 items={items}
                                 successMessage={'test success message'}
                                 rules={[TValidatorRule.requiredArr('과일을 선택해 주세요')]}
-                />
+                />,
             );
 
             const root = screen.getByTestId('t-checkbox-group-root');
@@ -183,10 +183,10 @@ describe('TCheckboxGroup', () => {
 
             render(
                 <TCheckboxGroup value={testData}
-                                onChange={items => {
-                                    testData = items
+                                onChange={(value) => {
+                                    testData = value;
                                 }}
-                                items={items}/>
+                                items={items}/>,
             );
 
             const item = screen.getByText('Apple');
@@ -207,10 +207,10 @@ describe('TCheckboxGroup', () => {
 
             render(
                 <TCheckboxGroup value={testData}
-                                onChange={items => {
-                                    testData = items
+                                onChange={(value) => {
+                                    testData = value;
                                 }}
-                                items={items}/>
+                                items={items}/>,
             );
 
             const item = screen.getByText('Apple');
@@ -228,7 +228,7 @@ describe('TCheckboxGroup', () => {
             const testData = 'test success message';
             const testValue = ['apple'];
 
-            const radioGroupRef = createRef<TRadioGroupRef>()
+            const radioGroupRef = createRef<TRadioGroupRef>();
 
             render(
                 <TCheckboxGroup ref={radioGroupRef}
@@ -237,7 +237,7 @@ describe('TCheckboxGroup', () => {
                                 items={items}
                                 successMessage={testData}
                                 rules={[TValidatorRule.requiredArr('과일을 선택해 주세요')]}
-                />
+                />,
             );
 
             const root = screen.getByTestId('t-checkbox-group-root');
@@ -263,7 +263,7 @@ describe('TCheckboxGroup', () => {
             const testData = 'test success message';
             const testValue = ['apple'];
 
-            const radioGroupRef = createRef<TRadioGroupRef>()
+            const radioGroupRef = createRef<TRadioGroupRef>();
 
             const user = userEvent.setup();
 
@@ -275,7 +275,7 @@ describe('TCheckboxGroup', () => {
                                 lazy={false}
                                 successMessage={testData}
                                 rules={[TValidatorRule.requiredArr('과일을 선택해 주세요')]}
-                />
+                />,
             );
 
             const root = screen.getByTestId('t-checkbox-group-root');
@@ -303,9 +303,9 @@ describe('TCheckboxGroup', () => {
 
             // Arrange
             const testData = '가장 좋아하는 과일을 선택해 주세요';
-            let testValue = [];
+            const testValue = [];
 
-            const radioGroupRef = createRef<TRadioGroupRef>()
+            const radioGroupRef = createRef<TRadioGroupRef>();
 
             render(
                 <TCheckboxGroup ref={radioGroupRef}
@@ -313,7 +313,7 @@ describe('TCheckboxGroup', () => {
                                 value={testValue}
                                 items={items}
                                 rules={[TValidatorRule.requiredArr(testData)]}
-                />
+                />,
             );
 
             // Act
@@ -336,7 +336,7 @@ describe('TCheckboxGroup', () => {
             const testData = 'test success message';
             const testValue = ['apple'];
 
-            const radioGroupRef = createRef<TRadioGroupRef>()
+            const radioGroupRef = createRef<TRadioGroupRef>();
 
             render(
                 <TCheckboxGroup ref={radioGroupRef}
@@ -345,7 +345,7 @@ describe('TCheckboxGroup', () => {
                                 items={items}
                                 successMessage={testData}
                                 rules={[TValidatorRule.requiredArr('가장 좋아하는 과일을 선택해 주세요')]}
-                />
+                />,
             );
 
             // Act
@@ -364,7 +364,7 @@ describe('TCheckboxGroup', () => {
         it('When items prop applied, it should be displayed on content area', () => {
 
             // Arrange
-            let testValue = [];
+            const testValue = [];
             render(<TCheckboxGroup onChange={mockFn} value={testValue} items={items}/>);
 
             const apple = screen.getByText('Apple');
@@ -379,13 +379,13 @@ describe('TCheckboxGroup', () => {
         it('When  disabled attribute is applied to an item, that item should not be changed', () => {
 
             // Arrange
-            let testValue = [];
+            const testValue = [];
 
             render(
                 <TCheckboxGroup onChange={mockFn}
                                 value={testValue}
                                 items={items}
-                />
+                />,
             );
 
             const checkboxButtons = screen.getAllByTestId('t-checkbox-root');
@@ -399,14 +399,14 @@ describe('TCheckboxGroup', () => {
 
             // Arrange
             const testData = '사과';
-            let testValue = [];
+            const testValue = [];
 
             render(
                 <TCheckboxGroup onChange={mockFn}
                                 value={testValue}
                                 items={items}
                                 textKey={'koreanText'}
-                />
+                />,
             );
 
 
@@ -427,7 +427,7 @@ describe('TCheckboxGroup', () => {
                                 value={testValue}
                                 items={items}
                                 valueKey={'value2'}
-                />
+                />,
             );
 
             const icons = screen.getAllByRole('img');
@@ -437,7 +437,7 @@ describe('TCheckboxGroup', () => {
 
         });
 
-        it('When labelTemplate prop is applied, it should be displayed on content aria ', () => {
+        it('When labelTemplate prop is applied, it should be displayed on content area', () => {
 
             // Arrange
             const testData = 'a';
@@ -449,7 +449,7 @@ describe('TCheckboxGroup', () => {
                                 items={items}
                                 valueKey={'value2'}
                                 labelTemplate={(item) => item.value2}
-                />
+                />,
             );
 
             const item = screen.getByText(testData);

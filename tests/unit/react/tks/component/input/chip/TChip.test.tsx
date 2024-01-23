@@ -1,7 +1,7 @@
 import {act, render, screen} from '@testing-library/react';
-import TChip from '~/input/chip/TChip';
 import userEvent from '@testing-library/user-event';
 import {createRef} from 'react';
+import TChip from '~/input/chip/TChip';
 import {TChipRef} from '@/components';
 
 describe('TChip', () => {
@@ -121,7 +121,7 @@ describe('TChip', () => {
                     <TChip size={'medium'}>hello</TChip>
                     <TChip size={'large'}>hello</TChip>
                     <TChip size={'xlarge'}>hello</TChip>
-                </>
+                </>,
             );
 
             const chips = screen.getAllByTestId('t-chip-root');
@@ -205,7 +205,7 @@ describe('TChip', () => {
                     <TChip size={'large'} icon={'test'}>hello</TChip>
                     <TChip size={'xlarge'} icon={'test'}>hello</TChip>
                     <TChip size={'invalid'} icon={'test'}>hello</TChip>
-                </>
+                </>,
             );
 
             const chips = screen.getAllByRole('img');
@@ -250,7 +250,7 @@ describe('TChip', () => {
             // Act
             act(() => {
                 chipRef.current.remove();
-            })
+            });
 
             // Assert
             expect(mockFn).toHaveBeenCalledTimes(1);
