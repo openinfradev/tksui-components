@@ -1,8 +1,7 @@
-import {act, render, screen} from '@testing-library/react';
-import React, {createRef} from 'react';
+import {act, render, renderHook, screen} from '@testing-library/react';
+import React, {useRef} from 'react';
 import userEvent from '@testing-library/user-event';
 import TRadioGroup from '~/input/radio-group/TRadioGroup';
-import {TRadioGroupRef} from '@/components';
 import TValidatorRule from '@/common/validator/TValidatorRule';
 
 describe('TRadioGroup', () => {
@@ -98,10 +97,11 @@ describe('TRadioGroup', () => {
             // Arrange
             const testValue = null;
 
-            const radioRef = createRef<TRadioGroupRef>();
+            const {result} = renderHook(() => useRef(null));
+            const radioGroupRef = result.current;
 
             render(
-                <TRadioGroup ref={radioRef}
+                <TRadioGroup ref={radioGroupRef}
                              onChange={mockFn}
                              value={testValue}
                              items={items}
@@ -113,7 +113,7 @@ describe('TRadioGroup', () => {
 
             // Act
             act(() => {
-                radioRef.current.validate();
+                radioGroupRef.current.validate();
             });
 
             // Assert
@@ -126,10 +126,11 @@ describe('TRadioGroup', () => {
             // Arrange
             const testValue = 'apple';
 
-            const radioRef = createRef<TRadioGroupRef>();
+            const {result} = renderHook(() => useRef(null));
+            const radioGroupRef = result.current;
 
             render(
-                <TRadioGroup ref={radioRef}
+                <TRadioGroup ref={radioGroupRef}
                              onChange={mockFn}
                              value={testValue}
                              items={items}
@@ -142,7 +143,7 @@ describe('TRadioGroup', () => {
 
             // Act
             act(() => {
-                radioRef.current.validate();
+                radioGroupRef.current.validate();
             });
 
             // Assert
@@ -161,11 +162,8 @@ describe('TRadioGroup', () => {
 
             const user = userEvent.setup();
 
-            const radioRef = createRef<TRadioGroupRef>();
-
             render(
-                <TRadioGroup ref={radioRef}
-                             onChange={mockFn}
+                <TRadioGroup onChange={mockFn}
                              value={testValue}
                              items={items}
                 />,
@@ -186,11 +184,8 @@ describe('TRadioGroup', () => {
             const testData = 'test success message';
             const testValue = 'apple';
 
-            const radioRef = createRef<TRadioGroupRef>();
-
             render(
-                <TRadioGroup ref={radioRef}
-                             onChange={mockFn}
+                <TRadioGroup onChange={mockFn}
                              value={testValue}
                              items={items}
                              successMessage={testData}
@@ -219,13 +214,11 @@ describe('TRadioGroup', () => {
             const testData = 'test success message';
             const testValue = 'apple';
 
-            const radioRef = createRef<TRadioGroupRef>();
 
             const user = userEvent.setup();
 
             render(
-                <TRadioGroup ref={radioRef}
-                             onChange={mockFn}
+                <TRadioGroup onChange={mockFn}
                              value={testValue}
                              items={items}
                              successMessage={testData}
@@ -262,10 +255,11 @@ describe('TRadioGroup', () => {
             const testData = '가장 좋아하는 과일을 선택해 주세요';
             const testValue = '';
 
-            const radioRef = createRef<TRadioGroupRef>();
+            const {result} = renderHook(() => useRef(null));
+            const radioGroupRef = result.current;
 
             render(
-                <TRadioGroup ref={radioRef}
+                <TRadioGroup ref={radioGroupRef}
                              onChange={mockFn}
                              value={testValue}
                              items={items}
@@ -275,7 +269,7 @@ describe('TRadioGroup', () => {
 
             // Act
             act(() => {
-                radioRef.current.validate();
+                radioGroupRef.current.validate();
             });
 
             // Arrange
@@ -292,10 +286,11 @@ describe('TRadioGroup', () => {
             const testData = 'test success message';
             const testValue = 'apple';
 
-            const radioRef = createRef<TRadioGroupRef>();
+            const {result} = renderHook(() => useRef(null));
+            const radioGroupRef = result.current;
 
             render(
-                <TRadioGroup ref={radioRef}
+                <TRadioGroup ref={radioGroupRef}
                              onChange={mockFn}
                              value={testValue}
                              items={items}
@@ -306,7 +301,7 @@ describe('TRadioGroup', () => {
 
             // Act
             act(() => {
-                radioRef.current.validate();
+                radioGroupRef.current.validate();
             });
 
             // Arrange
@@ -364,11 +359,9 @@ describe('TRadioGroup', () => {
             const testData = '사과';
             const testValue = null;
 
-            const radioRef = createRef<TRadioGroupRef>();
 
             render(
-                <TRadioGroup ref={radioRef}
-                             onChange={mockFn}
+                <TRadioGroup onChange={mockFn}
                              value={testValue}
                              items={items}
                              textKey={'koreanText'}
@@ -387,11 +380,8 @@ describe('TRadioGroup', () => {
             // Arrange
             const testValue = 'a';
 
-            const radioRef = createRef<TRadioGroupRef>();
-
             render(
-                <TRadioGroup ref={radioRef}
-                             onChange={mockFn}
+                <TRadioGroup onChange={mockFn}
                              value={testValue}
                              valueKey={'value2'}
                              items={items}
@@ -411,11 +401,8 @@ describe('TRadioGroup', () => {
             const testData = 'a';
             const testValue = null;
 
-            const radioRef = createRef<TRadioGroupRef>();
-
             render(
-                <TRadioGroup ref={radioRef}
-                             onChange={mockFn}
+                <TRadioGroup onChange={mockFn}
                              value={testValue}
                              items={items}
                              labelTemplate={(item) => item.value2}

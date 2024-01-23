@@ -1,8 +1,7 @@
-import {act, render, screen} from '@testing-library/react';
-import React, {createRef} from 'react';
+import {act, render, renderHook, screen} from '@testing-library/react';
+import React, {useRef} from 'react';
 import userEvent from '@testing-library/user-event';
 import TCheckboxGroup from '~/input/checkbox-group/TCheckboxGroup';
-import {TRadioGroupRef} from '@/components';
 import TValidatorRule from '@/common/validator/TValidatorRule';
 
 describe('TCheckboxGroup', () => {
@@ -98,7 +97,8 @@ describe('TCheckboxGroup', () => {
             // Arrange
             const testValue = [];
 
-            const radioGroupRef = createRef<TRadioGroupRef>();
+            const {result} = renderHook(() => useRef(null));
+            const radioGroupRef = result.current;
 
             render(
                 <TCheckboxGroup ref={radioGroupRef}
@@ -126,7 +126,8 @@ describe('TCheckboxGroup', () => {
             // Arrange
             const testValue = ['apple'];
 
-            const radioGroupRef = createRef<TRadioGroupRef>();
+            const {result} = renderHook(() => useRef(null));
+            const radioGroupRef = result.current;
 
             render(
                 <TCheckboxGroup ref={radioGroupRef}
@@ -228,7 +229,8 @@ describe('TCheckboxGroup', () => {
             const testData = 'test success message';
             const testValue = ['apple'];
 
-            const radioGroupRef = createRef<TRadioGroupRef>();
+            const {result} = renderHook(() => useRef(null));
+            const radioGroupRef = result.current;
 
             render(
                 <TCheckboxGroup ref={radioGroupRef}
@@ -263,7 +265,8 @@ describe('TCheckboxGroup', () => {
             const testData = 'test success message';
             const testValue = ['apple'];
 
-            const radioGroupRef = createRef<TRadioGroupRef>();
+            const {result} = renderHook(() => useRef(null));
+            const radioGroupRef = result.current;
 
             const user = userEvent.setup();
 
@@ -305,7 +308,8 @@ describe('TCheckboxGroup', () => {
             const testData = '가장 좋아하는 과일을 선택해 주세요';
             const testValue = [];
 
-            const radioGroupRef = createRef<TRadioGroupRef>();
+            const {result} = renderHook(() => useRef(null));
+            const radioGroupRef = result.current;
 
             render(
                 <TCheckboxGroup ref={radioGroupRef}
@@ -336,7 +340,8 @@ describe('TCheckboxGroup', () => {
             const testData = 'test success message';
             const testValue = ['apple'];
 
-            const radioGroupRef = createRef<TRadioGroupRef>();
+            const {result} = renderHook(() => useRef(null));
+            const radioGroupRef = result.current;
 
             render(
                 <TCheckboxGroup ref={radioGroupRef}

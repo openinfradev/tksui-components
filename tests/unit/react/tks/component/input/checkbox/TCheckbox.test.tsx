@@ -1,9 +1,8 @@
-import {act, render, screen} from '@testing-library/react';
+import {act, render, renderHook, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React, {createRef} from 'react';
+import React, {useRef} from 'react';
 import TCheckbox from '~/input/checkbox/TCheckbox';
 import TValidatorRule from '@/common/validator/TValidatorRule';
-import {TCheckboxRef} from '@/components';
 
 describe('TCheckbox', () => {
 
@@ -82,12 +81,12 @@ describe('TCheckbox', () => {
         it('When value is an invalid, root has t-checkbox--failure class', async () => {
 
             // Arrange
-            const checkboxRef = createRef<TCheckboxRef>();
+            const {result} = renderHook(() => useRef(null));
+            const checkboxRef = result.current;
 
             render(
-                <TCheckbox
-                    ref={checkboxRef}
-                    rules={[TValidatorRule.required('test error message')]}
+                <TCheckbox ref={checkboxRef}
+                           rules={[TValidatorRule.required('test error message')]}
                 >
                     Test
                 </TCheckbox>,
@@ -108,7 +107,8 @@ describe('TCheckbox', () => {
         it('When value is an valid, root has t-checkbox--success class', async () => {
 
             // Arrange
-            const checkboxRef = createRef<TCheckboxRef>();
+            const {result} = renderHook(() => useRef(null));
+            const checkboxRef = result.current;
 
             render(
                 <TCheckbox
@@ -176,7 +176,8 @@ describe('TCheckbox', () => {
         it('When onfocus handler is triggered, container should have focus', async () => {
 
             // Arrange
-            const checkboxRef = createRef<TCheckboxRef>();
+            const {result} = renderHook(() => useRef(null));
+            const checkboxRef = result.current;
 
             render(<TCheckbox ref={checkboxRef} value={true}>Test</TCheckbox>);
 
@@ -197,7 +198,9 @@ describe('TCheckbox', () => {
             // Arrange
             const testData = 'test success message';
             const testValue = true;
-            const checkboxRef = createRef<TCheckboxRef>();
+
+            const {result} = renderHook(() => useRef(null));
+            const checkboxRef = result.current;
 
             render(
                 <TCheckbox
@@ -228,9 +231,10 @@ describe('TCheckbox', () => {
             // Arrange
             const testChildren = 'test children';
 
-            const checkboxRef = createRef<TCheckboxRef>();
-
             const user = userEvent.setup();
+
+            const {result} = renderHook(() => useRef(null));
+            const checkboxRef = result.current;
 
             render(
                 <TCheckbox
@@ -251,16 +255,17 @@ describe('TCheckbox', () => {
 
         });
 
-        it('When the checkbox is checked and it is clicked, it should be pass both negative and positive values to the onChange handler', async () => {
+        it('When the checkbox is checked and clicked, it should be pass negative and positive values to the onChange handler', async () => {
 
             // Arrange
             let negativeValue = null;
             let positiveValue = null;
             const testChildren = 'test children';
 
-            const checkboxRef = createRef<TCheckboxRef>();
-
             const user = userEvent.setup();
+
+            const {result} = renderHook(() => useRef(null));
+            const checkboxRef = result.current;
 
             render(
                 <TCheckbox
@@ -293,9 +298,10 @@ describe('TCheckbox', () => {
             let positiveValue = null;
             const testChildren = 'test children';
 
-            const checkboxRef = createRef<TCheckboxRef>();
-
             const user = userEvent.setup();
+
+            const {result} = renderHook(() => useRef(null));
+            const checkboxRef = result.current;
 
             render(
                 <TCheckbox
@@ -350,9 +356,10 @@ describe('TCheckbox', () => {
             // Arrange
             const testChildren = 'test children';
 
-            const checkboxRef = createRef<TCheckboxRef>();
-
             const user = userEvent.setup();
+
+            const {result} = renderHook(() => useRef(null));
+            const checkboxRef = result.current;
 
             render(
                 <TCheckbox
@@ -383,9 +390,10 @@ describe('TCheckbox', () => {
             // Arrange
             const testChildren = 'test children';
 
-            const checkboxRef = createRef<TCheckboxRef>();
-
             const user = userEvent.setup();
+
+            const {result} = renderHook(() => useRef(null));
+            const checkboxRef = result.current;
 
             render(
                 <TCheckbox
@@ -416,7 +424,8 @@ describe('TCheckbox', () => {
             // Arrange
             const testData = 'test success message';
 
-            const checkboxRef = createRef<TCheckboxRef>();
+            const {result} = renderHook(() => useRef(null));
+            const checkboxRef = result.current;
 
             render(
                 <TCheckbox
@@ -490,7 +499,8 @@ describe('TCheckbox', () => {
             // Arrange
             const testData = 'test error message';
 
-            const checkboxRef = createRef<TCheckboxRef>();
+            const {result} = renderHook(() => useRef(null));
+            const checkboxRef = result.current;
 
             render(
                 <TCheckbox
@@ -519,7 +529,8 @@ describe('TCheckbox', () => {
             // Arrange
             const testData = 'test success message';
 
-            const checkboxRef = createRef<TCheckboxRef>();
+            const {result} = renderHook(() => useRef(null));
+            const checkboxRef = result.current;
 
             render(
                 <TCheckbox

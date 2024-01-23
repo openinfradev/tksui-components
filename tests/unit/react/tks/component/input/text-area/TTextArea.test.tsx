@@ -1,9 +1,8 @@
-import {act, render, screen} from '@testing-library/react';
-import TTextArea from '~/input/text-area/TTextArea';
+import {act, render, renderHook, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import {useRef} from 'react';
+import TTextArea from '~/input/text-area/TTextArea';
 import rule from '@/common/validator/TValidatorRule';
-import {createRef} from 'react';
-import {TTextAreaRef} from '@/components';
 
 describe('TTextArea', () => {
 
@@ -60,7 +59,7 @@ describe('TTextArea', () => {
             const root = screen.getByTestId('t-text-area-root');
 
             // Assert
-            expect(root).toHaveAttribute('id',testData);
+            expect(root).toHaveAttribute('id', testData);
 
         });
 
@@ -116,14 +115,14 @@ describe('TTextArea', () => {
             const textArea = screen.getByDisplayValue(testValue);
 
             // Assert
-            expect(textArea).toHaveAttribute('tabIndex','-1');
+            expect(textArea).toHaveAttribute('tabIndex', '-1');
 
         });
 
         it('When required prop is applied, the label has t-text-area__label--required class', () => {
 
             // Arrange
-            const testLabel = 'test-label'
+            const testLabel = 'test-label';
             const testValue = 'test-value';
 
             render(<TTextArea required label={testLabel} onChange={mockOnChange} value={testValue}/>);
@@ -141,7 +140,8 @@ describe('TTextArea', () => {
             const testData = 'test success message';
             const testPlaceholder = 'test-placeholder';
 
-            const textAreaRef = createRef<TTextAreaRef>();
+            const {result} = renderHook(() => useRef(null));
+            const textAreaRef = result.current;
 
             render(
                 <TTextArea ref={textAreaRef}
@@ -149,7 +149,7 @@ describe('TTextArea', () => {
                            placeholder={testPlaceholder}
                            value={'12345'}
                            successMessage={testData}
-                           rules={[rule.lengthBetween(1, 3)]}/>
+                           rules={[rule.lengthBetween(1, 3)]}/>,
             );
 
             const root = screen.getByTestId('t-text-area-root');
@@ -170,7 +170,8 @@ describe('TTextArea', () => {
             const testData = 'test success message';
             const testPlaceholder = 'test-placeholder';
 
-            const textAreaRef = createRef<TTextAreaRef>();
+            const {result} = renderHook(() => useRef(null));
+            const textAreaRef = result.current;
 
             render(
                 <TTextArea ref={textAreaRef}
@@ -178,7 +179,7 @@ describe('TTextArea', () => {
                            placeholder={testPlaceholder}
                            value={'12345'}
                            successMessage={testData}
-                           rules={[rule.lengthBetween(1, 10)]}/>
+                           rules={[rule.lengthBetween(1, 10)]}/>,
             );
 
             const root = screen.getByTestId('t-text-area-root');
@@ -203,7 +204,8 @@ describe('TTextArea', () => {
             const testData = 'test success message';
             const testPlaceholder = 'test-placeholder';
 
-            const textAreaRef = createRef<TTextAreaRef>();
+            const {result} = renderHook(() => useRef(null));
+            const textAreaRef = result.current;
 
             render(
                 <TTextArea ref={textAreaRef}
@@ -211,7 +213,7 @@ describe('TTextArea', () => {
                            placeholder={testPlaceholder}
                            value={'12345'}
                            successMessage={testData}
-                           rules={[rule.lengthBetween(1, 10)]}/>
+                           rules={[rule.lengthBetween(1, 10)]}/>,
             );
 
             const textArea = screen.getByPlaceholderText(testPlaceholder);
@@ -233,7 +235,8 @@ describe('TTextArea', () => {
             const testData = 'test success message';
             const testPlaceholder = 'test-placeholder';
 
-            const textAreaRef = createRef<TTextAreaRef>();
+            const {result} = renderHook(() => useRef(null));
+            const textAreaRef = result.current;
 
             render(
                 <TTextArea ref={textAreaRef}
@@ -241,7 +244,7 @@ describe('TTextArea', () => {
                            placeholder={testPlaceholder}
                            value={'12345'}
                            successMessage={testData}
-                           rules={[rule.lengthBetween(1, 10)]}/>
+                           rules={[rule.lengthBetween(1, 10)]}/>,
             );
 
             // Act
@@ -305,11 +308,11 @@ describe('TTextArea', () => {
 
             render(
                 <TTextArea counter={5}
-                           onChange={(value)=> {
-                               testData = value
+                           onChange={(value) => {
+                               testData = value;
                            }}
                            placeholder={testPlaceholder}
-                           value={testData} />
+                           value={testData} />,
             );
 
             const textArea = screen.getByPlaceholderText(testPlaceholder);
@@ -327,7 +330,8 @@ describe('TTextArea', () => {
             const testData = 'test success message';
             const testPlaceholder = 'test-placeholder';
 
-            const textAreaRef = createRef<TTextAreaRef>();
+            const {result} = renderHook(() => useRef(null));
+            const textAreaRef = result.current;
 
             render(
                 <TTextArea ref={textAreaRef}
@@ -335,7 +339,7 @@ describe('TTextArea', () => {
                            placeholder={testPlaceholder}
                            value={'12345'}
                            successMessage={testData}
-                           rules={[rule.lengthBetween(1, 10)]}/>
+                           rules={[rule.lengthBetween(1, 10)]}/>,
             );
 
             const textArea = screen.getByPlaceholderText(testPlaceholder);
@@ -344,7 +348,7 @@ describe('TTextArea', () => {
             act(() => {
                 textAreaRef.current.validate();
                 textArea.focus();
-            })
+            });
 
             // Arrange
             const message = screen.queryByText(testData);
@@ -361,7 +365,8 @@ describe('TTextArea', () => {
             const testData = 'test success message';
             const testPlaceholder = 'test-placeholder';
 
-            const textAreaRef = createRef<TTextAreaRef>();
+            const {result} = renderHook(() => useRef(null));
+            const textAreaRef = result.current;
 
             const user = userEvent.setup();
 
@@ -372,7 +377,7 @@ describe('TTextArea', () => {
                            value={'12345'}
                            successMessage={testData}
                            lazy={false}
-                           rules={[rule.lengthBetween(1, 10)]}/>
+                           rules={[rule.lengthBetween(1, 10)]}/>,
             );
 
             const textArea = screen.getByPlaceholderText(testPlaceholder);
@@ -380,7 +385,7 @@ describe('TTextArea', () => {
             // Act
             act(() => {
                 textArea.focus();
-            })
+            });
 
             await user.click(document.body);
 
@@ -461,14 +466,15 @@ describe('TTextArea', () => {
             const testData = 'test error message';
             const testPlaceholder = 'test-placeholder';
 
-            const textAreaRef = createRef<TTextAreaRef>();
+            const {result} = renderHook(() => useRef(null));
+            const textAreaRef = result.current;
 
             render(
                 <TTextArea ref={textAreaRef}
                            onChange={mockOnChange}
                            placeholder={testPlaceholder}
                            value={'12345'}
-                           rules={[rule.lengthBetween(1, 3, testData)]}/>
+                           rules={[rule.lengthBetween(1, 3, testData)]}/>,
             );
 
             // Act
@@ -491,7 +497,8 @@ describe('TTextArea', () => {
             const testData = 'test success message';
             const testPlaceholder = 'test-placeholder';
 
-            const textAreaRef = createRef<TTextAreaRef>();
+            const {result} = renderHook(() => useRef(null));
+            const textAreaRef = result.current;
 
             render(
                 <TTextArea ref={textAreaRef}
@@ -499,7 +506,7 @@ describe('TTextArea', () => {
                            placeholder={testPlaceholder}
                            value={'12345'}
                            successMessage={testData}
-                           rules={[rule.lengthBetween(1, 10)]}/>
+                           rules={[rule.lengthBetween(1, 10)]}/>,
             );
 
             // Act
@@ -525,7 +532,7 @@ describe('TTextArea', () => {
             const textArea = screen.getByDisplayValue('test-value');
 
             // Assert
-            expect(textArea).toHaveAttribute('placeholder','');
+            expect(textArea).toHaveAttribute('placeholder', '');
 
         });
 
@@ -544,7 +551,7 @@ describe('TTextArea', () => {
 
         });
 
-        it('When placeholder prop is applied and disabled prop are both applied, the textarea has an empty string as its placeholder attribute', async () => {
+        it('When placeholder prop and disabled prop are applied, the textarea has an empty placeholder attribute', async () => {
 
             // Arrange
             const testValue = 'test-value';
@@ -558,7 +565,7 @@ describe('TTextArea', () => {
 
         });
 
-        it('When placeholder prop is applied and label prop are both applied, the textarea has an empty string as its placeholder attribute', async () => {
+        it('When placeholder prop and label prop are applied, the textarea has an empty placeholder attribute', async () => {
 
             // Arrange
             const testValue = 'test-value';
@@ -599,7 +606,7 @@ describe('TTextArea', () => {
                 <TTextArea counter={10}
                            onChange={mockOnChange}
                            placeholder={testPlaceholder}
-                           value={testValue} />
+                           value={testValue} />,
             );
 
             const counter = screen.getByText(testData);
@@ -619,7 +626,7 @@ describe('TTextArea', () => {
             render(
                 <TTextArea counter={10}
                            onChange={mockOnChange}
-                           value={testValue} />
+                           value={testValue} />,
             );
 
             const counter = screen.getByText(testData);

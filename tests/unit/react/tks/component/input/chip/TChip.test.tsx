@@ -1,8 +1,7 @@
-import {act, render, screen} from '@testing-library/react';
+import {act, render, renderHook, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import {createRef} from 'react';
+import {useRef} from 'react';
 import TChip from '~/input/chip/TChip';
-import {TChipRef} from '@/components';
 
 describe('TChip', () => {
 
@@ -243,7 +242,8 @@ describe('TChip', () => {
         it('When remove handler is triggered, onRemove handler is called', async () => {
 
             // Arrange
-            const chipRef = createRef<TChipRef>();
+            const {result} = renderHook(() => useRef(null));
+            const chipRef = result.current;
 
             render(<TChip ref={chipRef} onRemove={mockFn}>hello</TChip>);
 
