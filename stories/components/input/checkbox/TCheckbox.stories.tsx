@@ -1,5 +1,5 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {useState} from 'react';
+import {CSSProperties, ReactNode, useState} from 'react';
 import useInputState from '@/common/hook/UseInputState';
 
 import TCheckbox from '@/components/input/checkbox/TCheckbox';
@@ -18,9 +18,27 @@ export default meta;
 type Story = StoryObj<typeof TCheckbox>;
 
 
+const flexStyle: CSSProperties = {
+    display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'center', gap: '8px',
+};
+const Container = ({children}: { children: ReactNode }) => {
+    return (<div style={{...flexStyle, gap: '24px'}}>{children}</div>);
+};
+
+const ItemContainer = ({label, children}: { label?: string, children: ReactNode }) => {
+    return (
+        <div style={flexStyle}>
+            <p style={{fontSize: '12px'}}>{label}</p>
+            <div>{children}</div>
+        </div>
+    );
+};
+
+
 // region [Normal]
 
 const NormalTemplate = (args: TCheckboxProps) => {
+
 
     const checkbox1 = useInputState(false);
     const checkbox2 = useInputState('N');
@@ -28,6 +46,8 @@ const NormalTemplate = (args: TCheckboxProps) => {
     const checkbox4 = useInputState(false);
 
     const checkbox5 = useInputState(false);
+    const checkbox6 = useInputState(true);
+
     const [checkbox5Indeterminate, setCheckbox5Indeterminate] = useState(true);
 
     function onChangeCheckbox5(value: boolean) {
@@ -36,22 +56,36 @@ const NormalTemplate = (args: TCheckboxProps) => {
     }
 
 
-    return (<>
-        Boolean Value(value: {checkbox1.value.toString()})
-        <TCheckbox {...args} onChange={checkbox1.onChange} value={checkbox1.value}>사과</TCheckbox>
+    return (
+        <Container>
+            <ItemContainer label={`Boolean Value(value: ${checkbox1.value.toString()})`}>
+                <TCheckbox {...args} onChange={checkbox1.onChange} value={checkbox1.value}>사과</TCheckbox>
+            </ItemContainer>
 
-        Custom Value(value: {checkbox2.value.toString()})
-        <TCheckbox {...args} onChange={checkbox2.onChange} value={checkbox2.value} positiveValue={'Y'} negativeValue={'N'}>파인애플</TCheckbox>
+            <ItemContainer label={`Custom Value(value: ${checkbox2.value.toString()})`}>
+                <TCheckbox {...args} onChange={checkbox2.onChange} value={checkbox2.value} positiveValue={'Y'}
+                           negativeValue={'N'}>파인애플</TCheckbox>
+            </ItemContainer>
 
-        Disabled checked (value: {checkbox3.value.toString()})
-        <TCheckbox {...args} disabled onChange={checkbox3.onChange} value={checkbox3.value}>바나나</TCheckbox>
+            <ItemContainer label={`Disabled checked (value: ${checkbox3.value.toString()})`}>
+                <TCheckbox {...args} disabled onChange={checkbox3.onChange} value={checkbox3.value}>바나나</TCheckbox>
+            </ItemContainer>
 
-        Disabled unchecked (value: {checkbox4.value.toString()})
-        <TCheckbox {...args} disabled onChange={checkbox4.onChange} value={checkbox4.value}>귤</TCheckbox>
+            <ItemContainer label={`Disabled unchecked (value: ${checkbox4.value.toString()})`}>
+                <TCheckbox {...args} disabled onChange={checkbox4.onChange} value={checkbox4.value}>귤</TCheckbox>
+            </ItemContainer>
 
-        Indeterminate (value: {checkbox5.value.toString()})
-        <TCheckbox {...args} onChange={onChangeCheckbox5} value={checkbox5.value} indeterminate={checkbox5Indeterminate}>수박</TCheckbox>
-    </>);
+            <ItemContainer label={`Indeterminate(${checkbox5Indeterminate}) (value: ${checkbox5.value.toString()}) : `}>
+                <TCheckbox {...args} onChange={onChangeCheckbox5} value={checkbox5.value}
+                           indeterminate={checkbox5Indeterminate}>수박</TCheckbox>
+            </ItemContainer>
+
+            <ItemContainer label={`Ripple (value: ${checkbox6.value.toString()}) : `}>
+                <TCheckbox {...args} onChange={checkbox6.onChange} value={checkbox6.value} ripple>수박</TCheckbox>
+            </ItemContainer>
+
+        </Container>
+    );
 };
 
 

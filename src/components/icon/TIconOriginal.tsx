@@ -1,39 +1,5 @@
 /* eslint-disable max-len */
 const TOriginalImage = {
-    t_check_on: (
-        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'>
-            <path d='M0 0h22v22H0z'/>
-            <g>
-                <path transform='rotate(-45 16.071 1)' style={{stroke: 'none', fill: '#fff'}} d='M0 0h2v7H0z'/>
-                <path transform='rotate(45 1.121 23.192)' style={{stroke: 'none', fill: '#fff'}} d='M0 0h2v13H0z'/>
-            </g>
-        </svg>
-    ),
-    t_check_disabled_off: (
-        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'>
-            <g style={{fill: '#f5f5f5'}}>
-                <path style={{stroke: 'none'}} d='M0 0h22v22H0z'/>
-                <path style={{fill: 'none'}} d='M.5.5h21v21H.5z'/>
-            </g>
-        </svg>
-    ),
-    t_check_off: (
-        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'>
-            <g style={{fill: '#fff'}}>
-                <path style={{stroke: 'none'}} d='M0 0h22v22H0z'/>
-                <path style={{fill: 'none'}} d='M.5.5h21v21H.5z'/>
-            </g>
-        </svg>
-    ),
-    t_check_intermediate: (
-        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'>
-            <path d='M0 0h22v22H0z'/>
-            <g>
-                <path strokeWidth={2} style={{stroke: '#fff'}} d='M5 11 l12 0 Z'/>
-            </g>
-        </svg>
-    ),
-
     t_radio_on: (
         <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'>
             <rect width='22' height='22' rx='11' style={{stroke: 'none'}}/>

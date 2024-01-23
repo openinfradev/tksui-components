@@ -1,19 +1,14 @@
-import {
-    CSSProperties,
-    forwardRef,
-    KeyboardEvent,
-    ReactElement,
-    Ref,
-    useCallback,
-    useEffect,
-    useImperativeHandle,
-    useRef,
-    useState,
-} from 'react';
+import {CSSProperties, forwardRef, KeyboardEvent, Ref, useCallback, useEffect, useImperativeHandle, useRef, useState} from 'react';
 import TIcon from '../../icon/TIcon';
-import {TCheckboxProps, TCheckboxRef} from './TCheckbox.interface';
+import {TCheckboxProps, TCheckboxRef, TCheckBoxStatus} from './TCheckbox.interface';
 import useValidator from '@/common/hook/UseValidator';
 
+const checkboxIcons = {
+    check: 'priority',
+    uncheck: 'check_box_outline_blank',
+    disabledUnCheck: 'check_box_outline_blank', // FIXME: 새로 추가돼야 함!
+    indeterminate: 'indeterminate_check_box',
+};
 
 const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => {
 
@@ -22,9 +17,7 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
     const validator = useValidator(props.value, props.rules, props.successMessage);
     const rootRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
-
-    useEffect(modifyStatus, [props.value, props.indeterminate, props.checked, props.positiveValue]);
-    const [status, setStatus] = useState('uncheck');
+    const [status, setStatus] = useState<TCheckBoxStatus>('uncheck');
 
     useImperativeHandle(ref, () => ({
         focus() { containerRef?.current?.focus(); },
@@ -72,7 +65,7 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
 
     }, [status, props.onChange]);
 
-    function modifyStatus(): void {
+    const modifyStatus = useCallback(() => {
         if (props.checked === true) {
             setStatus('check');
         } else if (props.checked === false) {
@@ -84,7 +77,7 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
         } else {
             setStatus('uncheck');
         }
-    }
+    }, [props.value, props.checked, props.indeterminate, props.positiveValue, status]);
 
     // endregion
 
@@ -111,25 +104,30 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
 
     // region [Templates]
 
-    function iconTemplate(): ReactElement {
+    const iconTemplate = useCallback(() => {
+        let iconType = '';
 
-        let iconType: string;
         if (status === 'indeterminate') {
-            iconType = 't_check_intermediate';
+            iconType = checkboxIcons.indeterminate;
         } else if (status === 'check') {
-            iconType = 't_check_on';
+            iconType = checkboxIcons.check;
         } else if (status === 'uncheck' && props.disabled) {
-            iconType = 't_check_disabled_off';
+            iconType = checkboxIcons.disabledUnCheck;
         } else if (status === 'uncheck' && !props.disabled) {
-            iconType = 't_check_off';
+            iconType = checkboxIcons.uncheck;
         } else {
             throw Error('Invalid status');
         }
 
-        return (
-            <TIcon small fill className={`t-checkbox__icon t-checkbox__icon--${status}`}>{iconType}</TIcon>
-        );
-    }
+        return (<TIcon small fill={props.fill} className={`t-checkbox__icon t-checkbox__icon--${status}`}>{iconType}</TIcon>);
+    }, [status, props.fill]);
+
+    // region [Effect]
+
+    useEffect(modifyStatus, [props.value, props.indeterminate, props.checked, props.positiveValue, props.ripple]);
+
+    // endregion
+
 
     return (
         <div ref={rootRef}
@@ -163,7 +161,6 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
 
     // endregion
 
-
 });
 
 TCheckbox.defaultProps = {
@@ -171,6 +168,7 @@ TCheckbox.defaultProps = {
     negativeValue: false,
     checked: null,
     lazy: true,
+    fill: true,
 };
 
 TCheckbox.displayName = 'TCheckbox';
