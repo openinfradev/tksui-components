@@ -1,5 +1,6 @@
 
 .t-pagination {
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -34,6 +35,7 @@
         display: flex;
         align-items: center;
         gap: $t-spacing-8;
+        margin: 0 $t-spacing-8;
 
         .t-pagination__page-container__page {
             min-width: 24px;
@@ -66,7 +68,7 @@
         display: flex;
         align-items: center;
         gap: $t-spacing-4;
-        margin-left: $t-spacing-16;
+        margin-left: $t-spacing-24;
 
         .t-pagination__jumper__container__page__field {
             width: $t-spacing-48;
@@ -103,4 +105,5 @@
 
         .t-number-field__details { display: none; }
     }
+
 }
