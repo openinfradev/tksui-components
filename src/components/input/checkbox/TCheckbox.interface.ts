@@ -1,14 +1,16 @@
 import {ReactNode} from 'react';
 import {TValidatorProps} from '@/common/validator/TValidator.interface';
+import {TBaseProps} from '@/common/base/TBase.interface';
 
 export type TCheckboxValue = boolean | string;
 
-export interface TCheckboxProps extends TValidatorProps {
-    className?: string,
-    style?: { [key: string]: string },
-    width?: string,
-    
+export interface TCheckboxProps extends TBaseProps, TValidatorProps {
+
     children?: ReactNode,
+
+    /**
+     * @deprecated This prop will be removed in release v1.0.0
+     */
     label?: JSX.Element,
     
     value?: TCheckboxValue,
