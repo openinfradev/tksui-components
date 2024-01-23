@@ -437,7 +437,7 @@ describe('TTextArea', () => {
 
         });
 
-        it('When pressing Enter on the thumb, onKeyDownEnter handler is called', async () => {
+        it('When pressing Enter on the content area, onKeyDownEnter handler is called', async () => {
 
             // Arrange
             const testValue = 'test-value';

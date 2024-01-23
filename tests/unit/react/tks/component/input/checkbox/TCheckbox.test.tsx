@@ -351,7 +351,7 @@ describe('TCheckbox', () => {
         });
 
 
-        it('When pressing Enter on the thumb, onChange handler is called', async () => {
+        it('When pressing Enter on the icon, onChange handler is called', async () => {
 
             // Arrange
             const testChildren = 'test children';
@@ -385,7 +385,7 @@ describe('TCheckbox', () => {
 
         });
 
-        it('When pressing Space on the thumb, onChange handler is called', async () => {
+        it('When pressing Space on the icon, onChange handler is called', async () => {
 
             // Arrange
             const testChildren = 'test children';

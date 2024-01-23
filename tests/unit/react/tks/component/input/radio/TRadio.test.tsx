@@ -145,7 +145,7 @@ describe('TRadio', () => {
 
         });
 
-        it('When pressing Enter on the thumb, onSelect handler is called', async () => {
+        it('When pressing Enter on the icon, onSelect handler is called', async () => {
 
             // Arrange
             const testChildren = 'test content';
@@ -165,7 +165,7 @@ describe('TRadio', () => {
 
         });
 
-        it('When pressing Space on the thumb, onSelect handler is called', async () => {
+        it('When pressing Space on the icon, onSelect handler is called', async () => {
 
             // Arrange
             const testChildren = 'test content';
