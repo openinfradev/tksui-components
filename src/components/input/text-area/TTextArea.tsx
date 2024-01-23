@@ -118,7 +118,10 @@ const TTextArea = forwardRef((props: TTextAreaProps, ref: Ref<TTextAreaRef>) => 
 
 
     return (
-        <div className={`t-text-area ${rootClass}`} style={rootStyle}>
+        <div className={`t-text-area ${rootClass}`}
+             style={rootStyle}
+             id={props.id}
+             data-testid={'t-text-area-root'}>
             {
                 props.label && (
                     <label className={`t-text-area__label ${labelClass}`}>

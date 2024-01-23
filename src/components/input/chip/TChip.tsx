@@ -79,7 +79,9 @@ const TChip = forwardRef((props: TChipProps, ref: Ref<TChipRef>) => {
         <div ref={rootRef}
              className={`t-chip ${rootClass}`}
              onClick={(event) => event.stopPropagation()}
-             style={rootStyle}>
+             style={rootStyle}
+             id={props.id}
+             data-testid={'t-chip-root'}>
     
             {
                 props.icon && (

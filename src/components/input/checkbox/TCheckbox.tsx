@@ -10,12 +10,13 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
 
     const validator = useValidator(props.value, props.rules, props.successMessage);
     const rootRef = useRef<HTMLDivElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(modifyStatus, [props.value, props.indeterminate, props.checked, props.positiveValue]);
     const [status, setStatus] = useState('uncheck');
 
     useImperativeHandle(ref, () => ({
-        focus() { rootRef?.current?.focus(); },
+        focus() { containerRef?.current?.focus(); },
         validate() { return validator.validate(); },
     }));
 
@@ -125,15 +126,19 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
     return (
         <div ref={rootRef}
              className={`t-checkbox ${getRootClass()}`}
+             id={props.id}
+             data-testid={'t-checkbox-root'}
              style={getRootStyle()}>
 
             {/* Main */}
-            <div className={'t-checkbox__container'}
+            <div ref={containerRef}
+                 className={'t-checkbox__container'}
                  tabIndex={props.disabled ? -1 : 0}
                  onFocus={validator.clearValidation}
                  onBlur={onBlur}
                  onKeyDown={onKeyDown}
-                 onClick={onClickCheckbox}>
+                 onClick={onClickCheckbox}
+                 data-testid={'t-checkbox-container'}>
                 {iconTemplate()}
                 <span className={'t-checkbox__label'}>{props.children}</span>
             </div>

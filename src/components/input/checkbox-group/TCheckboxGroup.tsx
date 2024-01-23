@@ -101,6 +101,8 @@ const TCheckboxGroup = forwardRef((props: TCheckboxGroupProps, ref: Ref<TCheckbo
              tabIndex={props.disabled ? -1 : 0}
              onFocus={onFocus}
              onBlur={onBlur}
+             id={props.id}
+             data-testid={'t-checkbox-group-root'}
         >
             <div className={'t-checkbox-group__container'}>
                 {

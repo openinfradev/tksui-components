@@ -25,7 +25,7 @@ describe('TTooltip', () => {
 
         it('Renders without errors', () => {
 
-            // Assign
+            // Arrange
             const testData = 'test content';
 
             render(<TTooltip isOpen={true} content={testData}/>);

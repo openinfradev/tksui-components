@@ -82,13 +82,16 @@ function TRadio(props: TRadioProps) {
     
     return (
         <div className={`t-radio ${getRootClass()}`}
-             style={getRootStyle()}>
+             style={getRootStyle()}
+             id={props.id}
+             data-testid={'t-radio-root'}>
             
             {/* Main */}
             <div className={'t-radio__container'}
                  tabIndex={props.disabled ? -1 : 0}
                  onKeyDown={onKeyDown}
-                 onClick={onClickRadio}>
+                 onClick={onClickRadio}
+                 data-testid={'t-radio-container'}>
                 {iconTemplate()}
                 <span className={'t-radio__label'}>{props.children}</span>
             </div>

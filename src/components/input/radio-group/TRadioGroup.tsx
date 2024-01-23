@@ -89,7 +89,9 @@ const TRadioGroup = forwardRef((props: TRadioGroupProps, ref: Ref<TRadioGroupRef
              ref={rootRef}
              tabIndex={props.disabled ? -1 : 0}
              onFocus={onFocus}
-             onBlur={onBlur}>
+             onBlur={onBlur}
+             id={props.id}
+             data-testid={'t-radio-group-root'}>
             <div className={'t-radio-group__container'}>
                 {
                     props.items.map((item, index) => (
