@@ -173,23 +173,40 @@ describe('TDataGrid', () => {
         it('If leftAction exists, the left action area is exposed.', () => {
 
             // Arrange
-            const leftAction = <button>left button</button>;
+            const buttonText = 'Left Button';
+            const leftAction = <button>{buttonText}</button>;
             render(<TDataGrid {...baseProps} leftAction={leftAction}/>);
-            const root = screen.getByTestId('data-gird-left-action-root');
+            const root: HTMLButtonElement = screen.getByText(buttonText);
 
             // Assert
-            expect(root).toBeInTheDocument();
+            // eslint-disable-next-line testing-library/no-node-access
+            expect(root.parentElement).toHaveClass('t-action-bar__container__left-action');
+        });
+
+        it('If leftAction exists, the left action area is exposed.', () => {
+
+            // Arrange
+            const buttonText = 'Center Button';
+            const centerAction = <button>{buttonText}</button>;
+            render(<TDataGrid {...baseProps} centerAction={centerAction}/>);
+            const root: HTMLButtonElement = screen.getByText(buttonText);
+
+            // Assert
+            // eslint-disable-next-line testing-library/no-node-access
+            expect(root.parentElement).toHaveClass('t-action-bar__container__center-action');
         });
 
         it('If rightAction exists, the right action area is exposed.', () => {
 
             // Arrange
-            const rightAction = <button>right button</button>;
+            const buttonText = 'Right Button';
+            const rightAction = <button>{buttonText}</button>;
             render(<TDataGrid {...baseProps} rightAction={rightAction}/>);
-            const root = screen.getByTestId('data-gird-right-action-root');
+            const root = screen.getByText(buttonText);
 
             // Assert
-            expect(root).toBeInTheDocument();
+            // eslint-disable-next-line testing-library/no-node-access
+            expect(root.parentElement).toHaveClass('t-action-bar__container__right-action');
         });
 
 

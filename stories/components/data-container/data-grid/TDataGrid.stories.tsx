@@ -68,7 +68,6 @@ const Template = () => {
                    columnDefs={columnDefs}
                    rightAction={gridRightAction}
                    onChange={selectedRows.onChange}
-                   jumper
         />
     </>);
 };
