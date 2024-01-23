@@ -81,28 +81,28 @@ describe('TChip', () => {
         it('When icon prop is applied, it should be displayed on content area', () => {
 
             // Arrange
-            const testData = 'test content';
+            const importedIcon = 'chips';
 
-            render(<TChip icon={testData}>hello</TChip>);
+            render(<TChip icon={importedIcon}>hello</TChip>);
 
-            const content = screen.getByText(testData);
+            const content = screen.getByText(importedIcon);
 
             // Assert
-            expect(content).toHaveTextContent(testData);
+            expect(content).toHaveTextContent(importedIcon);
 
         });
 
         it('When removeIcon prop and onRemove are applied, removeIcon should be displayed on content area', () => {
 
             // Arrange
-            const testData = 'test content';
+            const closeIcon = 'close';
 
-            render(<TChip removeIcon={testData} onRemove={mockFn}>hello</TChip>);
+            render(<TChip removeIcon={closeIcon} onRemove={mockFn}>hello</TChip>);
 
-            const content = screen.getByText(testData);
+            const content = screen.getByText(closeIcon);
 
             // Assert
-            expect(content).toHaveTextContent(testData);
+            expect(content).toHaveTextContent(closeIcon);
 
         });
 
@@ -198,12 +198,12 @@ describe('TChip', () => {
             // Arrange
             render(
                 <>
-                    <TChip size={'xsmall'} icon={'test'}>hello</TChip>
-                    <TChip size={'small'} icon={'test'}>hello</TChip>
-                    <TChip size={'medium'} icon={'test'}>hello</TChip>
-                    <TChip size={'large'} icon={'test'}>hello</TChip>
-                    <TChip size={'xlarge'} icon={'test'}>hello</TChip>
-                    <TChip size={'invalid'} icon={'test'}>hello</TChip>
+                    <TChip size={'xsmall'} icon={'chips'}>hello</TChip>
+                    <TChip size={'small'} icon={'chips'}>hello</TChip>
+                    <TChip size={'medium'} icon={'chips'}>hello</TChip>
+                    <TChip size={'large'} icon={'chips'}>hello</TChip>
+                    <TChip size={'xlarge'} icon={'chips'}>hello</TChip>
+                    <TChip size={'invalid'} icon={'chips'}>hello</TChip>
                 </>,
             );
 

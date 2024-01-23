@@ -1,6 +1,6 @@
 import {MouseEvent, ReactNode} from 'react';
+import {MaterialSymbol} from '@material-symbols/font-300';
 import {TBaseProps} from '@/common/base/TBase.interface';
-
 
 export const chipSize = {xsm: 'xsmall', sm: 'small', md: 'medium', lg: 'large', xlg: 'xlarge'};
 type chipSize = typeof chipSize[keyof typeof chipSize];
@@ -15,8 +15,8 @@ export interface TChipProps extends TBaseProps {
     type?: chipType,
     
     primary?: boolean,
-    icon?: string,
-    removeIcon?: string,
+    icon?: MaterialSymbol,
+    removeIcon?: MaterialSymbol,
     
     size?: chipSize,
     xsmall?: boolean,
