@@ -1,5 +1,5 @@
 import {MouseEvent, useCallback, useContext, useMemo, useRef} from 'react';
-import {TTabItemProps} from './TTabBox.interface';
+import {TTabItemProps} from '@/components';
 import TTabBoxContext from './TTabBoxContext';
 import useRipple from '@/common/hook/UseRipple';
 
@@ -53,7 +53,9 @@ const TTabItem = (props: TTabItemProps) => {
             className={`t-tab-item-label ${rootClass}`}
             onMouseDown={onMouseDown}
             onMouseUp={onMouseUp}
-            onMouseLeave={onMouseLeave}>
+            onMouseLeave={onMouseLeave}
+            data-testid={'tab-box-item-root'}
+        >
             {label}
             <div className={'t-tab-item-label__active-indicator'} />
         </li>
