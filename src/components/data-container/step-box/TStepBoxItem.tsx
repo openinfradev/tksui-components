@@ -1,5 +1,5 @@
 import {CSSProperties, useContext, useMemo} from 'react';
-import {TStepBoxItemProps} from './TStepBox.interface';
+import {TStepBoxItemProps} from '@/components';
 import TStepBoxFooter from '~/data-container/step-box/TStepBoxFooter';
 import TStepBoxContext from '~/data-container/step-box/TStepBoxContext';
 
@@ -31,7 +31,11 @@ const TStepBoxItem = (props: TStepBoxItemProps) => {
 
 
     return (
-        <div className={`t-step-box-item ${rootClass}`} style={rootStyle}>
+        <div
+            className={`t-step-box-item ${rootClass}`}
+            style={rootStyle}
+            data-testid={'step-box-item-root'}
+        >
             {props.children ?? props.children}
 
             <TStepBoxFooter prevButtonLabel={props.prevButtonLabel ?? stepBoxContext.prevButtonLabel}
