@@ -1,7 +1,6 @@
 import {act, render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import TDropHolder from '~/data-container/drop-holder/TDropHolder';
-import TButton from "../../../../../../../src/components/button/button/TButton";
 
 describe('TDropHolder', () => {
     const mockOnClickItem = jest.fn();
@@ -22,38 +21,38 @@ describe('TDropHolder', () => {
     describe('Style', () => {
 
         it('ClassName Prop applies to root', () => {
-            const testData = 'test-class'
-            render(<TDropHolder {...baseProps} className={testData}>button test</TDropHolder>);
 
-
+            // Arrange
+            const testClass = 'test-class'
+            render(<TDropHolder {...baseProps} className={testClass}>button test</TDropHolder>);
             const root = screen.getByTestId('drop-holder-root')
 
-            expect(root)
-                .toHaveClass('test-class');
+            // Assert
+            expect(root).toHaveClass('test-class');
         })
 
         it('Style Prop applies to root', () => {
-            const testData = {border: '1px solid blue'}
-            render(<TDropHolder {...baseProps} style={testData}>button test</TDropHolder>);
 
-
+            // Arrange
+            const testStyle = {border: '1px solid blue'}
+            render(<TDropHolder {...baseProps} style={testStyle}>button test</TDropHolder>);
             const root = screen.getByTestId('drop-holder-root');
 
-            expect(root)
-                .toHaveStyle(testData);
+            // Assert
+            expect(root).toHaveStyle(testStyle);
 
         })
 
         it('ID Prop applies to root', () => {
-            const testData = 'test-id'
-            render(<TDropHolder {...baseProps} id={testData}>button test</TDropHolder>);
 
-
+            // Arrange
+            const testId = 'test-id'
+            render(<TDropHolder {...baseProps} id={testId}>button test</TDropHolder>);
             const root = screen.getByTestId('drop-holder-root')
 
-            expect(root)
+            // Assert
             expect(root).toHaveProperty('id');
-            expect(root.id).toEqual(testData);
+            expect(root.id).toEqual(testId);
         })
 
     })
