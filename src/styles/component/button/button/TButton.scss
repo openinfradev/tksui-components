@@ -1,38 +1,41 @@
-
-$t-button-color--default: $t-black-color;
-$t-button-color--hover: $t-gray-color-6;
+$t-button-color--default: $t-white-color;
+$t-button-color--hover: $t-white-color;
 $t-button-color--disabled: $t-gray-color-4;
 
-$t-button-background--default: $t-white-color;
-$t-button-background--hover: $t-gray-color-2;
-$t-button-background--disabled: $t-gray-color-2;
+$t-button-background--default: $t-primary-color;
+$t-button-background--hover: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), $t-primary-color;
+$t-button-background--disabled: $t-gray-color-1;
 
-$t-button-border--default: $t-gray-color-2;
-$t-button-border--hover: $t-gray-color-4;
-$t-button-border--disabled: $t-gray-color-2;
+$t-button-border--default: transparent;
+$t-button-border--hover: transparent;
+$t-button-border--disabled: $t-gray-color-1;
 
 
 .t-button {
-    border: 1px solid $t-button-border--default;
-    color: $t-button-color--default;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     position: relative;
+    color: $t-button-color--default;
+    background: $t-button-background--default;
+    border: 1px solid $t-button-border--default;
+    border-radius: 4px;
     text-align: center;
-    overflow: hidden;
-    background-color: transparent;
     white-space: nowrap;
     font-family: $t-font-family;
-    border-radius: 4px;
+    overflow: hidden;
     @include user-select-none;
 
     .t-button__content {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        height: calc(100% - 2px);
+        position: relative;
+        top: 1px;
+
         .t-button__content__icon {
+            position: relative;
+            top: -1px;
             margin-right: $t-spacing-4;
         }
         &.t-button__content--loading {
@@ -42,66 +45,86 @@ $t-button-border--disabled: $t-gray-color-2;
                 left: calc(50% - (var(--t-button-loading-size) * 0.5));
                 width: var(--t-button-loading-size);
                 height: var(--t-button-loading-size);
-                border: var(--t-button-loading-thick) solid $t-primary-color;
+                border: var(--t-button-loading-thick) solid $t-white-color;
                 border-radius: 50%;
                 animation: rotate 1.2s ease infinite;
-                border-color: $t-primary-color transparent transparent transparent;
+                border-color: $t-white-color transparent transparent transparent;
                 &:nth-child(2) { animation-delay: 0.11s; }
                 &:nth-child(3) { animation-delay: 0.22s; }
             }
         }
     }
 
-    // [ color ]
-    &.t-button--primary {
-        border: 1px solid $t-primary-color;
+    // Variant
+    &.t-button--outlined {
         color: $t-primary-color;
-    }
-
-    &.t-button--main {
-        border: none;
-        color: $t-white-color;
-        background: $t-primary-color;
+        background: $t-white-color;
+        border-color: $t-primary-color;
 
         .t-button__content--loading .t-button__content--loading__slice {
-            border-color: $t-white-color transparent transparent transparent;
+            border-color: $t-primary-color transparent transparent transparent;
         }
     }
 
-    &.t-button--point {
-        border: none;
-        color: $t-white-color;
-        background: $t-point-color;
+    &.t-button--plain {
+        color: $t-black-color;
+        background: $t-white-color;
+        border: 1px solid $t-gray-color-4;
 
         .t-button__content--loading .t-button__content--loading__slice {
-            border-color: $t-white-color transparent transparent transparent;
+            border-color: $t-black-color transparent transparent transparent;
         }
     }
+
+    &.t-button--ghost {
+        color: $t-white-color;
+        background: transparent;
+        border: 1px solid $t-gray-color-5;
+
+        .t-button__content--loading .t-button__content--loading__slice {
+            border-color: $t-black-color transparent transparent transparent;
+        }
+    }
+
+    &.t-button--rounded {
+        color: $t-black-color;
+        background: $t-white-color;
+        border: 1px solid $t-gray-color-4;
+
+        .t-button__content--loading .t-button__content--loading__slice {
+            border-color: $t-primary-color transparent transparent transparent;
+        }
+    }
+
 
     &:hover, &:focus-visible {
-        border: 1px solid $t-button-border--hover;
         color: $t-button-color--hover;
         background: $t-button-background--hover;
+        border: 1px solid $t-button-border--hover;
         cursor: pointer;
-        &.t-button--primary {
-            border: 1px solid $t-primary-color;
+
+        &.t-button--outlined {
             color: $t-primary-color;
-            background: $t-primary-color--tint-9;
-            &.t-button--disabled {
-                border: 1px solid $t-button-border--disabled;
-                color: $t-button-color--disabled;
-                background: $t-button-background--disabled;
-            }
+            background: $t-blue-gray-color-1;
+            border: 1px solid $t-primary-color;
         }
-        &.t-button--main {
-            border: none;
-            color: $t-white-color;
-            background: $t-primary-color--shade-2;
+
+        &.t-button--plain {
+            color: $t-black-color;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.03) 0%, rgba(0, 0, 0, 0.03) 100%), $t-white-color;
+            border: 1px solid $t-gray-color-4;
         }
-        &.t-button--point {
-            border: none;
+
+        &.t-button--ghost {
             color: $t-white-color;
-            background: color-mix(in srgb, var(--t-point-color), black 20%);
+            background: rgba(0, 0, 0, 0.10);
+            border: 1px solid $t-gray-color-5;
+        }
+
+        &.t-button--rounded {
+            color: $t-black-color;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.03) 0%, rgba(0, 0, 0, 0.03) 100%), $t-white-color;
+            border: 1px solid $t-gray-color-4;
         }
     }
 
@@ -111,19 +134,11 @@ $t-button-border--disabled: $t-gray-color-2;
 
     // [ Disabled ]
     &.t-button--disabled {
-        cursor: default;
-        border: 1px solid $t-button-border--disabled;
-        color: $t-button-color--disabled;
-        background: $t-button-background--disabled;
-
-        &.t-button--main, &.t-button--point {
-            border: none;
-            color: $t-gray-color-2;
-            background: $t-button-color--disabled;
-        }
-
+        cursor: default !important;
+        color: $t-button-color--disabled !important;
+        background: $t-button-background--disabled !important;
+        border: 1px solid $t-button-border--disabled !important;
     }
-
 
     // [ Shape, Size ]
     &.t-button--loading {
@@ -134,45 +149,45 @@ $t-button-border--disabled: $t-gray-color-2;
     }
 
     &.t-button--xsmall {
-        height: 20px;
         min-width: 48px;
-        padding: 0 #{$t-spacing-8};
+        height: 20px;
+        padding: 0 $t-spacing-8;
         @include typo-element-4;
 
         --t-button-loading-size: 12px;
         --t-button-loading-thick: 2px;
     }
     &.t-button--small {
-        height: 24px;
         min-width: 64px;
-        padding: 0 #{$t-spacing-16};
+        height: 24px;
+        padding: 0 $t-spacing-16;
         @include typo-element-4;
 
         --t-button-loading-size: 14px;
         --t-button-loading-thick: 2px;
     }
     &.t-button--medium {
-        height:  32px;
         min-width: 96px;
-        padding: 0 #{$t-spacing-32};
+        height: 32px;
+        padding: 0 $t-spacing-16;
         @include typo-element-2;
 
         --t-button-loading-size: 16px;
         --t-button-loading-thick: 3px;
     }
     &.t-button--large {
-        height: 40px;
         min-width: 104px;
-        padding: 0 #{$t-spacing-32};
+        height: 40px;
+        padding: 0 $t-spacing-24;
         @include typo-body-2;
 
         --t-button-loading-size: 20px;
         --t-button-loading-thick: 3px;
     }
     &.t-button--xlarge {
-        height: 48px;
         min-width: 144px;
-        padding: 0 #{$t-spacing-48};
+        height: 48px;
+        padding: 0 $t-spacing-32;
         @include typo-subtitle-1;
 
         --t-button-loading-size: 24px;
@@ -182,7 +197,7 @@ $t-button-border--disabled: $t-gray-color-2;
 }
 
 
-.t-button--xsmall + .t-button--xsmall { MARGIN-LEFT: $t-spacing-4; }
+.t-button--xsmall + .t-button--xsmall { margin-left: $t-spacing-4; }
 .t-button--small + .t-button--small { margin-left: $t-spacing-4; }
 .t-button--medium + .t-button--medium { margin-left: $t-spacing-8; }
 .t-button--large + .t-button--large { margin-left: $t-spacing-8; }

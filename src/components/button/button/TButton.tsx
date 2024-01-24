@@ -1,5 +1,5 @@
 import {CSSProperties, forwardRef, KeyboardEvent, MouseEvent, Ref, useCallback, useImperativeHandle, useMemo, useRef} from 'react';
-import {buttonSize, TButtonProps, TButtonRef} from './TButton.interface';
+import {buttonSize, buttonVariant, TButtonProps, TButtonRef} from './TButton.interface';
 import useRipple from '@/common/hook/UseRipple';
 import TIcon from '../../icon/TIcon';
 
@@ -75,13 +75,19 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
         return buttonSize.medium;
     }, [props.size, props.xsmall, props.small, props.medium, props.large, props.xlarge]);
 
+    const isRenderIcon = useMemo(() => {
+        if ($_size === 'xsmall' || $_size === 'small') {
+            return false;
+            // throw Error('If TButton component is smaller than medium size, the icon won\'t be included.');
+        }
+        return true;
+    }, [$_size]);
+
     const contentIconSize = useMemo(() => {
-        if ($_size === 'xsmall') { return 'small'; }
-        if ($_size === 'small') { return 'small'; }
-        if ($_size === 'medium') { return 'small'; }
-        if ($_size === 'large') { return 'large'; }
-        if ($_size === 'xlarge') { return 'large'; }
-        return 'medium';
+        if ($_size === 'medium') { return 'xsmall'; }
+        if ($_size === 'large') { return 'xsmall'; }
+        if ($_size === 'xlarge') { return 'small'; }
+        return 'xsmall';
     }, [$_size]);
 
 
@@ -90,15 +96,16 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
 
         clazz.push(`t-button--${$_size}`);
         if (props.className) { clazz.push(props.className); }
-        if (props.primary) { clazz.push('t-button--primary'); }
-        if (props.point) { clazz.push('t-button--point'); }
-        if (props.main) { clazz.push('t-button--main'); }
+        if (props.variant && props.variant in buttonVariant) { clazz.push(`t-button--${props.variant}`)}
+        if (props.outlined) { clazz.push('t-button--outlined'); }
+        if (props.plain) { clazz.push('t-button--plain'); }
+        if (props.ghost) { clazz.push('t-button--ghost'); }
         if (props.disabled) { clazz.push('t-button--disabled'); }
         if (props.rounded) { clazz.push('t-button--rounded'); }
         if (props.loading) { clazz.push('t-button--loading'); }
 
         return clazz.join(' ');
-    }, [$_size, props.className, props.point, props.primary, props.main, props.disabled, props.rounded, props.loading]);
+    }, [$_size, props.className, props.outlined, props.plain, props.ghost, props.disabled, props.rounded, props.loading]);
 
     const rootStyle: CSSProperties = useMemo(() => {
         let style: CSSProperties = {};
@@ -130,7 +137,7 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
                     ? (
                         <div className={'t-button__content'}>
                             {
-                                props.icon && (
+                                props.icon && isRenderIcon && (
                                     <TIcon size={contentIconSize} className={'t-button__content__icon'}>{props.icon}</TIcon>
                                 )
                             }
