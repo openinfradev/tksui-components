@@ -88,6 +88,9 @@ export default function TPage(props: TPageProps) {
 
 
     // region [Hooks - Lifecycles]
+    useEffect(() => {
+        setIsInfoPanelOpened(props.isInfoPanelOpened);
+    }, [props.isInfoPanelOpened]);
 
     useEffect(() => {
         if (isInfoPanelOpened) {
@@ -105,7 +108,7 @@ export default function TPage(props: TPageProps) {
              ref={rootRef}>
             <div className={'t-page__content-container'}>
                 <div className={'t-page__title-area'}>
-                    <h3 className={'t-page__title-area__title'}>{props.title}</h3> {isInfoPanelOpened}
+                    <h3 className={'t-page__title-area__title'}>{props.title}</h3>
 
                     {
                         props.infoPanelContent && (
@@ -125,9 +128,12 @@ export default function TPage(props: TPageProps) {
                 props.infoPanelContent && (
                     <div className={`t-page__information-area ${infoPanelClass}`}
                          style={isInfoPanelOpened ? {flex: `0 0 ${panelWidth}`} : {}}>
-                        <div className={'t-page__information-area__resizer'}
-                             onMouseDown={onMouseDown}
-                        />
+                        {
+                            isInfoPanelOpened && (
+                                <div className={'t-page__information-area__resizer'}
+                                     onMouseDown={onMouseDown}/>
+                            )
+                        }
                         <div className={'t-page__information-area__container'}>
                             <div className={'t-page__information-area__header'}>
                                 <TIcon className={'t-page__information-area__header__close'}
