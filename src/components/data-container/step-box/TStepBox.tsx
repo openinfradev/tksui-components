@@ -76,7 +76,12 @@ const TStepBox = (props: TStepBoxProps) => {
     // endregion
 
     return (
-        <div className={`t-step-box ${rootClass}`} style={rootStyle}>
+        <div
+            className={`t-step-box ${rootClass}`}
+            style={rootStyle}
+            id={props.id}
+            data-testid={'step-box-root'}
+        >
             <TStepBoxContext.Provider value={{
                 currentStep: value,
                 totalStep: children?.length,
