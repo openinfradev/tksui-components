@@ -32,6 +32,7 @@
         .t-data-grid__header__select-indicator {
             @include typo-element-3;
             color: $t-primary-color;
+            white-space: nowrap;
         }
     }
 
