@@ -1,5 +1,5 @@
 import {CSSProperties, ReactElement, useMemo} from 'react';
-import {TStepBoxProps} from './TStepBox.interface';
+import {TStepBoxProps} from '@/components';
 import TStepBoxContext from './TStepBoxContext';
 import TStepBoxHeader from '~/data-container/step-box/TStepBoxHeader';
 import TStepBoxItem from '~/data-container/step-box/TStepBoxItem';
