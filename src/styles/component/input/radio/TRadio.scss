@@ -18,7 +18,7 @@
         }
         .t-radio__label { @include typo-body-3; }
 
-        &:focus .t-radio__icon.t-radio__icon--deselected svg { fill: $t-white-color; stroke: $t-primary-color; }
+        &:focus-within .t-radio__icon.t-radio__icon--deselected svg { fill: $t-white-color; stroke: $t-primary-color; }
     }
 
     &.t-radio--disabled .t-radio__container {

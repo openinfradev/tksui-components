@@ -1,4 +1,4 @@
-import {CSSProperties, forwardRef, Ref, useImperativeHandle, useRef} from 'react';
+import {forwardRef, Ref, useCallback, useImperativeHandle, useRef} from 'react';
 import useValidator from '@/common/hook/UseValidator';
 import {TCheckboxGroupProps, TCheckboxGroupRef, TCheckboxGroupValue} from './TCheckboxGroup.interface';
 import TCheckbox from '../checkbox/TCheckbox';
@@ -6,94 +6,85 @@ import {TCheckboxValue} from '../checkbox/TCheckbox.interface';
 
 
 const TCheckboxGroup = forwardRef((props: TCheckboxGroupProps, ref: Ref<TCheckboxGroupRef>) => {
-    
+
     // region [Hooks]
-    
+
     const validator = useValidator(props.value, props.rules, props.successMessage);
     const rootRef = useRef<HTMLDivElement>(null);
-    
-    
+
     useImperativeHandle(ref, () => ({
         validate() { return validator.validate(); },
     }));
-    
+
     // endregion
-    
-    
+
+
     // region [Styles]
-    
-    function getRootClass(): string {
+
+    const getRootClass = useCallback(() => {
         const clazz: string[] = [];
-        
+
         if (props.className) clazz.push(props.className);
         if (props.disabled) clazz.push('t-checkbox-group--disabled');
         if (!validator.result) clazz.push('t-checkbox-group--failure');
         if (validator.result && validator.message) clazz.push('t-checkbox-group--success');
-        
+
         return clazz.join(' ');
-    }
-    
-    function getRootStyle(): CSSProperties {
-        let style: CSSProperties = {};
-        
-        if (props.style) style = {...props.style};
-        
-        return style;
-    }
-    
+    }, [props.className, props.disabled, validator]);
+
+    const getRootStyle = useCallback(() => {
+        return props.style || {};
+    }, [props.style]);
+
     // endregion
-    
-    
+
+
     // region [Events]
-    function onChangeChildren(value, positiveValue): void {
-        
+
+    const onChangeChildren = useCallback((value: string, positiveValue: boolean) => {
         if (value === null) {
             removeValue(positiveValue);
         } else {
             addValue(value);
         }
-    }
-    
-    function onFocus(): void {
+    }, []);
+
+    const onFocus = useCallback(() => {
         if (props.rules) {
             validator.clearValidation();
         }
-    }
-    
-    function onBlur(event): void {
+    }, [props.rules]);
+
+    const onBlur = useCallback((event) => {
         const next = event.relatedTarget;
-        
+
         if (props.rules && !props.lazy && !rootRef.current.contains(next)) {
             validator.validate();
         }
-    }
-    
+    }, [props.rules, props.lazy, validator]);
+
     // endregion
-    
-    
+
+
     // region [ETC]
-    
-    function removeValue(value: TCheckboxValue) {
-        
-        
-        emitChange(props.value.filter((v) => v !== value));
-        
-    }
-    
-    function addValue(value: TCheckboxValue) {
-        emitChange([...props.value, value]);
-    }
-    
-    function emitChange(value: TCheckboxGroupValue): void {
+
+    const emitChange = useCallback((value: TCheckboxGroupValue) => {
         props.onChange(value);
-    }
-    
-    
+    }, [props.onChange]);
+
+    const removeValue = useCallback((value: TCheckboxValue) => {
+        emitChange(props.value.filter((v) => v !== value));
+    }, [emitChange]);
+
+    const addValue = useCallback((value: TCheckboxValue) => {
+        emitChange([...props.value, value]);
+    }, [emitChange]);
+
     // endregion
-    
-    
+
+
     // region [Templates]
-    
+
     return (
         <div className={`t-checkbox-group ${getRootClass()}`}
              style={getRootStyle()}
@@ -124,10 +115,10 @@ const TCheckboxGroup = forwardRef((props: TCheckboxGroupProps, ref: Ref<TCheckbo
             }
         </div>
     );
-    
+
     // endregion
-    
-    
+
+
 });
 
 TCheckboxGroup.defaultProps = {

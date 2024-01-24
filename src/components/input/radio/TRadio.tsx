@@ -1,10 +1,9 @@
-import {CSSProperties, KeyboardEvent, useCallback} from 'react';
+import {KeyboardEvent, useCallback} from 'react';
 import TIcon from '../../icon/TIcon';
 import {TRadioProps} from './TRadio.interface';
 
 
-function TRadio(props: TRadioProps) {
-
+const TRadio = (props: TRadioProps) => {
 
     // region [Styles]
 
@@ -28,7 +27,7 @@ function TRadio(props: TRadioProps) {
 
     const emitSelect = useCallback(() => {
         props.onSelect(props.positiveValue);
-    }, []);
+    }, [props.positiveValue]);
 
     // endregion
 
@@ -52,7 +51,7 @@ function TRadio(props: TRadioProps) {
 
     // region [Templates]
 
-    function iconTemplate(): JSX.Element {
+    const iconTemplate = useCallback(() => {
 
         const status = props.selected ? 'selected' : 'deselected';
 
@@ -66,13 +65,12 @@ function TRadio(props: TRadioProps) {
             iconType = 't_radio_off';
         }
 
-
         return (
             <TIcon small className={`t-radio__icon t-radio__icon--${status}`}>
                 {iconType}
             </TIcon>
         );
-    }
+    }, [props.selected, props.disabled]);
 
     return (
         <div className={`t-radio ${getRootClass()}`}
@@ -93,7 +91,7 @@ function TRadio(props: TRadioProps) {
     );
 
     // endregion
-}
+};
 
 TRadio.defaultProps = {};
 

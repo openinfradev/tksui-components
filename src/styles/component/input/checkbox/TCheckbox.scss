@@ -27,9 +27,12 @@
             color: $t-black-color;
         }
 
-        &:is(:focus-within, :hover) .t-checkbox__icon {
-            color: $t-primary-color;
-            stroke: $t-primary-color;
+
+        &:is(:focus-within, :hover) {
+            .t-checkbox__icon.t-checkbox__icon--uncheck svg {
+                color: $t-primary-color;
+                stroke: $t-primary-color;
+            }
         }
     }
 

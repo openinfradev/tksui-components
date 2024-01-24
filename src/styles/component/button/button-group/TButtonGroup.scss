@@ -1,7 +1,11 @@
 .t-button-group {
 
-    .t-button + .t-button {
-        margin-left: 6px;
+    :is(.t-button--xsmall + .t-button--xsmall, .t-button--small + .t-button--small) {
+        margin-left: $t-spacing-4;
+    }
+
+    :is(.t-button--medium + .t-button--medium, .t-button--large + .t-button--large, .t-button--xlarge + .t-button--xlarge) {
+        margin-left: $t-spacing-8;
     }
 
 }
