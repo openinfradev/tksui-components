@@ -6,6 +6,7 @@ import {TDataGridProps} from './TDataGrid.interface';
 import TButton from '../../button/button/TButton';
 import TPagination from '../pagination/TPagination';
 import TActionBar from '~/data-container/action-bar/TActionBar';
+import NumberUtil from '@/common/util/NumberUtil';
 
 const TDataGrid = forwardRef((props: TDataGridProps, ref: Ref<AgGridReact>) => {
 
@@ -74,11 +75,11 @@ const TDataGrid = forwardRef((props: TDataGridProps, ref: Ref<AgGridReact>) => {
 
     const noRowsOverlayComponent = useCallback(() => (<>
         <div className={'t-data-grid__body__no-rows-template'}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 100 100">
-                <circle cx="44" cy="44" r="44" transform="translate(6.5 6.5)"
+            <svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 100 100'>
+                <circle cx='44' cy='44' r='44' transform='translate(6.5 6.5)'
                         style={{fill: '#f2f2f2', stroke: '#ddd', strokeMiterlimit: 10, strokeWidth: '2px'}}/>
-                <path transform="translate(49 35)" style={{fill: '#999'}} d="M0 0h4v24H0z"/>
-                <path transform="translate(49 62.953)" style={{fill: '#999'}} d="M0 0h4v4H0z"/>
+                <path transform='translate(49 35)' style={{fill: '#999'}} d='M0 0h4v24H0z'/>
+                <path transform='translate(49 62.953)' style={{fill: '#999'}} d='M0 0h4v4H0z'/>
             </svg>
 
             {
@@ -112,7 +113,7 @@ const TDataGrid = forwardRef((props: TDataGridProps, ref: Ref<AgGridReact>) => {
                         {
                             !props.noTotalRows && (
                                 <div className={'t-data-grid__header__pagination'}>
-                                    총 <strong>{props.paging?.totalRows ?? props.rowData.length}</strong>건
+                                    총 <strong>{NumberUtil.toLocaleString(props.paging?.totalRows ?? props.rowData.length)}</strong>건
                                 </div>
                             )
 
@@ -120,7 +121,7 @@ const TDataGrid = forwardRef((props: TDataGridProps, ref: Ref<AgGridReact>) => {
                         {
                             selectedRows.length > 0 && (
                                 <div className={'t-data-grid__header__select-indicator'}>
-                                    {selectedRows.length} 개 선택
+                                    {NumberUtil.toLocaleString(selectedRows.length)} 개 선택
                                 </div>
                             )
                         }
