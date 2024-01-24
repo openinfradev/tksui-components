@@ -4,10 +4,10 @@ import {TCheckboxProps, TCheckboxRef, TCheckBoxStatus} from './TCheckbox.interfa
 import useValidator from '@/common/hook/UseValidator';
 
 const checkboxIcons = {
-    check: 'priority',
-    uncheck: 'check_box_outline_blank',
-    disabledUnCheck: 'check_box_outline_blank', // FIXME: 새로 추가돼야 함!
-    indeterminate: 'indeterminate_check_box',
+    check: 't_checkbox_on',
+    uncheck: 't_checkbox_off',
+    disabledUnCheck: 't_checkbox_disabled_off',
+    indeterminate: 't_checkbox_indeterminate',
 };
 
 const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => {
@@ -119,8 +119,8 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
             throw Error('Invalid status');
         }
 
-        return (<TIcon small fill={props.fill} className={`t-checkbox__icon t-checkbox__icon--${status}`}>{iconType}</TIcon>);
-    }, [status, props.fill]);
+        return (<TIcon xsmall className={`t-checkbox__icon t-checkbox__icon--${status}`}>{iconType}</TIcon>);
+    }, [status]);
 
     // region [Effect]
 
@@ -168,7 +168,6 @@ TCheckbox.defaultProps = {
     negativeValue: false,
     checked: null,
     lazy: true,
-    fill: true,
 };
 
 TCheckbox.displayName = 'TCheckbox';

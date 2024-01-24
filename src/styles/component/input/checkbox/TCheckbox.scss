@@ -3,7 +3,7 @@
     .t-checkbox__container {
         display: flex;
         align-items: center;
-        gap: $t-spacing-4; // FiXME: 아이콘 여백이 없을 경우 아이콘과 라벨 간격에 맞춰 재수정
+        gap: $t-spacing-8;
         height: 22px;
 
         cursor: pointer;
@@ -11,10 +11,18 @@
         user-select: none;
 
         .t-checkbox__icon {
-            &.t-checkbox__icon--check, &.t-checkbox__icon--indeterminate { color: $t-primary-color; stroke: $t-primary-color; }
-            &.t-checkbox__icon--uncheck { color: $t-gray-color-3; stroke: $t-gray-color-3; }
+
+            & svg { width: 16px; height: 16px; }
+            &:is(.t-checkbox__icon--check, .t-checkbox__icon--indeterminate) svg {
+                fill: $t-primary-color;
+                stroke: $t-white-color;
+            }
+            &.t-checkbox__icon--uncheck svg { fill: $t-white-color; stroke: $t-gray-color-3; }
         }
+
         .t-checkbox__label {
+            position: relative;
+            top: 1px;
             @include typo-body-3;
             color: $t-black-color;
         }
@@ -35,12 +43,16 @@
         }
     }
 
-
     &.t-checkbox--disabled .t-checkbox__container {
         pointer-events: none;
         color: $t-font-color--read-only;
 
-        .t-checkbox__icon--check, .t-checkbox__icon--indeterminate { color: $t-gray-color-3; stroke: $t-gray-color-3; }
+        .t-checkbox__label { color: $t-font-color--disabled; }
+
+        :is(.t-checkbox__icon--check, .t-checkbox__icon--indeterminate) svg {
+            fill: $t-gray-color-3;
+            stroke: $t-white-color;
+        }
         .t-checkbox__icon--uncheck { color: $t-gray-color-3; stroke: $t-gray-color-3; }
     }
 

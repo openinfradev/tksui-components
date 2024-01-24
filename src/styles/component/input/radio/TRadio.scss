@@ -4,28 +4,30 @@
     .t-radio__container {
         display: flex;
         align-items: center;
+        gap: $t-spacing-8;
         cursor: pointer;
         outline: none;
 
         .t-radio__icon {
             border-radius: 2px;
-            &.t-radio__icon--selected { fill: $t-primary-color; stroke: $t-primary-color; }
-            &.t-radio__icon--deselected { fill: $t-gray-color-3; stroke: $t-gray-color-3; }
-        }
-        .t-radio__label {
-            margin-left: $t-spacing-10;
-        }
 
-        &:focus .t-radio__icon {
-            outline: 1px solid $t-primary-color;
+            & svg { width: 16px; height: 16px; }
+
+            &.t-radio__icon--selected svg { fill: $t-primary-color; stroke: $t-white-color; }
+            &.t-radio__icon--deselected svg { fill: $t-white-color; stroke: $t-gray-color-3; }
         }
+        .t-radio__label { @include typo-body-3; }
+
+        &:focus .t-radio__icon.t-radio__icon--deselected svg { fill: $t-white-color; stroke: $t-primary-color; }
     }
 
     &.t-radio--disabled .t-radio__container {
         pointer-events: none;
         color: $t-font-color--read-only;
 
-        .t-radio__icon--selected { fill: $t-gray-color-3; stroke: $t-gray-color-3; }
-        .t-radio__icon--deselected { fill: $t-gray-color-3; stroke: $t-gray-color-3; }
+        .t-radio__label { color: $t-font-color--disabled; }
+
+        .t-radio__icon--selected svg { fill: $t-gray-color-3; stroke: $t-white-color; }
+        .t-radio__icon--deselected svg { fill: $t-gray-color-1; stroke: $t-gray-color-3; }
     }
 }

@@ -1,4 +1,4 @@
-import {ReactNode} from 'react';
+import {ReactElement, ReactNode} from 'react';
 import {TValidatorProps} from '@/common/validator/TValidator.interface';
 import {TBaseProps} from '@/common/base/TBase.interface';
 
@@ -7,10 +7,8 @@ export type TCheckboxValue = boolean | string;
 export type TCheckBoxStatus = 'check' | 'uncheck' | 'indeterminate'
 
 export interface TCheckboxProps extends TValidatorProps, TBaseProps {
-    width?: string,
-
     children?: ReactNode,
-    label?: JSX.Element,
+    label?: ReactElement,
 
     value?: TCheckboxValue,
     checked?: boolean,
@@ -18,7 +16,6 @@ export interface TCheckboxProps extends TValidatorProps, TBaseProps {
     positiveValue?: boolean | string
     negativeValue?: boolean | string
 
-    fill?: boolean,
     ripple?: boolean
 
     disabled?: boolean,

@@ -33,7 +33,7 @@ const NormalTemplate = () => {
 
     const radioGroup1 = useInputState<TRadioGroupValue>('a');
     const radioGroup2 = useInputState<TRadioGroupValue>('banana');
-    const radioGroup3 = useInputState<TRadioGroupValue>('mango');
+    const radioGroup3 = useInputState<TRadioGroupValue>('disabled');
 
 
     return (<>

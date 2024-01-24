@@ -1,29 +1,55 @@
 /* eslint-disable max-len */
 const TOriginalImage = {
-    t_radio_on: (
-        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'>
-            <rect width='22' height='22' rx='11' style={{stroke: 'none'}}/>
-            <g transform='translate(1 1)' style={{stroke: '#fff', strokeWidth: '4px'}}>
-                <rect width='20' height='20' rx='10' style={{stroke: 'none'}}/>
-                <rect x='2' y='2' width='16' height='16' rx='8' style={{fill: 'none'}}/>
+    t_checkbox_on: (
+        <svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
+            <rect width='16' height='16' rx='4'/>
+            <path d='M6.58327 11.25L3.7666 8.41667L4.59993 7.58333L6.58327 9.55L11.3999 4.75L12.2333 5.6L6.58327 11.25Z' fill='#ffffff'/>
+        </svg>
+    ),
+    t_checkbox_off: (
+        <svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
+            <rect x='0.5' y='0.5' width='15' height='15' rx='3.5'/>
+        </svg>
+    ),
+    t_checkbox_disabled_off: (
+        <svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
+            <g id='01.Button/Check Box/disable-off'>
+                <rect id='Rectangle 41976' x='0.5' y='0.5' width='15' height='15' rx='3.5' fill='#F4F4F4' stroke='#B8BABC'/>
             </g>
         </svg>
+    ),
+    t_checkbox_indeterminate: (
+        <svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
+            <g id='03.Icon/20x20/outline/remove'>
+                <rect width='16' height='16' rx='4'/>
+                <path id='Vector' d='M3.8667 8.5999V7.3999H12.1334V8.5999H3.8667Z'/>
+            </g>
+        </svg>
+    ),
+    t_radio_on: (
+        <svg width='16' height='16' viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'>
+            <g id='Radio Button/Ico/default-on'>
+                <circle id='Ellipse 3258' cx='8' cy='8' r='8' />
+                <circle id='Ellipse 3259' cx='8' cy='8' r='3' fill='white'/>
+            </g>
+        </svg>
+
     ),
     t_radio_off: (
-        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'>
-            <g style={{fill: '#fff'}}>
-                <rect width='22' height='22' rx='11' style={{stroke: 'none'}}/>
-                <rect x='.5' y='.5' width='21' height='21' rx='10.5' style={{fill: 'none'}}/>
+        <svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
+            <g id='Radio Button/Ico/default-off'>
+                <circle id='Ellipse 3257' cx='8' cy='8' r='7.5'/>
             </g>
         </svg>
+
     ),
     t_radio_disabled_off: (
-        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'>
-            <g style={{fill: '#f5f5f5'}}>
-                <rect width='22' height='22' rx='11' style={{stroke: 'none'}}/>
-                <rect x='.5' y='.5' width='21' height='21' rx='10.5' style={{fill: 'none'}}/>
+        <svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
+            <g id='01.Button/Radio Button/disable-off'>
+                <circle id='Ellipse 3258' cx='8' cy='8' r='7.5'/>
             </g>
         </svg>
+
     ),
     t_navigate_left: (
         <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
@@ -95,8 +121,8 @@ const TOriginalImage = {
         </svg>
     ),
     t_person: (
-        <svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80' >
-            <circle cx='40' cy='40' r='39' />
+        <svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'>
+            <circle cx='40' cy='40' r='39'/>
             <circle cx='40' cy='25' r='15' fill='#F5F5FD'/>
             <mask id='mask0_1030_1924' style={{maskType: 'alpha'}} maskUnits='userSpaceOnUse' x='0' y='0' width='80' height='80'>
                 <circle cx='40' cy='40' r='39' fill='#3535CE'/>
@@ -107,15 +133,19 @@ const TOriginalImage = {
         </svg>
     ),
     t_double_quotes_open: (
-        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 27 18' >
-            <path d='M12 17H0V10.6199C0 6.75376 2.51213 3.21308 7.53423 0L10.1995 2.14229C8.13535 4.16443 7.01114 6.00986 6.82907 7.67508H12V17Z'/>
-            <path d='M26.9993 17H15V10.6199C15 6.75376 17.5215 3.21308 22.5682 0L25.245 2.14229C23.152 4.16443 22.014 6.00986 21.8291 7.67508H27V17H26.9993Z'/>
+        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 27 18'>
+            <path
+                d='M12 17H0V10.6199C0 6.75376 2.51213 3.21308 7.53423 0L10.1995 2.14229C8.13535 4.16443 7.01114 6.00986 6.82907 7.67508H12V17Z'/>
+            <path
+                d='M26.9993 17H15V10.6199C15 6.75376 17.5215 3.21308 22.5682 0L25.245 2.14229C23.152 4.16443 22.014 6.00986 21.8291 7.67508H27V17H26.9993Z'/>
         </svg>
     ),
     t_double_quotes_close: (
         <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 27 18' style={{rotate: '180deg'}}>
-            <path d='M12 17H0V10.6199C0 6.75376 2.51213 3.21308 7.53423 0L10.1995 2.14229C8.13535 4.16443 7.01114 6.00986 6.82907 7.67508H12V17Z'/>
-            <path d='M26.9993 17H15V10.6199C15 6.75376 17.5215 3.21308 22.5682 0L25.245 2.14229C23.152 4.16443 22.014 6.00986 21.8291 7.67508H27V17H26.9993Z'/>
+            <path
+                d='M12 17H0V10.6199C0 6.75376 2.51213 3.21308 7.53423 0L10.1995 2.14229C8.13535 4.16443 7.01114 6.00986 6.82907 7.67508H12V17Z'/>
+            <path
+                d='M26.9993 17H15V10.6199C15 6.75376 17.5215 3.21308 22.5682 0L25.245 2.14229C23.152 4.16443 22.014 6.00986 21.8291 7.67508H27V17H26.9993Z'/>
         </svg>
     ),
 };
