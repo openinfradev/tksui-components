@@ -13,14 +13,14 @@ const TOriginalImage = {
     ),
     t_checkbox_disabled_off: (
         <svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
-            <g id='01.Button/Check Box/disable-off'>
+            <g>
                 <rect id='Rectangle 41976' x='0.5' y='0.5' width='15' height='15' rx='3.5' fill='#F4F4F4' stroke='#B8BABC'/>
             </g>
         </svg>
     ),
     t_checkbox_indeterminate: (
         <svg width='15' height='15' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
-            <g id='03.Icon/20x20/outline/remove'>
+            <g>
                 <rect x='0.5' y='0.5' width='15' height='15' rx='3.5' fill='currentColor'/>
                 <path id='Vector' d='M3.8667 8.5999V7.3999H12.1334V8.5999H3.8667Z' fill='white' stroke='white'/>
             </g>
@@ -28,7 +28,7 @@ const TOriginalImage = {
     ),
     t_radio_on: (
         <svg width='16' height='16' viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'>
-            <g id='Radio Button/Ico/default-on'>
+            <g>
                 <circle id='Ellipse 3258' cx='8' cy='8' r='7.5' />
                 <circle id='Ellipse 3259' cx='8' cy='8' r='3.5' fill='white'/>
             </g>
@@ -37,7 +37,7 @@ const TOriginalImage = {
     ),
     t_radio_off: (
         <svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
-            <g id='Radio Button/Ico/default-off'>
+            <g>
                 <circle id='Ellipse 3257' cx='8' cy='8' r='7.5'/>
             </g>
         </svg>
@@ -45,7 +45,7 @@ const TOriginalImage = {
     ),
     t_radio_disabled_off: (
         <svg width='16' height='16' viewBox='0 0 16 16' fill='#F4F4F4' stroke='#B8BABC' xmlns='http://www.w3.org/2000/svg'>
-            <g id='01.Button/Radio Button/disable-off' >
+            <g>
                 <circle id='Ellipse 3258' cx='8' cy='8' r='7.5' />
             </g>
         </svg>
