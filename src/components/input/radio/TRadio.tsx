@@ -1,6 +1,8 @@
 import {KeyboardEvent, useCallback} from 'react';
 import TIcon from '../../icon/TIcon';
-import {TRadioProps} from './TRadio.interface';
+import themeToken from '~style/designToken/ThemeToken.module.scss';
+
+import {TRadioProps} from '@/components';
 
 
 const TRadio = (props: TRadioProps) => {
@@ -27,7 +29,7 @@ const TRadio = (props: TRadioProps) => {
 
     const emitSelect = useCallback(() => {
         props.onSelect(props.positiveValue);
-    }, [props.positiveValue]);
+    }, [props]);
 
     // endregion
 
@@ -56,11 +58,11 @@ const TRadio = (props: TRadioProps) => {
         const status = props.selected ? 'selected' : 'deselected';
 
         let iconType: string;
-        let iconColor = '#B8BABC'; // FIXME: gray-color-3
+        let iconColor = themeToken.tGrayColor3;
 
         if (props.selected) {
             iconType = 't_radio_on';
-            iconColor = '#3617CE'; // FIXME: primary-color
+            iconColor = themeToken.tPrimaryColor;
         } else if (props.disabled) {
             iconType = 't_radio_disabled_off';
         } else {

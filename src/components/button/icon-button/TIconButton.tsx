@@ -2,6 +2,7 @@ import {CSSProperties, forwardRef, KeyboardEvent, MouseEvent, Ref, useCallback, 
 import {TIconButtonProps, TIconButtonRef} from './TIconButton.interface';
 import useRipple from '@/common/hook/UseRipple';
 import TIcon from '../../icon/TIcon';
+import themeToken from '~style/designToken/ThemeToken.module.scss';
 
 
 const TIconButton = forwardRef((props: TIconButtonProps, ref: Ref<TIconButtonRef>) => {
@@ -101,7 +102,7 @@ const TIconButton = forwardRef((props: TIconButtonProps, ref: Ref<TIconButtonRef
         >
             <TIcon className={'t-icon-button__inner'}
                    xsmall
-                   color={'#71747A'} /* FIXME. themetoken 으로 교체 */
+                   color={themeToken.tGrayColor5}
                    disabled={props.disabled}
             >{props.children}</TIcon>
         </button>

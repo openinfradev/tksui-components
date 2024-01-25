@@ -2,6 +2,7 @@ import {CSSProperties, forwardRef, KeyboardEvent, Ref, useCallback, useEffect, u
 import TIcon from '../../icon/TIcon';
 import {TCheckboxProps, TCheckboxRef, TCheckBoxStatus} from './TCheckbox.interface';
 import useValidator from '@/common/hook/UseValidator';
+import themeToken from '~style/designToken/ThemeToken.module.scss';
 
 const checkboxIcons = {
     check: 't_checkbox_on',
@@ -48,10 +49,8 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
     }, [props.style]);
 
     const iconColorByStatus = useMemo(() => {
-        // FIXME: t-primary-color
-        if (status === 'check' || status === 'indeterminate') return '#3617CE';
-        // FIXME: gray-color-3
-        if (status === 'uncheck') return '#B8BABC';
+        if (status === 'check' || status === 'indeterminate') { return themeToken.tPrimaryColor; }
+        if (status === 'uncheck') { return themeToken.tGrayColor3; }
         return '';
     }, [status]);
 
