@@ -1,4 +1,4 @@
-import {forwardRef, Ref, useCallback, useImperativeHandle, useRef} from 'react';
+import {forwardRef, Ref, useCallback, useImperativeHandle, useMemo, useRef} from 'react';
 import useValidator from '@/common/hook/UseValidator';
 import {TCheckboxGroupProps, TCheckboxGroupRef, TCheckboxGroupValue} from './TCheckboxGroup.interface';
 import TCheckbox from '../checkbox/TCheckbox';
@@ -21,7 +21,7 @@ const TCheckboxGroup = forwardRef((props: TCheckboxGroupProps, ref: Ref<TCheckbo
 
     // region [Styles]
 
-    const getRootClass = useCallback(() => {
+    const rootClass = useMemo(() => {
         const clazz: string[] = [];
 
         if (props.className) clazz.push(props.className);
@@ -32,7 +32,7 @@ const TCheckboxGroup = forwardRef((props: TCheckboxGroupProps, ref: Ref<TCheckbo
         return clazz.join(' ');
     }, [props.className, props.disabled, validator]);
 
-    const getRootStyle = useCallback(() => {
+    const rootStyle = useMemo(() => {
         return props.style || {};
     }, [props.style]);
 
@@ -86,8 +86,8 @@ const TCheckboxGroup = forwardRef((props: TCheckboxGroupProps, ref: Ref<TCheckbo
     // region [Templates]
 
     return (
-        <div className={`t-checkbox-group ${getRootClass()}`}
-             style={getRootStyle()}
+        <div className={`t-checkbox-group ${rootClass}`}
+             style={rootStyle}
              ref={rootRef}
              tabIndex={props.disabled ? -1 : 0}
              onFocus={onFocus}
