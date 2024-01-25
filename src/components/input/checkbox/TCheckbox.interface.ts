@@ -16,7 +16,7 @@ export interface TCheckboxProps extends TValidatorProps, TBaseProps {
     positiveValue?: boolean | string
     negativeValue?: boolean | string
 
-    ripple?: boolean
+    ripple?: boolean,
 
     disabled?: boolean,
     onChange?(value: boolean | string, positiveValue?: boolean | string): void,

@@ -56,9 +56,11 @@ const TRadio = (props: TRadioProps) => {
         const status = props.selected ? 'selected' : 'deselected';
 
         let iconType: string;
+        let iconColor = '#B8BABC'; // FIXME: gray-color-3
 
         if (props.selected) {
             iconType = 't_radio_on';
+            iconColor = '#3617CE'; // FIXME: primary-color
         } else if (props.disabled) {
             iconType = 't_radio_disabled_off';
         } else {
@@ -66,7 +68,10 @@ const TRadio = (props: TRadioProps) => {
         }
 
         return (
-            <TIcon small className={`t-radio__icon t-radio__icon--${status}`}>
+            <TIcon small
+                   className={`t-radio__icon t-radio__icon--${status}`}
+                   color={iconColor}
+            >
                 {iconType}
             </TIcon>
         );

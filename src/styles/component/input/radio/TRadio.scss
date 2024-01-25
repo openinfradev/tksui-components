@@ -8,17 +8,10 @@
         cursor: pointer;
         outline: none;
 
-        .t-radio__icon {
-            border-radius: 2px;
-
-            & svg { width: 16px; height: 16px; }
-
-            &.t-radio__icon--selected svg { fill: $t-primary-color; stroke: $t-white-color; }
-            &.t-radio__icon--deselected svg { fill: $t-white-color; stroke: $t-gray-color-3; }
-        }
+        .t-radio__icon { border-radius: 2px; }
         .t-radio__label { @include typo-body-3; }
 
-        &:focus-within .t-radio__icon.t-radio__icon--deselected svg { fill: $t-white-color; stroke: $t-primary-color; }
+        &:is(:focus-within, :hover) .t-radio__icon.t-radio__icon--deselected svg { fill: $t-white-color; stroke: $t-primary-color; }
     }
 
     &.t-radio--disabled .t-radio__container {
@@ -26,8 +19,5 @@
         color: $t-font-color--read-only;
 
         .t-radio__label { color: $t-font-color--disabled; }
-
-        .t-radio__icon--selected svg { fill: $t-gray-color-3; stroke: $t-white-color; }
-        .t-radio__icon--deselected svg { fill: $t-gray-color-1; stroke: $t-gray-color-3; }
     }
 }

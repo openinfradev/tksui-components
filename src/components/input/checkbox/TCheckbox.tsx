@@ -1,4 +1,4 @@
-import {CSSProperties, forwardRef, KeyboardEvent, Ref, useCallback, useEffect, useImperativeHandle, useRef, useState} from 'react';
+import {CSSProperties, forwardRef, KeyboardEvent, Ref, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState} from 'react';
 import TIcon from '../../icon/TIcon';
 import {TCheckboxProps, TCheckboxRef, TCheckBoxStatus} from './TCheckbox.interface';
 import useValidator from '@/common/hook/UseValidator';
@@ -47,6 +47,14 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
         return style;
     }, [props.style]);
 
+    const iconColorByStatus = useMemo(() => {
+        // FIXME: t-primary-color
+        if (status === 'check' || status === 'indeterminate') return '#3617CE';
+        // FIXME: gray-color-3
+        if (status === 'uncheck') return '#B8BABC';
+        return '';
+    }, [status]);
+
     // endregion
 
 
@@ -63,7 +71,7 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
             props.onChange(props.positiveValue);
         }
 
-    }, [status, props.onChange]);
+    }, [props, status]);
 
     const modifyStatus = useCallback(() => {
         if (props.checked === true) {
@@ -77,7 +85,7 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
         } else {
             setStatus('uncheck');
         }
-    }, [props.value, props.checked, props.indeterminate, props.positiveValue, status]);
+    }, [props.value, props.checked, props.indeterminate, props.positiveValue]);
 
     // endregion
 
@@ -119,12 +127,19 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
             throw Error('Invalid status');
         }
 
-        return (<TIcon xsmall className={`t-checkbox__icon t-checkbox__icon--${status}`}>{iconType}</TIcon>);
-    }, [status]);
+        return (
+            <TIcon xsmall
+                   className={`t-checkbox__icon t-checkbox__icon--${status}`}
+                   color={iconColorByStatus}
+                   fill
+            >{iconType}</TIcon>);
+    }, [iconColorByStatus, props.disabled, status]);
 
     // region [Effect]
 
-    useEffect(modifyStatus, [props.value, props.indeterminate, props.checked, props.positiveValue, props.ripple]);
+    useEffect(() => {
+        modifyStatus();
+    }, [props.value, props.indeterminate, props.checked, props.positiveValue, props.ripple, modifyStatus]);
 
     // endregion
 
@@ -171,6 +186,5 @@ TCheckbox.defaultProps = {
 };
 
 TCheckbox.displayName = 'TCheckbox';
-
 
 export default TCheckbox;

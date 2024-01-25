@@ -2,8 +2,8 @@
 const TOriginalImage = {
     t_checkbox_on: (
         <svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
-            <rect width='16' height='16' rx='4'/>
-            <path d='M6.58327 11.25L3.7666 8.41667L4.59993 7.58333L6.58327 9.55L11.3999 4.75L12.2333 5.6L6.58327 11.25Z' fill='#ffffff'/>
+            <rect x='0.5' y='0.5' width='15' height='15' rx='3.5' fill='currentColor'/>
+            <path d='M6.58327 11.25L3.7666 8.41667L4.59993 7.58333L6.58327 9.55L11.3999 4.75L12.2333 5.6L6.58327 11.25Z' fill='white' stroke='white' />
         </svg>
     ),
     t_checkbox_off: (
@@ -19,18 +19,18 @@ const TOriginalImage = {
         </svg>
     ),
     t_checkbox_indeterminate: (
-        <svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
+        <svg width='15' height='15' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
             <g id='03.Icon/20x20/outline/remove'>
-                <rect width='16' height='16' rx='4'/>
-                <path id='Vector' d='M3.8667 8.5999V7.3999H12.1334V8.5999H3.8667Z'/>
+                <rect x='0.5' y='0.5' width='15' height='15' rx='3.5' fill='currentColor'/>
+                <path id='Vector' d='M3.8667 8.5999V7.3999H12.1334V8.5999H3.8667Z' fill='white' stroke='white'/>
             </g>
         </svg>
     ),
     t_radio_on: (
         <svg width='16' height='16' viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'>
             <g id='Radio Button/Ico/default-on'>
-                <circle id='Ellipse 3258' cx='8' cy='8' r='8' />
-                <circle id='Ellipse 3259' cx='8' cy='8' r='3' fill='white'/>
+                <circle id='Ellipse 3258' cx='8' cy='8' r='7.5' />
+                <circle id='Ellipse 3259' cx='8' cy='8' r='3.5' fill='white'/>
             </g>
         </svg>
 
@@ -44,9 +44,9 @@ const TOriginalImage = {
 
     ),
     t_radio_disabled_off: (
-        <svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
-            <g id='01.Button/Radio Button/disable-off'>
-                <circle id='Ellipse 3258' cx='8' cy='8' r='7.5'/>
+        <svg width='16' height='16' viewBox='0 0 16 16' fill='#F4F4F4' stroke='#B8BABC' xmlns='http://www.w3.org/2000/svg'>
+            <g id='01.Button/Radio Button/disable-off' >
+                <circle id='Ellipse 3258' cx='8' cy='8' r='7.5' />
             </g>
         </svg>
 

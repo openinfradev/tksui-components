@@ -12,12 +12,12 @@
 
         .t-checkbox__icon {
 
-            & svg { width: 16px; height: 16px; }
-            &:is(.t-checkbox__icon--check, .t-checkbox__icon--indeterminate) svg {
-                fill: $t-primary-color;
-                stroke: $t-white-color;
-            }
-            &.t-checkbox__icon--uncheck svg { fill: $t-white-color; stroke: $t-gray-color-3; }
+            //& svg { width: 16px; height: 16px; }
+            //&:is(.t-checkbox__icon--check, .t-checkbox__icon--indeterminate) svg {
+            //    fill: $t-primary-color;
+            //    stroke: $t-white-color;
+            //}
+            //&.t-checkbox__icon--uncheck svg { fill: $t-white-color; stroke: $t-gray-color-3; }
         }
 
         .t-checkbox__label {
@@ -52,11 +52,11 @@
 
         .t-checkbox__label { color: $t-font-color--disabled; }
 
-        :is(.t-checkbox__icon--check, .t-checkbox__icon--indeterminate) svg {
-            fill: $t-gray-color-3;
-            stroke: $t-white-color;
-        }
-        .t-checkbox__icon--uncheck { color: $t-gray-color-3; stroke: $t-gray-color-3; }
+        //:is(.t-checkbox__icon--check, .t-checkbox__icon--indeterminate) svg {
+        //    fill: $t-gray-color-3;
+        //    stroke: $t-white-color;
+        //}
+        //.t-checkbox__icon--uncheck { color: $t-gray-color-3; stroke: $t-gray-color-3; }
     }
 
     &.t-checkbox--failure {
