@@ -1,13 +1,10 @@
 import {Meta, StoryObj} from '@storybook/react';
+import {toast} from 'react-toastify';
+import {ReactNode, useEffect, useRef} from 'react';
 import useInputState from '@/common/hook/UseInputState';
 
-import TCheckbox from '@/components/input/checkbox/TCheckbox';
-import {TCheckboxProps} from '@/components/input/checkbox/TCheckbox.interface';
-import TButton from '@/components/button/button/TButton';
-import TValidatorRule from '@/common/validator/TValidatorRule';
-import useRefs from '@/common/hook/UseRefs';
 import TDatePicker from '~/input/date-picker/TDatePicker';
-import {TDatePickerProps} from '~/input/date-picker';
+import {TDatePickerRef, TDatePickerProps} from '~/input/date-picker';
 
 const meta: Meta<typeof TDatePicker> = {
     title: 'Input/TDatePicker',
@@ -19,14 +16,37 @@ export default meta;
 type Story = StoryObj<typeof TDatePicker>;
 
 
+const Container = ({label, value, children}: { label: string, value: string, children: ReactNode }) => {
+
+    return (
+        <div style={{display: 'flex', flexDirection: 'column', gap: '32px'}}>
+            <p style={{fontSize: '18px'}}>{label}</p>
+            <div style={{display: 'flex', flexDirection: 'column', gap: '8px'}}>
+                <p>{value}</p>
+                <div>{children}</div>
+            </div>
+        </div>
+    );
+};
+
+
 // region [Normal]
 
 const NormalTemplate = (args: TDatePickerProps) => {
 
+    const datePickerRef = useRef<TDatePickerRef>(null);
+    const input = useInputState('20240205');
 
-    return (<>
-        <TDatePicker value={''} />
-    </>);
+    useEffect(() => {
+        datePickerRef.current?.open();
+    }, []);
+
+    return (
+        <>
+            <Container label={'DatePicker(type: date)'} value={`Value: ${input.value}`}>
+                <TDatePicker {...args} ref={datePickerRef} value={input.value} onChange={input.onChange}/>
+            </Container>
+        </>);
 };
 
 
