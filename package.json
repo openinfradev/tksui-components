@@ -69,7 +69,8 @@
         "ts-jest": "^29.1.1",
         "tsc-alias": "^1.8.7",
         "typescript": "^5.0.2",
-        "vite": "^4.3.9",
+        "typescript-plugin-css-modules": "^5.0.2",
+        "vite": "^5.0.10",
         "vite-plugin-compression2": "^0.10.4"
     },
     "peerDependencies": {

@@ -33,14 +33,17 @@
             "@/*": ["src/*"],
             "~/*": ["src/components/*"],
             "~style/*": ["src/styles/*"],
-        }
+        },
+        "plugins": [
+            { "name": "typescript-plugin-css-modules" }
+        ]
     },
     "tsc-alias": {
         "verbose": true,
         "fileExtensions": ["js"]
     },
     "files": ["index.ts"],
-    "include": ["src/main/react/**/*.tsx", "src/main/react/**/*.ts", "stories/components/**/*.tsx", "tests/unit/**/*.*", ".storybook/*.*"],
+    "include": ["src/main/react/**/*.tsx", "src/main/react/**/*.ts", "stories/components/**/*.tsx", "tests/unit/**/*.*", ".storybook/*.*",  "src/styles/designToken/ThemeToken.module.scss"],
     "exclude": ["node_modules"],
     "references": [{"path": "./tsconfig.node.json"}]
 }
