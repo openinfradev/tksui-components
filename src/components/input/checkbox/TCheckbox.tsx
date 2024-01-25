@@ -138,7 +138,7 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
 
     useEffect(() => {
         modifyStatus();
-    }, [props.value, props.indeterminate, props.checked, props.positiveValue, props.ripple, modifyStatus]);
+    }, [props.value, props.indeterminate, props.checked, props.positiveValue, modifyStatus]);
 
     // endregion
 

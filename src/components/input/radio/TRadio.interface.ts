@@ -11,8 +11,6 @@ export interface TRadioProps extends TBaseProps {
     selected?: boolean,
     disabled?: boolean,
 
-    ripple?: boolean,
-
     onSelect(value: TRadioValue): void,
 
 }
