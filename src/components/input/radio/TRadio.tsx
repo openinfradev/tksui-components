@@ -1,91 +1,90 @@
-import {CSSProperties, KeyboardEvent} from 'react';
+import {KeyboardEvent, useCallback} from 'react';
 import TIcon from '../../icon/TIcon';
-import {TRadioProps} from './TRadio.interface';
+import themeToken from '~style/designToken/ThemeToken.module.scss';
+
+import {TRadioProps} from '@/components';
 
 
-function TRadio(props: TRadioProps) {
-    
-    
+const TRadio = (props: TRadioProps) => {
+
     // region [Styles]
-    
-    function getRootClass(): string {
+
+    const getRootClass = useCallback(() => {
         const clazz: string[] = [];
-        
+
         if (props.className) clazz.push(props.className);
         if (props.disabled) clazz.push('t-radio--disabled');
-        
+
         return clazz.join(' ');
-    }
-    
-    function getRootStyle(): CSSProperties {
-        let style: CSSProperties = {};
-        
-        if (props.style) style = {...props.style};
-        
-        return style;
-    }
-    
+    }, [props.className, props.disabled]);
+
+    const getRootStyle = useCallback(() => {
+        return props.style || {};
+    }, [props.style]);
+
     // endregion
-    
-    
+
+
+    // region [ETC]
+
+    const emitSelect = useCallback(() => {
+        props.onSelect(props.positiveValue);
+    }, [props]);
+
+    // endregion
+
+
     // region [Events]
-    
-    function onClickRadio(): void {
+
+    const onClickRadio = useCallback(() => {
         if (props.disabled) return;
         emitSelect();
-    }
-    
-    function onKeyDown(event: KeyboardEvent): void {
+    }, [props.disabled, emitSelect]);
+
+    const onKeyDown = useCallback((event: KeyboardEvent) => {
         if (props.disabled) return;
         if (event.key === 'Enter' || event.key === ' ') {
             emitSelect();
         }
-    }
-    
+    }, [props.disabled, emitSelect]);
+
     // endregion
-    
-    
-    // region [ETC]
-    
-    function emitSelect(): void {
-        props.onSelect(props.positiveValue);
-    }
-    
-    // endregion
-    
-    
+
+
     // region [Templates]
-    
-    function iconTemplate(): JSX.Element {
+
+    const iconTemplate = useCallback(() => {
 
         const status = props.selected ? 'selected' : 'deselected';
 
         let iconType: string;
+        let iconColor = themeToken.tGrayColor3;
 
         if (props.selected) {
             iconType = 't_radio_on';
+            iconColor = themeToken.tPrimaryColor;
         } else if (props.disabled) {
-            iconType = 't_radio_disabled_off'
+            iconType = 't_radio_disabled_off';
         } else {
-            iconType = 't_radio_off'
+            iconType = 't_radio_off';
         }
 
-
-        
-        
         return (
-            <TIcon small className={`t-radio__icon t-radio__icon--${status}`}>
+            <TIcon small
+                   className={`t-radio__icon t-radio__icon--${status}`}
+                   color={iconColor}
+            >
                 {iconType}
             </TIcon>
         );
-    }
-    
+    }, [props.selected, props.disabled]);
+
     return (
         <div className={`t-radio ${getRootClass()}`}
              style={getRootStyle()}
              id={props.id}
              data-testid={'t-radio-root'}>
-            
+
             {/* Main */}
             <div className={'t-radio__container'}
                  tabIndex={props.disabled ? -1 : 0}
@@ -97,9 +96,9 @@ function TRadio(props: TRadioProps) {
             </div>
         </div>
     );
-    
+
     // endregion
-}
+};
 
 TRadio.defaultProps = {};
 

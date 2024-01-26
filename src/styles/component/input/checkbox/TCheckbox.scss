@@ -1,24 +1,28 @@
 .t-checkbox {
-    line-height: $t-line-height-header;
 
     .t-checkbox__container {
         display: flex;
         align-items: center;
+        gap: $t-spacing-8;
+        height: 22px;
+
         cursor: pointer;
         outline: none;
+        user-select: none;
 
-        .t-checkbox__icon {
-            &.t-checkbox__icon--check, &.t-checkbox__icon--indeterminate { fill: $t-primary-color; stroke: $t-primary-color; }
-            &.t-checkbox__icon--uncheck { fill: $t-gray-color-3; stroke: $t-gray-color-3; }
-        }
         .t-checkbox__label {
-            margin-left: $t-spacing-8 * 1.25;
+            position: relative;
+            top: 1px;
             @include typo-body-3;
-            color: $t-gray-color-6;
+            color: $t-black-color;
         }
 
-        &:focus .t-checkbox__icon {
-            outline: 1px solid $t-primary-color;
+
+        &:is(:focus-within, :hover) {
+            .t-checkbox__icon.t-checkbox__icon--uncheck svg {
+                color: $t-primary-color;
+                stroke: $t-primary-color;
+            }
         }
     }
 
@@ -32,13 +36,11 @@
         }
     }
 
-
     &.t-checkbox--disabled .t-checkbox__container {
         pointer-events: none;
         color: $t-font-color--read-only;
 
-        .t-checkbox__icon--check, .t-checkbox__icon--indeterminate { fill: $t-gray-color-3; stroke: $t-gray-color-3; }
-        .t-checkbox__icon--uncheck { fill: $t-gray-color-3; stroke: $t-gray-color-3; }
+        .t-checkbox__label { color: $t-font-color--disabled; }
     }
 
     &.t-checkbox--failure {

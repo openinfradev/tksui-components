@@ -8,12 +8,12 @@
         flex-direction: column;
 
         .t-form-section__content__info {
-            .t-icon {margin-top: 2px;} // TODO: [junhee] ThemeToken
+            .t-icon {margin-top: $t-spacing-2;}
 
             display: flex;
             align-items: center;
-            gap: 16px; // TODO: [junhee] ThemeToken
-            padding: 24px 24px; // TODO: [junhee] ThemeToken
+            gap: $t-spacing-16;
+            padding: $t-spacing-24;
             color: $t-gray-color-5;
             background: $t-grid-background-color--01;
             @include typo-element-3;
@@ -32,16 +32,16 @@
     align-items: flex-start;
     gap: 0;
     width: 100%;
-    padding: 16px 24px; // TODO: [junhee] ThemeToken
+    padding: $t-spacing-16 $t-spacing-24;
 
     &:not(:last-child) {
         border-bottom: 1px solid $t-blue-gray-color-3;
     }
     &:first-child {
-        padding-top: 24px; // TODO: [junhee] ThemeToken
+        padding-top: $t-spacing-24;
     }
     &:last-child {
-        padding-bottom: 24px; // TODO: [junhee] ThemeToken
+        padding-bottom: $t-spacing-24;
     }
 }
 
@@ -50,10 +50,10 @@
     display: inline-flex;
     flex: 0 0 auto;
     white-space: pre-wrap;
-    padding-right: 8px; // TODO: [junhee] ThemeToken
+    padding-right: $t-spacing-8;
     color: $t-black-color;
 
-    &:not(:first-child) {padding-left: 8px;} // TODO: [junhee] ThemeToken
+    &:not(:first-child) {padding-left: $t-spacing-8;}
 
 
     .t-form-section-item__label {
@@ -62,7 +62,7 @@
         @include typo-subtitle-3;
 
         .t-form-section-item__label__info-icon {
-            margin-left: 8px; // TODO: [junhee] ThemeToken
+            margin-left: $t-spacing-8;
             stroke: $t-gray-color-5;
             fill: $t-gray-color-5;
         }
@@ -70,7 +70,7 @@
     }
     .t-form-section-item__content {
         display: flex;
-        gap: 8px; // TODO: [junhee] ThemeToken
+        gap: $t-spacing-8;
         width: 100%;
         @include typo-body-3;
     }

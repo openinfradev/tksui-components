@@ -6,7 +6,7 @@
         display: flex;
         align-items: center;
     }
-    .t-radio + .t-radio { margin-left: $t-spacing-16; }
+    .t-radio + .t-radio { margin-left: $t-spacing-64; }
 
     .t-radio-group__message {
         @include typo-element-3;

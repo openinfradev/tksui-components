@@ -3,7 +3,7 @@ import {createPortal} from 'react-dom';
 import ReactModal from 'react-modal';
 import TIcon from '../../icon/TIcon';
 import {modalSize, TModalProps} from './TModal.interface';
-
+import themeToken from '~style/designToken/ThemeToken.module.scss';
 
 export default function TModal(props: TModalProps): JSX.Element {
 
@@ -79,9 +79,8 @@ export default function TModal(props: TModalProps): JSX.Element {
                         shouldCloseOnOverlayClick={false}
             >
                 {/* Close Button */}
-                {/* FIXME. color: themeToken gray5로 교체 */}
                 <TIcon className={'t-modal__overlay__body__close-icon'}
-                       color={'#71747A'}
+                       color={themeToken.tGrayColor5}
                        small clickable onClick={(e) => { closeModal(e); }}>close</TIcon>
                 {/* Modal Header */}
                 <header className={'t-modal__overlay__body__header'}>

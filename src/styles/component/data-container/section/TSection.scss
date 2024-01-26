@@ -4,7 +4,7 @@
     background: $t-white-color;
 
     .t-section__header, .t-section__content {
-        padding: 24px; // TODO: [junhee] ThemeToken
+        padding: $t-spacing-24;
     }
     .t-section__header {
         display: flex;
@@ -12,7 +12,7 @@
         border-bottom: 1px solid $t-blue-gray-color-3;
 
         .t-section__header__label {
-            margin-right: 16px; // TODO: [junhee] ThemeToken
+            margin-right: $t-spacing-16;
             @include typo-subtitle-2;
         }
 
@@ -39,5 +39,5 @@
 }
 
 .t-section + .t-section {
-    margin-top: 24px; // TODO: [junhee] ThemeToken
+    margin-top: $t-spacing-24;
 }

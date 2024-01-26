@@ -1,8 +1,15 @@
-import {CSSProperties, forwardRef, KeyboardEvent, ReactElement, Ref, useEffect, useImperativeHandle, useRef, useState} from 'react';
+import {CSSProperties, forwardRef, KeyboardEvent, Ref, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState} from 'react';
 import TIcon from '../../icon/TIcon';
-import {TCheckboxProps, TCheckboxRef} from './TCheckbox.interface';
+import {TCheckboxProps, TCheckboxRef, TCheckBoxStatus} from './TCheckbox.interface';
 import useValidator from '@/common/hook/UseValidator';
+import themeToken from '~style/designToken/ThemeToken.module.scss';
 
+const checkboxIcons = {
+    check: 't_checkbox_on',
+    uncheck: 't_checkbox_off',
+    disabledUnCheck: 't_checkbox_disabled_off',
+    indeterminate: 't_checkbox_indeterminate',
+};
 
 const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => {
 
@@ -11,9 +18,7 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
     const validator = useValidator(props.value, props.rules, props.successMessage);
     const rootRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
-
-    useEffect(modifyStatus, [props.value, props.indeterminate, props.checked, props.positiveValue]);
-    const [status, setStatus] = useState('uncheck');
+    const [status, setStatus] = useState<TCheckBoxStatus>('uncheck');
 
     useImperativeHandle(ref, () => ({
         focus() { containerRef?.current?.focus(); },
@@ -22,10 +27,9 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
 
     // endregion
 
-
     // region [Styles]
 
-    function getRootClass(): string {
+    const getRootClass = useCallback(() => {
         const clazz: string[] = [];
 
         if (props.className) clazz.push(props.className);
@@ -34,44 +38,28 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
         if (validator.result && validator.message) clazz.push('t-checkbox--success');
 
         return clazz.join(' ');
-    }
+    }, [props.className, props.disabled, validator.result, validator.message]);
 
-    function getRootStyle(): CSSProperties {
+    const getRootStyle = useCallback(() => {
         let style: CSSProperties = {};
 
         if (props.style) style = {...props.style};
 
         return style;
-    }
+    }, [props.style]);
+
+    const iconColorByStatus = useMemo(() => {
+        if (status === 'check' || status === 'indeterminate') { return themeToken.tPrimaryColor; }
+        if (status === 'uncheck') { return themeToken.tGrayColor3; }
+        return '';
+    }, [status]);
 
     // endregion
 
 
-    // region [Events]
+    // region [Privates]
 
-    function onClickCheckbox(): void {
-        emitChange();
-    }
-
-    function onBlur(): void {
-        if (!props.lazy) {
-            validator.validate();
-        }
-    }
-
-    function onKeyDown(event: KeyboardEvent): void {
-        if (event.key === 'Enter' || event.key === ' ') {
-            event.preventDefault();
-            emitChange();
-        }
-    }
-
-    // endregion
-
-
-    // region [ETC]
-
-    function emitChange(): void {
+    const emitChange = useCallback(() => {
         if (typeof props.onChange !== 'function') {
             return;
         }
@@ -82,9 +70,9 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
             props.onChange(props.positiveValue);
         }
 
-    }
+    }, [props, status]);
 
-    function modifyStatus(): void {
+    const modifyStatus = useCallback(() => {
         if (props.checked === true) {
             setStatus('check');
         } else if (props.checked === false) {
@@ -96,32 +84,64 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
         } else {
             setStatus('uncheck');
         }
-    }
+    }, [props.value, props.checked, props.indeterminate, props.positiveValue]);
 
     // endregion
 
+    // region [Events]
+
+    const onClickCheckbox = useCallback(() => {
+        emitChange();
+    }, [emitChange]);
+
+    const onBlur = useCallback(() => {
+        if (!props.lazy) {
+            validator.validate();
+        }
+    }, [props.lazy, validator]);
+
+    const onKeyDown = useCallback((event: KeyboardEvent) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            emitChange();
+        }
+    }, [emitChange]);
+
+    // endregion
 
     // region [Templates]
 
-    function iconTemplate(): ReactElement {
+    const iconTemplate = useCallback(() => {
+        let iconType = '';
 
-        let iconType: string;
         if (status === 'indeterminate') {
-            iconType = 't_check_intermediate';
+            iconType = checkboxIcons.indeterminate;
         } else if (status === 'check') {
-            iconType = 't_check_on';
+            iconType = checkboxIcons.check;
         } else if (status === 'uncheck' && props.disabled) {
-            iconType = 't_check_disabled_off';
+            iconType = checkboxIcons.disabledUnCheck;
         } else if (status === 'uncheck' && !props.disabled) {
-            iconType = 't_check_off';
+            iconType = checkboxIcons.uncheck;
         } else {
             throw Error('Invalid status');
         }
 
         return (
-            <TIcon small fill className={`t-checkbox__icon t-checkbox__icon--${status}`}>{iconType}</TIcon>
-        );
-    }
+            <TIcon xsmall
+                   className={`t-checkbox__icon t-checkbox__icon--${status}`}
+                   color={iconColorByStatus}
+                   fill
+            >{iconType}</TIcon>);
+    }, [iconColorByStatus, props.disabled, status]);
+
+    // region [Effect]
+
+    useEffect(() => {
+        modifyStatus();
+    }, [props.value, props.indeterminate, props.checked, props.positiveValue, modifyStatus]);
+
+    // endregion
+
 
     return (
         <div ref={rootRef}
@@ -155,7 +175,6 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
 
     // endregion
 
-
 });
 
 TCheckbox.defaultProps = {
@@ -166,6 +185,5 @@ TCheckbox.defaultProps = {
 };
 
 TCheckbox.displayName = 'TCheckbox';
-
 
 export default TCheckbox;
