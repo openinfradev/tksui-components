@@ -13,87 +13,43 @@ export default meta;
 
 type Story = StoryObj<typeof TChip>;
 
-const ChipContainer = (props: { children: ReactNode }) => (
-    <div style={{marginBottom: '16px', display: 'flex', alignItems: 'center'}}>
-        {props.children}
-    </div>
-);
 
-
-const NormalTemplate = (args: TChipProps) => (<>
-
-    <ChipContainer>
-        <TChip {...args}>hello</TChip>
-        <TChip {...args} onRemove={() => { notify('삭제 이벤트 발생'); }}>hello</TChip>
-        <TChip {...args} onRemove={() => { notify('삭제 이벤트 발생'); }} removeIcon={'cleaning_bucket'}>hello</TChip>
-        <TChip {...args} icon={'face'}>hello</TChip>
-        <TChip {...args} icon={'face'} onRemove={() => { notify('삭제 이벤트 발생'); }}>hello</TChip>
-    </ChipContainer>
-
-    <ChipContainer>
-        <TChip {...args} >hello</TChip>
-        <TChip {...args} onRemove={() => { notify('삭제 이벤트 발생'); }}>hello</TChip>
-        <TChip {...args} onRemove={() => { notify('삭제 이벤트 발생'); }} removeIcon={'cleaning_bucket'}>hello</TChip>
-        <TChip {...args} icon={'face'}>hello</TChip>
-        <TChip {...args} icon={'face'} onRemove={() => { notify('삭제 이벤트 발생'); }}>hello</TChip>
-    </ChipContainer>
-
-    <ChipContainer>
-        <TChip {...args} type={'outlined'}>hello</TChip>
-        <TChip {...args} type={'outlined'} onRemove={() => { notify('삭제 이벤트 발생'); }}>hello</TChip>
-        <TChip {...args} type={'outlined'} onRemove={() => { notify('삭제 이벤트 발생'); }} removeIcon={'cleaning_bucket'}>hello</TChip>
-        <TChip {...args} type={'outlined'} icon={'face'}>hello</TChip>
-        <TChip {...args} type={'outlined'} icon={'face'} onRemove={() => { notify('삭제 이벤트 발생'); }}>hello</TChip>
-    </ChipContainer>
-
-    <ChipContainer>
-        <TChip {...args} type={'outlined'}>hello</TChip>
-        <TChip {...args} type={'outlined'} onRemove={() => { notify('삭제 이벤트 발생'); }}>hello</TChip>
-        <TChip {...args} type={'outlined'} onRemove={() => { notify('삭제 이벤트 발생'); }} removeIcon={'cleaning_bucket'}>hello</TChip>
-        <TChip {...args} type={'outlined'} icon={'face'}>hello</TChip>
-        <TChip {...args} type={'outlined'} icon={'face'} onRemove={() => { notify('삭제 이벤트 발생'); }}>hello</TChip>
-    </ChipContainer>
-
-    <TToast/>
-</>);
-
-
-export const XSmall: Story = {
-    render: NormalTemplate,
-    args: {
-        onRemove: undefined,
-        xsmall: true,
-    },
+const Container = ({label, children}: { label: string, children: ReactNode }) => {
+    return (
+        <div style={{border: '1px solid #eee', padding: '16px'}}>
+            <p style={{marginBottom: '16px', fontSize: '14px'}}>{label}</p>
+            <div style={{display: 'flex', alignItems: 'center', gap: '16px'}}>
+                {children}
+            </div>
+        </div>
+    );
 };
 
-export const Small: Story = {
+
+const NormalTemplate = (args: TChipProps) => (
+    <div style={{display: 'flex', flexDirection: 'column', gap: '32px'}}>
+
+        <Container label={'Chip(type: Outlined)'}>
+            <TChip {...args} outlined onRemove={() => { notify('삭제 이벤트 발생'); }}>Multi Select1</TChip>
+            <TChip {...args} outlined onRemove={() => { notify('삭제 이벤트 발생'); }}>Multi Select2</TChip>
+            <TChip {...args} outlined onRemove={() => { notify('삭제 이벤트 발생'); }}>
+                Multi Select3
+            </TChip>
+            <TChip {...args} outlined prevIcon={'face'} onRemove={() => { notify('삭제 이벤트 발생'); }}>Multi Select5</TChip>
+            <TChip {...args} outlined prevIcon={'battery_horiz_075'} onRemove={() => { notify('삭제 이벤트 발생'); }}>Multi Select4</TChip>
+        </Container>
+
+        <Container label={'Chip(type: Fill)'}>
+            <TChip {...args} fill>Multi Select1</TChip>
+            <TChip {...args} fill>prometheus-stack v0.62.0</TChip>
+        </Container>
+
+        <TToast/>
+    </div>);
+
+
+export const Default: Story = {
     render: NormalTemplate,
-    args: {
-        onRemove: undefined,
-        small: true,
-    },
+    args: {onRemove: undefined},
 };
 
-export const Medium: Story = {
-    render: NormalTemplate,
-    args: {
-        onRemove: undefined,
-        medium: true,
-    },
-};
-
-export const Large: Story = {
-    render: NormalTemplate,
-    args: {
-        onRemove: undefined,
-        large: true,
-    },
-};
-
-export const XLarge: Story = {
-    render: NormalTemplate,
-    args: {
-        onRemove: undefined,
-        xlarge: true,
-    },
-};

@@ -1,6 +1,7 @@
 import {CSSProperties, forwardRef, MouseEvent, Ref, useImperativeHandle, useMemo, useRef} from 'react';
-import {chipSize, TChipProps, TChipRef} from './TChip.interface';
+import {TChipProps, TChipRef} from './TChip.interface';
 import TIcon from '../../icon/TIcon';
+import themeToken from '~style/designToken/ThemeToken.module.scss';
 
 
 const TChip = forwardRef((props: TChipProps, ref: Ref<TChipRef>) => {
@@ -18,27 +19,22 @@ const TChip = forwardRef((props: TChipProps, ref: Ref<TChipRef>) => {
 
     // region [Styles]
 
-    const $_size = useMemo(() => {
-        if (props.size) { return props.size; }
-        if (props.xsmall) { return chipSize.xsm; }
-        if (props.small) { return chipSize.sm; }
-        if (props.medium) { return chipSize.md; }
-        if (props.large) { return chipSize.lg; }
-        if (props.xlarge) { return chipSize.xlg; }
-        return chipSize.md;
-    }, [props.size, props.xsmall, props.small, props.medium, props.large, props.xlarge]);
-
     const rootClass = useMemo((): string => {
+
         const clazz: string[] = [];
 
-        clazz.push(`t-chip--${$_size}`);
-
-        if (props.type === 'outlined') { clazz.push('t-chip--outlined'); }
-        if (props.type === 'filled') { clazz.push('t-chip--filled'); }
         if (props.className) { clazz.push(props.className); }
 
+        if (props.type) {
+            clazz.push('t-chip--outlined');
+        } else if (props.type === 'outlined' || props.outlined) {
+            clazz.push('t-chip--outlined');
+        } else if (props.type === 'fill' || props.fill) {
+            clazz.push('t-chip--fill');
+        }
+
         return clazz.join(' ');
-    }, [$_size, props.type, props.className]);
+    }, [props.type, props.className, props.fill, props.outlined]);
 
 
     const rootStyle = useMemo((): CSSProperties => props.style, [props.style]);
@@ -56,23 +52,10 @@ const TChip = forwardRef((props: TChipProps, ref: Ref<TChipRef>) => {
 
 
     // region [ETC]
-
-
     // endregion
 
 
     // region [Templates]
-
-    const deleteIconStyle: CSSProperties = useMemo(() => {
-
-        if ($_size === 'xsmall') { return {fontSize: '12px'}; }
-        if ($_size === 'small') { return {fontSize: '14px'}; }
-        if ($_size === 'medium') { return {fontSize: '16px'}; }
-        if ($_size === 'large') { return {fontSize: '20px'}; }
-        if ($_size === 'xlarge') { return {fontSize: '24px'}; }
-        return {fontSize: '16px'};
-    }, [$_size]);
-
 
     return (
         <div ref={rootRef}
@@ -83,10 +66,14 @@ const TChip = forwardRef((props: TChipProps, ref: Ref<TChipRef>) => {
              data-testid={'t-chip-root'}>
 
             {
-                props.icon && (
+                props.prevIcon && (
                     <TIcon fill
+                           color={props.prevIconColor}
+                           size={props.prevIconSize}
                            className={'t-chip__prev-icon'}
-                           style={deleteIconStyle}>{props.icon}</TIcon>
+                    >
+                        {props.prevIcon}
+                    </TIcon>
                 )
             }
 
@@ -96,8 +83,10 @@ const TChip = forwardRef((props: TChipProps, ref: Ref<TChipRef>) => {
                 !!props.onRemove && (
                     <TIcon fill
                            className={'t-chip__remove-icon'}
-                           style={deleteIconStyle}
                            color={props.removeIconColor}
+                           size={props.removeIconSize}
+                           // FIXME: TIcon Size 16x16 추가되면 수정 해야 함.
+                           style={{fontSize: props.removeIconSize ? 'auto' : '16px'}}
                            clickable
                            onClick={(event) => onClickRemove(event)}
                     >{props.removeIcon}</TIcon>
@@ -108,13 +97,12 @@ const TChip = forwardRef((props: TChipProps, ref: Ref<TChipRef>) => {
 
     // endregion
 
-
 });
 
 TChip.defaultProps = {
-    type: 'filled',
-    removeIcon: 'close',
-    removeIconColor: 'red',
+    prevIconSize: 'xsmall',
+    removeIcon: 'close_small',
+    removeIconColor: themeToken.tSecondaryRedColor,
 };
 
 TChip.displayName = 'TChip';

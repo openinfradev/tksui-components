@@ -1,10 +1,9 @@
 import {MouseEvent, ReactNode} from 'react';
 import {MaterialSymbol} from '@material-symbols/font-300';
 import {TBaseProps} from '@/common/base/TBase.interface';
+import {TIconSize} from '~/icon';
 
-export const chipSize = {xsm: 'xsmall', sm: 'small', md: 'medium', lg: 'large', xlg: 'xlarge'};
-type chipSize = typeof chipSize[keyof typeof chipSize];
-const chipType = ['outlined', 'filled'] as const;
+const chipType = ['outlined', 'fill'] as const;
 type chipType = typeof chipType[number];
 
 
@@ -13,21 +12,18 @@ export interface TChipProps extends TBaseProps {
     children?: ReactNode,
 
     type?: chipType,
+    outlined?: boolean,
+    fill?: boolean,
 
-    // primary?: boolean,
-    icon?: MaterialSymbol,
+    prevIcon?: MaterialSymbol,
+    prevIconColor?: string,
+    prevIconSize?: TIconSize,
+
     removeIcon?: MaterialSymbol,
     removeIconColor?: string,
-
-    size?: chipSize,
-    xsmall?: boolean,
-    small?: boolean,
-    medium?: boolean,
-    large?: boolean,
-    xlarge?: boolean,
+    removeIconSize?: TIconSize,
 
     onRemove?: (event?: MouseEvent) => void,
-
 }
 
 
