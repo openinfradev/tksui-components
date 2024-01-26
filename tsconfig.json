@@ -26,7 +26,7 @@
         "noEmit": false,
         "jsx": "react-jsx",
         "declaration": true,
-        "typeRoots": ["index.d.ts", "node_modules/@types"],
+        "typeRoots": ["styles.d.ts", "node_modules/@types"],
         "baseUrl": "./",
         "paths": {
             // For aliases recognition
@@ -42,8 +42,14 @@
         "verbose": true,
         "fileExtensions": ["js"]
     },
-    "files": ["index.ts"],
-    "include": ["src/main/react/**/*.tsx", "src/main/react/**/*.ts", "stories/components/**/*.tsx", "tests/unit/**/*.*", ".storybook/*.*",  "src/styles/designToken/ThemeToken.module.scss"],
+    "files": ["index.ts", "styles.d.ts"],
+    "include": [
+        "src/**/*.tsx",
+        "src/**/*.ts",
+        "stories/components/**/*.tsx",
+        "tests/unit/**/*.*",
+        ".storybook/*.*",
+    ],
     "exclude": ["node_modules"],
     "references": [{"path": "./tsconfig.node.json"}]
 }
