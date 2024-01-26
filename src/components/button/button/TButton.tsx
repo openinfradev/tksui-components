@@ -41,11 +41,11 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
     }, [props, ripple]);
 
     const onMouseLeave = useCallback((): void => {
-        ripple.remove();
+        if (ripple.status === 'on') { ripple.remove(); }
     }, [ripple]);
 
     const onKeyDown = useCallback((event: KeyboardEvent): void => {
-        if (event.key === 'Enter' || event.key === ' ') {
+        if ((event.key === 'Enter' || event.key === ' ') && ripple.status === 'off') {
             ripple.register(event);
         }
     }, [ripple]);
@@ -58,7 +58,6 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
             }
         }
     }, [props, ripple]);
-
 
     // endregion
 
@@ -76,10 +75,7 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
     }, [props.size, props.xsmall, props.small, props.medium, props.large, props.xlarge]);
 
     const isRenderIcon = useMemo(() => {
-        if ($_size === 'xsmall' || $_size === 'small') {
-            return false;
-            // throw Error('If TButton component is smaller than medium size, the icon won\'t be included.');
-        }
+        if ($_size === 'xsmall' || $_size === 'small') { return false; }
         return true;
     }, [$_size]);
 
@@ -96,7 +92,7 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
 
         clazz.push(`t-button--${$_size}`);
         if (props.className) { clazz.push(props.className); }
-        if (props.variant && props.variant in buttonVariant) { clazz.push(`t-button--${props.variant}`)}
+        if (props.variant && props.variant in buttonVariant) { clazz.push(`t-button--${props.variant}`); }
         if (props.outlined) { clazz.push('t-button--outlined'); }
         if (props.plain) { clazz.push('t-button--plain'); }
         if (props.ghost) { clazz.push('t-button--ghost'); }

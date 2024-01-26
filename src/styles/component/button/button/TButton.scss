@@ -30,12 +30,8 @@ $t-button-border--disabled: $t-gray-color-1;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        position: relative;
-        top: 1px;
 
         .t-button__content__icon {
-            position: relative;
-            top: -1px;
             margin-right: $t-spacing-4;
         }
         &.t-button__content--loading {
