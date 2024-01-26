@@ -3,7 +3,7 @@ import {TBaseProps, TBaseTooltipProps} from '@/common/base/TBase.interface';
 
 export const buttonSize = {xsmall: 'xsmall', small: 'small', medium: 'medium', large: 'large', xlarge: 'xlarge'};
 export const buttonVariant = {
-    primary: 'primary', outline: 'outline', plain: 'plain', ghost: 'ghost', rounded: 'rounded',
+    outlined: 'outlined', plain: 'plain', ghost: 'ghost', rounded: 'rounded',
 };
 
 type ButtonSize = typeof buttonSize[keyof typeof buttonSize];
