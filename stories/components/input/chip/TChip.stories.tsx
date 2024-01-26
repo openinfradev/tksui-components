@@ -35,7 +35,7 @@ const NormalTemplate = (args: TChipProps) => (
             <TChip {...args} outlined onRemove={() => { notify('삭제 이벤트 발생'); }}>
                 Multi Select3
             </TChip>
-            <TChip {...args} outlined prevIcon={'face'} prevIconSize={'xlarge'} onRemove={() => { notify('삭제 이벤트 발생'); }}>Multi Select5</TChip>
+            <TChip {...args} outlined prevIcon={'face'} onRemove={() => { notify('삭제 이벤트 발생'); }}>Multi Select5</TChip>
             <TChip {...args} outlined prevIcon={'battery_horiz_075'} onRemove={() => { notify('삭제 이벤트 발생'); }}>Multi Select4</TChip>
         </Container>
 

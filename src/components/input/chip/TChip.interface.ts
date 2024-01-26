@@ -24,6 +24,7 @@ export interface TChipProps extends TBaseProps {
     removeIconSize?: TIconSize,
 
     onRemove?: (event?: MouseEvent) => void,
+
 }
 
 
