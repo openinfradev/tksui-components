@@ -9,23 +9,25 @@ type chipType = typeof chipType[number];
 
 
 export interface TChipProps extends TBaseProps {
-    
+
     children?: ReactNode,
-    
+
     type?: chipType,
-    
-    primary?: boolean,
+
+    // primary?: boolean,
     icon?: MaterialSymbol,
     removeIcon?: MaterialSymbol,
-    
+    removeIconColor?: string,
+
     size?: chipSize,
     xsmall?: boolean,
     small?: boolean,
     medium?: boolean,
     large?: boolean,
     xlarge?: boolean,
-    
+
     onRemove?: (event?: MouseEvent) => void,
+
 }
 
 

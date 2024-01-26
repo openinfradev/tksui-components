@@ -31,11 +31,11 @@ const NormalTemplate = (args: TChipProps) => (<>
     </ChipContainer>
 
     <ChipContainer>
-        <TChip {...args} primary>hello</TChip>
-        <TChip {...args} primary onRemove={() => { notify('삭제 이벤트 발생'); }}>hello</TChip>
-        <TChip {...args} primary onRemove={() => { notify('삭제 이벤트 발생'); }} removeIcon={'cleaning_bucket'}>hello</TChip>
-        <TChip {...args} primary icon={'face'}>hello</TChip>
-        <TChip {...args} primary icon={'face'} onRemove={() => { notify('삭제 이벤트 발생'); }}>hello</TChip>
+        <TChip {...args} >hello</TChip>
+        <TChip {...args} onRemove={() => { notify('삭제 이벤트 발생'); }}>hello</TChip>
+        <TChip {...args} onRemove={() => { notify('삭제 이벤트 발생'); }} removeIcon={'cleaning_bucket'}>hello</TChip>
+        <TChip {...args} icon={'face'}>hello</TChip>
+        <TChip {...args} icon={'face'} onRemove={() => { notify('삭제 이벤트 발생'); }}>hello</TChip>
     </ChipContainer>
 
     <ChipContainer>
@@ -47,11 +47,11 @@ const NormalTemplate = (args: TChipProps) => (<>
     </ChipContainer>
 
     <ChipContainer>
-        <TChip {...args} type={'outlined'} primary>hello</TChip>
-        <TChip {...args} type={'outlined'} primary onRemove={() => { notify('삭제 이벤트 발생'); }}>hello</TChip>
-        <TChip {...args} type={'outlined'} primary onRemove={() => { notify('삭제 이벤트 발생'); }} removeIcon={'cleaning_bucket'}>hello</TChip>
-        <TChip {...args} type={'outlined'} primary icon={'face'}>hello</TChip>
-        <TChip {...args} type={'outlined'} primary icon={'face'} onRemove={() => { notify('삭제 이벤트 발생'); }}>hello</TChip>
+        <TChip {...args} type={'outlined'}>hello</TChip>
+        <TChip {...args} type={'outlined'} onRemove={() => { notify('삭제 이벤트 발생'); }}>hello</TChip>
+        <TChip {...args} type={'outlined'} onRemove={() => { notify('삭제 이벤트 발생'); }} removeIcon={'cleaning_bucket'}>hello</TChip>
+        <TChip {...args} type={'outlined'} icon={'face'}>hello</TChip>
+        <TChip {...args} type={'outlined'} icon={'face'} onRemove={() => { notify('삭제 이벤트 발생'); }}>hello</TChip>
     </ChipContainer>
 
     <TToast/>

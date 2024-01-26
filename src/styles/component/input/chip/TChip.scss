@@ -1,40 +1,21 @@
 .t-chip {
     height: 30px;
-    border-radius: 50px;
+    border-radius: 4px;
     display: inline-flex;
     align-items: center;
     cursor: default;
 
-
-    &.t-chip--primary {
-        .t-chip__remove-icon {
-            color: $t-primary-color--tint-3;
-            &:hover { color: $t-primary-color--tint-2;}
-            &:active { color: $t-primary-color--tint-1;}
-        }
-    }
-
     &.t-chip--filled {
         border: none;
 
-        color: $t-black-color;
-        background-color: $t-gray-color-3;
-
-        &.t-chip--primary {
-            color: $t-primary-color;
-            background-color: $t-primary-color--tint-9;
-        }
+        color: $t-primary-color;
+        background-color: $t-blue-gray-color-2;
     }
 
     &.t-chip--outlined {
-        border: 1px solid $t-border-color--default;
+        border: 1px solid $t-blue-gray-color-3;
         background-color: $t-white-color;
         color: $t-gray-color-5;
-
-        &.t-chip--primary {
-            border: 1px solid $t-primary-color--tint-2;
-            color: $t-primary-color;
-        }
     }
 
     .t-chip__prev-icon {
