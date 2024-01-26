@@ -26,7 +26,7 @@ const TChip = forwardRef((props: TChipProps, ref: Ref<TChipRef>) => {
         if (props.className) { clazz.push(props.className); }
 
         if (props.type) {
-            clazz.push('t-chip--outlined');
+            clazz.push(`t-chip--${props.type}`);
         } else if (props.type === 'outlined' || props.outlined) {
             clazz.push('t-chip--outlined');
         } else if (props.type === 'fill' || props.fill) {
@@ -85,7 +85,7 @@ const TChip = forwardRef((props: TChipProps, ref: Ref<TChipRef>) => {
                            className={'t-chip__remove-icon'}
                            color={props.removeIconColor}
                            size={props.removeIconSize}
-                           // FIXME: TIcon Size 16x16 추가되면 수정 해야 함.
+                           // FIXME: TIcon Size 16x16 추가되면 변경
                            style={{fontSize: props.removeIconSize ? 'auto' : '16px'}}
                            clickable
                            onClick={(event) => onClickRemove(event)}
