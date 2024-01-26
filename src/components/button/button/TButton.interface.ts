@@ -7,7 +7,7 @@ export const buttonVariant = {
 };
 
 type ButtonSize = typeof buttonSize[keyof typeof buttonSize];
-type ButtonVariant = typeof buttonVariant[keyof typeof buttonVariant];
+export type ButtonVariant = typeof buttonVariant[keyof typeof buttonVariant];
 
 export interface TButtonProps extends TBaseProps, TBaseTooltipProps {
     children: ReactNode,
