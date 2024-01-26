@@ -11,11 +11,11 @@ const TButtonGroup = (props: TButtonGroupProps) => {
         const clazz: string[] = [];
 
         if (props.className) { clazz.push(props.className); }
+        if (props.multiSelect) { clazz.push('t-button-group--multi-select'); }
         if (props.disabled) { clazz.push('t-button-group--disabled'); }
-        if (props.primary) { clazz.push('t-button-group--primary'); }
 
         return clazz.join(' ');
-    }, [props.className, props.disabled, props.primary]);
+    }, [props.className, props.disabled, props.multiSelect]);
 
     const rootStyle = useMemo((): CSSProperties => {
         let style: CSSProperties = {};
@@ -24,6 +24,10 @@ const TButtonGroup = (props: TButtonGroupProps) => {
 
         return style;
     }, [props.style]);
+
+    const buttonClass = useCallback((isActive: boolean) => {
+        return isActive ? 't-button-group__button--active' : 't-button-group__button';
+    }, []);
 
     // endregion
 
@@ -80,10 +84,9 @@ const TButtonGroup = (props: TButtonGroupProps) => {
                 props.items.map((item, index) => {
                     return (
                         <TButton key={index}
+                                 className={buttonClass(isActive(item.value))}
                                  small
-                                 primary={props.primary}
                                  disabled={props.disabled}
-                                 main={isActive(item.value)}
                                  onClick={() => onClickItem(item.value, isActive(item.value))}
                         >{item.template}</TButton>
                     );
@@ -96,7 +99,6 @@ const TButtonGroup = (props: TButtonGroupProps) => {
 TButtonGroup.displayName = 'TButtonGroup';
 
 TButtonGroup.defaultProps = {
-    primary: false,
     disabled: false,
 };
 

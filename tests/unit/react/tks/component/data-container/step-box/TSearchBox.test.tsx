@@ -98,7 +98,7 @@ describe('TSearchBox', () => {
                 .toHaveTextContent('조회');
 
             expect(button)
-                .toHaveClass('t-button--main');
+                .toHaveClass('t-button');
 
             expect(onSearch)
                 .toBeCalledTimes(1);
@@ -120,7 +120,7 @@ describe('TSearchBox', () => {
                 .toHaveTextContent('초기화');
 
             expect(button)
-                .toHaveClass('t-button--primary');
+                .toHaveClass('t-button');
 
             expect(onReset)
                 .toBeCalledTimes(1);

@@ -24,7 +24,6 @@ describe('TButtonGroup', () => {
 
         multiSelect?: boolean,
 
-        primary?: boolean,
         disabled?: boolean,
 
         initialValue?: string | string[], // additional
@@ -66,24 +65,6 @@ describe('TButtonGroup', () => {
             });
         });
 
-        it('When primary prop is applied, root has t-button-group--primary class', () => {
-
-            // Arrange
-            render(<ButtonGroup primary/>);
-
-            const buttonGroup = screen.getByTestId('button-group-root');
-            const buttons = getAllByRole(buttonGroup, 'button');
-
-            // Assert
-            expect(buttonGroup)
-                .toHaveClass('t-button-group--primary');
-
-            buttons.forEach((button) => {
-                expect(button)
-                    .toHaveClass('t-button--primary');
-            });
-        });
-
         it('Style prop applies to the root', () => {
 
             // Arrange
@@ -109,10 +90,10 @@ describe('TButtonGroup', () => {
 
             // Assert
             expect(boldButton)
-                .toHaveClass('t-button--main');
+                .toHaveClass('t-button-group__button--active');
 
             expect(italicButton)
-                .not.toHaveClass('t-button--main');
+                .not.toHaveClass('t-button-group__button--active');
 
             // Act
             await act(async () => {
@@ -121,10 +102,10 @@ describe('TButtonGroup', () => {
 
             // Assert
             expect(boldButton)
-                .not.toHaveClass('t-button--main');
+                .not.toHaveClass('t-button-group__button--active');
 
             expect(italicButton)
-                .toHaveClass('t-button--main');
+                .toHaveClass('t-button-group__button--active');
         });
 
         it('When clicking on an item, ButtonGroup with multiSelect=true updates its value as an array', async () => {
@@ -135,27 +116,26 @@ describe('TButtonGroup', () => {
             const [boldButton, italicButton] = screen.getAllByRole('button');
 
             // Assert
-            expect(boldButton)
-                .not.toHaveClass('t-button--main');
-
-            expect(italicButton)
-                .not.toHaveClass('t-button--main');
+            expect(boldButton).toHaveClass('t-button-group__button');
+            expect(italicButton).toHaveClass('t-button-group__button');
 
             // Act
             await act(async () => {
                 await userEvent.click(boldButton);
             });
+
             // Assert
             expect(boldButton)
-                .toHaveClass('t-button--main');
+                .toHaveClass('t-button-group__button--active');
 
             // Act
             await act(async () => {
                 await userEvent.click(italicButton);
             });
 
+            // Assert
             expect(italicButton)
-                .toHaveClass('t-button--main');
+                .toHaveClass('t-button-group__button--active');
 
             // Act
             await act(async () => {
@@ -164,10 +144,9 @@ describe('TButtonGroup', () => {
 
             // Assert
             expect(boldButton)
-                .not.toHaveClass('t-button--main');
-
+                .toHaveClass('t-button-group__button');
             expect(italicButton)
-                .toHaveClass('t-button--main');
+                .toHaveClass('t-button-group__button--active');
         });
 
     });

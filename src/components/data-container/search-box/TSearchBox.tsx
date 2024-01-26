@@ -98,8 +98,8 @@ function TSearchBox(props: TSearchBoxProps) {
             {
                 (props.onReset || props.onSearch) && (
                     <div className={'t-search-box__action-bar'}>
-                        {props.onReset && (<TButton large primary onClick={onReset}>초기화</TButton>)}
-                        {props.onSearch && (<TButton large main onClick={onSearch}>조회</TButton>)}
+                        {props.onReset && (<TButton large onClick={onReset}>초기화</TButton>)}
+                        {props.onSearch && (<TButton large onClick={onSearch}>조회</TButton>)}
                     </div>
                 )
             }
