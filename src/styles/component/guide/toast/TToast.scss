@@ -1,13 +1,50 @@
 .tks-toast {
+
     .tks-toast__body {
         font-family: $t-font-family;
     }
+
     .tks-toast__progress {
         background: $t-primary-color;
     }
 
-    @at-root .Toastify__toast-container--top-right {
-        top: 4em;
+    @at-root .tks-toast-container {
+
+        &.Toastify__toast-container--top-right {
+            width: 320px;
+            top: 4em;
+
+            .Toastify__toast {
+                padding: 16px 10px 21px 16px;
+            }
+
+            .Toastify__toast-body {
+                margin: 0;
+                padding: 0 16px 0 0;
+
+            }
+
+        }
+
+        &.Toastify__toast-container {
+            padding: 0;
+        }
+
     }
 
+    .Toastify__toast-icon {
+        margin-inline-end: 8px;
+
+        & > svg {
+            width: 24px;
+            height: 24px;
+        }
+    }
+
+    .Toastify__close-button > svg {
+        width: 20px;
+        height: 20px;
+    }
 }
+
+
