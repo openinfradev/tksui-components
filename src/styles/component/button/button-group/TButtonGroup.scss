@@ -8,6 +8,8 @@
         border-right-color: transparent;
         background: $t-white-color;
         border-radius: 0;
+
+        .t-button__content { @include typo-body-3; }
     }
 
     .t-button-group__button--active {
