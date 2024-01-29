@@ -26,7 +26,7 @@ const TButtonGroup = (props: TButtonGroupProps) => {
     }, [props.style]);
 
     const buttonClass = useCallback((isActive: boolean) => {
-        return isActive ? 't-button-group__button--active' : 't-button-group__button';
+        return isActive ? 't-button-group__button--active' : '';
     }, []);
 
     // endregion
@@ -84,7 +84,7 @@ const TButtonGroup = (props: TButtonGroupProps) => {
                 props.items.map((item, index) => {
                     return (
                         <TButton key={index}
-                                 className={buttonClass(isActive(item.value))}
+                                 className={`t-button-group__button ${buttonClass(isActive(item.value))}`}
                                  small
                                  disabled={props.disabled}
                                  onClick={() => onClickItem(item.value, isActive(item.value))}
