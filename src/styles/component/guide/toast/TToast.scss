@@ -1,21 +1,30 @@
 .tks-toast {
 
-    .tks-toast__body {
-        font-family: $t-font-family;
-    }
+    --toastify-color-light: $t-white-color;
 
-    .tks-toast__progress {
-        background: $t-primary-color;
-    }
+    --toastify-font-family: $t-font-family;
+    --toastify-text-color-info: #{$t-black-color};
+    --toastify-text-color-success: #{$t-black-color};
+    --toastify-text-color-warning: #{$t-black-color};
+    --toastify-text-color-error: #{$t-black-color};
+
+    --toastify-color-progress-light: #{$t-primary-color};
+    --toastify-color-progress-info: #{$t-primary-color};
+    --toastify-color-progress-success: #{$t-primary-color};
+    --toastify-color-progress-warning: #{$t-primary-color};
+    --toastify-color-progress-error: #{$t-primary-color};
+
+    --toastify-toast-width: 320px;
 
     @at-root .tks-toast-container {
 
         &.Toastify__toast-container--top-right {
-            width: 320px;
             top: 4em;
 
             .Toastify__toast {
                 padding: 16px 10px 21px 16px;
+                border-radius: 4px;
+                font-weight: normal;
             }
 
             .Toastify__toast-body {
@@ -38,6 +47,7 @@
         & > svg {
             width: 24px;
             height: 24px;
+
         }
     }
 
@@ -45,6 +55,7 @@
         width: 20px;
         height: 20px;
     }
+
 }
 
 
