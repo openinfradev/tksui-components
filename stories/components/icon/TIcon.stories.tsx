@@ -1,13 +1,14 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {ReactElement, useState} from 'react';
+import {CSSProperties, ReactElement, useCallback, useState} from 'react';
 import TIcon from '@/components/icon/TIcon';
 import {TIconProps, TIconSize} from '@/components/icon/TIcon.interface';
 import materialIconGallery from './material-icon-gallery';
 import TTextField from '~/input/text-field/TTextField';
 import TSwitch from '~/input/switch/TSwitch';
 import TFormSection from '~/data-container/form-section/TFormSection';
-import {TFormItem, TFormRow} from '@/components';
+import {TButton, TFormItem, TFormRow} from '@/components';
 import TDropdown from '~/input/dropdown/TDropdown';
+import TToast, {notify} from '@/components/guide/toast/TToast';
 
 
 const meta: Meta<typeof TIcon> = {
@@ -18,14 +19,45 @@ export default meta;
 
 type Story = StoryObj<typeof TIcon>;
 
-const Showcase = (props: { children: ReactElement }): ReactElement => {
-    return (<div style={{display: 'flex', flexDirection: 'column', fontSize: '14px', gap: '8px', alignItems: 'center'}}>
-        {props.children}
-        {props.children.props.children}
-    </div>);
+const showCaseStyle: CSSProperties = {
+    display: 'flex',
+    flexDirection: 'column',
+    fontSize: '14px',
+    gap: '8px',
+    alignItems: 'center',
+    cursor: 'pointer',
+};
+
+const Showcase = (props: { children: ReactElement, onClick?: () => void }): ReactElement => {
+    return (
+        <div style={showCaseStyle}
+             onClick={props?.onClick}>
+            {props.children}
+            {props.children.props.children}
+        </div>);
 };
 
 const Template = (args: TIconProps) => {
+
+    const onSuccessToast = useCallback((text: string) => {
+        notify.success(`${text} 복사했습니다.`);
+    }, []);
+
+    const copyText = useCallback((text: string) => {
+        try {
+            navigator.clipboard.writeText(text).then(() => {
+                onSuccessToast(text);
+            });
+        } catch (error) {
+            const textElement = document.createElement('textarea');
+            textElement.value = text;
+            document.body.appendChild(textElement);
+            textElement.select();
+            document.execCommand('copy');
+            document.body.removeChild(textElement);
+            onSuccessToast(text);
+        }
+    }, []);
 
     const [searchText, setSearchText] = useState<string>('');
     const [isFilled, setIsFilled] = useState<boolean>(false);
@@ -33,11 +65,13 @@ const Template = (args: TIconProps) => {
     const [size, setSize] = useState<TIconSize>('medium');
 
     return (<>
-        <div>
-            <a href={'https://fonts.google.com/icons'}
-               target={'_blank'}
-               style={{textDecoration: 'underline', color: 'blue', cursor: 'pointer'}} rel='noreferrer'>
-                아이콘 라이브러리 링크
+        <TToast/>
+
+        <div style={{marginBottom: '16px'}}>
+            <a href={'https://fonts.google.com/icons'} target={'_blank'} rel='noreferrer'>
+                <TButton primary large>
+                    아이콘 라이브러리 링크 바로가기
+                </TButton>
             </a>
         </div>
         <TFormSection column={2}>
@@ -46,7 +80,7 @@ const Template = (args: TIconProps) => {
                     <TTextField value={searchText} onChange={setSearchText} searchable/>
                 </TFormItem>
                 <TFormItem label={'FILL'}>
-                    <TSwitch value={isFilled} onChange={(value: boolean) => setIsFilled(value)} />
+                    <TSwitch value={isFilled} onChange={(value: boolean) => setIsFilled(value)}/>
                 </TFormItem>
             </TFormRow>
             <TFormRow>
@@ -60,7 +94,7 @@ const Template = (args: TIconProps) => {
                     ]}/>
                 </TFormItem>
                 <TFormItem label={'COLOR'}>
-                    <TTextField value={color} onChange={setColor} />
+                    <TTextField value={color} onChange={setColor}/>
                 </TFormItem>
             </TFormRow>
         </TFormSection>
@@ -75,8 +109,14 @@ const Template = (args: TIconProps) => {
                 materialIconGallery
                     .filter((icon) => icon.includes(searchText))
                     .map((icon) => (
-                        <Showcase key={icon}>
-                            <TIcon {...args} fill={isFilled} color={color} size={size}>{icon}</TIcon>
+                        <Showcase key={icon} onClick={() => { copyText(icon); }}>
+                            <TIcon {...args}
+                                   fill={isFilled}
+                                   color={color}
+                                   size={size}
+                            >
+                                {icon}
+                            </TIcon>
                         </Showcase>
                     ))
             }
@@ -88,8 +128,5 @@ const Template = (args: TIconProps) => {
 
 export const Default: Story = {
     render: Template,
-    args: {
-        xsmall: true,
-    },
 };
 

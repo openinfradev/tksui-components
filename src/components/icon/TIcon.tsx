@@ -1,7 +1,7 @@
 
 import '@material-symbols/font-300/outlined.css';
 
-import {CSSProperties, KeyboardEvent, MouseEvent, ReactElement, useCallback, useMemo} from 'react';
+import {CSSProperties, KeyboardEvent, memo, MouseEvent, ReactElement, useCallback, useMemo} from 'react';
 import {TIconSource, TIconProps, iconSize} from './TIcon.interface';
 import TOriginalImage from './TIconOriginal';
 
@@ -9,7 +9,7 @@ import TOriginalImage from './TIconOriginal';
  * We are using Google Material Symbols {@link https://fonts.google.com/icons?icon.set=Material+Symbols} <br/>
  * If you want to know the list of icons, please visit the link
  */
-function TIcon(props: TIconProps): ReactElement {
+const TIcon = (props: TIconProps): ReactElement => {
 
     // region [Styles]
 
@@ -98,6 +98,8 @@ function TIcon(props: TIconProps): ReactElement {
 
     // endregion
 
+    // region [Templates]
+
     return (
         <span className={`t-icon material-symbols-outlined ${rootClass}`}
               data-tooltip-id={props.tooltipId}
@@ -119,9 +121,11 @@ function TIcon(props: TIconProps): ReactElement {
             }
         </span>
     );
-}
 
-TIcon.defaultProps = {
+    // endregion
+
 };
 
-export default TIcon;
+TIcon.defaultProps = {};
+
+export default memo(TIcon);
