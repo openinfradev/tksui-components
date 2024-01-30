@@ -55,7 +55,7 @@ const TCardHeader = (props: TCardHeaderProps) => {
 };
 
 TCardHeader.defaultProps = {
-    iconSize: 'medium',
+    iconSize: 'large',
     iconType: 'outlined',
 };
 

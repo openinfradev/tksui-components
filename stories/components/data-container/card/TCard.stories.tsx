@@ -75,7 +75,7 @@ const Template = (args) => {
                         dolor</TCardContent>
                 </TCard>
 
-                <TCard {...args} width={'343px'} icon={'edit'} iconSize={'large'} iconColor={'#3617CE'}>
+                <TCard {...args} width={'343px'} icon={'edit_square'} iconColor={'#3617CE'}>
                     <TCardHeader title={'title'} subTitle={'Sub Title'}></TCardHeader>
                     <TCardContent>Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum
                         dolor Lorem ipsum dolor Lorem ipsum dolorLorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum
