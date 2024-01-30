@@ -81,7 +81,7 @@ export default function TModal(props: TModalProps): JSX.Element {
                 {/* Close Button */}
                 <TIcon className={'t-modal__overlay__body__close-icon'}
                        color={themeToken.tGrayColor5}
-                       small clickable onClick={(e) => { closeModal(e); }}>close</TIcon>
+                       clickable onClick={(e) => { closeModal(e); }}>close</TIcon>
                 {/* Modal Header */}
                 <header className={'t-modal__overlay__body__header'}>
                     {
