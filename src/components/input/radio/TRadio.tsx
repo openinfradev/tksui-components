@@ -70,7 +70,7 @@ const TRadio = (props: TRadioProps) => {
         }
 
         return (
-            <TIcon small
+            <TIcon xsmall
                    className={`t-radio__icon t-radio__icon--${status}`}
                    color={iconColor}
             >

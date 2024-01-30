@@ -230,7 +230,7 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
 
                 {
                     props.clearable && props.value && props.value.length > 0 && !props.disabled && (
-                        <TIcon xsmall
+                        <TIcon small
                                className={'t-text-field__container__action-icon'}
                                clickable
                                onClick={onClickClear}>
@@ -240,7 +240,7 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
                 }
                 {
                     props.searchable && !props.disabled && (
-                        <TIcon xsmall
+                        <TIcon small
                                className={'t-text-field__container__action-icon'}
                                clickable
                                color={props.value ? themeToken.tGrayColor6 : themeToken.tGrayColor4}
@@ -251,7 +251,7 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
                 }
                 {
                     props.password && !props.disabled && (
-                        <TIcon xsmall
+                        <TIcon small
                                className={'t-text-field__container__action-icon'}
                                clickable
                                onClick={togglePasswordVisibility}>

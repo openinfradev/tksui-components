@@ -337,14 +337,14 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
                 {
                     (!props.multiple && props.value) && (
                         <TIcon className={'t-dropdown__control__remover'}
-                               xsmall
+                               small
                                fill
                                color={themeToken.tGrayColor3}
                                onClick={onClickClear}>cancel</TIcon>
                     )
                 }
                 <TIcon className={`t-dropdown__control__opener ${isOpened ? 't-dropdown__control__opener--open' : ''}`}
-                       small
+                       
                        color={props.disabled ? themeToken.tGrayColor4 : themeToken.tGrayColor6}>arrow_drop_down</TIcon>
             </div>
 

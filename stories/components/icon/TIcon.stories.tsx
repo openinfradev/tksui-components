@@ -37,6 +37,8 @@ const Showcase = (props: { children: ReactElement, onClick?: () => void }): Reac
         </div>);
 };
 
+const officialSearchUrl = 'https://fonts.google.com/icons?icon.query=';
+
 const Template = (args: TIconProps) => {
 
     const onSuccessToast = useCallback((text: string) => {
@@ -64,6 +66,12 @@ const Template = (args: TIconProps) => {
     const [color, setColor] = useState<string>('');
     const [size, setSize] = useState<TIconSize>('medium');
 
+
+    const onClickOfficialSearch = useCallback(() => {
+        const searchStr = searchText.trim();
+        if (searchStr !== '') window.open(officialSearchUrl + searchStr);
+    }, [searchText]);
+
     return (<>
         <TToast/>
 
@@ -78,6 +86,7 @@ const Template = (args: TIconProps) => {
             <TFormRow>
                 <TFormItem label={'검색'}>
                     <TTextField value={searchText} onChange={setSearchText} searchable/>
+                    <TButton main large onClick={onClickOfficialSearch}>공식 문서에서 검색</TButton>
                 </TFormItem>
                 <TFormItem label={'FILL'}>
                     <TSwitch value={isFilled} onChange={(value: boolean) => setIsFilled(value)}/>
@@ -86,11 +95,11 @@ const Template = (args: TIconProps) => {
             <TFormRow>
                 <TFormItem label={'SIZE'}>
                     <TDropdown value={size} onChange={(value: string) => setSize(value)} items={[
-                        {text: 'XSmall', value: 'xsmall'},
-                        {text: 'Small', value: 'small'},
-                        {text: 'Medium', value: 'medium'},
-                        {text: 'Large', value: 'large'},
-                        {text: 'XLarge', value: 'xlarge'},
+                        {text: 'XSmall(16x16)', value: 'xsmall'},
+                        {text: 'Small(20x20)', value: 'small'},
+                        {text: 'Medium(24x24)', value: 'medium'},
+                        {text: 'Large(32x32)', value: 'large'},
+                        {text: 'XLarge(48x48)', value: 'xlarge'},
                     ]}/>
                 </TFormItem>
                 <TFormItem label={'COLOR'}>

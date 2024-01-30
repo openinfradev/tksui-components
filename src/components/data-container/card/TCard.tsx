@@ -70,7 +70,7 @@ const TCard = (props: TCardProps) => {
 };
 
 TCard.defaultProps = {
-    iconSize: 'medium',
+    iconSize: 'xlarge',
     iconType: 'outlined',
 };
 
