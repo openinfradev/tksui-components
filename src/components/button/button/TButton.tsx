@@ -74,18 +74,15 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
         return buttonSize.medium;
     }, [props.size, props.xsmall, props.small, props.medium, props.large, props.xlarge]);
 
-    const isRenderIcon = useMemo(() => {
-        if ($_size === 'xsmall' || $_size === 'small') { return false; }
-        return true;
-    }, [$_size]);
+    const contentIconInfo = useMemo(() => {
 
-    const contentIconSize = useMemo(() => {
-        if ($_size === 'medium') { return 'xsmall'; }
-        if ($_size === 'large') { return 'xsmall'; }
-        if ($_size === 'xlarge') { return 'small'; }
-        return 'xsmall';
-    }, [$_size]);
+        const iconInfo = {render: true, size: ''};
+        if ($_size === 'medium') { return {...iconInfo, size: 'xsmall'}; }
+        if ($_size === 'large') { return {...iconInfo, size: 'xsmall'}; }
+        if ($_size === 'xlarge') { return {...iconInfo, size: 'medium'}; }
 
+        return {...iconInfo, render: false};
+    }, [$_size]);
 
     const rootClass: string = useMemo(() => {
         const clazz = [];
@@ -133,8 +130,8 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
                     ? (
                         <div className={'t-button__content'}>
                             {
-                                props.icon && isRenderIcon && (
-                                    <TIcon size={contentIconSize} className={'t-button__content__icon'}>{props.icon}</TIcon>
+                                props.icon && contentIconInfo.render && (
+                                    <TIcon size={contentIconInfo.size} className={'t-button__content__icon'}>{props.icon}</TIcon>
                                 )
                             }
                             {props.children}
