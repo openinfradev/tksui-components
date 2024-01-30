@@ -69,7 +69,7 @@ const TStepBoxHeader = (props: TStepBoxHeaderProps) => {
                                 <div className={'t-step-box-header__step__number__inner'}>
                                     {
                                         (item.stepNumber < context.currentStep)
-                                            ? <TIcon size={'medium'}>t_done</TIcon>
+                                            ? <TIcon size={'large'}>t_done</TIcon>
                                             : item.stepNumber
                                     }
                                 </div>
