@@ -97,18 +97,6 @@ const TOriginalImage = {
             <path transform='translate(1 15)' style={{stroke: 'none'}} d='M0 0h2v2H0z'/>
         </svg>
     ),
-    t_information: (
-        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'>
-            <g style={{fill: '#fff'}}>
-                <circle cx='10' cy='10' r='10' style={{stroke: 'none'}}/>
-                <circle cx='10' cy='10' r='9.5' style={{fill: 'none'}}/>
-            </g>
-            <g>
-                <path transform='translate(9 9)' style={{stroke: 'none'}} d='M0 0h2v6H0z'/>
-                <path transform='translate(9 5)' style={{stroke: 'none'}} d='M0 0h2v2H0z'/>
-            </g>
-        </svg>
-    ),
     t_done: (
         <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 58 58'>
             <path d='M15.8262 29.6945L15.643 29.8718L15.8237 30.0515C17.8671 32.0838 19.8512 34.0539 21.7619 35.9512C22.8703 37.0518
