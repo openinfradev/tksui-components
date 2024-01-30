@@ -82,14 +82,12 @@ const TChip = forwardRef((props: TChipProps, ref: Ref<TChipRef>) => {
             {
                 !!props.onRemove && (
                     <TIcon fill
+                           xsmall
                            className={'t-chip__remove-icon'}
-                           color={props.removeIconColor}
-                           size={props.removeIconSize}
-                           // FIXME: TIcon Size 16x16 추가되면 변경
-                           style={{fontSize: props.removeIconSize ? 'auto' : '16px'}}
                            clickable
+                           color={themeToken.tSecondaryRedColor}
                            onClick={(event) => onClickRemove(event)}
-                    >{props.removeIcon}</TIcon>
+                    >close</TIcon>
                 )
             }
         </div>
@@ -101,8 +99,6 @@ const TChip = forwardRef((props: TChipProps, ref: Ref<TChipRef>) => {
 
 TChip.defaultProps = {
     prevIconSize: 'xsmall',
-    removeIcon: 'close_small',
-    removeIconColor: themeToken.tSecondaryRedColor,
 };
 
 TChip.displayName = 'TChip';

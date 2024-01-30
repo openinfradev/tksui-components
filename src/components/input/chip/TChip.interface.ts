@@ -19,10 +19,6 @@ export interface TChipProps extends TBaseProps {
     prevIconColor?: string,
     prevIconSize?: TIconSize,
 
-    removeIcon?: MaterialSymbol,
-    removeIconColor?: string,
-    removeIconSize?: TIconSize,
-
     onRemove?: (event?: MouseEvent) => void,
 
 }

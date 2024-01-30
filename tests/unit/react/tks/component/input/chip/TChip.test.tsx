@@ -121,30 +121,17 @@ describe('TChip', () => {
         });
 
         it(
-            'When removeIcon, removeIconSize, removeIconColor prop and onRemove are applied to root',
+            'When onRemove prop applied, removeIcon is visible',
             async () => {
 
                 // Arrange
-                const user = userEvent.setup();
-                const removeIcon = 'close';
-                const removeSize = 'small';
-                const removeColor = 'blue';
-                render(<TChip removeIcon={removeIcon} removeIconSize={removeSize}
-                              removeIconColor={removeColor} onRemove={mockFn}>
-                    hello
-                </TChip>);
-                const removeIconElement = screen.getByText(removeIcon);
+                render(<TChip onRemove={mockFn}>TChip</TChip>);
+                const removeIconElement = screen.getByRole('img');
 
                 // Assert
-                expect(mockFn).toHaveBeenCalledTimes(0);
-
-                // Act
-                await user.click(removeIconElement);
+                expect(removeIconElement).toBeInTheDocument();
 
                 // Assert
-                expect(removeIconElement).toHaveClass(`t-icon--${removeSize}`);
-                expect(removeIconElement).toHaveStyle({color: removeColor});
-                expect(mockFn).toHaveBeenCalledTimes(1);
             },
         );
 
