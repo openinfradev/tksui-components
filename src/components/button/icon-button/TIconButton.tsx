@@ -101,7 +101,7 @@ const TIconButton = forwardRef((props: TIconButtonProps, ref: Ref<TIconButtonRef
                 data-tooltip-hidden={props.tooltipHidden}
         >
             <TIcon className={'t-icon-button__inner'}
-                   xsmall
+                   small
                    color={themeToken.tGrayColor5}
                    disabled={props.disabled}
             >{props.children}</TIcon>
