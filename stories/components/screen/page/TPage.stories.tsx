@@ -11,6 +11,21 @@ export default meta;
 
 type Story = StoryObj<typeof TPage>;
 
+const infoContent = `
+Lorem ipsum dolor sit amet, consec
+tetur adipiscing elit. In nec consecte
+tur justo, in faucibus nisl. Donec acc
+umsan, sem non pellentesque ullam
+corper, diam lectus cursus urna, 
+in euismod dui risus vitae massa. 
+Donec pretium faucibus placerat. 
+Nulla facilisi. Proin ultricies, 
+nulla eget efficitur facilisis, orci quam acc
+umsan nulla, eget condimentum pur
+us massa eu velit. Suspendisse fring
+illa ex ex, in facilisis urna sagittis vel. Cras sit amet mattis urna. Etiam vehi
+cula cursus lorem ac tempor.`;
+
 const Template = (args: TPageProps) => {
 
     return (
@@ -40,4 +55,5 @@ const Template = (args: TPageProps) => {
 
 export const Default: Story = {
     render: Template,
+    args: {infoPanelContent: infoContent},
 };

@@ -60,11 +60,11 @@ const TFormSectionItem = (props: TFormSectionItemProps) => {
                         {
                             (props.information) && (
                                 <TIcon className={'t-form-section-item__label__info-icon'}
-                                       xsmall
+                                       small
                                        tooltipContent={props.information}
                                        tooltipId={tooltipId}
                                        clickable
-                                >t_information</TIcon>
+                                >info</TIcon>
                             )
                         }
                     </label>

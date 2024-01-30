@@ -109,9 +109,9 @@ export default function TPage(props: TPageProps) {
 
                     {
                         props.infoPanelContent && (
-                            <TIcon small
+                            <TIcon fill
                                    clickable
-                                   onClick={() => { setIsInfoPanelOpened(!isInfoPanelOpened); }}>t_information</TIcon>
+                                   onClick={() => { setIsInfoPanelOpened(!isInfoPanelOpened); }}>info</TIcon>
                         )
                     }
                 </div>

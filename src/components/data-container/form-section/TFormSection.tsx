@@ -34,7 +34,7 @@ const TFormSection = (props: TFormSectionProps) => {
             {
                 (props.information || props.customInformation) && (
                     <div className={'t-form-section__content__info'}>
-                        <TIcon small className={'t-form-section__content__info__icon'} color={'#666666'}>t_information</TIcon>
+                        <TIcon className={'t-form-section__content__info__icon'}>info</TIcon>
                         <div className={'t-form-section__content__info__content'}>
                             {
                                 props.customInformation
