@@ -22,7 +22,10 @@
         margin-right: $t-spacing-4;
     }
 
-    .t-chip__label { @include typo-body-3; }
+    .t-chip__label {
+        white-space: nowrap;
+        @include typo-body-3;
+    }
 
     .t-chip__remove-icon {
         margin-left: $t-spacing-2;
