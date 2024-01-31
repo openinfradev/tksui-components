@@ -1,13 +1,68 @@
 .tks-toast {
-    .tks-toast__body {
-        font-family: $t-font-family;
-    }
-    .tks-toast__progress {
-        background: $t-primary-color;
+
+    --toastify-color-light: $t-white-color;
+
+    --toastify-text-color-info: #{$t-black-color};
+    --toastify-text-color-success: #{$t-black-color};
+    --toastify-text-color-warning: #{$t-black-color};
+    --toastify-text-color-error: #{$t-black-color};
+
+    --toastify-color-progress-light: #{$t-primary-color};
+    --toastify-color-progress-info: #{$t-primary-color};
+    --toastify-color-progress-success: #{$t-primary-color};
+    --toastify-color-progress-warning: #{$t-primary-color};
+    --toastify-color-progress-error: #{$t-primary-color};
+
+    --toastify-toast-width: 320px;
+
+    $t-toastify-progress-bar-height: 5px;
+
+    @at-root .tks-toast-container {
+
+        &.Toastify__toast-container--top-right {
+            top: $t-spacing-64;
+
+            .Toastify__toast {
+
+                padding: $t-spacing-16 $t-spacing-10 calc($t-spacing-16 + $t-toastify-progress-bar-height) $t-spacing-16;
+                border-radius: 4px;
+                font-weight: normal;
+            }
+
+            .Toastify__toast-body {
+                margin: 0;
+                padding: 0 $t-spacing-16 0 0;
+
+                @include typo-element-3
+            }
+
+        }
+
+        &.Toastify__toast-container {
+            padding: 0;
+        }
+
     }
 
-    @at-root .Toastify__toast-container--top-right {
-        top: 4em;
+    .Toastify__toast-icon {
+        margin-inline-end: $t-spacing-8;
+
+        & > svg {
+            width: 24px;
+            height: 24px;
+
+        }
+    }
+
+    .Toastify__close-button > svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .Toastify__progress-bar {
+        height: $t-toastify-progress-bar-height;
     }
 
 }
+
+
