@@ -45,7 +45,7 @@
     }
 
     .Toastify__toast-icon {
-        margin-inline-end: 8px;
+        margin-inline-end: $t-spacing-8;
 
         & > svg {
             width: 24px;
