@@ -27,7 +27,7 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
 
     // region [Events]
 
-    const onMouseDown = useCallback((event: MouseEvent): void => {
+    const onMouseDown = useCallback((event: MouseEvent<HTMLButtonElement>): void => {
         if (!props.disabled) {
             ripple.register(event);
         }
