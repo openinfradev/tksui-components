@@ -129,11 +129,17 @@ $t-button-border--disabled: $t-gray-color-1;
     }
 
     // [ Disabled ]
-    &.t-button--disabled {
-        cursor: default !important;
-        color: $t-button-color--disabled !important;
-        background: $t-button-background--disabled !important;
-        border: 1px solid $t-button-border--disabled !important;
+    &:disabled.t-button--disabled {
+        cursor: default;
+        color: $t-button-color--disabled;
+        background: $t-button-background--disabled;
+        border: 1px solid $t-button-border--disabled;
+
+        &:hover {
+            color: $t-button-color--disabled;
+            background: $t-button-background--disabled;
+            border: 1px solid $t-button-border--disabled;
+        }
     }
 
     // [ Shape, Size ]

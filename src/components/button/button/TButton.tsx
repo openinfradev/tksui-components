@@ -119,6 +119,7 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
                 onMouseLeave={onMouseLeave}
                 onKeyDown={onKeyDown}
                 onKeyUp={onKeyUp}
+                disabled={props.disabled}
                 tabIndex={(props.disabled || props.loading) ? -1 : 0}
                 data-tooltip-id={props.tooltipId}
                 data-tooltip-content={props.tooltipContent}

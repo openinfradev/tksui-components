@@ -4,10 +4,13 @@
     .t-button-group__button {
         height: 40px;
         color: $t-gray-color-5;
-        border-color: $t-gray-color-2;
-        border-right-color: transparent;
+        border: 1px solid $t-gray-color-2;
         background: $t-white-color;
         border-radius: 0;
+        margin: 0 -1px;
+        z-index: 0;
+
+        &:first-child, &:last-child { margin: 0; }
 
         .t-button__content { @include typo-body-3; }
     }
@@ -18,23 +21,12 @@
         border-color: $t-gray-color-4;
         background: $t-white-color;
         border-radius: 0;
-
-        &:last-child { border-right: 1px solid $t-gray-color-4 !important; }
+        z-index: 1;
     }
 
-    :is(.t-button-group__button, .t-button-group__button--active) {
-        &.t-button--disabled {
-            border-right: 1px solid $t-gray-color-2 !important;
-            border-top: 1px solid $t-gray-color-2 !important;
-            border-bottom: 1px solid $t-gray-color-2 !important;
-        }
-        &.t-button--disabled:first-child {
-            border-left: 1px solid $t-gray-color-2 !important;
-        }
-
-        &:last-child { border-right: 1px solid $t-gray-color-2; }
+    &.t-button-group--disabled .t-button-group__button.t-button--disabled {
+        border: 1px solid $t-gray-color-2;
     }
-
 
     :is(.t-button-group__button, .t-button-group__button--active):last-child {
         border-top-right-radius: 4px;
@@ -45,22 +37,4 @@
         border-top-left-radius: 4px;
         border-bottom-left-radius: 4px;
     }
-
-    .t-button-group__button--active + .t-button-group__button {
-        border-left-color: transparent !important;
-    }
-
-    .t-button-group__button + :is(.t-button-group__button, .t-button-group__button--active),
-    .t-button-group__button--active + :is(.t-button-group__button, .t-button-group__button--active) {
-        margin-left: 0;
-    }
-
-    // Multi Select
-    &.t-button-group--multi-select {
-
-        .t-button-group__button--active + .t-button-group__button--active {
-            border-left-color: transparent;
-        }
-    }
-
 }
