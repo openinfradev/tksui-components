@@ -26,11 +26,13 @@ const TChip = forwardRef((props: TChipProps, ref: Ref<TChipRef>) => {
         if (props.className) { clazz.push(props.className); }
 
         if (props.type) {
-            clazz.push('t-chip--outlined');
+            clazz.push(`t-chip--${props.type}`);
         } else if (props.type === 'outlined' || props.outlined) {
             clazz.push('t-chip--outlined');
         } else if (props.type === 'fill' || props.fill) {
             clazz.push('t-chip--fill');
+        } else {
+            clazz.push('t-chip--outlined');
         }
 
         return clazz.join(' ');
