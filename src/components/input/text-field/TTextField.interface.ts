@@ -21,6 +21,7 @@ export interface TTextFieldProps extends TValidatorProps, TBaseProps {
     autoComplete?: 'new-password' | 'off' | undefined,
     multiline?: boolean
     rows?: number,
+    messageId?: string,
 
     onChange(value: string): void,
     onBlur?(): void,

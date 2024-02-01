@@ -12,6 +12,11 @@
 
         &.t-text-field__label--required::after {
             @include require-mark;
+
+        }
+
+        .t-text-field__label--hidden {
+            display: none;
         }
     }
 
@@ -45,7 +50,16 @@
 
         .t-text-field__container__action-icon {
             color: $t-black-color;
-            &:nth-child(2) { margin-left: 16px; }
+        }
+
+        .t-text-field__container__action-btn {
+            width: 20px;
+            height: 20px;
+            border: none;
+            background-color: transparent;
+            padding: 0;
+
+            &:nth-child(2) { margin-left: $t-spacing-16; }
             &:not(:nth-child(2)) { margin-left: $t-spacing-4; }
         }
 
@@ -61,6 +75,7 @@
                 display: inline-block;
             }
         }
+
     }
 
     &.t-text-field__multiline {

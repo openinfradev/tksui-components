@@ -27,6 +27,8 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
     const inputRef = useRef<HTMLInputElement>(null);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     const inputUuid = uniqueId();
+    const messageUuid = props.messageId ? props.messageId : uniqueId();
+    const counterUuid = uniqueId();
 
     useImperativeHandle(ref, () => ({
         focus() {
@@ -187,7 +189,19 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
             {
                 props.label && (
                     <label className={`t-text-field__label ${labelClass}`} htmlFor={inputUuid}>
-                        {props.label}
+                        {
+                            props.label
+                        }
+                        {
+                            props.counter && (
+                                <span className='t-text-field__label--hidden'>{`${props.counter}자 이내`}</span>
+                            )
+                        }
+                        {
+                            props.required && (
+                                <span className='t-text-field__label--hidden'>mandatory</span>
+                            )
+                        }
                     </label>
                 )
             }
@@ -197,10 +211,11 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
                         ? <input id={inputUuid}
                                  ref={inputRef}
                                  type={inputType}
-                                 tabIndex={(props.disabled || props.readOnly) ? -1 : 0}
+                                 tabIndex={(props.disabled || props.readOnly) ? -1 : null}
                                  className={`t-text-field__container__input ${inputClass}`}
                                  disabled={props.disabled || props.readOnly}
                                  placeholder={(props.disabled || props.readOnly) ? '' : props.placeholder}
+                                 title={(props.disabled || props.readOnly) ? '' : props.placeholder}
                                  value={props.value}
                                  onChange={onChange}
                                  onKeyDown={onKeyDown}
@@ -208,6 +223,7 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
                                  onBlur={onBlur}
                                  autoComplete={props.autoComplete}
                                  data-testid={'text-field-input'}
+                                 aria-describedby={`${messageUuid} ${counterUuid}`}
                         />
                         : <textarea
                             id={inputUuid}
@@ -229,39 +245,52 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
 
                 {
                     props.clearable && props.value && props.value.length > 0 && !props.disabled && (
-                        <TIcon xsmall
-                               className={'t-text-field__container__action-icon'}
-                               clickable
-                               onClick={onClickClear}>
-                            clear
-                        </TIcon>
+                        <button className={'t-text-field__container__action-btn'}
+                                aria-label={'clear'}
+                                onClick={onClickClear}>
+                            <TIcon xsmall
+                                   className={'t-text-field__container__action-icon'}
+                                   clickable>
+                                clear
+                            </TIcon>
+                        </button>
+
                     )
                 }
                 {
                     props.searchable && !props.disabled && (
-                        <TIcon xsmall
-                               className={'t-text-field__container__action-icon'}
-                               clickable
-                               // FIXME. themeToken(gray-6, gray-4) 으로 교체
-                               color={props.value ? '#54575D' : '#999999'}
-                               onClick={props.onClickSearch}>
-                            search
-                        </TIcon>
+                        <button className={'t-text-field__container__action-btn'}
+                                aria-label={'search'}
+                                onClick={props.onClickSearch}>
+                            <TIcon xsmall
+                                   className={'t-text-field__container__action-icon'}
+                                   clickable
+                                   // FIXME. themeToken(gray-6, gray-4) 으로 교체
+                                   color={props.value ? '#54575D' : '#999999'}>
+                                search
+                            </TIcon>
+                        </button>
                     )
                 }
                 {
                     props.password && !props.disabled && (
-                        <TIcon xsmall
-                               className={'t-text-field__container__action-icon'}
-                               clickable
-                               onClick={togglePasswordVisibility}>
-                            {isPasswordVisible ? 'visibility_off' : 'visibility'}
-                        </TIcon>
+                        <button className={'t-text-field__container__action-btn'}
+                                onClick={togglePasswordVisibility}>
+                            <TIcon xsmall
+                                   className={'t-text-field__container__action-icon'}
+                                   clickable>
+                                {isPasswordVisible ? 'visibility_off' : 'visibility'}
+                            </TIcon>
+                        </button>
                     )
                 }
                 {
                     (props.counter && !props.disabled && !props.multiline && (hasFocus || validator.message)) && (
-                        <div className={'t-text-field__container__counter'} data-testid={'text-field-counter'}>
+                        <div className={'t-text-field__container__counter'}
+                             aria-live={counterLength ? 'polite' : 'off'}
+                             id={counterUuid}
+                             data-testid={'text-field-counter'}
+                        >
                             <span className={'t-text-field__container__counter__counted'}>
                                 {counterLength}
                             </span>
@@ -272,7 +301,10 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
             </div>
 
             <div className={'t-text-field__details'}>
-                <div className={'t-text-field__details__message'} data-testid={'text-field-message'}>
+                <div className={'t-text-field__details__message'}
+                     id={messageUuid}
+                     aria-hidden={true}
+                     data-testid={'text-field-message'}>
                     {validator.message || props.hint}
                 </div>
                 {
