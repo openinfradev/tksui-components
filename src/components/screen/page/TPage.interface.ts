@@ -6,7 +6,6 @@ export interface TPageProps extends TBaseProps {
 
     title?: string,
 
-    isInfoPanelOpened?: boolean,
     infoPanelContent?: ReactNode,
 }
 

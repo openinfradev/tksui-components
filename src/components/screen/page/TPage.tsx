@@ -88,9 +88,6 @@ export default function TPage(props: TPageProps) {
 
 
     // region [Hooks - Lifecycles]
-    useEffect(() => {
-        setIsInfoPanelOpened(props.isInfoPanelOpened);
-    }, [props.isInfoPanelOpened]);
 
     useEffect(() => {
         if (isInfoPanelOpened) {
