@@ -4,6 +4,8 @@ export interface TProgressProps extends TBaseProps {
     isOpen?: boolean,
     onRequestClose?: () => void,
     message?: string,
+    openMessage?: string,
+    closeMessage?: string,
     containerId?: string,
 }
 
