@@ -25,14 +25,12 @@ time, mark, audio, video {
     // Belows are tks custom attributes
     text-decoration: none;
     color: inherit;
-    box-sizing: border-box;
     word-break: keep-all;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
     display: block;
-    box-sizing: border-box; // tks custom
 }
 body {
     line-height: 1;
@@ -50,4 +48,11 @@ q:before, q:after {
 table {
     border-collapse: collapse;
     border-spacing: 0;
+}
+
+// tks custom
+*, *:after, *:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
