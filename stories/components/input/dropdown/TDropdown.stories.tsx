@@ -55,6 +55,9 @@ const NormalTemplate = (args: TDropdownProps) => {
             <div>
                 <span style={{fontSize: '20px'}}>단건 선택</span>
                 <div style={containerStyle}>
+                    default - No Data
+                    <TDropdown items={[]} value={''} onChange={singleSelect1.onChange} />
+
                     default (value: {singleSelect1.value})
                     <TDropdown {...args} {...singleSelect1} />
 
@@ -82,6 +85,9 @@ const NormalTemplate = (args: TDropdownProps) => {
             <div>
                 <span style={{fontSize: '20px'}}>다건 선택</span>
                 <div style={containerStyle}>
+                    default - No Data
+                    <TDropdown items={[]} value={''} onChange={singleSelect1.onChange} />
+
                     default (value: {multiSelect1.value.join(', ')})
                     <TDropdown {...args} {...multiSelect1} multiple/>
 
