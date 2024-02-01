@@ -5,13 +5,12 @@ import {
     MouseEvent,
     Ref,
     useCallback,
-    useEffect,
+    useEffect, useId,
     useImperativeHandle,
     useMemo,
     useRef,
     useState,
 } from 'react';
-import uniqueId from 'lodash/uniqueId';
 import useValidator from '@/common/hook/UseValidator';
 import {TDropdownItem, TDropdownProps, TDropdownRef} from './TDropdown.interface';
 import useClickOutside from '@/common/hook/UseClickOutside';
@@ -33,7 +32,7 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
     const [filterText, setFilterText] = useState('');
     const [isOpened, setIsOpened] = useState(false);
     const [itemMap, setItemMap] = useState(new Map());
-    const messageUuid = uniqueId();
+    const messageUuid = useId();
 
     useImperativeHandle(ref, () => ({
         focus() {

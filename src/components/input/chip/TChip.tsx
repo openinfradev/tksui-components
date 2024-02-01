@@ -1,5 +1,4 @@
-import {CSSProperties, forwardRef, MouseEvent, Ref, useImperativeHandle, useMemo, useRef} from 'react';
-import uniqueId from 'lodash/uniqueId';
+import {CSSProperties, forwardRef, MouseEvent, Ref, useId, useImperativeHandle, useMemo, useRef} from 'react';
 import {chipSize, TChipProps, TChipRef} from './TChip.interface';
 import TIcon from '../../icon/TIcon';
 
@@ -9,7 +8,7 @@ const TChip = forwardRef((props: TChipProps, ref: Ref<TChipRef>) => {
     // region [Hooks]
 
     const rootRef = useRef<HTMLDivElement>(null);
-    const inputUuid = uniqueId();
+    const inputUuid = useId();
 
     useImperativeHandle(ref, () => ({
         remove() { onClickRemove(); },

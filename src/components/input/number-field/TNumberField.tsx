@@ -1,5 +1,4 @@
-import {CSSProperties, forwardRef, KeyboardEvent, Ref, useCallback, useImperativeHandle, useMemo, useRef, useState} from 'react';
-import uniqueId from 'lodash/uniqueId';
+import {CSSProperties, forwardRef, KeyboardEvent, Ref, useCallback, useId, useImperativeHandle, useMemo, useRef, useState} from 'react';
 import useValidator from '@/common/hook/UseValidator';
 import {TNumberFieldProps, TNumberFieldRef} from './TNumberField.interface';
 
@@ -12,8 +11,8 @@ const TNumberField = forwardRef((props: TNumberFieldProps, ref: Ref<TNumberField
     const [hasFocus, setHasFocus] = useState<boolean>(false);
     const validator = useValidator(props.value, props.rules, props.successMessage);
     const inputRef = useRef<HTMLInputElement>(null);
-    const inputUuid: string = uniqueId();
-    const messageUuid: string = uniqueId();
+    const inputUuid: string = useId();
+    const messageUuid: string = useId();
 
     useImperativeHandle(ref, () => ({
         focus() {

@@ -1,5 +1,4 @@
-import {CSSProperties, forwardRef, KeyboardEvent, Ref, useCallback, useImperativeHandle, useMemo, useRef, useState} from 'react';
-import uniqueId from 'lodash/uniqueId';
+import {CSSProperties, forwardRef, KeyboardEvent, Ref, useCallback, useId, useImperativeHandle, useMemo, useRef, useState} from 'react';
 import useValidator from '@/common/hook/UseValidator';
 import {TTextAreaProps, TTextAreaRef} from './TTextArea.interface';
 
@@ -13,11 +12,11 @@ const TTextArea = forwardRef((props: TTextAreaProps, ref: Ref<TTextAreaRef>) => 
 
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-    const textAreaUuid = uniqueId();
+    const textAreaUuid = useId();
 
-    const messageUuid = uniqueId();
+    const messageUuid = useId();
 
-    const counterUuid = uniqueId();
+    const counterUuid = useId();
 
     useImperativeHandle(ref, () => ({
         focus() {

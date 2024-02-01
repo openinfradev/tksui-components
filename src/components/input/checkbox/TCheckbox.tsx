@@ -1,5 +1,4 @@
-import {CSSProperties, forwardRef, KeyboardEvent, ReactElement, Ref, useEffect, useImperativeHandle, useRef, useState} from 'react';
-import uniqueId from 'lodash/uniqueId';
+import {CSSProperties, forwardRef, KeyboardEvent, ReactElement, Ref, useEffect, useImperativeHandle, useRef, useState, useId} from 'react';
 import TIcon from '../../icon/TIcon';
 import {TCheckboxProps, TCheckboxRef} from './TCheckbox.interface';
 import useValidator from '@/common/hook/UseValidator';
@@ -12,8 +11,8 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
     const validator = useValidator(props.value, props.rules, props.successMessage);
     const rootRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
-    const inputUuid = uniqueId();
-    const messageUuid = uniqueId();
+    const inputUuid = useId();
+    const messageUuid = useId();
 
     useEffect(modifyStatus, [props.value, props.indeterminate, props.checked, props.positiveValue]);
     const [status, setStatus] = useState('uncheck');

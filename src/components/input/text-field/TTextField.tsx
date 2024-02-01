@@ -4,13 +4,12 @@ import {
     KeyboardEvent,
     MouseEvent,
     Ref,
-    useCallback,
+    useCallback, useId,
     useImperativeHandle,
     useMemo,
     useRef,
     useState,
 } from 'react';
-import uniqueId from 'lodash/uniqueId';
 import TIcon from '../../icon/TIcon';
 import {TTextFieldProps, TTextFieldRef} from './TTextField.interface';
 import useValidator from '@/common/hook/UseValidator';
@@ -26,9 +25,9 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
     const validator = useValidator(props.noTrim ? props.value : props.value.trim(), props.rules, props.successMessage);
     const inputRef = useRef<HTMLInputElement>(null);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
-    const inputUuid = uniqueId();
-    const messageUuid = props.messageId ? props.messageId : uniqueId();
-    const counterUuid = uniqueId();
+    const inputUuid = useId();
+    const messageUuid = props.messageId ? props.messageId : useId();
+    const counterUuid = useId();
 
     useImperativeHandle(ref, () => ({
         focus() {

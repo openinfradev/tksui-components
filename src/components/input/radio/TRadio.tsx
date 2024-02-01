@@ -1,5 +1,4 @@
-import {CSSProperties, KeyboardEvent} from 'react';
-import uniqueId from 'lodash/uniqueId';
+import {CSSProperties, KeyboardEvent, useId} from 'react';
 import TIcon from '../../icon/TIcon';
 import {TRadioProps} from './TRadio.interface';
 
@@ -8,7 +7,7 @@ function TRadio(props: TRadioProps) {
 
     // region [Hooks]
 
-    const inputUuid = uniqueId();
+    const inputUuid = useId();
 
     // endregion
     
