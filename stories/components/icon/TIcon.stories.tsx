@@ -137,5 +137,8 @@ const Template = (args: TIconProps) => {
 
 export const Default: Story = {
     render: Template,
+    args: {
+        xsmall: true,
+    },
 };
 
