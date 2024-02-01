@@ -1,4 +1,5 @@
 import {CSSProperties, forwardRef, KeyboardEvent, Ref, useCallback, useImperativeHandle, useMemo, useRef, useState} from 'react';
+import uniqueId from 'lodash/uniqueId';
 import useValidator from '@/common/hook/UseValidator';
 import {TTextAreaProps, TTextAreaRef} from './TTextArea.interface';
 
@@ -11,6 +12,12 @@ const TTextArea = forwardRef((props: TTextAreaProps, ref: Ref<TTextAreaRef>) => 
     const validator = useValidator(props.value, props.rules, props.successMessage);
 
     const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+    const textAreaUuid = uniqueId();
+
+    const messageUuid = uniqueId();
+
+    const counterUuid = uniqueId();
 
     useImperativeHandle(ref, () => ({
         focus() {
@@ -124,13 +131,27 @@ const TTextArea = forwardRef((props: TTextAreaProps, ref: Ref<TTextAreaRef>) => 
              data-testid={'t-text-area-root'}>
             {
                 props.label && (
-                    <label className={`t-text-area__label ${labelClass}`}>
-                        {props.label}
+                    <label className={`t-text-area__label ${labelClass}`} htmlFor={textAreaUuid}>
+                        {
+                            props.label
+                        }
+                        {
+                            props.counter && (
+                                <span className='t-text-area__label--hidden'>{`${props.counter}자 이내`}</span>
+                            )
+                        }
+                        {
+                            props.required && (
+                                <span className='t-text-area__label--hidden'>mandatory</span>
+                            )
+                        }
                     </label>
                 )
             }
             <div className={'t-text-area__container'}>
                 <textarea ref={textareaRef}
+                          id={textAreaUuid}
+                          aria-describedby={`${messageUuid} ${counterUuid}`}
                           tabIndex={props.disabled ? -1 : 0}
                           className={`t-text-area__container__input ${textAreaClass}`}
                           disabled={props.disabled}
@@ -144,13 +165,16 @@ const TTextArea = forwardRef((props: TTextAreaProps, ref: Ref<TTextAreaRef>) => 
                 />
             </div>
             <div className={'t-text-area__details'}>
-                <div className={'t-text-area__details__message'}>
+                <div className={'t-text-area__details__message'}
+                     id={messageUuid}>
                     {
                         validator.message
                         && `${validator.message}`
                     }
                 </div>
-                <div className={'t-text-area__details__counter'}>
+                <div className={'t-text-area__details__counter'}
+                     aria-live={props.value?.length ? 'polite' : 'off'}
+                     id={counterUuid}>
                     {
                         props.counter && !props.disabled
                         && `${props.value?.length} / ${props.counter}`
