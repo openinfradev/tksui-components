@@ -1,5 +1,5 @@
 import {CSSProperties, forwardRef, KeyboardEvent, MouseEvent, Ref, useCallback, useImperativeHandle, useMemo, useRef} from 'react';
-import {buttonSize, TButtonProps, TButtonRef} from './TButton.interface';
+import {buttonSize, buttonVariant, TButtonProps, TButtonRef} from './TButton.interface';
 import useRipple from '@/common/hook/UseRipple';
 import TIcon from '../../icon/TIcon';
 
@@ -27,7 +27,7 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
 
     // region [Events]
 
-    const onMouseDown = useCallback((event: MouseEvent): void => {
+    const onMouseDown = useCallback((event: MouseEvent<HTMLButtonElement>): void => {
         if (!props.disabled) {
             ripple.register(event);
         }
@@ -41,11 +41,11 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
     }, [props, ripple]);
 
     const onMouseLeave = useCallback((): void => {
-        ripple.remove();
+        if (ripple.status === 'on') { ripple.remove(); }
     }, [ripple]);
 
     const onKeyDown = useCallback((event: KeyboardEvent): void => {
-        if (event.key === 'Enter' || event.key === ' ') {
+        if ((event.key === 'Enter' || event.key === ' ') && ripple.status === 'off') {
             ripple.register(event);
         }
     }, [ripple]);
@@ -58,7 +58,6 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
             }
         }
     }, [props, ripple]);
-
 
     // endregion
 
@@ -75,30 +74,31 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
         return buttonSize.medium;
     }, [props.size, props.xsmall, props.small, props.medium, props.large, props.xlarge]);
 
-    const contentIconSize = useMemo(() => {
-        if ($_size === 'xsmall') { return 'small'; }
-        if ($_size === 'small') { return 'small'; }
-        if ($_size === 'medium') { return 'small'; }
-        if ($_size === 'large') { return 'large'; }
-        if ($_size === 'xlarge') { return 'large'; }
-        return 'medium';
-    }, [$_size]);
+    const contentIconInfo = useMemo(() => {
 
+        const iconInfo = {render: true, size: ''};
+        if ($_size === 'medium') { return {...iconInfo, size: 'xsmall'}; }
+        if ($_size === 'large') { return {...iconInfo, size: 'xsmall'}; }
+        if ($_size === 'xlarge') { return {...iconInfo, size: 'medium'}; }
+
+        return {...iconInfo, render: false};
+    }, [$_size]);
 
     const rootClass: string = useMemo(() => {
         const clazz = [];
 
         clazz.push(`t-button--${$_size}`);
         if (props.className) { clazz.push(props.className); }
-        if (props.primary) { clazz.push('t-button--primary'); }
-        if (props.point) { clazz.push('t-button--point'); }
-        if (props.main) { clazz.push('t-button--main'); }
+        if (props.variant && props.variant in buttonVariant) { clazz.push(`t-button--${props.variant}`); }
+        if (props.outlined) { clazz.push('t-button--outlined'); }
+        if (props.plain) { clazz.push('t-button--plain'); }
+        if (props.ghost) { clazz.push('t-button--ghost'); }
         if (props.disabled) { clazz.push('t-button--disabled'); }
         if (props.rounded) { clazz.push('t-button--rounded'); }
         if (props.loading) { clazz.push('t-button--loading'); }
 
         return clazz.join(' ');
-    }, [$_size, props.className, props.point, props.primary, props.main, props.disabled, props.rounded, props.loading]);
+    }, [$_size, props.className, props.outlined, props.plain, props.ghost, props.disabled, props.rounded, props.loading]);
 
     const rootStyle: CSSProperties = useMemo(() => {
         let style: CSSProperties = {};
@@ -119,6 +119,7 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
                 onMouseLeave={onMouseLeave}
                 onKeyDown={onKeyDown}
                 onKeyUp={onKeyUp}
+                disabled={props.disabled}
                 tabIndex={(props.disabled || props.loading) ? -1 : 0}
                 data-tooltip-id={props.tooltipId}
                 data-tooltip-content={props.tooltipContent}
@@ -130,8 +131,8 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
                     ? (
                         <div className={'t-button__content'}>
                             {
-                                props.icon && (
-                                    <TIcon size={contentIconSize} className={'t-button__content__icon'}>{props.icon}</TIcon>
+                                props.icon && contentIconInfo.render && (
+                                    <TIcon size={contentIconInfo.size} className={'t-button__content__icon'}>{props.icon}</TIcon>
                                 )
                             }
                             {props.children}

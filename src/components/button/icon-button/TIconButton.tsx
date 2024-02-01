@@ -63,11 +63,11 @@ const TIconButton = forwardRef((props: TIconButtonProps, ref: Ref<TIconButtonRef
     }, [props, ripple]);
 
     const onMouseLeave = useCallback((): void => {
-        ripple.remove();
+        if (ripple.status === 'on') { ripple.remove(); }
     }, [ripple]);
 
     const onKeyDown = useCallback((event: KeyboardEvent): void => {
-        if (event.key === 'Enter' || event.key === ' ') {
+        if ((event.key === 'Enter' || event.key === ' ') && ripple.status === 'off') {
             ripple.register(event);
         }
     }, [ripple]);

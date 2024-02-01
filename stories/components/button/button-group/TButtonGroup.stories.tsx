@@ -1,6 +1,5 @@
 import {Meta, StoryObj} from '@storybook/react';
-
-import {useCallback, useState} from 'react';
+import {ReactNode, useCallback, useState} from 'react';
 import TButtonGroup from '@/components/button/button-group/TButtonGroup';
 import TIcon from '@/components/icon/TIcon';
 
@@ -13,6 +12,15 @@ export default meta;
 
 type Story = StoryObj<typeof TButtonGroup>;
 
+const Container = ({label, children}: { label: string, children: ReactNode }) => {
+    return (
+        <div style={{display: 'flex', alignItems: 'flex-start', flexDirection: 'column', gap: '8px'}}>
+            <p style={{fontSize: '14px'}}>{label}</p>
+            <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>{children}</div>
+        </div>
+    );
+};
+
 const Template = (args) => {
 
     const [searchParam, setSearchParam] = useState<string | string[]>(args.value);
@@ -21,28 +29,17 @@ const Template = (args) => {
         setSearchParam(value);
     }, []);
 
+    return (
+        <div style={{display: 'flex', flexDirection: 'column', gap: '24px'}}>
+            <Container label={`Default(value: ${args.multiSelect ? (searchParam as string[]).join(', ') : searchParam})`}>
+                <TButtonGroup {...args} value={searchParam} onChange={onChangeSearchParam}/>
+            </Container>
 
-    return (<>
-        <span style={{fontSize: '20px'}}>
-            선택된 값 = {args.multiSelect ? (searchParam as string[]).join(', ') : searchParam}
-        </span> <br/><br/><br/><br/>
+            <Container label={'Disabled'}>
+                <TButtonGroup {...args} disabled value={searchParam} onChange={onChangeSearchParam}/>
+            </Container>
 
-        Normal <br/> <br/>
-        <TButtonGroup {...args} value={searchParam} onChange={onChangeSearchParam}/>
-        <br/> <br/>
-
-        Primary <br/> <br/>
-        <TButtonGroup {...args} primary value={searchParam} onChange={onChangeSearchParam}/>
-        <br/> <br/>
-
-        Disabled <br/> <br/>
-        <TButtonGroup {...args} disabled value={searchParam} onChange={onChangeSearchParam}/>
-
-        <br/> <br/>
-
-        Primary + Disabled <br/> <br/>
-        <TButtonGroup {...args} primary disabled value={searchParam} onChange={onChangeSearchParam}/>
-    </>);
+        </div>);
 };
 
 
@@ -51,9 +48,9 @@ export const SingleSelect: Story = {
     args: {
         value: '1d',
         items: [
-            {template: '최근 1일', value: '1d'},
-            {template: '7일', value: '7d'},
-            {template: '30일', value: '30d'},
+            {template: '최근 1주', value: '1W'},
+            {template: '1개월', value: '1M'},
+            {template: '3개월', value: '3M'},
         ],
         multiSelect: false,
     },

@@ -15,6 +15,5 @@ export interface TButtonGroupProps extends TBaseProps {
 
     multiSelect?: boolean,
 
-    primary?: boolean,
     disabled?: boolean,
 }
