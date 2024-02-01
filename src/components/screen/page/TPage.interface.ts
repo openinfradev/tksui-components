@@ -1,13 +1,11 @@
 import {ReactNode} from 'react';
+import {TBaseProps} from '@/common/base/TBase.interface';
 
-export interface TPageProps {
+export interface TPageProps extends TBaseProps {
     children: ReactNode,
-    className?: string,
-    style?: { [key: string]: string },
 
     title?: string,
 
-    isInfoPanelOpened?: boolean,
     infoPanelContent?: ReactNode,
 }
 

@@ -102,10 +102,12 @@ export default function TPage(props: TPageProps) {
     return (
         <div className={`t-page ${rootClass}`}
              style={props.style}
-             ref={rootRef}>
+             ref={rootRef}
+             id={props.id}
+             data-testid={'t-page-root'}>
             <div className={'t-page__content-container'}>
                 <div className={'t-page__title-area'}>
-                    <h3 className={'t-page__title-area__title'}>{props.title}</h3> {isInfoPanelOpened}
+                    <h3 className={'t-page__title-area__title'}>{props.title}</h3>
 
                     {
                         props.infoPanelContent && (
@@ -124,10 +126,16 @@ export default function TPage(props: TPageProps) {
             {
                 props.infoPanelContent && (
                     <div className={`t-page__information-area ${infoPanelClass}`}
-                         style={isInfoPanelOpened ? {flex: `0 0 ${panelWidth}`} : {}}>
-                        <div className={'t-page__information-area__resizer'}
-                             onMouseDown={onMouseDown}
-                        />
+                         style={isInfoPanelOpened ? {flex: `0 0 ${panelWidth}`} : {}}
+                         data-testid='t-page-information-area'>
+                        {
+                            isInfoPanelOpened && (
+                                <div className={'t-page__information-area__resizer'}
+                                     onMouseDown={onMouseDown}
+                                     data-testid={'t-page-information-area-resizer'}
+                                />
+                            )
+                        }
                         <div className={'t-page__information-area__container'}>
                             <div className={'t-page__information-area__header'}>
                                 <TIcon className={'t-page__information-area__header__close'}
