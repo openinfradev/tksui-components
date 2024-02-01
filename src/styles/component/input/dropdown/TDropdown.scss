@@ -116,6 +116,17 @@
             max-height: $t-dropdown-item-height * 5.5;
             overflow-y: auto;
 
+            .t-dropdown__items__wrapper-hidden {
+                overflow: hidden;
+                display: inline-block;
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                margin: -1px;
+                padding: 0;
+                border: 0;
+                clip: rect(0,0,0,0);
+            }
         }
 
 

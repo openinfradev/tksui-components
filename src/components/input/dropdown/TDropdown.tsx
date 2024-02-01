@@ -11,6 +11,7 @@ import {
     useRef,
     useState,
 } from 'react';
+import uniqueId from 'lodash/uniqueId';
 import useValidator from '@/common/hook/UseValidator';
 import {TDropdownItem, TDropdownProps, TDropdownRef} from './TDropdown.interface';
 import useClickOutside from '@/common/hook/UseClickOutside';
@@ -32,7 +33,7 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
     const [filterText, setFilterText] = useState('');
     const [isOpened, setIsOpened] = useState(false);
     const [itemMap, setItemMap] = useState(new Map());
-
+    const messageUuid = uniqueId();
 
     useImperativeHandle(ref, () => ({
         focus() {
@@ -361,8 +362,19 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
                             onChange={onChangeFilterText}
                             onClear={onClearFilterText}
                             onKeyDown={onKeyDownFilterText}
+                            messageId={messageUuid}
                 />
                 <div className={'t-dropdown__items__wrapper'}>
+                    {
+                        isOpened && (
+                            <span className={'t-dropdown__items__wrapper-hidden'}>Opened</span>
+                        )
+                    }
+                    {
+                        !isOpened && (
+                            <span className={'t-dropdown__items__wrapper-hidden'}>Closed</span>
+                        )
+                    }
                     {
 
                         isOpened && getFilteredItems()
@@ -398,7 +410,7 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
             {
                 !props.noDetail && (
                     <div className={'t-dropdown__details'}>
-                        <div className={'t-dropdown__details__message'}>
+                        <div className={'t-dropdown__details__message'} id={messageUuid}>
                             {validator.message && `${validator.message}`}
                         </div>
                     </div>
