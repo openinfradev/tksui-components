@@ -2,10 +2,22 @@
     line-height: $t-line-height-header;
 
     .t-radio__container {
+        position: relative;
         display: flex;
         align-items: center;
         cursor: pointer;
         outline: none;
+
+        .t-radio__input-hidden {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 24px;
+            height: 24px;
+            margin: 0;
+            appearance: none;
+            cursor: pointer;
+        }
 
         .t-radio__icon {
             border-radius: 2px;

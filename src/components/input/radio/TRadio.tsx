@@ -1,10 +1,16 @@
 import {CSSProperties, KeyboardEvent} from 'react';
+import uniqueId from 'lodash/uniqueId';
 import TIcon from '../../icon/TIcon';
 import {TRadioProps} from './TRadio.interface';
 
 
 function TRadio(props: TRadioProps) {
-    
+
+    // region [Hooks]
+
+    const inputUuid = uniqueId();
+
+    // endregion
     
     // region [Styles]
     
@@ -65,13 +71,11 @@ function TRadio(props: TRadioProps) {
         if (props.selected) {
             iconType = 't_radio_on';
         } else if (props.disabled) {
-            iconType = 't_radio_disabled_off'
+            iconType = 't_radio_disabled_off';
         } else {
-            iconType = 't_radio_off'
+            iconType = 't_radio_off';
         }
 
-
-        
         
         return (
             <TIcon small className={`t-radio__icon t-radio__icon--${status}`}>
@@ -88,17 +92,32 @@ function TRadio(props: TRadioProps) {
             
             {/* Main */}
             <div className={'t-radio__container'}
-                 tabIndex={props.disabled ? -1 : 0}
+                 tabIndex={props.disabled ? -1 : null}
                  onKeyDown={onKeyDown}
                  onClick={onClickRadio}
                  data-testid={'t-radio-container'}>
+
+                <input type={'radio'}
+                       role={'radio'}
+                       className={'t-radio__input-hidden'}
+                       disabled={props.disabled}
+                       id={inputUuid}
+                       aria-describedby={props.messageId}/>
+
                 {iconTemplate()}
-                <span className={'t-radio__label'}>{props.children}</span>
+
+                <label htmlFor={inputUuid}>
+
+                    <span className={'t-radio__label'}>{props.children}</span>
+
+                </label>
+
             </div>
+
         </div>
     );
-    
-    // endregion
+
+// endregion
 }
 
 TRadio.defaultProps = {};

@@ -20,6 +20,7 @@ export interface TRadioGroupProps extends TBaseProps, TValidatorProps {
     valueKey?: string,
     
     labelTemplate?: (item: TRadioGroupItem) => string,
+    labelId?: string,
     
     onChange(value: TRadioGroupValue): void,
 }

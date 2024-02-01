@@ -10,6 +10,7 @@ export interface TRadioProps extends TBaseProps {
     
     selected?: boolean,
     disabled?: boolean,
+    messageId?: string,
     onSelect(value: TRadioValue): void,
     
 }

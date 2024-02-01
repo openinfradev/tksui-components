@@ -87,11 +87,13 @@ const TRadioGroup = forwardRef((props: TRadioGroupProps, ref: Ref<TRadioGroupRef
         <div className={`t-radio-group ${getRootClass()}`}
              style={getRootStyle()}
              ref={rootRef}
-             tabIndex={props.disabled ? -1 : 0}
+             tabIndex={props.disabled ? -1 : null}
              onFocus={onFocus}
              onBlur={onBlur}
              id={props.id}
-             data-testid={'t-radio-group-root'}>
+             data-testid={'t-radio-group-root'}
+             aria-labelledby={props.labelId}
+             role={props.labelId ? 'radiogroup' : null}>
             <div className={'t-radio-group__container'}>
                 {
                     props.items.map((item, index) => (
@@ -101,7 +103,7 @@ const TRadioGroup = forwardRef((props: TRadioGroupProps, ref: Ref<TRadioGroupRef
                                 disabled={props.disabled || item.disabled}
                                 onSelect={onSelectRadio}
                         >
-                            
+
                             {props.labelTemplate ? props.labelTemplate(item) : item[props.textKey]}
                         </TRadio>
                     ))
