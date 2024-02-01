@@ -310,7 +310,7 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
                     {
                         props.multiple && props.chip && (
                             props.value as string[]).map((value) => (
-                            <TChip key={value} small onRemove={props.disabled ? null : () => onClickItem(value)}>
+                            <TChip key={value} onRemove={props.disabled ? null : () => onClickItem(value)}>
                                 {getItemTemplate(itemMap.get(value))}
                             </TChip>
                         ))
