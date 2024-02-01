@@ -93,7 +93,6 @@ const TDataGrid = forwardRef((props: TDataGridProps, ref: Ref<AgGridReact>) => {
             {
                 props.noDataContent && (
                     <TButton className={'t-data-grid__body__no-rows-template__add-button'}
-                             point
                              onClick={props.noDataContent.addButtonHandler}>
                         {props.noDataContent.title} 생성하기
                     </TButton>

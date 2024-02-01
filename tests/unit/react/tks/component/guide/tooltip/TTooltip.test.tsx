@@ -1,7 +1,7 @@
 import {render, screen} from '@testing-library/react';
-import TTooltip from '~/guide/tooltip/TTooltip';
 import userEvent from '@testing-library/user-event';
-import ResizeObserver from 'resize-observer-polyfill'
+import ResizeObserver from 'resize-observer-polyfill';
+import TTooltip from '~/guide/tooltip/TTooltip';
 
 global.ResizeObserver = ResizeObserver;
 
@@ -56,7 +56,7 @@ describe('TTooltip', () => {
                           data-tooltip-place={'left'}>
                         {spanContent}
                     </span>
-                </>
+                </>,
             );
 
             const item = screen.getByText(spanContent);

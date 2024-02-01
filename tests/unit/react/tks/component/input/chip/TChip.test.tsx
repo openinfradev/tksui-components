@@ -15,229 +15,129 @@ describe('TChip', () => {
 
             // Arrange
             const testData = 'class-name-prop';
-
             render(<TChip className={testData}>hello</TChip>);
-
             const root = screen.getByTestId('t-chip-root');
 
             // Assert
             expect(root).toHaveClass(testData);
-
         });
 
         it('Style prop applies to root', () => {
 
             // Arrange
             const testData = {width: '50px'};
-
             render(<TChip style={testData}>hello</TChip>);
-
             const root = screen.getByTestId('t-chip-root');
 
             // Assert
             expect(root).toHaveStyle(testData);
-
         });
 
         it('ID prop applies to root', () => {
 
             // Arrange
             const testData = 'test-id';
-
             render(<TChip id={testData}>hello</TChip>);
-
             const root = screen.getByTestId('t-chip-root');
 
             // Assert
             expect(root).toHaveProperty('id');
             expect(root.id).toEqual(testData);
-
         });
 
-        it('When type prop is set to filled, root has t-chip--filled class', () => {
+        it('Fill prop applies to root', () => {
 
             // Arrange
-            render(<TChip type={'filled'}>hello</TChip>);
-
-            const chip = screen.getByTestId('t-chip-root');
-
-            // Assert
-            expect(chip).toHaveClass('t-chip--filled');
-
-        });
-
-        it('When primary prop is applied, root has t-chip--primary class', () => {
-
-            // Arrange
-            render(<TChip primary={true}>hello</TChip>);
-
+            render(<TChip fill>hello</TChip>);
             const root = screen.getByTestId('t-chip-root');
 
             // Assert
-            expect(root).toHaveClass('t-chip--primary');
-
+            expect(root).toHaveClass('t-chip--fill');
         });
 
-        it('When icon prop is applied, it should be displayed on content area', () => {
+        it('Outlined prop applies to root', () => {
+
+            // Arrange
+            render(<TChip outlined>hello</TChip>);
+            const root = screen.getByTestId('t-chip-root');
+
+            // Assert
+            expect(root).toHaveClass('t-chip--outlined');
+        });
+
+        it('When type prop is set to filled, root has t-chip--fill class', () => {
+
+            // Arrange
+            render(<TChip type={'fill'}>hello</TChip>);
+            const chip = screen.getByTestId('t-chip-root');
+
+            // Assert
+            expect(chip).toHaveClass('t-chip--fill');
+        });
+
+        it('When type prop is set to outlined, root has t-chip--outlined class', () => {
+
+            // Arrange
+            render(<TChip type={'outlined'}>hello</TChip>);
+            const root = screen.getByTestId('t-chip-root');
+
+            // Assert
+            expect(root).toHaveClass('t-chip--outlined');
+        });
+
+        it('When prevIcon prop is applied, it should be displayed on content area', () => {
 
             // Arrange
             const importedIcon = 'chips';
-
-            render(<TChip icon={importedIcon}>hello</TChip>);
-
-            const content = screen.getByText(importedIcon);
+            render(<TChip prevIcon={importedIcon}>hello</TChip>);
+            const root = screen.getByText(importedIcon);
 
             // Assert
-            expect(content).toHaveTextContent(importedIcon);
-
+            expect(root).toHaveTextContent(importedIcon);
         });
 
-        it('When removeIcon prop and onRemove are applied, removeIcon should be displayed on content area', () => {
+        it('When icon prevIconColor is applied, it should be displayed on content area', () => {
 
             // Arrange
-            const closeIcon = 'close';
-
-            render(<TChip removeIcon={closeIcon} onRemove={mockFn}>hello</TChip>);
-
-            const content = screen.getByText(closeIcon);
+            const importedIcon = 'chips';
+            const testColor = 'red';
+            render(<TChip prevIcon={importedIcon} prevIconColor={'red'}>hello</TChip>);
+            const root = screen.getByText(importedIcon);
 
             // Assert
-            expect(content).toHaveTextContent(closeIcon);
-
+            expect(root).toHaveStyle({color: testColor});
         });
 
-    });
-
-    describe('Size', () => {
-
-        it('When valid size is entered, it will be applied in the classname', () => {
+        it('When icon prevIconSize is applied, it should be displayed on content area', () => {
 
             // Arrange
-            render(
-                <>
-                    <TChip size={'xsmall'}>hello</TChip>
-                    <TChip size={'small'}>hello</TChip>
-                    <TChip size={'medium'}>hello</TChip>
-                    <TChip size={'large'}>hello</TChip>
-                    <TChip size={'xlarge'}>hello</TChip>
-                </>,
-            );
-
-            const chips = screen.getAllByTestId('t-chip-root');
-
-            expect(chips[0]).toHaveClass('t-chip--xsmall');
-            expect(chips[1]).toHaveClass('t-chip--small');
-            expect(chips[2]).toHaveClass('t-chip--medium');
-            expect(chips[3]).toHaveClass('t-chip--large');
-            expect(chips[4]).toHaveClass('t-chip--xlarge');
-
-        });
-
-        it('When xsmall is applied, icon chip will be xsmall', () => {
-
-            // Arrange
-            render(<TChip xsmall>hello</TChip>);
-
-            const chip = screen.getByTestId('t-chip-root');
+            const importedIcon = 'chips';
+            const testIconSize = 'xlarge';
+            render(<TChip prevIcon={importedIcon} prevIconSize={testIconSize}>hello</TChip>);
+            const root = screen.getByText(importedIcon);
 
             // Assert
-            expect(chip).toHaveClass('t-chip--xsmall');
-
+            expect(root).toHaveClass(`t-icon--${testIconSize}`);
         });
 
-        it('When small is applied, icon chip will be small', () => {
+        it(
+            'When onRemove prop applied, removeIcon is visible',
+            async () => {
 
-            // Arrange
-            render(<TChip small>hello</TChip>);
+                // Arrange
+                render(<TChip onRemove={mockFn}>TChip</TChip>);
+                const removeIconElement = screen.getByRole('img');
 
-            const chip = screen.getByTestId('t-chip-root');
+                // Assert
+                expect(removeIconElement).toBeInTheDocument();
 
-            // Assert
-            expect(chip).toHaveClass('t-chip--small');
-
-        });
-
-        it('When medium is applied, icon chip will be medium', () => {
-
-            // Arrange
-            render(<TChip medium>hello</TChip>);
-
-            const chip = screen.getByTestId('t-chip-root');
-
-            // Assert
-            expect(chip).toHaveClass('t-chip--medium');
-
-        });
-
-        it('When large is applied, icon chip will be large', () => {
-
-            // Arrange
-            render(<TChip large>hello</TChip>);
-
-            const chip = screen.getByTestId('t-chip-root');
-
-            // Assert
-            expect(chip).toHaveClass('t-chip--large');
-
-        });
-
-        it('When xlarge is applied, icon chip will be xlarge', () => {
-
-            // Arrange
-            render(<TChip xlarge>hello</TChip>);
-
-            const chip = screen.getByTestId('t-chip-root');
-
-            // Assert
-            expect(chip).toHaveClass('t-chip--xlarge');
-
-        });
-
-        it('When size prop applied, delete icon size will be changed', () => {
-
-            // Arrange
-            render(
-                <>
-                    <TChip size={'xsmall'} icon={'chips'}>hello</TChip>
-                    <TChip size={'small'} icon={'chips'}>hello</TChip>
-                    <TChip size={'medium'} icon={'chips'}>hello</TChip>
-                    <TChip size={'large'} icon={'chips'}>hello</TChip>
-                    <TChip size={'xlarge'} icon={'chips'}>hello</TChip>
-                    <TChip size={'invalid'} icon={'chips'}>hello</TChip>
-                </>,
-            );
-
-            const chips = screen.getAllByRole('img');
-
-            expect(chips[0]).toHaveStyle({fontSize: '12px'});
-            expect(chips[1]).toHaveStyle({fontSize: '14px'});
-            expect(chips[2]).toHaveStyle({fontSize: '16px'});
-            expect(chips[3]).toHaveStyle({fontSize: '20px'});
-            expect(chips[4]).toHaveStyle({fontSize: '24px'});
-            expect(chips[5]).toHaveStyle({fontSize: '16px'});
-
-        });
+                // Assert
+            },
+        );
 
     });
 
     describe('Event', () => {
-
-        it('When clicking remove icon, onRemove handler is called', async () => {
-
-            // Arrange
-            const user = userEvent.setup();
-
-            render(<TChip onRemove={mockFn}>hello</TChip>);
-
-            const remove = screen.getByRole('img');
-
-            // Act
-            await user.click(remove);
-
-            // Assert
-            expect(mockFn).toHaveBeenCalledTimes(1);
-
-        });
 
         it('When remove handler is triggered, onRemove handler is called', async () => {
 
