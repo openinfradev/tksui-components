@@ -1,9 +1,0 @@
-import{j as e}from"./jsx-runtime-vNq4Oc-g.js";import{T as n}from"./TIconButton-1RQhodRD.js";import"./index-4g5l5LRQ.js";import"./_commonjsHelpers-4gQjN7DL.js";import"./UseRipple-bKa6TkVL.js";import"./TIcon-4O00LWfy.js";import"./ThemeToken.module-mxnC7jdb.js";const T={title:"Button/TIconButton",component:n},t=r=>e.jsx("div",{style:{display:"flex",flexDirection:"column",fontSize:"14px",gap:"8px",alignItems:"center"},children:r.children}),x=r=>e.jsx(e.Fragment,{children:e.jsxs("div",{style:{display:"grid",gridTemplateColumns:"repeat(4, 150px)",marginTop:"32px",rowGap:"40px",alignItems:"center",textAlign:"center"},children:[e.jsx("div",{}),e.jsx("div",{children:"Elevation"}),e.jsx("div",{children:"Flat"}),e.jsx("div",{children:"None"}),e.jsx("div",{children:"Rectangle"}),e.jsx(t,{children:e.jsx(n,{...r,shape:"rectangle",outline:"elevation",children:"add"})}),e.jsx(t,{children:e.jsx(n,{...r,shape:"rectangle",outline:"flat",children:"add"})}),e.jsx(t,{children:e.jsx(n,{...r,shape:"rectangle",outline:"none",children:"add"})}),e.jsx("div",{children:"Circle"}),e.jsx(t,{children:e.jsx(n,{...r,shape:"circle",outline:"elevation",children:"add"})}),e.jsx(t,{children:e.jsx(n,{...r,shape:"circle",outline:"flat",children:"add"})}),e.jsx(t,{children:e.jsx(n,{...r,shape:"circle",outline:"none",children:"add"})})]})}),i={render:x,args:{}},s={render:x,args:{disabled:!0}};var l,a,d;i.parameters={...i.parameters,docs:{...(l=i.parameters)==null?void 0:l.docs,source:{originalSource:`{
-  render: Template,
-  args: {}
-}`,...(d=(a=i.parameters)==null?void 0:a.docs)==null?void 0:d.source}}};var c,o,p;s.parameters={...s.parameters,docs:{...(c=s.parameters)==null?void 0:c.docs,source:{originalSource:`{
-  render: Template,
-  args: {
-    disabled: true
-  }
-}`,...(p=(o=s.parameters)==null?void 0:o.docs)==null?void 0:p.source}}};const D=["Default","Disabled"];export{i as Default,s as Disabled,D as __namedExportsOrder,T as default};
