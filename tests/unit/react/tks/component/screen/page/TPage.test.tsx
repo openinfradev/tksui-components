@@ -174,7 +174,7 @@ describe('TPage', () => {
 
             render(<TPage infoPanelContent={infoContent}>Content</TPage>);
 
-            const icon = screen.getByRole('img', {name: 't_information'});
+            const icon = screen.getByRole('img', {name: 'info'});
 
             // Act
             await user.click(icon);
@@ -223,7 +223,7 @@ describe('TPage', () => {
 
             render(<TPage isInfoPanelOpened={true} infoPanelContent={infoContent}>Content</TPage>);
 
-            const icon = screen.getByRole('img', {name: 't_information'});
+            const icon = screen.getByRole('img', {name: 'info'});
 
             const beforeInfoArea = screen.getByTestId('t-page-information-area');
 
@@ -294,7 +294,7 @@ describe('TPage', () => {
 
             render(<TPage infoPanelContent={infoContent}>Content</TPage>);
 
-            const informationIcon = screen.getByRole('img', {name: 't_information'});
+            const informationIcon = screen.getByRole('img', {name: 'info'});
             const closeIcon = screen.getByRole('img', {name: 'close'});
 
             // Assert
