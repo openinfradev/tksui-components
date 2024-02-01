@@ -68,16 +68,17 @@ function TSwitch(props: TSwitchProps) {
              data-testid={'t-switch-root'}
         >
             <div className={`t-switch__container ${containerClass}`}
+                 tabIndex={props.disabled ? -1 : 0}
+                 onKeyDown={onKeydownThumb}
                  data-testid={'t-switch-container'}
+                 aria-pressed={!!props.value}
             >
                 <div className={'t-switch__container__thumb'}
-                     tabIndex={props.disabled ? -1 : 0}
-                     onKeyDown={onKeydownThumb}
                      data-testid={'t-switch-thumb'}
                 />
             </div>
             {
-                props.label && <label className={'t-switch__label'}> {props.label} </label>
+                props.label && <span className={'t-switch__label'}> {props.label} </span>
             }
         </div>
     );
