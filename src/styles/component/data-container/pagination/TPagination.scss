@@ -95,14 +95,8 @@
         }
 
         .t-pagination__jumper__container__button {
-            // FIXME: 버튼 디자인 변경된 plain으로 적용하고 기존 스타일 제거
             min-width: 71px;
-            height: 24px;
-            border: 1px solid $t-gray-color-4;
-            background-color: $t-white-color;
             border-radius: 2px;
-            padding: 0;
-            @include typo-element-4;
         }
 
         .t-number-field__details { display: none; }
