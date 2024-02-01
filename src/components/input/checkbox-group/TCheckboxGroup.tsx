@@ -98,11 +98,13 @@ const TCheckboxGroup = forwardRef((props: TCheckboxGroupProps, ref: Ref<TCheckbo
         <div className={`t-checkbox-group ${getRootClass()}`}
              style={getRootStyle()}
              ref={rootRef}
-             tabIndex={props.disabled ? -1 : 0}
+             tabIndex={props.disabled ? -1 : null}
              onFocus={onFocus}
              onBlur={onBlur}
              id={props.id}
              data-testid={'t-checkbox-group-root'}
+             aria-labelledby={props.labelId}
+             role={props.labelId ? 'group' : null}
         >
             <div className={'t-checkbox-group__container'}>
                 {

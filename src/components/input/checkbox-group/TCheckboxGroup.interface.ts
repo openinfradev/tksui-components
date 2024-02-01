@@ -12,10 +12,12 @@ export interface TCheckboxGroupProps extends TBaseProps, TValidatorProps {
     value: TCheckboxGroupValue,
     items: TCheckboxGroupItem[],
     disabled?: boolean,
-    
+
+    labelId?: string,
+
     textKey?: string,
     valueKey?: string,
-    
+
     labelTemplate?: (item: TCheckboxGroupItem) => string,
     
     onChange(value: TCheckboxGroupValue): void,
