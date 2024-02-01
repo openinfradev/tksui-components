@@ -1,4 +1,5 @@
 import {CSSProperties, forwardRef, KeyboardEvent, Ref, useCallback, useImperativeHandle, useMemo, useRef, useState} from 'react';
+import uniqueId from 'lodash/uniqueId';
 import useValidator from '@/common/hook/UseValidator';
 import {TNumberFieldProps, TNumberFieldRef} from './TNumberField.interface';
 
@@ -11,6 +12,8 @@ const TNumberField = forwardRef((props: TNumberFieldProps, ref: Ref<TNumberField
     const [hasFocus, setHasFocus] = useState<boolean>(false);
     const validator = useValidator(props.value, props.rules, props.successMessage);
     const inputRef = useRef<HTMLInputElement>(null);
+    const inputUuid: string = uniqueId();
+    const messageUuid: string = uniqueId();
 
     useImperativeHandle(ref, () => ({
         focus() {
@@ -89,7 +92,6 @@ const TNumberField = forwardRef((props: TNumberFieldProps, ref: Ref<TNumberField
 
         return style;
     }, [props.style, props.width]);
-
 
     // endregion
 
@@ -204,10 +206,11 @@ const TNumberField = forwardRef((props: TNumberFieldProps, ref: Ref<TNumberField
     return (
         <div className={`t-number-field ${rootClass}`}
              style={rootStyle}
+             id={props.id}
              data-testid={'number-field-root'}>
             {
                 props.label && (
-                    <label className={`t-number-field__label ${labelClass}`}>
+                    <label className={`t-number-field__label ${labelClass}`} htmlFor={inputUuid}>
                         {props.label}
                     </label>
                 )
@@ -216,7 +219,8 @@ const TNumberField = forwardRef((props: TNumberFieldProps, ref: Ref<TNumberField
                  data-testid={'number-field-root__container'}>
                 <input ref={inputRef}
                        type={'number'}
-                       tabIndex={props.disabled ? -1 : 0}
+                       tabIndex={props.disabled ? -1 : null}
+                       title={!props.label ? `t-number-field__container__input-title-${props.id}` : null}
                        className={`t-number-field__container__input ${inputClass}`}
                        disabled={props.disabled}
                        placeholder={inputPlaceholder}
@@ -228,6 +232,8 @@ const TNumberField = forwardRef((props: TNumberFieldProps, ref: Ref<TNumberField
                        onKeyDown={onKeyDown}
                        onFocus={onFocus}
                        onBlur={onBlur}
+                       id={inputUuid}
+                       aria-describedby={messageUuid}
                        data-testid={'number-field-input-root'}
                 />
                 {
@@ -247,7 +253,9 @@ const TNumberField = forwardRef((props: TNumberFieldProps, ref: Ref<TNumberField
                 }
             </div>
             <div className={'t-number-field__details'}>
-                <div className={'t-number-field__details__message'} data-testid={'number-field-message'}>
+                <div className={'t-number-field__details__message'}
+                     id={messageUuid}
+                     data-testid={'number-field-message'}>
                     {validator.message || props.hint}
                 </div>
             </div>
