@@ -61,29 +61,6 @@ describe('TPage', () => {
 
         });
 
-        it('When isInfoPanelOpened prop is applied, information area has t-page__information-area--visible class', () => {
-
-            // Arrange
-            render(<TPage isInfoPanelOpened infoPanelContent={'test info content'}>Content</TPage>);
-
-            const informationArea = screen.getByTestId('t-page-information-area');
-
-            // Assert
-            expect(informationArea).toHaveClass('t-page__information-area--visible');
-
-        });
-
-        it('When isInfoPanelOpened prop is applied, resizer should be displayed on information area', () => {
-
-            // Arrange
-            render(<TPage isInfoPanelOpened infoPanelContent={'test info content'}>Content</TPage>);
-
-            const resizer = screen.getByTestId('t-page-information-area-resizer');
-
-            // Assert
-            expect(resizer).toBeInTheDocument();
-
-        });
 
     });
 
@@ -94,9 +71,15 @@ describe('TPage', () => {
             // Arrange
             const user = userEvent.setup();
 
-            render(<TPage isInfoPanelOpened infoPanelContent={'test info content'}>Content</TPage>);
+            render(<TPage infoPanelContent={'test info content'}>Content</TPage>);
 
             const root = screen.getByTestId('t-page-root');
+            const icon = screen.getByRole('img', {name: 'info'});
+
+            // Act
+            await user.click(icon);
+
+            // Arrange
             const resizer = screen.getByTestId('t-page-information-area-resizer');
 
             // Act
@@ -120,9 +103,14 @@ describe('TPage', () => {
 
             const user = userEvent.setup();
 
-            render(<TPage isInfoPanelOpened infoPanelContent={'test info content'}>Content</TPage>);
+            render(<TPage infoPanelContent={'test info content'}>Content</TPage>);
 
+            const icon = screen.getByRole('img', {name: 'info'});
 
+            // Act
+            await user.click(icon);
+
+            // Arrange
             const resizer = screen.queryByTestId('t-page-information-area-resizer');
 
 
@@ -145,9 +133,15 @@ describe('TPage', () => {
 
             // Arrange
             const user = userEvent.setup();
-            render(<TPage isInfoPanelOpened infoPanelContent={'test info content'}>Content</TPage>);
 
+            render(<TPage infoPanelContent={'test info content'}>Content</TPage>);
 
+            const icon = screen.getByRole('img', {name: 'info'});
+
+            // Act
+            await user.click(icon);
+
+            // Arrange
             const resizer = screen.getByTestId('t-page-information-area-resizer');
 
             // Act
@@ -221,11 +215,14 @@ describe('TPage', () => {
 
             const user = userEvent.setup();
 
-            render(<TPage isInfoPanelOpened={true} infoPanelContent={infoContent}>Content</TPage>);
+            render(<TPage infoPanelContent={infoContent}>Content</TPage>);
 
             const icon = screen.getByRole('img', {name: 'info'});
 
             const beforeInfoArea = screen.getByTestId('t-page-information-area');
+
+            // Act
+            await user.click(icon);
 
             // Assert
             expect(beforeInfoArea).toHaveClass('t-page__information-area--visible');
