@@ -2,10 +2,21 @@
     line-height: $t-line-height-header;
 
     .t-checkbox__container {
+        position: relative;
         display: flex;
         align-items: center;
-        cursor: pointer;
         outline: none;
+
+        .t-checkbox__input-hidden {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 24px;
+            height: 24px;
+            margin: 0;
+            appearance: none;
+            cursor: pointer;
+        }
 
         .t-checkbox__icon {
             &.t-checkbox__icon--check, &.t-checkbox__icon--indeterminate { fill: $t-primary-color; stroke: $t-primary-color; }

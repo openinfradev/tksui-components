@@ -1,4 +1,5 @@
 import {CSSProperties, forwardRef, KeyboardEvent, ReactElement, Ref, useEffect, useImperativeHandle, useRef, useState} from 'react';
+import uniqueId from 'lodash/uniqueId';
 import TIcon from '../../icon/TIcon';
 import {TCheckboxProps, TCheckboxRef} from './TCheckbox.interface';
 import useValidator from '@/common/hook/UseValidator';
@@ -11,6 +12,8 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
     const validator = useValidator(props.value, props.rules, props.successMessage);
     const rootRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
+    const inputUuid = uniqueId();
+    const messageUuid = uniqueId();
 
     useEffect(modifyStatus, [props.value, props.indeterminate, props.checked, props.positiveValue]);
     const [status, setStatus] = useState('uncheck');
@@ -133,20 +136,33 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
             {/* Main */}
             <div ref={containerRef}
                  className={'t-checkbox__container'}
-                 tabIndex={props.disabled ? -1 : 0}
+                 tabIndex={props.disabled ? -1 : null}
                  onFocus={validator.clearValidation}
                  onBlur={onBlur}
                  onKeyDown={onKeyDown}
                  onClick={onClickCheckbox}
                  data-testid={'t-checkbox-container'}>
+
+                <input type={'checkbox'}
+                       className={'t-checkbox__input-hidden'}
+                       disabled={props.disabled}
+                       id={inputUuid}
+                       aria-describedby={props.rules ? messageUuid : null}/>
+
                 {iconTemplate()}
-                <span className={'t-checkbox__label'}>{props.children}</span>
+
+                <label htmlFor={inputUuid}>
+
+                    <span className={'t-checkbox__label'}>{props.children}</span>
+
+                </label>
+
             </div>
 
             {/* Validation message, rule 이 설정된 경우에만 그려지게 합니다 */}
             {
                 props.rules
-                && <div className={'t-checkbox__message'}>
+                && <div className={'t-checkbox__message'} id={messageUuid}>
                     {validator.message}
                 </div>
             }
