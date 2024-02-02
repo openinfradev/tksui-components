@@ -1,6 +1,6 @@
-import {useState, useRef, KeyboardEvent, MouseEvent, MutableRefObject, CSSProperties} from 'react';
-import lodashUtil from '@/common/util/lodashUtil';
+import {useRef, KeyboardEvent, MouseEvent, MutableRefObject, CSSProperties, useState} from 'react';
 import colorUtil from '../util/ColorUtil';
+import lodashUtil from '@/common/util/lodashUtil';
 
 type RippleStatus = 'on' | 'off';
 
@@ -10,7 +10,7 @@ const useRipple = (ref: MutableRefObject<HTMLElement>) => {
 
     // region [Hooks]
 
-    const [status, setStatus] = useState<RippleStatus>('off');
+    const status = useRef<RippleStatus>('off');
     const rippleTaskRef = useRef<Promise<string>>();
 
     // endregion
@@ -18,8 +18,17 @@ const useRipple = (ref: MutableRefObject<HTMLElement>) => {
 
     const register = (event: MouseEvent | KeyboardEvent) => {
 
-        setStatus('on');
-        const uniqueRippleClass = lodashUtil.uniqueId('t-ripple-');
+        const keyboardEvent = event as KeyboardEvent;
+        if (event.type.includes('key')) {
+            if (keyboardEvent.key !== 'Enter' && keyboardEvent.key !== ' ') return;
+
+            const buttonElement = event.target as HTMLElement;
+            const rippleRefs = buttonElement.getElementsByClassName('t-ripple');
+            if (status.current === 'on' || rippleRefs?.length > 0) return;
+        }
+
+        status.current = 'on';
+        const rippleClass = lodashUtil.uniqueId('t-ripple-');
 
         rippleTaskRef.current = new Promise((resolve) => {
             const {x, y, width, height} = ref.current.getBoundingClientRect();
@@ -31,7 +40,8 @@ const useRipple = (ref: MutableRefObject<HTMLElement>) => {
             const radius = Math.sqrt(width * width + height * height);
 
             const ripple = document.createElement(rippleElementTag);
-            ripple.classList.add(uniqueRippleClass);
+            ripple.classList.add('t-ripple');
+            ripple.classList.add(rippleClass);
 
             const baseColor = window.getComputedStyle(ref.current)
                 .getPropertyValue('background-color');
@@ -52,11 +62,11 @@ const useRipple = (ref: MutableRefObject<HTMLElement>) => {
                 ripple.style[cssProperty] = rippleStyle[cssProperty];
             });
 
-            ref.current.append(ripple);
+            ref.current.appendChild(ripple);
 
             setTimeout(() => {
 
-                resolve(uniqueRippleClass);
+                resolve(rippleClass);
             }, 350);
         });
 
@@ -65,14 +75,12 @@ const useRipple = (ref: MutableRefObject<HTMLElement>) => {
     const remove = () => {
 
         rippleTaskRef.current?.then((rippleClass) => {
-
             const rippleElement = ref.current?.getElementsByClassName(rippleClass);
             rippleElement[0]?.remove();
-            setStatus('off');
+            status.current = 'off';
         });
     };
 
-
-    return {status, register, remove};
+    return {register, remove};
 };
 export default useRipple;

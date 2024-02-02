@@ -26,7 +26,7 @@ const TTabItem = (props: TTabItemProps) => {
     }, [context, index, value, ripple]);
 
     const onMouseLeave = useCallback((): void => {
-        if (ripple.status === 'on') { ripple.remove(); }
+        ripple.remove();
     }, [ripple]);
 
     // endregion

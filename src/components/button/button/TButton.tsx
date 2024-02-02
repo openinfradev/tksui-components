@@ -41,21 +41,18 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
     }, [props, ripple]);
 
     const onMouseLeave = useCallback((): void => {
-        if (ripple.status === 'on') { ripple.remove(); }
+        ripple.remove();
     }, [ripple]);
 
     const onKeyDown = useCallback((event: KeyboardEvent): void => {
-        if ((event.key === 'Enter' || event.key === ' ') && ripple.status === 'off') {
-            ripple.register(event);
-        }
+        ripple.register(event);
     }, [ripple]);
 
     const onKeyUp = useCallback((event: KeyboardEvent): void => {
+
         if (event.key === 'Enter' || event.key === ' ') {
             ripple.remove();
-            if (props.onClick) {
-                props.onClick(event);
-            }
+            if (props.onClick) { props.onClick(event); }
         }
     }, [props, ripple]);
 
