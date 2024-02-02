@@ -62,7 +62,7 @@ const useRipple = (ref: MutableRefObject<HTMLElement>) => {
                 ripple.style[cssProperty] = rippleStyle[cssProperty];
             });
 
-            ref.current.appendChild(ripple);
+            ref.current.append(ripple);
 
             setTimeout(() => {
 
