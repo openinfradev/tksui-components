@@ -1,8 +1,10 @@
+
 import {act, render, renderHook, screen} from '@testing-library/react';
 import React, {useRef} from 'react';
 import userEvent from '@testing-library/user-event';
 import TCheckboxGroup from '~/input/checkbox-group/TCheckboxGroup';
 import TValidatorRule from '@/common/validator/TValidatorRule';
+import {useInputState} from '@/common/hook';
 
 describe('TCheckboxGroup', () => {
 
@@ -178,7 +180,7 @@ describe('TCheckboxGroup', () => {
         it('When item is checked and that is clicked, it is removed from array', async () => {
 
             // Arrange
-            let testData : any = ['apple'];
+            let testData: any = ['apple'];
 
             const user = userEvent.setup();
 
@@ -202,7 +204,7 @@ describe('TCheckboxGroup', () => {
         it('When item is unchecked and that is clicked, it is added to array', async () => {
 
             // Arrange
-            let testData : any = [];
+            let testData: any = [];
 
             const user = userEvent.setup();
 
@@ -463,6 +465,62 @@ describe('TCheckboxGroup', () => {
             expect(item).toHaveTextContent(testData);
 
         });
+
+        it('When values is changed, Be changed correctly', async () => {
+
+            // Arrange
+            const user = userEvent.setup();
+
+            const ChecboxGroupTest = () => {
+                const useInput = useInputState([]);
+                return (
+                    <TCheckboxGroup onChange={useInput.onChange} value={useInput.value} items={items}/>
+                );
+            };
+
+            render(<ChecboxGroupTest/>);
+
+            const appleButton = screen.getByText(items[0].text);
+            const bananaButton = screen.getByText(items[1].text);
+
+            // Act
+            await user.click(appleButton);
+
+            /* eslint-disable testing-library/no-node-access */
+            const appleExpectedCheckIcon = appleButton?.parentElement?.children[0];
+
+            // Assert
+            expect(appleExpectedCheckIcon).toHaveClass('t-checkbox__icon--check');
+
+            // Act
+            await user.click(bananaButton);
+
+            const bananaExpectedCheckIcon = bananaButton?.parentElement?.children[0];
+
+            // Assert
+            expect(bananaExpectedCheckIcon).toHaveClass('t-checkbox__icon--check');
+
+
+            // Act
+            await user.click(appleButton);
+
+            const appleExpectedUncheckIcon = appleButton?.parentElement?.children[0];
+
+            // Assert
+            expect(appleExpectedUncheckIcon).toHaveClass('t-checkbox__icon--uncheck');
+
+            // Act
+            await user.click(bananaButton);
+
+
+            const bananaExpectedUncheckIcon = bananaButton?.parentElement?.children[0];
+            /* eslint-disable testing-library/no-node-access */
+
+            // Assert
+            expect(bananaExpectedUncheckIcon).toHaveClass('t-checkbox__icon--uncheck');
+
+        });
+
 
     });
 

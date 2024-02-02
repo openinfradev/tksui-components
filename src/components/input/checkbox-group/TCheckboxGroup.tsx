@@ -47,7 +47,7 @@ const TCheckboxGroup = forwardRef((props: TCheckboxGroupProps, ref: Ref<TCheckbo
         } else {
             addValue(value);
         }
-    }, []);
+    }, [props.value]);
 
     const onFocus = useCallback(() => {
         if (props.rules) {
