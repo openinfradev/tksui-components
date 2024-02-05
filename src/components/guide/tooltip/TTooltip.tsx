@@ -5,7 +5,7 @@ import {TTooltipProps} from './TTooltip.interface';
 // region [Tooltip]
 
 const TTooltip = (props: TTooltipProps) => (
-    <ReactTooltip {...props}
+    <ReactTooltip {...props} isOpen={true}
                   className={`t-tooltip ${props.className}`}
     />
 );

@@ -23,6 +23,13 @@
         padding: $t-spacing-16 $t-spacing-16;
         line-height: $t-line-height-body;
 
+        .t-tooltip__title{
+            color: $t-gray-color-1;
+        }
+        .t-tooltip__content{
+            color: $t-gray-color-2;
+        }
+
         & > .react-tooltip-arrow {
             width: 12px;
             height: 12px;
