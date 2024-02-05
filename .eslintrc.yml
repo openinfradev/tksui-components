@@ -42,7 +42,7 @@ rules:
   lines-between-class-members: off # 클래스 멤버변수 사이 한줄 띄우지 않아도 됨
   '@typescript-eslint/no-explicit-any': off # any 사용 가능
   '@typescript-eslint/ban-ts-comment': off
-
+  curly: [error, all] # if 조건문 사용 시 중괄호({}) 필수 예) if (a) { return; }
 
 overrides:
   - files: '*.json'

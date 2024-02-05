@@ -14,8 +14,14 @@ const TIconButton = forwardRef((props: TIconButtonProps, ref: Ref<TIconButtonRef
     const ripple = useRipple(rootRef);
 
     useImperativeHandle(ref, () => ({
-        focus() { /**/ },
-        click() { /**/ },
+        focus() {
+            rootRef?.current?.focus();
+        },
+        click() {
+            if (!props.disabled && props.onClick) {
+                props.onClick();
+            }
+        },
     }));
 
     // endregion
@@ -55,7 +61,7 @@ const TIconButton = forwardRef((props: TIconButtonProps, ref: Ref<TIconButtonRef
         }
     }, [props.disabled, ripple]);
 
-    const onMouseUp = useCallback((event: MouseEvent<Element, globalThis.MouseEvent> | KeyboardEvent<Element>): void => {
+    const onMouseUp = useCallback((event: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>): void => {
         ripple.remove();
         if (!props.disabled && props.onClick) {
             props.onClick(event);
@@ -63,21 +69,18 @@ const TIconButton = forwardRef((props: TIconButtonProps, ref: Ref<TIconButtonRef
     }, [props, ripple]);
 
     const onMouseLeave = useCallback((): void => {
-        if (ripple.status === 'on') { ripple.remove(); }
+        ripple.remove();
     }, [ripple]);
 
     const onKeyDown = useCallback((event: KeyboardEvent): void => {
-        if ((event.key === 'Enter' || event.key === ' ') && ripple.status === 'off') {
-            ripple.register(event);
-        }
+        ripple.register(event);
+
     }, [ripple]);
 
     const onKeyUp = useCallback((event: KeyboardEvent): void => {
         if (event.key === 'Enter' || event.key === ' ') {
             ripple.remove();
-            if (props.onClick) {
-                props.onClick(event);
-            }
+            if (props.onClick) { props.onClick(event); }
         }
     }, [props, ripple]);
 

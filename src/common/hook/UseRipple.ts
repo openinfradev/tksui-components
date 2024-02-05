@@ -1,27 +1,40 @@
-import {useState, useRef, KeyboardEvent, MouseEvent, MutableRefObject, CSSProperties} from 'react';
-import lodashUtil from '@/common/util/lodashUtil';
+import {CSSProperties, KeyboardEvent, MouseEvent, MutableRefObject, useRef} from 'react';
 import colorUtil from '../util/ColorUtil';
+import lodashUtil from '@/common/util/lodashUtil';
 
 type RippleStatus = 'on' | 'off';
 
+const rippleClass = 't-ripple';
 const rippleElementTag = 'span';
 
 const useRipple = (ref: MutableRefObject<HTMLElement>) => {
 
     // region [Hooks]
 
-    const [status, setStatus] = useState<RippleStatus>('off');
-    const rippleTaskRef = useRef<Promise<string>>();
+    const status = useRef<RippleStatus>('off');
+    const lastRipplePromise = useRef<Promise<string>>();
 
     // endregion
 
 
+    // region [Privates]
+
     const register = (event: MouseEvent | KeyboardEvent) => {
 
-        setStatus('on');
-        const uniqueRippleClass = lodashUtil.uniqueId('t-ripple-');
+        if (event.type.includes('key')) {
+            const keyboardEvent = event as KeyboardEvent;
+            if (keyboardEvent.key !== 'Enter' && keyboardEvent.key !== ' ') { return; }
 
-        rippleTaskRef.current = new Promise((resolve) => {
+            const targetElement = event.target as HTMLElement;
+            const rippleElements = targetElement.getElementsByClassName(rippleClass);
+
+            if (status.current === 'on' || rippleElements?.length > 0) { return; }
+        }
+
+        status.current = 'on';
+        const uniqueRippleClass = lodashUtil.uniqueId(`${rippleClass}-`);
+
+        lastRipplePromise.current = new Promise((resolve) => {
             const {x, y, width, height} = ref.current.getBoundingClientRect();
 
             const { // Default values for Keyboard event
@@ -31,6 +44,7 @@ const useRipple = (ref: MutableRefObject<HTMLElement>) => {
             const radius = Math.sqrt(width * width + height * height);
 
             const ripple = document.createElement(rippleElementTag);
+            ripple.classList.add(rippleClass);
             ripple.classList.add(uniqueRippleClass);
 
             const baseColor = window.getComputedStyle(ref.current)
@@ -64,15 +78,15 @@ const useRipple = (ref: MutableRefObject<HTMLElement>) => {
 
     const remove = () => {
 
-        rippleTaskRef.current?.then((rippleClass) => {
-
-            const rippleElement = ref.current?.getElementsByClassName(rippleClass);
+        lastRipplePromise.current?.then((rippleTargetClass) => {
+            const rippleElement = ref.current?.getElementsByClassName(rippleTargetClass);
             rippleElement[0]?.remove();
-            setStatus('off');
+            status.current = 'off';
         });
     };
 
+    // endregion
 
-    return {status, register, remove};
+    return {register, remove};
 };
 export default useRipple;
