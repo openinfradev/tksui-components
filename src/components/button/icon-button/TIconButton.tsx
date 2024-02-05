@@ -102,6 +102,7 @@ const TIconButton = forwardRef((props: TIconButtonProps, ref: Ref<TIconButtonRef
                 data-tooltip-content={props.tooltipContent}
                 data-tooltip-place={props.tooltipPlace}
                 data-tooltip-hidden={props.tooltipHidden}
+                data-testid={'icon-button-root'}
         >
             <TIcon className={'t-icon-button__inner'}
                    small
