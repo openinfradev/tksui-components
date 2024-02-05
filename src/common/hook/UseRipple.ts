@@ -1,9 +1,10 @@
-import {useRef, KeyboardEvent, MouseEvent, MutableRefObject, CSSProperties, useState} from 'react';
+import {CSSProperties, KeyboardEvent, MouseEvent, MutableRefObject, useRef} from 'react';
 import colorUtil from '../util/ColorUtil';
 import lodashUtil from '@/common/util/lodashUtil';
 
 type RippleStatus = 'on' | 'off';
 
+const rippleClass = 't-ripple';
 const rippleElementTag = 'span';
 
 const useRipple = (ref: MutableRefObject<HTMLElement>) => {
@@ -11,26 +12,29 @@ const useRipple = (ref: MutableRefObject<HTMLElement>) => {
     // region [Hooks]
 
     const status = useRef<RippleStatus>('off');
-    const rippleTaskRef = useRef<Promise<string>>();
+    const lastRipplePromise = useRef<Promise<string>>();
 
     // endregion
 
 
+    // region [Privates]
+
     const register = (event: MouseEvent | KeyboardEvent) => {
 
-        const keyboardEvent = event as KeyboardEvent;
         if (event.type.includes('key')) {
-            if (keyboardEvent.key !== 'Enter' && keyboardEvent.key !== ' ') return;
+            const keyboardEvent = event as KeyboardEvent;
+            if (keyboardEvent.key !== 'Enter' && keyboardEvent.key !== ' ') { return; }
 
-            const buttonElement = event.target as HTMLElement;
-            const rippleRefs = buttonElement.getElementsByClassName('t-ripple');
-            if (status.current === 'on' || rippleRefs?.length > 0) return;
+            const targetElement = event.target as HTMLElement;
+            const rippleElements = targetElement.getElementsByClassName(rippleClass);
+
+            if (status.current === 'on' || rippleElements?.length > 0) { return; }
         }
 
         status.current = 'on';
-        const rippleClass = lodashUtil.uniqueId('t-ripple-');
+        const uniqueRippleClass = lodashUtil.uniqueId(`${rippleClass}-`);
 
-        rippleTaskRef.current = new Promise((resolve) => {
+        lastRipplePromise.current = new Promise((resolve) => {
             const {x, y, width, height} = ref.current.getBoundingClientRect();
 
             const { // Default values for Keyboard event
@@ -40,8 +44,8 @@ const useRipple = (ref: MutableRefObject<HTMLElement>) => {
             const radius = Math.sqrt(width * width + height * height);
 
             const ripple = document.createElement(rippleElementTag);
-            ripple.classList.add('t-ripple');
             ripple.classList.add(rippleClass);
+            ripple.classList.add(uniqueRippleClass);
 
             const baseColor = window.getComputedStyle(ref.current)
                 .getPropertyValue('background-color');
@@ -66,7 +70,7 @@ const useRipple = (ref: MutableRefObject<HTMLElement>) => {
 
             setTimeout(() => {
 
-                resolve(rippleClass);
+                resolve(uniqueRippleClass);
             }, 350);
         });
 
@@ -74,12 +78,14 @@ const useRipple = (ref: MutableRefObject<HTMLElement>) => {
 
     const remove = () => {
 
-        rippleTaskRef.current?.then((rippleClass) => {
-            const rippleElement = ref.current?.getElementsByClassName(rippleClass);
+        lastRipplePromise.current?.then((rippleTargetClass) => {
+            const rippleElement = ref.current?.getElementsByClassName(rippleTargetClass);
             rippleElement[0]?.remove();
             status.current = 'off';
         });
     };
+
+    // endregion
 
     return {register, remove};
 };
