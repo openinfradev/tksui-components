@@ -23,39 +23,39 @@ describe('TDropHolder', () => {
         it('ClassName Prop applies to root', () => {
 
             // Arrange
-            const testClass = 'test-class'
+            const testClass = 'test-class';
             render(<TDropHolder {...baseProps} className={testClass}>button test</TDropHolder>);
-            const root = screen.getByTestId('drop-holder-root')
+            const root = screen.getByTestId('drop-holder-root');
 
             // Assert
             expect(root).toHaveClass('test-class');
-        })
+        });
 
         it('Style Prop applies to root', () => {
 
             // Arrange
-            const testStyle = {border: '1px solid blue'}
+            const testStyle = {border: '1px solid blue'};
             render(<TDropHolder {...baseProps} style={testStyle}>button test</TDropHolder>);
             const root = screen.getByTestId('drop-holder-root');
 
             // Assert
             expect(root).toHaveStyle(testStyle);
 
-        })
+        });
 
         it('ID Prop applies to root', () => {
 
             // Arrange
-            const testId = 'test-id'
+            const testId = 'test-id';
             render(<TDropHolder {...baseProps} id={testId}>button test</TDropHolder>);
-            const root = screen.getByTestId('drop-holder-root')
+            const root = screen.getByTestId('drop-holder-root');
 
             // Assert
             expect(root).toHaveProperty('id');
             expect(root.id).toEqual(testId);
-        })
+        });
 
-    })
+    });
 
     describe('Render', () => {
 
@@ -75,6 +75,8 @@ describe('TDropHolder', () => {
             const root = screen.getByTestId('drop-holder-root');
 
             // Assert
+            // FIXME. remove no-node-access
+            // eslint-disable-next-line testing-library/no-node-access
             expect(root.getElementsByClassName('t-drop-holder__anchor').length).toBe(1);
 
         });
@@ -86,6 +88,7 @@ describe('TDropHolder', () => {
             const root = screen.getByTestId('drop-holder-root');
 
             // Assert
+            // eslint-disable-next-line testing-library/no-node-access
             expect(root.getElementsByClassName('t-drop-holder__holder').length).toBe(1);
 
         });
@@ -173,19 +176,21 @@ describe('TDropHolder', () => {
             const root = screen.getByTestId('drop-holder-root');
 
 
-
             // Act
+            // eslint-disable-next-line no-restricted-syntax
             for (const item of baseProps.items) {
 
+                // eslint-disable-next-line no-await-in-loop
                 await act(async () => {
                     await user.click(root);
                 });
 
                 const itemElement = screen.getByText(item.text);
 
+                // eslint-disable-next-line no-await-in-loop
                 await act(async () => {
                     await userEvent.click(itemElement);
-                })
+                });
             }
 
             // Assert

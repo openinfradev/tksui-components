@@ -2,7 +2,8 @@ import {render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import TStepBoxItem from '~/data-container/step-box/TStepBoxItem';
 import TStepBoxContext from '~/data-container/step-box/TStepBoxContext';
-``
+
+
 jest.mock('@/common/util/ColorUtil', () => ({
     shadeColor: jest.fn(() => 'blue'),
 }));

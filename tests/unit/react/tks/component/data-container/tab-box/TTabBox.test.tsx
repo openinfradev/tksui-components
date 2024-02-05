@@ -20,8 +20,8 @@ describe('TTabBox', () => {
             // Arrange
             render(
                 <TTabBox value={0} onChange={mockOnChange}>
-                    <TTabItem value={0} label="Tab 1" content={<div>Tab 1 Content</div>}/>
-                    <TTabItem value={1} label="Tab 2" content={<div>Tab 2 Content</div>}/>
+                    <TTabItem value={0} label='Tab 1' content={<div>Tab 1 Content</div>}/>
+                    <TTabItem value={1} label='Tab 2' content={<div>Tab 2 Content</div>}/>
                 </TTabBox>,
             );
 
@@ -34,8 +34,8 @@ describe('TTabBox', () => {
             // Arrange
             render(
                 <TTabBox value={1} onChange={mockOnChange}>
-                    <TTabItem value={0} label="Tab 1" content={<div>Tab 1 Content</div>}/>
-                    <TTabItem value={1} label="Tab 2" content={<div>Tab 2 Content</div>}/>
+                    <TTabItem value={0} label='Tab 1' content={<div>Tab 1 Content</div>}/>
+                    <TTabItem value={1} label='Tab 2' content={<div>Tab 2 Content</div>}/>
                 </TTabBox>,
             );
 
@@ -51,8 +51,8 @@ describe('TTabBox', () => {
             const user = userEvent.setup();
             render(
                 <TTabBox value={0} onChange={mockOnChange}>
-                    <TTabItem value={0} label="Tab 1" content={<div>Tab 1 Content</div>}/>
-                    <TTabItem value={1} label="Tab 2" content={<div>Tab 2 Content</div>}/>
+                    <TTabItem value={0} label='Tab 1' content={<div>Tab 1 Content</div>}/>
+                    <TTabItem value={1} label='Tab 2' content={<div>Tab 2 Content</div>}/>
                 </TTabBox>,
             );
             const tab2 = screen.getByText('Tab 2');

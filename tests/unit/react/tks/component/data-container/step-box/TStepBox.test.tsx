@@ -6,9 +6,9 @@ describe('TStepBox', () => {
     const mockOnChange = jest.fn();
     const stepLabels = ['Step 1', 'Step 2', 'Step 3'];
     const steps = [
-        <div data-testid="step-1" key={1}>Step 1 Content</div>,
-        <div data-testid="step-2" key={2}>Step 2 Content</div>,
-        <div data-testid="step-3" key={3}>Step 3 Content</div>,
+        <div data-testid='step-1' key={1}>Step 1 Content</div>,
+        <div data-testid='step-2' key={2}>Step 2 Content</div>,
+        <div data-testid='step-3' key={3}>Step 3 Content</div>,
     ];
 
     describe('Style', () => {
@@ -18,11 +18,10 @@ describe('TStepBox', () => {
             // Arrange
             const testClassName = 'test-class';
             render(
-                <TStepBox
-                    value={1}
-                    stepLabels={stepLabels}
-                    onChange={mockOnChange}
-                    className={testClassName}
+                <TStepBox value={1}
+                          stepLabels={stepLabels}
+                          onChange={mockOnChange}
+                          className={testClassName}
                 >
                     {steps}
                 </TStepBox>,
@@ -111,8 +110,11 @@ describe('TStepBox', () => {
             const root = screen.getByTestId('step-box-root');
 
             // Assert
+            // eslint-disable-next-line testing-library/no-node-access
             expect(root.getElementsByClassName('t-step-box-header__step__number__inner').length).toBe(3);
+            // eslint-disable-next-line testing-library/no-node-access
             expect(root.getElementsByClassName('t-step-box-header__step__label').length).toBe(3);
+            // eslint-disable-next-line testing-library/no-node-access
             expect(root.getElementsByClassName('t-step-box-item').length).toBe(1);
             expect(screen.getByRole('button', {name: 'Previous'})).toBeInTheDocument();
             expect(screen.getByRole('button', {name: 'Next'})).toBeInTheDocument();
@@ -122,12 +124,11 @@ describe('TStepBox', () => {
 
             // Arrange
             render(
-                <TStepBox
-                    value={1}
-                    stepLabels={stepLabels}
-                    onChange={mockOnChange}
-                    prevButtonLabel="Custom Prev"
-                    nextButtonLabel="Custom Next"
+                <TStepBox value={1}
+                          stepLabels={stepLabels}
+                          onChange={mockOnChange}
+                          prevButtonLabel='Custom Prev'
+                          nextButtonLabel='Custom Next'
                 >
                     {steps}
                 </TStepBox>,

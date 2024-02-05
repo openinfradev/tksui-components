@@ -79,6 +79,7 @@ describe('TTabItem', () => {
             await user.click(root);
 
             // Assert
+            // eslint-disable-next-line testing-library/no-node-access
             expect(root.getElementsByClassName('t-ripple')).toHaveLength(1);
         });
 
