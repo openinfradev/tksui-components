@@ -81,7 +81,7 @@ describe('TDropHolder', () => {
 
         });
 
-        it('Child nodes render without error : t-drop-holder__holder ', () => {
+        it('Child nodes render without error : t-drop-holder__holder', () => {
 
             // Arrange
             render(<TDropHolder {...baseProps} >Test DropHolder</TDropHolder>);
