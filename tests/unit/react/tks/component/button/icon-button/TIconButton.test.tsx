@@ -1,7 +1,7 @@
 import {act, render, screen, within} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import TIconButton from '~/button/icon-button/TIconButton';
 import {useState} from 'react';
+import TIconButton from '~/button/icon-button/TIconButton';
 
 jest.mock('@/common/util/ColorUtil', () => ({
     shadeColor: jest.fn(() => 'blue'),
@@ -132,7 +132,7 @@ describe('TIconButton', () => {
             const root = screen.getByRole('button');
             await act(async () => {
                 await user.click(root);
-            })
+            });
 
             // Assert
             expect(mockOnClick).not.toHaveBeenCalled();
