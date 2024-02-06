@@ -1,5 +1,5 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {CSSProperties, ReactElement, useCallback, useState} from 'react';
+import React, {CSSProperties, ReactElement, useCallback, useState} from 'react';
 import TIcon from '@/components/icon/TIcon';
 import {TIconProps, TIconSize} from '@/components/icon/TIcon.interface';
 import materialIconGallery from './material-icon-gallery';
@@ -9,6 +9,7 @@ import TFormSection from '~/data-container/form-section/TFormSection';
 import {TButton, TFormItem, TFormRow} from '@/components';
 import TDropdown from '~/input/dropdown/TDropdown';
 import TToast, {notify} from '@/components/guide/toast/TToast';
+import TTooltip from '../../../src/components/guide/tooltip/TTooltip';
 
 
 const meta: Meta<typeof TIcon> = {
@@ -123,6 +124,8 @@ const Template = (args: TIconProps) => {
                                    fill={isFilled}
                                    color={color}
                                    size={size}
+                                   tooltipTitle={icon}
+                                   tooltipContent={size}
                             >
                                 {icon}
                             </TIcon>
@@ -130,7 +133,7 @@ const Template = (args: TIconProps) => {
                     ))
             }
         </div>
-
+        <TTooltip id={'icon-tooltip'}/>
     </>);
 };
 
@@ -139,6 +142,7 @@ export const Default: Story = {
     render: Template,
     args: {
         xsmall: true,
+        tooltipId: 'icon-tooltip',
     },
 };
 

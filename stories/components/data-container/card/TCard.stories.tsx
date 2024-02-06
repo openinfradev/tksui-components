@@ -115,5 +115,10 @@ const Template = (args) => {
 
 export const Default: Story = {
     render: Template,
-    args: {},
+    args: {
+        tooltipTitle: 'title',
+        tooltipContent: 'content',
+        tooltipPlace: 'top',
+        tooltipId: 'card-tooltip',
+    },
 };
