@@ -67,6 +67,20 @@ const Template = (args) => {
                 </TCard>
             </Container>
 
+            <Container label={'Dashed Clickable'}>
+                <TCard {...args} clickable dashed onClick={() => setVal('1')} width={'300px'} selected={val === '1'}>
+                    <TCardHeader title={'AWS'} subTitle={'Lorem ipsum dolor sit'}></TCardHeader>
+                    {/* <CardDivider /> */}
+                    <TCardContent>Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor</TCardContent>
+                </TCard>
+
+                <TCard {...args} clickable dashed onClick={() => setVal('2')} width={'300px'} selected={val === '2'}>
+                    <TCardHeader title={'AWS'} subTitle={'Lorem ipsum dolor sit'}></TCardHeader>
+                    {/* <CardDivider /> */}
+                    <TCardContent>Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor</TCardContent>
+                </TCard>
+            </Container>
+
             <Container label={'Only Text / Card Icon + Text / Header Icon + Text'}>
                 <TCard {...args} width={'343px'}>
                     <TCardHeader title={'title'} subTitle={'Sub Title'}></TCardHeader>

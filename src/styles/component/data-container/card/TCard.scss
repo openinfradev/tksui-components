@@ -8,15 +8,15 @@
 
     &.t-card--clickable {
         cursor: pointer;
+
         &:hover {
-            outline: 2px solid $t-primary-color;
-            border-color: $t-primary-color;
+            border-color: transparent;
+            outline: 1px solid $t-primary-color;
         }
     }
 
     &.t-card--selected {
-        border-color: $t-primary-color;
-        outline: 2px solid $t-primary-color;
+        outline: 1px solid $t-primary-color;
     }
 
     &.t-card--dashed {
@@ -25,14 +25,14 @@
 
         &.t-card--clickable {
             &:hover {
-                outline: 2px dashed $t-primary-color;
                 border-color: transparent;
+                outline: 1px dashed $t-primary-color;
             }
         }
 
         &.t-card--selected {
             border-color: transparent;
-            outline: 2px dashed $t-primary-color;
+            outline: 1px dashed $t-primary-color;
         }
     }
 
