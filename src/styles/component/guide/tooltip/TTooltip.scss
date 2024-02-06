@@ -24,13 +24,11 @@
 
         .t-tooltip__title{
             color: $t-gray-color-1;
-            font-size: $t-font-size-element-3;
-            font-weight: $t-font-weight-element-1;
+            @include typo-subtitle-4;
         }
         .t-tooltip__content{
             color: $t-gray-color-2;
-            font-size: $t-font-size-element-4;
-            font-weight: $t-font-weight-element-1;
+            @include typo-element-4;
         }
 
         & > .react-tooltip-arrow {
