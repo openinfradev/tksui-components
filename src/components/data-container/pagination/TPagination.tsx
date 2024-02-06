@@ -43,7 +43,7 @@ const TPagination = forwardRef((props: TPaginationProps, ref: Ref<TPaginationRef
     const rootStyle: CSSProperties = useMemo((): CSSProperties => {
         let style: CSSProperties = {};
 
-        if (props.style) style = {...props.style};
+        if (props.style) { style = {...props.style}; }
 
         return style;
     }, [props.style]);
@@ -188,7 +188,7 @@ const TPagination = forwardRef((props: TPaginationProps, ref: Ref<TPaginationRef
                                       rules={[rule.valueMin(jumperTextFieldMin), rule.valueMax(props.totalPages)]}
                                       onChange={onChangeJumperPageNumber} onKeyDownEnter={onClickJumperButton}
                         />
-                        <TButton plain small className={'t-pagination__jumper__container__button'} onClick={onClickJumperButton}>
+                        <TButton small className={'t-pagination__jumper__container__button'} onClick={onClickJumperButton}>
                             {props.jumperText}
                         </TButton>
                     </div>

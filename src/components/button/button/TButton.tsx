@@ -87,15 +87,15 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
         clazz.push(`t-button--${$_size}`);
         if (props.className) { clazz.push(props.className); }
         if (props.variant && props.variant in buttonVariant) { clazz.push(`t-button--${props.variant}`); }
-        if (props.outlined) { clazz.push('t-button--outlined'); }
-        if (props.plain) { clazz.push('t-button--plain'); }
+        if (props.primary) { clazz.push('t-button--primary'); }
+        if (props.main) { clazz.push('t-button--main'); }
         if (props.ghost) { clazz.push('t-button--ghost'); }
         if (props.disabled) { clazz.push('t-button--disabled'); }
         if (props.rounded) { clazz.push('t-button--rounded'); }
         if (props.loading) { clazz.push('t-button--loading'); }
 
         return clazz.join(' ');
-    }, [$_size, props.className, props.outlined, props.plain, props.ghost, props.disabled, props.rounded, props.loading]);
+    }, [$_size, props.className, props.primary, props.main, props.ghost, props.disabled, props.rounded, props.loading]);
 
     const rootStyle: CSSProperties = useMemo(() => {
         let style: CSSProperties = {};

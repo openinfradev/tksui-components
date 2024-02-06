@@ -1,13 +1,13 @@
-$t-button-color--default: $t-white-color;
-$t-button-color--hover: $t-white-color;
+$t-button-color--default: $t-black-color;
+$t-button-color--hover: $t-black-color;
 $t-button-color--disabled: $t-gray-color-4;
 
-$t-button-background--default: $t-primary-color;
-$t-button-background--hover: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), $t-primary-color;
+$t-button-background--default: $t-white-color;
+$t-button-background--hover: linear-gradient(0deg, rgba(0, 0, 0, 0.03) 0%, rgba(0, 0, 0, 0.03) 100%), #FFF;
 $t-button-background--disabled: $t-gray-color-1;
 
-$t-button-border--default: transparent;
-$t-button-border--hover: transparent;
+$t-button-border--default: $t-gray-color-4;
+$t-button-border--hover: $t-gray-color-4;
 $t-button-border--disabled: $t-gray-color-1;
 
 
@@ -44,7 +44,7 @@ $t-button-border--disabled: $t-gray-color-1;
                 border: var(--t-button-loading-thick) solid $t-white-color;
                 border-radius: 50%;
                 animation: rotate 1.2s ease infinite;
-                border-color: $t-white-color transparent transparent transparent;
+                border-color: $t-black-color transparent transparent transparent;
                 &:nth-child(2) { animation-delay: 0.11s; }
                 &:nth-child(3) { animation-delay: 0.22s; }
             }
@@ -52,7 +52,7 @@ $t-button-border--disabled: $t-gray-color-1;
     }
 
     // Variant
-    &.t-button--outlined {
+    &.t-button--primary {
         color: $t-primary-color;
         background: $t-white-color;
         border-color: $t-primary-color;
@@ -62,13 +62,13 @@ $t-button-border--disabled: $t-gray-color-1;
         }
     }
 
-    &.t-button--plain {
-        color: $t-black-color;
-        background: $t-white-color;
-        border: 1px solid $t-gray-color-4;
+    &.t-button--main {
+        color: $t-white-color;
+        background: $t-primary-color;
+        border: 1px solid $t-primary-color;
 
         .t-button__content--loading .t-button__content--loading__slice {
-            border-color: $t-black-color transparent transparent transparent;
+            border-color: $t-white-color transparent transparent transparent;
         }
     }
 
@@ -78,7 +78,7 @@ $t-button-border--disabled: $t-gray-color-1;
         border: 1px solid $t-gray-color-5;
 
         .t-button__content--loading .t-button__content--loading__slice {
-            border-color: $t-black-color transparent transparent transparent;
+            border-color: $t-white-color transparent transparent transparent;
         }
     }
 
@@ -92,23 +92,22 @@ $t-button-border--disabled: $t-gray-color-1;
         }
     }
 
-
     &:hover, &:focus-visible {
         color: $t-button-color--hover;
         background: $t-button-background--hover;
         border: 1px solid $t-button-border--hover;
         cursor: pointer;
 
-        &.t-button--outlined {
+        &.t-button--primary {
             color: $t-primary-color;
             background: $t-blue-gray-color-1;
             border: 1px solid $t-primary-color;
         }
 
-        &.t-button--plain {
-            color: $t-black-color;
-            background: linear-gradient(0deg, rgba(0, 0, 0, 0.03) 0%, rgba(0, 0, 0, 0.03) 100%), $t-white-color;
-            border: 1px solid $t-gray-color-4;
+        &.t-button--main {
+            color: $t-white-color;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), $t-primary-color;
+            border-color: transparent;
         }
 
         &.t-button--ghost {
@@ -195,9 +194,7 @@ $t-button-border--disabled: $t-gray-color-1;
         --t-button-loading-size: 24px;
         --t-button-loading-thick: 3px;
     }
-
 }
-
 
 .t-button--xsmall + .t-button--xsmall { margin-left: $t-spacing-4; }
 .t-button--small + .t-button--small { margin-left: $t-spacing-4; }
