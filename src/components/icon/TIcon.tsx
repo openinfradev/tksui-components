@@ -2,7 +2,7 @@
 import '@material-symbols/font-300/outlined.css';
 
 import {CSSProperties, KeyboardEvent, memo, MouseEvent, ReactElement, useCallback, useMemo} from 'react';
-import {TIconSource, TIconProps, iconSize} from '@/components';
+import {TIconSource, TIconProps, iconSize} from './TIcon.interface';
 import TOriginalImage from './TIconOriginal';
 import TooltipUtil from '@/common/util/TooltipUtil';
 

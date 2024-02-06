@@ -1,6 +1,6 @@
 import {CSSProperties, useMemo} from 'react';
 import {TIcon} from '~/icon';
-import {TCardProps} from '@/components';
+import {TCardProps} from './TCard.interface';
 import TooltipUtil from '@/common/util/TooltipUtil';
 
 const TCard = (props: TCardProps) => {
