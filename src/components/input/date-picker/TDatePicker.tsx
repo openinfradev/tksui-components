@@ -1,30 +1,38 @@
 import {CSSProperties, forwardRef, MouseEvent, Ref, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState} from 'react';
-import {TDatePickerProps, TDatePickerRef, TDateValue} from './TDatePicker.interface';
+import {TDatePickerProps, TDatePickerRef, TDatePickerViewType} from './TDatePicker.interface';
 import useValidator from '@/common/hook/UseValidator';
-import {TTextField} from '../text-field';
+import {TTextField, TTextFieldRef} from '../text-field';
 import {TIcon} from '~/icon';
 import TDropHolder from '~/data-container/drop-holder/TDropHolder';
 import TDaySelector from '~/input/date-picker/selector/TDaySelector';
+import TMonthSelector from '~/input/date-picker/selector/TMonthSelector';
+import TYearSelector from '~/input/date-picker/selector/TYearSelector';
 import themeToken from '~style//designToken/ThemeToken.module.scss';
 import {TDropHolderRef} from '@/components';
+import TDateContext from '~/input/date-picker/TDateContext';
 
 
 const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef>) => {
 
     // region [Hooks]
 
-    const validator = useValidator(props.value, props.rules, props.successMessage);
     const rootRef = useRef<HTMLDivElement>(null);
+    const textFieldRef = useRef<TTextFieldRef>(null);
     const dropDownRef = useRef<TDropHolderRef>(null);
 
-    const [dateValue, setDateValue] = useState(props.value || '');
+    const validator = useValidator(props.value, props.rules, props.successMessage);
+
+    const [viewMode, setViewMode] = useState<TDatePickerViewType>(props.view);
+    const [displayValue, setDisplayValue] = useState('');
+    const [dateValue, setDateValue] = useState(props.value);
 
     // const [status, setStatus] = useState('uncheck');
 
     useImperativeHandle(ref, () => ({
         focus() { rootRef?.current?.focus(); },
-        validate() { return validator.validate(); },
         open() { dropDownRef?.current?.open(); },
+        validate() { return validator.validate(); },
+        getDate() { return dateValue; },
     }));
 
     // endregion
@@ -53,27 +61,6 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
 
     // region [Private]
 
-    const formatDateToString = useCallback((dateInfo: TDateValue): string => {
-
-        const {year, month, date} = dateInfo;
-
-        if (month === null && date === null) {
-            return `${year}`;
-        }
-
-        const formattedMonth = month < 10 ? `0${month}` : `${month}`;
-
-        if (month !== null && date === null) {
-            return `${year}${month}`;
-        }
-
-        const formattedDate = date < 10 ? `0${date}` : `${date}`;
-
-        if (month !== null && date !== null) {
-            return `${year}${formattedMonth}${formattedDate}`;
-        }
-    }, []);
-
     const stringToDateObject = useCallback((date: string) => {
         const yearPart = date.substring(0, 4);
         const monthPart = date.substring(4, 6);
@@ -82,101 +69,154 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
         return {year: yearPart, month: monthPart, date: datePart};
     }, []);
 
+    const validateDate = useCallback((dateStr:string): boolean => {
+
+        const {year, month, date} = stringToDateObject(dateStr);
+        const lastDayOfMonth = (new Date(Number(year), Number(month), 0)).getDate();
+
+        const isValidYear = Number(year) > 999;
+        const isValidMonth = (Number(month) > 0 && Number(month) < 13);
+        const isValidDate = (Number(date) > 0 && Number(date) <= lastDayOfMonth);
+
+        if (viewMode === 'date') {
+            if (isValidYear && isValidMonth && isValidDate) { return true; }
+        } else if (viewMode === 'month') {
+            if (isValidYear && isValidMonth) { return true; }
+        } else if (viewMode === 'year') {
+            if (isValidYear) { return true; }
+        }
+        return false;
+
+    }, [viewMode]);
+
+    const changeViewMode = useCallback((mode: TDatePickerViewType) => {
+        setViewMode(mode);
+    }, []);
+
+    const setDate = useCallback((dateStr: string) => {
+        setDisplayValue(dateStr);
+        setDateValue(dateStr);
+
+        if (props.onChange) { props.onChange(dateStr); }
+
+        dropDownRef.current?.close();
+    }, [props.onChange]);
+
+    const clearDate = useCallback(() => {
+        setDisplayValue('');
+        setDateValue('');
+
+        if (props.onChange) { props.onChange(''); }
+    }, [props.onChange]);
+
+    const restoreDate = useCallback(() => {
+        const isValidDate = validateDate(dateValue);
+
+        if (viewMode === 'date') {
+            if (isValidDate) {
+                setDisplayValue(dateValue);
+            } else { clearDate(); }
+        } else if (viewMode === 'month') {
+            if (isValidDate) {
+                setDisplayValue(dateValue);
+            } else { clearDate(); }
+        } else if (viewMode === 'year') {
+            if (isValidDate) {
+                setDisplayValue(dateValue);
+            } else { clearDate(); }
+        }
+    }, [dateValue]);
+
     // endregion
 
 
     // region [Events]
 
-    const onChangeFormatAndDate = useCallback((changedDate: string) => {
+    const onChangeDisplayValue = useCallback((dateStr: string) => {
+        const onlyNumDate = dateStr.replace(/\D/g, '')
+            .replace(/^0+/, '').substring(0, 8);
+        setDisplayValue(onlyNumDate);
+    }, []);
 
-        const numStr = changedDate.replace(/\D/g, '').substring(0, 8);
+    const handleDateValueChange = useCallback((dateStr = displayValue) => {
 
-        if (numStr.length < 6) {
-
-            setDateValue(numStr);
-        } else if (numStr.length < 7) {
-
-            const {year, month} = stringToDateObject(numStr);
-
-            const monthNum = Number(month);
-            const formattedMonth = monthNum === 0 ? '01' : monthNum > 12 ? '12' : month;
-
-            setDateValue(`${year}${formattedMonth}`);
-        } else {
-
-            const {year, month, date} = stringToDateObject(numStr);
-
-            const monthNum = Number(month);
-            const formattedMonth = monthNum === 0 ? '01' : monthNum > 12 ? '12' : month;
-
-            const lastDayOfMonth = (new Date(Number(year), Number(month), 0)).getDate();
-            const formattedDate = date === '00' ? '01' : Number(date) > lastDayOfMonth ? lastDayOfMonth : date;
-
-            setDateValue(`${year}${formattedMonth}${formattedDate}`);
+        if (dateStr.trim() === '') {
+            clearDate();
+            return;
         }
-    }, [props.onChange]);
 
-    const onChangeDaySelector = useCallback((dateInfo: TDateValue) => {
-        const formattedDate = formatDateToString(dateInfo);
+        const isDateValid = validateDate(dateStr);
 
-        setDateValue(formattedDate);
-        dropDownRef.current?.close();
-    }, [dateValue]);
+        const {year, month, date} = stringToDateObject(dateStr);
+
+        const twoDigitMonth = Number(month) < 10 ? `0${Number(month)}` : month;
+        const twoDigitDate = Number(date) < 10 ? `0${Number(date)}` : date;
+
+        if (isDateValid && viewMode === 'date') {
+            const yearMonthDate = `${year}${twoDigitMonth}${twoDigitDate}`;
+            setDate(yearMonthDate);
+        } else if (isDateValid && viewMode === 'month') {
+            const yearMonth = `${year}${twoDigitMonth}`;
+            setDate(yearMonth);
+        } else if (isDateValid && viewMode === 'year') {
+            setDate(year);
+        } else {
+            restoreDate();
+        }
+
+    }, [displayValue, stringToDateObject]);
+
+    const onBlurTextField = useCallback(() => {
+        handleDateValueChange();
+    }, [handleDateValueChange]);
 
     const onClickSelector = useCallback((e: MouseEvent<HTMLDivElement>) => {
         e.stopPropagation();
     }, []);
-
-    // const onChangeMonthSelector = useCallback((date) => {
-    //     setDate(date);
-    // }, []);
-    //
-    // const onChangeYearSelector = useCallback((date) => {
-    //     setDate(date);
-    // }, []);
-
 
     // endregion
 
     // region [Effects]
 
     useEffect(() => {
-        if (props.onChange) props.onChange(dateValue);
-    }, [dateValue]);
+        handleDateValueChange(props.value);
+    }, [props.value]);
 
     // endregion
 
     // region [Templates]
 
     return (
-        <div ref={rootRef} className={`t-date-picker ${rootClass}`} style={rootStyle}>
-            <TTextField className={'t-date-picker__text-field'} value={dateValue} onChange={onChangeFormatAndDate} width={'156px'}/>
+        <div ref={rootRef} className={`t-date-picker ${rootClass}`} style={rootStyle} data-testid={'t-date-picker'}>
             <TDropHolder
                 ref={dropDownRef}
                 className={'t-date-picker__drop-holder'}
                 alignment={'bottom-center'}
                 offset={'16px'}
                 customItem={
-                    <div className={'t-date-picker__drop-holder__item__wrapper'} onClick={onClickSelector}>
-                        {
-                            props.view === 'date' && (
-                                <TDaySelector value={dateValue} onChange={onChangeDaySelector}/>
-                            )
-                        }
-                        {/* { */}
-                        {/*     props.view === 'month' && ( */}
-                        {/*         <TMonthSelector value={date} onChange={onChangeDaySelector} */}
-                        {/*     ) */}
-                        {/* } */}
-                        {/* { */}
-                        {/*     props.view === 'year' && ( */}
-                        {/*         <TYearSelector value={date} onChange={onChangeDaySelector} /> */}
-                        {/*     ) */}
-                        {/* } */}
-                    </div>
+                    <TDateContext.Provider value={{dateValue, handleDateValueChange, changeViewMode}}>
+                        <div className={'t-date-picker__drop-holder__item__wrapper'} onClick={onClickSelector}>
+                            {
+                                viewMode === 'date' && (<TDaySelector />)
+                            }
+                            {
+                                viewMode === 'month' && (<TMonthSelector />)
+                            }
+                            {
+                                viewMode === 'year' && (<TYearSelector />)
+                            }
+                        </div>
+                    </TDateContext.Provider>
                 }>
                 <TIcon medium color={themeToken.tGrayColor3}>calendar_month</TIcon>
             </TDropHolder>
+            <TTextField ref={textFieldRef}
+                        className={'t-date-picker__text-field'}
+                        value={displayValue}
+                        onChange={onChangeDisplayValue}
+                        onBlur={onBlurTextField}
+                        width={'156px'}
+            />
         </div>
     );
 
@@ -186,6 +226,7 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
 });
 
 TDatePicker.defaultProps = {
+    value: '',
     view: 'date',
 };
 

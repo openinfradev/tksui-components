@@ -12,15 +12,11 @@ const nowDate = (): TDateValue => ({
     date: new Date().getDate(),
 });
 
-
-// FIXME: props 로 받아 포멧을 별도 지정 가능하도록 변경
-const dayList = ['일', '월', '화', '수', '목', '금', '토'];
-
 const DaySpan = ({day}: { day: string }) => (<span className={'t-day-selector__content__weekday__item'}>{day}</span>);
 const MemoizedDaySpan = memo(DaySpan);
 
 
-const TDaySelector = () => {
+const TMonthSelector = () => {
 
     // region [Hooks]
 
@@ -145,11 +141,10 @@ const TDaySelector = () => {
     // region [Templates]
 
     return (
-        <div className={'t-day-selector'} data-testid={'t-date-selector'}>
+        <div className={'t-day-selector'} data-testid={'t-month-selector'}>
             <div className={'t-day-selector__header'}>
                 <div className={'t-day-selector__header__current-month'}>
                     <div onClick={() => { changeViewMode('year'); }}>{displayDateObject.year}년</div>
-                    <div onClick={() => { changeViewMode('month'); }}>{displayDateObject.month}월</div>
                     <TIcon xsmall>arrow_drop_down</TIcon>
                 </div>
 
@@ -158,8 +153,6 @@ const TDaySelector = () => {
                              className={'t-day-selector__header__control__icon-button'}>
                         <TIcon xsmall color={themeToken.tGrayColor5}>arrow_left</TIcon>
                     </TButton>
-                    <TButton onClick={() => { onMoveMonth('today'); }} xsmall
-                             className={'t-day-selector__header__control__today-button'}>오늘</TButton>
                     <TButton onClick={() => { onMoveMonth('next'); }} xsmall
                              className={'t-day-selector__header__control__icon-button'}>
                         <TIcon xsmall color={themeToken.tGrayColor5}>arrow_right</TIcon>
@@ -168,25 +161,26 @@ const TDaySelector = () => {
             </div>
 
             <div className={'t-day-selector__content'}>
-                <div className={'t-day-selector__content__weekday'}>
-                    {dayList.map((day) => <MemoizedDaySpan key={day} day={day}/>)}
-                </div>
+                달
+                {/* <div className={'t-day-selector__content__weekday'}> */}
+                {/*     {dayList.map((day) => <MemoizedDaySpan key={day} day={day}/>)} */}
+                {/* </div> */}
 
-                <div className={'t-day-selector__content__day-container'}>
-                    {
-                        daysInMonth.map((a) => (
-                            <div key={a}
-                                 className={'t-day-selector__content__day-container__item'}
-                                 style={a === 0 ? {gridColumn: firstDayOfWeek} : {}}
-                                 onClick={() => { onClickDate(a + 1); }}
-                            >
-                                <div className={`t-day-selector__content__day-container__item__day ${dateLabelClass((a + 1))}`}>
-                                    {a + 1}
-                                </div>
-                            </div>
-                        ))
-                    }
-                </div>
+                {/* <div className={'t-day-selector__content__day-container'}> */}
+                {/*     { */}
+                {/*         daysInMonth.map((a) => ( */}
+                {/*             <div key={a} */}
+                {/*                  className={'t-day-selector__content__day-container__item'} */}
+                {/*                  style={a === 0 ? {gridColumn: firstDayOfWeek} : {}} */}
+                {/*                  onClick={() => { onClickDate(a + 1); }} */}
+                {/*             > */}
+                {/*                 <div className={`t-day-selector__content__day-container__item__day ${dateLabelClass((a + 1))}`}> */}
+                {/*                     {a + 1} */}
+                {/*                 </div> */}
+                {/*             </div> */}
+                {/*         )) */}
+                {/*     } */}
+                {/* </div> */}
             </div>
         </div>
     );
@@ -194,11 +188,11 @@ const TDaySelector = () => {
     // endregion
 };
 
-TDaySelector.defaultProps = {
+TMonthSelector.defaultProps = {
     value: `${nowDate().year}-`,
 };
 
-TDaySelector.displayName = 'TDaySelector';
+TMonthSelector.displayName = 'TMonthSelector';
 
 
-export default TDaySelector;
+export default TMonthSelector;
