@@ -69,7 +69,7 @@ const Template = (args: TIconProps) => {
 
     const onClickOfficialSearch = useCallback(() => {
         const searchStr = searchText.trim();
-        if (searchStr !== '') window.open(officialSearchUrl + searchStr);
+        if (searchStr !== '') { window.open(officialSearchUrl + searchStr); }
     }, [searchText]);
 
     return (<>
@@ -77,7 +77,7 @@ const Template = (args: TIconProps) => {
 
         <div style={{marginBottom: '16px'}}>
             <a href={'https://fonts.google.com/icons'} target={'_blank'} rel='noreferrer'>
-                <TButton outlined large>
+                <TButton large>
                     아이콘 라이브러리 링크 바로가기
                 </TButton>
             </a>
@@ -86,7 +86,7 @@ const Template = (args: TIconProps) => {
             <TFormRow>
                 <TFormItem label={'검색'}>
                     <TTextField value={searchText} onChange={setSearchText} searchable/>
-                    <TButton outlined large onClick={onClickOfficialSearch}>공식 문서에서 검색</TButton>
+                    <TButton large onClick={onClickOfficialSearch}>공식 문서에서 검색</TButton>
                 </TFormItem>
                 <TFormItem label={'FILL'}>
                     <TSwitch value={isFilled} onChange={(value: boolean) => setIsFilled(value)}/>

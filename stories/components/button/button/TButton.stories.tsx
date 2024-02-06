@@ -1,6 +1,7 @@
 import {ReactNode} from 'react';
 import type {Meta, StoryObj} from '@storybook/react';
 import TButton from '@/components/button/button/TButton';
+import {TButtonProps} from '@/components';
 
 
 const meta: Meta<typeof TButton> = {
@@ -21,34 +22,33 @@ const Container = ({label, children}: { label: string, children: ReactNode }) =>
     );
 };
 
-const Template = (args) => (
+const Template = (args: TButtonProps) => (
     <div style={{display: 'flex', flexDirection: 'column', gap: '32px'}}>
         <Container label={'Default'}>
             <TButton {...args} >Normal</TButton>
-            <TButton {...args} outlined>Outlined</TButton>
-            <TButton {...args} plain>Plain</TButton>
+            <TButton {...args} primary>Primary</TButton>
+            <TButton {...args} main>Main</TButton>
             <TButton {...args} ghost>Ghost</TButton>
             <TButton {...args} rounded>Rounded</TButton>
             <TButton {...args} icon={'info'}>Icon Button</TButton>
         </Container>
         <Container label={'Disabled'}>
             <TButton {...args} disabled>Normal</TButton>
-            <TButton {...args} outlined disabled>Outlined</TButton>
-            <TButton {...args} plain disabled>Plain</TButton>
+            <TButton {...args} primary disabled>Primary</TButton>
+            <TButton {...args} main disabled>Main</TButton>
             <TButton {...args} ghost disabled>Ghost</TButton>
             <TButton {...args} rounded disabled>Rounded</TButton>
             <TButton {...args} icon={'info'} disabled>Icon Button</TButton>
         </Container>
         <Container label={'Loading'}>
             <TButton {...args} loading>plain</TButton>
-            <TButton {...args} outlined loading>primary</TButton>
-            <TButton {...args} plain loading>main</TButton>
+            <TButton {...args} primary loading>primary</TButton>
+            <TButton {...args} main loading>main</TButton>
             <TButton {...args} ghost loading>point</TButton>
             <TButton {...args} rounded loading>rounded</TButton>
             <TButton {...args} icon={'info'} loading>Icon Button</TButton>
         </Container>
-    </div>)
-;
+    </div>);
 
 export const XSmall: Story = {
     render: Template,
