@@ -238,6 +238,21 @@ describe('TPage', () => {
 
         });
 
+        it('ContentDirection prop applies to content', () => {
+
+            // Arrange
+            const contentDirection = 'left-light';
+
+            render(<TPage contentDirection={contentDirection}>Content</TPage>);
+
+            const contentArea = screen.getByRole('article');
+
+            // Assert
+            expect(contentArea).toHaveClass(`t-page__content-area--direction-${contentDirection}`);
+
+        });
+
+
     });
 
     describe('Content', () => {

@@ -1,10 +1,10 @@
 import {MouseEvent, MouseEventHandler, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import TIcon from '../../icon/TIcon';
-import {TPageProps} from './TPage.interface';
+import {contentDirection, TPageProps} from './TPage.interface';
 
 const defaultPanelWidth = '360px';
 
-export default function TPage(props: TPageProps) {
+const TPage = (props: TPageProps) => {
 
     // region [Hooks]
 
@@ -84,6 +84,12 @@ export default function TPage(props: TPageProps) {
         return clazz.join(' ');
     }, [isInfoPanelOpened, isInfoPanelResizing]);
 
+    const contentAreaClass = useMemo(() : string => {
+
+        return `t-page__content-area--direction-${props.contentDirection}`;
+
+    }, [props.contentDirection]);
+
     // endregion
 
 
@@ -118,7 +124,7 @@ export default function TPage(props: TPageProps) {
                     }
                 </div>
 
-                <article className={'t-page__content-area'}>
+                <article className={`t-page__content-area ${contentAreaClass}`}>
                     {props.children}
                 </article>
             </div>
@@ -151,4 +157,14 @@ export default function TPage(props: TPageProps) {
             }
         </div>
     );
-}
+};
+
+TPage.defaultProps = {
+    contentDirection: 'top-bottom' as contentDirection,
+};
+
+
+TPage.displayName = 'TPage';
+
+export default TPage;
+

@@ -23,6 +23,16 @@
 
         .t-page__content-area {
             @include typo-body-3;
+            display: flex;
+            gap: $t-spacing-20;
+
+            &.t-page__content-area--direction-top-bottom {
+                flex-direction: column;
+            }
+
+            &.t-page__content-area--direction-left-right {
+                flex-direction: row;
+            }
         }
     }
 
