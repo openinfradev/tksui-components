@@ -8,18 +8,25 @@ function generateTooltipHtml({tooltipTitle, tooltipContent}: TBaseTooltipProps):
 }
 
 
-function convertToTooltipAttributes(props: TBaseTooltipProps) {
+function convertToTooltipAttributes({
+    tooltipId,
+    tooltipPlace,
+    tooltipHidden,
+    tooltipHtml,
+    tooltipTitle,
+    tooltipContent,
+}: TBaseTooltipProps) {
     const ret = {};
 
-    ret['data-tooltip-id'] = props.tooltipId;
-    ret['data-tooltip-place'] = props.tooltipPlace;
-    ret['data-tooltip-hidden'] = props.tooltipHidden;
+    ret['data-tooltip-id'] = tooltipId;
+    ret['data-tooltip-place'] = tooltipPlace;
+    ret['data-tooltip-hidden'] = tooltipHidden;
 
-    if (props.tooltipHtml) {
-        ret['data-tooltip-html'] = props.tooltipHtml;
+    if (tooltipHtml) {
+        ret['data-tooltip-html'] = tooltipHtml;
     } else {
         try {
-            ret['data-tooltip-html'] = generateTooltipHtml(props);
+            ret['data-tooltip-html'] = generateTooltipHtml({tooltipTitle, tooltipContent});
         } catch (e) {
             ret['data-tooltip-html'] = '';
         }
