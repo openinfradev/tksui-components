@@ -1,6 +1,7 @@
 import {CSSProperties, useMemo} from 'react';
-import {TCardProps} from './TCard.interface';
 import {TIcon} from '~/icon';
+import {TCardProps} from './TCard.interface';
+import TooltipUtil from '@/common/util/TooltipUtil';
 
 const TCard = (props: TCardProps) => {
 
@@ -26,7 +27,7 @@ const TCard = (props: TCardProps) => {
         }
 
         return clazz.join(' ');
-    }, [props.className, props.clickable, props.selected]);
+    }, [props.center, props.className, props.clickable, props.dashed, props.selected]);
 
     const rootStyle = useMemo((): CSSProperties => {
         let style: CSSProperties = {};
@@ -50,10 +51,7 @@ const TCard = (props: TCardProps) => {
         <div className={`t-card ${rootClass}`}
              style={rootStyle}
              onClick={props.onClick}
-             data-tooltip-id={props.tooltipId}
-             data-tooltip-content={props.tooltipContent}
-             data-tooltip-place={props.tooltipPlace}
-             data-tooltip-hidden={props.tooltipHidden}
+             {...TooltipUtil.convertToTooltipAttributes(props)}
              data-testid={'card-root'}
         >
             {

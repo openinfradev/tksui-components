@@ -4,6 +4,7 @@ import '@material-symbols/font-300/outlined.css';
 import {CSSProperties, KeyboardEvent, memo, MouseEvent, ReactElement, useCallback, useMemo} from 'react';
 import {TIconSource, TIconProps, iconSize} from './TIcon.interface';
 import TOriginalImage from './TIconOriginal';
+import TooltipUtil from '@/common/util/TooltipUtil';
 
 /**
  * We are using Google Material Symbols {@link https://fonts.google.com/icons?icon.set=Material+Symbols} <br/>
@@ -54,7 +55,7 @@ const TIcon = (props: TIconProps): ReactElement => {
     const rootStyle: CSSProperties = useMemo((): CSSProperties => {
         let style: CSSProperties = {};
 
-        if (props.style) style = {...props.style};
+        if (props.style) { style = {...props.style}; }
 
         if (props.color && !props.disabled) {
             style.color = props.color;
@@ -102,10 +103,7 @@ const TIcon = (props: TIconProps): ReactElement => {
 
     return (
         <span className={`t-icon material-symbols-outlined ${rootClass}`}
-              data-tooltip-id={props.tooltipId}
-              data-tooltip-content={props.tooltipContent}
-              data-tooltip-place={props.tooltipPlace}
-              data-tooltip-hidden={props.tooltipHidden}
+              {...TooltipUtil.convertToTooltipAttributes(props)}
               tabIndex={(!props.disabled && (props.onKeyDownEnter || props.onKeyDownSpace)) ? 0 : -1}
               onClick={onClickRoot}
               onKeyDown={onKeyDown}

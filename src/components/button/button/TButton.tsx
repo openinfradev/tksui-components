@@ -2,6 +2,7 @@ import {CSSProperties, forwardRef, KeyboardEvent, MouseEvent, Ref, useCallback, 
 import {buttonSize, buttonVariant, TButtonProps, TButtonRef} from './TButton.interface';
 import useRipple from '@/common/hook/UseRipple';
 import TIcon from '../../icon/TIcon';
+import TooltipUtil from '@/common/util/TooltipUtil';
 
 
 const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
@@ -118,10 +119,7 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
                 onKeyUp={onKeyUp}
                 disabled={props.disabled}
                 tabIndex={(props.disabled || props.loading) ? -1 : 0}
-                data-tooltip-id={props.tooltipId}
-                data-tooltip-content={props.tooltipContent}
-                data-tooltip-place={props.tooltipPlace}
-                data-tooltip-hidden={props.tooltipHidden}
+                {...TooltipUtil.convertToTooltipAttributes(props)}
                 ref={rootRef}>
             {
                 !props.loading

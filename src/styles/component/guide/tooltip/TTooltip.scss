@@ -11,7 +11,6 @@
     --rt-color-white: #{$t-gray-color-1};
     --rt-opacity: 0.9;
     font-family: $t-font-family;
-    @include typo-element-4;
     word-break: keep-all;
     word-wrap: break-word;
     z-index: $t-z-index-tooltip;
@@ -22,6 +21,15 @@
         border: 1px solid $t-gray-color-5;
         padding: $t-spacing-16 $t-spacing-16;
         line-height: $t-line-height-body;
+
+        .t-tooltip__title{
+            color: $t-gray-color-1;
+            @include typo-subtitle-4;
+        }
+        .t-tooltip__content{
+            color: $t-gray-color-2;
+            @include typo-element-4;
+        }
 
         & > .react-tooltip-arrow {
             width: 12px;

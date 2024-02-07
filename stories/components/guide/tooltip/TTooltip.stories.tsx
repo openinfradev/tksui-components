@@ -41,6 +41,12 @@ const NormalTemplate = (args) => (<>
         <TButton tooltipContent={'tooltipPlace props 에 top, right, bottom, left 중 값을 입력해주세요'}
                  tooltipId={'common-tooltip'}
                  {...args}>방향 테스트</TButton>
+        <br/>
+        <TIcon xlarge clickable
+               tooltipTitle={'제목'}
+               tooltipContent={'제목이 있는 툴팁 <br/>줄바꿈'}
+               tooltipPlace={'right'}
+               tooltipId={'common-tooltip'}>title</TIcon>
     </div>
 
 

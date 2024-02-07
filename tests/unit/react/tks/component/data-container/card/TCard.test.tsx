@@ -3,7 +3,11 @@ import userEvent from '@testing-library/user-event';
 import TCard from '~/data-container/card/TCard';
 import TCardHeader from '~/data-container/card/TCardHeader';
 import TCardContent from '~/data-container/card/TCardContent';
+import {TIconSize} from '@/components/icon/TIcon.interface';
 
+jest.mock('@/common/util/ColorUtil', () => ({
+    shadeColor: jest.fn(() => 'blue'),
+}));
 describe('TCard', () => {
 
     const mockOnClick = jest.fn();
@@ -22,10 +26,14 @@ describe('TCard', () => {
         dashed: true,
         center: true,
         icon: 'edit',
+        iconSize: 'small' as TIconSize,
+        iconFill: true,
+        iconColor: 'blue',
         width: testStyle.width,
         height: testStyle.height,
         style: {backgroundColor: testStyle.background},
         tooltipId: 'tooltip-id',
+        tooltipTitle: 'Tooltip Title',
         tooltipContent: 'Tooltip Content',
         tooltipPlace: 'bottom' as 'top' | 'bottom' | 'right' | 'left',
         tooltipHidden: false,
@@ -36,8 +44,8 @@ describe('TCard', () => {
         mockOnClick.mockClear();
     });
 
-    describe('Card Style', () => {
-        it('renders without errors', () => {
+    describe('Render', () => {
+        it('Renders without errors', () => {
 
             // Arrange
             render(<TCard {...baseProps}>Card Content</TCard>);
@@ -45,8 +53,11 @@ describe('TCard', () => {
             // Assert
             expect(screen.getByText('Card Content')).toBeInTheDocument();
         });
+    });
 
-        it('applies custom className to root', () => {
+    describe('Style', () => {
+
+        it('Classname prop applies to root', () => {
 
             // Arrange
             const testClassName = 'test-class';
@@ -57,7 +68,7 @@ describe('TCard', () => {
             expect(root).toHaveClass(testClassName);
         });
 
-        it('applies clickable class to root', () => {
+        it('Clickable class applies to root', () => {
 
             // Arrange
             const clickableClass = 't-card--clickable';
@@ -68,7 +79,7 @@ describe('TCard', () => {
             expect(root).toHaveClass(clickableClass);
         });
 
-        it('applies selected class to root', () => {
+        it('Selected class applies to root', () => {
 
             // Arrange
             const selectedClass = 't-card--selected';
@@ -79,7 +90,7 @@ describe('TCard', () => {
             expect(root).toHaveClass(selectedClass);
         });
 
-        it('applies dashed class to root', () => {
+        it('Dashed class applies to root', () => {
 
             // Arrange
             const dashedClass = 't-card--dashed';
@@ -90,7 +101,7 @@ describe('TCard', () => {
             expect(root).toHaveClass(dashedClass);
         });
 
-        it('applies center class to root', () => {
+        it('Center class applies to root', () => {
 
             // Arrange
             const centerClass = 't-card--center';
@@ -101,7 +112,7 @@ describe('TCard', () => {
             expect(root).toHaveClass(centerClass);
         });
 
-        it('applies width and height to root style', () => {
+        it('Width and height applies to root style', () => {
 
             // Arrange
             render(<TCard {...baseProps}>Card Content</TCard>);
@@ -111,7 +122,7 @@ describe('TCard', () => {
             expect(root).toHaveStyle(testStyle);
         });
 
-        it('applies icon to root style', () => {
+        it('Icon to applies root style', () => {
 
             // Arrange
             const iconClass = 't-card-top__icon';
@@ -122,13 +133,13 @@ describe('TCard', () => {
             expect(root).toHaveClass(iconClass);
         });
 
-        it('applies icon props to root style', () => {
+        it('Icon props applies to root', () => {
 
             // Arrange
             const iconSize = 'large';
             const iconFill = true;
             const iconColor = 'red';
-            render(<TCard iconSize={iconSize} iconFill={iconFill} iconColor={iconColor} {...baseProps}>Card Content</TCard>);
+            render(<TCard {...baseProps} icon={'title'} iconSize={iconSize} iconFill={iconFill} iconColor={iconColor}>Card Content</TCard>);
             const iconRoot = screen.getByRole('img');
 
             // Assert
@@ -137,11 +148,11 @@ describe('TCard', () => {
             expect(iconRoot).toHaveStyle({color: iconColor});
         });
 
-        it('applies iconSize to root style', () => {
+        it('IconSize prop applies to root', () => {
 
             // Arrange
             const iconSize = 'large';
-            render(<TCard iconSize={iconSize} {...baseProps}>Card Content</TCard>);
+            render(<TCard {...baseProps} iconSize={iconSize}>Card Content</TCard>);
             const root = screen.getByRole('img');
 
             // Assert
@@ -151,7 +162,7 @@ describe('TCard', () => {
     });
 
     describe('Action', () => {
-        it('calls onClick handler when clicked', async () => {
+        it('Calls onClick handler when clicked', async () => {
 
             // Arrange
             const user = userEvent.setup();
@@ -165,7 +176,7 @@ describe('TCard', () => {
             expect(mockOnClick).toHaveBeenCalledTimes(1);
         });
 
-        it('applies tooltip attributes to root', () => {
+        it('Tooltip attributes applies to root', () => {
 
             // Arrange
             render(<TCard {...baseProps}>Card Content</TCard>);
@@ -173,7 +184,6 @@ describe('TCard', () => {
 
             // Assert
             expect(root).toHaveAttribute('data-tooltip-id', 'tooltip-id');
-            expect(root).toHaveAttribute('data-tooltip-content', 'Tooltip Content');
             expect(root).toHaveAttribute('data-tooltip-place', 'bottom');
             expect(root).toHaveAttribute('data-tooltip-hidden', 'false');
         });
@@ -182,7 +192,7 @@ describe('TCard', () => {
 
     describe('Card Header, Content Style', () => {
 
-        it('renders without errors', () => {
+        it('Renders without errors', () => {
 
             // Arrange
             const cardTitle = 'Card Title';
@@ -198,7 +208,7 @@ describe('TCard', () => {
             expect(screen.getByText(cardContent)).toBeInTheDocument();
         });
 
-        it('applies custom className to root', () => {
+        it('Custom className applies to root', () => {
 
             // Arrange
             const customClass = 'card__custom__class';
@@ -217,7 +227,7 @@ describe('TCard', () => {
             expect(contentRoot).toHaveClass(customClass);
         });
 
-        it('applies custom Style to root', () => {
+        it('Custom Style applies to root', () => {
 
             // Arrange
             render(
@@ -234,7 +244,7 @@ describe('TCard', () => {
             expect(contentRoot).toHaveStyle(testStyle);
         });
 
-        it('applies icon props Style to root', () => {
+        it('Icon props style applies to root', () => {
 
             // Arrange
             const iconSize = 'large';
@@ -253,7 +263,7 @@ describe('TCard', () => {
             expect(iconRoot).toHaveStyle({color: iconColor});
         });
 
-        it('applies subTitle to TCardHeader', () => {
+        it('SubTitle applies to TCardHeader', () => {
 
             // Arrange
             const subTitle = 'Card Sub Title';

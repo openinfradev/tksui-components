@@ -3,6 +3,7 @@ import {TIconButtonProps, TIconButtonRef} from './TIconButton.interface';
 import useRipple from '@/common/hook/UseRipple';
 import TIcon from '../../icon/TIcon';
 import themeToken from '~style/designToken/ThemeToken.module.scss';
+import TooltipUtil from '@/common/util/TooltipUtil';
 
 
 const TIconButton = forwardRef((props: TIconButtonProps, ref: Ref<TIconButtonRef>) => {
@@ -98,11 +99,7 @@ const TIconButton = forwardRef((props: TIconButtonProps, ref: Ref<TIconButtonRef
                 onKeyDown={onKeyDown}
                 onKeyUp={onKeyUp}
                 tabIndex={props.disabled ? -1 : 0}
-                data-tooltip-id={props.tooltipId}
-                data-tooltip-content={props.tooltipContent}
-                data-tooltip-place={props.tooltipPlace}
-                data-tooltip-hidden={props.tooltipHidden}
-                data-testid={'icon-button-root'}
+                {...TooltipUtil.convertToTooltipAttributes(props)}
         >
             <TIcon className={'t-icon-button__inner'}
                    small

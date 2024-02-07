@@ -12,4 +12,6 @@ export interface TBaseTooltipProps {
     tooltipContent?: string,
     tooltipPlace?: 'top' | 'right' | 'bottom' | 'left',
     tooltipHidden?: boolean,
+    tooltipTitle?: string,
+    tooltipHtml?: string,
 }
