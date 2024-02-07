@@ -1,5 +1,5 @@
 import {CSSProperties, ReactElement, useMemo} from 'react';
-import {TStepBoxProps} from './TStepBox.interface';
+import {TStepBoxProps} from '@/components';
 import TStepBoxContext from './TStepBoxContext';
 import TStepBoxHeader from '~/data-container/step-box/TStepBoxHeader';
 import TStepBoxItem from '~/data-container/step-box/TStepBoxItem';
@@ -76,7 +76,12 @@ const TStepBox = (props: TStepBoxProps) => {
     // endregion
 
     return (
-        <div className={`t-step-box ${rootClass}`} style={rootStyle}>
+        <div
+            className={`t-step-box ${rootClass}`}
+            style={rootStyle}
+            id={props.id}
+            data-testid={'step-box-root'}
+        >
             <TStepBoxContext.Provider value={{
                 currentStep: value,
                 totalStep: children?.length,

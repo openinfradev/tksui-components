@@ -1,7 +1,6 @@
 import {act, render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import TDropHolder from '~/data-container/drop-holder/TDropHolder';
-import TButton from "../../../../../../../src/components/button/button/TButton";
 
 describe('TDropHolder', () => {
     const mockOnClickItem = jest.fn();
@@ -22,41 +21,41 @@ describe('TDropHolder', () => {
     describe('Style', () => {
 
         it('ClassName Prop applies to root', () => {
-            const testData = 'test-class'
-            render(<TDropHolder {...baseProps} className={testData}>button test</TDropHolder>);
 
-
-            const root = screen.getByTestId('drop-holder-root')
-
-            expect(root)
-                .toHaveClass('test-class');
-        })
-
-        it('Style Prop applies to root', () => {
-            const testData = {border: '1px solid blue'}
-            render(<TDropHolder {...baseProps} style={testData}>button test</TDropHolder>);
-
-
+            // Arrange
+            const testClass = 'test-class';
+            render(<TDropHolder {...baseProps} className={testClass}>button test</TDropHolder>);
             const root = screen.getByTestId('drop-holder-root');
 
-            expect(root)
-                .toHaveStyle(testData);
+            // Assert
+            expect(root).toHaveClass('test-class');
+        });
 
-        })
+        it('Style Prop applies to root', () => {
+
+            // Arrange
+            const testStyle = {border: '1px solid blue'};
+            render(<TDropHolder {...baseProps} style={testStyle}>button test</TDropHolder>);
+            const root = screen.getByTestId('drop-holder-root');
+
+            // Assert
+            expect(root).toHaveStyle(testStyle);
+
+        });
 
         it('ID Prop applies to root', () => {
-            const testData = 'test-id'
-            render(<TDropHolder {...baseProps} id={testData}>button test</TDropHolder>);
 
+            // Arrange
+            const testId = 'test-id';
+            render(<TDropHolder {...baseProps} id={testId}>button test</TDropHolder>);
+            const root = screen.getByTestId('drop-holder-root');
 
-            const root = screen.getByTestId('drop-holder-root')
-
-            expect(root)
+            // Assert
             expect(root).toHaveProperty('id');
-            expect(root.id).toEqual(testData);
-        })
+            expect(root.id).toEqual(testId);
+        });
 
-    })
+    });
 
     describe('Render', () => {
 
@@ -72,22 +71,23 @@ describe('TDropHolder', () => {
         it('Child nodes render without error : t-drop-holder__anchor ', () => {
 
             // Arrange
+            const testClassName = 't-drop-holder__anchor';
             render(<TDropHolder {...baseProps} >Test DropHolder</TDropHolder>);
-            const root = screen.getByTestId('drop-holder-root');
+            const anchorRoot = screen.getByTestId('drop-holder-anchor');
 
             // Assert
-            expect(root.getElementsByClassName('t-drop-holder__anchor').length).toBe(1);
-
+            expect(anchorRoot).toHaveClass(testClassName);
         });
 
-        it('Child nodes render without error : t-drop-holder__holder ', () => {
+        it('Child nodes render without error : t-drop-holder__holder', () => {
 
             // Arrange
+            const testClassName = 't-drop-holder__holder';
             render(<TDropHolder {...baseProps} >Test DropHolder</TDropHolder>);
-            const root = screen.getByTestId('drop-holder-root');
+            const holderRoot = screen.getByTestId('drop-holder-holder');
 
             // Assert
-            expect(root.getElementsByClassName('t-drop-holder__holder').length).toBe(1);
+            expect(holderRoot).toHaveClass(testClassName);
 
         });
 
@@ -174,19 +174,21 @@ describe('TDropHolder', () => {
             const root = screen.getByTestId('drop-holder-root');
 
 
-
             // Act
+            // eslint-disable-next-line no-restricted-syntax
             for (const item of baseProps.items) {
 
+                // eslint-disable-next-line no-await-in-loop
                 await act(async () => {
                     await user.click(root);
                 });
 
                 const itemElement = screen.getByText(item.text);
 
+                // eslint-disable-next-line no-await-in-loop
                 await act(async () => {
                     await userEvent.click(itemElement);
-                })
+                });
             }
 
             // Assert

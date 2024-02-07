@@ -56,7 +56,7 @@ const TDropHolder = forwardRef((props: TDropHolderProps, ref: ForwardedRef<TDrop
 
         let style: CSSProperties = {};
 
-        if (props.style) style = {...style, ...props.style};
+        if (props.style) { style = {...style, ...props.style}; }
 
         return style;
     }, [props.style]);
@@ -142,7 +142,11 @@ const TDropHolder = forwardRef((props: TDropHolderProps, ref: ForwardedRef<TDrop
              onClick={onClickRoot}
              data-testid={'drop-holder-root'}
         >
-            <div className={'t-drop-holder__anchor'} style={anchorStyle}>
+            <div
+                className={'t-drop-holder__anchor'}
+                style={anchorStyle}
+                data-testid={'drop-holder-anchor'}
+            >
                 {
                     isOpened && (
                         !props.customItem ? (
@@ -169,7 +173,7 @@ const TDropHolder = forwardRef((props: TDropHolderProps, ref: ForwardedRef<TDrop
                     )
                 }
             </div>
-            <div className={'t-drop-holder__holder'}>
+            <div className={'t-drop-holder__holder'} data-testid={'drop-holder-holder'}>
                 {props.children}
             </div>
         </div>

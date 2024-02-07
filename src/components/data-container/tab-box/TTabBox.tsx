@@ -1,5 +1,5 @@
 import {cloneElement, CSSProperties, useCallback, useMemo} from 'react';
-import {TTabBoxProps, TTabBoxValue} from './TTabBox.interface';
+import {TTabBoxProps, TTabBoxValue} from '@/components';
 import TTabBoxContext from './TTabBoxContext';
 
 const TTabBox = (props: TTabBoxProps) => {
@@ -46,7 +46,12 @@ const TTabBox = (props: TTabBoxProps) => {
     // endregion
     
     return (
-        <div className={`t-tab-box ${rootClass}`} style={rootStyle}>
+        <div
+            className={`t-tab-box ${rootClass}`}
+            style={rootStyle}
+            id={props.id}
+            data-testid={'tab-box-root'}
+        >
             <ul className={'t-tab-box__tab-list'}>
                 <TTabBoxContext.Provider value={{activeTab: value, onChangeActiveTab}}>
                     {

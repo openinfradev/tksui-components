@@ -1,5 +1,5 @@
-import {useCallback, useContext, useMemo} from 'react';
-import {TStepBoxFooterProps} from './TStepBox.interface';
+import {useCallback, useContext} from 'react';
+import {TStepBoxFooterProps} from '@/components';
 import TButton from '~/button/button/TButton';
 import TStepBoxContext from '~/data-container/step-box/TStepBoxContext';
 
@@ -53,7 +53,7 @@ const TStepBoxFooter = (props: TStepBoxFooterProps) => {
 
 
     return (
-        <div className={'t-step-box-footer'}>
+        <div className={'t-step-box-footer'} data-testid={'step-box-footer-root'}>
             <div className={'t-step-box-footer__left-action'}>
                 <TButton large disabled={context.currentStep === 1} onClick={onClickPrev}>{props.prevButtonLabel}</TButton>
             </div>
