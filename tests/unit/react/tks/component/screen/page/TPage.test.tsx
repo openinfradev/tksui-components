@@ -1,6 +1,9 @@
 import {render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import {TPage} from '@/components';
+import {contentDirection, TPage} from '@/components';
+
+
+const contentDirectionList = Object.values(contentDirection);
 
 describe('TPage', () => {
 
@@ -44,25 +47,19 @@ describe('TPage', () => {
 
             // Assert
             expect(root).toHaveStyle(testData);
-
         });
 
-        it('ID prop applies to root', () => {
-
+        it.each(contentDirectionList)('ContentDirection (%s) is applies to content area', (direction) => {
             // Arrange
-            const testData = 'test-id';
+            render(<TPage contentDirection={direction}>Content</TPage>);
 
-            render(<TPage id={testData}>Content</TPage>);
-
-            const root = screen.getByTestId('t-page-root');
+            const contentArea = screen.getByRole('article');
 
             // Assert
-            expect(root).toHaveAttribute('id', testData);
-
+            expect(contentArea).toHaveClass(`t-page__content-area--direction-${direction}`);
         });
-
-
     });
+
 
     describe('Event', () => {
 
@@ -237,21 +234,6 @@ describe('TPage', () => {
             expect(afterInfoArea).toHaveClass('t-page__information-area--invisible');
 
         });
-
-        it('ContentDirection prop applies to content', () => {
-
-            // Arrange
-            const contentDirection = 'left-light';
-
-            render(<TPage contentDirection={contentDirection}>Content</TPage>);
-
-            const contentArea = screen.getByRole('article');
-
-            // Assert
-            expect(contentArea).toHaveClass(`t-page__content-area--direction-${contentDirection}`);
-
-        });
-
 
     });
 

@@ -84,6 +84,6 @@ export const LeftRight: Story = {
     render: Template,
     args: {
         infoPanelContent: infoContent,
-        contentDirection: 'left-light',
+        contentDirection: 'left-right',
     },
 };

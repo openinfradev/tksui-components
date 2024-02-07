@@ -160,7 +160,7 @@ const TPage = (props: TPageProps) => {
 };
 
 TPage.defaultProps = {
-    contentDirection: 'top-bottom' as contentDirection,
+    contentDirection: 'top-bottom',
 };
 
 
