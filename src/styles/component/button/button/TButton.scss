@@ -150,7 +150,7 @@ $t-button-border--disabled: $t-gray-color-1;
     }
 
     &.t-button--xsmall {
-        min-width: 48px;
+        min-width: 32px;
         height: 20px;
         padding: 0 $t-spacing-8;
         @include typo-element-4;
@@ -159,7 +159,7 @@ $t-button-border--disabled: $t-gray-color-1;
         --t-button-loading-thick: 2px;
     }
     &.t-button--small {
-        min-width: 64px;
+        min-width: 40px;
         height: 24px;
         padding: 0 $t-spacing-16;
         @include typo-element-4;
@@ -168,7 +168,7 @@ $t-button-border--disabled: $t-gray-color-1;
         --t-button-loading-thick: 2px;
     }
     &.t-button--medium {
-        min-width: 96px;
+        min-width: 56px;
         height: 32px;
         padding: 0 $t-spacing-16;
         @include typo-element-2;
@@ -177,7 +177,7 @@ $t-button-border--disabled: $t-gray-color-1;
         --t-button-loading-thick: 3px;
     }
     &.t-button--large {
-        min-width: 104px;
+        min-width: 64px;
         height: 40px;
         padding: 0 $t-spacing-24;
         @include typo-body-2;
@@ -186,7 +186,7 @@ $t-button-border--disabled: $t-gray-color-1;
         --t-button-loading-thick: 3px;
     }
     &.t-button--xlarge {
-        min-width: 144px;
+        min-width: 88px;
         height: 48px;
         padding: 0 $t-spacing-32;
         @include typo-subtitle-1;
