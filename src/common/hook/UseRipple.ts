@@ -80,7 +80,8 @@ const useRipple = (ref: MutableRefObject<HTMLElement>) => {
 
         lastRipplePromise.current?.then((rippleTargetClass) => {
             const rippleElement = ref.current?.getElementsByClassName(rippleTargetClass);
-            rippleElement[0]?.remove();
+            if (rippleElement) { rippleElement[0]?.remove(); }
+
             status.current = 'off';
         });
     };
