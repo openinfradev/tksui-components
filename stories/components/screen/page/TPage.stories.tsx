@@ -50,7 +50,7 @@ const Template = (args: TPageProps) => {
                         여기에 컨텐츠를 구현합니다. <br/>
                     </p>
                 </TSection>
-                <TSection label={'컨텐츠 1'}>
+                <TSection label={'컨텐츠 2'}>
                     <p>
                         여기에 컨텐츠를 구현합니다. <br/>
                         여기에 컨텐츠를 구현합니다. <br/>
