@@ -19,7 +19,7 @@ type Story = StoryObj<typeof TDatePicker>;
 const Container = ({label, value, children}: { label: string, value: string, children: ReactNode }) => {
 
     return (
-        <div style={{display: 'flex', flexDirection: 'column', gap: '32px'}}>
+        <div style={{display: 'flex', flexDirection: 'column', gap: '32px', padding: '24px 0'}}>
             <p style={{fontSize: '18px'}}>{label}</p>
             <div style={{display: 'flex', flexDirection: 'column', gap: '8px'}}>
                 <p>{value}</p>
@@ -35,18 +35,31 @@ const Container = ({label, value, children}: { label: string, value: string, chi
 const NormalTemplate = (args: TDatePickerProps) => {
 
     const datePickerRef = useRef<TDatePickerRef>(null);
-    const input = useInputState('20240205');
+    const monthPickerRef = useRef<TDatePickerRef>(null);
+    const yearPickerRef = useRef<TDatePickerRef>(null);
+
+    const dateInput = useInputState('20240205');
+    const monthInput = useInputState('202402');
+    const yearInput = useInputState('2024');
 
     useEffect(() => {
         datePickerRef.current?.open();
+        monthPickerRef.current?.open();
+        yearPickerRef.current?.open();
     }, []);
 
     return (
-        <>
-            <Container label={'DatePicker(type: date)'} value={`Value: ${input.value}`}>
-                <TDatePicker {...args} ref={datePickerRef} value={input.value} onChange={input.onChange}/>
+        <div style={{display: 'flex', justifyContent: 'flex-start', gap: '120px'}}>
+            <Container label={'DatePicker(type: date)'} value={`Value: ${dateInput.value}`} >
+                <TDatePicker {...args} ref={datePickerRef} value={dateInput.value} onChange={dateInput.onChange}/>
             </Container>
-        </>);
+            <Container label={'DatePicker(type: month)'} value={`Value: ${monthInput.value}`} >
+                <TDatePicker {...args} ref={monthPickerRef} view={'month'} value={monthInput.value} onChange={monthInput.onChange}/>
+            </Container>
+            <Container label={'DatePicker(type: year)'} value={`Value: ${yearInput.value}`} >
+                <TDatePicker {...args} ref={yearPickerRef} view={'year'} value={yearInput.value} onChange={yearInput.onChange}/>
+            </Container>
+        </div>);
 };
 
 
