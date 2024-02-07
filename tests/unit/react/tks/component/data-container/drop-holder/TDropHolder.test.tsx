@@ -71,25 +71,23 @@ describe('TDropHolder', () => {
         it('Child nodes render without error : t-drop-holder__anchor ', () => {
 
             // Arrange
+            const testClassName = 't-drop-holder__anchor';
             render(<TDropHolder {...baseProps} >Test DropHolder</TDropHolder>);
-            const root = screen.getByTestId('drop-holder-root');
+            const anchorRoot = screen.getByTestId('drop-holder-anchor');
 
             // Assert
-            // FIXME. remove no-node-access
-            // eslint-disable-next-line testing-library/no-node-access
-            expect(root.getElementsByClassName('t-drop-holder__anchor').length).toBe(1);
-
+            expect(anchorRoot).toHaveClass(testClassName);
         });
 
         it('Child nodes render without error : t-drop-holder__holder', () => {
 
             // Arrange
+            const testClassName = 't-drop-holder__holder';
             render(<TDropHolder {...baseProps} >Test DropHolder</TDropHolder>);
-            const root = screen.getByTestId('drop-holder-root');
+            const holderRoot = screen.getByTestId('drop-holder-holder');
 
             // Assert
-            // eslint-disable-next-line testing-library/no-node-access
-            expect(root.getElementsByClassName('t-drop-holder__holder').length).toBe(1);
+            expect(holderRoot).toHaveClass(testClassName);
 
         });
 
