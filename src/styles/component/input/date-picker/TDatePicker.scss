@@ -2,17 +2,14 @@
 .t-date-picker {
     position: relative;
     width: 156px;
+    user-select: none;
 
     .t-drop-holder.t-date-picker__drop-holder {
 
-        position: absolute;
-        top: 50%;
-        right: 8px;
-        transform: translate(0, -50%);
+        margin-right: -4px;
 
-        .t-drop-holder__items {
-            border: none;
-        }
+        .t-drop-holder__items { border: none; }
+        .t-drop-holder__holder { height: 24px; }
 
     }
 }
@@ -124,10 +121,6 @@
                         color: $t-primary-color;
                         border: 1px solid $t-secondary-color-blue;
 
-                        &.t-day-selector__content__day-container__item__day--disabled {
-                            background-color: $t-gray-color-2;
-                            border: 2px solid $t-secondary-color-blue;
-                        }
                     }
 
                     &.t-day-selector__content__day-container__item__day--selected {
@@ -138,7 +131,6 @@
 
                     &.t-day-selector__content__day-container__item__day--disabled {
                         color: $t-gray-color-4;
-                        background-color: $t-gray-color-2;
                         cursor: not-allowed;
                     }
                 }

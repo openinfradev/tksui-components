@@ -29,7 +29,7 @@ const TDaySelector = () => {
         ...nowDate(),
     });
 
-    const selectedDateObject = useMemo(() => {
+    const selectedDateObject = useMemo(():TDateValue => {
 
         if (dateValue === '') { return {year: null, month: null, day: null}; }
 
@@ -38,6 +38,7 @@ const TDaySelector = () => {
         if (year !== 0 && month !== 0 && day !== 0) { return {year, month, day}; }
 
         return {year: null, month: null, day: null};
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dateValue]);
 
     // endregion
@@ -48,8 +49,9 @@ const TDaySelector = () => {
     const initializeDisplayDateInfo = useCallback((): void => {
 
         // 현재 dateValue 로 처음 보여질 캘린더 상태를 초기화
-        // 우선순위 1 - 현재 값이 있는 경우 그 날짜 기준으로 캘린더를 보여줌
-        // 우선순위 2 - from, to 둘 다 값이 있는 경우 from 기준으로 보여줌(애매함, Range 컴포넌트가 별도로 있어야지 가능)
+        // 우선순위 1 - 현재 선택된 값이 있는 경우 그 날짜 기준으로 캘린더를 보여줌
+        // 우선순위 2 - 현재 값이 없을 때, from, to 둘 다 값이 있는 경우 from 기준으로 보여줌(애매함)
+        //  => DatePicker 2개 달린 Range 컴포넌트가 별도로 있고 보여줄 상태를 prop 으로 받던가 position 역할이 부여돼야 해결됌)
         // 우선순위 3 - from, to 각 하나 씩만 있는 경우 그 날짜 기준으로 보여줌
         // 우선순위 4 - from, to 없는 경우 현재 날짜 기준으로 보여줌
         const {year, month} = parseDateString(dateValue);
@@ -72,7 +74,8 @@ const TDaySelector = () => {
 
             setDisplayDateObject((prev) => ({...prev, year, month: 1}));
         }
-    }, [dateValue]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [dateRange, dateValue]);
 
 
     const daysInMonth = useMemo(() => {

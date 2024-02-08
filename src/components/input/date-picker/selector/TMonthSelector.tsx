@@ -9,11 +9,11 @@ import datePickerConText from '~/input/date-picker/TDateContext';
 const nowDate = (): TDateValue => ({
     year: new Date().getFullYear(),
     month: (new Date().getMonth() + 1),
-    date: new Date().getDate(),
+    day: new Date().getDate(),
 });
 
-const DaySpan = ({day}: { day: string }) => (<span className={'t-day-selector__content__weekday__item'}>{day}</span>);
-const MemoizedDaySpan = memo(DaySpan);
+// const DaySpan = ({day}: { day: string }) => (<span className={'t-day-selector__content__weekday__item'}>{day}</span>);
+// const MemoizedDaySpan = memo(DaySpan);
 
 
 const TMonthSelector = () => {
@@ -25,17 +25,17 @@ const TMonthSelector = () => {
         ...nowDate(),
     });
 
-    const selectedDateObject = useMemo(() => {
+    const selectedDateObject = useMemo(() :TDateValue => {
 
-        if (dateValue === '') { return {year: null, month: null, date: null}; }
+        if (dateValue === '') { return {year: null, month: null, day: null}; }
 
         const year = Number(dateValue.substring(0, 4));
         const month = Number(dateValue.substring(4, 6));
-        const date = Number(dateValue.substring(6, 8));
+        const day = Number(dateValue.substring(6, 8));
 
-        if (year !== 0 && month !== 0 && date !== 0) { return {year, month, date}; }
+        if (year !== 0 && month !== 0 && day !== 0) { return {year, month, day}; }
 
-        return {year: null, month: null, date: null};
+        return {year: null, month: null, day: null};
     }, [dateValue]);
 
     // endregion
@@ -47,12 +47,12 @@ const TMonthSelector = () => {
         (date: number): string => {
 
             if (displayDateObject.year === selectedDateObject.year && displayDateObject.month === selectedDateObject.month
-                && date === selectedDateObject.date) {
+                && date === selectedDateObject.day) {
 
                 return 't-day-selector__content__day-container__item__day--selected';
             }
             if (displayDateObject.year === nowDate().year && displayDateObject.month === nowDate().month
-                && date === nowDate().date) {
+                && date === nowDate().day) {
 
                 return 't-day-selector__content__day-container__item__day--today';
             }

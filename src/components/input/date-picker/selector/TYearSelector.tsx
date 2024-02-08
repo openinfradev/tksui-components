@@ -1,4 +1,4 @@
-import {memo, useCallback, useContext, useEffect, useMemo, useState} from 'react';
+import {useCallback, useContext, useEffect, useState} from 'react';
 import TIcon from '~/icon/TIcon';
 import TButton from '~/button/button/TButton';
 import themeToken from '~style/designToken/ThemeToken.module.scss';
@@ -9,15 +9,12 @@ import datePickerConText from '~/input/date-picker/TDateContext';
 const nowDate = (): TDateValue => ({
     year: new Date().getFullYear(),
     month: (new Date().getMonth() + 1),
-    date: new Date().getDate(),
+    day: new Date().getDate(),
 });
 
 
-// FIXME: props 로 받아 포멧을 별도 지정 가능하도록 변경
-const dayList = ['일', '월', '화', '수', '목', '금', '토'];
-
-const DaySpan = ({day}: { day: string }) => (<span className={'t-day-selector__content__weekday__item'}>{day}</span>);
-const MemoizedDaySpan = memo(DaySpan);
+// const DaySpan = ({day}: { day: string }) => (<span className={'t-day-selector__content__weekday__item'}>{day}</span>);
+// const MemoizedDaySpan = memo(DaySpan);
 
 
 const TYearSelector = () => {
@@ -28,79 +25,70 @@ const TYearSelector = () => {
     const [displayDateObject, setDisplayDateObject] = useState<TDateValue>({
         ...nowDate(),
     });
+    const {parseDateString, dateRange} = useContext(datePickerConText);
 
-    const selectedDateObject = useMemo(() => {
-
-        if (dateValue === '') { return {year: null, month: null, date: null}; }
-
-        const year = Number(dateValue.substring(0, 4));
-        const month = Number(dateValue.substring(4, 6));
-        const date = Number(dateValue.substring(6, 8));
-
-        if (year !== 0 && month !== 0 && date !== 0) { return {year, month, date}; }
-
-        return {year: null, month: null, date: null};
-    }, [dateValue]);
+    // const selectedDateObject = useMemo((): TDateValue => {
+    //
+    //     if (dateValue === '') { return {year: null, month: null, day: null}; }
+    //
+    //     const year = Number(dateValue.substring(0, 4));
+    //     const month = Number(dateValue.substring(4, 6));
+    //     const day = Number(dateValue.substring(6, 8));
+    //
+    //     if (year !== 0 && month !== 0 && day !== 0) { return {year, month, day}; }
+    //
+    //     return {year: null, month: null, day: null};
+    // }, [dateValue]);
 
     // endregion
 
 
     // region [Styles]
 
-    const dateLabelClass = useCallback(
-        (date: number): string => {
-
-            if (displayDateObject.year === selectedDateObject.year && displayDateObject.month === selectedDateObject.month
-                && date === selectedDateObject.date) {
-
-                return 't-day-selector__content__day-container__item__day--selected';
-            }
-            if (displayDateObject.year === nowDate().year && displayDateObject.month === nowDate().month
-                && date === nowDate().date) {
-
-                return 't-day-selector__content__day-container__item__day--today';
-            }
-            return '';
-        },
-        [selectedDateObject, displayDateObject],
-    );
+    // const dateLabelClass = useCallback(
+    //     (date: number): string => {
+    //
+    //         if (displayDateObject.year === selectedDateObject.year && displayDateObject.month === selectedDateObject.month
+    //             && date === selectedDateObject.date) {
+    //
+    //             return 't-day-selector__content__day-container__item__day--selected';
+    //         }
+    //         if (displayDateObject.year === nowDate().year && displayDateObject.month === nowDate().month
+    //             && date === nowDate().date) {
+    //
+    //             return 't-day-selector__content__day-container__item__day--today';
+    //         }
+    //         return '';
+    //     },
+    //     [selectedDateObject, displayDateObject],
+    // );
 
     // endregion
 
 
     // region [Privates]
 
-    const initializeDisplayDateInfo = useCallback(() => {
+    const initializeDisplayDateInfo = useCallback((): void => {
 
-        const year = Number(dateValue.substring(0, 4));
-        const month = Number(dateValue.substring(4, 6));
-        const date = Number(dateValue.substring(6, 8));
+        const {year} = parseDateString(dateValue);
 
-        if (year !== 0 && month !== 0 && date !== 0) {
-            // setSelectedDate({year, month, date});
+        if (year !== 0) {
+            setDisplayDateObject((prev) => ({...prev, year}));
+        } else if (dateRange.openFrom && dateRange.openTo) {
+
+            const {year: openFromYear} = parseDateString(dateRange.openFrom);
+            setDisplayDateObject((prev) => ({...prev, year: openFromYear}));
+        } else if (dateRange.openFrom && !dateRange.openTo) {
+
+            const {year: openFromYear} = parseDateString(dateRange.openFrom);
+            setDisplayDateObject((prev) => ({...prev, year: openFromYear}));
+        } else if (!dateRange.openFrom && dateRange.openTo) {
+
+            const {year: openToYear} = parseDateString(dateRange.openTo);
+            setDisplayDateObject((prev) => ({...prev, year: openToYear}));
         }
-
-        if (year !== 0 && month !== 0) {
-            setDisplayDateObject((prev) => ({...prev, year, month, date: null}));
-        } else if (year !== 0 && month === 0) {
-            setDisplayDateObject((prev) => ({...prev, year, month: 1}));
-        }
-    }, [dateValue]);
-
-
-    const daysInMonth = useMemo(() => {
-
-        const lastDayOfMonth = (new Date(displayDateObject.year, displayDateObject.month, 0)).getDate();
-        return Array.from(Array(lastDayOfMonth).keys());
-    }, [displayDateObject]);
-
-
-    const firstDayOfWeek = useMemo((): number => {
-
-        return (new Date(displayDateObject.year, displayDateObject.month - 1).getDay()) + 1;
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [daysInMonth, displayDateObject]);
-
+    }, [dateRange, dateValue]);
 
     // endregion
 
@@ -116,20 +104,19 @@ const TYearSelector = () => {
 
 
         if (handleDateValueChange) { handleDateValueChange(dateStr); }
-    }, [handleDateValueChange, displayDateObject, daysInMonth]);
+    }, [handleDateValueChange, displayDateObject]);
 
-    const onMoveMonth = useCallback((move: 'next' | 'prev' | 'today') => {
-
-        if (move === 'today') {
-            setDisplayDateObject({...nowDate()});
-        } else if (move === 'next' || move === 'prev') {
+    const onMoveYear = useCallback((move: 'next' | 'prev') => {
+        if (move === 'next' || move === 'prev') {
             setDisplayDateObject((prev) => {
                 const moveValue = move === 'next' ? 1 : -1;
-                const newMonth = (prev.month + moveValue - 1 + 12) % 12 + 1;
-                const newYear = prev.year + Math.floor((prev.month + moveValue - 1) / 12);
-                return {...prev, month: newMonth, year: newYear};
+                const newYear = prev.year + moveValue;
+
+                return {...prev, year: newYear};
             });
-        } else { throw new Error('Invalid move value'); }
+        } else {
+            throw new Error('Invalid move value');
+        }
     }, []);
 
     // endregion
@@ -137,8 +124,10 @@ const TYearSelector = () => {
 
     // region [Effects]
 
-    useEffect(() => { initializeDisplayDateInfo(); }, []);
-
+    useEffect(() => {
+        initializeDisplayDateInfo();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
     // endregion
 
 
@@ -155,11 +144,11 @@ const TYearSelector = () => {
                 </div>
 
                 <div className={'t-day-selector__header__control'}>
-                    <TButton onClick={() => { onMoveMonth('prev'); }} xsmall
+                    <TButton onClick={() => { onMoveYear('prev'); }} xsmall
                              className={'t-day-selector__header__control__icon-button'}>
                         <TIcon xsmall color={themeToken.tGrayColor5}>arrow_left</TIcon>
                     </TButton>
-                    <TButton onClick={() => { onMoveMonth('today'); }} xsmall
+                    <TButton onClick={() => { onMoveYear('next'); }} xsmall
                              className={'t-day-selector__header__control__icon-button'}>
                         <TIcon xsmall color={themeToken.tGrayColor5}>arrow_right</TIcon>
                     </TButton>

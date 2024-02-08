@@ -1,5 +1,5 @@
 import {CSSProperties, forwardRef, MouseEvent, Ref, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState} from 'react';
-import {TDatePickerProps, TDatePickerRef, TDatePickerViewType, TDateValue} from './TDatePicker.interface';
+import {TDatePickerProps, TDatePickerRef, TDatePickerViewType, TDateRange, TDateValue} from './TDatePicker.interface';
 import useValidator from '@/common/hook/UseValidator';
 import {TTextField, TTextFieldRef} from '../text-field';
 import {TIcon} from '~/icon';
@@ -25,7 +25,7 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
     const [viewMode, setViewMode] = useState<TDatePickerViewType>(props.view);
     const [displayValue, setDisplayValue] = useState('');
     const [dateValue, setDateValue] = useState(props.value);
-    const [dateRange, setDateRange] = useState({openFrom: undefined, openTo: undefined});
+    const [dateRange, setDateRange] = useState<TDateRange>({openFrom: undefined, openTo: undefined});
 
     // const [status, setStatus] = useState('uncheck');
 
@@ -62,6 +62,11 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
 
     // region [Private]
 
+    const getOnlyNumDateStr = useCallback((dateStr: string) => {
+        return dateStr?.replace(/\D/g, '')
+            .replace(/^0+/, '').substring(0, 8);
+    }, []);
+
     const parseDateString = useCallback((date: string) => {
         const yearPart = date?.substring(0, 4);
         const monthPart = date?.substring(4, 6);
@@ -75,12 +80,7 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
         return `${year}${pad(month)}${pad(day)}`;
     }, []);
 
-    const getOnlyNumDateStr = useCallback((dateStr: string) => {
-        return dateStr?.replace(/\D/g, '')
-            .replace(/^0+/, '').substring(0, 8);
-    }, []);
-
-    const validateDateFormat = useCallback((dateStr:string): boolean => {
+    const validateDateFormat = useCallback((dateStr: string): boolean => {
 
         const {year, month, day} = parseDateString(dateStr);
         const lastDayOfMonth = (new Date(year, month, 0)).getDate();
@@ -97,15 +97,17 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
             if (isValidYear) { return true; }
         }
         return false;
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [viewMode]);
 
     const validDateRange = useCallback((dateStr: string) => {
 
+        const numTypeTargetDate = Number(dateStr);
         const {openTo, openFrom} = dateRange;
 
-        if (openFrom && openTo) { return Number(dateStr) >= Number(openFrom) && Number(dateStr) <= Number(openTo); }
-        if (openFrom) { return Number(dateStr) >= Number(openFrom); }
-        if (openTo) { return Number(dateStr) <= Number(openTo); }
+        if (openFrom && openTo) { return numTypeTargetDate >= Number(openFrom) && numTypeTargetDate <= Number(openTo); }
+        if (openFrom) { return numTypeTargetDate >= Number(openFrom); }
+        if (openTo) { return numTypeTargetDate <= Number(openTo); }
 
         return true;
     }, [dateRange]);
@@ -149,18 +151,30 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
                 setDisplayValue(dateValue);
             } else { clearDate(); }
         }
-    }, [dateValue]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [dateValue, viewMode]);
 
     const initializeFromToDate = useCallback(() => {
+
         const openFrom = getOnlyNumDateStr(props.openFrom);
         const openTo = getOnlyNumDateStr(props.openTo);
+
         const isValidOpenFrom = validateDateFormat(openFrom);
         const isValidOpenTo = validateDateFormat(openTo);
 
-        setDateRange({
-            openFrom: isValidOpenFrom ? openFrom : undefined,
-            openTo: isValidOpenTo ? openTo : undefined,
-        });
+        // openFrom, openTo validation check
+        if (openFrom && openTo && !isValidOpenFrom && !isValidOpenTo) {
+            throw Error('Error: openFrom and openTo prop invalid value.');
+        } else if (openFrom && !openTo && !isValidOpenFrom) {
+            throw Error('Error: openFrom prop invalid value.');
+        } else if (!openFrom && openTo && !isValidOpenTo) {
+            throw Error('Error: openTo prop invalid value.');
+        } else {
+            setDateRange({
+                openFrom: isValidOpenFrom ? openFrom : undefined,
+                openTo: isValidOpenTo ? openTo : undefined,
+            });
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.openFrom, props.openTo]);
 
@@ -170,9 +184,9 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
     // region [Events]
 
     const onChangeDisplayValue = useCallback((dateStr: string) => {
-        const onlyNumDate = dateStr.replace(/\D/g, '')
-            .replace(/^0+/, '').substring(0, 8);
+        const onlyNumDate = getOnlyNumDateStr(dateStr);
         setDisplayValue(onlyNumDate);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleDateValueChange = useCallback((dateStr = displayValue) => {
@@ -198,6 +212,7 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
         } else {
             restoreDate();
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [displayValue]);
 
     const onBlurTextField = useCallback(() => {
@@ -234,31 +249,33 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
                         onChange={onChangeDisplayValue}
                         onBlur={onBlurTextField}
                         width={'156px'}
+                        customAction={
+                            <TDropHolder
+                                ref={dropDownRef}
+                                className={'t-date-picker__drop-holder'}
+                                alignment={'bottom-center'}
+                                offset={'16px'}
+                                customItem={
+                                    <TDateContext.Provider value={{
+                                        dateValue,
+                                        handleDateValueChange,
+                                        changeViewMode,
+                                        dateRange,
+                                        validDateRange,
+                                        parseDateString,
+                                        parseDateObject,
+                                    }}>
+                                        <div className={'t-date-picker__drop-holder__item__wrapper'} onClick={onClickSelector}>
+                                            {viewMode === 'date' && (<TDaySelector/>)}
+                                            {viewMode === 'month' && (<TMonthSelector/>)}
+                                            {viewMode === 'year' && (<TYearSelector/>)}
+                                        </div>
+                                    </TDateContext.Provider>
+                                }>
+                                <TIcon medium color={themeToken.tGrayColor3}>calendar_month</TIcon>
+                            </TDropHolder>
+                        }
             />
-            <TDropHolder
-                ref={dropDownRef}
-                className={'t-date-picker__drop-holder'}
-                alignment={'bottom-center'}
-                offset={'16px'}
-                customItem={
-                    <TDateContext.Provider value={{
-                        dateValue,
-                        handleDateValueChange,
-                        changeViewMode,
-                        dateRange,
-                        validDateRange,
-                        parseDateString,
-                        parseDateObject,
-                    }}>
-                        <div className={'t-date-picker__drop-holder__item__wrapper'} onClick={onClickSelector}>
-                            { viewMode === 'date' && (<TDaySelector />) }
-                            { viewMode === 'month' && (<TMonthSelector />) }
-                            { viewMode === 'year' && (<TYearSelector />) }
-                        </div>
-                    </TDateContext.Provider>
-                }>
-                <TIcon medium color={themeToken.tGrayColor3}>calendar_month</TIcon>
-            </TDropHolder>
         </div>
     );
 

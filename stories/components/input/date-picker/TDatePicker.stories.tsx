@@ -37,21 +37,30 @@ const NormalTemplate = (args: TDatePickerProps) => {
     const datePickerRef = useRef<TDatePickerRef>(null);
     const monthPickerRef = useRef<TDatePickerRef>(null);
     const yearPickerRef = useRef<TDatePickerRef>(null);
-    const dateRagnePickerrRef = useRef<TDatePickerRef>(null);
+
+    const openToRangePickerRef = useRef<TDatePickerRef>(null);
+    const openFromRangePickerRef = useRef<TDatePickerRef>(null);
+    const openFromToRangePickerRef = useRef<TDatePickerRef>(null);
 
     const dateInput = useInputState('20240205');
     const monthInput = useInputState('202402');
     const yearInput = useInputState('2024');
 
-    const rangeDate1Input = useInputState('');
-    const rangeDate2Input = useInputState('');
+    const openFromRangeDateInput = useInputState('');
+    const openToRangeDateInput = useInputState('');
+
+    const rangeDateInput = useInputState('');
 
     const openFrom = '20240210';
+    const openTo = '20240227';
 
     useEffect(() => {
-        // datePickerRef.current?.open();
-        // monthPickerRef.current?.open();
-        // yearPickerRef.current?.open();
+        datePickerRef.current?.open();
+        monthPickerRef.current?.open();
+        yearPickerRef.current?.open();
+        openToRangePickerRef.current?.open();
+        openFromRangePickerRef.current?.open();
+        openFromToRangePickerRef.current?.open();
     }, []);
 
     return (
@@ -71,14 +80,24 @@ const NormalTemplate = (args: TDatePickerProps) => {
 
             <br/>
             <br/>
-            <div>
-                <Container label={`DatePicker(Date type + Range Option: open-from: ${openFrom})`} value={`Value: ${rangeDate1Input.value}`}>
-                    <TDatePicker {...args} ref={dateRagnePickerrRef} openFrom={openFrom} view={'date'} value={rangeDate1Input.value}
-                                 onChange={rangeDate1Input.onChange}/>
+            <div style={{display: 'flex', justifyContent: 'flex-start', gap: '120px'}}>
+                <Container label={`DatePicker(Date type + Range Option: open-from: ${openFrom})`}
+                           value={`Value: ${openFromRangeDateInput.value}`}>
+                    <TDatePicker {...args} ref={openToRangePickerRef} openFrom={openFrom} view={'date'} value={openFromRangeDateInput.value}
+                                 onChange={openFromRangeDateInput.onChange}/>
                 </Container>
-                <Container label={`DatePicker(Date type + Range Option: open-from: ${openFrom})`} value={`Value: ${rangeDate2Input.value}`}>
-                    <TDatePicker {...args} ref={dateRagnePickerrRef} openTo={openFrom} view={'date'} value={rangeDate2Input.value}
-                                 onChange={rangeDate2Input.onChange}/>
+                <Container label={`DatePicker(Date type + Range Option: open-to: ${openTo})`}
+                           value={`Value: ${openToRangeDateInput.value}`}>
+                    <TDatePicker {...args} ref={openFromRangePickerRef} openTo={openTo} view={'date'} value={openToRangeDateInput.value}
+                                 onChange={openToRangeDateInput.onChange}/>
+                </Container>
+            </div>
+            <div style={{display: 'flex', justifyContent: 'flex-start', gap: '120px'}}>
+                <Container label={`DatePicker(Date type + Range Option: openFrom~To: ${openFrom} ~ ${openTo})`}
+                           value={`Value: ${rangeDateInput.value}`}>
+                    <TDatePicker {...args} ref={openFromToRangePickerRef} openFrom={openFrom} openTo={openTo} view={'date'}
+                                 value={rangeDateInput.value}
+                                 onChange={rangeDateInput.onChange}/>
                 </Container>
             </div>
         </>);
