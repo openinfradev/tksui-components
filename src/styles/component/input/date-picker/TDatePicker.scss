@@ -4,18 +4,18 @@
     width: 156px;
 
     .t-drop-holder.t-date-picker__drop-holder {
+
         position: absolute;
         top: 50%;
-        transform: translateY(-50%);
-        right: $t-spacing-8;
-        z-index: 1;
+        right: 8px;
+        transform: translate(0, -50%);
 
         .t-drop-holder__items {
             border: none;
         }
+
     }
 }
-
 
 
 .t-day-selector {
@@ -123,12 +123,23 @@
                     &.t-day-selector__content__day-container__item__day--today {
                         color: $t-primary-color;
                         border: 1px solid $t-secondary-color-blue;
+
+                        &.t-day-selector__content__day-container__item__day--disabled {
+                            background-color: $t-gray-color-2;
+                            border: 2px solid $t-secondary-color-blue;
+                        }
                     }
 
                     &.t-day-selector__content__day-container__item__day--selected {
                         color: $t-white-color;
                         border: 1px solid $t-primary-color;
                         background-color: $t-primary-color;
+                    }
+
+                    &.t-day-selector__content__day-container__item__day--disabled {
+                        color: $t-gray-color-4;
+                        background-color: $t-gray-color-2;
+                        cursor: not-allowed;
                     }
                 }
 

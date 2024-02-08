@@ -9,12 +9,12 @@ import datePickerConText from '~/input/date-picker/TDateContext';
 const nowDate = (): TDateValue => ({
     year: new Date().getFullYear(),
     month: (new Date().getMonth() + 1),
-    date: new Date().getDate(),
+    day: new Date().getDate(),
 });
 
 
 // FIXME: props 로 받아 포멧을 별도 지정 가능하도록 변경
-const dayList = ['일', '월', '화', '수', '목', '금', '토'];
+const weekList = ['일', '월', '화', '수', '목', '금', '토'];
 
 const DaySpan = ({day}: { day: string }) => (<span className={'t-day-selector__content__weekday__item'}>{day}</span>);
 const MemoizedDaySpan = memo(DaySpan);
@@ -24,65 +24,52 @@ const TDaySelector = () => {
 
     // region [Hooks]
 
-    const {dateValue, changeViewMode, handleDateValueChange} = useContext(datePickerConText);
+    const {dateValue, changeViewMode, handleDateValueChange, dateRange, parseDateString, validDateRange} = useContext(datePickerConText);
     const [displayDateObject, setDisplayDateObject] = useState<TDateValue>({
         ...nowDate(),
     });
 
     const selectedDateObject = useMemo(() => {
 
-        if (dateValue === '') { return {year: null, month: null, date: null}; }
+        if (dateValue === '') { return {year: null, month: null, day: null}; }
 
-        const year = Number(dateValue.substring(0, 4));
-        const month = Number(dateValue.substring(4, 6));
-        const date = Number(dateValue.substring(6, 8));
+        const {year, month, day} = parseDateString(dateValue);
 
-        if (year !== 0 && month !== 0 && date !== 0) { return {year, month, date}; }
+        if (year !== 0 && month !== 0 && day !== 0) { return {year, month, day}; }
 
-        return {year: null, month: null, date: null};
+        return {year: null, month: null, day: null};
     }, [dateValue]);
-
-    // endregion
-
-
-    // region [Styles]
-
-    const dateLabelClass = useCallback(
-        (date: number): string => {
-
-            if (displayDateObject.year === selectedDateObject.year && displayDateObject.month === selectedDateObject.month
-                && date === selectedDateObject.date) {
-
-                return 't-day-selector__content__day-container__item__day--selected';
-            }
-            if (displayDateObject.year === nowDate().year && displayDateObject.month === nowDate().month
-                && date === nowDate().date) {
-
-                return 't-day-selector__content__day-container__item__day--today';
-            }
-            return '';
-        },
-        [selectedDateObject, displayDateObject],
-    );
 
     // endregion
 
 
     // region [Privates]
 
-    const initializeDisplayDateInfo = useCallback(() => {
+    const initializeDisplayDateInfo = useCallback((): void => {
 
-        const year = Number(dateValue.substring(0, 4));
-        const month = Number(dateValue.substring(4, 6));
-        const date = Number(dateValue.substring(6, 8));
-
-        if (year !== 0 && month !== 0 && date !== 0) {
-            // setSelectedDate({year, month, date});
-        }
+        // 현재 dateValue 로 처음 보여질 캘린더 상태를 초기화
+        // 우선순위 1 - 현재 값이 있는 경우 그 날짜 기준으로 캘린더를 보여줌
+        // 우선순위 2 - from, to 둘 다 값이 있는 경우 from 기준으로 보여줌(애매함, Range 컴포넌트가 별도로 있어야지 가능)
+        // 우선순위 3 - from, to 각 하나 씩만 있는 경우 그 날짜 기준으로 보여줌
+        // 우선순위 4 - from, to 없는 경우 현재 날짜 기준으로 보여줌
+        const {year, month} = parseDateString(dateValue);
 
         if (year !== 0 && month !== 0) {
-            setDisplayDateObject((prev) => ({...prev, year, month, date: null}));
+            setDisplayDateObject((prev) => ({...prev, year, month, day: null}));
+        } else if (dateRange.openFrom && dateRange.openTo) { // 둘 다 설정 시 여기가 애매함
+
+            const {year: openFromYear, month: openFromMonth} = parseDateString(dateRange.openFrom);
+            setDisplayDateObject((prev) => ({...prev, year: openFromYear, month: openFromMonth}));
+        } else if (dateRange.openFrom && !dateRange.openTo) {
+
+            const {year: openFromYear, month: openFromMonth} = parseDateString(dateRange.openFrom);
+            setDisplayDateObject((prev) => ({...prev, year: openFromYear, month: openFromMonth}));
+        } else if (!dateRange.openFrom && dateRange.openTo) {
+
+            const {year: openToYear, month: openToMonth} = parseDateString(dateRange.openTo);
+            setDisplayDateObject((prev) => ({...prev, year: openToYear, month: openToMonth}));
         } else if (year !== 0 && month === 0) {
+
             setDisplayDateObject((prev) => ({...prev, year, month: 1}));
         }
     }, [dateValue]);
@@ -101,6 +88,39 @@ const TDaySelector = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [daysInMonth, displayDateObject]);
 
+    // endregion
+
+
+    // region [Styles]
+
+    const dateLabelClass = useCallback(
+        (clickedDate: number): string => {
+
+            const clazz = [];
+            const {year: displayYear, month: displayMonth} = displayDateObject;
+            const {year: selectedYear, month: selectedMonth, day: selectedDay} = selectedDateObject;
+
+            if (displayYear === selectedYear && displayMonth === selectedMonth
+                && clickedDate === selectedDay) {
+                clazz.push('t-day-selector__content__day-container__item__day--selected');
+            }
+
+            if (displayYear === nowDate().year && displayMonth === nowDate().month
+                && clickedDate === nowDate().day) {
+                clazz.push('t-day-selector__content__day-container__item__day--today');
+            }
+
+            const padMonth = String(displayDateObject.month).padStart(2, '0');
+            const padDate = String(clickedDate).padStart(2, '0');
+
+            if (!validDateRange(`${displayYear}${padMonth}${padDate}`)) {
+                clazz.push('t-day-selector__content__day-container__item__day--disabled');
+            }
+
+            return clazz.join(' ');
+        },
+        [validDateRange, selectedDateObject, displayDateObject],
+    );
 
     // endregion
 
@@ -114,22 +134,22 @@ const TDaySelector = () => {
 
         const dateStr = `${displayDateObject.year}${twoDigitMonth}${twoDigitDate}`;
 
-
         if (handleDateValueChange) { handleDateValueChange(dateStr); }
-    }, [handleDateValueChange, displayDateObject, daysInMonth]);
+    }, [handleDateValueChange, displayDateObject]);
 
     const onMoveMonth = useCallback((move: 'next' | 'prev' | 'today') => {
-
         if (move === 'today') {
             setDisplayDateObject({...nowDate()});
         } else if (move === 'next' || move === 'prev') {
             setDisplayDateObject((prev) => {
                 const moveValue = move === 'next' ? 1 : -1;
-                const newMonth = (prev.month + moveValue - 1 + 12) % 12 + 1;
+                const newMonth = ((prev.month + moveValue - 1 + 12) % 12) + 1;
                 const newYear = prev.year + Math.floor((prev.month + moveValue - 1) / 12);
                 return {...prev, month: newMonth, year: newYear};
             });
-        } else { throw new Error('Invalid move value'); }
+        } else {
+            throw new Error('Invalid move value');
+        }
     }, []);
 
     // endregion
@@ -137,7 +157,10 @@ const TDaySelector = () => {
 
     // region [Effects]
 
-    useEffect(() => { initializeDisplayDateInfo(); }, []);
+    useEffect(() => {
+        initializeDisplayDateInfo();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     // endregion
 
@@ -169,7 +192,7 @@ const TDaySelector = () => {
 
             <div className={'t-day-selector__content'}>
                 <div className={'t-day-selector__content__weekday'}>
-                    {dayList.map((day) => <MemoizedDaySpan key={day} day={day}/>)}
+                    {weekList.map((day) => <MemoizedDaySpan key={day} day={day}/>)}
                 </div>
 
                 <div className={'t-day-selector__content__day-container'}>

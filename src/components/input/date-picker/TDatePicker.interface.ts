@@ -4,7 +4,7 @@ import {TBaseProps} from '@/common/base/TBase.interface';
 export interface TDateValue {
     year: number | null,
     month: number | null,
-    date: number | null,
+    day: number | null,
 }
 
 export type TDatePickerViewType = 'date' | 'month' | 'year';
@@ -15,7 +15,7 @@ export interface TDatePickerProps extends TBaseProps, TValidatorProps {
     disabled?: boolean,
     value?: string,
 
-    openForm?: string,
+    openFrom?: string,
     openTo?: string,
 
     view?: TDatePickerViewType
@@ -31,10 +31,7 @@ export interface TDatePickerRef {
     getDate(): string,
 }
 
-export interface TDaySelectorProps {
-    value: string,
-    onChange: (date: string) => void,
-
+export interface TDateRange {
     openFrom?: string,
     openTo?: string,
 }
@@ -42,6 +39,12 @@ export interface TDaySelectorProps {
 export interface TDateContextType {
     dateValue: string,
 
-    handleDateValueChange: (date: string) => void
-    changeViewMode: (view: TDatePickerViewType) => void
+    handleDateValueChange: (date: string) => void,
+    changeViewMode: (view: TDatePickerViewType) => void,
+
+    dateRange: TDateRange,
+    validDateRange: (date: string) => boolean
+
+    parseDateString: (date: string) => TDateValue,
+    parseDateObject: (dateObj: TDateValue) => string,
 }
