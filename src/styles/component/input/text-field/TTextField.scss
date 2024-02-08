@@ -51,6 +51,12 @@
 
         .t-text-field__container__action-icon ~ .t-text-field__container__counter { margin-left: $t-spacing-8; }
 
+        .t-text-field__container__custom-action-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
         .t-text-field__container__counter {
             flex: 0 0 auto;
             text-align: right;
