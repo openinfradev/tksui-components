@@ -11,6 +11,11 @@ import themeToken from '~style//designToken/ThemeToken.module.scss';
 import {TDropHolderRef} from '@/components';
 import TDateContext from '~/input/date-picker/TDateContext';
 
+const nowDate = (): TDateValue => ({
+    year: new Date().getFullYear(),
+    month: (new Date().getMonth() + 1),
+    day: new Date().getDate(),
+});
 
 const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef>) => {
 
@@ -23,8 +28,11 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
     const validator = useValidator(props.value, props.rules, props.successMessage);
 
     const [viewMode, setViewMode] = useState<TDatePickerViewType>(props.view);
-    const [displayValue, setDisplayValue] = useState('');
+    const [displayDateValue, setDisplayDateValue] = useState('');
     const [dateValue, setDateValue] = useState(props.value);
+    const [displayDateObject, setDisplayDateObject] = useState<TDateValue>({
+        ...nowDate(),
+    });
     const [dateRange, setDateRange] = useState<TDateRange>({openFrom: undefined, openTo: undefined});
 
     // const [status, setStatus] = useState('uncheck');
@@ -62,10 +70,17 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
 
     // region [Private]
 
-    const getOnlyNumDateStr = useCallback((dateStr: string) => {
+    const sanitizeDateInput = useCallback((dateStr: string) => {
+        let maxAllowedLength = 8;
+        if (viewMode === 'month') {
+            maxAllowedLength = 6;
+        } else if (viewMode === 'year') {
+            maxAllowedLength = 4;
+        }
+
         return dateStr?.replace(/\D/g, '')
-            .replace(/^0+/, '').substring(0, 8);
-    }, []);
+            .replace(/^0+/, '').substring(0, maxAllowedLength);
+    }, [viewMode]);
 
     const parseDateString = useCallback((date: string) => {
         const yearPart = date?.substring(0, 4);
@@ -113,11 +128,15 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
     }, [dateRange]);
 
     const changeViewMode = useCallback((mode: TDatePickerViewType) => {
-        setViewMode(mode);
-    }, []);
+        if (props.view === 'date') {
+            setViewMode(mode);
+        } else if (props.view === 'month' && mode !== 'date') {
+            setViewMode(mode);
+        }
+    }, [props.view]);
 
     const setDate = useCallback((dateStr: string) => {
-        setDisplayValue(dateStr);
+        setDisplayDateValue(dateStr);
         setDateValue(dateStr);
 
         if (props.onChange) { props.onChange(dateStr); }
@@ -127,7 +146,7 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
     }, [props.onChange]);
 
     const clearDate = useCallback(() => {
-        setDisplayValue('');
+        setDisplayDateValue('');
         setDateValue('');
 
         if (props.onChange) { props.onChange(''); }
@@ -140,15 +159,15 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
 
         if (viewMode === 'date') {
             if (isValidDate && isValidRange) {
-                setDisplayValue(dateValue);
+                setDisplayDateValue(dateValue);
             } else { clearDate(); }
         } else if (viewMode === 'month') {
             if (isValidDate && isValidRange) {
-                setDisplayValue(dateValue);
+                setDisplayDateValue(dateValue);
             } else { clearDate(); }
         } else if (viewMode === 'year') {
             if (isValidDate && isValidRange) {
-                setDisplayValue(dateValue);
+                setDisplayDateValue(dateValue);
             } else { clearDate(); }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -156,8 +175,8 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
 
     const initializeFromToDate = useCallback(() => {
 
-        const openFrom = getOnlyNumDateStr(props.openFrom);
-        const openTo = getOnlyNumDateStr(props.openTo);
+        const openFrom = sanitizeDateInput(props.openFrom);
+        const openTo = sanitizeDateInput(props.openTo);
 
         const isValidOpenFrom = validateDateFormat(openFrom);
         const isValidOpenTo = validateDateFormat(openTo);
@@ -178,19 +197,45 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.openFrom, props.openTo]);
 
+    const initializeDisplayDate = useCallback((): void => {
+
+        setViewMode(props.view);
+        const {year, month} = parseDateString(dateValue);
+
+        if (year !== 0 && month !== 0) {
+            setDisplayDateObject({year, month, day: null});
+        } else if (dateRange.openFrom && dateRange.openTo) {
+
+            const {year: openFromYear, month: openFromMonth} = parseDateString(dateRange.openFrom);
+            setDisplayDateObject({year: openFromYear, month: openFromMonth, day: null});
+        } else if (dateRange.openFrom && !dateRange.openTo) {
+
+            const {year: openFromYear, month: openFromMonth} = parseDateString(dateRange.openFrom);
+            setDisplayDateObject({year: openFromYear, month: openFromMonth, day: null});
+        } else if (!dateRange.openFrom && dateRange.openTo) {
+
+            const {year: openToYear, month: openToMonth} = parseDateString(dateRange.openTo);
+            setDisplayDateObject({year: openToYear, month: openToMonth, day: null});
+        } else if (year !== 0 && month === 0) {
+
+            setDisplayDateObject((prev) => ({...prev, year, month: 1}));
+        } else { setDisplayDateObject(nowDate()); }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [dateValue, dateRange, props.view]);
+
     // endregion
 
 
     // region [Events]
 
-    const onChangeDisplayValue = useCallback((dateStr: string) => {
-        const onlyNumDate = getOnlyNumDateStr(dateStr);
-        setDisplayValue(onlyNumDate);
+    const onChangeDisplayDateValue = useCallback((dateStr: string) => {
+        const sanitizeDate = sanitizeDateInput(dateStr);
+        setDisplayDateValue(sanitizeDate);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const handleDateValueChange = useCallback((dateStr = displayValue) => {
-
+    const onChangeDateValue = useCallback((dateStr = displayDateValue) => {
         if (dateStr.trim() === '') {
             clearDate();
             return;
@@ -213,11 +258,12 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
             restoreDate();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [displayValue]);
+    }, [displayDateValue, dateRange, displayDateObject]);
+
 
     const onBlurTextField = useCallback(() => {
-        handleDateValueChange();
-    }, [handleDateValueChange]);
+        onChangeDateValue();
+    }, [onChangeDateValue]);
 
     const onClickSelector = useCallback((e: MouseEvent<HTMLDivElement>) => {
         e.stopPropagation();
@@ -225,10 +271,11 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
 
     // endregion
 
+
     // region [Effects]
 
     useEffect(() => {
-        handleDateValueChange(props.value);
+        onChangeDateValue(props.value);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.value]);
 
@@ -237,44 +284,55 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.openFrom, props.openTo]);
 
+    useEffect(() => {
+        initializeDisplayDate();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [dateValue]);
+
+
     // endregion
 
     // region [Templates]
 
     return (
         <div ref={rootRef} className={`t-date-picker ${rootClass}`} style={rootStyle} data-testid={'t-date-picker'}>
-            <TTextField ref={textFieldRef}
-                        className={'t-date-picker__text-field'}
-                        value={displayValue}
-                        onChange={onChangeDisplayValue}
-                        onBlur={onBlurTextField}
-                        width={'156px'}
-                        customAction={
-                            <TDropHolder
-                                ref={dropDownRef}
-                                className={'t-date-picker__drop-holder'}
-                                alignment={'bottom-center'}
-                                offset={'16px'}
-                                customItem={
-                                    <TDateContext.Provider value={{
-                                        dateValue,
-                                        handleDateValueChange,
-                                        changeViewMode,
-                                        dateRange,
-                                        validDateRange,
-                                        parseDateString,
-                                        parseDateObject,
-                                    }}>
-                                        <div className={'t-date-picker__drop-holder__item__wrapper'} onClick={onClickSelector}>
-                                            {viewMode === 'date' && (<TDaySelector/>)}
-                                            {viewMode === 'month' && (<TMonthSelector/>)}
-                                            {viewMode === 'year' && (<TYearSelector/>)}
-                                        </div>
-                                    </TDateContext.Provider>
-                                }>
-                                <TIcon medium color={themeToken.tGrayColor3}>calendar_month</TIcon>
-                            </TDropHolder>
-                        }
+            <TTextField
+                ref={textFieldRef}
+                className={'t-date-picker__text-field'}
+                value={displayDateValue}
+                onChange={onChangeDisplayDateValue}
+                onBlur={onBlurTextField}
+                width={'156px'}
+                customAction={
+                    <TDropHolder
+                        ref={dropDownRef}
+                        className={'t-date-picker__drop-holder'}
+                        alignment={'bottom-center'}
+                        offset={'16px'}
+                        customItem={
+                            <TDateContext.Provider value={{
+                                nowDate,
+                                dateValue,
+                                onChangeDateValue,
+                                displayDateObject,
+                                setDisplayDateObject,
+                                viewMode: {current: props.view, original: viewMode},
+                                changeViewMode,
+                                dateRange,
+                                validDateRange,
+                                parseDateString,
+                                parseDateObject,
+                            }}>
+                                <div className={'t-date-picker__drop-holder__item__wrapper'} onClick={onClickSelector}>
+                                    {viewMode === 'date' && (<TDaySelector/>)}
+                                    {viewMode === 'month' && (<TMonthSelector/>)}
+                                    {viewMode === 'year' && (<TYearSelector/>)}
+                                </div>
+                            </TDateContext.Provider>
+                        }>
+                        <TIcon medium onClick={initializeDisplayDate} color={themeToken.tGrayColor3}>calendar_month</TIcon>
+                    </TDropHolder>
+                }
             />
         </div>
     );

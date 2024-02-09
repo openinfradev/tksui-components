@@ -15,15 +15,14 @@
 }
 
 
-.t-day-selector {
+.t-day-selector, .t-month-selector {
     width: 260px;
-    min-height: 304px;
     padding: $t-spacing-20;
     border-radius: 8px;
     box-shadow: $t-shadow--modal;
 
     /* Header */
-    .t-day-selector__header {
+    .t-day-selector__header, .t-month-selector__header {
         width: 100%;
         height: 24px;
 
@@ -33,7 +32,7 @@
 
         @include typo-subtitle-3;
 
-        .t-day-selector__header__current-month {
+        .t-day-selector__header__current-display-date, .t-month-selector__header__current-display-date {
             display: inline-flex;
             align-items: center;
             gap: $t-spacing-2;
@@ -67,7 +66,7 @@
         }
     }
 
-    /* Content */
+    /* t-day-selector */
     .t-day-selector__content {
         height: calc(100% - 44px);
         margin-top: $t-spacing-20;
@@ -137,6 +136,60 @@
 
             }
         }
+    }
+
+
+    // t-month-selector
+    .t-month-selector__content {
+        margin-top: calc($t-spacing-40 + $t-spacing-2);
+
+        .t-month-selector__content__months-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: $t-spacing-10;
+            row-gap: calc($t-spacing-32 + $t-spacing-4);
+
+            margin-bottom: $t-spacing-12;
+            color: $t-gray-color-5;
+
+            .t-month-selector__content__months__item {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                width: 40px;
+                height: 40px;
+                color: $t-black-color;
+                border-radius: 50%;
+                cursor: pointer;
+
+                @include typo-subtitle-1;
+
+                &:hover {
+                    border: 1px solid $t-gray-color-1;
+                    background: $t-gray-color-1;
+                }
+
+                &.t-day-selector__content__day-container__item__month--today {
+                    color: $t-primary-color;
+                    border: 1px solid $t-secondary-color-blue;
+                }
+
+                &.t-day-selector__content__day-container__item__month--selected {
+                    color: $t-white-color;
+                    border: 1px solid $t-primary-color;
+                    background-color: $t-primary-color;
+                }
+
+                &.t-day-selector__content__day-container__item__month--disabled {
+                    color: $t-gray-color-4;
+                    cursor: not-allowed;
+                }
+            }
+        }
+
     }
 
 }

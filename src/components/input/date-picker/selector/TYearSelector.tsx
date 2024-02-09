@@ -21,7 +21,7 @@ const TYearSelector = () => {
 
     // region [Hooks]
 
-    const {dateValue, changeViewMode, handleDateValueChange} = useContext(datePickerConText);
+    const {dateValue, changeViewMode, onChangeDateValue} = useContext(datePickerConText);
     const [displayDateObject, setDisplayDateObject] = useState<TDateValue>({
         ...nowDate(),
     });
@@ -103,8 +103,8 @@ const TYearSelector = () => {
         const dateStr = `${displayDateObject.year}${twoDigitMonth}${twoDigitDate}`;
 
 
-        if (handleDateValueChange) { handleDateValueChange(dateStr); }
-    }, [handleDateValueChange, displayDateObject]);
+        if (onChangeDateValue) { onChangeDateValue(dateStr); }
+    }, [onChangeDateValue, displayDateObject]);
 
     const onMoveYear = useCallback((move: 'next' | 'prev') => {
         if (move === 'next' || move === 'prev') {
@@ -136,7 +136,7 @@ const TYearSelector = () => {
     return (
         <div className={'t-day-selector'} data-testid={'t-year-selector'}>
             <div className={'t-day-selector__header'}>
-                <div className={'t-day-selector__header__current-month'}>
+                <div className={'t-day-selector__header__current-display-date'}>
                     <div onClick={() => { changeViewMode('year'); }}>
                         {displayDateObject.year}년 - {displayDateObject.year}년
                     </div>

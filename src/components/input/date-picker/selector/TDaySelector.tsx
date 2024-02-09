@@ -1,4 +1,4 @@
-import {memo, useCallback, useContext, useEffect, useMemo, useState} from 'react';
+import {memo, useCallback, useContext, useMemo} from 'react';
 import TIcon from '~/icon/TIcon';
 import TButton from '~/button/button/TButton';
 import themeToken from '~style/designToken/ThemeToken.module.scss';
@@ -6,14 +6,6 @@ import {TDateValue} from '~/input/date-picker';
 import datePickerConText from '~/input/date-picker/TDateContext';
 
 
-const nowDate = (): TDateValue => ({
-    year: new Date().getFullYear(),
-    month: (new Date().getMonth() + 1),
-    day: new Date().getDate(),
-});
-
-
-// FIXME: props 로 받아 포멧을 별도 지정 가능하도록 변경
 const weekList = ['일', '월', '화', '수', '목', '금', '토'];
 
 const DaySpan = ({day}: { day: string }) => (<span className={'t-day-selector__content__weekday__item'}>{day}</span>);
@@ -24,12 +16,12 @@ const TDaySelector = () => {
 
     // region [Hooks]
 
-    const {dateValue, changeViewMode, handleDateValueChange, dateRange, parseDateString, validDateRange} = useContext(datePickerConText);
-    const [displayDateObject, setDisplayDateObject] = useState<TDateValue>({
-        ...nowDate(),
-    });
+    const {
+        dateValue, onChangeDateValue, displayDateObject, setDisplayDateObject, changeViewMode,
+        nowDate, parseDateString, validDateRange,
+    } = useContext(datePickerConText);
 
-    const selectedDateObject = useMemo(():TDateValue => {
+    const selectedDateObject = useMemo((): TDateValue => {
 
         if (dateValue === '') { return {year: null, month: null, day: null}; }
 
@@ -46,44 +38,11 @@ const TDaySelector = () => {
 
     // region [Privates]
 
-    const initializeDisplayDateInfo = useCallback((): void => {
-
-        // 현재 dateValue 로 처음 보여질 캘린더 상태를 초기화
-        // 우선순위 1 - 현재 선택된 값이 있는 경우 그 날짜 기준으로 캘린더를 보여줌
-        // 우선순위 2 - 현재 값이 없을 때, from, to 둘 다 값이 있는 경우 from 기준으로 보여줌(애매함)
-        //  => DatePicker 2개 달린 Range 컴포넌트가 별도로 있고 보여줄 상태를 prop 으로 받던가 position 역할이 부여돼야 해결됌)
-        // 우선순위 3 - from, to 각 하나 씩만 있는 경우 그 날짜 기준으로 보여줌
-        // 우선순위 4 - from, to 없는 경우 현재 날짜 기준으로 보여줌
-        const {year, month} = parseDateString(dateValue);
-
-        if (year !== 0 && month !== 0) {
-            setDisplayDateObject((prev) => ({...prev, year, month, day: null}));
-        } else if (dateRange.openFrom && dateRange.openTo) { // 둘 다 설정 시 여기가 애매함
-
-            const {year: openFromYear, month: openFromMonth} = parseDateString(dateRange.openFrom);
-            setDisplayDateObject((prev) => ({...prev, year: openFromYear, month: openFromMonth}));
-        } else if (dateRange.openFrom && !dateRange.openTo) {
-
-            const {year: openFromYear, month: openFromMonth} = parseDateString(dateRange.openFrom);
-            setDisplayDateObject((prev) => ({...prev, year: openFromYear, month: openFromMonth}));
-        } else if (!dateRange.openFrom && dateRange.openTo) {
-
-            const {year: openToYear, month: openToMonth} = parseDateString(dateRange.openTo);
-            setDisplayDateObject((prev) => ({...prev, year: openToYear, month: openToMonth}));
-        } else if (year !== 0 && month === 0) {
-
-            setDisplayDateObject((prev) => ({...prev, year, month: 1}));
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dateRange, dateValue]);
-
-
     const daysInMonth = useMemo(() => {
 
         const lastDayOfMonth = (new Date(displayDateObject.year, displayDateObject.month, 0)).getDate();
         return Array.from(Array(lastDayOfMonth).keys());
     }, [displayDateObject]);
-
 
     const firstDayOfWeek = useMemo((): number => {
 
@@ -122,7 +81,7 @@ const TDaySelector = () => {
 
             return clazz.join(' ');
         },
-        [validDateRange, selectedDateObject, displayDateObject],
+        [validDateRange, selectedDateObject, displayDateObject, nowDate],
     );
 
     // endregion
@@ -137,8 +96,8 @@ const TDaySelector = () => {
 
         const dateStr = `${displayDateObject.year}${twoDigitMonth}${twoDigitDate}`;
 
-        if (handleDateValueChange) { handleDateValueChange(dateStr); }
-    }, [handleDateValueChange, displayDateObject]);
+        if (onChangeDateValue) { onChangeDateValue(dateStr); }
+    }, [onChangeDateValue, displayDateObject]);
 
     const onMoveMonth = useCallback((move: 'next' | 'prev' | 'today') => {
         if (move === 'today') {
@@ -153,6 +112,7 @@ const TDaySelector = () => {
         } else {
             throw new Error('Invalid move value');
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     // endregion
@@ -160,26 +120,28 @@ const TDaySelector = () => {
 
     // region [Effects]
 
-    useEffect(() => {
-        initializeDisplayDateInfo();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
     // endregion
 
 
     // region [Templates]
 
     return (
-        <div className={'t-day-selector'} data-testid={'t-date-selector'}>
+        <div className={'t-day-selector'} data-testid={'t-day-selector'}>
             <div className={'t-day-selector__header'}>
-                <div className={'t-day-selector__header__current-month'}>
-                    <div onClick={() => { changeViewMode('year'); }}>{displayDateObject.year}년</div>
-                    <div onClick={() => { changeViewMode('month'); }}>{displayDateObject.month}월</div>
+
+                <div className={'t-day-selector__header__current-display-date'}>
+                    <div data-testid={'t-date-picker-display-year'}
+                         onClick={() => { changeViewMode('year'); }}>
+                        {displayDateObject.year}년
+                    </div>
+                    <div data-testid={'t-date-picker-display-month'}
+                         onClick={() => { changeViewMode('month'); }}>
+                        {displayDateObject.month}월
+                    </div>
                     <TIcon xsmall>arrow_drop_down</TIcon>
                 </div>
 
-                <div className={'t-day-selector__header__control'}>
+                <div className={'t-day-selector__header__control'} data-testid={'t-day-selector-control'}>
                     <TButton onClick={() => { onMoveMonth('prev'); }} xsmall
                              className={'t-day-selector__header__control__icon-button'}>
                         <TIcon xsmall color={themeToken.tGrayColor5}>arrow_left</TIcon>
@@ -191,16 +153,18 @@ const TDaySelector = () => {
                         <TIcon xsmall color={themeToken.tGrayColor5}>arrow_right</TIcon>
                     </TButton>
                 </div>
+
             </div>
 
             <div className={'t-day-selector__content'}>
+
                 <div className={'t-day-selector__content__weekday'}>
-                    {weekList.map((day) => <MemoizedDaySpan key={day} day={day}/>)}
+                    {weekList?.map((day) => <MemoizedDaySpan key={day} day={day}/>)}
                 </div>
 
                 <div className={'t-day-selector__content__day-container'}>
                     {
-                        daysInMonth.map((a) => (
+                        daysInMonth?.map((a) => (
                             <div key={a}
                                  className={'t-day-selector__content__day-container__item'}
                                  style={a === 0 ? {gridColumn: firstDayOfWeek} : {}}
@@ -213,15 +177,15 @@ const TDaySelector = () => {
                         ))
                     }
                 </div>
+
             </div>
         </div>
     );
-
     // endregion
 };
 
 TDaySelector.defaultProps = {
-    value: `${nowDate().year}-`,
+    value: `${new Date().getFullYear()}-`,
 };
 
 TDaySelector.displayName = 'TDaySelector';

@@ -3,9 +3,15 @@ import {TDateContextType} from '~/input/date-picker/TDatePicker.interface';
 
 
 export const datePickerConText = createContext<TDateContextType>({
-    dateValue: '',
-    handleDateValueChange: (date) => date,
+    nowDate: null,
 
+    dateValue: '',
+    onChangeDateValue: (date) => date,
+
+    displayDateObject: null,
+    setDisplayDateObject: null,
+
+    viewMode: {current: 'date', original: 'date'},
     changeViewMode: (view) => view,
 
     dateRange: {},
