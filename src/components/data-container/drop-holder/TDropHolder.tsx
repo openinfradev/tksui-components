@@ -164,9 +164,7 @@ const TDropHolder = forwardRef((props: TDropHolderProps, ref: ForwardedRef<TDrop
                             </div>
                         ) : (
                             <div className={'t-drop-holder__items t-drop-holder__items--custom'} style={itemsStyle}>
-                                {
-                                    props.customItem
-                                }
+                                {props.customItem}
                             </div>
                         )
 
