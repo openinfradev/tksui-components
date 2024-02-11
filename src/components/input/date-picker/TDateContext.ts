@@ -6,7 +6,7 @@ export const datePickerConText = createContext<TDateContextType>({
     nowDate: null,
 
     dateValue: '',
-    onChangeDateValue: (date) => date,
+    handleDateValueChange: (date) => date,
 
     displayDateObject: null,
     setDisplayDateObject: null,

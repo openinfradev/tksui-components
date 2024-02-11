@@ -13,7 +13,6 @@ export type TDatePickerViewType = 'date' | 'month' | 'year';
 
 export interface TDatePickerProps extends TBaseProps, TValidatorProps {
 
-    readOnly?: boolean,
     disabled?: boolean,
     value?: string,
 
@@ -51,7 +50,7 @@ export interface TDateContextType {
     displayDateObject: TDateValue,
     setDisplayDateObject: Dispatch<SetStateAction<TDateValue>>
 
-    onChangeDateValue: (date: string) => void,
+    handleDateValueChange: (date: string) => void,
     viewMode: ViewInfoType,
     changeViewMode: (view: TDatePickerViewType) => void,
 

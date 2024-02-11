@@ -1,5 +1,5 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {ReactNode, useRef} from 'react';
+import React, {ReactNode, useRef} from 'react';
 import useInputState from '@/common/hook/UseInputState';
 
 import TDatePicker from '~/input/date-picker/TDatePicker';
@@ -14,91 +14,90 @@ export default meta;
 
 type Story = StoryObj<typeof TDatePicker>;
 
-
-const Container = ({label, value, children}: { label: string, value: string, children: ReactNode }) => {
-
-    return (
-        <div style={{display: 'flex', flexDirection: 'column', gap: '32px', padding: '24px 0'}}>
-            <p style={{fontSize: '18px'}}>{label}</p>
-            <div style={{display: 'flex', flexDirection: 'column', gap: '8px'}}>
-                <p>{value}</p>
-                <div>{children}</div>
-            </div>
+const Wrapper = ({children}: {children: ReactNode}) => (
+    <div style={{display: 'flex', flexDirection: 'column', gap: '36px'}}>
+        {children}
+    </div>
+);
+const Container = ({children}: {children: ReactNode}) => (
+    <div style={{display: 'flex', alignItems: 'center', gap: '120px'}}>
+        {children}
+    </div>
+);
+const Item = ({label, value, children}: { label: string, value: string, children: ReactNode }) => (
+    <div style={{display: 'flex', flexDirection: 'column', gap: '32px'}}>
+        <p style={{fontSize: '20px'}}>{label}</p>
+        <div style={{display: 'flex', flexDirection: 'column', gap: '8px'}}>
+            <p style={{marginBottom: '6px'}}>{value}</p>
+            <div>{children}</div>
         </div>
-    );
-};
+    </div>
+);
 
 
 // region [Normal]
 
 const NormalTemplate = (args: TDatePickerProps) => {
 
-    const datePickerRef = useRef<TDatePickerRef>(null);
-    const monthPickerRef = useRef<TDatePickerRef>(null);
-    const yearPickerRef = useRef<TDatePickerRef>(null);
-
-    const openToRangePickerRef = useRef<TDatePickerRef>(null);
-    const openFromRangePickerRef = useRef<TDatePickerRef>(null);
-    const openFromToRangePickerRef = useRef<TDatePickerRef>(null);
-
-    const dateInput = useInputState('20240205');
-    const monthInput = useInputState('202402');
-    const yearInput = useInputState('2024');
-
-    const openFromRangeDateInput = useInputState('');
-    const openToRangeDateInput = useInputState('');
-
-    const rangeDateInput = useInputState('');
-
-    const openFrom = '20240210';
-    const openTo = '20240227';
-
+    const dateValue1 = useInputState(args.value);
+    const dateValue2 = useInputState(args.value);
+    const dateValue3 = useInputState(args.value);
 
     return (
-        <>
-            <div style={{display: 'flex', justifyContent: 'flex-start', gap: '120px'}}>
-                <Container label={'DatePicker(Date Type)'} value={`Value: ${dateInput.value}`}>
-                    <TDatePicker {...args} ref={datePickerRef} value={dateInput.value} onChange={dateInput.onChange}/>
-                </Container>
-                <Container label={'DatePicker(Month Type)'} value={`Value: ${monthInput.value}`}>
-                    <TDatePicker {...args} ref={monthPickerRef} view={'month'} value={monthInput.value} onChange={monthInput.onChange}/>
-                </Container>
-                <Container label={'DatePicker(Year Type)'} value={`Value: ${yearInput.value}`}>
-                    <TDatePicker {...args} ref={yearPickerRef} view={'year'} value={yearInput.value} onChange={yearInput.onChange}/>
-                </Container>
-            </div>
-            <br/>
-
-            <br/>
-            <br/>
-            <div style={{display: 'flex', justifyContent: 'flex-start', gap: '120px'}}>
-                <Container label={`DatePicker(Date type + Range Option: open-from: ${openFrom})`}
-                           value={`Value: ${openFromRangeDateInput.value}`}>
-                    <TDatePicker {...args} ref={openToRangePickerRef} openFrom={openFrom} view={'date'} value={openFromRangeDateInput.value}
-                                 onChange={openFromRangeDateInput.onChange}/>
-                </Container>
-                <Container label={`DatePicker(Date type + Range Option: open-to: ${openTo})`}
-                           value={`Value: ${openToRangeDateInput.value}`}>
-                    <TDatePicker {...args} ref={openFromRangePickerRef} openTo={openTo} view={'date'} value={openToRangeDateInput.value}
-                                 onChange={openToRangeDateInput.onChange}/>
-                </Container>
-            </div>
-            <div style={{display: 'flex', justifyContent: 'flex-start', gap: '120px'}}>
-                <Container label={`DatePicker(Date type + Range Option: openFrom~To: ${openFrom} ~ ${openTo})`}
-                           value={`Value: ${rangeDateInput.value}`}>
-                    <TDatePicker {...args} ref={openFromToRangePickerRef} openFrom={openFrom} openTo={openTo} view={'date'}
-                                 value={rangeDateInput.value}
-                                 onChange={rangeDateInput.onChange}/>
-                </Container>
-            </div>
-        </>);
+        <Wrapper>
+            <Container>
+                <Item label={`view: ${args.view} / No Range`} value={`value: ${dateValue1.value}`}>
+                    <TDatePicker value={dateValue1.value} onChange={dateValue1.onChange} view={args.view}/>
+                </Item>
+                <Item label={`openFrom: ${args.openFrom || ''}`}
+                      value={`value: ${dateValue2.value}`}>
+                    <TDatePicker value={dateValue2.value} openFrom={args.openFrom} view={args.view}
+                                 onChange={dateValue2.onChange}/>
+                </Item>
+                <Item label={`openFrom: ${args.openFrom || ''} + openTo: ${args.openTo || ''}`}
+                      value={`value: ${dateValue3.value}`}>
+                    <TDatePicker value={dateValue3.value} openFrom={args.openFrom} openTo={args.openTo} view={args.view}
+                                 onChange={dateValue3.onChange}/>
+                </Item>
+            </Container>
+            <Container>
+                <Item label={'Disabled'} value={`value: ${dateValue1.value}`}>
+                    <TDatePicker value={dateValue1.value} onChange={dateValue1.onChange} view={args.view} disabled/>
+                </Item>
+            </Container>
+        </Wrapper>);
 };
 
 
-export const Default: Story = {
+export const DateType: Story = {
     render: NormalTemplate,
+    args: {
+        view: 'date',
+        value: '20240212',
+        openFrom: '20240210',
+        openTo: '20240224',
+    },
 };
 
+export const MonthType: Story = {
+    render: NormalTemplate,
+    args: {
+        view: 'month',
+        value: '202405',
+        openFrom: '202403',
+        openTo: '202408',
+    },
+};
+
+export const YearType: Story = {
+    render: NormalTemplate,
+    args: {
+        view: 'year',
+        value: '2024',
+        openFrom: '2023',
+        openTo: '2028',
+    },
+};
 
 // endregion
 

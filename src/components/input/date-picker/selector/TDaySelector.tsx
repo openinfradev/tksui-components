@@ -17,7 +17,7 @@ const TDaySelector = () => {
     // region [Hooks]
 
     const {
-        dateValue, onChangeDateValue, displayDateObject, setDisplayDateObject, changeViewMode,
+        dateValue, handleDateValueChange, displayDateObject, setDisplayDateObject, changeViewMode,
         nowDate, parseDateString, validDateRange,
     } = useContext(datePickerConText);
 
@@ -96,8 +96,8 @@ const TDaySelector = () => {
 
         const dateStr = `${displayDateObject.year}${twoDigitMonth}${twoDigitDate}`;
 
-        if (onChangeDateValue) { onChangeDateValue(dateStr); }
-    }, [onChangeDateValue, displayDateObject]);
+        if (handleDateValueChange) { handleDateValueChange(dateStr); }
+    }, [handleDateValueChange, displayDateObject]);
 
     const onMoveMonth = useCallback((move: 'next' | 'prev' | 'today') => {
         if (move === 'today') {
@@ -119,7 +119,6 @@ const TDaySelector = () => {
 
 
     // region [Effects]
-
     // endregion
 
 

@@ -17,8 +17,8 @@ const TMonthSelector = () => {
 
     // region [Hooks]
 
-    const {dateValue, onChangeDateValue, displayDateObject, setDisplayDateObject,
-        changeViewMode, nowDate, viewMode} = useContext(datePickerConText);
+    const {dateValue, handleDateValueChange, displayDateObject, setDisplayDateObject,
+        changeViewMode, nowDate, viewMode, validDateRange} = useContext(datePickerConText);
 
     const selectedDateObject = useMemo((): TDateValue => {
 
@@ -26,9 +26,8 @@ const TMonthSelector = () => {
 
         const year = Number(dateValue.substring(0, 4));
         const month = Number(dateValue.substring(4, 6));
-        const day = null;
 
-        if (year !== 0 && month !== 0) { return {year, month, day}; }
+        if (year !== 0 && month !== 0) { return {year, month, day: null}; }
 
         return {year: null, month: null, day: null};
     }, [dateValue]);
@@ -41,24 +40,29 @@ const TMonthSelector = () => {
     const dateLabelClass = useCallback(
         (month: number): string => {
 
-            if (displayDateObject.year === selectedDateObject.year && month === selectedDateObject.month) {
+            const clazz = [];
+            const {year: displayYear} = displayDateObject;
+            const padMonth = String(month).padStart(2, '0');
 
-                return 't-day-selector__content__day-container__item__month--selected';
+            if (displayDateObject.year === selectedDateObject.year && month === selectedDateObject.month) {
+                clazz.push('t-month-selector__content__month-container__item__month--selected');
             }
             if (displayDateObject.year === nowDate().year && month === nowDate().month) {
-
-                return 't-day-selector__content__day-container__item__month--today';
+                clazz.push('t-month-selector__content__month-container__item__month--today');
             }
-            return '';
+            if (!validDateRange(`${displayYear}${padMonth}`)) {
+                clazz.push('t-month-selector__content__month-container__item__month--disabled');
+            }
+
+            return clazz.join(' ');
         },
-        [selectedDateObject, displayDateObject, nowDate],
+        [selectedDateObject, displayDateObject, validDateRange, nowDate],
     );
 
     // endregion
 
 
     // region [Privates]
-
     // endregion
 
 
@@ -72,9 +76,13 @@ const TMonthSelector = () => {
         if (viewMode.current !== viewMode.original) {
             setDisplayDateObject((prev) => ({...prev, year: displayDateObject.year, month: clickedDate}));
             changeViewMode('date');
-        } else { onChangeDateValue(dateStr); }
+            return;
+        }
+        if (validDateRange(dateStr)) {
+            handleDateValueChange(dateStr);
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [viewMode, displayDateObject, onChangeDateValue]);
+    }, [viewMode, displayDateObject, handleDateValueChange]);
 
     const onMoveMonth = useCallback((move: 'next' | 'prev') => {
         setDisplayDateObject((prev) => {
@@ -92,7 +100,6 @@ const TMonthSelector = () => {
 
 
     // region [Effects]
-
     // endregion
 
 
@@ -104,36 +111,34 @@ const TMonthSelector = () => {
 
                 <div className={'t-month-selector__header__current-display-date'}>
                     <div data-testid={'t-date-picker-display-year'}
-                         onClick={() => { changeViewMode('year'); }}>{displayDateObject.year}년
+                         onClick={() => { changeViewMode('year'); }}>{`${displayDateObject.year}년`}
                     </div>
                     <TIcon xsmall>arrow_drop_down</TIcon>
                 </div>
 
 
-                <div className={'t-day-selector__header__control'}>
+                <div className={'t-month-selector__header__control'}>
                     <TButton onClick={() => { onMoveMonth('prev'); }} xsmall
-                             className={'t-day-selector__header__control__icon-button'}>
+                             className={'t-month-selector__header__control__icon-button'}>
                         <TIcon xsmall color={themeToken.tGrayColor5}>arrow_left</TIcon>
                     </TButton>
                     <TButton onClick={() => { onMoveMonth('next'); }} xsmall
-                             className={'t-day-selector__header__control__icon-button'}>
+                             className={'t-month-selector__header__control__icon-button'}>
                         <TIcon xsmall color={themeToken.tGrayColor5}>arrow_right</TIcon>
                     </TButton>
                 </div>
 
             </div>
 
-            <div className={'t-month-selector__content'}>
-                <div className={'t-month-selector__content__months-container'}>
-
+            <div className={'t-month-selector__content'} data-testid={'t-month-selector-control'}>
+                <div className={'t-month-selector__content__month-container'}>
                     {months.map((mon, idx) => (
-                        <span className={`t-month-selector__content__months__item ${dateLabelClass(idx + 1)}`}
+                        <span className={`t-month-selector__content__month__item ${dateLabelClass(idx + 1)}`}
                               onClick={() => { onClickDate(mon.value); }} key={mon.value}
                         >
                             {mon.value}
                         </span>
                     ))}
-
                 </div>
             </div>
         </div>

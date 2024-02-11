@@ -2,6 +2,7 @@ import {act, render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import {TDatePicker} from '~/input/date-picker';
+import {useInputState} from '@/common/hook';
 
 jest.mock('@/common/util/ColorUtil', () => ({
     shadeColor: jest.fn(() => 'blue'),
@@ -10,7 +11,7 @@ jest.mock('@/common/util/ColorUtil', () => ({
 const datePickerTestId = 't-date-picker';
 const invalidDates = ['2029199', '20999999', '20100000', '20100099', '21230010', '00000000', '01232323'];
 const invalidMonths = ['219900', '000000', '999999', '01021201', '123413', '202577'];
-const invalidYears = ['0000', '999', '123', '1', '66', '00004'];
+const invalidYears = ['0000', '999', '123', '1', '66', '00004', '0101', '0001'];
 
 describe('TDatePicker', () => {
 
@@ -142,7 +143,7 @@ describe('TDatePicker', () => {
             // Arrange
             const user = userEvent.setup();
             const todayDate = new Date().getDate();
-            render(<TDatePicker view={'date'} />);
+            render(<TDatePicker view={'date'}/>);
             const calendarIcon = screen.getByRole('img');
 
             // Act
@@ -160,7 +161,7 @@ describe('TDatePicker', () => {
             // Arrange
             const user = userEvent.setup();
             const todayDate = new Date().getDate();
-            render(<TDatePicker view={'date'} />);
+            render(<TDatePicker view={'date'}/>);
             const calendarIcon = screen.getByRole('img');
 
             // Act
@@ -184,7 +185,7 @@ describe('TDatePicker', () => {
             const openFrom = `${date.getFullYear()}${month < 10 ? `0${month}` : month}${openFromDay}`;
             const openTo = `${date.getFullYear()}${month < 10 ? `0${month}` : month}${openToDay}`;
 
-            render(<TDatePicker value={today} view={'date'} openFrom={openFrom} openTo={openTo} />);
+            render(<TDatePicker value={today} view={'date'} openFrom={openFrom} openTo={openTo}/>);
             const calendarIcon = screen.getByRole('img');
 
             // Act
@@ -272,6 +273,73 @@ describe('TDatePicker', () => {
             // Assert
             expect(root).toHaveValue('');
         });
+
+        it('Selector components are not displayed when disabled prop is applied', async () => {
+
+            // Arrange
+            const user = userEvent.setup();
+            render(<TDatePicker disabled view={'date'} value={'20240212'}/>);
+            const dropHolderRoot = screen.getByRole('img');
+
+            // Act
+            await act(async () => {
+                await user.click(dropHolderRoot);
+            });
+
+            try {
+                // Arrange
+                screen.getByTestId('t-day-selector');
+            } catch (err) {
+                // Assert
+                expect(err).not.toBeUndefined();
+                return;
+            }
+            throw Error('Disabled prop not working');
+        });
+
+        it('When user opens the date calendar and selects a disabled day, the input value remains unchanged.', async () => {
+
+            // Arrange
+            const testValue = '20240210';
+            const openFrom = '20240204';
+            const openTo = '20240220';
+            const user = userEvent.setup();
+            const TestDatePicker = () => {
+                const dateInput = useInputState(testValue);
+                return (
+                    <TDatePicker view={'date'} value={dateInput.value} onChange={dateInput.onChange}
+                                 openFrom={openFrom} openTo={openTo}/>
+                );
+            };
+            render(<TestDatePicker/>);
+
+            const iconRoot = screen.getByRole('img');
+
+            // Act
+            await act(async () => { await user.click(iconRoot); });
+
+            // Arrange
+            const testDay1 = Number(openFrom.substring(6, 8)) - 1;
+            const testDay2 = Number(openTo.substring(6, 8)) + 1;
+            const testDay1Root = screen.getByText(testDay1);
+            const testDay2Root = screen.getByText(testDay2);
+
+            // Assert
+            expect(testDay1Root).toHaveClass('t-day-selector__content__day-container__item__day--disabled');
+            expect(testDay2Root).toHaveClass('t-day-selector__content__day-container__item__day--disabled');
+
+            // Act
+            await act(async () => {
+                await user.click(testDay1Root);
+            });
+
+            // Arrange
+            const inputRoot = screen.getByTestId('text-field-input');
+
+            // Assert
+            expect(inputRoot).toHaveValue(testValue);
+        });
+
     });
 
 
@@ -281,7 +349,7 @@ describe('TDatePicker', () => {
 
             // Arrange
             const user = userEvent.setup();
-            render(<TDatePicker view={'date'} />);
+            render(<TDatePicker view={'date'}/>);
             const calendarIcon = screen.getByRole('img');
 
             // Act
@@ -310,19 +378,80 @@ describe('TDatePicker', () => {
                 // Arrange
                 const user = userEvent.setup();
                 const monthText = month === 12 ? `${month - 1}월` : `${month + 1}월`;
-                render(<TDatePicker value={today} />);
+                render(<TDatePicker value={today}/>);
+                const dropDownIcon = screen.getByRole('img');
+
+                // Act
+                await act(async () => { await user.click(dropDownIcon); });
+
+                // Arrange
+                const prevMonthButtonRoot = screen.queryAllByRole('button')[0];
+                const todayButtonRoot = screen.queryAllByRole('button')[1];
+                const nextMonthButtonRoot = screen.queryAllByRole('button')[2];
+
+                // Act
+                if (month === 12) {
+                    await act(async () => { await user.click(prevMonthButtonRoot); });
+                } else {
+                    await act(async () => { await user.click(nextMonthButtonRoot); });
+                }
+
+                // Arrange
+                const displayMonthRoot = screen.getByText(monthText);
+
+                // Assert
+                expect(displayMonthRoot).toBeInTheDocument();
+
+                // Act
+                if (month === 12) {
+                    await act(async () => { await user.click(nextMonthButtonRoot); });
+                } else {
+                    await act(async () => { await user.click(prevMonthButtonRoot); });
+                }
+
+                // Arrange
+                const expectMonthText = `${month}월`;
+                const displayMonth2Root = screen.getByText(expectMonthText);
+
+                // Assert
+                expect(displayMonth2Root).toBeInTheDocument();
+
+                // Act
+                await act(async () => { await user.click(todayButtonRoot); });
+
+                // Assert
+                const todayMonthExpectRoot = screen.getByText(`${month}월`);
+
+                expect(todayMonthExpectRoot).toBeInTheDocument();
+            },
+        );
+
+        it(
+            'Verify that when the user opens the date calendar and clicks the next or previous month, '
+            + 'the date changes correctly, and the selected year and month are displayed correctly in the text field.',
+            async () => {
+
+                // Arrange
+                const user = userEvent.setup();
+                const monthText = month === 12 ? `${month - 1}월` : `${month + 1}월`;
+
+                const TestDatePicker = () => {
+                    const dateInput = useInputState(today);
+                    return (
+                        <TDatePicker view={'date'} value={today} onChange={dateInput.onChange}/>
+                    );
+                };
+                render(<TestDatePicker/>);
+
                 const calendarIcon = screen.getByRole('img');
 
                 // Act
                 await act(async () => { await user.click(calendarIcon); });
 
                 // Arrange
-                const controlRoot = screen.getByTestId('t-day-selector-control') as HTMLDivElement;
-
-                /* eslint-disable testing-library/no-node-access */
-                const prevMonthButton = controlRoot.children[0];
-                const todayButton = controlRoot.children[1];
-                const nextMonthButton = controlRoot.children[2];
+                const prevMonthButton = screen.queryAllByRole('button')[0];
+                const todayButton = screen.queryAllByRole('button')[1];
+                const nextMonthButton = screen.queryAllByRole('button')[2];
 
                 // Act
                 if (month === 12) {
@@ -354,15 +483,243 @@ describe('TDatePicker', () => {
                 // Act
                 await act(async () => { await user.click(todayButton); });
 
-                // Assert
-                const todayMonthExpectRoot = screen.getByText(`${month}월`);
+                // Arrange
+                screen.getByText(`${month}월`);
+                const yearRoot = screen.getByText(`${today.substring(0, 4)}년`);
 
-                expect(todayMonthExpectRoot).toBeInTheDocument();
+                // Act
+                await act(async () => {
+                    await user.click(yearRoot);
+                });
+
+                // Arrange
+                const targetYear = Number(today.substring(0, 4)) - 1;
+                let targetMonth = Number(today.substring(4, 6));
+                if (targetMonth === 1) {
+                    targetMonth = 2;
+                } else if (targetMonth === 12) {
+                    targetMonth = 11;
+                } else {
+                    targetMonth += 1;
+                }
+                const targetDay = 18;
+
+                const targetYearRoot = screen.getByText(targetYear);
+
+                // Act
+                await act(async () => {
+                    await user.click(targetYearRoot);
+                });
+
+                // Arrange
+                const targetMonthItem = screen.getByText(targetMonth);
+
+                // Act
+                await act(async () => {
+                    await user.click(targetMonthItem);
+                });
+
+                // Arrange
+                const targetDayItem = screen.getByText(targetDay);
+
+                // Act
+                await act(async () => {
+                    await user.click(targetDayItem);
+                });
+
+                // Arrange
+                const inputRoot = screen.getByTestId('text-field-input');
+                const padMonth = String(targetMonth).padStart(2, '0');
+                const expectedValue = `${targetYear}${padMonth}${targetDay}`;
+
+                // Assert
+                expect(inputRoot).toHaveValue(expectedValue);
             },
         );
 
-        // TODO: YearSelector, MonthSelector Test
+        it(
+            'Verify that when the user opens the monthly calendar and clicks the next or previous month, '
+            + 'the date changes correctly, and the selected year and month are displayed correctly in the text field.',
+            async () => {
+
+                // Arrange
+                const user = userEvent.setup();
+                const testDate = '202401';
+                const selectedMonth = Number(testDate.substring(4, 6));
+                const currentYearText = `${today.substring(0, 4)}년`;
+                const prevYearText = `${Number(today.substring(0, 4)) - 1}년`;
+                const nextYearText = `${Number(today.substring(0, 4)) + 1}년`;
+                const targetDate = '202607';
+                const TestDatePicker = () => {
+                    const dateInput = useInputState(testDate);
+                    return (
+                        <TDatePicker view={'month'} value={dateInput.value} onChange={dateInput.onChange}/>
+                    );
+                };
+                render(<TestDatePicker/>);
+                const calendarIcon = screen.getByRole('img');
+
+                // Act
+                await act(async () => { await user.click(calendarIcon); });
+
+                // Arrange
+                const selectedMonthRoot = screen.getByText(selectedMonth);
+                const todayMonthRoot = screen.getByText(month);
+
+                // Assert
+                expect(selectedMonthRoot).toHaveClass('t-month-selector__content__month-container__item__month--selected');
+                expect(todayMonthRoot).toHaveClass('t-month-selector__content__month-container__item__month--today');
+
+                // Arrange
+                screen.getByText(currentYearText);
+                const prevButton = screen.queryAllByRole('button')[0];
+                const nextButton = screen.queryAllByRole('button')[1];
+
+                // Act
+                await act(async () => { await user.click(prevButton); });
+
+                // Arrange
+                const yearTextRoot = screen.getByText(prevYearText);
+
+                // Assert
+                expect(yearTextRoot).toBeInTheDocument();
+
+                // Act
+                await act(async () => {
+                    await user.click(nextButton);
+                    await user.click(nextButton);
+                });
+
+                // Arrange
+                const yearRoot = screen.getByText(nextYearText);
+
+                // Act
+                await act(async () => { await user.click(yearRoot); });
+
+                // Arrange
+                const selectedYearRoot = screen.getByText(today.substring(0, 4));
+
+                // Assert
+                expect(selectedYearRoot).toHaveClass('t-year-selector__content__year-container__item__year--selected');
+
+                // Arrange
+                const currentYearRoot = screen.getByText(targetDate.substring(0, 4));
+
+                // Act
+                await act(async () => { await user.click(currentYearRoot); });
+
+                // Arrange
+                screen.getByTestId('t-month-selector');
+                const targetMonthRoot = screen.getByText(Number(targetDate.substring(4, 6)));
+
+                // Act
+                await act(async () => { await user.click(targetMonthRoot); });
+
+                // Arrange
+                const dateInputRoot = screen.getByTestId('text-field-input');
+
+                // Assert
+                expect(dateInputRoot).toHaveValue(targetDate);
+            },
+        );
+
+        it('When user opens the year calendar and selects a disabled year, the input value remains unchanged.', async () => {
+
+            // Arrange
+            const testYear = '2026';
+            const openFrom = '2022';
+            const openTo = '2027';
+            const user = userEvent.setup();
+            const TestDatePicker = () => {
+                const dateInput = useInputState(testYear);
+                return (
+                    <TDatePicker view={'year'} value={dateInput.value} onChange={dateInput.onChange}
+                                 openFrom={openFrom} openTo={openTo}/>
+                );
+            };
+            render(<TestDatePicker/>);
+
+            const dropDownIcon = screen.getByRole('img');
+
+            // Act
+            await act(async () => { await user.click(dropDownIcon); });
+
+            // Arrange
+            const yearFromTargetRoot = screen.getByText(Number(openFrom) - 1);
+            const yearToTargetRoot = screen.getByText(Number(openTo) + 1);
+
+            // Assert
+            expect(yearFromTargetRoot).toHaveClass('t-year-selector__content__year-container__item__year--disabled');
+            expect(yearToTargetRoot).toHaveClass('t-year-selector__content__year-container__item__year--disabled');
+
+            // Act
+            await act(async () => { await user.click(yearFromTargetRoot); });
+
+            // Arrange
+            const inoutRoot = screen.getByTestId('text-field-input');
+
+            // Assert
+            expect(inoutRoot).toHaveValue(testYear);
+        });
+
+        it('If the user enters the blur state after entering the date, the value changes normally.', async () => {
+
+            // Arrange
+            const user = userEvent.setup();
+            const openFrom = '20240205';
+            const openTo = '20240224';
+            const validDate = '20240211';
+            const firstInvalidDate = '20240228';
+            const secondInvalidDate = '20240202';
+
+            const TestDatePicker = () => {
+                const dateInput = useInputState('');
+                return (
+                    <TDatePicker view={'date'} value={dateInput.value} onChange={dateInput.onChange}
+                                 openFrom={openFrom} openTo={openTo}/>
+                );
+            };
+            render(<TestDatePicker/>);
+            const textInput = screen.getByTestId('text-field-input');
+
+            // Act
+            await act(async () => {
+                await user.click(textInput);
+                await user.keyboard(validDate);
+                await user.tab();
+            });
+
+            // Arrange
+            const typedTextInput = screen.getByTestId('text-field-input');
+
+            // Assert
+            expect(typedTextInput).toHaveValue(validDate);
+
+            // Act
+            await act(async () => {
+                await user.clear(typedTextInput);
+                await user.keyboard(firstInvalidDate);
+                await user.tab();
+            });
+
+            // Arrange
+            const firstInvalidTypedInput = screen.getByTestId('text-field-input');
+
+            // Assert
+            expect(firstInvalidTypedInput).toHaveValue(validDate);
+
+            // Act
+            await act(async () => {
+                await user.clear(firstInvalidTypedInput);
+                await user.keyboard(secondInvalidDate);
+                await user.tab();
+            });
+
+            // Assert
+            expect(firstInvalidTypedInput).toHaveValue(validDate);
+        });
 
     });
+
 
 });
