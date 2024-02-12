@@ -271,7 +271,7 @@ describe('TTextField', () => {
     // endregion
 
 
-    // region [Password, Searchable, AutoComplete]
+    // region [Password, Searchable, AutoComplete, customAction]
 
     it('When password prop is applies, input type is password and password icon is shown', () => {
         // Arrange
@@ -371,6 +371,19 @@ describe('TTextField', () => {
 
         expect(inputElement)
             .toHaveAttribute('autocomplete', autoCompleteValue);
+    });
+
+    it('When customAction prop is applied, input element has customAction attribute', () => {
+
+        // Arrange
+        const customTestId = 'custom-action';
+        const CustomActionComponent = () => (<div data-testid={customTestId}>Custom</div>);
+        render(<TTextField {...baseProps} customAction={<CustomActionComponent/>}/>);
+
+        // Assert
+        const customActionRoot = screen.getByTestId(customTestId);
+
+        expect(customActionRoot).toBeInTheDocument();
     });
 
     // endregion

@@ -260,7 +260,7 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
                     )
                 }
                 {
-                    props.customAction && !props.disabled && (
+                    props.customAction && (
                         <div className={'t-text-field__container__custom-action-icon'}>{props.customAction}</div>
                     )
                 }
