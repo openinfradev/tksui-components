@@ -173,6 +173,7 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
     }, [props.onChange]);
 
     const restoreDate = useCallback(() => {
+
         const isValidDate = validateDateFormat(dateValue);
         const isValidRange = validDateRange(dateValue);
 
@@ -256,15 +257,17 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
 
     const handleDateValueChange = useCallback((dateStr = displayDateValue) => {
 
-        if (dateStr.trim() === '') {
+        const sanitizeDate = sanitizeDateInput(dateStr);
+
+        if (sanitizeDate === '') {
             clearDate();
             return;
         }
 
-        const isDateValid = validateDateFormat(dateStr);
-        const isRangeValid = validDateRange(dateStr);
+        const isDateValid = validateDateFormat(sanitizeDate);
+        const isRangeValid = validDateRange(sanitizeDate);
 
-        const {year, month, day} = parseDateString(dateStr);
+        const {year, month, day} = parseDateString(sanitizeDate);
         const formattedDateStr = parseDateObject({year, month, day});
 
         if (isDateValid && isRangeValid && viewMode === 'date') {
