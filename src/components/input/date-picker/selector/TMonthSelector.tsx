@@ -147,10 +147,7 @@ const TMonthSelector = () => {
     // endregion
 };
 
-TMonthSelector.defaultProps = {
-    value: `${new Date().getFullYear()}-`,
-};
-
+TMonthSelector.defaultProps = {};
 TMonthSelector.displayName = 'TMonthSelector';
 
 

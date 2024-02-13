@@ -75,7 +75,7 @@ export const DateType: Story = {
         view: 'date',
         value: '20240212',
         openFrom: '20240210',
-        openTo: '20240224',
+        openTo: '20240320',
     },
 };
 

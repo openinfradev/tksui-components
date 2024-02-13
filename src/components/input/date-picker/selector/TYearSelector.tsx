@@ -5,9 +5,6 @@ import themeToken from '~style/designToken/ThemeToken.module.scss';
 import datePickerConText from '~/input/date-picker/TDateContext';
 import {TDateValue} from '~/input/date-picker';
 
-// const DaySpan = ({day}: { day: string }) => (<span className={'t-year-selector__content__weekday__item'}>{day}</span>);
-// const MemoizedDaySpan = memo(DaySpan);
-
 
 const TYearSelector = () => {
 
@@ -142,9 +139,7 @@ const TYearSelector = () => {
     // endregion
 };
 
-TYearSelector.defaultProps = {
-    value: `${new Date().getFullYear()}-`,
-};
+TYearSelector.defaultProps = {};
 
 TYearSelector.displayName = 'TYearSelector';
 

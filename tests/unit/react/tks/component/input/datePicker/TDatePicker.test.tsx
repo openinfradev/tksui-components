@@ -1,6 +1,5 @@
 import {act, render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
 import {TDatePicker} from '~/input/date-picker';
 import {useInputState} from '@/common/hook';
 
@@ -13,17 +12,23 @@ const invalidDates = ['2029199', '20999999', '20100000', '20100099', '21230010',
 const invalidMonths = ['219900', '000000', '999999', '01021201', '123413', '202577'];
 const invalidYears = ['0000', '999', '123', '1', '66', '00004', '0101', '0001'];
 
-describe('TDatePicker', () => {
+const dateFormatter = (date: string): string => {
+    const dateLength = date.length;
+    const yearStr = date.substring(0, 4);
+    const monthStr = date.substring(4, 6);
+    const dayStr = date.substring(6, 8);
 
-    const mockFn = jest.fn();
+    if (dateLength < 5) { return yearStr; }
+    if (dateLength < 7) { return `${yearStr}-${monthStr}`; }
+    return `${yearStr}-${monthStr}-${dayStr}`;
+};
+
+describe('TDatePicker', () => {
 
     const date = new Date();
     const month = date.getMonth() + 1;
     const day = date.getDate();
     const today = `${date.getFullYear()}${month < 10 ? `0${month}` : month}${day < 10 ? `0${day}` : day}`;
-
-
-    beforeEach(() => { mockFn.mockClear(); });
 
     describe('Style', () => {
 
@@ -57,7 +62,7 @@ describe('TDatePicker', () => {
             const datePickerRoot = screen.getByTestId('text-field-input');
 
             // Assert
-            expect(datePickerRoot).toHaveValue(testDateValue);
+            expect(datePickerRoot).toHaveValue(dateFormatter(testDateValue));
         });
 
         it('value prop applies to month type root', () => {
@@ -68,7 +73,7 @@ describe('TDatePicker', () => {
             const datePickerRoot = screen.getByTestId('text-field-input');
 
             // Assert
-            expect(datePickerRoot).toHaveValue(testDateValue);
+            expect(datePickerRoot).toHaveValue(dateFormatter(testDateValue));
         });
 
         it('value prop applies to year type root', () => {
@@ -79,7 +84,7 @@ describe('TDatePicker', () => {
             const monthPickerRoot = screen.getByTestId('text-field-input');
 
             // Assert
-            expect(monthPickerRoot).toHaveValue(testMonthValue);
+            expect(monthPickerRoot).toHaveValue(dateFormatter(testMonthValue));
         });
 
         it('value prop applies to root', () => {
@@ -216,7 +221,7 @@ describe('TDatePicker', () => {
             const datePickerRoot = screen.getByTestId('text-field-input');
 
             // Assert
-            expect(datePickerRoot).toHaveValue(validFullDate);
+            expect(datePickerRoot).toHaveValue(dateFormatter(validFullDate));
         });
 
 
@@ -229,7 +234,7 @@ describe('TDatePicker', () => {
             const monthPickerRoot = screen.getByTestId('text-field-input');
 
             // Assert
-            expect(monthPickerRoot).toHaveValue(validMonthDate);
+            expect(monthPickerRoot).toHaveValue(dateFormatter(validMonthDate));
         });
 
         it('Displays correctly when incorrect value is provided to year type root', () => {
@@ -337,7 +342,33 @@ describe('TDatePicker', () => {
             const inputRoot = screen.getByTestId('text-field-input');
 
             // Assert
-            expect(inputRoot).toHaveValue(testValue);
+            expect(inputRoot).toHaveValue(dateFormatter(testValue));
+        });
+
+        it('Displays correctly when separator is provided to date type root', () => {
+
+            // Arrange
+            const testDate = '20291212';
+            const testSeparator = '+';
+            render(<TDatePicker view={'date'} value={testDate} separator={testSeparator} />);
+            const dateInputRoot = screen.getByTestId('text-field-input') as HTMLInputElement;
+
+            const splitDate = dateInputRoot.value.split(testSeparator);
+            // Assert
+            expect(splitDate.length).toBe(3);
+        });
+
+        it('Displays correctly when separator is provided to month type root', () => {
+
+            // Arrange
+            const testDate = '203004';
+            const testSeparator = '/';
+            render(<TDatePicker view={'month'} value={testDate} separator={testSeparator} />);
+            const dateInputRoot = screen.getByTestId('text-field-input') as HTMLInputElement;
+
+            const splitDate = dateInputRoot.value.split(testSeparator);
+            // Assert
+            expect(splitDate.length).toBe(2);
         });
 
     });
@@ -533,7 +564,7 @@ describe('TDatePicker', () => {
                 const expectedValue = `${targetYear}${padMonth}${targetDay}`;
 
                 // Assert
-                expect(inputRoot).toHaveValue(expectedValue);
+                expect(inputRoot).toHaveValue(dateFormatter(expectedValue));
             },
         );
 
@@ -619,7 +650,7 @@ describe('TDatePicker', () => {
                 const dateInputRoot = screen.getByTestId('text-field-input');
 
                 // Assert
-                expect(dateInputRoot).toHaveValue(targetDate);
+                expect(dateInputRoot).toHaveValue(dateFormatter(targetDate));
             },
         );
 
@@ -693,7 +724,7 @@ describe('TDatePicker', () => {
             const typedTextInput = screen.getByTestId('text-field-input');
 
             // Assert
-            expect(typedTextInput).toHaveValue(validDate);
+            expect(typedTextInput).toHaveValue(dateFormatter(validDate));
 
             // Act
             await act(async () => {
@@ -706,7 +737,7 @@ describe('TDatePicker', () => {
             const firstInvalidTypedInput = screen.getByTestId('text-field-input');
 
             // Assert
-            expect(firstInvalidTypedInput).toHaveValue(validDate);
+            expect(firstInvalidTypedInput).toHaveValue(dateFormatter(validDate));
 
             // Act
             await act(async () => {
@@ -716,7 +747,7 @@ describe('TDatePicker', () => {
             });
 
             // Assert
-            expect(firstInvalidTypedInput).toHaveValue(validDate);
+            expect(firstInvalidTypedInput).toHaveValue(dateFormatter(validDate));
         });
 
     });

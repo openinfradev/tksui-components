@@ -21,6 +21,7 @@ export interface TDatePickerProps extends TBaseProps, TValidatorProps {
 
     view?: TDatePickerViewType
     dateFormat?: 'YYYY-MM-DD' | 'DD-MM-YYYY' | 'MM-DD-YYYY',
+    separator?: string,
 
     onChange?(value: boolean | string, positiveValue?: boolean | string): void,
 }
@@ -43,7 +44,7 @@ interface ViewInfoType {
 }
 
 export interface TDateContextType {
-    nowDate: ()=> TDateValue,
+    nowDate: () => TDateValue,
 
     dateValue: string,
 

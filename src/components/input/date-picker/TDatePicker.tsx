@@ -17,6 +17,7 @@ const nowDate = (): TDateValue => ({
     day: new Date().getDate(),
 });
 
+
 const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef>) => {
 
     // region [Hooks]
@@ -67,6 +68,22 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
 
     // region [Private]
 
+    const formattedDate = useCallback((date: string) => {
+        const dateLength = date.length;
+        const yearStr = date.substring(0, 4);
+        const monthStr = date.substring(4, 6);
+        const dayStr = date.substring(6, 8);
+
+        if (dateLength < 5) { return yearStr; }
+        if (dateLength < 7) { return `${yearStr}${props.separator}${monthStr}`; }
+        return `${yearStr}${props.separator}${monthStr}${props.separator}${dayStr}`;
+    }, []);
+
+    // const displayFormattedDate = useMemo((): string => {
+    //
+    //
+    // }, [displayDateValue]);
+
     const sanitizeDateInput = useCallback((dateStr: string) => {
         let maxAllowedLength = 8;
 
@@ -116,14 +133,18 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
     const validDateRange = useCallback((dateStr: string) => {
 
         const numTypeTargetDate = Number(dateStr);
-        const {openFrom, openTo} = dateRange;
 
-        if (openFrom && openTo) { return numTypeTargetDate >= Number(openFrom) && numTypeTargetDate <= Number(openTo); }
-        if (openFrom) { return Number(openFrom) <= numTypeTargetDate; }
-        if (openTo) { return Number(openTo) >= numTypeTargetDate; }
+        const sanitizedOpenFrom = sanitizeDateInput(dateRange.openFrom);
+        const sanitizedOpenTo = sanitizeDateInput(dateRange.openTo);
+
+        if (sanitizedOpenFrom && sanitizedOpenTo) {
+            return numTypeTargetDate >= Number(sanitizedOpenFrom) && numTypeTargetDate <= Number(sanitizedOpenTo);
+        }
+        if (sanitizedOpenFrom) { return Number(sanitizedOpenFrom) <= numTypeTargetDate; }
+        if (sanitizedOpenTo) { return Number(sanitizedOpenTo) >= numTypeTargetDate; }
 
         return true;
-    }, [dateRange]);
+    }, [dateRange, sanitizeDateInput]);
 
     const changeViewMode = useCallback((mode: TDatePickerViewType) => {
         if (props.view === 'date') {
@@ -137,7 +158,7 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
         setDisplayDateValue(dateStr);
         setDateValue(dateStr);
 
-        if (props.onChange) { props.onChange(dateStr); }
+        if (props.onChange) { props.onChange(formattedDate(dateStr)); }
 
         dropDownRef.current?.close();
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -297,7 +318,7 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
             <TTextField
                 ref={textFieldRef}
                 className={'t-date-picker__text-field'}
-                value={displayDateValue}
+                value={formattedDate(displayDateValue)}
                 onChange={onChangeDisplayDateValue}
                 onBlur={onBlurTextField}
                 width={'156px'}
@@ -336,18 +357,14 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
             />
         </div>
     );
-
     // endregion
-
-
 });
 
 TDatePicker.defaultProps = {
     value: '',
     view: 'date',
+    separator: '-',
 };
-
 TDatePicker.displayName = 'TDatePicker';
-
 
 export default TDatePicker;

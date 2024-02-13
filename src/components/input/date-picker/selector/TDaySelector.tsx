@@ -16,10 +16,8 @@ const TDaySelector = () => {
 
     // region [Hooks]
 
-    const {
-        dateValue, handleDateValueChange, displayDateObject, setDisplayDateObject, changeViewMode,
-        nowDate, parseDateString, validDateRange,
-    } = useContext(datePickerConText);
+    const {dateValue, handleDateValueChange, displayDateObject, setDisplayDateObject, changeViewMode,
+        nowDate, parseDateString, validDateRange} = useContext(datePickerConText);
 
     const selectedDateObject = useMemo((): TDateValue => {
 
@@ -183,10 +181,7 @@ const TDaySelector = () => {
     // endregion
 };
 
-TDaySelector.defaultProps = {
-    value: `${new Date().getFullYear()}-`,
-};
-
+TDaySelector.defaultProps = {};
 TDaySelector.displayName = 'TDaySelector';
 
 
