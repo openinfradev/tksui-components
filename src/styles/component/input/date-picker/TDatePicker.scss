@@ -48,7 +48,11 @@
             display: inline-flex;
             align-items: center;
             gap: $t-spacing-2;
-            cursor: pointer;
+
+            .t-day-selector-display-year-month,
+            .t-day-selector-display-date__icon {
+                cursor: pointer;
+            }
         }
 
         .t-day-selector__header__control {
@@ -163,6 +167,15 @@
             display: inline-flex;
             align-items: center;
             gap: $t-spacing-2;
+
+            .t-month-selector-display-year,
+            .t-month-selector-display-date__icon {
+                cursor: pointer;
+            }
+
+            .t-month-selector__header__current-display-date__icon--open {
+                transform: rotate(180deg);
+            }
         }
 
         .t-month-selector__header__control {
@@ -259,7 +272,15 @@
             display: inline-flex;
             align-items: center;
             gap: $t-spacing-2;
-            cursor: pointer;
+
+
+            .t-year-selector__header__current-display-date__icon {
+                cursor: pointer;
+
+                &.t-year-selector__header__current-display-date__icon--open {
+                    transform: rotate(180deg);
+                }
+            }
         }
 
         .t-year-selector__header__control {

@@ -17,8 +17,10 @@ const TMonthSelector = () => {
 
     // region [Hooks]
 
-    const {dateValue, handleDateValueChange, displayDateObject, setDisplayDateObject,
-        changeViewMode, nowDate, viewMode, validDateRange} = useContext(datePickerConText);
+    const {
+        dateValue, handleDateValueChange, displayDateObject, setDisplayDateObject,
+        changeViewMode, nowDate, viewMode, validDateRange,
+    } = useContext(datePickerConText);
 
     const selectedDateObject = useMemo((): TDateValue => {
 
@@ -59,6 +61,13 @@ const TMonthSelector = () => {
         [selectedDateObject, displayDateObject, validDateRange, nowDate],
     );
 
+    const iconClass = useMemo(() => {
+        if (viewMode.original !== viewMode.current) {
+            return 't-month-selector__header__current-display-date__icon--open';
+        }
+        return '';
+    }, [viewMode]);
+
     // endregion
 
 
@@ -96,6 +105,11 @@ const TMonthSelector = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    const onClickToggleViewMode = useCallback(() => {
+        if (viewMode.original !== viewMode.current) { changeViewMode(viewMode.original); }
+        if (viewMode.original === viewMode.current) { changeViewMode('year'); }
+    }, [viewMode, changeViewMode]);
+
     // endregion
 
 
@@ -110,10 +124,13 @@ const TMonthSelector = () => {
             <div className={'t-month-selector__header'}>
 
                 <div className={'t-month-selector__header__current-display-date'}>
-                    <div data-testid={'t-date-picker-display-year'}
-                         onClick={() => { changeViewMode('year'); }}>{`${displayDateObject.year}년`}
+                    <div data-testid={'t-month-selector-display-year'}>
+                        {`${displayDateObject.year}년`}
                     </div>
-                    <TIcon xsmall>arrow_drop_down</TIcon>
+                    <TIcon xsmall className={`t-month-selector-display-date__icon ${iconClass}`}
+                           onClick={onClickToggleViewMode} >
+                        arrow_drop_down
+                    </TIcon>
                 </div>
 
 

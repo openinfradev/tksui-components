@@ -127,15 +127,15 @@ const TDaySelector = () => {
             <div className={'t-day-selector__header'}>
 
                 <div className={'t-day-selector__header__current-display-date'}>
-                    <div data-testid={'t-date-picker-display-year'}
-                         onClick={() => { changeViewMode('year'); }}>
-                        {displayDateObject.year}년
-                    </div>
-                    <div data-testid={'t-date-picker-display-month'}
+                    <div className={'t-day-selector-display-year-month'}
+                         data-testid={'t-day-selector-display-year-month'}
                          onClick={() => { changeViewMode('month'); }}>
-                        {displayDateObject.month}월
+                        {`${displayDateObject.year}년 ${displayDateObject.month}월`}
                     </div>
-                    <TIcon xsmall>arrow_drop_down</TIcon>
+                    <TIcon onClick={() => { changeViewMode('year'); }}
+                           xsmall className={'t-day-selector-display-date__icon'}>
+                        arrow_drop_down
+                    </TIcon>
                 </div>
 
                 <div className={'t-day-selector__header__control'} data-testid={'t-day-selector-control'}>

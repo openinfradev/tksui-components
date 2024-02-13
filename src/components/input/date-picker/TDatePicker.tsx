@@ -337,7 +337,7 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
                                     handleDateValueChange,
                                     displayDateObject,
                                     setDisplayDateObject,
-                                    viewMode: {current: props.view, original: viewMode},
+                                    viewMode: {current: viewMode, original: props.view},
                                     changeViewMode,
                                     dateRange,
                                     validDateRange,

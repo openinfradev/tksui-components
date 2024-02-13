@@ -58,6 +58,13 @@ const TYearSelector = () => {
         [selectedDateObject, displayDateObject, nowDate, validDateRange],
     );
 
+    const iconClass = useMemo(() => {
+        if (viewMode.original !== viewMode.current) {
+            return 't-year-selector__header__current-display-date__icon--open';
+        }
+        return '';
+    }, [viewMode]);
+
     // endregion
 
 
@@ -67,7 +74,7 @@ const TYearSelector = () => {
 
         if (viewMode.current !== viewMode.original) {
             setDisplayDateObject((prev) => ({...prev, year: clickedYear}));
-            changeViewMode('month');
+            changeViewMode(viewMode.original);
             return;
         }
 
@@ -92,6 +99,10 @@ const TYearSelector = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    const onClickToggleViewMode = useCallback(() => {
+        if (viewMode.original !== viewMode.current) { changeViewMode(viewMode.original); }
+    }, [viewMode, changeViewMode]);
+
     // endregion
 
 
@@ -106,9 +117,12 @@ const TYearSelector = () => {
             <div className={'t-year-selector__header'}>
                 <div className={'t-year-selector__header__current-display-date'}>
                     <div onClick={() => { changeViewMode('year'); }}>
-                        {displayYearRange[0]}년 - {displayYearRange[displayYearRange.length - 1]}년
+                        {`${displayYearRange[0]}년 - ${displayYearRange[displayYearRange.length - 1]}년`}
                     </div>
-                    <TIcon xsmall>arrow_drop_down</TIcon>
+                    <TIcon xsmall onClick={onClickToggleViewMode}
+                           className={`t-year-selector__header__current-display-date__icon ${iconClass}`}>
+                        arrow_drop_down
+                    </TIcon>
                 </div>
 
                 <div className={'t-year-selector__header__control'}>

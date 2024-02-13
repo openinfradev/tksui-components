@@ -1,5 +1,6 @@
 import {act, render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import {Simulate} from 'react-dom/test-utils';
 import {TDatePicker} from '~/input/date-picker';
 import {useInputState} from '@/common/hook';
 
@@ -408,7 +409,7 @@ describe('TDatePicker', () => {
 
                 // Arrange
                 const user = userEvent.setup();
-                const monthText = month === 12 ? `${month - 1}월` : `${month + 1}월`;
+                const monthText = month === 12 ? (month - 1) : (month + 1);
                 render(<TDatePicker value={today}/>);
                 const dropDownIcon = screen.getByRole('img');
 
@@ -428,10 +429,7 @@ describe('TDatePicker', () => {
                 }
 
                 // Arrange
-                const displayMonthRoot = screen.getByText(monthText);
-
-                // Assert
-                expect(displayMonthRoot).toBeInTheDocument();
+                screen.getByText(`${today.substring(0, 4)}년 ${monthText}월`);
 
                 // Act
                 if (month === 12) {
@@ -441,8 +439,7 @@ describe('TDatePicker', () => {
                 }
 
                 // Arrange
-                const expectMonthText = `${month}월`;
-                const displayMonth2Root = screen.getByText(expectMonthText);
+                const displayMonth2Root = screen.getByText(`${today.substring(0, 4)}년 ${month}월`);
 
                 // Assert
                 expect(displayMonth2Root).toBeInTheDocument();
@@ -451,7 +448,7 @@ describe('TDatePicker', () => {
                 await act(async () => { await user.click(todayButtonRoot); });
 
                 // Assert
-                const todayMonthExpectRoot = screen.getByText(`${month}월`);
+                const todayMonthExpectRoot = screen.getByText(`${today.substring(0, 4)}년 ${month}월`);
 
                 expect(todayMonthExpectRoot).toBeInTheDocument();
             },
@@ -464,7 +461,7 @@ describe('TDatePicker', () => {
 
                 // Arrange
                 const user = userEvent.setup();
-                const monthText = month === 12 ? `${month - 1}월` : `${month + 1}월`;
+                const nextMonth = month === 12 ? (month - 1) : (month + 1);
 
                 const TestDatePicker = () => {
                     const dateInput = useInputState(today);
@@ -492,7 +489,7 @@ describe('TDatePicker', () => {
                 }
 
                 // Arrange
-                const displayMonthRoot = screen.getByText(monthText);
+                const displayMonthRoot = screen.getByText(`${today.substring(0, 4)}년 ${nextMonth}월`);
 
                 // Assert
                 expect(displayMonthRoot).toBeInTheDocument();
@@ -505,52 +502,49 @@ describe('TDatePicker', () => {
                 }
 
                 // Arrange
-                const expectMonthText = `${month}월`;
-                const displayMonth2Root = screen.getByText(expectMonthText);
-
-                // Assert
-                expect(displayMonth2Root).toBeInTheDocument();
+                screen.getByText(`${today.substring(0, 4)}년 ${month}월`);
 
                 // Act
                 await act(async () => { await user.click(todayButton); });
 
                 // Arrange
-                screen.getByText(`${month}월`);
-                const yearRoot = screen.getByText(`${today.substring(0, 4)}년`);
+                screen.getByText(`${today.substring(0, 4)}년 ${Number(today.substring(4, 6))}월`);
+
+                const toggleButton = screen.queryAllByRole('img')[0];
 
                 // Act
                 await act(async () => {
-                    await user.click(yearRoot);
+                    await user.click(toggleButton);
                 });
 
                 // Arrange
                 const targetYear = Number(today.substring(0, 4)) - 1;
-                let targetMonth = Number(today.substring(4, 6));
-                if (targetMonth === 1) {
-                    targetMonth = 2;
-                } else if (targetMonth === 12) {
-                    targetMonth = 11;
-                } else {
-                    targetMonth += 1;
-                }
-                const targetDay = 18;
 
                 const targetYearRoot = screen.getByText(targetYear);
 
                 // Act
-                await act(async () => {
-                    await user.click(targetYearRoot);
-                });
+                await act(async () => { await user.click(targetYearRoot); });
 
                 // Arrange
-                const targetMonthItem = screen.getByText(targetMonth);
+                const monthSelectorItem = screen.getByText(`${targetYear}년 ${month}월`);
+                const targetMonth = '4';
 
                 // Act
                 await act(async () => {
-                    await user.click(targetMonthItem);
+                    await user.click(monthSelectorItem);
                 });
 
                 // Arrange
+                const monthItem = screen.getByText(targetMonth);
+
+                // Act
+                await act(async () => {
+                    await user.click(monthItem);
+                });
+
+                // Arrange
+                screen.getByText(`${targetYear}년 ${targetMonth}월`);
+                const targetDay = '19';
                 const targetDayItem = screen.getByText(targetDay);
 
                 // Act
@@ -622,10 +616,10 @@ describe('TDatePicker', () => {
                 });
 
                 // Arrange
-                const yearRoot = screen.getByText(nextYearText);
+                const toggleButton = screen.queryAllByRole('img')[0];
 
                 // Act
-                await act(async () => { await user.click(yearRoot); });
+                await act(async () => { await user.click(toggleButton); });
 
                 // Arrange
                 const selectedYearRoot = screen.getByText(today.substring(0, 4));
