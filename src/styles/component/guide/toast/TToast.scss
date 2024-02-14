@@ -1,6 +1,6 @@
 .tks-toast {
 
-    --toastify-color-light: $t-white-color;
+    --toastify-color-light: #{$t-white-color};
 
     --toastify-text-color-info: #{$t-black-color};
     --toastify-text-color-success: #{$t-black-color};
