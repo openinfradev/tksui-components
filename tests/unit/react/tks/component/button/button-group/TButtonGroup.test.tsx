@@ -4,9 +4,13 @@ import userEvent from '@testing-library/user-event';
 import TButtonGroup from '~/button/button-group/TButtonGroup';
 import useInputState from '@/common/hook/UseInputState';
 import {
+    ButtonGroupVariant,
+    ButtonGroupVariantType,
     TButtonGroupItem,
     TButtonGroupValue,
 } from '~/button/button-group/TButtonGroup.interface';
+
+const variantList = Object.values(ButtonGroupVariant);
 
 jest.mock('@/common/util/ColorUtil', () => ({
     shadeColor: jest.fn(() => 'blue'),
@@ -20,6 +24,11 @@ describe('TButtonGroup', () => {
 
         value?: TButtonGroupValue,
         items?: TButtonGroupItem[],
+        variant?: ButtonGroupVariantType,
+
+        primary?: boolean,
+        main?: boolean,
+
         onChange?(value: TButtonGroupValue): void,
 
         multiSelect?: boolean,
@@ -151,5 +160,36 @@ describe('TButtonGroup', () => {
 
     });
 
+    it.each(variantList)('Variant prop applies to the root. %s', (variant) => {
+
+        // Arrange
+        render(<ButtonGroup initialValue={[]} variant={variant} multiSelect={true}/>);
+        const root = screen.getByTestId('button-group-root');
+
+        // Assert
+        expect(root).toHaveClass(`t-button-group--${variant}`);
+    });
+
+    it('primary prop applies to the root.', () => {
+
+        // Arrange
+        const testVariant = 'primary';
+        render(<ButtonGroup initialValue={[]} variant={testVariant} multiSelect={true}/>);
+        const root = screen.getByTestId('button-group-root');
+
+        // Assert
+        expect(root).toHaveClass(`t-button-group--${testVariant}`);
+    });
+
+    it('main prop applies to the root.', () => {
+
+        // Arrange
+        const testVariant = 'main';
+        render(<ButtonGroup initialValue={[]} variant={testVariant} multiSelect={true}/>);
+        const root = screen.getByTestId('button-group-root');
+
+        // Assert
+        expect(root).toHaveClass(`t-button-group--${testVariant}`);
+    });
 
 });

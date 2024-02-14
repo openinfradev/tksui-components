@@ -24,6 +24,26 @@
         z-index: 1;
     }
 
+    &.t-button-group--primary {
+
+        .t-button-group__button {
+            &.t-button-group__button--active {
+                border-color: $t-primary-color;
+            }
+        }
+    }
+
+    &.t-button-group--main {
+
+        .t-button-group__button {
+            &.t-button-group__button--active {
+                color: $t-white-color;
+                background: $t-primary-color;
+                border-color: $t-primary-color;
+            }
+        }
+    }
+
     &.t-button-group--disabled .t-button-group__button.t-button--disabled {
         border: 1px solid $t-gray-color-2;
     }

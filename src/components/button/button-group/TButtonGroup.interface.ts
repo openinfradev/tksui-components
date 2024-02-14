@@ -8,6 +8,14 @@ export interface TButtonGroupItem {
     value: TButtonGroupValue,
 }
 
+export const ButtonGroupVariant = {
+    primary: 'primary',
+    main: 'main',
+} as const;
+
+export type ButtonGroupVariantType = typeof ButtonGroupVariant[keyof typeof ButtonGroupVariant];
+
+
 export interface TButtonGroupProps extends TBaseProps {
     value: TButtonGroupValue,
     items: TButtonGroupItem[],
@@ -16,4 +24,8 @@ export interface TButtonGroupProps extends TBaseProps {
     multiSelect?: boolean,
 
     disabled?: boolean,
+
+    variant?: ButtonGroupVariantType,
+    primary?: boolean,
+    main?: boolean,
 }
