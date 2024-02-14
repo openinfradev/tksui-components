@@ -9,9 +9,9 @@ const replaceContents = (contents, searchValue, replaceValue) => {
 
 const replaceInFile = async (filePath) => {
     const contents = await fs.promises.readFile(filePath, 'utf8');
-    const removedTestIdContents = replaceContents(contents, ',?\\s*["\']data-testid["\']\\s*:\\s*["\']([^"\']*)["\']', '');
+    const testIdRemovedContents = replaceContents(contents, ',?\\s*["\']data-testid["\']\\s*:\\s*["\']([^"\']*)["\']', '');
     // eslint-disable-next-line max-len
-    const updatedContents = replaceContents(removedTestIdContents, '~style/designToken/ThemeToken.module.scss', 'tksui-components/lib/styles/ThemeToken.module.css');
+    const updatedContents = replaceContents(testIdRemovedContents, '~style/designToken/ThemeToken.module.scss', 'tksui-components/lib/styles/ThemeToken.module.css');
     await fs.promises.writeFile(filePath, updatedContents, 'utf8');
 };
 
