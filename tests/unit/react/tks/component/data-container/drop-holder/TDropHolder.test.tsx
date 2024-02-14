@@ -182,7 +182,7 @@ describe('TDropHolder', () => {
             expect(mockOnClickItem).toHaveBeenCalledTimes(baseProps.items.length);
         });
 
-        it('When user clicks and opens TDropHolder, custom item elements are displayed', async () => {
+        it('When a user clicks the TDropHolder that is provided with customItem, custom item elements are displayed', async () => {
 
             // Arrange
             const user = userEvent.setup();
