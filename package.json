@@ -13,7 +13,7 @@
         "build-sass": "sass --no-source-map src/styles/Entry.scss:lib/styles/index.css src/styles/designToken/ThemeToken.module.scss:lib/styles/ThemeToken.module.css",
         "minify-css": "esbuild lib/styles/index.css --minify --allow-overwrite --outfile=lib/styles/index.css && esbuild lib/styles/ThemeToken.module.css --minify --allow-overwrite --outfile=lib/styles/ThemeToken.module.css",
         "build-tsc": "tsc --project tsconfig.esm.json && tsc-alias -p tsconfig.esm.json",
-        "path-replace-js": "node path-replacer.js",
+        "build-contents-replace-js": "node build-contents-replacer.js",
         "minify-js": "esbuild lib/esm/**/*.js --minify --allow-overwrite --outdir=lib/esm",
         "build-all": "npm run clean && npm run build-sass && npm run minify-css && npm run build-tsc && npm run path-replace-js && npm run minify-js",
         "patch": "npm run build-all && npm version patch && npm publish && npm run clean",
