@@ -2,7 +2,7 @@ import {DomLayoutType} from 'ag-grid-community/dist/lib/entities/gridOptions';
 import {CSSProperties, forwardRef, Ref, useCallback, useImperativeHandle, useMemo, useRef, useState} from 'react';
 import {AgGridReact} from 'ag-grid-react';
 import {SelectionChangedEvent} from 'ag-grid-community';
-import {TDataGridProps} from './TDataGrid.interface';
+import {TDataGridProps} from '@/components';
 import TButton from '../../button/button/TButton';
 import TPagination from '../pagination/TPagination';
 import TActionBar from '~/data-container/action-bar/TActionBar';
@@ -47,7 +47,7 @@ const TDataGrid = forwardRef((props: TDataGridProps, ref: Ref<AgGridReact>) => {
 
         let style: CSSProperties = {};
 
-        if (props.style) style = {...props.style};
+        if (props.style) { style = {...props.style}; }
 
         return style;
     }, [props.style]);
