@@ -2,9 +2,9 @@ import {useCallback, useState} from 'react';
 import {TPageRequestVO, TPageResponseVO} from '~/data-container/data-grid';
 
 
-export default function usePagination() {
+export default function usePagination(initialPageSize = 20) {
     const [value, setValue] = useState<TPageResponseVO>(
-        {totalPages: 1, pageNumber: 1, pageSize: 20, totalRows: 0},
+        {totalPages: 1, pageNumber: 1, pageSize: initialPageSize, totalRows: 0},
     );
 
     const setTotalPagesAndRows = useCallback((pageResponse: TPageResponseVO): void => {
