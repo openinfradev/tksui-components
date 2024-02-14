@@ -105,17 +105,13 @@ describe('TDropHolder', () => {
             expect(root).not.toHaveClass('t-drop-holder--open');
 
             // Act
-            await act(async () => {
-                await user.click(root);
-            });
+            await act(async () => { await user.click(root); });
 
             // Assert
             expect(root).toHaveClass('t-drop-holder--open');
 
             // Act
-            await act(async () => {
-                await user.click(root);
-            });
+            await act(async () => { await user.click(root); });
 
             // Assert
             expect(root).not.toHaveClass('t-drop-holder--open');
@@ -131,17 +127,13 @@ describe('TDropHolder', () => {
             document.body.appendChild(outsideElement);
 
             // Act
-            await act(async () => {
-                await user.click(root);
-            });
+            await act(async () => { await user.click(root); });
 
             // Assert
             expect(root).toHaveClass('t-drop-holder--open');
 
             // Act
-            await act(async () => {
-                await user.click(outsideElement);
-            });
+            await act(async () => { await user.click(outsideElement); });
 
             // Assert
             expect(root).not.toHaveClass('t-drop-holder--open');
@@ -155,9 +147,7 @@ describe('TDropHolder', () => {
             const root = screen.getByTestId('drop-holder-root');
 
             // Act
-            await act(async () => {
-                await user.click(root);
-            });
+            await act(async () => { await user.click(root); });
 
             // Assert
             baseProps.items.forEach((item) => {
@@ -173,7 +163,6 @@ describe('TDropHolder', () => {
             render(<TDropHolder {...baseProps} >Test DropHolder</TDropHolder>);
             const root = screen.getByTestId('drop-holder-root');
 
-
             // Act
             // eslint-disable-next-line no-restricted-syntax
             for (const item of baseProps.items) {
@@ -186,13 +175,30 @@ describe('TDropHolder', () => {
                 const itemElement = screen.getByText(item.text);
 
                 // eslint-disable-next-line no-await-in-loop
-                await act(async () => {
-                    await userEvent.click(itemElement);
-                });
+                await act(async () => { await userEvent.click(itemElement); });
             }
 
             // Assert
             expect(mockOnClickItem).toHaveBeenCalledTimes(baseProps.items.length);
+        });
+
+        it('When a user clicks the TDropHolder that is provided with customItem, custom item elements are displayed', async () => {
+
+            // Arrange
+            const user = userEvent.setup();
+            const customTestId = 'test-custom-element';
+            const CustomElement = () => (<div data-testid={customTestId}>👻</div>);
+
+            render(<TDropHolder alignment={'top-center'} customItem={<CustomElement/>}>Test DropHolder</TDropHolder>);
+            const root = screen.getByTestId('drop-holder-root');
+
+            // Act
+            await act(async () => { await user.click(root); });
+
+            // Assert
+            const customItemRoot = screen.getByTestId(customTestId);
+            expect(customItemRoot).toBeInTheDocument();
+
         });
     });
 
