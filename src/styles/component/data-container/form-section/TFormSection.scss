@@ -49,6 +49,7 @@
     position: relative;
     display: inline-flex;
     flex: 0 0 auto;
+    gap: $t-spacing-16;
     white-space: pre-wrap;
     padding-right: $t-spacing-8;
     color: $t-black-color;
@@ -59,6 +60,7 @@
     .t-form-section-item__label {
         display: inline-flex;
         align-items: center;
+        max-width: 120px;
         @include typo-subtitle-3;
 
         .t-form-section-item__label__info-icon {
