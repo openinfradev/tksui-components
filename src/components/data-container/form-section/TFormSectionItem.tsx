@@ -35,10 +35,17 @@ const TFormSectionItem = (props: TFormSectionItemProps) => {
     const labelStyle = useMemo((): CSSProperties => {
         const style: CSSProperties = {marginBottom: props.labelMarginBottom};
 
-        style.flex = `0 0 ${labelWidth}`;
+        const labelWidthNum = Number(labelWidth.replace(/\D/g, ''));
+        if (labelWidthNum === 0) {
+            throw Error((`Error: Invalid labelWidth value '${labelWidth}.`));
+        }
+        if (labelWidthNum > 120) {
+            throw Error((`Error: labelWidth cannot exceed ${labelWidth}px.`));
+        }
+        style.minWidth = labelWidth;
 
         return style;
-    }, [labelWidth]);
+    }, [labelWidth, props.labelMarginBottom]);
 
     const contentStyle = useMemo((): CSSProperties => {
 

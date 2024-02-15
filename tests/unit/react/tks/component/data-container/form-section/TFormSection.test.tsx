@@ -127,7 +127,7 @@ describe('TFormSection', () => {
 
             // Assert
             expect(formSectionItemLabel)
-                .toHaveStyle({flex: `0 0 ${labelWidth}`});
+                .toHaveStyle({minWidth: labelWidth});
         });
 
     });
