@@ -5,7 +5,7 @@ import {glob} from 'glob';
 
 const replaceRules = [
     {
-        before: ',?\\s*["\']data-testid["\']\\s*:\\s*["\']([^"\']*)["\']',
+        before: '(,\\s*["\']data-testid["\']\\s*:\\s*["\'][^"\']*["\'])|(\\s*["\']data-testid["\']\\s*:\\s*["\'][^"\']*["\']\\s*,?)',
         after: '',
     },
     {
