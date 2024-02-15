@@ -1,4 +1,4 @@
-import {MouseEvent, KeyboardEvent} from 'react';
+import {MouseEvent, KeyboardEvent, ReactNode} from 'react';
 import {TValidatorProps} from '@/common/validator/TValidator.interface';
 import {TBaseProps} from '@/common/base/TBase.interface';
 
@@ -8,6 +8,7 @@ export interface TTextFieldProps extends TValidatorProps, TBaseProps {
     password?: boolean,
     clearable?: boolean,
     searchable?: boolean,
+    customAction?: ReactNode,
     required?: boolean,
     noTrim?: boolean,
     readOnly? : boolean,

@@ -122,7 +122,7 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
 
     const inputType = useMemo((): string => {
 
-        if (props.password && !isPasswordVisible) return 'password';
+        if (props.password && !isPasswordVisible) { return 'password'; }
         return 'text';
     }, [props.password, isPasswordVisible]);
 
@@ -175,8 +175,8 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
     const rootStyle = useMemo((): CSSProperties => {
         let style: CSSProperties = {};
 
-        if (props.style) style = {...props.style};
-        if (props.width) style = {...style, width: props.width};
+        if (props.style) { style = {...props.style}; }
+        if (props.width) { style = {...style, width: props.width}; }
 
         return style;
     }, [props.style, props.width]);
@@ -257,6 +257,11 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
                                onClick={togglePasswordVisibility}>
                             {isPasswordVisible ? 'visibility_off' : 'visibility'}
                         </TIcon>
+                    )
+                }
+                {
+                    props.customAction && (
+                        <div className={'t-text-field__container__custom-action-icon'}>{props.customAction}</div>
                     )
                 }
                 {
