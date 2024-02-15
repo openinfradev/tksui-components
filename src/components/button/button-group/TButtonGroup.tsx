@@ -1,6 +1,6 @@
 import {CSSProperties, useCallback, useMemo} from 'react';
 import TButton from '../button/TButton';
-import {TButtonGroupProps, TButtonGroupValue} from './TButtonGroup.interface';
+import {TButtonGroupProps, TButtonGroupValue} from '@/components';
 
 
 const TButtonGroup = (props: TButtonGroupProps) => {
@@ -10,17 +10,25 @@ const TButtonGroup = (props: TButtonGroupProps) => {
     const rootClass = useMemo((): string => {
         const clazz: string[] = [];
 
+        if (props.variant && (props.primary || props.main)) {
+            throw Error('Error: variant prop cannot have both primary and main simultaneously.');
+        }
+
         if (props.className) { clazz.push(props.className); }
+        if (props.variant) { clazz.push(`t-button-group--${props.variant}`); }
+        if (props.primary) { clazz.push('t-button-group--primary'); }
+        if (props.main) { clazz.push('t-button-group--main'); }
+
         if (props.multiSelect) { clazz.push('t-button-group--multi-select'); }
         if (props.disabled) { clazz.push('t-button-group--disabled'); }
 
         return clazz.join(' ');
-    }, [props.className, props.disabled, props.multiSelect]);
+    }, [props.className, props.disabled, props.multiSelect, props.variant, props.primary, props.main]);
 
     const rootStyle = useMemo((): CSSProperties => {
         let style: CSSProperties = {};
 
-        if (props.style) style = {...props.style};
+        if (props.style) { style = {...props.style}; }
 
         return style;
     }, [props.style]);

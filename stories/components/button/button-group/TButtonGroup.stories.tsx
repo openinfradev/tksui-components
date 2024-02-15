@@ -35,6 +35,14 @@ const Template = (args) => {
                 <TButtonGroup {...args} value={searchParam} onChange={onChangeSearchParam}/>
             </Container>
 
+            <Container label={`Primary(value: ${args.multiSelect ? (searchParam as string[]).join(', ') : searchParam})`}>
+                <TButtonGroup {...args} primary value={searchParam} onChange={onChangeSearchParam}/>
+            </Container>
+
+            <Container label={`Main(value: ${args.multiSelect ? (searchParam as string[]).join(', ') : searchParam})`}>
+                <TButtonGroup {...args} main value={searchParam} onChange={onChangeSearchParam}/>
+            </Container>
+
             <Container label={'Disabled'}>
                 <TButtonGroup {...args} disabled value={searchParam} onChange={onChangeSearchParam}/>
             </Container>

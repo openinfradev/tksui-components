@@ -1,6 +1,6 @@
 import {CSSProperties, forwardRef, Ref, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState} from 'react';
 
-import {TPaginationProps, TPaginationRef} from './TPagination.interface';
+import {TPaginationProps, TPaginationRef} from '@/components';
 import TIcon from '../../icon/TIcon';
 import TButton from '~/button/button/TButton';
 import TNumberField from '~/input/number-field/TNumberField';
@@ -115,12 +115,12 @@ const TPagination = forwardRef((props: TPaginationProps, ref: Ref<TPaginationRef
 
     const onChangeJumperPageNumber = useCallback((pageNumber: string) => {
         setJumperPage(Number(pageNumber));
-    }, [pageRange]);
+    }, []);
 
     const onClickJumperButton = useCallback(() => {
         const validResult = numberFieldRef.current?.validate();
         if (validResult === true && onChangePageNumber) { onChangePageNumber(jumperPage); }
-    }, [jumperPage, pageRange, onChangePageNumber]);
+    }, [jumperPage, onChangePageNumber]);
 
     // endregion
 
