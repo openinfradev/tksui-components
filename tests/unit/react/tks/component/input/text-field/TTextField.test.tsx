@@ -210,7 +210,7 @@ describe('TTextField', () => {
 
         // Assert
         expect(mockOnChange).toHaveBeenCalledWith('a');
-        expect(mockOnBlur).toBeCalledTimes(1);
+        expect(mockOnBlur).toHaveBeenCalledTimes(1);
     });
 
     it('When noTrim prop is applied, the input value is trimmed', async () => {
@@ -228,8 +228,8 @@ describe('TTextField', () => {
         });
 
         // Assert
-        expect(mockOnChange).toBeCalledTimes(0);
-        expect(mockOnBlur).toBeCalledTimes(1);
+        expect(mockOnChange).toHaveBeenCalledTimes(0);
+        expect(mockOnBlur).toHaveBeenCalledTimes(1);
     });
 
 
@@ -405,7 +405,7 @@ describe('TTextField', () => {
         });
 
         // Assert
-        expect(mockOnKeyDownEnter).toBeCalledTimes(1);
+        expect(mockOnKeyDownEnter).toHaveBeenCalledTimes(1);
     });
 
     it('When type any key, onKeyDown handler is called', async () => {
@@ -422,7 +422,7 @@ describe('TTextField', () => {
         });
 
         // Assert
-        expect(mockOnKeyDown).toBeCalledTimes(1);
+        expect(mockOnKeyDown).toHaveBeenCalledTimes(1);
     });
 
 

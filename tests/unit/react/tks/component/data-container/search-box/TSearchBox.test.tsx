@@ -101,7 +101,7 @@ describe('TSearchBox', () => {
                 .toHaveClass('t-button');
 
             expect(onSearch)
-                .toBeCalledTimes(1);
+                .toHaveBeenCalledTimes(1);
         });
 
         it('When the onSearch prop is supplied, the "조회" button should be displayed and working', async () => {
@@ -123,7 +123,7 @@ describe('TSearchBox', () => {
                 .toHaveClass('t-button');
 
             expect(onReset)
-                .toBeCalledTimes(1);
+                .toHaveBeenCalledTimes(1);
         });
 
     });
