@@ -28,6 +28,7 @@
 
         .t-button-group__button {
             &.t-button-group__button--active {
+                color: $t-primary-color;
                 border-color: $t-primary-color;
             }
         }
