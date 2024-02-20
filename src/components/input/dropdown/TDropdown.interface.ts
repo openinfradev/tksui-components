@@ -20,6 +20,7 @@ export interface TDropdownProps extends TValidatorProps, TBaseProps {
     multiple?: boolean,
     disabled?: boolean,
     noDetail?: boolean,
+    chip?: boolean,
     placeholder?: string,
     filterPlaceholder?: string,
 
@@ -29,8 +30,8 @@ export interface TDropdownProps extends TValidatorProps, TBaseProps {
     itemTemplate?: (item: TDropdownItem) => string,
 
     onChange(value: string | string[]): void,
-
-    chip?: boolean,
+    onOpen?(): void,
+    onClose?(): void,
 }
 
 

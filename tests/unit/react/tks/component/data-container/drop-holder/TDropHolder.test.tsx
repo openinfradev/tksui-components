@@ -4,6 +4,8 @@ import TDropHolder from '~/data-container/drop-holder/TDropHolder';
 
 describe('TDropHolder', () => {
     const mockOnClickItem = jest.fn();
+    const mockOnOpen = jest.fn();
+    const mockOnClose = jest.fn();
     const baseProps = {
         children: <div>Holder Content</div>,
         items: [
@@ -115,6 +117,41 @@ describe('TDropHolder', () => {
 
             // Assert
             expect(root).not.toHaveClass('t-drop-holder--open');
+        });
+
+        it('When the onOpen prop is provided and user clicks root, it will be called exactly once.', async () => {
+
+            // Arrange
+            const user = userEvent.setup();
+            render(<TDropHolder {...baseProps} onOpen={mockOnOpen}>Test DropHolder</TDropHolder>);
+            const root = screen.getByTestId('drop-holder-root');
+
+            // Act
+            await act(async () => {
+                await user.click(root);
+            });
+
+            // Assert
+            expect(mockOnOpen).toHaveBeenCalledTimes(1);
+        });
+
+        it('When the onClose prop is provided and the user clicks the root element twice, it will be called exactly once.', async () => {
+
+            // Arrange
+            const user = userEvent.setup();
+            render(<TDropHolder {...baseProps} onClose={mockOnClose}>Test DropHolder</TDropHolder>);
+            const root = screen.getByTestId('drop-holder-root');
+
+            // Act
+            await act(async () => {
+                await user.click(root);
+            });
+            await act(async () => {
+                await user.click(root);
+            });
+
+            // Assert
+            expect(mockOnClose).toHaveBeenCalledTimes(1);
         });
 
         it('When user clicks outside, TDropHolder closes', async () => {

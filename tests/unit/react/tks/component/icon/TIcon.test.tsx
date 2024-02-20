@@ -159,7 +159,7 @@ describe('TIcon', () => {
             await user.click(root);
 
             // Assert
-            expect(mockOnClick).toBeCalledTimes(1);
+            expect(mockOnClick).toHaveBeenCalledTimes(1);
         });
 
 
@@ -176,7 +176,7 @@ describe('TIcon', () => {
             await user.click(root);
 
             // Assert
-            expect(mockOnClick).toBeCalledTimes(0);
+            expect(mockOnClick).toHaveBeenCalledTimes(0);
         });
 
         it('When the icon is clicked, the onClick event handler should receive the event parameter', async () => {
@@ -221,9 +221,9 @@ describe('TIcon', () => {
             await user.keyboard(' ');
 
             // Assert
-            expect(mockOnKeyDown).toBeCalledTimes(2);
-            expect(mockOnKeyDownEnter).toBeCalledTimes(1);
-            expect(mockOnKeyDownSpace).toBeCalledTimes(1);
+            expect(mockOnKeyDown).toHaveBeenCalledTimes(2);
+            expect(mockOnKeyDownEnter).toHaveBeenCalledTimes(1);
+            expect(mockOnKeyDownSpace).toHaveBeenCalledTimes(1);
         });
 
         it('When icon is disabled and user type something on Icon, onKeyDown event handler will be NOT executed', async () => {
@@ -248,9 +248,9 @@ describe('TIcon', () => {
             await user.keyboard(' ');
 
             // Assert
-            expect(mockOnKeyDown).toBeCalledTimes(0);
-            expect(mockOnKeyDownEnter).toBeCalledTimes(0);
-            expect(mockOnKeyDownSpace).toBeCalledTimes(0);
+            expect(mockOnKeyDown).toHaveBeenCalledTimes(0);
+            expect(mockOnKeyDownEnter).toHaveBeenCalledTimes(0);
+            expect(mockOnKeyDownSpace).toHaveBeenCalledTimes(0);
         });
 
     });
