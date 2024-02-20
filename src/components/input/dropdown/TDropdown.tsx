@@ -12,7 +12,7 @@ import {
     useState,
 } from 'react';
 import useValidator from '@/common/hook/UseValidator';
-import {TDropdownItem, TDropdownProps, TDropdownRef} from './TDropdown.interface';
+import {TDropdownItem, TDropdownProps, TDropdownRef} from '@/components';
 import useClickOutside from '@/common/hook/UseClickOutside';
 import TCheckbox from '../checkbox/TCheckbox';
 import TTextField from '../text-field/TTextField';
@@ -82,16 +82,18 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
 
     const close = useCallback((setFocus: boolean): void => {
         setIsOpened(false);
+        props.onClose?.();
         setFilterText('');
         if (setFocus) {
             focusToControl();
         }
-    }, [focusToControl]);
+    }, [focusToControl, props]);
 
     const open = useCallback((): void => {
         setIsOpened(true);
+        props.onOpen?.();
         validator.clearValidation();
-    }, [validator]);
+    }, [props, validator]);
 
     const toggleIsOpened = useCallback((): void => {
         if (isOpened) {
@@ -154,7 +156,7 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
     const selectedClass = useMemo((): string => {
         const clazz: string[] = [];
 
-        if (props.value?.length === 0) clazz.push('t-dropdown__control__selected--empty');
+        if (props.value?.length === 0) { clazz.push('t-dropdown__control__selected--empty'); }
 
         return clazz.join(' ');
     }, [props.value?.length]);
@@ -162,9 +164,9 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
     const itemsClass = useMemo((): string => {
         const clazz: string[] = [];
 
-        if (isOpened) clazz.push('t-dropdown__items--open');
-        if (props.noDetail) clazz.push('t-dropdown__items--no-detail');
-        if (getFilteredItems().length === 0) clazz.push('t-dropdown__items--empty');
+        if (isOpened) { clazz.push('t-dropdown__items--open'); }
+        if (props.noDetail) { clazz.push('t-dropdown__items--no-detail'); }
+        if (getFilteredItems().length === 0) { clazz.push('t-dropdown__items--empty'); }
 
         return clazz.join(' ');
     }, [getFilteredItems, isOpened, props.noDetail]);
@@ -184,8 +186,8 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
     const rootStyle = useMemo((): CSSProperties => {
         let style: CSSProperties = {};
 
-        if (props.style) style = {...props.style};
-        if (props.width) style = {...style, width: props.width};
+        if (props.style) { style = {...props.style}; }
+        if (props.width) { style = {...style, width: props.width}; }
 
         return style;
     }, [props.style, props.width]);
@@ -298,7 +300,8 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
                  tabIndex={props.disabled ? -1 : 0}
                  onKeyDown={onKeyDownControl}
                  ref={controlRef}
-                 onClick={onClickControl}>
+                 onClick={onClickControl}
+                 data-testid={'dropdown-control'}>
 
                 {/* Control - Selected Items */}
                 <div className={`t-dropdown__control__selected ${selectedClass}`}>
@@ -344,7 +347,7 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
                     )
                 }
                 <TIcon className={`t-dropdown__control__opener ${isOpened ? 't-dropdown__control__opener--open' : ''}`}
-                       
+
                        color={props.disabled ? themeToken.tGrayColor4 : themeToken.tGrayColor6}>arrow_drop_down</TIcon>
             </div>
 

@@ -1,18 +1,19 @@
 import {act, render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import TTextField from '~/input/text-field/TTextField';
 import TDropdown from '~/input/dropdown/TDropdown';
 
 
 describe('TDropdown', () => {
 
     const mockOnChange = jest.fn();
+    const mockOnOpen = jest.fn();
+    const mockOnClose = jest.fn();
     const baseProps = {value: 'hello', onChange: mockOnChange, items: []};
 
     beforeEach(() => { mockOnChange.mockClear(); });
 
 
-    describe('style', () => {
+    describe('Style', () => {
         it('renders without errors', () => {
             render(<TDropdown {...baseProps}/>);
             expect(screen.getByTestId('dropdown-root')).toBeInTheDocument();
@@ -76,6 +77,45 @@ describe('TDropdown', () => {
             expect(root)
                 .toHaveClass('t-dropdown--underline');
         });
-    })
+    });
 
+
+    describe('Event', () => {
+
+        it('When the onOpen prop is provided and user clicks root, it will be called exactly once.', async () => {
+
+            // Arrange
+            const user = userEvent.setup();
+            render(<TDropdown {...baseProps} onOpen={mockOnOpen} />);
+            const control = screen.getByTestId('dropdown-control');
+
+            // Act
+            await act(async () => {
+                await user.click(control);
+            });
+
+            // Assert
+            expect(mockOnOpen).toHaveBeenCalledTimes(1);
+        });
+
+        it('When the onClose prop is provided and the user clicks the root element twice, it will be called exactly once.', async () => {
+
+            // Arrange
+            const user = userEvent.setup();
+            render(<TDropdown {...baseProps} onClose={mockOnClose} />);
+            const control = screen.getByTestId('dropdown-control');
+
+
+            // Act
+            await act(async () => {
+                await user.click(control);
+            });
+            await act(async () => {
+                await user.click(control);
+            });
+
+            // Assert
+            expect(mockOnClose).toHaveBeenCalledTimes(1);
+        });
+    });
 });

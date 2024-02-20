@@ -20,6 +20,9 @@ export interface TDropHolderProps extends TBaseProps {
     textKey?: string,
     customItem?: ReactNode,
     offset?: string,
+
+    onOpen?(): void,
+    onClose?(): void,
 }
 
 

@@ -10,7 +10,7 @@ import {
     useRef,
     useState,
 } from 'react';
-import {DropHolderAlignment, TDropHolderItem, TDropHolderProps, TDropHolderRef} from './TDropHolder.interface';
+import {DropHolderAlignment, TDropHolderItem, TDropHolderProps, TDropHolderRef} from '@/components';
 import useClickOutside from '@/common/hook/UseClickOutside';
 
 
@@ -110,10 +110,12 @@ const TDropHolder = forwardRef((props: TDropHolderProps, ref: ForwardedRef<TDrop
 
     const open = (): void => {
         setIsOpened(true);
+        props.onOpen?.();
     };
 
     const close = (): void => {
         setIsOpened(false);
+        props.onClose?.();
     };
 
     // endregion
