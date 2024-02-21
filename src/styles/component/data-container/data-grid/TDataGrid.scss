@@ -67,6 +67,10 @@
                     padding: 0 $t-spacing-20;
 
                     .ag-header-cell-label { position: relative; }
+
+                    .ag-wrapper.ag-input-wrapper.ag-checkbox-input-wrapper {
+                        margin-left: 1px;
+                    }
                 }
             }
 
