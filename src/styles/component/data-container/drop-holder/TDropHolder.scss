@@ -11,6 +11,7 @@
         display: inline-block;
         position: absolute;
     }
+
     .t-drop-holder__items {
         position: absolute;
         z-index: $t-z-index-drop-holder;
@@ -18,23 +19,33 @@
         background: $t-white-color;
         display: flex;
         flex-direction: column;
+        box-shadow: $t-shadow--focused-element;
+
+        .t-drop-holder__items__title {
+            cursor: default;
+            color: $t-gray-color-4;
+            @include typo-element-3;
+            padding: $t-spacing-16 $t-spacing-16 0;
+        }
 
         .t-drop-holder__items__item {
             cursor: pointer;
             padding: 0 $t-spacing-16;
-            height: 56px;
-            //min-width: 120px;
+            height: 38px;
             outline: none;
             display: flex;
             align-items: center;
-            //justify-content: center;
             @include user-select-none;
-            > div {
-                width: max-content;
-                align-items: center;
+
+            .t-drop-holder__items__item__icon {
+                margin-right: $t-spacing-4;
             }
+            .t-drop-holder__items__item__text {
+                @include typo-body-3;
+            }
+
             &.t-drop-holder__items__item--divider {
-                border-top: 1px dotted $t-gray-color-2;
+                border-top: 1px solid $t-blue-gray-color-3;
             }
             &.t-drop-holder__items__item--selected {
                 background: $t-background-color--hover;
@@ -51,7 +62,6 @@
 
             &.t-drop-holder__items__item--focused { background: $t-background-color--hover; }
             &:hover { background: $t-background-color--hover; }
-            &:active { background: $t-background-color--active; }
         }
 
     }

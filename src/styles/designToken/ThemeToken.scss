@@ -31,6 +31,11 @@ $t-blue-gray-color-5: var(--blue-gray-color-5) !default; // #2B394E
 $t-black-color: var(--t-black-color) !default; // #121821
 
 
+
+$t-background-color--hover: $t-blue-gray-color-2;
+$t-background-color--read-only: $t-gray-color-1;
+
+
 // endregion
 
 
@@ -148,6 +153,8 @@ $t-shadow--modal: var(--t-shadow-modal);
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+
+
 // content
 
 $t-line-height-default: var(--t-line-height-default);
@@ -187,9 +194,7 @@ $t-status-color--default: var(--t-status-color--default) !default;
 $t-status-color--processing: var(--t-status-color--processing) !default;
 $t-status-color--warning: var(--t-status-color--warning) !default;
 
-$t-background-color--hover: $t-primary-color--tint-9;
-$t-background-color--active: $t-primary-color--tint-8;
-$t-background-color--read-only: $t-gray-color-1;
+
 
 // font color
 $t-font-color--primary-01: $t-primary-color !default; // #333333

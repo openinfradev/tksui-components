@@ -2,7 +2,7 @@
 .t-date-picker {
     position: relative;
     width: 156px;
-    user-select: none;
+    @include user-select-none;
 
     .t-date-picker__text-field {
         .t-text-field__container {
