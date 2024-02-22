@@ -2,6 +2,7 @@ import {Meta, StoryObj} from '@storybook/react';
 import TDropHolder from '@/components/data-container/drop-holder/TDropHolder';
 
 import TIcon from '@/components/icon/TIcon';
+import {TDropHolderItem} from '@/components';
 
 const meta: Meta<typeof TDropHolder> = {
     title: 'DataContainer/TDropHolder',
@@ -14,8 +15,10 @@ type Story = StoryObj<typeof TDropHolder>;
 
 const AlignmentTemplate = (args) => {
 
-    const items = [{text: '생성'}, {text: '수정'}, {text: '삭제'}];
-
+    const items: TDropHolderItem[] = [
+        {text: '내 정보', icon: 'manage_accounts'},
+        {text: '로그아웃', icon: 'logout'},
+    ];
     return (
         <div style={{marginTop: '120px', display: 'flex', justifyContent: 'center', gap: '60px'}}>
             <TDropHolder {...args} items={items} alignment={'bottom-left'}><TIcon>south_west</TIcon></TDropHolder>

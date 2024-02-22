@@ -1,6 +1,7 @@
 import {act, render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import TDropHolder from '~/data-container/drop-holder/TDropHolder';
+import {TDropHolderItem} from '@/components';
 
 describe('TDropHolder', () => {
     const mockOnClickItem = jest.fn();
@@ -93,9 +94,58 @@ describe('TDropHolder', () => {
 
         });
 
+        it('When title props is applied, title element will be displayed', async () => {
+
+            // Arrange
+            const title = 'Test Title';
+            render(<TDropHolder {...baseProps} title={title}>Test DropHolder</TDropHolder>);
+
+            const user = userEvent.setup();
+            const root = screen.getByTestId('drop-holder-root');
+            await act(async () => { await user.click(root); });
+
+            const titleElement = screen.getByTestId('drop-holder-title');
+
+            // Assert
+            expect(titleElement).toBeInTheDocument();
+            expect(titleElement).toHaveTextContent(title);
+        });
+
+    });
+
+
+    describe('Item', () => {
+
+        it('When an item is provided with an icon attribute, TIcon should be displayed before the text', async () => {
+
+            // Arrange
+
+            const icons = ['manage_accounts', 'logout'];
+
+            const items: TDropHolderItem[] = [
+                {text: 'Item 1', icon: icons[0]},
+                {text: 'Item 2', icon: icons[1]},
+            ];
+
+            const user = userEvent.setup();
+            render(<TDropHolder {...baseProps} items={items}>Test DropHolder</TDropHolder>);
+
+            const root = screen.getByTestId('drop-holder-root');
+
+            // Act
+            await act(async () => { await user.click(root); });
+
+            // Arrange
+            const itemElements = screen.getAllByRole('listitem');
+
+            // Assert
+            expect(itemElements[0]).toHaveTextContent(icons[0]);
+            expect(itemElements[1]).toHaveTextContent(icons[1]);
+        });
     });
 
     describe('Event', () => {
+
         it('When user clicks root, TDropHolder opens and then closes', async () => {
 
             // Arrange

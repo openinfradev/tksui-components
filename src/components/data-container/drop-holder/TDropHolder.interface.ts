@@ -10,11 +10,13 @@ export interface TDropHolderItem {
     disabled?: boolean,
     onClick?: (event?: MouseEvent) => void,
     divideSection?: boolean,
+    icon?: string,
 }
 
 export interface TDropHolderProps extends TBaseProps {
     children: ReactNode,
-    alignment: DropHolderAlignment
+    alignment: DropHolderAlignment,
+    title?: string,
     items?: TDropHolderItem[],
     itemTemplate?: (item: TDropHolderItem) => ReactNode,
     textKey?: string,

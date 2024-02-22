@@ -1,17 +1,9 @@
-import {
-    CSSProperties,
-    ForwardedRef,
-    forwardRef,
-    MouseEvent,
-    MouseEventHandler,
-    ReactNode,
-    useCallback, useImperativeHandle,
-    useMemo,
-    useRef,
-    useState,
-} from 'react';
+// eslint-disable-next-line max-len
+import {CSSProperties, ForwardedRef, forwardRef, MouseEvent, MouseEventHandler, ReactNode, useCallback, useImperativeHandle, useMemo, useRef, useState} from 'react';
 import {DropHolderAlignment, TDropHolderItem, TDropHolderProps, TDropHolderRef} from '@/components';
 import useClickOutside from '@/common/hook/UseClickOutside';
+import {TIcon} from '~/icon';
+import themeToken from '~style/designToken/ThemeToken.module.scss';
 
 
 const TDropHolder = forwardRef((props: TDropHolderProps, ref: ForwardedRef<TDropHolderRef>) => {
@@ -131,7 +123,20 @@ const TDropHolder = forwardRef((props: TDropHolderProps, ref: ForwardedRef<TDrop
         if (props.itemTemplate) {
             return props.itemTemplate(item);
         }
-        return (<div>{item[props.textKey]}</div>);
+
+        return (<>
+            {
+                item.icon && (
+                    <TIcon className={'t-drop-holder__items__item__icon'} small color={themeToken.tGrayColor5}>
+                        {item.icon}
+                    </TIcon>
+
+                )
+            }
+            <span className={'t-drop-holder__items__item__text'}>{item[props.textKey]}</span>
+        </>);
+
+
     }, [props]);
 
     // endregion
@@ -152,18 +157,25 @@ const TDropHolder = forwardRef((props: TDropHolderProps, ref: ForwardedRef<TDrop
                 {
                     isOpened && (
                         !props.customItem ? (
-                            <div className={'t-drop-holder__items'} style={itemsStyle}>
+                            <ul className={'t-drop-holder__items'} style={itemsStyle}>
+                                {
+                                    props.title && (
+                                        <div className={'t-drop-holder__items__title'} data-testid={'drop-holder-title'}>
+                                            {props.title}
+                                        </div>
+                                    )
+                                }
                                 {
                                     props.items?.map((item, index) => (
-                                        <div key={index}
-                                             className={`t-drop-holder__items__item ${itemClass(item)}`}
-                                             onClick={(event) => onClickItem(event, item.onClick)}
+                                        <li key={index}
+                                            className={`t-drop-holder__items__item ${itemClass(item)}`}
+                                            onClick={(event) => onClickItem(event, item.onClick)}
                                         >
                                             {getItemTemplate(item)}
-                                        </div>
+                                        </li>
                                     ))
                                 }
-                            </div>
+                            </ul>
                         ) : (
                             <div className={'t-drop-holder__items t-drop-holder__items--custom'} style={itemsStyle}>
                                 {props.customItem}
