@@ -41,6 +41,7 @@ export * from './input/radio-group';
 export * from './input/switch';
 export * from './input/text-area';
 export * from './input/text-field';
+export * from './input/date-picker';
 
 // screen
 export * from './screen/modal';
