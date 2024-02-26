@@ -71,15 +71,20 @@ describe('TDropHolder', () => {
             expect(screen.getByTestId('drop-holder-root')).toBeInTheDocument();
         });
 
-        it('Child nodes render without error : t-drop-holder__anchor ', () => {
+        it('Child nodes render without error : t-drop-holder__anchor ', async () => {
 
             // Arrange
-            const testClassName = 't-drop-holder__anchor';
+            const user = userEvent.setup();
             render(<TDropHolder {...baseProps} >Test DropHolder</TDropHolder>);
-            const anchorRoot = screen.getByTestId('drop-holder-anchor');
+            const root = screen.getByTestId('drop-holder-root');
+
+            // Act
+            await act(async () => { await user.click(root); });
+
+            const dropHolderItemsRoot = screen.getByTestId('t-drop-holder__items');
 
             // Assert
-            expect(anchorRoot).toHaveClass(testClassName);
+            expect(dropHolderItemsRoot).toBeInTheDocument();
         });
 
         it('Child nodes render without error : t-drop-holder__holder', () => {

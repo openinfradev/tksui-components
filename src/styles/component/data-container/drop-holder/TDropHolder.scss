@@ -12,7 +12,7 @@
         position: absolute;
     }
 
-    .t-drop-holder__items {
+    .t-drop-holder__anchor__items {
         position: absolute;
         z-index: $t-z-index-drop-holder;
         border: 1px solid $t-blue-gray-color-3;
@@ -22,14 +22,14 @@
         box-shadow: $t-shadow--focused-element;
         width: max-content;
 
-        .t-drop-holder__items__title {
+        .t-drop-holder__anchor__items__title {
             cursor: default;
             color: $t-gray-color-4;
             @include typo-element-3;
             padding: $t-spacing-16 $t-spacing-16 0;
         }
 
-        .t-drop-holder__items__item {
+        .t-drop-holder__anchor__items__item {
             cursor: pointer;
             padding: 0 $t-spacing-16;
             height: 38px;
@@ -38,34 +38,95 @@
             align-items: center;
             @include user-select-none;
 
-            .t-drop-holder__items__item__icon {
+            .t-drop-holder__anchor__items__item__icon {
                 margin-right: $t-spacing-4;
             }
-            .t-drop-holder__items__item__text {
+            .t-drop-holder__anchor__items__item__text {
                 @include typo-body-3;
             }
 
-            &.t-drop-holder__items__item--divider {
+            &.t-drop-holder__anchor__items__item--divider {
                 border-top: 1px solid $t-blue-gray-color-3;
             }
-            &.t-drop-holder__items__item--selected {
+            &.t-drop-holder__anchor__items__item--selected {
                 background: $t-background-color--hover;
                 color: $t-font-color--selected;
                 font-weight: $t-font-weight--selected;
             }
-            &.t-drop-holder__items__item--disabled {
+            &.t-drop-holder__anchor__items__item--disabled {
                 pointer-events: none;
                 cursor: default;
                 color: $t-font-color--disabled;
             }
 
-            .t-drop-holder__items__item__checkbox .t-checkbox__container:focus .t-checkbox__icon { outline: none; }
+            .t-drop-holder__anchor__items__item__checkbox .t-checkbox__container:focus .t-checkbox__icon { outline: none; }
 
-            &.t-drop-holder__items__item--focused { background: $t-background-color--hover; }
+            &.t-drop-holder__anchor__items__item--focused { background: $t-background-color--hover; }
             &:hover { background: $t-background-color--hover; }
         }
 
     }
-
-
 }
+
+.t-drop-holder__anchor__wrapper {
+
+    .t-drop-holder__anchor__container {
+
+        .t-drop-holder__anchor__items {
+            position: absolute;
+            z-index: $t-z-index-drop-holder;
+            border: 1px solid $t-blue-gray-color-3;
+            background: $t-white-color;
+            display: flex;
+            flex-direction: column;
+            box-shadow: $t-shadow--focused-element;
+            width: max-content;
+
+            .t-drop-holder__anchor__items__title {
+                cursor: default;
+                color: $t-gray-color-4;
+                @include typo-element-3;
+                padding: $t-spacing-16 $t-spacing-16 0;
+
+                strong { font-weight: inherit; }
+            }
+
+            .t-drop-holder__anchor__items__item {
+                cursor: pointer;
+                padding: 0 $t-spacing-16;
+                height: 38px;
+                outline: none;
+                display: flex;
+                align-items: center;
+                @include user-select-none;
+
+                .t-drop-holder__anchor__items__item__icon {
+                    margin-right: $t-spacing-4;
+                }
+                .t-drop-holder__anchor__items__item__text {
+                    @include typo-body-3;
+                }
+
+                &.t-drop-holder__anchor__items__item--divider {
+                    border-top: 1px solid $t-blue-gray-color-3;
+                }
+                &.t-drop-holder__anchor__items__item--selected {
+                    background: $t-background-color--hover;
+                    color: $t-font-color--selected;
+                    font-weight: $t-font-weight--selected;
+                }
+                &.t-drop-holder__anchor__items__item--disabled {
+                    pointer-events: none;
+                    cursor: default;
+                    color: $t-font-color--disabled;
+                }
+
+                .t-drop-holder__anchor__items__item__checkbox .t-checkbox__container:focus .t-checkbox__icon { outline: none; }
+
+                &.t-drop-holder__anchor__items__item--focused { background: $t-background-color--hover; }
+                &:hover { background: $t-background-color--hover; }
+            }
+        }
+    }
+}
+
