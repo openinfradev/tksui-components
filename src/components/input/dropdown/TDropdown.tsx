@@ -54,8 +54,6 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
 
     const modifyValue = useCallback((newItem: any): void => {
 
-        props.onChange(newItem);
-
         if (props.multiple) {
             if (props.value.includes(newItem)) {
                 props.onChange((props.value as string[]).filter((v) => v !== newItem));
