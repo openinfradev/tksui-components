@@ -55,7 +55,7 @@ const TYearSelector = () => {
 
             return clazz.join(' ');
         },
-        [selectedDateObject, displayDateObject, nowDate, validDateRange],
+        [selectedDateObject, nowDate, validDateRange],
     );
 
     const iconClass = useMemo(() => {

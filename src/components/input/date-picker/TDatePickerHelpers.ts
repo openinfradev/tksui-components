@@ -1,5 +1,4 @@
-import {useCallback} from 'react';
-import {TDatePickerValueType, TDateValue} from '@/components';
+import {TDatePickerBounds, TDatePickerMode, TDateValue} from '@/components';
 
 const convertToDateValue = (date: string): TDateValue => {
     // YYYY-MM-DD -> {year: '2024', month: '02', date: '29'}
@@ -17,20 +16,24 @@ const convertToDateString = ({year, month, day}: TDateValue): string => {
 };
 
 
-const formattedDate = (date: string, separator: string) => {
+const addDateSeparator = (date: string, separator: string) => {
 
     const dateLength = date.length;
     const yearStr = date.substring(0, 4);
     const monthStr = date.substring(4, 6);
     const dayStr = date.substring(6, 8);
 
-    if (dateLength < 5) { return yearStr; }
-    if (dateLength < 7) { return `${yearStr}${separator}${monthStr}`; }
+    if (dateLength < 5) {
+        return yearStr;
+    }
+    if (dateLength < 7) {
+        return `${yearStr}${separator}${monthStr}`;
+    }
     return `${yearStr}${separator}${monthStr}${separator}${dayStr}`;
 };
 
 
-const sanitizeDateInput = (dateStr: string, valueType: TDatePickerValueType) => {
+const sanitizeDateInput = (dateStr: string, valueType: TDatePickerMode) => {
 
     let maxAllowedLength = 8;
 
@@ -44,7 +47,7 @@ const sanitizeDateInput = (dateStr: string, valueType: TDatePickerValueType) => 
         .replace(/^0+/, '').substring(0, maxAllowedLength);
 };
 
-const validateDateFormat = (dateStr: string, valueType: TDatePickerValueType): boolean => {
+const validateFormat = (dateStr: string, valueType: TDatePickerMode): boolean => {
 
     const {year, month, day} = convertToDateValue(dateStr);
     const lastDayOfMonth = (new Date(year, month, 0)).getDate();
@@ -54,21 +57,54 @@ const validateDateFormat = (dateStr: string, valueType: TDatePickerValueType): b
     const isValidDate = (day > 0 && day <= lastDayOfMonth);
 
     if (valueType === 'date') {
-        if (isValidYear && isValidMonth && isValidDate) { return true; }
+        if (isValidYear && isValidMonth && isValidDate) {
+            return true;
+        }
     } else if (valueType === 'month') {
-        if (isValidYear && isValidMonth) { return true; }
+        if (isValidYear && isValidMonth) {
+            return true;
+        }
     } else if (valueType === 'year') {
-        if (isValidYear) { return true; }
+        if (isValidYear) {
+            return true;
+        }
     }
     return false;
     // eslint-disable-next-line react-hooks/exhaustive-deps
+};
+
+const validDateRange = (dateStr: string, valueType: TDatePickerMode, dateRange: TDatePickerBounds): boolean => {
+
+    const numTypeTargetDate = Number(dateStr);
+
+    const sanitizedOpenFrom = sanitizeDateInput(dateRange.openFrom, valueType);
+    const sanitizedOpenTo = sanitizeDateInput(dateRange.openTo, valueType);
+
+    if (sanitizedOpenFrom && sanitizedOpenTo) {
+        return numTypeTargetDate >= Number(sanitizedOpenFrom) && numTypeTargetDate <= Number(sanitizedOpenTo);
+    }
+    if (sanitizedOpenFrom) { return Number(sanitizedOpenFrom) <= numTypeTargetDate; }
+    if (sanitizedOpenTo) { return Number(sanitizedOpenTo) >= numTypeTargetDate; }
+
+    return true;
+};
+
+const currentDateValue = (): TDateValue => {
+    const now: Date = new Date();
+    return {
+        year: now.getFullYear(),
+        month: now.getMonth() + 1,
+        day: now.getDate(),
+    };
 };
 
 
 export default {
     convertToDateValue,
     convertToDateString,
-    formattedDate,
+    addDateSeparator,
     sanitizeDateInput,
-    validateDateFormat,
+    validateDateFormat: validateFormat,
+    validateDateRange: validDateRange,
+    currentDateValue,
 };

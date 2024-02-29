@@ -1,5 +1,5 @@
 import {CSSProperties, forwardRef, MouseEvent, Ref, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState} from 'react';
-import {TDateLimit, TDatePickerProps, TDatePickerRef, TDatePickerValueType, TDateValue, TDropHolderRef} from '@/components';
+import {TDatePickerBounds, TDatePickerProps, TDatePickerRef, TDatePickerMode, TDateValue, TDropHolderRef} from '@/components';
 import useValidator from '@/common/hook/UseValidator';
 import {TTextField, TTextFieldRef} from '../text-field';
 import {TIcon} from '~/icon';
@@ -10,15 +10,6 @@ import TYearSelector from '~/input/date-picker/selector/TYearSelector';
 import themeToken from '~style//designToken/ThemeToken.module.scss';
 import TDateContext from '~/input/date-picker/TDatePickerContext';
 import TDatePickerHelpers from '~/input/date-picker/TDatePickerHelpers';
-
-const currentDateValue = (): TDateValue => {
-    const now: Date = new Date();
-    return {
-        year: now.getFullYear(),
-        month: now.getMonth() + 1,
-        day: now.getDate(),
-    };
-};
 
 
 const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef>) => {
@@ -31,13 +22,11 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
 
     const validator = useValidator(props.value, props.rules, props.successMessage);
 
-    const [valueType, setValueType] = useState<TDatePickerValueType>(props.valueType);
+    const [currentSelector, setCurrentSelector] = useState<TDatePickerMode>(props.valueType);
     const [displayValue, setDisplayValue] = useState('');
     const [dateValue, setDateValue] = useState(props.value);
-    const [displayDateObject, setDisplayDateObject] = useState<TDateValue>({
-        ...currentDateValue(),
-    });
-    const [dateRange, setDateRange] = useState<TDateLimit>({openFrom: undefined, openTo: undefined});
+    const [displayDateObject, setDisplayDateObject] = useState<TDateValue>({...TDatePickerHelpers.currentDateValue()});
+    const [dateRange, setDateRange] = useState<TDatePickerBounds>({openFrom: undefined, openTo: undefined});
 
     useImperativeHandle(ref, () => ({
         focus() { rootRef?.current?.focus(); },
@@ -52,6 +41,7 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
     // region [Styles]
 
     const rootClass = useMemo((): string => {
+
         const clazz: string[] = [];
 
         if (props.className) { clazz.push(props.className); }
@@ -72,49 +62,19 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
     // region [Private]
 
 
-    const validateDateFormat = useCallback((dateStr: string): boolean => {
+    const validateDateRange = useCallback((dateStr: string) => {
 
-        const {year, month, day} = TDatePickerHelpers.convertToDateValue(dateStr);
-        const lastDayOfMonth = (new Date(year, month, 0)).getDate();
+        return TDatePickerHelpers.validateDateRange(dateStr, currentSelector, dateRange);
 
-        const isValidYear = year > 999;
-        const isValidMonth = (month > 0 && month < 13);
-        const isValidDate = (day > 0 && day <= lastDayOfMonth);
-
-        if (valueType === 'date') {
-            if (isValidYear && isValidMonth && isValidDate) { return true; }
-        } else if (valueType === 'month') {
-            if (isValidYear && isValidMonth) { return true; }
-        } else if (valueType === 'year') {
-            if (isValidYear) { return true; }
-        }
-        return false;
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [valueType]);
+    }, [dateRange, currentSelector]);
 
 
-    const validDateRange = useCallback((dateStr: string) => {
+    const modifyCurrentSelector = useCallback((value: TDatePickerMode) => {
 
-        const numTypeTargetDate = Number(dateStr);
-
-        const sanitizedOpenFrom = TDatePickerHelpers.sanitizeDateInput(dateRange.openFrom, props.valueType);
-        const sanitizedOpenTo = TDatePickerHelpers.sanitizeDateInput(dateRange.openTo, props.valueType);
-
-        if (sanitizedOpenFrom && sanitizedOpenTo) {
-            return numTypeTargetDate >= Number(sanitizedOpenFrom) && numTypeTargetDate <= Number(sanitizedOpenTo);
-        }
-        if (sanitizedOpenFrom) { return Number(sanitizedOpenFrom) <= numTypeTargetDate; }
-        if (sanitizedOpenTo) { return Number(sanitizedOpenTo) >= numTypeTargetDate; }
-
-        return true;
-    }, [dateRange, TDatePickerHelpers.sanitizeDateInput]);
-
-
-    const modifyViewMode = useCallback((vt: TDatePickerValueType) => {
         if (props.valueType === 'date') {
-            setValueType(vt);
-        } else if (props.valueType === 'month' && vt !== 'date') {
-            setValueType(vt);
+            setCurrentSelector(value);
+        } else if (props.valueType === 'month' && value !== 'date') {
+            setCurrentSelector(value);
         }
     }, [props.valueType]);
 
@@ -124,7 +84,7 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
         setDisplayValue(dateStr);
         setDateValue(dateStr);
 
-        if (props.onChange) { props.onChange(TDatePickerHelpers.formattedDate(dateStr, props.separator)); }
+        props.onChange?.(TDatePickerHelpers.addDateSeparator(dateStr, props.separator));
 
         dropHolderRef.current?.close();
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -136,71 +96,59 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
         setDisplayValue('');
         setDateValue('');
 
-        if (props.onChange) { props.onChange(''); }
+        props.onChange?.('');
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.onChange]);
 
 
     const restoreDate = useCallback(() => {
+        const isValidDate = TDatePickerHelpers.validateDateFormat(dateValue, currentSelector);
+        const isValidRange = validateDateRange(dateValue);
 
-        const isValidDate = validateDateFormat(dateValue);
-        const isValidRange = validDateRange(dateValue);
-
-        if (valueType === 'date') {
-            if (isValidDate && isValidRange) {
-                setDisplayValue(dateValue);
-            } else { clearDate(); }
-        } else if (valueType === 'month') {
-            if (isValidDate && isValidRange) {
-                setDisplayValue(dateValue);
-            } else { clearDate(); }
-        } else if (valueType === 'year') {
-            if (isValidDate && isValidRange) {
-                setDisplayValue(dateValue);
-            } else { clearDate(); }
+        if (isValidDate && isValidRange) {
+            setDisplayValue(dateValue);
+        } else {
+            clearDate();
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dateValue, valueType]);
+    }, [dateValue, currentSelector, validateDateRange, clearDate]);
 
 
-    const initializeFromToDate = useCallback(() => {
-
+    const initializeDateRange = useCallback(() => {
         const openFrom = TDatePickerHelpers.sanitizeDateInput(props.openFrom, props.valueType);
         const openTo = TDatePickerHelpers.sanitizeDateInput(props.openTo, props.valueType);
 
-        const isValidOpenFrom = validateDateFormat(openFrom);
-        const isValidOpenTo = validateDateFormat(openTo);
+        const isValidOpenFrom = !openFrom || TDatePickerHelpers.validateDateFormat(openFrom, currentSelector);
+        const isValidOpenTo = !openTo || TDatePickerHelpers.validateDateFormat(openTo, currentSelector);
 
-        // openFrom, openTo validation check
-        if (openFrom && openTo && !isValidOpenFrom && !isValidOpenTo) {
-            throw Error('Error: openFrom and openTo prop invalid value.');
-        } else if (openFrom && !openTo && !isValidOpenFrom) {
-            throw Error('Error: openFrom prop invalid value.');
-        } else if (!openFrom && openTo && !isValidOpenTo) {
-            throw Error('Error: openTo prop invalid value.');
-        } else {
-            setDateRange({
-                openFrom: isValidOpenFrom ? openFrom : undefined,
-                openTo: isValidOpenTo ? openTo : undefined,
-            });
+        if (!isValidOpenFrom || !isValidOpenTo) {
+            throw Error(`Error: Invalid date range value. openFrom: ${openFrom}, openTo: ${openTo}`);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [props.openFrom, props.openTo]);
+
+        setDateRange({openFrom, openTo});
+    }, [props.openFrom, props.openTo, props.valueType, currentSelector]);
+
 
     const initializeDisplayDate = useCallback((): void => {
 
-        setValueType(props.valueType);
+        setCurrentSelector(props.valueType);
         const {year, month} = TDatePickerHelpers.convertToDateValue(dateValue);
 
         if (year !== 0 && month !== 0) {
             setDisplayDateObject({year, month, day: null});
         } else if (dateRange.openFrom && dateRange.openTo) {
 
-            const {year: openFromYear, month: openFromMonth} = TDatePickerHelpers.convertToDateValue(dateRange.openFrom);
+            const {
+                year: openFromYear,
+                month: openFromMonth,
+            } = TDatePickerHelpers.convertToDateValue(dateRange.openFrom);
             setDisplayDateObject({year: openFromYear, month: openFromMonth, day: null});
         } else if (dateRange.openFrom && !dateRange.openTo) {
 
-            const {year: openFromYear, month: openFromMonth} = TDatePickerHelpers.convertToDateValue(dateRange.openFrom);
+            const {
+                year: openFromYear,
+                month: openFromMonth,
+            } = TDatePickerHelpers.convertToDateValue(dateRange.openFrom);
             setDisplayDateObject({year: openFromYear, month: openFromMonth, day: null});
         } else if (!dateRange.openFrom && dateRange.openTo) {
 
@@ -209,38 +157,51 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
         } else if (year !== 0 && month === 0) {
 
             setDisplayDateObject((prev) => ({...prev, year, month: 1}));
-        } else { setDisplayDateObject(currentDateValue()); }
+        } else {
+            setDisplayDateObject(TDatePickerHelpers.currentDateValue());
+        }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dateValue, dateRange, props.valueType]);
 
+    const updateDateValueIfValid = useCallback((dateStr: string = displayValue) => {
+        const sanitizedDate: string = TDatePickerHelpers.sanitizeDateInput(dateStr, props.valueType);
 
-    const handleDateValueChange = useCallback((dateStr = displayValue) => {
-
-        const sanitizeDate = TDatePickerHelpers.sanitizeDateInput(dateStr, props.valueType);
-
-        if (sanitizeDate === '') {
+        if (!sanitizedDate) {
             clearDate();
             return;
         }
 
-        const isDateValid = validateDateFormat(sanitizeDate);
-        const isRangeValid = validDateRange(sanitizeDate);
+        const isValidDate: boolean = TDatePickerHelpers.validateDateFormat(sanitizedDate, currentSelector);
+        const isValidRange: boolean = validateDateRange(sanitizedDate);
 
-        const {year, month, day} = TDatePickerHelpers.convertToDateValue(sanitizeDate);
-        const formattedDateStr = TDatePickerHelpers.convertToDateString({year, month, day});
+        const {year, month, day} = TDatePickerHelpers.convertToDateValue(sanitizedDate);
+        const formattedDateStr: string = TDatePickerHelpers.convertToDateString({year, month, day});
 
-        if (isDateValid && isRangeValid && valueType === 'date') {
-            setDate(formattedDateStr);
-        } else if (isDateValid && isRangeValid && valueType === 'month') {
-            const yearMonthStr = formattedDateStr.substring(0, 6);
-            setDate(yearMonthStr);
-        } else if (isDateValid && isRangeValid && valueType === 'year') {
-            setDate(year.toString());
-        } else { restoreDate(); }
+        if (isValidDate && isValidRange) {
+            switch (currentSelector) {
+                case 'date': {
+                    setDate(formattedDateStr);
+                    break;
+                }
+                case 'month': {
+                    setDate(formattedDateStr.substring(0, 6));
+                    break;
+                }
+                case 'year': {
+                    setDate(year.toString());
+                    break;
+                }
+                default: {
+                    restoreDate();
+                    break;
+                }
+            }
+        } else {
+            restoreDate();
+        }
+    }, [displayValue, props.valueType, currentSelector, validateDateRange, clearDate, setDate, restoreDate]);
 
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [displayValue, dateRange, displayDateObject, validDateRange, validateDateFormat]);
     // endregion
 
 
@@ -252,12 +213,11 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-
     const onBlurTextField = useCallback(() => {
-        handleDateValueChange();
-    }, [handleDateValueChange]);
+        updateDateValueIfValid();
+    }, [updateDateValueIfValid]);
 
-    const onClickSelector = useCallback((e: MouseEvent<HTMLDivElement>) => {
+    const onClickDropHolder = useCallback((e: MouseEvent<HTMLDivElement>) => {
         e.stopPropagation();
     }, []);
 
@@ -267,12 +227,12 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
     // region [Effects]
 
     useEffect(() => {
-        handleDateValueChange(props.value);
+        updateDateValueIfValid(props.value);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.value]);
 
     useEffect(() => {
-        initializeFromToDate();
+        initializeDateRange();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.openFrom, props.openTo]);
 
@@ -291,7 +251,7 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
             <TTextField
                 ref={textFieldRef}
                 className={'t-date-picker__text-field'}
-                value={TDatePickerHelpers.formattedDate(displayValue, props.separator)}
+                value={TDatePickerHelpers.addDateSeparator(displayValue, props.separator)}
                 onChange={onChangeDisplayDateValue}
                 onBlur={onBlurTextField}
                 width={'156px'}
@@ -305,26 +265,27 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
                         customItem={
                             !props.disabled && (
                                 <TDateContext.Provider value={{
-                                    nowDate: currentDateValue,
                                     dateValue,
-                                    onChangeValue: handleDateValueChange,
+                                    onChangeValue: updateDateValueIfValid,
                                     displayDateObject,
                                     setDisplayDateObject,
-                                    viewMode: {current: valueType, original: props.valueType},
-                                    changeViewMode: modifyViewMode,
+                                    viewMode: {current: currentSelector, original: props.valueType},
+                                    changeViewMode: modifyCurrentSelector,
                                     dateRange,
-                                    validDateRange,
+                                    validDateRange: validateDateRange,
+                                    nowDate: TDatePickerHelpers.currentDateValue,
                                     parseDateString: TDatePickerHelpers.convertToDateValue,
                                     parseDateObject: TDatePickerHelpers.convertToDateString,
                                 }}>
-                                    <div className={'t-date-picker__drop-holder__item__wrapper'} onClick={onClickSelector}>
-                                        {valueType === 'date' && (<TDaySelector/>)}
-                                        {valueType === 'month' && (<TMonthSelector/>)}
-                                        {valueType === 'year' && (<TYearSelector/>)}
+                                    <div className={'t-date-picker__drop-holder__item__wrapper'} onClick={onClickDropHolder}>
+                                        {currentSelector === 'date' && (<TDaySelector/>)}
+                                        {currentSelector === 'month' && (<TMonthSelector/>)}
+                                        {currentSelector === 'year' && (<TYearSelector/>)}
                                     </div>
                                 </TDateContext.Provider>)
                         }>
-                        <TIcon medium onClick={initializeDisplayDate} color={themeToken.tGrayColor3}>calendar_month</TIcon>
+                        <TIcon medium onClick={initializeDisplayDate}
+                               color={themeToken.tGrayColor3}>calendar_month</TIcon>
                     </TDropHolder>
                 }
             />

@@ -7,13 +7,12 @@ export interface TDateValue {
     day: number | null,
 }
 
-export type TDatePickerValueType = 'date' | 'month' | 'year';
-
+export type TDatePickerMode = 'date' | 'month' | 'year';
 
 export interface TDatePickerProps extends TBaseProps, TValidatorProps {
 
     value?: string,
-    valueType?: TDatePickerValueType
+    valueType?: TDatePickerMode
 
     disabled?: boolean,
     openFrom?: string,
@@ -32,13 +31,13 @@ export interface TDatePickerRef {
     getDate(): string,
 }
 
-export interface TDateLimit {
+export interface TDatePickerBounds {
     openFrom?: string,
     openTo?: string,
 }
 
 export interface ViewInfoType {
-    original: TDatePickerValueType
-    current: TDatePickerValueType,
+    original: TDatePickerMode
+    current: TDatePickerMode,
 }
 

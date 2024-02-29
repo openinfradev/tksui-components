@@ -1,5 +1,5 @@
 import {createContext, Dispatch, SetStateAction} from 'react';
-import {TDatePickerValueType, TDateLimit, TDateValue, ViewInfoType} from '~/input/date-picker/TDatePicker.interface';
+import {TDatePickerMode, TDatePickerBounds, TDateValue, ViewInfoType} from '~/input/date-picker/TDatePicker.interface';
 
 
 export interface TDatePickerContext {
@@ -12,9 +12,9 @@ export interface TDatePickerContext {
 
     onChangeValue: (date: string) => void,
     viewMode: ViewInfoType,
-    changeViewMode: (view: TDatePickerValueType) => void,
+    changeViewMode: (view: TDatePickerMode) => void,
 
-    dateRange: TDateLimit,
+    dateRange: TDatePickerBounds,
     validDateRange: (date: string) => boolean
 
     parseDateString: (date: string) => TDateValue,
