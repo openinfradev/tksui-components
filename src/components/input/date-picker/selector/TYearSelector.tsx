@@ -2,7 +2,7 @@ import {useCallback, useContext, useMemo} from 'react';
 import TIcon from '~/icon/TIcon';
 import TButton from '~/button/button/TButton';
 import themeToken from '~style/designToken/ThemeToken.module.scss';
-import datePickerConText from '~/input/date-picker/TDateContext';
+import datePickerConText from '~/input/date-picker/TDatePickerContext';
 import {TDateValue} from '~/input/date-picker';
 
 
@@ -11,7 +11,7 @@ const TYearSelector = () => {
     // region [Hooks]
 
     const {
-        dateValue, handleDateValueChange, displayDateObject, setDisplayDateObject,
+        dateValue, onChangeValue, displayDateObject, setDisplayDateObject,
         changeViewMode, validDateRange, nowDate, viewMode,
     } = useContext(datePickerConText);
 
@@ -79,10 +79,10 @@ const TYearSelector = () => {
         }
 
         if (validDateRange(clickedYear?.toString())) {
-            handleDateValueChange(clickedYear?.toString());
+            onChangeValue(clickedYear?.toString());
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [handleDateValueChange]);
+    }, [onChangeValue]);
 
     const onMoveYear = useCallback((move: 'next' | 'prev') => {
         if (move === 'next' || move === 'prev') {

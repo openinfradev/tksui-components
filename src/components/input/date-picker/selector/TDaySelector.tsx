@@ -3,7 +3,7 @@ import TIcon from '~/icon/TIcon';
 import TButton from '~/button/button/TButton';
 import themeToken from '~style/designToken/ThemeToken.module.scss';
 import {TDateValue} from '~/input/date-picker';
-import datePickerConText from '~/input/date-picker/TDateContext';
+import datePickerConText from '~/input/date-picker/TDatePickerContext';
 
 
 const weekList = ['일', '월', '화', '수', '목', '금', '토'];
@@ -16,7 +16,7 @@ const TDaySelector = () => {
 
     // region [Hooks]
 
-    const {dateValue, handleDateValueChange, displayDateObject, setDisplayDateObject, changeViewMode,
+    const {dateValue, onChangeValue, displayDateObject, setDisplayDateObject, changeViewMode,
         nowDate, parseDateString, validDateRange} = useContext(datePickerConText);
 
     const selectedDateObject = useMemo((): TDateValue => {
@@ -94,8 +94,8 @@ const TDaySelector = () => {
 
         const dateStr = `${displayDateObject.year}${twoDigitMonth}${twoDigitDate}`;
 
-        if (handleDateValueChange) { handleDateValueChange(dateStr); }
-    }, [handleDateValueChange, displayDateObject]);
+        if (onChangeValue) { onChangeValue(dateStr); }
+    }, [onChangeValue, displayDateObject]);
 
     const onMoveMonth = useCallback((move: 'next' | 'prev' | 'today') => {
         if (move === 'today') {

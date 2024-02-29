@@ -1,4 +1,3 @@
-import {Dispatch, SetStateAction} from 'react';
 import {TValidatorProps} from '@/common/validator/TValidator.interface';
 import {TBaseProps} from '@/common/base/TBase.interface';
 
@@ -8,19 +7,19 @@ export interface TDateValue {
     day: number | null,
 }
 
-export type TDatePickerViewType = 'date' | 'month' | 'year';
+export type TDatePickerValueType = 'date' | 'month' | 'year';
 
 
 export interface TDatePickerProps extends TBaseProps, TValidatorProps {
 
-    disabled?: boolean,
     value?: string,
+    valueType?: TDatePickerValueType
 
+    disabled?: boolean,
     openFrom?: string,
     openTo?: string,
 
-    view?: TDatePickerViewType
-    dateFormat?: 'YYYY-MM-DD' | 'DD-MM-YYYY' | 'MM-DD-YYYY',
+    // dateFormat?: 'YYYY-MM-DD' | 'DD-MM-YYYY' | 'MM-DD-YYYY', // TODO. Should be implemented
     separator?: string,
 
     onChange?(value: boolean | string, positiveValue?: boolean | string): void,
@@ -33,31 +32,13 @@ export interface TDatePickerRef {
     getDate(): string,
 }
 
-export interface TDateRange {
+export interface TDateLimit {
     openFrom?: string,
     openTo?: string,
 }
 
-interface ViewInfoType {
-    original: TDatePickerViewType
-    current: TDatePickerViewType,
+export interface ViewInfoType {
+    original: TDatePickerValueType
+    current: TDatePickerValueType,
 }
 
-export interface TDateContextType {
-    nowDate: () => TDateValue,
-
-    dateValue: string,
-
-    displayDateObject: TDateValue,
-    setDisplayDateObject: Dispatch<SetStateAction<TDateValue>>
-
-    handleDateValueChange: (date: string) => void,
-    viewMode: ViewInfoType,
-    changeViewMode: (view: TDatePickerViewType) => void,
-
-    dateRange: TDateRange,
-    validDateRange: (date: string) => boolean
-
-    parseDateString: (date: string) => TDateValue,
-    parseDateObject: (dateObj: TDateValue) => string,
-}

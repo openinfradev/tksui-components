@@ -3,7 +3,7 @@ import TIcon from '~/icon/TIcon';
 import TButton from '~/button/button/TButton';
 import themeToken from '~style/designToken/ThemeToken.module.scss';
 import {TDateValue} from '~/input/date-picker';
-import datePickerConText from '~/input/date-picker/TDateContext';
+import datePickerConText from '~/input/date-picker/TDatePickerContext';
 
 
 const months = [
@@ -18,7 +18,7 @@ const TMonthSelector = () => {
     // region [Hooks]
 
     const {
-        dateValue, handleDateValueChange, displayDateObject, setDisplayDateObject,
+        dateValue, onChangeValue, displayDateObject, setDisplayDateObject,
         changeViewMode, nowDate, viewMode, validDateRange,
     } = useContext(datePickerConText);
 
@@ -88,10 +88,10 @@ const TMonthSelector = () => {
             return;
         }
         if (validDateRange(dateStr)) {
-            handleDateValueChange(dateStr);
+            onChangeValue(dateStr);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [viewMode, displayDateObject, handleDateValueChange]);
+    }, [viewMode, displayDateObject, onChangeValue]);
 
     const onMoveMonth = useCallback((move: 'next' | 'prev') => {
         setDisplayDateObject((prev) => {
