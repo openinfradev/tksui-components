@@ -46,23 +46,23 @@ const NormalTemplate = (args: TDatePickerProps) => {
     return (
         <Wrapper>
             <Container>
-                <Item label={`view: ${args.view} / No Range`} value={`value: ${dateValue1.value}`}>
-                    <TDatePicker value={dateValue1.value} onChange={dateValue1.onChange} view={args.view}/>
+                <Item label={`view: ${args.valueType} / No Range`} value={`value: ${dateValue1.value}`}>
+                    <TDatePicker value={dateValue1.value} onChange={dateValue1.onChange} valueType={args.valueType}/>
                 </Item>
                 <Item label={`openFrom: ${args.openFrom || ''}`}
                       value={`value: ${dateValue2.value}`}>
-                    <TDatePicker value={dateValue2.value} openFrom={args.openFrom} view={args.view}
+                    <TDatePicker value={dateValue2.value} openFrom={args.openFrom} valueType={args.valueType}
                                  onChange={dateValue2.onChange}/>
                 </Item>
                 <Item label={`openFrom: ${args.openFrom || ''} + openTo: ${args.openTo || ''}`}
                       value={`value: ${dateValue3.value}`}>
-                    <TDatePicker value={dateValue3.value} openFrom={args.openFrom} openTo={args.openTo} view={args.view}
+                    <TDatePicker value={dateValue3.value} openFrom={args.openFrom} openTo={args.openTo} valueType={args.valueType}
                                  onChange={dateValue3.onChange}/>
                 </Item>
             </Container>
             <Container>
                 <Item label={'Disabled'} value={`value: ${dateValue1.value}`}>
-                    <TDatePicker value={dateValue1.value} onChange={dateValue1.onChange} view={args.view} disabled/>
+                    <TDatePicker value={dateValue1.value} onChange={dateValue1.onChange} valueType={args.valueType} disabled/>
                 </Item>
             </Container>
         </Wrapper>);
@@ -72,7 +72,7 @@ const NormalTemplate = (args: TDatePickerProps) => {
 export const DateType: Story = {
     render: NormalTemplate,
     args: {
-        view: 'date',
+        valueType: 'date',
         value: '20240212',
         openFrom: '20240210',
         openTo: '20240320',
@@ -82,7 +82,7 @@ export const DateType: Story = {
 export const MonthType: Story = {
     render: NormalTemplate,
     args: {
-        view: 'month',
+        valueType: 'month',
         value: '202405',
         openFrom: '202403',
         openTo: '202408',
@@ -92,7 +92,7 @@ export const MonthType: Story = {
 export const YearType: Story = {
     render: NormalTemplate,
     args: {
-        view: 'year',
+        valueType: 'year',
         value: '2024',
         openFrom: '2023',
         openTo: '2028',

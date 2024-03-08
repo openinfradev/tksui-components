@@ -1,6 +1,5 @@
 import {act, render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import {Simulate} from 'react-dom/test-utils';
 import {TDatePicker} from '~/input/date-picker';
 import {useInputState} from '@/common/hook';
 
@@ -37,7 +36,7 @@ describe('TDatePicker', () => {
 
             // Arrange
             const testClass = 'test-class-name-prop';
-            render(<TDatePicker view={'date'} value={'20240101'} className={testClass}/>);
+            render(<TDatePicker valueType={'date'} value={'20240101'} className={testClass}/>);
             const root = screen.getByTestId(datePickerTestId);
 
             // Assert
@@ -48,7 +47,7 @@ describe('TDatePicker', () => {
 
             // Arrange
             const testStyle = {background: 'red', fontSize: '20px'};
-            render(<TDatePicker view={'date'} value={today} style={testStyle}/>);
+            render(<TDatePicker valueType={'date'} value={today} style={testStyle}/>);
             const root = screen.getByTestId(datePickerTestId);
 
             // Assert
@@ -59,7 +58,7 @@ describe('TDatePicker', () => {
 
             // Arrange
             const testDateValue = '20240207';
-            render(<TDatePicker view={'date'} value={testDateValue}/>);
+            render(<TDatePicker valueType={'date'} value={testDateValue}/>);
             const datePickerRoot = screen.getByTestId('text-field-input');
 
             // Assert
@@ -70,7 +69,7 @@ describe('TDatePicker', () => {
 
             // Arrange
             const testDateValue = '20240207';
-            render(<TDatePicker view={'date'} value={testDateValue}/>);
+            render(<TDatePicker valueType={'date'} value={testDateValue}/>);
             const datePickerRoot = screen.getByTestId('text-field-input');
 
             // Assert
@@ -81,7 +80,7 @@ describe('TDatePicker', () => {
 
             // Arrange
             const testMonthValue = '202412';
-            render(<TDatePicker view={'month'} value={testMonthValue}/>);
+            render(<TDatePicker valueType={'month'} value={testMonthValue}/>);
             const monthPickerRoot = screen.getByTestId('text-field-input');
 
             // Assert
@@ -92,7 +91,7 @@ describe('TDatePicker', () => {
 
             // Arrange
             const testYearValue = '2029';
-            render(<TDatePicker view={'year'} value={testYearValue}/>);
+            render(<TDatePicker valueType={'year'} value={testYearValue}/>);
             const monthPickerRoot = screen.getByTestId('text-field-input');
 
             // Assert
@@ -103,7 +102,7 @@ describe('TDatePicker', () => {
 
             // Arrange
             const user = userEvent.setup();
-            render(<TDatePicker view={'date'} value={'20241212'}/>);
+            render(<TDatePicker valueType={'date'} value={'20241212'}/>);
             const calendarIcon = screen.getByRole('img');
 
             await act(async () => { await user.click(calendarIcon); });
@@ -118,7 +117,7 @@ describe('TDatePicker', () => {
 
             // Arrange
             const user = userEvent.setup();
-            render(<TDatePicker view={'month'} value={'202412'}/>);
+            render(<TDatePicker valueType={'month'} value={'202412'}/>);
             const calendarIcon = screen.getByRole('img');
 
             await act(async () => { await user.click(calendarIcon); });
@@ -133,7 +132,7 @@ describe('TDatePicker', () => {
 
             // Arrange
             const user = userEvent.setup();
-            render(<TDatePicker view={'year'} value={'2024'}/>);
+            render(<TDatePicker valueType={'year'} value={'2024'}/>);
             const calendarIcon = screen.getByRole('img');
 
             await act(async () => { await user.click(calendarIcon); });
@@ -149,7 +148,7 @@ describe('TDatePicker', () => {
             // Arrange
             const user = userEvent.setup();
             const todayDate = new Date().getDate();
-            render(<TDatePicker view={'date'}/>);
+            render(<TDatePicker valueType={'date'}/>);
             const calendarIcon = screen.getByRole('img');
 
             // Act
@@ -167,7 +166,7 @@ describe('TDatePicker', () => {
             // Arrange
             const user = userEvent.setup();
             const todayDate = new Date().getDate();
-            render(<TDatePicker view={'date'}/>);
+            render(<TDatePicker valueType={'date'}/>);
             const calendarIcon = screen.getByRole('img');
 
             // Act
@@ -191,7 +190,7 @@ describe('TDatePicker', () => {
             const openFrom = `${date.getFullYear()}${month < 10 ? `0${month}` : month}${openFromDay}`;
             const openTo = `${date.getFullYear()}${month < 10 ? `0${month}` : month}${openToDay}`;
 
-            render(<TDatePicker value={today} view={'date'} openFrom={openFrom} openTo={openTo}/>);
+            render(<TDatePicker value={today} valueType={'date'} openFrom={openFrom} openTo={openTo}/>);
             const calendarIcon = screen.getByRole('img');
 
             // Act
@@ -218,7 +217,7 @@ describe('TDatePicker', () => {
             // Arrange
             const validFullDate = '20291212';
             const pollutedDate = `${validFullDate} !@# ${9999}`;
-            render(<TDatePicker view={'date'} value={pollutedDate}/>);
+            render(<TDatePicker valueType={'date'} value={pollutedDate}/>);
             const datePickerRoot = screen.getByTestId('text-field-input');
 
             // Assert
@@ -231,7 +230,7 @@ describe('TDatePicker', () => {
             // Arrange
             const validMonthDate = '202912';
             const pollutedDate = `${validMonthDate} !@# ${9999}`;
-            render(<TDatePicker view={'month'} value={pollutedDate}/>);
+            render(<TDatePicker valueType={'month'} value={pollutedDate}/>);
             const monthPickerRoot = screen.getByTestId('text-field-input');
 
             // Assert
@@ -243,7 +242,7 @@ describe('TDatePicker', () => {
             // Arrange
             const validYearDate = '2029';
             const pollutedDate = `${validYearDate} !@# ${9999}`;
-            render(<TDatePicker view={'year'} value={pollutedDate}/>);
+            render(<TDatePicker valueType={'year'} value={pollutedDate}/>);
             const yearPickerRoot = screen.getByTestId('text-field-input');
 
             // Assert
@@ -253,7 +252,7 @@ describe('TDatePicker', () => {
         it.each(invalidDates)('Displays correctly when incorrect value is provided to date type root. data: #%s', (invalidDate) => {
 
             // Arrange
-            render(<TDatePicker view={'date'} value={invalidDate}/>);
+            render(<TDatePicker valueType={'date'} value={invalidDate}/>);
             const root = screen.getByTestId('text-field-input');
 
             // Assert
@@ -263,7 +262,7 @@ describe('TDatePicker', () => {
         it.each(invalidMonths)('Displays correctly when incorrect value is provided to month type root: #%s', (invalidDate) => {
 
             // Arrange
-            render(<TDatePicker view={'month'} value={invalidDate}/>);
+            render(<TDatePicker valueType={'month'} value={invalidDate}/>);
             const root = screen.getByTestId('text-field-input');
 
             // Assert
@@ -273,7 +272,7 @@ describe('TDatePicker', () => {
         it.each(invalidYears)('Displays correctly when incorrect value is provided to year type root. data: #%s', (invalidDate) => {
 
             // Arrange
-            render(<TDatePicker view={'year'} value={invalidDate}/>);
+            render(<TDatePicker valueType={'year'} value={invalidDate}/>);
             const root = screen.getByTestId('text-field-input');
 
             // Assert
@@ -284,7 +283,7 @@ describe('TDatePicker', () => {
 
             // Arrange
             const user = userEvent.setup();
-            render(<TDatePicker disabled view={'date'} value={'20240212'}/>);
+            render(<TDatePicker disabled valueType={'date'} value={'20240212'}/>);
             const dropHolderRoot = screen.getByRole('img');
 
             // Act
@@ -313,7 +312,7 @@ describe('TDatePicker', () => {
             const TestDatePicker = () => {
                 const dateInput = useInputState(testValue);
                 return (
-                    <TDatePicker view={'date'} value={dateInput.value} onChange={dateInput.onChange}
+                    <TDatePicker valueType={'date'} value={dateInput.value} onChange={dateInput.onChange}
                                  openFrom={openFrom} openTo={openTo}/>
                 );
             };
@@ -351,7 +350,7 @@ describe('TDatePicker', () => {
             // Arrange
             const testDate = '20291212';
             const testSeparator = '+';
-            render(<TDatePicker view={'date'} value={testDate} separator={testSeparator} />);
+            render(<TDatePicker valueType={'date'} value={testDate} separator={testSeparator} />);
             const dateInputRoot = screen.getByTestId('text-field-input') as HTMLInputElement;
 
             const splitDate = dateInputRoot.value.split(testSeparator);
@@ -364,7 +363,7 @@ describe('TDatePicker', () => {
             // Arrange
             const testDate = '203004';
             const testSeparator = '/';
-            render(<TDatePicker view={'month'} value={testDate} separator={testSeparator} />);
+            render(<TDatePicker valueType={'month'} value={testDate} separator={testSeparator} />);
             const dateInputRoot = screen.getByTestId('text-field-input') as HTMLInputElement;
 
             const splitDate = dateInputRoot.value.split(testSeparator);
@@ -381,7 +380,7 @@ describe('TDatePicker', () => {
 
             // Arrange
             const user = userEvent.setup();
-            render(<TDatePicker view={'date'}/>);
+            render(<TDatePicker valueType={'date'}/>);
             const calendarIcon = screen.getByRole('img');
 
             // Act
@@ -466,7 +465,7 @@ describe('TDatePicker', () => {
                 const TestDatePicker = () => {
                     const dateInput = useInputState(today);
                     return (
-                        <TDatePicker view={'date'} value={today} onChange={dateInput.onChange}/>
+                        <TDatePicker valueType={'date'} value={today} onChange={dateInput.onChange}/>
                     );
                 };
                 render(<TestDatePicker/>);
@@ -578,7 +577,7 @@ describe('TDatePicker', () => {
                 const TestDatePicker = () => {
                     const dateInput = useInputState(testDate);
                     return (
-                        <TDatePicker view={'month'} value={dateInput.value} onChange={dateInput.onChange}/>
+                        <TDatePicker valueType={'month'} value={dateInput.value} onChange={dateInput.onChange}/>
                     );
                 };
                 render(<TestDatePicker/>);
@@ -658,7 +657,7 @@ describe('TDatePicker', () => {
             const TestDatePicker = () => {
                 const dateInput = useInputState(testYear);
                 return (
-                    <TDatePicker view={'year'} value={dateInput.value} onChange={dateInput.onChange}
+                    <TDatePicker valueType={'year'} value={dateInput.value} onChange={dateInput.onChange}
                                  openFrom={openFrom} openTo={openTo}/>
                 );
             };
@@ -700,7 +699,7 @@ describe('TDatePicker', () => {
             const TestDatePicker = () => {
                 const dateInput = useInputState('');
                 return (
-                    <TDatePicker view={'date'} value={dateInput.value} onChange={dateInput.onChange}
+                    <TDatePicker valueType={'date'} value={dateInput.value} onChange={dateInput.onChange}
                                  openFrom={openFrom} openTo={openTo}/>
                 );
             };
