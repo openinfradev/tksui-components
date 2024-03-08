@@ -1,31 +1,30 @@
-import {cloneElement, CSSProperties, useCallback, useMemo} from 'react';
+import {cloneElement, CSSProperties, useCallback, useMemo, memo} from 'react';
 import {TTabBoxProps, TTabBoxValue} from '@/components';
 import TTabBoxContext from './TTabBoxContext';
 
 const TTabBox = (props: TTabBoxProps) => {
-    
+
     // region [Hooks]
-    
+
     const {onChange, value, children, style, className} = props;
-    
+
     // endregion
-    
-    
+
+
     // region [Templates]
-    
+
     const rootClass = useMemo((): string => {
         const clazz: string[] = [];
-        
+
         if (className) { clazz.push(className); }
-        
+
         return clazz.join(' ');
     }, [className]);
-    
+
     const rootStyle = useMemo((): CSSProperties => {
-        if (style) { return style; }
-        return {};
+        return style || {};
     }, [style]);
-    
+
     const tabItemContent = useMemo(() => children
         .filter(
             (child, index) => {
@@ -35,16 +34,16 @@ const TTabBox = (props: TTabBoxProps) => {
                 return index === value;
             },
         )[0]?.props.content, [children, value]);
-    
+
     // endregion1
-    
-    
+
+
     // region [Events]
-    
+
     const onChangeActiveTab = useCallback((val: TTabBoxValue) => onChange(val), [onChange]);
-    
+
     // endregion
-    
+
     return (
         <div
             className={`t-tab-box ${rootClass}`}
@@ -77,5 +76,4 @@ TTabBox.defaultProps = {};
 
 TTabBox.displayName = 'TTabBox';
 
-
-export default TTabBox;
+export default memo(TTabBox);

@@ -11,6 +11,7 @@ const TTabItem = (props: TTabItemProps) => {
     const context = useContext<typeof TTabBoxContext>(TTabBoxContext);
     const itemRef = useRef<HTMLLIElement>(null);
     const ripple = useRipple(itemRef);
+
     // endregion
 
 
@@ -57,7 +58,6 @@ const TTabItem = (props: TTabItemProps) => {
             data-testid={'tab-box-item-root'}
         >
             {label}
-            <div className={'t-tab-item-label__active-indicator'} />
         </li>
     );
 };
