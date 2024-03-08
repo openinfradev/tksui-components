@@ -139,6 +139,9 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
         if (props.disabled) {
             clazz.push('t-dropdown--disabled');
         }
+        if (props.dense) {
+            clazz.push('t-dropdown--dense');
+        }
         if (!validator.result) {
             clazz.push('t-dropdown--failure');
         }
@@ -359,6 +362,7 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
                             disabled={props.disabled}
                             noTrim
                             searchable
+                            dense={props.dense}
                             onChange={onChangeFilterText}
                             onClear={onClearFilterText}
                             onKeyDown={onKeyDownFilterText}

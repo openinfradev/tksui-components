@@ -84,6 +84,18 @@ describe('TDropdown', () => {
             expect(root)
                 .toHaveClass('t-dropdown--underline');
         });
+
+        it('When dense prop is applied, root has t-dropdown--dense class', () => {
+
+            // Arrange
+            render(<TDropdown {...baseProps} dense/>);
+
+            // Assert
+            const root = screen.getByTestId('dropdown-root');
+
+            expect(root)
+                .toHaveClass('t-dropdown--dense');
+        });
     });
 
 
