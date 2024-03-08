@@ -12,6 +12,7 @@ export interface TTextFieldProps extends TValidatorProps, TBaseProps {
     required?: boolean,
     noTrim?: boolean,
     readOnly? : boolean,
+    dense?: boolean,
 
     placeholder?: string,
     label?: string,

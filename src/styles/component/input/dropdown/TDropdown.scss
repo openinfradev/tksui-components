@@ -172,6 +172,7 @@
     .t-dropdown__details {
         display: flex;
         @include typo-element-3;
+        margin-top: $t-spacing-4;
         height: $t-dropdown-detail-height;
         color: $t-gray-color-4;
         position: absolute;
@@ -200,6 +201,13 @@
             border-color: $t-primary-color;
             border-width: 0 0 2px 0;
         }
+    }
+
+    &.t-dropdown--dense {
+        .t-dropdown__control {height: 32px;}
+        .t-dropdown__details {margin-top: 0;}
+        .t-chip {height: 24px;}
+
     }
 
     &.t-dropdown--disabled {

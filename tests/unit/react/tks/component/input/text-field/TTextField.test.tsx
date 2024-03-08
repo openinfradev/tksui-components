@@ -68,7 +68,7 @@ describe('TTextField', () => {
     // endregion
 
 
-    // region [Label, Required, Placeholder, Disabled, ReadOnly]
+    // region [Label, Required, Placeholder, Disabled, ReadOnly, Dense]
 
 
     it('When label prop is applies, label is shown', () => {
@@ -132,6 +132,18 @@ describe('TTextField', () => {
 
         expect(root)
             .toHaveClass('t-text-field--read-only');
+    });
+
+    it('When dense prop is applies, root has t-text-field--dense class', () => {
+
+        // Arrange
+        render(<TTextField {...baseProps} dense/>);
+
+        // Assert
+        const root = screen.getByTestId('text-field-root');
+
+        expect(root)
+            .toHaveClass('t-text-field--dense');
     });
 
 

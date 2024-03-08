@@ -12,7 +12,7 @@ import {
 } from 'react';
 import uniqueId from 'lodash/uniqueId';
 import TIcon from '../../icon/TIcon';
-import {TTextFieldProps, TTextFieldRef} from './TTextField.interface';
+import {TTextFieldProps, TTextFieldRef} from '@/components';
 import useValidator from '@/common/hook/UseValidator';
 import themeToken from '~style/designToken/ThemeToken.module.scss';
 
@@ -148,12 +148,13 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
         if (props.multiline) { clazz.push('t-text-field__multiline'); }
         if (props.disabled) { clazz.push('t-text-field--disabled'); }
         if (props.readOnly) { clazz.push('t-text-field--read-only'); }
+        if (props.dense) { clazz.push('t-text-field--dense'); }
         if (!validator.result) { clazz.push('t-text-field--failure'); }
         if (validator.result && validator.message) { clazz.push('t-text-field--success'); }
         if (hasFocus) { clazz.push('t-text-field--focused'); }
 
         return clazz.join(' ');
-    }, [props.className, props.disabled, props.readOnly, validator.result, validator.message, hasFocus]);
+    }, [props.className, props.multiline, props.disabled, props.readOnly, props.dense, validator.result, validator.message, hasFocus]);
 
     const inputClass = useMemo((): string => {
         const clazz: string[] = [];

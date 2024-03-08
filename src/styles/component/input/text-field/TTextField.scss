@@ -122,6 +122,15 @@
     }
     .t-text-field__container:hover { border-color: $t-primary-color; }
 
+    &.t-text-field--dense  {
+        .t-text-field__container {
+            height: 32px;
+        }
+        .t-text-field__details {
+            margin-top: 0;
+        }
+    }
+
     &.t-text-field--disabled .t-text-field__container {
         background: $t-gray-color-2;
 

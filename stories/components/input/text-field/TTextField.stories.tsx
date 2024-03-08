@@ -47,6 +47,7 @@ const NormalTemplate = (args: TTextFieldProps) => {
                 <span style={{fontSize: '20px'}}>Normal</span>
                 <div style={containerStyle}>
                     <TTextField {...args} value={value} onChange={setValue} label={'무옵션'}/>
+                    <TTextField {...args} value={value} onChange={setValue} label={'Dense'} dense/>
                     <TTextField {...args} value={value} onChange={setValue} label={'Clearable'} clearable/>
                     <TTextField {...args} value={value} onChange={setValue} label={'Required'} required/>
                     <TTextField {...args} value={value} onChange={setValue} label={'Password'} password clearable/>
@@ -179,7 +180,7 @@ const ValidationTemplate = (args: TTextFieldProps) => {
 
 
                 <TTextField {...args}
-                            label={'Outline Default'}
+                            label={'Default'}
                             rules={[
                                 rule.required(),
                                 rule.lengthBetween(3, 12),
@@ -190,7 +191,19 @@ const ValidationTemplate = (args: TTextFieldProps) => {
                             counter={12}
                 />
                 <TTextField {...args}
-                            label={'Outline Custom Long Message'}
+                            label={'Dense'}
+                            rules={[
+                                rule.required(),
+                                rule.lengthBetween(3, 12),
+                            ]}
+                            {...textField1}
+                            ref={textField1Ref}
+                            placeholder={'값을 입력해 주세요'}
+                            counter={12}
+                            dense
+                />
+                <TTextField {...args}
+                            label={'Custom Long Message'}
                             rules={[
                                 rule.required(
                                     '에러 메시지가 길면 벽에 닿아서 말 줄임표로 표현됩니다. 에러 메시지가 길면 벽에 닿아서 말 줄임표로 표현됩니다.',
@@ -202,7 +215,7 @@ const ValidationTemplate = (args: TTextFieldProps) => {
                             counter={12}
                 />
                 <TTextField {...args}
-                            label={'Outline Success Message'}
+                            label={'Success Message'}
                             rules={[
                                 rule.required(),
                                 rule.lengthBetween(3, 12),
@@ -211,39 +224,6 @@ const ValidationTemplate = (args: TTextFieldProps) => {
                             {...textField3}
                             ref={textField3Ref}
                             successMessage={'사용할 수 있는 아이디입니다'}
-                />
-                <TTextField {...args}
-                            label={'Underline Default'}
-                            rules={[
-                                rule.required(),
-                                rule.lengthBetween(3, 12),
-                            ]}
-                            counter={12}
-                            {...textField4}
-                            ref={textField4Ref}
-                />
-                <TTextField {...args}
-                            label={'Underline Custom Long Message'}
-                            rules={[
-                                rule.required(
-                                    '에러 메시지가 길면 벽에 닿아서 말 줄임표로 표현됩니다. 에러 메시지가 길면 벽에 닿아서 말 줄임표로 표현됩니다.',
-                                ),
-                                rule.lengthBetween(3, 12),
-                            ]}
-                            counter={12}
-                            {...textField5}
-                            ref={textField5Ref}
-                />
-                <TTextField {...args}
-                            label={'Underline Success Message'}
-                            rules={[
-                                rule.required(),
-                                rule.lengthBetween(3, 12),
-                            ]}
-                            counter={12}
-                            successMessage={'사용할 수 있는 아이디입니다'}
-                            {...textField6}
-                            ref={textField6Ref}
                 />
             </div>
 

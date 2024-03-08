@@ -30,6 +30,7 @@ const NormalTemplate = (args: TDropdownProps) => {
     const singleSelect5 = useInputState<string>('');
     const singleSelect6 = useInputState<string>('');
     const singleSelect7 = useInputState<string>('');
+    const singleSelect8 = useInputState<string>('');
 
     const multiSelect1 = useInputState<any[]>([]);
     const multiSelect2 = useInputState<any[]>(['melon', 'banana']);
@@ -38,6 +39,7 @@ const NormalTemplate = (args: TDropdownProps) => {
     const multiSelect5 = useInputState<any[]>([]);
     const multiSelect6 = useInputState<any[]>([]);
     const multiSelect7 = useInputState<any[]>([]);
+    const multiSelect8 = useInputState<any[]>([]);
 
     const containerStyle: CSSProperties = {
         width: '500px',
@@ -74,11 +76,13 @@ const NormalTemplate = (args: TDropdownProps) => {
                     <TDropdown {...args} {...singleSelect5} valueKey={'value2'}/>
 
                     itemTemplate (value: {singleSelect6.value})
-                    {/* @ts-ignore */}
                     <TDropdown {...args} {...singleSelect6} itemTemplate={(item) => `${item.text} (${item.koreanText})`}/>
 
-                    width 300px (value: {singleSelect7.value})
-                    <TDropdown {...args} {...singleSelect7} width={'300px'}/>
+                    Dense (value: {singleSelect7.value})
+                    <TDropdown {...args} {...singleSelect7} dense/>
+
+                    width 300px (value: {singleSelect8.value})
+                    <TDropdown {...args} {...singleSelect8} width={'300px'}/>
                 </div>
             </div>
 
@@ -104,11 +108,13 @@ const NormalTemplate = (args: TDropdownProps) => {
                     <TDropdown {...args} {...multiSelect5} multiple valueKey={'value2'}/>
 
                     itemTemplate (value: {multiSelect6.value.join(', ')})
-                    {/* @ts-ignore */}
                     <TDropdown {...args} {...multiSelect6} multiple itemTemplate={(item) => `${item.text} (${item.koreanText})`}/>
 
-                    width 300px (value: {multiSelect7.value})
-                    <TDropdown {...args} {...multiSelect7} multiple width={'300px'}/>
+                    Dense (value: {multiSelect7.value})
+                    <TDropdown {...args} {...multiSelect7} multiple dense/>
+
+                    width 300px (value: {multiSelect8.value})
+                    <TDropdown {...args} {...multiSelect8} multiple width={'300px'}/>
                 </div>
             </div>
         </div>
@@ -120,12 +126,15 @@ const ValidationTemplate = (args: TDropdownProps) => {
     const singleSelect1 = useInputState<string>('');
     const singleSelect2 = useInputState<string>('melon');
     const singleSelect3 = useInputState<string>('');
+    const singleSelect4 = useInputState<string>('');
 
     const multiSelect1 = useInputState<any[]>([]);
     const multiSelect2 = useInputState<any[]>(['melon', 'banana']);
     const multiSelect3 = useInputState<any[]>([]);
+    const multiSelect4 = useInputState<any[]>([]);
 
-    const [singleSelect1Ref, singleSelect2Ref, singleSelect3Ref, multiSelect1Ref, multiSelect2Ref, multiSelect3Ref] = useRefs(6);
+    const [singleSelect1Ref, singleSelect2Ref, singleSelect3Ref, singleSelect4Ref,
+        multiSelect1Ref, multiSelect2Ref, multiSelect3Ref, multiSelect4Ref] = useRefs(8);
 
     const containerStyle: CSSProperties = {
         width: '500px',
@@ -141,9 +150,11 @@ const ValidationTemplate = (args: TDropdownProps) => {
         singleSelect1Ref.current.validate();
         singleSelect2Ref.current.validate();
         singleSelect3Ref.current.validate();
+        singleSelect4Ref.current.validate();
         multiSelect1Ref.current.validate();
         multiSelect2Ref.current.validate();
         multiSelect3Ref.current.validate();
+        multiSelect4Ref.current.validate();
     };
 
 
@@ -162,6 +173,9 @@ const ValidationTemplate = (args: TDropdownProps) => {
                     <TDropdown ref={singleSelect3Ref} rules={[rule.required()]} {...args} {...singleSelect3}
                                filterPlaceholder={'Choose your favorite fruit'}/>
 
+                    dense (value: {singleSelect4.value})
+                    <TDropdown ref={singleSelect4Ref} rules={[rule.required()]} {...args} {...singleSelect4} dense/>
+
                     default (value: {multiSelect1.value.join(', ')})
                     <TDropdown ref={multiSelect1Ref} rules={[rule.requiredArr()]} {...args} type={'underline'} {...multiSelect1} multiple/>
 
@@ -172,6 +186,10 @@ const ValidationTemplate = (args: TDropdownProps) => {
                     placeholder (value: {multiSelect3.value.join(', ')})
                     <TDropdown ref={multiSelect3Ref} rules={[rule.requiredArr()]} {...args} type={'underline'} {...multiSelect3} multiple
                                filterPlaceholder={'Choose your favorite fruits'}/>
+
+                    dense (value: {multiSelect4.value})
+                    <TDropdown ref={multiSelect4Ref} rules={[rule.requiredArr()]} {...args} type={'underline'} {...multiSelect4} multiple dense/>
+
                 </div>
             </div>
         </div>
