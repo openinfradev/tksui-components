@@ -339,7 +339,7 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
 
                 {/* Control - Remover, Opener */}
                 {
-                    (!props.multiple && props.value) && (
+                    (!props.multiple && props.value && props.clearable) && (
                         <TIcon className={'t-dropdown__control__remover'}
                                small
                                fill
@@ -422,6 +422,7 @@ TDropdown.defaultProps = {
     filterPlaceholder: '검색',
     chip: true,
     lazy: true,
+    clearable: false,
 };
 
 TDropdown.displayName = 'TDropdown';
