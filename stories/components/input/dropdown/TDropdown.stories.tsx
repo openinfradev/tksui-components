@@ -86,7 +86,7 @@ const NormalTemplate = (args: TDropdownProps) => {
                     <TDropdown {...args} {...singleSelect8} width={'300px'}/>
 
                     Clearable (value: {singleSelect8.value})
-                    <TDropdown {...args} clearable {...singleSelect9} />
+                    <TDropdown {...args} noClearButton {...singleSelect9} />
                 </div>
             </div>
 
@@ -115,7 +115,7 @@ const NormalTemplate = (args: TDropdownProps) => {
                     <TDropdown {...args} {...multiSelect6} multiple itemTemplate={(item) => `${item.text} (${item.koreanText})`}/>
 
                     Dense (value: {multiSelect7.value})
-                    <TDropdown {...args} {...multiSelect7} multiple dense clearable/>
+                    <TDropdown {...args} {...multiSelect7} multiple dense/>
 
                     width 300px (value: {multiSelect8.value})
                     <TDropdown {...args} {...multiSelect8} multiple width={'300px'}/>

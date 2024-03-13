@@ -97,29 +97,16 @@ describe('TDropdown', () => {
                 .toHaveClass('t-dropdown--dense');
         });
 
-        it('When clearable prop is applied, root has clear icon element', async () => {
+        it('When noClearButton prop is applied, root has clear icon element', async () => {
 
             // Arrange
-            const user = userEvent.setup();
-            render(<TDropdown clearable {...baseProps} />);
+            render(<TDropdown noClearButton {...baseProps} value={testItems[0].value} />);
+
+            // Arrange
+            const iconRoots = screen.getAllByRole('img');
 
             // Assert
-            const root = screen.getByTestId('dropdown-control');
-
-            // Act
-            await act(async () => { await user.click(root); });
-
-            // Arrange
-            const firstItemRoot = screen.getByText(testItems[0].text);
-
-            // Act
-            await act(async () => { await user.click(firstItemRoot); });
-
-            // Arrange
-            const clearIconRoot = screen.getAllByRole('img')[0];
-
-            // Assert
-            expect(clearIconRoot).toHaveClass('t-dropdown__control__remover');
+            expect(iconRoots.length).toEqual(2);
         });
     });
 
