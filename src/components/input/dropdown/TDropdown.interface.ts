@@ -19,6 +19,7 @@ export interface TDropdownProps extends TValidatorProps, TBaseProps {
 
     multiple?: boolean,
     disabled?: boolean,
+    noClearButton?: boolean,
     noDetail?: boolean,
     chip?: boolean,
     dense?: boolean,

@@ -96,6 +96,18 @@ describe('TDropdown', () => {
             expect(root)
                 .toHaveClass('t-dropdown--dense');
         });
+
+        it('When noClearButton prop is applied, root has clear icon element', async () => {
+
+            // Arrange
+            render(<TDropdown noClearButton {...baseProps} value={testItems[0].value} />);
+
+            // Arrange
+            const iconRoots = screen.getAllByRole('img');
+
+            // Assert
+            expect(iconRoots.length).toEqual(2);
+        });
     });
 
 

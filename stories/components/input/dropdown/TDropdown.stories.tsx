@@ -31,6 +31,7 @@ const NormalTemplate = (args: TDropdownProps) => {
     const singleSelect6 = useInputState<string>('');
     const singleSelect7 = useInputState<string>('');
     const singleSelect8 = useInputState<string>('');
+    const singleSelect9 = useInputState<string>('');
 
     const multiSelect1 = useInputState<any[]>([]);
     const multiSelect2 = useInputState<any[]>(['melon', 'banana']);
@@ -83,6 +84,9 @@ const NormalTemplate = (args: TDropdownProps) => {
 
                     width 300px (value: {singleSelect8.value})
                     <TDropdown {...args} {...singleSelect8} width={'300px'}/>
+
+                    Clearable (value: {singleSelect8.value})
+                    <TDropdown {...args} noClearButton {...singleSelect9} />
                 </div>
             </div>
 
