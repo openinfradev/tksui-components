@@ -1,6 +1,6 @@
 import {CSSProperties, useMemo} from 'react';
 import TModal from '../../screen/modal/TModal';
-import {TProgressProps} from './TProgress.interface';
+import {TProgressProps} from '@/components';
 
 
 function TProgress(props: TProgressProps) {
@@ -16,7 +16,7 @@ function TProgress(props: TProgressProps) {
     const rootStyle: CSSProperties = useMemo((): CSSProperties => {
         let style: CSSProperties = {};
 
-        if (props.style) style = {...props.style};
+        if (props.style) { style = {...props.style}; }
 
         return style;
     }, [props.style]);

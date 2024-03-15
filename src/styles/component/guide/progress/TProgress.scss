@@ -9,6 +9,7 @@
 
     .t-progress__modal-body.t-modal__overlay__body {
         background: transparent;
+        box-shadow: none;
 
         .t-modal__overlay__body__header, .t-modal__overlay__body__close-icon, .t-modal__overlay__body__footer {
             display: none;
