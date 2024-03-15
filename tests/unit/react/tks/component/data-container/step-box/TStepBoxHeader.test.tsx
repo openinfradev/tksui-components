@@ -25,15 +25,18 @@ describe('TStepBoxHeader', () => {
 
             // Arrange
             render(<TStepBoxHeader {...baseProps} />);
-            const root = screen.getByTestId('step-box-header-root');
 
             // Assert
-            // eslint-disable-next-line testing-library/no-node-access
-            expect(root.getElementsByClassName('t-step-box-header__step').length).toBe(3);
-            // eslint-disable-next-line testing-library/no-node-access
-            expect(root.getElementsByClassName('t-step-box-header__step__number').length).toBe(3);
-            // eslint-disable-next-line testing-library/no-node-access
-            expect(root.getElementsByClassName('t-step-box-header__step__label').length).toBe(3);
+
+            const listItems = screen.getAllByRole('listitem');
+
+            expect(listItems.length).toBe(baseProps.content.length);
+
+            baseProps.content.forEach((item, index) => {
+                expect(listItems[index]).toHaveTextContent(item.stepNumber.toString());
+                expect(listItems[index]).toHaveTextContent(item.label);
+            });
+
         });
 
         it('ID prop applies to root', () => {
