@@ -111,7 +111,7 @@ describe('TStepBox', () => {
 
             // Assert
             // eslint-disable-next-line testing-library/no-node-access
-            expect(root.getElementsByClassName('t-step-box-header__step__number__inner').length).toBe(3);
+            expect(root.getElementsByClassName('t-step-box-header__step__number').length).toBe(3);
             // eslint-disable-next-line testing-library/no-node-access
             expect(root.getElementsByClassName('t-step-box-header__step__label').length).toBe(3);
             // eslint-disable-next-line testing-library/no-node-access

@@ -21,22 +21,21 @@ type Story = StoryObj<typeof TStepBox>;
 const Template = (args) => {
 
     const [stepNumber, setStepNumber] = useState<number>(1);
-    const [text, setText] = useState<string>('');
-    const textRef = useRef<TTextFieldRef>(null);
 
     return (<>
 
-        <TStepBox value={stepNumber} onChange={setStepNumber} stepLabels={['csp', 'step 2']} {...args} >
-            <TStepBoxItem nextButtonDisabled>
-                <div>
-                    Step 2 Content
-                </div>
-            </TStepBoxItem>
-            <TStepBoxItem>
-                <div>
-                    Step 2 Content
-                </div>
-            </TStepBoxItem>
+        <TStepBox
+            value={stepNumber}
+            onChange={setStepNumber}
+            stepLabels={['설치환경 선택', '스택 템플릿 선택', '속성 입력', '정책 템플릿 선택', '정책 선택', '확인 및 생성']}
+            {...args}
+        >
+            <TStepBoxItem><div>Step 1 Content</div></TStepBoxItem>
+            <TStepBoxItem><div>Step 2 Content</div></TStepBoxItem>
+            <TStepBoxItem><div>Step 3 Content</div></TStepBoxItem>
+            <TStepBoxItem><div>Step 4 Content</div></TStepBoxItem>
+            <TStepBoxItem><div>Step 5 Content</div></TStepBoxItem>
+            <TStepBoxItem><div>Step 6 Content</div></TStepBoxItem>
 
         </TStepBox>
     </>);

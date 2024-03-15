@@ -61,7 +61,7 @@ const TStepBoxFooter = (props: TStepBoxFooterProps) => {
                 {
                     props.customNextButton
                         ? props.customNextButton
-                        : <TButton large onClick={onClickNext} disabled={props.nextButtonDisabled}>
+                        : <TButton large onClick={onClickNext} main disabled={props.nextButtonDisabled}>
                             {
                                 (context.currentStep < context.totalStep)
                                     ? props.nextButtonLabel

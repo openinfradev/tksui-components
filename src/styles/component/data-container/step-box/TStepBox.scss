@@ -4,21 +4,20 @@
     align-items: center;
     justify-content: center;
     height: 48px;
-    padding: 40px 70px;
-    margin-bottom: calc($t-spacing-16 + 30px);
+    padding: 40px 0;
+    margin-bottom: calc($t-spacing-40);
 
     .t-step-box-header__connector {
-        height: 6px;
-        flex: 0 1 250px;
-        margin: 0 -9px;
-        background: $t-background-color-01;
+        height: 2px;
+        flex: 0 1 140px;
+        background: $t-blue-gray-color-3;
 
 
         &.t-step-box-header__connector--prev, &.t-step-box-header__connector--current {
-            background: $t-primary-color--tint-6;
+            background: $t-primary-color;
         }
-
     }
+
     .t-step-box-header__step {
         display: flex;
         align-items: center;
@@ -28,66 +27,35 @@
 
         .t-step-box-header__step__number {
             border-radius: 50%;
-            width: 48px;
-            height: 48px;
+            width: 32px;
+            height: 32px;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-
-            .t-step-box-header__step__number__inner {
-                border-radius: 50%;
-                width: 35px;
-                height: 35px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                @include typo-subtitle-4;
-            }
+            @include typo-element-1;
 
             .t-step-box-header__step__label {
                 position: absolute;
-                top: 64px;
-                @include typo-body-3;
+                top: calc($t-spacing-32 + $t-spacing-12);
+                @include typo-subtitle-1;
                 width: max-content;
             }
 
-
-            &.t-step-box-header__step__number--prev, &.t-step-box-header__step__number--current {
-                background: $t-primary-color--tint-6;
-
-                .t-step-box-header__step__number__inner {
-                    background: $t-primary-color;
-                    color: $t-white-color;
-                }
-            }
-
-            &.t-step-box-header__step__number--current .t-step-box-header__step__label {
-                color: $t-primary-color;
-            }
-
-            &.t-step-box-header__step__number--next {
-
-                .t-step-box-header__step__number__inner {
-                    background: $t-background-color-01;
-                    color: $t-font-color--primary-02;
-                }
-            }
+            &.t-step-box-header__step__number--prev {background: $t-primary-color;}
+            &.t-step-box-header__step__number--current {outline: 2px solid $t-primary-color;color: $t-primary-color;}
+            &.t-step-box-header__step__number--next {outline: 2px solid $t-blue-gray-color-3;color: $t-gray-color-4;}
         }
 
     }
 
 }
 
-.t-step-box-item {
-}
-
-
 .t-step-box-footer {
     height: 48px;
     display: flex;
     align-items: center;
-    margin-top: 40px;
+    margin-top: $t-spacing-20;
 
     .t-step-box-footer__left-action {
         flex: 1 0 auto;
