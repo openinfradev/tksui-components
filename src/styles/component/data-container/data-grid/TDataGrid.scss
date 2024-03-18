@@ -89,17 +89,6 @@
 
             .ag-overlay-no-rows-wrapper .ag-react-container {
                 pointer-events: all;
-                .t-data-grid__body__no-rows-template {
-                    .t-data-grid__body__no-rows-template__guide-message {
-                        @include typo-body-3;
-                        color: $t-gray-color-4;
-                        margin-bottom: $t-spacing-32;
-                    }
-
-                    .t-data-grid__body__no-rows-template__add-button {
-                        min-width: 144px;
-                    }
-                }
             }
         }
 
