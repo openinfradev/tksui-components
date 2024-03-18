@@ -1,5 +1,5 @@
 import {DomLayoutType} from 'ag-grid-community/dist/lib/entities/gridOptions';
-import {CSSProperties, forwardRef, memo, Ref, useCallback, useImperativeHandle, useMemo, useRef, useState} from 'react';
+import {CSSProperties, forwardRef, Ref, useCallback, useImperativeHandle, useMemo, useRef, useState} from 'react';
 import {AgGridReact} from 'ag-grid-react';
 import {SelectionChangedEvent} from 'ag-grid-community';
 import {TDataGridProps} from '@/components';
@@ -150,4 +150,4 @@ TDataGrid.defaultProps = {
 TDataGrid.displayName = 'TDataGrid';
 
 
-export default memo(TDataGrid);
+export default TDataGrid;
