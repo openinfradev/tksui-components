@@ -71,6 +71,15 @@ const TDataGrid = forwardRef((props: TDataGridProps, ref: Ref<AgGridReact>) => {
     // endregion
 
 
+    // region [Templates]
+
+    const noRowsOverlayComponent = useCallback(() => {
+        return props.noRowsOverlayComponent || '검색 조건에 맞는 데이터가 없습니다';
+    }, [props.noRowsOverlayComponent]);
+
+    // endregion
+
+
     return (
         <div className={`t-data-grid ${rootClass}`} style={rootStyle} id={props.id} data-testid={'data-grid-root'}>
             {
@@ -110,8 +119,8 @@ const TDataGrid = forwardRef((props: TDataGridProps, ref: Ref<AgGridReact>) => {
                 <AgGridReact className={''}
                              ref={gridRef}
                              onSelectionChanged={onSelectionChanged}
-                             noRowsOverlayComponent={() => ((props.noRowsOverlayComponent || '검색 조건에 맞는 데이터가 없습니다'))}
                              {...props}
+                             noRowsOverlayComponent={noRowsOverlayComponent}
                              {...generatedHeightProps}
                 />
             </div>

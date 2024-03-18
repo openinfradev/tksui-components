@@ -29,7 +29,7 @@ export interface TDataGridProps extends TBaseProps, AgReactUiProps {
     paging?: TPageResponseVO,
     maxRowsWithoutScroll?: number,
 
-    noRowsOverlayComponent?: () => ReactNode,
+    noRowsOverlayComponent?: ReactNode,
 
     noJumper?: boolean,
     jumperText?: string,
