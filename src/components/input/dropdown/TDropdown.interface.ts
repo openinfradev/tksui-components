@@ -40,6 +40,7 @@ export interface TDropdownProps extends TValidatorProps, TBaseProps {
 
 export interface TDropdownRef {
     focus(): void,
-
     validate(): true | string,
+    manualValidate(result: boolean, message?: string): void,
+    clearValidation(): void,
 }
