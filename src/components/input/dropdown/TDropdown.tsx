@@ -42,6 +42,12 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
         validate() {
             return validator.validate();
         },
+        manualValidate(result: boolean, message?: string) {
+            validator.manualValidate(result, message);
+        },
+        clearValidation() {
+            validator.clearValidation();
+        },
     }));
 
     // endregion
