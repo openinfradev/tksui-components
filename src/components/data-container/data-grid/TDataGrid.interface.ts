@@ -1,5 +1,5 @@
 import {AgReactUiProps} from 'ag-grid-react/lib/shared/interfaces';
-import {ReactElement} from 'react';
+import {ReactElement, ReactNode} from 'react';
 import {TBaseProps} from '@/common/base/TBase.interface';
 
 
@@ -29,10 +29,18 @@ export interface TDataGridProps extends TBaseProps, AgReactUiProps {
     paging?: TPageResponseVO,
     maxRowsWithoutScroll?: number,
 
+    noRowsOverlayComponent?: ReactNode,
+
     noJumper?: boolean,
     jumperText?: string,
 
+    /**
+     * @deprecated This prop will be removed before release v1.0.0.
+     */
     noDataText?: string,
+    /**
+     * @deprecated This prop will be removed before release v1.0.0.
+     */
     noDataContent?: {
         title: string,
         addButtonHandler(): void,

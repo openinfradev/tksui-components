@@ -3,7 +3,6 @@ import {CSSProperties, forwardRef, Ref, useCallback, useImperativeHandle, useMem
 import {AgGridReact} from 'ag-grid-react';
 import {SelectionChangedEvent} from 'ag-grid-community';
 import {TDataGridProps} from '@/components';
-import TButton from '../../button/button/TButton';
 import TPagination from '../pagination/TPagination';
 import TActionBar from '~/data-container/action-bar/TActionBar';
 import NumberUtil from '@/common/util/NumberUtil';
@@ -71,35 +70,12 @@ const TDataGrid = forwardRef((props: TDataGridProps, ref: Ref<AgGridReact>) => {
 
     // endregion
 
+
     // region [Templates]
 
-    const noRowsOverlayComponent = useCallback(() => (<>
-        <div className={'t-data-grid__body__no-rows-template'}>
-            <svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 100 100'>
-                <circle cx='44' cy='44' r='44' transform='translate(6.5 6.5)'
-                        style={{fill: '#f2f2f2', stroke: '#ddd', strokeMiterlimit: 10, strokeWidth: '2px'}}/>
-                <path transform='translate(49 35)' style={{fill: '#999'}} d='M0 0h4v24H0z'/>
-                <path transform='translate(49 62.953)' style={{fill: '#999'}} d='M0 0h4v4H0z'/>
-            </svg>
-
-            {
-                props.noDataText && (
-                    <div className={'t-data-grid__body__no-rows-template__guide-message'}>
-                        {props.noDataText}
-                    </div>
-                )
-            }
-
-            {
-                props.noDataContent && (
-                    <TButton className={'t-data-grid__body__no-rows-template__add-button'}
-                             onClick={props.noDataContent.addButtonHandler}>
-                        {props.noDataContent.title} 생성하기
-                    </TButton>
-                )
-            }
-        </div>
-    </>), [props.noDataContent, props.noDataText]);
+    const noRowsOverlayComponent = useCallback(() => {
+        return props.noRowsOverlayComponent || '검색 조건에 맞는 데이터가 없습니다';
+    }, [props.noRowsOverlayComponent]);
 
     // endregion
 
@@ -143,8 +119,8 @@ const TDataGrid = forwardRef((props: TDataGridProps, ref: Ref<AgGridReact>) => {
                 <AgGridReact className={''}
                              ref={gridRef}
                              onSelectionChanged={onSelectionChanged}
-                             noRowsOverlayComponent={noRowsOverlayComponent}
                              {...props}
+                             noRowsOverlayComponent={noRowsOverlayComponent}
                              {...generatedHeightProps}
                 />
             </div>
@@ -176,7 +152,6 @@ TDataGrid.defaultProps = {
     popupParent: document.body,
     suppressRowClickSelection: true,
     enableCellTextSelection: true,
-    noDataText: '검색 조건에 맞는 데이터가 없습니다',
     headerHeight: 32,
     rowHeight: 40,
 };
