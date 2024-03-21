@@ -204,6 +204,8 @@
     }
 
     &.t-dropdown--dense {
+        height: auto;
+
         .t-dropdown__control {height: 32px;}
         .t-dropdown__details {margin-top: 0;}
         .t-chip {height: 24px;}
