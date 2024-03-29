@@ -1,0 +1,52 @@
+.t-text-array-field {
+    display: inline-block;
+    width: 100%;
+    position: relative;
+    border: 1px solid $t-gray-color-2;
+    border-radius: 4px;
+
+    .t-text-array-field__input-container {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: $t-spacing-4;
+        cursor: text;
+        padding: $t-spacing-4 $t-spacing-16;
+        .t-chip { height: 24px; }
+        .t-chip + .t-chip { margin-left: 0; }
+    }
+
+    .t-text-field {
+        margin-left: 4px;
+        flex: 1 0 80px;
+
+        .t-text-field__container {
+            border: none;
+            padding: 0;
+            height: 24px;
+        }
+        width: auto;
+        min-width: 80px;
+    }
+
+
+
+
+    &.t-text-array-field--failure {
+        @include animation-shake();
+        border-color: $t-status-color--error;
+
+        .t-text-array-field__message {
+            color: $t-status-color--error;
+        }
+    }
+
+    .t-text-array-field__message {
+        position: absolute;
+        margin-top: $t-spacing-4;
+
+        @include typo-element-3;
+
+    }
+
+}
