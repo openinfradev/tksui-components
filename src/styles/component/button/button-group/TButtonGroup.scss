@@ -2,7 +2,6 @@
 
     // Single Select
     .t-button-group__button {
-        height: 40px;
         color: $t-gray-color-5;
         border: 1px solid $t-gray-color-2;
         background: $t-white-color;
@@ -16,10 +15,9 @@
     }
 
     .t-button-group__button--active {
-        height: 40px;
         color: $t-black-color;
         border-color: $t-gray-color-4;
-        background: $t-white-color;
+        background: $t-blue-gray-color-2;
         border-radius: 0;
         z-index: 1;
     }
@@ -57,5 +55,22 @@
     :is(.t-button-group__button, .t-button-group__button--active):first-child {
         border-top-left-radius: 4px;
         border-bottom-left-radius: 4px;
+    }
+
+    &.t-button-group--xsmall .t-button {
+        height: 16px;
+        @include typo-element-3;
+    }
+    &.t-button-group--small .t-button {
+        height: 24px;
+        @include typo-element-4;
+    }
+    &.t-button-group--medium .t-button {
+        height: 32px;
+        @include typo-element-2;
+    }
+    &.t-button-group--large .t-button {
+        height: 40px;
+        @include typo-body-3;
     }
 }

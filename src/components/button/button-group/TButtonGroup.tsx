@@ -1,19 +1,30 @@
 import {CSSProperties, useCallback, useMemo} from 'react';
 import TButton from '../button/TButton';
-import {TButtonGroupProps, TButtonGroupValue} from '@/components';
+import {buttonGroupSize, TButtonGroupProps, TButtonGroupValue} from '@/components';
 
 
 const TButtonGroup = (props: TButtonGroupProps) => {
 
     // region [Styles]
 
+    const $_size = useMemo(() => {
+        if (props.size && props.size in buttonGroupSize) { return props.size; }
+        if (props.xsmall) { return buttonGroupSize.xsmall; }
+        if (props.small) { return buttonGroupSize.small; }
+        if (props.medium) { return buttonGroupSize.medium; }
+        if (props.large) { return buttonGroupSize.large; }
+        return buttonGroupSize.medium;
+    }, [props.size, props.xsmall, props.small, props.medium, props.large]);
+
+
     const rootClass = useMemo((): string => {
         const clazz: string[] = [];
 
-        if (props.variant && (props.primary || props.main)) {
-            throw Error('Error: variant prop cannot have both primary and main simultaneously.');
-        }
+        // if (props.variant && (props.primary || props.main)) {
+        //     throw Error('Error: variant prop cannot have both primary and main simultaneously.');
+        // }
 
+        clazz.push(`t-button-group--${$_size}`);
         if (props.className) { clazz.push(props.className); }
         if (props.variant) { clazz.push(`t-button-group--${props.variant}`); }
         if (props.primary) { clazz.push('t-button-group--primary'); }
@@ -23,7 +34,7 @@ const TButtonGroup = (props: TButtonGroupProps) => {
         if (props.disabled) { clazz.push('t-button-group--disabled'); }
 
         return clazz.join(' ');
-    }, [props.className, props.disabled, props.multiSelect, props.variant, props.primary, props.main]);
+    }, [props.variant, props.primary, props.main, props.className, props.multiSelect, props.disabled, $_size]);
 
     const rootStyle = useMemo((): CSSProperties => {
         let style: CSSProperties = {};
