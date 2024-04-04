@@ -4,7 +4,7 @@
     background: $t-white-color;
     padding: $t-spacing-24;
     font-size: 0;
-
+    transition: border, outline, box-shadow 0.15s ease;
 
     &.t-card--clickable {
         cursor: pointer;
@@ -12,6 +12,7 @@
         &:hover {
             border-color: transparent;
             outline: 1px solid $t-primary-color;
+            box-shadow: $t-shadow--focused-element;
         }
     }
 
@@ -43,11 +44,6 @@
     }
 
     & .t-card-top__icon ~ .t-card-header { padding-top: $t-spacing-16; }
-
-    &:hover {
-        border-color: $t-primary-color;
-        box-shadow: $t-shadow--focused-element;
-    }
 }
 
 .t-card-header {
