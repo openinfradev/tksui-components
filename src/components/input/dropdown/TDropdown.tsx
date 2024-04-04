@@ -142,6 +142,9 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
         if (isOpened) {
             clazz.push('t-dropdown--open');
         }
+        if (props.readOnly) {
+            clazz.push('t-dropdown--read-only');
+        }
         if (props.disabled) {
             clazz.push('t-dropdown--disabled');
         }
@@ -355,7 +358,8 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
                 }
                 <TIcon className={`t-dropdown__control__opener ${isOpened ? 't-dropdown__control__opener--open' : ''}`}
 
-                       color={props.disabled ? themeToken.tGrayColor4 : themeToken.tGrayColor6}>arrow_drop_down</TIcon>
+                       color={(props.disabled || props.readOnly)
+                           ? themeToken.tGrayColor4 : themeToken.tGrayColor6}>arrow_drop_down</TIcon>
             </div>
 
             {/* Floating */}
