@@ -247,7 +247,7 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
                         <TIcon small
                                className={'t-text-field__container__action-icon'}
                                clickable
-                               color={props.value ? themeToken.tGrayColor6 : themeToken.tGrayColor4}
+                               color={props.value ? themeToken.tGrayColor6 : themeToken.tGrayColor5}
                                onClick={props.onClickSearch}>
                             search
                         </TIcon>
