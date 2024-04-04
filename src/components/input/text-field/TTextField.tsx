@@ -96,6 +96,9 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
     }, [props, validator]);
 
     const onKeyDown = useCallback((event: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+
+        if (event.nativeEvent.isComposing) { return; }
+
         if (event.key === 'Enter' && props.onKeyDownEnter) {
             props.onKeyDownEnter(event);
         }
