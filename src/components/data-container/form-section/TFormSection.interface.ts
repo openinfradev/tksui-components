@@ -1,6 +1,7 @@
 import {ReactElement, ReactNode, CSSProperties} from 'react';
 import {TBaseProps} from '@/common/base/TBase.interface';
 
+
 export interface TFormSectionProps extends TBaseProps {
     children: ReactNode,
 
@@ -13,6 +14,8 @@ export interface TFormSectionProps extends TBaseProps {
 
     leftAction?: ReactElement,
     rightAction?: ReactElement,
+
+    formLabelItemAlign?: 'horizontal' | 'vertical';
 }
 
 export interface TFormSectionRowProps extends TBaseProps {

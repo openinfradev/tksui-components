@@ -19,6 +19,30 @@
             @include typo-element-3;
         }
     }
+
+
+    &.t-form-section--form-label-item-align--vertical {
+        border: none;
+
+        .t-section__header {
+            border-bottom: none;
+            padding: 0;
+        }
+
+        .t-form-section-row {
+            border: none;
+            padding: $t-spacing-24 0 0 0;
+
+            .t-form-section-item {
+                flex-direction: column;
+                gap: $t-spacing-10;
+
+                .t-text-area__container {
+                    border-radius: 4px;
+                }
+            }
+        }
+    }
 }
 
 .t-section.t-form-section {
