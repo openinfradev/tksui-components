@@ -1,4 +1,4 @@
-import {CSSProperties, useContext, useId, useMemo} from 'react';
+import {CSSProperties, useContext, useEffect, useId, useMemo, useRef} from 'react';
 import TIcon from '~/icon/TIcon';
 import TTooltip from '~/guide/tooltip/TTooltip';
 import {TFormSectionItemProps} from '@/components';
@@ -8,6 +8,7 @@ const TFormSectionItem = (props: TFormSectionItemProps) => {
 
     // region [Hooks]
 
+    const rootRef = useRef<HTMLSpanElement>(null);
     const {column, labelWidth} = useContext(FormContext);
     const tooltipId = useId();
 
@@ -54,8 +55,29 @@ const TFormSectionItem = (props: TFormSectionItemProps) => {
 
     // endregion
 
+
+    // region [Privates]
+
+    const adjustLabelAlignment = () => {
+        if (rootRef.current?.clientHeight > 44) {
+            rootRef.current.style.alignItems = 'flex-start';
+        }
+    };
+
+    // endregion
+
+
+    // region [Effects]
+
+    useEffect(() => {
+        adjustLabelAlignment();
+    }, []);
+
+    // endregion
+
+
     return (
-        <span className={`t-form-section-item ${rootClass}`}
+        <span ref={rootRef} className={`t-form-section-item ${rootClass}`}
               style={rootStyle} role={'group'}>
             {
                 props.label && (
