@@ -13,8 +13,10 @@ const TFormSection = (props: TFormSectionProps) => {
 
         if (props.className) { clazz.push(props.className); }
 
+        clazz.push(`t-form-section--form-label-item-align--${props.formLabelItemAlign}`);
+
         return clazz.join(' ');
-    }, [props.className]);
+    }, [props.className, props.formLabelItemAlign]);
 
     const rootStyle = useMemo((): CSSProperties => {
 
@@ -58,5 +60,6 @@ const TFormSection = (props: TFormSectionProps) => {
 TFormSection.defaultProps = {
     column: 2,
     labelWidth: '84px',
+    formLabelItemAlign: 'horizontal',
 };
 export default TFormSection;

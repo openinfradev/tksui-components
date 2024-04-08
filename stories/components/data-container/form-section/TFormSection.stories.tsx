@@ -49,72 +49,93 @@ const Template = (args: TFormSectionProps) => {
     return (
         <>
             <TToast/>
-            <TFormSection label={'Basic Properties'} column={2} {...args} customInformation={<>앱 생성 양식 예제입니다.</>}
-                          leftAction={leftAction()} rightAction={rightAction()}>
-                <TFormSectionRow>
-                    <TFormSectionItem label={'Name'} required>
-                        <TTextField counter={30} {...name} />
-                    </TFormSectionItem>
-                    <TFormSectionItem label={'Version'} required>
-                        <TTextField counter={20} {...version} />
-                    </TFormSectionItem>
-                </TFormSectionRow>
-                <TFormSectionRow>
-                    <TFormSectionItem label={'Description'} span={2}>
-                        <TTextField counter={300} {...description} />
-                    </TFormSectionItem>
-                </TFormSectionRow>
-            </TFormSection>
+            <div style={{display: 'flex', flexDirection: 'column', gap: '24px'}}>
+                <TFormSection label={'Basic Properties'} column={2} {...args} customInformation={<>앱 생성 양식 예제입니다.</>}
+                              leftAction={leftAction()} rightAction={rightAction()}>
+                    <TFormSectionRow>
+                        <TFormSectionItem label={'Name'} required>
+                            <TTextField counter={30} {...name} />
+                        </TFormSectionItem>
+                        <TFormSectionItem label={'Version'} required>
+                            <TTextField counter={20} {...version} />
+                        </TFormSectionItem>
+                    </TFormSectionRow>
+                    <TFormSectionRow>
+                        <TFormSectionItem label={'Description'} span={2}>
+                            <TTextField counter={300} {...description} />
+                        </TFormSectionItem>
+                    </TFormSectionRow>
+                </TFormSection>
 
-            <TFormSection label={'Properties'} column={2} information={'컨트롤플레인 노드는 이런겁니다.\n인프라 노드는 이런겁니다.\n사용자 노드는 이런겁니다.'}>
-                <TFormSectionRow>
-                    <TFormSectionItem label={'Artifact URL'} required information={'form item에 설명이 필요하면 \n information 기능을 사용하면 됩니다.'}>
-                        <TTextField {...artifactUrl} />
-                    </TFormSectionItem>
-                    <TFormSectionItem label={'Port'}>
-                        <TTextField counter={20} {...port} placeholder={'123.123.123.123'}/>
-                    </TFormSectionItem>
-                </TFormSectionRow>
+                <TFormSection label={'Properties'} column={2} information={'컨트롤플레인 노드는 이런겁니다.\n인프라 노드는 이런겁니다.\n사용자 노드는 이런겁니다.'}>
+                    <TFormSectionRow>
+                        <TFormSectionItem label={'Artifact URL'} required information={'form item에 설명이 필요하면 \n information 기능을 사용하면 됩니다.'}>
+                            <TTextField {...artifactUrl} />
+                        </TFormSectionItem>
+                        <TFormSectionItem label={'Port'}>
+                            <TTextField counter={20} {...port} placeholder={'123.123.123.123'}/>
+                        </TFormSectionItem>
+                    </TFormSectionRow>
 
-                <TFormSectionRow>
-                    <TFormSectionItem label={'Profile'}>
-                        <TTextField counter={20} {...profile} />
-                    </TFormSectionItem>
-                    <TFormSectionItem label={'Resource Spec'}>
-                        <TDropdown items={resourceSpecItems} {...resourceSpec} />
-                    </TFormSectionItem>
-                </TFormSectionRow>
-            </TFormSection>
+                    <TFormSectionRow>
+                        <TFormSectionItem label={'Profile'}>
+                            <TTextField counter={20} {...profile} />
+                        </TFormSectionItem>
+                        <TFormSectionItem label={'Resource Spec'}>
+                            <TDropdown items={resourceSpecItems} {...resourceSpec} />
+                        </TFormSectionItem>
+                    </TFormSectionRow>
+                </TFormSection>
 
-            <TFormSection label={'Properties'} column={2}>
-                <TFormSectionRow>
-                    <TFormSectionItem label={'Artifact URL'} required>
-                        <TTextField {...artifactUrl} />
-                    </TFormSectionItem>
-                    <TFormSectionItem label={'Port'}>
-                        <TTextField counter={20} {...port} placeholder={'123.123.123.123'}/>
-                    </TFormSectionItem>
-                </TFormSectionRow>
+                <TFormSection label={'Properties'} column={2}>
+                    <TFormSectionRow>
+                        <TFormSectionItem label={'Artifact URL'} required>
+                            <TTextField {...artifactUrl} />
+                        </TFormSectionItem>
+                        <TFormSectionItem label={'Port'}>
+                            <TTextField counter={20} {...port} placeholder={'123.123.123.123'}/>
+                        </TFormSectionItem>
+                    </TFormSectionRow>
 
-                <TFormSectionRow>
-                    <TFormSectionItem label={'Profile'}>
-                        <TTextField counter={20} {...profile} />
-                    </TFormSectionItem>
-                    <TFormSectionItem label={'Resource Spec'}>
-                        <TDropdown items={resourceSpecItems} {...resourceSpec} />
-                    </TFormSectionItem>
-                </TFormSectionRow>
+                    <TFormSectionRow>
+                        <TFormSectionItem label={'Profile'}>
+                            <TTextField counter={20} {...profile} />
+                        </TFormSectionItem>
+                        <TFormSectionItem label={'Resource Spec'}>
+                            <TDropdown items={resourceSpecItems} {...resourceSpec} />
+                        </TFormSectionItem>
+                    </TFormSectionRow>
 
-                <TFormSectionRow>
-                    <TFormSectionItem label={'Description'} span={2}>
-                        <TTextArea counter={100} {...profile} />
-                    </TFormSectionItem>
-                </TFormSectionRow>
-            </TFormSection>
+                    <TFormSectionRow>
+                        <TFormSectionItem label={'Description'} span={2}>
+                            <TTextArea counter={100} {...profile} />
+                        </TFormSectionItem>
+                    </TFormSectionRow>
+                </TFormSection>
+                <TFormSection label={'Basic Properties'} formLabelItemAlign={'vertical'} column={2}
+                              leftAction={leftAction()} rightAction={rightAction()}>
+                    <TFormSectionRow>
+                        <TFormSectionItem label={'Name'} required>
+                            <TTextField counter={30} {...name} />
+                        </TFormSectionItem>
+                        <TFormSectionItem label={'Version'} required>
+                            <TTextField counter={20} {...version} />
+                        </TFormSectionItem>
+                    </TFormSectionRow>
+                    <TFormSectionRow>
+                        <TFormSectionItem label={'Description'} span={2}>
+                            <TTextField counter={300} {...description} />
+                        </TFormSectionItem>
+                    </TFormSectionRow>
+                </TFormSection>
+            </div>
         </>
     );
 };
 
 export const Default: Story = {
     render: Template,
+    args: {
+        formLabelItemAlign: 'horizontal',
+    },
 };
