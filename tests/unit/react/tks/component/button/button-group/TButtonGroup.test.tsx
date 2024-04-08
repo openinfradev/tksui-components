@@ -42,6 +42,16 @@ describe('TButtonGroup', () => {
         return (<TButtonGroup value={buttonGroup.value} onChange={buttonGroup.onChange} items={props.items || defaultItems} {...props} />);
     };
 
+    const value = '1d';
+    const items = [
+        {template: '최근 1주', value: '1W'},
+        {template: '1개월', value: '1M'},
+        {template: '3개월', value: '3M'},
+    ];
+
+    const mockOnChange = jest.fn();
+
+    const baseProps = {value, onChange: mockOnChange, items};
 
     describe('style', () => {
 
@@ -85,6 +95,85 @@ describe('TButtonGroup', () => {
             expect(buttonGroup)
                 .toHaveStyle({color: 'red'});
         });
+    });
+
+
+    describe('size', () => {
+
+        it('When valid size is entered, it will be applied in the classname', () => {
+
+            // Arrange
+            render(<>
+                <TButtonGroup {...baseProps} size={'xsmall'} />
+                <TButtonGroup {...baseProps} size={'small'} />
+                <TButtonGroup {...baseProps} size={'medium'} />
+                <TButtonGroup {...baseProps} size={'large'} />
+            </>);
+            const buttonGroups = screen.getAllByTestId('button-group-root');
+
+            // Assert
+            expect(buttonGroups[0]).toHaveClass('t-button-group--xsmall');
+            expect(buttonGroups[1]).toHaveClass('t-button-group--small');
+            expect(buttonGroups[2]).toHaveClass('t-button-group--medium');
+            expect(buttonGroups[3]).toHaveClass('t-button-group--large');
+        });
+
+
+        it('When invalid size is entered or not entered, medium size will is applied', () => {
+
+            // Arrange
+            render(<TButtonGroup {...baseProps} size={'invalid'} />);
+            const root = screen.getByTestId('button-group-root');
+
+            // Assert
+            expect(root)
+                .toHaveClass('t-button-group--medium');
+        });
+
+        it('When xsmall is applied, button group size will be xsmall', () => {
+
+            // Arrange
+            render(<TButtonGroup {...baseProps} xsmall/>);
+            const root = screen.getByTestId('button-group-root');
+
+            // Assert
+            expect(root)
+                .toHaveClass('t-button-group--xsmall');
+        });
+
+        it('When small is applied, button group size will be small', () => {
+
+            // Arrange
+            render(<TButtonGroup {...baseProps} small/>);
+            const root = screen.getByTestId('button-group-root');
+
+            // Assert
+            expect(root)
+                .toHaveClass('t-button-group--small');
+        });
+
+        it('When medium is applied, button group size will be medium', () => {
+
+            // Arrange
+            render(<TButtonGroup {...baseProps} medium/>);
+            const root = screen.getByTestId('button-group-root');
+
+            // Assert
+            expect(root)
+                .toHaveClass('t-button-group--medium');
+        });
+
+        it('When large is applied, button group size will be large', () => {
+
+            // Arrange
+            render(<TButtonGroup {...baseProps} large/>);
+            const root = screen.getByTestId('button-group-root');
+
+            // Assert
+            expect(root)
+                .toHaveClass('t-button-group--large');
+        });
+
     });
 
 
