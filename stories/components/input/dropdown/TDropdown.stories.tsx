@@ -65,6 +65,9 @@ const NormalTemplate = (args: TDropdownProps) => {
                     <TDropdown {...args} {...singleSelect1} />
 
                     readOnly (value: {singleSelect2.value})
+                    <TDropdown {...args} {...singleSelect2} readOnly/>
+
+                    disabled (value: {singleSelect2.value})
                     <TDropdown {...args} {...singleSelect2} disabled/>
 
                     placeholder (value: {singleSelect3.value})
@@ -100,6 +103,9 @@ const NormalTemplate = (args: TDropdownProps) => {
                     <TDropdown {...args} {...multiSelect1} multiple/>
 
                     readOnly (value: {multiSelect2.value})
+                    <TDropdown {...args} {...multiSelect2} multiple readOnly />
+
+                    disabled (value: {multiSelect2.value})
                     <TDropdown {...args} {...multiSelect2} multiple disabled/>
 
                     placeholder (value: {multiSelect3.value.join(', ')})
@@ -171,7 +177,10 @@ const ValidationTemplate = (args: TDropdownProps) => {
                     <TDropdown ref={singleSelect1Ref} rules={[rule.required()]} {...args} {...singleSelect1} />
 
                     readOnly (value: {singleSelect2.value})
-                    <TDropdown ref={singleSelect2Ref} rules={[rule.required()]} {...args} {...singleSelect2} disabled/>
+                    <TDropdown ref={singleSelect2Ref} rules={[rule.required()]} {...args} {...singleSelect2} readOnly />
+
+                    disabled (value: {singleSelect2.value})
+                    <TDropdown ref={singleSelect2Ref} rules={[rule.required()]} {...args} {...singleSelect2} disabled />
 
                     placeholder (value: {singleSelect3.value})
                     <TDropdown ref={singleSelect3Ref} rules={[rule.required()]} {...args} {...singleSelect3}
@@ -185,14 +194,19 @@ const ValidationTemplate = (args: TDropdownProps) => {
 
                     readOnly (value: {multiSelect2.value})
                     <TDropdown ref={multiSelect2Ref} rules={[rule.requiredArr()]} {...args} type={'underline'} {...multiSelect2} multiple
-                               disabled/>
+                               readOnly />
+
+                    disabled (value: {multiSelect2.value})
+                    <TDropdown ref={multiSelect2Ref} rules={[rule.requiredArr()]} {...args} type={'underline'} {...multiSelect2} multiple
+                               disabled />
 
                     placeholder (value: {multiSelect3.value.join(', ')})
                     <TDropdown ref={multiSelect3Ref} rules={[rule.requiredArr()]} {...args} type={'underline'} {...multiSelect3} multiple
                                filterPlaceholder={'Choose your favorite fruits'}/>
 
                     dense (value: {multiSelect4.value})
-                    <TDropdown ref={multiSelect4Ref} rules={[rule.requiredArr()]} {...args} type={'underline'} {...multiSelect4} multiple dense/>
+                    <TDropdown ref={multiSelect4Ref} rules={[rule.requiredArr()]} {...args} type={'underline'} {...multiSelect4}
+                               multiple dense/>
 
                 </div>
             </div>

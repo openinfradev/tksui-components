@@ -62,9 +62,12 @@ const TTextArrayField = forwardRef((props: TTextArrayFieldProps, ref: Ref<TTextA
 
     const isDuplicatedItem = useCallback((item: string): boolean => {
 
-        return props.value.includes(item);
+        if (!props.duplicable) {
+            return props.value.includes(item);
+        }
 
-    }, [props.value]);
+        return false;
+    }, [props.duplicable, props.value]);
 
 
     // endregion
@@ -72,10 +75,7 @@ const TTextArrayField = forwardRef((props: TTextArrayFieldProps, ref: Ref<TTextA
 
     // region [Events]
 
-    const onKeydownEnter = useCallback(() => {
-
-
-        // FIXME. [Sapp] 마지막 글자가 한글일 경우 이벤트 두번 발생함
+    const onKeydownEnter = useCallback((e) => {
 
         const candidateItem = currentInput.trim();
 
