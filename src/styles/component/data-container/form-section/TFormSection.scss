@@ -26,7 +26,11 @@
 
         .t-section__header {
             border-bottom: none;
-            padding: 0;
+            padding: 0 0 $t-spacing-24 0;
+        }
+
+        .t-form-section-row:first-child {
+            padding-top: 0;
         }
 
         .t-form-section-row {
