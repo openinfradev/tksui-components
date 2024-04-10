@@ -3,6 +3,8 @@ import TIcon from '~/icon/TIcon';
 import TTooltip from '~/guide/tooltip/TTooltip';
 import {TFormSectionItemProps} from '@/components';
 import FormContext from './TFormSectionContext';
+import themeToken from '~style/designToken/ThemeToken.module.scss';
+
 
 const TFormSectionItem = (props: TFormSectionItemProps) => {
 
@@ -28,22 +30,27 @@ const TFormSectionItem = (props: TFormSectionItemProps) => {
     const rootStyle = useMemo((): CSSProperties => {
 
         const style: CSSProperties = props.style ? props.style : {};
-        style.width = `calc(100% / ${column} * ${props.span || 1})`;
+
+        let gapAdjustment = '';
+
+        if (column === 2 && props.span === 2) {
+            gapAdjustment = ' - 0px';
+        }
+        if (column === 2 && (props.span === 1 || !props.span)) {
+            gapAdjustment = ` - ${themeToken.tSpacing40}`;
+        }
+
+        style.width = `calc(100% / ${column} * ${props.span || 1}${gapAdjustment})`;
 
         return style;
     }, [column, props.span, props.style]);
 
     const labelStyle = useMemo((): CSSProperties => {
+
         const style: CSSProperties = {marginBottom: props.labelMarginBottom};
 
-        const labelWidthNum = Number(labelWidth.replace(/\D/g, ''));
-        if (labelWidthNum === 0) {
-            throw Error((`Error: Invalid labelWidth value '${labelWidth}.`));
-        }
-        if (labelWidthNum > 120) {
-            throw Error((`Error: labelWidth cannot exceed ${labelWidth}px.`));
-        }
         style.minWidth = labelWidth;
+        style.maxWidth = labelWidth;
 
         return style;
     }, [labelWidth, props.labelMarginBottom]);

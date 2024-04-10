@@ -4,6 +4,12 @@ import {TFormSectionProps} from '@/components';
 import FormContext from './TFormSectionContext';
 import TSection from '~/data-container/section/TSection';
 
+
+const labelWidth = {
+    min: '68px',
+    max: '104px',
+} as const;
+
 const TFormSection = (props: TFormSectionProps) => {
 
     // region [Styles]
@@ -49,7 +55,7 @@ const TFormSection = (props: TFormSectionProps) => {
                     </div>
                 )
             }
-            <FormContext.Provider value={{column: props.column, labelWidth: props.labelWidth}}>
+            <FormContext.Provider value={{column: props.column, labelWidth: props.labelFullWidth ? labelWidth.max : props.labelWidth}}>
                 {props.children}
             </FormContext.Provider>
         </TSection>
@@ -59,7 +65,7 @@ const TFormSection = (props: TFormSectionProps) => {
 
 TFormSection.defaultProps = {
     column: 2,
-    labelWidth: '84px',
+    labelWidth: labelWidth.min,
     formLabelItemAlign: 'horizontal',
 };
 export default TFormSection;
