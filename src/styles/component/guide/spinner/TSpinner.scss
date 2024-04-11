@@ -1,0 +1,57 @@
+
+.t-spinner {
+    position: relative;
+    display: inline-block;
+
+    &.t-spinner__default {
+        animation: rotate 6.6s ease-in-out infinite;
+
+        .t-spinner__slice {
+            animation: rotate 1.2s ease infinite;
+        }
+    }
+
+    .t-spinner__slice {
+        position: absolute;
+        width: inherit;
+        height: inherit;
+        border-style: solid;
+        border-color: $t-primary-color transparent transparent transparent;
+        border-radius: 50%;
+        &:nth-child(2) { animation-delay: 0.11s; }
+        &:nth-child(3) { animation-delay: 0.22s; }
+    }
+
+    &.t-spinner__xsmall {
+        width: 14px; height: 14px;
+        .t-spinner__slice {
+            border-width: 2px;
+        }
+    }
+    &.t-spinner__small {
+        width: 20px; height: 20px;
+        .t-spinner__slice {
+            border-width: 2.5px;
+        }
+    }
+    &.t-spinner__medium {
+        width: 28px; height: 28px;
+        .t-spinner__slice {
+            border-width: 3.5px;
+        }
+    }
+    &.t-spinner__large {
+        width: 40px; height: 40px;
+        .t-spinner__slice {
+            border-width: 5px;
+        }
+    }
+    &.t-spinner__xlarge {
+        width: 60px; height: 60px;
+        .t-spinner__slice {
+            border-width: 6px;
+        }
+    }
+
+}
+
