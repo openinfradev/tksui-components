@@ -1,8 +1,10 @@
 import {CSSProperties, forwardRef, KeyboardEvent, MouseEvent, Ref, useCallback, useImperativeHandle, useMemo, useRef} from 'react';
-import {buttonSize, buttonVariant, TButtonProps, TButtonRef} from './TButton.interface';
+import {ButtonSize, buttonSize, buttonVariant, TButtonProps, TButtonRef} from './TButton.interface';
 import useRipple from '@/common/hook/UseRipple';
 import TIcon from '../../icon/TIcon';
 import TooltipUtil from '@/common/util/TooltipUtil';
+import {TSpinner} from '~/guide/spinner';
+import themeToken from '~style/designToken/ThemeToken.module.scss';
 
 
 const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
@@ -72,9 +74,9 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
         return buttonSize.medium;
     }, [props.size, props.xsmall, props.small, props.medium, props.large, props.xlarge]);
 
-    const contentIconInfo = useMemo(() => {
+    const contentIconInfo = useMemo((): { render: boolean, size: ButtonSize } => {
 
-        const iconInfo = {render: true, size: ''};
+        const iconInfo = {render: true, size: undefined};
         if ($_size === 'medium') { return {...iconInfo, size: 'xsmall'}; }
         if ($_size === 'large') { return {...iconInfo, size: 'xsmall'}; }
         if ($_size === 'xlarge') { return {...iconInfo, size: 'medium'}; }
@@ -96,7 +98,7 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
         if (props.loading) { clazz.push('t-button--loading'); }
 
         return clazz.join(' ');
-    }, [$_size, props.className, props.primary, props.main, props.ghost, props.disabled, props.rounded, props.loading]);
+    }, [$_size, props.className, props.variant, props.primary, props.main, props.ghost, props.disabled, props.rounded, props.loading]);
 
     const rootStyle: CSSProperties = useMemo(() => {
         let style: CSSProperties = {};
@@ -107,7 +109,29 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
         return style;
     }, [props.style, props.width]);
 
+    const spinnerSize = useMemo(() => {
+        if ($_size === 'xsmall' || $_size === 'small') { return 'xsmall'; }
+        if ($_size === 'xlarge') { return 'medium'; }
+        return 'small';
+    }, [$_size]);
+
+    const spinnerColor = useMemo(() => {
+
+        if (props.variant === 'primary' || props.primary) {
+            return themeToken.tPrimaryColor;
+        }
+        if (props.variant === 'main' || props.main) {
+            return themeToken.tWhiteColor;
+        }
+        if (props.variant === 'ghost' || props.ghost) {
+            return themeToken.tWhiteColor;
+        }
+
+        return themeToken.tBlackColor;
+    }, [props.variant, props.primary, props.main, props.ghost]);
+
     // endregion
+
 
     return (
         <button className={`t-button ${rootClass}`}
@@ -133,14 +157,9 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
                             {props.children}
                         </div>
                     )
-                    : (
-                        <div className={'t-button__content t-button__content--loading'}>
-                            <div className={'t-button__content--loading__slice'}/>
-                            <div className={'t-button__content--loading__slice'}/>
-                            <div className={'t-button__content--loading__slice'}/>
-                        </div>
-                    )
-            }</button>
+                    : (<TSpinner size={spinnerSize} color={spinnerColor}/>)
+            }
+        </button>
     );
 });
 

@@ -1,6 +1,7 @@
 import {CSSProperties, useMemo} from 'react';
 import TModal from '../../screen/modal/TModal';
 import {TProgressProps} from '@/components';
+import {TSpinner} from '~/guide/spinner';
 
 
 function TProgress(props: TProgressProps) {
@@ -31,10 +32,8 @@ function TProgress(props: TProgressProps) {
                 overlayClassName={'t-progress__overlay'}
                 bodyClassName={'t-progress__modal-body'}>
             {/* Spinner */}
-            <div className={'t-progress__spinner'}>
-                <div className={'t-progress__spinner__slice'}/>
-                <div className={'t-progress__spinner__slice'}/>
-                <div className={'t-progress__spinner__slice'}/>
+            <div className='t-progress__spinner__wrapper'>
+                <TSpinner size={'xlarge'} />
             </div>
 
             {/* Message */}

@@ -34,21 +34,6 @@ $t-button-border--disabled: $t-gray-color-1;
         .t-button__content__icon {
             margin-right: $t-spacing-4;
         }
-        &.t-button__content--loading {
-            .t-button__content--loading__slice {
-                position: absolute;
-                top: calc(50% - (var(--t-button-loading-size) * 0.5));
-                left: calc(50% - (var(--t-button-loading-size) * 0.5));
-                width: var(--t-button-loading-size);
-                height: var(--t-button-loading-size);
-                border: var(--t-button-loading-thick) solid $t-white-color;
-                border-radius: 50%;
-                animation: rotate 1.2s ease infinite;
-                border-color: $t-black-color transparent transparent transparent;
-                &:nth-child(2) { animation-delay: 0.11s; }
-                &:nth-child(3) { animation-delay: 0.22s; }
-            }
-        }
     }
 
     // Variant
@@ -56,40 +41,24 @@ $t-button-border--disabled: $t-gray-color-1;
         color: $t-primary-color;
         background: $t-white-color;
         border-color: $t-primary-color;
-
-        .t-button__content--loading .t-button__content--loading__slice {
-            border-color: $t-primary-color transparent transparent transparent;
-        }
     }
 
     &.t-button--main {
         color: $t-white-color;
         background: $t-primary-color;
         border: 1px solid $t-primary-color;
-
-        .t-button__content--loading .t-button__content--loading__slice {
-            border-color: $t-white-color transparent transparent transparent;
-        }
     }
 
     &.t-button--ghost {
         color: $t-white-color;
         background: transparent;
         border: 1px solid $t-gray-color-5;
-
-        .t-button__content--loading .t-button__content--loading__slice {
-            border-color: $t-white-color transparent transparent transparent;
-        }
     }
 
     &.t-button--rounded {
         color: $t-black-color;
         background: $t-white-color;
         border: 1px solid $t-gray-color-4;
-
-        .t-button__content--loading .t-button__content--loading__slice {
-            border-color: $t-primary-color transparent transparent transparent;
-        }
     }
 
     &:hover, &:focus-visible {
@@ -154,45 +123,30 @@ $t-button-border--disabled: $t-gray-color-1;
         height: 20px;
         padding: 0 $t-spacing-8;
         @include typo-element-4;
-
-        --t-button-loading-size: 12px;
-        --t-button-loading-thick: 2px;
     }
     &.t-button--small {
         min-width: 40px;
         height: 24px;
         padding: 0 $t-spacing-16;
         @include typo-element-4;
-
-        --t-button-loading-size: 14px;
-        --t-button-loading-thick: 2px;
     }
     &.t-button--medium {
         min-width: 56px;
         height: 32px;
         padding: 0 $t-spacing-16;
         @include typo-element-2;
-
-        --t-button-loading-size: 16px;
-        --t-button-loading-thick: 3px;
     }
     &.t-button--large {
         min-width: 64px;
         height: 40px;
         padding: 0 $t-spacing-24;
         @include typo-body-2;
-
-        --t-button-loading-size: 20px;
-        --t-button-loading-thick: 3px;
     }
     &.t-button--xlarge {
         min-width: 88px;
         height: 48px;
         padding: 0 $t-spacing-32;
         @include typo-subtitle-1;
-
-        --t-button-loading-size: 24px;
-        --t-button-loading-thick: 3px;
     }
 }
 
