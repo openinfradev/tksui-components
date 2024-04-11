@@ -26,6 +26,7 @@ export * from './guide/input-validation-hint';
 export * from './guide/progress';
 export * from './guide/toast';
 export * from './guide/tooltip';
+export * from './guide/spinner';
 
 // icon
 export * from './icon';

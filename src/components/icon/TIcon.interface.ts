@@ -2,7 +2,7 @@ import {KeyboardEvent, MouseEvent} from 'react';
 import {TBaseProps, TBaseTooltipProps} from '@/common/base/TBase.interface';
 
 export type TIconSource = 'original' | 'material';
-export const iconSize = {xsmall: 'xsmall', small: 'small', medium: 'medium', large: 'large', xlarge: 'xlarge'};
+export const iconSize = {xsmall: 'xsmall', small: 'small', medium: 'medium', large: 'large', xlarge: 'xlarge'} as const;
 export type TIconSize = typeof iconSize[keyof typeof iconSize];
 
 export interface TIconProps extends TBaseProps, TBaseTooltipProps {
