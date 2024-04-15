@@ -1,9 +1,8 @@
 import {CSSProperties, forwardRef, KeyboardEvent, MouseEvent, Ref, useCallback, useImperativeHandle, useMemo, useRef} from 'react';
-import {ButtonSize, buttonSize, buttonVariant, TButtonProps, TButtonRef} from './TButton.interface';
+import {TLoadingIndicator, ButtonSize, buttonSize, buttonVariant, TButtonProps, TButtonRef} from '@/components';
 import useRipple from '@/common/hook/UseRipple';
 import TIcon from '../../icon/TIcon';
 import TooltipUtil from '@/common/util/TooltipUtil';
-import {TSpinner} from '~/guide/spinner';
 import themeToken from '~style/designToken/ThemeToken.module.scss';
 
 
@@ -109,7 +108,7 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
         return style;
     }, [props.style, props.width]);
 
-    const spinnerSize = useMemo(() => {
+    const loadingIndicatorSize = useMemo(() => {
         if ($_size === 'xsmall' || $_size === 'small') { return 'xsmall'; }
         if ($_size === 'xlarge') { return 'medium'; }
         return 'small';
@@ -157,7 +156,7 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
                             {props.children}
                         </div>
                     )
-                    : (<TSpinner size={spinnerSize} color={spinnerColor}/>)
+                    : (<TLoadingIndicator size={loadingIndicatorSize} color={spinnerColor}/>)
             }
         </button>
     );
