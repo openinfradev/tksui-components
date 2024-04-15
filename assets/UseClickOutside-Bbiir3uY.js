@@ -1,1 +1,0 @@
-import{r}from"./index-CBqU2yxZ.js";function s(e,n){r.useEffect(()=>{function t(o){e.current&&!e.current.contains(o.target)&&n()}return document.addEventListener("mousedown",t),()=>{document.removeEventListener("mousedown",t)}},[e])}export{s as u};
