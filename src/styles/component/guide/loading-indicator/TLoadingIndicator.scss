@@ -1,0 +1,157 @@
+
+.t-loading-indicator {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .t-loading-indicator__message {
+        color: $t-gray-color-4;
+        @include typo-element-3;
+    }
+
+    .t-loading-indicator__message { margin-top: $t-spacing-10; }
+
+    &.t-loading-indicator--default {
+
+        &.t-loading-indicator--xlarge .t-loading-indicator__body {
+            width: 60px; height: 60px;
+
+            .t-default-spinner__slice { border-width: 6px; }
+        }
+        &.t-loading-indicator--large .t-loading-indicator__body {
+            width: 40px; height: 40px;
+
+            .t-default-spinner__slice { border-width: 5px; }
+        }
+        &.t-loading-indicator--medium .t-loading-indicator__body {
+            width: 28px; height: 28px;
+
+            .t-default-spinner__slice { border-width: 3.5px; }
+        }
+        &.t-loading-indicator--small .t-loading-indicator__body {
+            width: 20px; height: 20px;
+
+            .t-default-spinner__slice { border-width: 2.5px; }
+        }
+        &.t-loading-indicator--xsmall .t-loading-indicator__body {
+            width: 14px; height: 14px;
+
+            .t-default-spinner__slice { border-width: 2px; }
+        }
+
+        .t-loading-indicator__body {
+            position: relative;
+            display: inline-block;
+            animation: rotate 6.6s ease-in-out infinite;
+
+            .t-default-spinner__slice {
+                position: absolute;
+                width: inherit;
+                height: inherit;
+                border-style: solid;
+                border-color: $t-primary-color transparent transparent transparent;
+                border-radius: 50%;
+                animation: rotate 1.2s ease infinite;
+
+                &:nth-child(2) { animation-delay: 0.11s; }
+                &:nth-child(3) { animation-delay: 0.22s; }
+            }
+        }
+    }
+
+    &.t-loading-indicator--sun {
+        color: $t-blue-gray-color-4;
+
+        .t-loading-indicator__body .t-sun-spinner__slice {
+            animation: sun-spinner 1.2s linear infinite;
+
+            &:after {
+                content: ' ';
+                display: block;
+                position: absolute;
+                background: currentColor;
+            }
+            &:nth-child(1) { transform: rotate(0deg); animation-delay: -1.05s; }
+            &:nth-child(2) { transform: rotate(45deg); animation-delay: -0.9s; }
+            &:nth-child(3) { transform: rotate(90deg); animation-delay: -0.75s; }
+            &:nth-child(4) { transform: rotate(135deg); animation-delay: -0.6s; }
+            &:nth-child(5) { transform: rotate(180deg); animation-delay: -0.45s; }
+            &:nth-child(6) { transform: rotate(225deg); animation-delay: -0.3s; }
+            &:nth-child(7) { transform: rotate(270deg); animation-delay: -0.15s; }
+            &:nth-child(8) { transform: rotate(315deg); animation-delay: 0s; }
+        }
+
+        &.t-loading-indicator--xlarge .t-loading-indicator__body {
+            width: 80px; height: 80px;
+
+            .t-sun-spinner__slice { transform-origin: 40px 40px; }
+            .t-sun-spinner__slice:after {
+                top: 6px;
+                left: 36.8px;
+                width: 6.4px;
+                height: 18px;
+                border-radius: 3.2px;
+            }
+        }
+
+        &.t-loading-indicator--large .t-loading-indicator__body {
+            width: 68px; height: 68px;
+
+            .t-sun-spinner__slice { transform-origin: 34px 34px; }
+            .t-sun-spinner__slice:after {
+                top: 6px;
+                left: 31px;
+                width: 5.44px;
+                height: 15px;
+                border-radius: 2.72px;
+            }
+        }
+
+        &.t-loading-indicator--medium .t-loading-indicator__body {
+            width: 56px; height: 56px;
+
+            .t-sun-spinner__slice { transform-origin: 28px 28px; }
+            .t-sun-spinner__slice:after {
+                top: 6px;
+                left: 26px;
+                width: 4.6px;
+                height: 12px;
+                border-radius: 2.3px;
+            }
+        }
+
+        &.t-loading-indicator--small .t-loading-indicator__body {
+            width: 44px; height: 44px;
+
+            .t-sun-spinner__slice { transform-origin: 22px 22px; }
+            .t-sun-spinner__slice:after {
+                top: 5px;
+                left: 20.3px;
+                width: 3.22px;
+                height: 9px;
+                border-radius: 1.61px;
+            }
+        }
+
+        &.t-loading-indicator--xsmall .t-loading-indicator__body {
+            width: 32px; height: 32px;
+
+            .t-sun-spinner__slice { transform-origin: 16px 16px; }
+            .t-sun-spinner__slice:after {
+                top: 3px;
+                left: 14.4px;
+                width: 2.56px;
+                height: 7px;
+                border-radius: 1.28px;
+            }
+        }
+    }
+}
+
+@keyframes sun-spinner {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+

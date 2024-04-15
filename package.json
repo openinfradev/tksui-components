@@ -1,6 +1,6 @@
 {
     "name": "tksui-components",
-    "version": "0.6.4",
+    "version": "0.6.5",
     "private": false,
     "type": "module",
     "module": "lib/esm/index.js",
@@ -95,5 +95,6 @@
     "bugs": {
         "url": "https://github.com/openinfradev/tksui-components/issues"
     },
-    "license": "MIT"
+    "license": "MIT",
+    "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
 }

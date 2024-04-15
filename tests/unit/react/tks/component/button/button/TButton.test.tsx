@@ -348,7 +348,7 @@ describe('TButton', () => {
             // Arrange
             const buttonContentLoading = within(button)
                 .queryAllByText('')
-                .filter((n) => n.className === 't-spinner__slice');
+                .filter((n) => n.className === 't-default-spinner__slice');
 
             // Assert
             expect(buttonContentLoading.length)
