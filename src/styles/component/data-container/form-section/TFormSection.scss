@@ -47,6 +47,7 @@
             }
         }
     }
+
 }
 
 .t-section.t-form-section {
@@ -72,6 +73,26 @@
         padding-bottom: $t-spacing-24;
     }
 }
+
+.t-form-section--no-row-divider {
+    .t-form-section-row {
+
+        &:first-child {
+            padding-bottom: $t-spacing-8;
+            border-bottom: none;
+        }
+        &:not(:last-child, :first-child) {
+            border: none;
+            padding: $t-spacing-8 $t-spacing-24;
+        }
+        &:last-child {
+            padding-top: $t-spacing-8;
+            border-top: none;
+        }
+    }
+}
+
+
 
 .t-form-section-item {
     position: relative;

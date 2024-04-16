@@ -12,6 +12,7 @@ export interface TFormSectionProps extends TBaseProps {
     customInformation?: ReactElement,
 
     labelWidth?: string,
+    noRowDivider?: boolean,
 
     leftAction?: ReactElement,
     rightAction?: ReactElement,
