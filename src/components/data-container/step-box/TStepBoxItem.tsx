@@ -27,6 +27,12 @@ const TStepBoxItem = (props: TStepBoxItemProps) => {
         return {};
     }, [props.style]);
 
+    const contentClass = useMemo(() : string => {
+
+        return `t-step-box-item__content--direction-${props.contentDirection}`;
+
+    }, [props.contentDirection]);
+
     // endregion
 
 
@@ -36,7 +42,9 @@ const TStepBoxItem = (props: TStepBoxItemProps) => {
             style={rootStyle}
             data-testid={'step-box-item-root'}
         >
-            {props.children ?? props.children}
+            <div className={`t-step-box-item__content ${contentClass}`}>
+                {props.children ?? props.children}
+            </div>
 
             <TStepBoxFooter prevButtonLabel={props.prevButtonLabel ?? stepBoxContext.prevButtonLabel}
                             nextButtonLabel={props.nextButtonLabel ?? stepBoxContext.nextButtonLabel}
@@ -53,6 +61,9 @@ const TStepBoxItem = (props: TStepBoxItemProps) => {
 };
 
 TStepBoxItem.displayName = 'TStepBoxItem';
+TStepBoxItem.defaultProps = {
+    contentDirection: 'top-bottom',
+};
 
 
 export default TStepBoxItem;
