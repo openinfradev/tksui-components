@@ -15,11 +15,7 @@ const TFormSectionRow = (props: TFormSectionRowProps) => {
     }, [props.className]);
 
     const rootStyle: CSSProperties = useMemo(() => {
-        // let style: CSSProperties = {};
-        //
-        // if (props.style) { style = {...props.style}; }
-        //
-        // return style;
+
         return props.style ? {...props.style} : {};
     }, [props.style]);
 

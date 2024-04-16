@@ -58,7 +58,7 @@
 .t-form-section-row {
     display: flex;
     align-items: center;
-    gap: 0;
+    gap: calc($t-spacing-40 * 2);
     width: 100%;
     padding: $t-spacing-16 $t-spacing-24;
 
@@ -79,11 +79,7 @@
     flex: 0 0 auto;
     gap: $t-spacing-16;
     white-space: pre-wrap;
-    padding-right: $t-spacing-8;
     color: $t-black-color;
-
-    &:not(:first-child) {padding-left: $t-spacing-8;}
-
 
     .t-form-section-item__label {
         display: inline-flex;

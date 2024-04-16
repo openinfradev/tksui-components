@@ -4,6 +4,7 @@ import {TFormSectionProps} from '@/components';
 import FormContext from './TFormSectionContext';
 import TSection from '~/data-container/section/TSection';
 
+
 const TFormSection = (props: TFormSectionProps) => {
 
     // region [Styles]
@@ -59,7 +60,7 @@ const TFormSection = (props: TFormSectionProps) => {
 
 TFormSection.defaultProps = {
     column: 2,
-    labelWidth: '84px',
+    labelWidth: '104px',
     formLabelItemAlign: 'horizontal',
 };
 export default TFormSection;
