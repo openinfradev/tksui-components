@@ -121,6 +121,9 @@ const TDataGrid = forwardRef((props: TDataGridProps, ref: Ref<AgGridReact>) => {
                              onSelectionChanged={onSelectionChanged}
                              {...props}
                              noRowsOverlayComponent={noRowsOverlayComponent}
+
+                             // TODO. [TR-YOO] 해당 옵션 검토하기
+                             suppressPropertyNamesCheck
                              {...generatedHeightProps}
                 />
             </div>
