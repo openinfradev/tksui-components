@@ -1,3 +1,4 @@
+
 /* eslint-disable max-len */
 const TOriginalImage = {
     t_checkbox_on: (
@@ -11,10 +12,17 @@ const TOriginalImage = {
             <rect x='0.5' y='0.5' width='15' height='15' rx='3.5'/>
         </svg>
     ),
+    t_checkbox_disabled_on: (
+        <svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
+            <rect x='0.5' y='0.5' width='15' height='15' rx='3.5' fill='currentColor' stroke='#B8BABC' />
+            <path d='M6.58327 11.25L3.7666 8.41667L4.59993 7.58333L6.58327 9.55L11.3999 4.75L12.2333 5.6L6.58327 11.25Z' fill='#B8BABC'
+                  stroke='none'/>
+        </svg>
+    ),
     t_checkbox_disabled_off: (
         <svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
             <g>
-                <rect id='Rectangle 41976' x='0.5' y='0.5' width='15' height='15' rx='3.5' fill='#F4F4F4' stroke='#B8BABC'/>
+                <rect x='0.5' y='0.5' width='15' height='15' rx='3.5' fill='#F4F4F4' stroke='#B8BABC'/>
             </g>
         </svg>
     ),

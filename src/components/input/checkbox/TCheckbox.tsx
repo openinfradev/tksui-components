@@ -1,12 +1,13 @@
 import {CSSProperties, forwardRef, KeyboardEvent, Ref, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState} from 'react';
 import TIcon from '../../icon/TIcon';
-import {TCheckboxProps, TCheckboxRef, TCheckBoxStatus} from './TCheckbox.interface';
+import {TCheckboxProps, TCheckboxRef, TCheckBoxStatus} from '@/components';
 import useValidator from '@/common/hook/UseValidator';
 import themeToken from '~style/designToken/ThemeToken.module.scss';
 
 const checkboxIcons = {
     check: 't_checkbox_on',
     uncheck: 't_checkbox_off',
+    disabledCheck: 't_checkbox_disabled_on',
     disabledUnCheck: 't_checkbox_disabled_off',
     indeterminate: 't_checkbox_indeterminate',
 };
@@ -32,10 +33,10 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
     const getRootClass = useCallback(() => {
         const clazz: string[] = [];
 
-        if (props.className) clazz.push(props.className);
-        if (props.disabled) clazz.push('t-checkbox--disabled');
-        if (!validator.result) clazz.push('t-checkbox--failure');
-        if (validator.result && validator.message) clazz.push('t-checkbox--success');
+        if (props.className) { clazz.push(props.className); }
+        if (props.disabled) { clazz.push('t-checkbox--disabled'); }
+        if (!validator.result) { clazz.push('t-checkbox--failure'); }
+        if (validator.result && validator.message) { clazz.push('t-checkbox--success'); }
 
         return clazz.join(' ');
     }, [props.className, props.disabled, validator.result, validator.message]);
@@ -43,16 +44,17 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
     const getRootStyle = useCallback(() => {
         let style: CSSProperties = {};
 
-        if (props.style) style = {...props.style};
+        if (props.style) { style = {...props.style}; }
 
         return style;
     }, [props.style]);
 
     const iconColorByStatus = useMemo(() => {
+        if (props.disabled) { return themeToken.tGrayColor2; }
         if (status === 'check' || status === 'indeterminate') { return themeToken.tPrimaryColor; }
-        if (status === 'uncheck') { return themeToken.tGrayColor3; }
+        if (status === 'uncheck' || props.disabled) { return themeToken.tGrayColor3; }
         return '';
-    }, [status]);
+    }, [status, props.disabled]);
 
     // endregion
 
@@ -116,8 +118,10 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
 
         if (status === 'indeterminate') {
             iconType = checkboxIcons.indeterminate;
-        } else if (status === 'check') {
+        } else if (status === 'check' && !props.disabled) {
             iconType = checkboxIcons.check;
+        } else if (status === 'check' && props.disabled) {
+            iconType = checkboxIcons.disabledCheck;
         } else if (status === 'uncheck' && props.disabled) {
             iconType = checkboxIcons.disabledUnCheck;
         } else if (status === 'uncheck' && !props.disabled) {
