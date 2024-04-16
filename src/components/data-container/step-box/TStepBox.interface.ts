@@ -1,5 +1,6 @@
 import {ReactElement} from 'react';
 import {TBaseProps} from '@/common/base/TBase.interface';
+import {contentDirection} from '@/components';
 
 export type TStepBoxValue = number;
 
@@ -17,8 +18,12 @@ export interface TStepBoxHeaderProps extends TBaseProps {
     content: {stepNumber: number, label: string | ReactElement}[],
 }
 
+
+type ContentDirection = typeof contentDirection[keyof typeof contentDirection];
+
 export interface TStepBoxItemProps extends TBaseProps {
     children?: any,
+    contentDirection?: ContentDirection,
     prevButtonLabel?: string,
     nextButtonLabel?: string,
     nextButtonDisabled?: boolean,
