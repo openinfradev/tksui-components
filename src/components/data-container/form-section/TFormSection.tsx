@@ -14,10 +14,12 @@ const TFormSection = (props: TFormSectionProps) => {
 
         if (props.className) { clazz.push(props.className); }
 
+        if (props.noRowDivider) { clazz.push('t-form-section--no-row-divider'); }
+
         clazz.push(`t-form-section--form-label-item-align--${props.formLabelItemAlign}`);
 
         return clazz.join(' ');
-    }, [props.className, props.formLabelItemAlign]);
+    }, [props.className, props.formLabelItemAlign, props.noRowDivider]);
 
     const rootStyle = useMemo((): CSSProperties => {
 

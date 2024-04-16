@@ -9,7 +9,6 @@ import TTextField from '@/components/input/text-field/TTextField';
 import useInputState from '@/common/hook/UseInputState';
 import TDropdown from '@/components/input/dropdown/TDropdown';
 import TToast, {notify} from '@/components/guide/toast/TToast';
-import TTextArea from '~/input/text-area/TTextArea';
 
 
 const meta: Meta<typeof TFormSection> = {
@@ -51,7 +50,7 @@ const Template = (args: TFormSectionProps) => {
             <TToast/>
             <div style={{display: 'flex', flexDirection: 'column', gap: '24px'}}>
                 <TFormSection label={'Basic Properties'} column={2} {...args} customInformation={<>앱 생성 양식 예제입니다.</>}
-                              leftAction={leftAction()} rightAction={rightAction()}>
+                              leftAction={leftAction()} rightAction={rightAction()} >
                     <TFormSectionRow>
                         <TFormSectionItem label={'Name'} required>
                             <TTextField counter={30} {...name} />
@@ -108,10 +107,37 @@ const Template = (args: TFormSectionProps) => {
 
                     <TFormSectionRow>
                         <TFormSectionItem label={'Description'} span={2}>
-                            <TTextArea counter={100} {...profile} />
+                            <TTextField multiline counter={100} rows={5} {...profile} />
                         </TFormSectionItem>
                     </TFormSectionRow>
                 </TFormSection>
+
+                <TFormSection label={'Properties'} column={2} noRowDivider>
+                    <TFormSectionRow>
+                        <TFormSectionItem label={'Artifact URL'} required>
+                            <TTextField {...artifactUrl} />
+                        </TFormSectionItem>
+                        <TFormSectionItem label={'Port'}>
+                            <TTextField counter={20} {...port} placeholder={'123.123.123.123'}/>
+                        </TFormSectionItem>
+                    </TFormSectionRow>
+
+                    <TFormSectionRow>
+                        <TFormSectionItem label={'Profile'}>
+                            <TTextField counter={20} {...profile} />
+                        </TFormSectionItem>
+                        <TFormSectionItem label={'Resource Spec'}>
+                            <TDropdown items={resourceSpecItems} {...resourceSpec} />
+                        </TFormSectionItem>
+                    </TFormSectionRow>
+
+                    <TFormSectionRow>
+                        <TFormSectionItem label={'Description'} span={2}>
+                            <TTextField multiline counter={100} rows={5} {...profile} />
+                        </TFormSectionItem>
+                    </TFormSectionRow>
+                </TFormSection>
+
                 <TFormSection label={'Basic Properties'} formLabelItemAlign={'vertical'} column={2}
                               leftAction={leftAction()} rightAction={rightAction()}>
                     <TFormSectionRow>

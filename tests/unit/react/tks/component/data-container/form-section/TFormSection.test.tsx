@@ -96,6 +96,30 @@ describe('TFormSection', () => {
                 .toHaveClass('t-form-section__content__info__content');
         });
 
+        it('When noRowDivider prop is applied, it should be displayed on row area', () => {
+
+            // Arrange
+            const firstRowContent = 'First Row Content';
+            const middleRowContent = 'Middle Row Content';
+            const lastRowContent = 'Last Row Content';
+            render(
+                <TFormSection noRowDivider>
+                    <TFormSectionRow>{firstRowContent}</TFormSectionRow>
+                    <TFormSectionRow>{middleRowContent}</TFormSectionRow>
+                    <TFormSectionRow>{lastRowContent}</TFormSectionRow>
+                </TFormSection>,
+            );
+
+            const firstRowRoot = screen.getByText(firstRowContent);
+            const middleRowRoot = screen.getByText(middleRowContent);
+            const lastRowRoot = screen.getByText(lastRowContent);
+
+            // Assert
+            expect(firstRowRoot).toHaveStyle({borderBottom: 'none'});
+            expect(middleRowRoot).toHaveStyle({border: 'none'});
+            expect(lastRowRoot).toHaveStyle({borderTop: 'none'});
+        });
+
         it('When customInformation prop is applied, it should be displayed on information area', () => {
 
             // Arrange
