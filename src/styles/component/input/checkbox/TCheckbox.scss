@@ -37,6 +37,10 @@
         }
     }
 
+    &.t-checkbox--readOnly .t-checkbox__container {
+        pointer-events: none;
+    }
+
     &.t-checkbox--disabled .t-checkbox__container {
         pointer-events: none;
         color: $t-font-color--read-only;
