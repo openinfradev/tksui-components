@@ -7,6 +7,8 @@ import themeToken from '~style/designToken/ThemeToken.module.scss';
 const checkboxIcons = {
     check: 't_checkbox_on',
     uncheck: 't_checkbox_off',
+    readOnlyCheck: 't_checkbox_read_only_on',
+    readOnlyUnCheck: 't_checkbox_read_only_off',
     disabledCheck: 't_checkbox_disabled_on',
     disabledUnCheck: 't_checkbox_disabled_off',
     indeterminate: 't_checkbox_indeterminate',
@@ -34,12 +36,13 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
         const clazz: string[] = [];
 
         if (props.className) { clazz.push(props.className); }
+        if (props.readOnly) { clazz.push('t-checkbox--readOnly'); }
         if (props.disabled) { clazz.push('t-checkbox--disabled'); }
         if (!validator.result) { clazz.push('t-checkbox--failure'); }
         if (validator.result && validator.message) { clazz.push('t-checkbox--success'); }
 
         return clazz.join(' ');
-    }, [props.className, props.disabled, validator.result, validator.message]);
+    }, [props.className, props.readOnly, props.disabled, validator.result, validator.message]);
 
     const getRootStyle = useCallback(() => {
         let style: CSSProperties = {};
@@ -54,7 +57,7 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
         if (status === 'check' || status === 'indeterminate') { return themeToken.tPrimaryColor; }
         if (status === 'uncheck' || props.disabled) { return themeToken.tGrayColor3; }
         return '';
-    }, [status, props.disabled]);
+    }, [props.disabled, status]);
 
     // endregion
 
@@ -86,7 +89,7 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
         } else {
             setStatus('uncheck');
         }
-    }, [props.value, props.checked, props.indeterminate, props.positiveValue]);
+    }, [props.value, props.checked, props.indeterminate, props.positiveValue, props.readOnly]);
 
     // endregion
 
@@ -118,14 +121,18 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
 
         if (status === 'indeterminate') {
             iconType = checkboxIcons.indeterminate;
-        } else if (status === 'check' && !props.disabled) {
+        } else if (status === 'check' && !props.disabled && !props.readOnly) {
             iconType = checkboxIcons.check;
-        } else if (status === 'check' && props.disabled) {
+        } else if (status === 'check' && !props.disabled && props.readOnly) {
+            iconType = checkboxIcons.readOnlyCheck;
+        } else if (status === 'check' && props.disabled && !props.readOnly) {
             iconType = checkboxIcons.disabledCheck;
-        } else if (status === 'uncheck' && props.disabled) {
-            iconType = checkboxIcons.disabledUnCheck;
-        } else if (status === 'uncheck' && !props.disabled) {
+        } else if (status === 'uncheck' && props.disabled && !props.readOnly) {
             iconType = checkboxIcons.uncheck;
+        } else if (status === 'uncheck' && !props.disabled && props.readOnly) {
+            iconType = checkboxIcons.readOnlyUnCheck;
+        } else if (status === 'uncheck' && !props.disabled && !props.readOnly) {
+            iconType = checkboxIcons.disabledUnCheck;
         } else {
             throw Error('Invalid status');
         }
@@ -136,7 +143,7 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
                    color={iconColorByStatus}
                    fill
             >{iconType}</TIcon>);
-    }, [iconColorByStatus, props.disabled, status]);
+    }, [iconColorByStatus, props.disabled, props.readOnly, status]);
 
     // region [Effect]
 

@@ -45,8 +45,8 @@ const NormalTemplate = (args: TCheckboxProps) => {
     const checkbox3 = useInputState(true);
     const checkbox4 = useInputState(false);
 
-    const checkbox5 = useInputState(false);
-    const checkbox6 = useInputState(true);
+    const checkbox5 = useInputState(true);
+    const checkbox6 = useInputState(false);
 
     const [checkbox5Indeterminate, setCheckbox5Indeterminate] = useState(true);
 
@@ -72,14 +72,25 @@ const NormalTemplate = (args: TCheckboxProps) => {
             </ItemContainer>
 
             <ItemContainer label={`Disabled checked (value: ${checkbox3.value.toString()})`}>
-                <TCheckbox {...args} disabled onChange={checkbox3.onChange} value={checkbox3.value}>바나나</TCheckbox>
-                <TCheckbox {...args} disabled onChange={checkbox3.onChange} value={checkbox3.value}>Banana</TCheckbox>
+                <TCheckbox {...args} disabled onChange={checkbox3.onChange} value={checkbox3.value}>오렌지</TCheckbox>
+                <TCheckbox {...args} disabled onChange={checkbox3.onChange} value={checkbox3.value}>Orange</TCheckbox>
             </ItemContainer>
 
             <ItemContainer label={`Disabled unchecked (value: ${checkbox4.value.toString()})`}>
                 <TCheckbox {...args} disabled onChange={checkbox4.onChange} value={checkbox4.value}>오렌지</TCheckbox>
                 <TCheckbox {...args} disabled onChange={checkbox4.onChange} value={checkbox4.value}>Orange</TCheckbox>
             </ItemContainer>
+
+            <ItemContainer label={`ReadOnly checked (value: ${checkbox5.value.toString()})`}>
+                <TCheckbox {...args} readOnly onChange={checkbox5.onChange} value={checkbox5.value}>바나나</TCheckbox>
+                <TCheckbox {...args} readOnly onChange={checkbox5.onChange} value={checkbox5.value}>Banana</TCheckbox>
+            </ItemContainer>
+
+            <ItemContainer label={`ReadOnly unchecked (value: ${checkbox6.value.toString()})`}>
+                <TCheckbox {...args} readOnly onChange={checkbox6.onChange} value={checkbox6.value}>오렌지</TCheckbox>
+                <TCheckbox {...args} readOnly onChange={checkbox6.onChange} value={checkbox6.value}>Orange</TCheckbox>
+            </ItemContainer>
+
 
             <ItemContainer label={`Indeterminate(${checkbox5Indeterminate}) (value: ${checkbox5.value.toString()}) : `}>
                 <TCheckbox {...args} onChange={onChangeCheckbox5} value={checkbox5.value}
