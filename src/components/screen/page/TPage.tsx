@@ -1,10 +1,11 @@
 import {MouseEvent, MouseEventHandler, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import TIcon from '../../icon/TIcon';
-import {contentDirection, TPageProps} from './TPage.interface';
+import {TPageProps} from '@/components';
 
-const defaultPanelWidth = '360px';
+const defaultPanelWidth = '280px';
 
 const TPage = (props: TPageProps) => {
+
 
     // region [Hooks]
 
@@ -13,7 +14,6 @@ const TPage = (props: TPageProps) => {
 
     const [panelWidth, setPanelWidth] = useState<string>(defaultPanelWidth);
     const rootRef = useRef<HTMLDivElement>(null);
-
 
     // endregion
 
@@ -54,7 +54,6 @@ const TPage = (props: TPageProps) => {
         document.addEventListener('mouseup', mouseUpHandler, {once: true});
     }) as MouseEventHandler;
 
-
     // endregion
 
 
@@ -84,11 +83,17 @@ const TPage = (props: TPageProps) => {
         return clazz.join(' ');
     }, [isInfoPanelOpened, isInfoPanelResizing]);
 
+
     const contentAreaClass = useMemo(() : string => {
 
         return `t-page__content-area--direction-${props.contentDirection}`;
-
     }, [props.contentDirection]);
+
+
+    const containerWidth = useMemo(() => {
+
+        return isInfoPanelOpened ? `calc(100% - ${panelWidth})` : '100%';
+    }, [isInfoPanelOpened, panelWidth]);
 
     // endregion
 
@@ -111,7 +116,7 @@ const TPage = (props: TPageProps) => {
              ref={rootRef}
              id={props.id}
              data-testid={'t-page-root'}>
-            <div className={'t-page__content-container'}>
+            <div className={'t-page__content-container'} style={{width: containerWidth}}>
                 <div className={'t-page__title-area'}>
                     <h3 className={'t-page__title-area__title'}>{props.title}</h3>
 
@@ -148,6 +153,13 @@ const TPage = (props: TPageProps) => {
                                        clickable
                                        onClick={onClickInfoClose}>close</TIcon>
                             </div>
+                            {
+                                props.infoPanelTitle && (
+                                    <div className={'t-page__information-area__title'}>
+                                        {props.infoPanelTitle}
+                                    </div>
+                                )
+                            }
                             <div className={'t-page__information-area__content'}>
                                 {props.infoPanelContent}
                             </div>

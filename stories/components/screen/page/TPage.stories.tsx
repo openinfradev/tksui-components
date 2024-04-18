@@ -12,6 +12,8 @@ export default meta;
 
 type Story = StoryObj<typeof TPage>;
 
+const infoPanelTitle = 'Lorem ipsum dolor sit amet';
+
 const infoContent = `
 Lorem ipsum dolor sit amet, consec
 tetur adipiscing elit. In nec consecte
@@ -77,7 +79,7 @@ const Template = (args: TPageProps) => {
 
 export const TopBottom: Story = {
     render: Template,
-    args: {infoPanelContent: infoContent},
+    args: {infoPanelTitle, infoPanelContent: infoContent},
 };
 
 export const LeftRight: Story = {
