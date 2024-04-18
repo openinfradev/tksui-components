@@ -12,6 +12,8 @@ export interface TPageProps extends TBaseProps {
     children: ReactNode,
 
     title?: string,
+
+    infoPanelTitle?: string,
     infoPanelContent?: ReactNode,
 
     contentDirection?: contentDirection,
