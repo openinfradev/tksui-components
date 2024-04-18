@@ -9,6 +9,7 @@
     .t-page__content-container {
         padding: $t-spacing-40 $t-spacing-48;
         flex: 1 1 auto;
+        transition: width .3s;
 
         .t-page__title-area {
             margin-bottom: $t-spacing-24;

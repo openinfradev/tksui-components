@@ -1,8 +1,8 @@
 import {CSSProperties, useMemo} from 'react';
 import {TFormSectionRowProps} from '@/components';
 
-
 const TFormSectionRow = (props: TFormSectionRowProps) => {
+
 
     // region [Styles]
 
@@ -20,7 +20,6 @@ const TFormSectionRow = (props: TFormSectionRowProps) => {
     }, [props.style]);
 
     // endregion
-
 
     return (
         <div className={`t-form-section-row ${rootClass}`} style={rootStyle}>
