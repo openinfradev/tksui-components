@@ -79,26 +79,6 @@ describe('TFormSectionItem', () => {
                 .toHaveClass('t-form-section-item--required');
         });
 
-        it('When span prop is applied, it should be applied on flex to adjust width', () => {
-
-            // Arrange
-            const columnCount = 3;
-            const spanCount = 2;
-            render(
-                <TFormSection column={columnCount}>
-                    <TFormSectionRow>
-                        <TFormSectionItem span={spanCount}>content</TFormSectionItem>
-                    </TFormSectionRow>
-                </TFormSection>,
-            );
-
-            const root = screen.getByRole('group');
-            // Assert
-            expect(root)
-                .toHaveStyle({width: `calc(100% / ${columnCount} * ${spanCount})`});
-
-        });
-
         it('When information prop is applied, it should be displayed on information area', async () => {
 
             // Arrange

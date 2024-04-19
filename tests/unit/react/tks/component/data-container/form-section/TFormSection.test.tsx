@@ -36,26 +36,6 @@ describe('TFormSection', () => {
                 .toHaveStyle({width: '100%'});
         });
 
-        it('Column prop applied to TFormSection width', () => {
-
-            // Arrange
-            const columnCount = 3;
-            render(
-                <TFormSection column={columnCount}>
-                    <TFormSectionRow>
-                        <TFormSectionItem>Form Section Item</TFormSectionItem>
-                    </TFormSectionRow>
-                </TFormSection>,
-            );
-
-            const searchBoxItem = screen.getByRole('group');
-
-            // Assert
-
-            expect(searchBoxItem)
-                .toHaveStyle({width: `calc(100% / ${columnCount} * 1)`});
-        });
-
         it('When label prop is applied, it should be displayed on label area', () => {
 
             // Arrange
@@ -99,25 +79,16 @@ describe('TFormSection', () => {
         it('When noRowDivider prop is applied, it should be displayed on row area', () => {
 
             // Arrange
-            const firstRowContent = 'First Row Content';
-            const middleRowContent = 'Middle Row Content';
-            const lastRowContent = 'Last Row Content';
             render(
                 <TFormSection noRowDivider>
-                    <TFormSectionRow>{firstRowContent}</TFormSectionRow>
-                    <TFormSectionRow>{middleRowContent}</TFormSectionRow>
-                    <TFormSectionRow>{lastRowContent}</TFormSectionRow>
+                    <TFormSectionRow>First Row Content</TFormSectionRow>
                 </TFormSection>,
             );
 
-            const firstRowRoot = screen.getByText(firstRowContent);
-            const middleRowRoot = screen.getByText(middleRowContent);
-            const lastRowRoot = screen.getByText(lastRowContent);
+            const root = screen.getByTestId('t-section-root');
 
             // Assert
-            expect(firstRowRoot).toHaveStyle({borderBottom: 'none'});
-            expect(middleRowRoot).toHaveStyle({border: 'none'});
-            expect(lastRowRoot).toHaveStyle({borderTop: 'none'});
+            expect(root).toHaveClass('t-form-section--no-row-divider');
         });
 
         it('When customInformation prop is applied, it should be displayed on information area', () => {

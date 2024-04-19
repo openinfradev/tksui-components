@@ -1,4 +1,4 @@
-import {CSSProperties, useContext, useEffect, useId, useMemo, useRef} from 'react';
+import {CSSProperties, useContext, useEffect, useId, useMemo, useRef, memo, useCallback} from 'react';
 import TIcon from '~/icon/TIcon';
 import TTooltip from '~/guide/tooltip/TTooltip';
 import {TFormSectionItemProps} from '@/components';
@@ -6,19 +6,25 @@ import FormContext from './TFormSectionContext';
 import themeToken from '~style/designToken/ThemeToken.module.scss';
 
 
+const gapSize = Number(themeToken.tSpacing40?.replace(/[^0-9]/g, '')) * 2 || 80;
+
 const TFormSectionItem = (props: TFormSectionItemProps) => {
+
 
     // region [Hooks]
 
     const rootRef = useRef<HTMLSpanElement>(null);
     const {column, labelWidth} = useContext(FormContext);
+
     const tooltipId = useId();
 
     // endregion
 
+
     // region [Styles]
 
     const rootClass = useMemo((): string => {
+
         const clazz: string[] = [];
 
         if (props.className) { clazz.push(props.className); }
@@ -27,23 +33,32 @@ const TFormSectionItem = (props: TFormSectionItemProps) => {
         return clazz.join(' ');
     }, [props.className, props.required]);
 
+
+    const excludedGap = useMemo(() => {
+
+        if (column === props.span) { return '0px'; }
+
+        return `${gapSize * (column - 1)}px`;
+    }, [column, props.span]);
+
+
+    const includedGap = useMemo(() => {
+
+        if (column === props.span || props.span === 1) { return '0px'; }
+
+        return `(${gapSize}px * ${props.span - 1})`;
+    }, [column, props.span]);
+
+
     const rootStyle = useMemo((): CSSProperties => {
 
         const style: CSSProperties = props.style ? props.style : {};
 
-        let gapAdjustment = '';
-
-        if (column === 2 && props.span === 2) {
-            gapAdjustment = ' - 0px';
-        }
-        if (column === 2 && (props.span === 1 || !props.span)) {
-            gapAdjustment = ` - ${themeToken.tSpacing40}`;
-        }
-
-        style.width = `calc(100% / ${column} * ${props.span || 1}${gapAdjustment})`;
+        style.width = `calc(((100% - ${excludedGap}) / ${column} * ${props.span}) + ${includedGap})`;
 
         return style;
-    }, [column, props.span, props.style]);
+    }, [props.style, column, props.span, excludedGap, includedGap]);
+
 
     const labelStyle = useMemo((): CSSProperties => {
 
@@ -55,6 +70,7 @@ const TFormSectionItem = (props: TFormSectionItemProps) => {
         return style;
     }, [labelWidth, props.labelMarginBottom]);
 
+
     const contentStyle = useMemo((): CSSProperties => {
 
         return props.contentStyle ? {...props.contentStyle} : {};
@@ -65,11 +81,11 @@ const TFormSectionItem = (props: TFormSectionItemProps) => {
 
     // region [Privates]
 
-    const adjustLabelAlignment = () => {
+    const adjustLabelAlignment = useCallback(() => {
         if (rootRef.current?.clientHeight > 44) {
             rootRef.current.style.alignItems = 'flex-start';
         }
-    };
+    }, []);
 
     // endregion
 
@@ -77,8 +93,9 @@ const TFormSectionItem = (props: TFormSectionItemProps) => {
     // region [Effects]
 
     useEffect(() => {
+
         adjustLabelAlignment();
-    }, []);
+    }, [adjustLabelAlignment]);
 
     // endregion
 
@@ -88,30 +105,30 @@ const TFormSectionItem = (props: TFormSectionItemProps) => {
               style={rootStyle} role={'group'}>
             {
                 props.label && (
-                    <label className={'t-form-section-item__label'}
-                           style={labelStyle}>
-                        <span className={'t-form-section-item__label__text'}>
-                            {props.label}
-                        </span>
+                    <label className={'t-form-section-item__label'} style={labelStyle}>
+
+                        <span className={'t-form-section-item__label__text'}>{props.label}</span>
+
                         {
                             (props.information) && (
                                 <TIcon className={'t-form-section-item__label__info-icon'}
-                                       small
-                                       tooltipContent={props.information}
-                                       tooltipId={tooltipId}
-                                       clickable
-                                >info</TIcon>
+                                       small tooltipContent={props.information}
+                                       tooltipId={tooltipId} clickable>info</TIcon>
                             )
                         }
+
                     </label>
                 )
             }
             <div className={'t-form-section-item__content'} style={contentStyle}>{props.children} </div>
-
             {props.information && (<TTooltip id={tooltipId} openOnClick/>)}
         </span>
     );
 
 };
 
-export default TFormSectionItem;
+TFormSectionItem.defaultProps = {
+    span: 1,
+};
+
+export default memo(TFormSectionItem);
