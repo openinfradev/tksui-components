@@ -48,8 +48,8 @@
             &:nth-child(2) { margin-left: 16px; }
             &:not(:nth-child(2)) { margin-left: $t-spacing-4; }
         }
-
-        .t-text-field__container__action-icon ~ .t-text-field__container__counter { margin-left: $t-spacing-8; }
+        
+        .t-text-field__container__input ~ .t-text-field__container__counter { margin-left: $t-spacing-8; }
 
         .t-text-field__container__custom-action-icon {
             display: flex;
