@@ -2,10 +2,17 @@
     width: 100%;
 
         .t-action-bar__container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+
+            .t-action-bar__container__left-action,
+            .t-action-bar__container__center-action,
+            .t-action-bar__container__right-action, {
+                display: flex;
+                align-items: center;
+            }
 
         .t-action-bar__container__center-action {
             position: absolute;
