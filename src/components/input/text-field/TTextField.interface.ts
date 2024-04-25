@@ -36,6 +36,7 @@ export interface TTextFieldProps extends TValidatorProps, TBaseProps {
 
 export interface TTextFieldRef {
     focus(): void,
+    scrollToComponent(): void,
     blur(): void,
     validate(): true | string,
     manualValidate(result: boolean, message?: string): void,
