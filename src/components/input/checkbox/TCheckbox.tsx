@@ -131,11 +131,11 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
         } else if (status === 'check' && props.disabled && !props.readOnly) {
             iconType = checkboxIcons.disabledCheck;
         } else if (status === 'uncheck' && props.disabled && !props.readOnly) {
-            iconType = checkboxIcons.uncheck;
+            iconType = checkboxIcons.disabledUnCheck;
         } else if (status === 'uncheck' && !props.disabled && props.readOnly) {
             iconType = checkboxIcons.readOnlyUnCheck;
         } else if (status === 'uncheck' && !props.disabled && !props.readOnly) {
-            iconType = checkboxIcons.disabledUnCheck;
+            iconType = checkboxIcons.uncheck;
         } else {
             throw Error('Invalid status');
         }
