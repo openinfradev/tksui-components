@@ -27,4 +27,5 @@ export interface TRadioGroupProps extends TBaseProps, TValidatorProps {
 
 export interface TRadioGroupRef {
     validate(): true | string,
+    scrollToComponent(): void,
 }

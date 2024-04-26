@@ -19,6 +19,10 @@ const TTextArea = forwardRef((props: TTextAreaProps, ref: Ref<TTextAreaRef>) => 
         validate() {
             return validator.validate();
         },
+        scrollToComponent(options: ScrollIntoViewOptions = {behavior: 'smooth', block: 'center'}) {
+            textareaRef?.current?.scrollIntoView(options);
+        },
+
     }));
 
     // endregion
@@ -68,12 +72,12 @@ const TTextArea = forwardRef((props: TTextAreaProps, ref: Ref<TTextAreaRef>) => 
     const rootClass = useMemo((): string => {
         const clazz: string[] = [];
 
-        if (props.className) clazz.push(props.className);
+        if (props.className) { clazz.push(props.className); }
 
-        if (props.disabled) clazz.push('t-text-area--disabled');
-        if (!validator.result) clazz.push('t-text-area--failure');
+        if (props.disabled) { clazz.push('t-text-area--disabled'); }
+        if (!validator.result) { clazz.push('t-text-area--failure'); }
         if (hasFocus) { clazz.push('t-text-area--focused'); }
-        if (validator.result && validator.message) clazz.push('t-text-area--success');
+        if (validator.result && validator.message) { clazz.push('t-text-area--success'); }
 
         clazz.push(`t-text-area--${props.type}`);
 
@@ -91,8 +95,8 @@ const TTextArea = forwardRef((props: TTextAreaProps, ref: Ref<TTextAreaRef>) => 
     const rootStyle = useMemo((): CSSProperties => {
         let style: CSSProperties = {};
 
-        if (props.style) style = {...props.style};
-        if (props.width) style = {...style, width: props.width};
+        if (props.style) { style = {...props.style}; }
+        if (props.width) { style = {...style, width: props.width}; }
 
         return style;
     }, [props.style, props.width]);
@@ -101,7 +105,7 @@ const TTextArea = forwardRef((props: TTextAreaProps, ref: Ref<TTextAreaRef>) => 
     const textAreaClass = useMemo((): string => {
         const clazz: string[] = [];
 
-        if (props.disabled) clazz.push('t-text-area__container__input--disabled');
+        if (props.disabled) { clazz.push('t-text-area__container__input--disabled'); }
 
         return clazz.join(' ');
     }, [props.disabled]);

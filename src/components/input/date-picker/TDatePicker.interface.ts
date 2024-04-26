@@ -29,6 +29,7 @@ export interface TDatePickerRef {
     open(): void,
     validate(): true | string,
     getDate(): string,
+    scrollToComponent(): void,
 }
 
 export interface TDatePickerBounds {

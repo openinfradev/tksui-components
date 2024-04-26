@@ -44,4 +44,5 @@ export interface TDropdownRef {
     validate(): true | string,
     manualValidate(result: boolean, message?: string): void,
     clearValidation(): void,
+    scrollToComponent(): void,
 }

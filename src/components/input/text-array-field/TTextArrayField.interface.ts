@@ -19,4 +19,5 @@ export interface TTextArrayFieldRef {
     clearValidation(): void,
     getValidateResult(): boolean,
     getValidateMessage(): string,
+    scrollToComponent(): void,
 }

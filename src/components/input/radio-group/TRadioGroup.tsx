@@ -3,8 +3,7 @@ import useValidator from '@/common/hook/UseValidator';
 
 
 import TRadio from '../radio/TRadio';
-import {TRadioGroupProps, TRadioGroupRef, TRadioGroupValue} from './TRadioGroup.interface';
-import {TRadioValue} from '../radio/TRadio.interface';
+import {TRadioGroupProps, TRadioGroupRef, TRadioGroupValue, TRadioValue} from '@/components';
 
 
 const TRadioGroup = forwardRef((props: TRadioGroupProps, ref: Ref<TRadioGroupRef>) => {
@@ -17,6 +16,9 @@ const TRadioGroup = forwardRef((props: TRadioGroupProps, ref: Ref<TRadioGroupRef
     
     useImperativeHandle(ref, () => ({
         validate() { return validator.validate(); },
+        scrollToComponent(options: ScrollIntoViewOptions = {behavior: 'smooth', block: 'center'}) {
+            rootRef?.current?.scrollIntoView(options);
+        },
     }));
     
     // endregion
@@ -27,10 +29,10 @@ const TRadioGroup = forwardRef((props: TRadioGroupProps, ref: Ref<TRadioGroupRef
     function getRootClass(): string {
         const clazz: string[] = [];
         
-        if (props.className) clazz.push(props.className);
-        if (props.disabled) clazz.push('t-radio-group--disabled');
-        if (!validator.result) clazz.push('t-radio-group--failure');
-        if (validator.result && validator.message) clazz.push('t-radio-group--success');
+        if (props.className) { clazz.push(props.className); }
+        if (props.disabled) { clazz.push('t-radio-group--disabled'); }
+        if (!validator.result) { clazz.push('t-radio-group--failure'); }
+        if (validator.result && validator.message) { clazz.push('t-radio-group--success'); }
         
         return clazz.join(' ');
     }
@@ -38,7 +40,7 @@ const TRadioGroup = forwardRef((props: TRadioGroupProps, ref: Ref<TRadioGroupRef
     function getRootStyle(): CSSProperties {
         let style: CSSProperties = {};
         
-        if (props.style) style = {...props.style};
+        if (props.style) { style = {...props.style}; }
         
         return style;
     }

@@ -1,8 +1,7 @@
 import {forwardRef, Ref, useCallback, useImperativeHandle, useMemo, useRef} from 'react';
 import useValidator from '@/common/hook/UseValidator';
-import {TCheckboxGroupProps, TCheckboxGroupRef, TCheckboxGroupValue} from './TCheckboxGroup.interface';
+import {TCheckboxGroupProps, TCheckboxGroupRef, TCheckboxGroupValue, TCheckboxValue} from '@/components';
 import TCheckbox from '../checkbox/TCheckbox';
-import {TCheckboxValue} from '../checkbox/TCheckbox.interface';
 
 
 const TCheckboxGroup = forwardRef((props: TCheckboxGroupProps, ref: Ref<TCheckboxGroupRef>) => {
@@ -14,6 +13,9 @@ const TCheckboxGroup = forwardRef((props: TCheckboxGroupProps, ref: Ref<TCheckbo
 
     useImperativeHandle(ref, () => ({
         validate() { return validator.validate(); },
+        scrollToComponent(options: ScrollIntoViewOptions = {behavior: 'smooth', block: 'center'}) {
+            rootRef?.current?.scrollIntoView(options);
+        },
     }));
 
     // endregion
@@ -24,10 +26,10 @@ const TCheckboxGroup = forwardRef((props: TCheckboxGroupProps, ref: Ref<TCheckbo
     const rootClass = useMemo(() => {
         const clazz: string[] = [];
 
-        if (props.className) clazz.push(props.className);
-        if (props.disabled) clazz.push('t-checkbox-group--disabled');
-        if (!validator.result) clazz.push('t-checkbox-group--failure');
-        if (validator.result && validator.message) clazz.push('t-checkbox-group--success');
+        if (props.className) { clazz.push(props.className); }
+        if (props.disabled) { clazz.push('t-checkbox-group--disabled'); }
+        if (!validator.result) { clazz.push('t-checkbox-group--failure'); }
+        if (validator.result && validator.message) { clazz.push('t-checkbox-group--success'); }
 
         return clazz.join(' ');
     }, [props.className, props.disabled, validator]);

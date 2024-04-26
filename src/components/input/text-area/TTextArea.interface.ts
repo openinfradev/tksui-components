@@ -31,4 +31,5 @@ export interface TTextAreaProps extends TValidatorProps, TBaseProps {
 export interface TTextAreaRef {
     focus(): void,
     validate(): true | string,
+    scrollToComponent(): void,
 }

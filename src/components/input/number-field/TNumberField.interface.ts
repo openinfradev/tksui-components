@@ -31,9 +31,9 @@ export interface TNumberFieldProps extends TBaseProps, TValidatorProps {
 
 
 export interface TNumberFieldRef {
+
     focus(): void,
-
     validate(): true | string,
-
     manualValidate(result: boolean, message?: string): void,
+    scrollToComponent(): void,
 }

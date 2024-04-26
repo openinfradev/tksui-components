@@ -33,6 +33,9 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
         open() { dropHolderRef?.current?.open(); },
         validate() { return validator.validate(); },
         getDate() { return dateValue; },
+        scrollToComponent(options: ScrollIntoViewOptions = {behavior: 'smooth', block: 'center'}) {
+            rootRef?.current?.scrollIntoView(options);
+        },
     }));
 
     // endregion
