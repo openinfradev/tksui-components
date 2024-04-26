@@ -48,6 +48,9 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
         clearValidation() {
             validator.clearValidation();
         },
+        scrollToComponent(options: ScrollIntoViewOptions = {behavior: 'smooth', block: 'center'}) {
+            rootRef?.current?.scrollIntoView(options);
+        },
     }));
 
     // endregion

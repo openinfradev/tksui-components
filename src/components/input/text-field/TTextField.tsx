@@ -34,6 +34,10 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
             inputRef?.current?.focus();
             textareaRef?.current?.focus();
         },
+        scrollToComponent(options: ScrollIntoViewOptions = {behavior: 'smooth', block: 'center'}) {
+            inputRef?.current?.scrollIntoView(options);
+            textareaRef?.current?.scrollIntoView(options);
+        },
         blur() {
             inputRef?.current?.blur();
             textareaRef?.current?.blur();

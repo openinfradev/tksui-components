@@ -149,8 +149,6 @@ const ValidationTemplate = (args: TTextFieldProps) => {
     const textField2 = useInputState('');
     const textField3 = useInputState('');
     const textField4 = useInputState('');
-    const textField5 = useInputState('');
-    const textField6 = useInputState('');
 
     const [textField1Ref, textField2Ref, textField3Ref, textField4Ref, textField5Ref, textField6Ref] = useRefs(6);
 
@@ -169,8 +167,6 @@ const ValidationTemplate = (args: TTextFieldProps) => {
         textField2Ref.current.validate();
         textField3Ref.current.validate();
         textField4Ref.current.validate();
-        textField5Ref.current.validate();
-        textField6Ref.current.validate();
     };
 
     return (<>
@@ -196,8 +192,8 @@ const ValidationTemplate = (args: TTextFieldProps) => {
                                 rule.required(),
                                 rule.lengthBetween(3, 12),
                             ]}
-                            {...textField1}
-                            ref={textField1Ref}
+                            {...textField2}
+                            ref={textField2Ref}
                             placeholder={'값을 입력해 주세요'}
                             counter={12}
                             dense
@@ -210,8 +206,8 @@ const ValidationTemplate = (args: TTextFieldProps) => {
                                 ),
                                 rule.lengthBetween(3, 12),
                             ]}
-                            {...textField2}
-                            ref={textField2Ref}
+                            {...textField3}
+                            ref={textField3Ref}
                             counter={12}
                 />
                 <TTextField {...args}
@@ -221,8 +217,8 @@ const ValidationTemplate = (args: TTextFieldProps) => {
                                 rule.lengthBetween(3, 12),
                             ]}
                             counter={12}
-                            {...textField3}
-                            ref={textField3Ref}
+                            {...textField4}
+                            ref={textField4Ref}
                             successMessage={'사용할 수 있는 아이디입니다'}
                 />
             </div>

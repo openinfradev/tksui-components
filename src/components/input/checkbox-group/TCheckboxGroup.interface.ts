@@ -24,4 +24,5 @@ export interface TCheckboxGroupProps extends TBaseProps, TValidatorProps {
 
 export interface TCheckboxGroupRef {
     validate(): true | string,
+    scrollToComponent(): void,
 }

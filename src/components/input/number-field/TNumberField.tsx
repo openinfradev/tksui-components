@@ -22,6 +22,9 @@ const TNumberField = forwardRef((props: TNumberFieldProps, ref: Ref<TNumberField
         manualValidate(result: boolean, message?: string) {
             validator.manualValidate(result, message);
         },
+        scrollToComponent(options: ScrollIntoViewOptions = {behavior: 'smooth', block: 'center'}) {
+            inputRef?.current?.scrollIntoView(options);
+        },
     }));
 
     // endregion
@@ -47,7 +50,7 @@ const TNumberField = forwardRef((props: TNumberFieldProps, ref: Ref<TNumberField
     const inputClass: string = useMemo((): string => {
         const clazz: string[] = [];
 
-        if (props.disabled) clazz.push('t-number-field__container__input--disabled');
+        if (props.disabled) { clazz.push('t-number-field__container__input--disabled'); }
 
         return clazz.join(' ');
     }, [props.disabled]);
@@ -84,8 +87,8 @@ const TNumberField = forwardRef((props: TNumberFieldProps, ref: Ref<TNumberField
     const rootStyle: CSSProperties = useMemo((): CSSProperties => {
         let style: CSSProperties = {};
 
-        if (props.style) style = {...props.style};
-        if (props.width) style = {...style, width: props.width};
+        if (props.style) { style = {...props.style}; }
+        if (props.width) { style = {...style, width: props.width}; }
 
         return style;
     }, [props.style, props.width]);

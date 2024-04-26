@@ -26,6 +26,9 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
     useImperativeHandle(ref, () => ({
         focus() { containerRef?.current?.focus(); },
         validate() { return validator.validate(); },
+        scrollToComponent(options: ScrollIntoViewOptions = {behavior: 'smooth', block: 'center'}) {
+            rootRef?.current?.scrollIntoView(options);
+        },
     }));
 
     // endregion
@@ -89,7 +92,7 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
         } else {
             setStatus('uncheck');
         }
-    }, [props.value, props.checked, props.indeterminate, props.positiveValue, props.readOnly]);
+    }, [props.value, props.checked, props.indeterminate, props.positiveValue]);
 
     // endregion
 

@@ -13,6 +13,7 @@ const TTextArrayField = forwardRef((props: TTextArrayFieldProps, ref: Ref<TTextA
 
     const [currentInput, setCurrentInput] = useState<string>('');
 
+    const rootRef = useRef<HTMLDivElement>(null);
     const textFieldRef = useRef<TTextFieldRef>(null);
 
     useImperativeHandle(ref, () => ({
@@ -30,6 +31,9 @@ const TTextArrayField = forwardRef((props: TTextArrayFieldProps, ref: Ref<TTextA
         },
         getValidateResult(): boolean {
             return validator.result;
+        },
+        scrollToComponent(options: ScrollIntoViewOptions = {behavior: 'smooth', block: 'center'}) {
+            rootRef?.current?.scrollIntoView(options);
         },
     }));
 
@@ -116,7 +120,7 @@ const TTextArrayField = forwardRef((props: TTextArrayFieldProps, ref: Ref<TTextA
     // endregion
 
     return (
-        <div className={`t-text-array-field ${rootClass}`} style={rootStyle} id={props.id} data-testid={'text-field-root'}>
+        <div className={`t-text-array-field ${rootClass}`} style={rootStyle} id={props.id} data-testid={'text-field-root'} ref={rootRef}>
 
             <span className={'t-text-array-field__input-container'} onClick={onClickInputContainer}>
                 {
