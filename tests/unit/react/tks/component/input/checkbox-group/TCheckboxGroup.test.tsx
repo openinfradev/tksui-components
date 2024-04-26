@@ -80,6 +80,25 @@ describe('TCheckboxGroup', () => {
 
         });
 
+        it('When readOnly prop is applied, root has t-checkbox-group--read-only class', () => {
+
+            // Arrange
+            const testValue = [];
+            const testItems = [
+                {text: 'Apple', koreanText: '사과', value: 'apple', value2: 'a'},
+                {text: 'Banana', koreanText: '바나나', value: 'banana', value2: 'b'},
+            ];
+
+            render(<TCheckboxGroup readOnly={true} onChange={mockFn} value={testValue} items={testItems}/>);
+
+            const root = screen.getByTestId('t-checkbox-group-root');
+
+            // Assert
+            expect(root).toHaveClass('t-checkbox-group--read-only');
+
+        });
+
+
         it('When disabled prop is applied, root will be applied -1 to tabIndex', () => {
 
             // Arrange
@@ -383,7 +402,7 @@ describe('TCheckboxGroup', () => {
 
         });
 
-        it('When  disabled attribute is applied to an item, that item should not be changed', () => {
+        it('When disabled attribute is applied to an item, that item should not be changed', () => {
 
             // Arrange
             const testValue = [];
@@ -401,6 +420,31 @@ describe('TCheckboxGroup', () => {
             expect(checkboxButtons[2]).toHaveClass('t-checkbox--disabled');
 
         });
+
+        it('When readOnly attribute is applied to an item, that item should not be changed', () => {
+
+            // Arrange
+            const testValue = [];
+            const testItems = [
+                {text: 'Apple', koreanText: '사과', value: 'apple', value2: 'a'},
+                {text: 'Banana', koreanText: '바나나', value: 'banana', value2: 'b'},
+                {text: 'ReadOnly', koreanText: '선택 불가 과일', value: 'readonly', value2: 'd2', readOnly: true},
+            ];
+
+            render(
+                <TCheckboxGroup onChange={mockFn}
+                                value={testValue}
+                                items={testItems}
+                />,
+            );
+
+            const checkboxButtons = screen.getAllByTestId('t-checkbox-root');
+
+            // Assert
+            expect(checkboxButtons[2]).toHaveClass('t-checkbox--read-only');
+
+        });
+
 
         it('When textKey prop is applied, the text will have the key of that item', () => {
 

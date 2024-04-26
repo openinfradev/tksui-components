@@ -1,6 +1,5 @@
-import {CSSProperties} from 'react';
 import {TValidatorProps} from '@/common/validator/TValidator.interface';
-import {TCheckboxValue} from '../checkbox/TCheckbox.interface';
+import {TCheckboxValue} from '@/components';
 import {TBaseProps} from '@/common/base/TBase.interface';
 
 export type TCheckboxGroupValue = TCheckboxValue[];
@@ -12,6 +11,7 @@ export interface TCheckboxGroupProps extends TBaseProps, TValidatorProps {
     value: TCheckboxGroupValue,
     items: TCheckboxGroupItem[],
     disabled?: boolean,
+    readOnly?: boolean,
     
     textKey?: string,
     valueKey?: string,

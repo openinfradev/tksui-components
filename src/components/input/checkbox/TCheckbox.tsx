@@ -39,7 +39,7 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
         const clazz: string[] = [];
 
         if (props.className) { clazz.push(props.className); }
-        if (props.readOnly) { clazz.push('t-checkbox--readOnly'); }
+        if (props.readOnly) { clazz.push('t-checkbox--read-only'); }
         if (props.disabled) { clazz.push('t-checkbox--disabled'); }
         if (!validator.result) { clazz.push('t-checkbox--failure'); }
         if (validator.result && validator.message) { clazz.push('t-checkbox--success'); }
@@ -131,11 +131,11 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
         } else if (status === 'check' && props.disabled && !props.readOnly) {
             iconType = checkboxIcons.disabledCheck;
         } else if (status === 'uncheck' && props.disabled && !props.readOnly) {
-            iconType = checkboxIcons.uncheck;
+            iconType = checkboxIcons.disabledUnCheck;
         } else if (status === 'uncheck' && !props.disabled && props.readOnly) {
             iconType = checkboxIcons.readOnlyUnCheck;
         } else if (status === 'uncheck' && !props.disabled && !props.readOnly) {
-            iconType = checkboxIcons.disabledUnCheck;
+            iconType = checkboxIcons.uncheck;
         } else {
             throw Error('Invalid status');
         }

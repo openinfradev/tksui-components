@@ -54,7 +54,7 @@ describe('TCheckbox', () => {
 
         });
 
-        it('When readOnly prop is applied, root has t-checkbox--readOnly class', () => {
+        it('When readOnly prop is applied, root has t-checkbox--read-only class', () => {
 
             // Arrange
             render(<TCheckbox readOnly>Test</TCheckbox>);
@@ -62,7 +62,7 @@ describe('TCheckbox', () => {
             const root = screen.getByTestId('t-checkbox-root');
 
             // Assert
-            expect(root).toHaveClass('t-checkbox--readOnly');
+            expect(root).toHaveClass('t-checkbox--read-only');
 
         });
 

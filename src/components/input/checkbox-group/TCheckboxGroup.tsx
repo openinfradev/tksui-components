@@ -28,6 +28,7 @@ const TCheckboxGroup = forwardRef((props: TCheckboxGroupProps, ref: Ref<TCheckbo
 
         if (props.className) { clazz.push(props.className); }
         if (props.disabled) { clazz.push('t-checkbox-group--disabled'); }
+        if (props.readOnly) { clazz.push('t-checkbox-group--read-only'); }
         if (!validator.result) { clazz.push('t-checkbox-group--failure'); }
         if (validator.result && validator.message) { clazz.push('t-checkbox-group--success'); }
 
@@ -105,7 +106,9 @@ const TCheckboxGroup = forwardRef((props: TCheckboxGroupProps, ref: Ref<TCheckbo
                                    negativeValue={null}
                                    value={props.value.some((v) => v === item[props.valueKey]) ? item[props.valueKey] : null}
                                    onChange={onChangeChildren}
-                                   disabled={props.disabled || item.disabled}>
+                                   disabled={props.disabled || item.disabled}
+                                   readOnly={props.readOnly || item.readOnly}
+                        >
                             {props.labelTemplate ? props.labelTemplate(item) : item[props.textKey]}
                         </TCheckbox>
                     ))

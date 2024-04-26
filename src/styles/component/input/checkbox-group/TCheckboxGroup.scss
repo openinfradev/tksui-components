@@ -13,7 +13,8 @@
         @include typo-element-3;
     }
 
-    &.t-checkbox-group--disabled {
+    &.t-checkbox-group--disabled,
+    &.t-checkbox-group--read-only {
         pointer-events: none;
     }
 
