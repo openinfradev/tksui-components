@@ -42,13 +42,14 @@ const TStepBox = (props: TStepBoxProps) => {
             return (
                 <TStepBoxItem prevButtonLabel={props.prevButtonLabel}
                               nextButtonLabel={props.nextButtonLabel}
+                              nextButtonDisabled={props.nextButtonDisabled}
                               completeButtonLabel={props.completeButtonLabel}
                               {...content.props}
                 />
             );
         },
 
-        [children, props.completeButtonLabel, props.nextButtonLabel, props.prevButtonLabel, value],
+        [children, props.completeButtonLabel, props.nextButtonDisabled, props.nextButtonLabel, props.prevButtonLabel, value],
     );
 
 

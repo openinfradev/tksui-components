@@ -11,6 +11,7 @@ export interface TStepBoxProps extends TBaseProps {
     onChange: (value: TStepBoxValue) => void,
     prevButtonLabel?: string,
     nextButtonLabel?: string,
+    nextButtonDisabled?: boolean,
     completeButtonLabel?: string,
 }
 
