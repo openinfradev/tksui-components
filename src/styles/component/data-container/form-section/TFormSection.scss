@@ -8,14 +8,15 @@
         flex-direction: column;
 
         .t-form-section__content__info {
+
             .t-icon {margin-top: $t-spacing-2;}
 
             display: flex;
             align-items: center;
-            gap: $t-spacing-16;
-            padding: $t-spacing-24;
+            gap: $t-spacing-6;
+            padding: $t-spacing-10;
             color: $t-gray-color-5;
-            background: $t-grid-background-color--01;
+            background: $t-gray-color-1;
             @include typo-element-3;
         }
     }
