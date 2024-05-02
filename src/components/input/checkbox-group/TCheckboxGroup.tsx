@@ -115,8 +115,9 @@ const TCheckboxGroup = forwardRef((props: TCheckboxGroupProps, ref: Ref<TCheckbo
                 }
             </div>
             {
-                props.rules
-                && <div className={'t-checkbox-group__message'}>{validator.message}</div>
+                props.rules && (
+                    <div className={'t-checkbox-group__message'}>{validator.message}</div>
+                )
             }
         </div>
     );

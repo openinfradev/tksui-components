@@ -42,10 +42,6 @@
 
         &:hover { border-color: $t-primary-color; }
 
-        &:hover .t-dropdown__control__selected.t-dropdown__control__selected--empty {
-            color: $t-black-color;
-        }
-
         &:focus-within { border-color: $t-primary-color; }
 
 

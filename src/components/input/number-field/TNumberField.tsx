@@ -1,6 +1,6 @@
 import {CSSProperties, forwardRef, KeyboardEvent, Ref, useCallback, useImperativeHandle, useMemo, useRef, useState} from 'react';
 import useValidator from '@/common/hook/UseValidator';
-import {TNumberFieldProps, TNumberFieldRef} from './TNumberField.interface';
+import {TNumberFieldProps, TNumberFieldRef} from '@/components';
 
 
 const TNumberField = forwardRef((props: TNumberFieldProps, ref: Ref<TNumberFieldRef>) => {

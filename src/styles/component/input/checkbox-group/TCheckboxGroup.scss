@@ -10,6 +10,7 @@
     .t-checkbox-group__message {
         height: 18px;
         color: $t-gray-color-4;
+        position: absolute;
         @include typo-element-3;
     }
 
