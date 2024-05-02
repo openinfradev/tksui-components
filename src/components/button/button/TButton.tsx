@@ -58,6 +58,11 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
         }
     }, [props, ripple]);
 
+    const onClick = useCallback((event: MouseEvent) => {
+
+        event.stopPropagation();
+    }, []);
+
     // endregion
 
 
@@ -140,6 +145,7 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
                 onMouseLeave={onMouseLeave}
                 onKeyDown={onKeyDown}
                 onKeyUp={onKeyUp}
+                onClick={onClick}
                 disabled={props.disabled}
                 tabIndex={(props.disabled || props.loading) ? -1 : 0}
                 {...TooltipUtil.convertToTooltipAttributes(props)}
