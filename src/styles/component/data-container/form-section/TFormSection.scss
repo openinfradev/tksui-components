@@ -111,6 +111,7 @@
         display: flex;
         gap: $t-spacing-8;
         width: 100%;
+        word-break: break-all;
         @include typo-body-3;
     }
 
