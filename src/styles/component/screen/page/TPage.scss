@@ -79,28 +79,33 @@
         .t-page__information-area__resizer {
             position: absolute;
             top: 0;
-            left: 0;
-            width: 2px;
+            left: -4px;
+            width: 8px;
             height: 100%;
             z-index: 1;
 
-            &:after {
+            &:before {
                 position: absolute;
                 top: 0;
                 left: 50%;
                 transform: translateX(-50%);
-                width: 48px;
                 height: 100%;
-                cursor: ew-resize;
             }
 
             &:hover {
-                width: 4px;
-                left: -2px;
                 cursor: ew-resize;
-                background: #293443;
+                width: 4px;
+                background-color: $t-black-color;
 
-                &:after { content: ''; }
+                &:before {
+                    width: 16px;
+                    content: '';
+                }
+                &:active:before {
+                    width: 120px;
+                }
+
+
             }
         }
 
