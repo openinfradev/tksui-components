@@ -77,18 +77,30 @@
         }
 
         .t-page__information-area__resizer {
-            height: 100%;
-            width: 1px;
-            background: $t-grid-border-color--01;
             position: absolute;
+            top: 0;
             left: 0;
+            width: 2px;
+            height: 100%;
             z-index: 1;
+
+            &:after {
+                position: absolute;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 48px;
+                height: 100%;
+                cursor: ew-resize;
+            }
 
             &:hover {
                 width: 4px;
                 left: -2px;
                 cursor: ew-resize;
                 background: #293443;
+
+                &:after { content: ''; }
             }
         }
 
