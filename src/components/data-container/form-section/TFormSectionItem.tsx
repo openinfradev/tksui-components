@@ -1,8 +1,8 @@
-import {CSSProperties, useContext, useEffect, useId, useMemo, useRef, memo, useCallback} from 'react';
+import {CSSProperties, memo, useContext, useId, useMemo, useRef} from 'react';
 import TIcon from '~/icon/TIcon';
 import TTooltip from '~/guide/tooltip/TTooltip';
 import {TFormSectionItemProps} from '@/components';
-import FormContext from './TFormSectionContext';
+import FormContext, {formSectionRowContext} from './TFormSectionContext';
 import themeToken from '~style/designToken/ThemeToken.module.scss';
 
 
@@ -15,6 +15,7 @@ const TFormSectionItem = (props: TFormSectionItemProps) => {
 
     const rootRef = useRef<HTMLSpanElement>(null);
     const {column, labelWidth} = useContext(FormContext);
+    const {verticalAlign} = useContext(formSectionRowContext);
 
     const tooltipId = useId();
 
@@ -62,40 +63,26 @@ const TFormSectionItem = (props: TFormSectionItemProps) => {
 
     const labelStyle = useMemo((): CSSProperties => {
 
-        const style: CSSProperties = {marginBottom: props.labelMarginBottom};
+        const style: CSSProperties = {};
 
         style.minWidth = labelWidth;
         style.maxWidth = labelWidth;
 
+        if (verticalAlign === 'middle') {
+            style.alignItems = 'center';
+        }
+        if (verticalAlign === 'top') {
+            style.alignItems = 'flex-start';
+        }
+
         return style;
-    }, [labelWidth, props.labelMarginBottom]);
+    }, [labelWidth, verticalAlign]);
 
 
     const contentStyle = useMemo((): CSSProperties => {
 
         return props.contentStyle ? {...props.contentStyle} : {};
     }, [props.contentStyle]);
-
-    // endregion
-
-
-    // region [Privates]
-
-    const adjustLabelAlignment = useCallback(() => {
-        if (rootRef.current?.clientHeight > 44) {
-            rootRef.current.style.alignItems = 'flex-start';
-        }
-    }, []);
-
-    // endregion
-
-
-    // region [Effects]
-
-    useEffect(() => {
-
-        adjustLabelAlignment();
-    }, [adjustLabelAlignment]);
 
     // endregion
 

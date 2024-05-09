@@ -1,5 +1,8 @@
 import {render, screen} from '@testing-library/react';
+import {TFormSection} from '@/components';
 import TFormSectionRow from '~/data-container/form-section/TFormSectionRow';
+import TFormSectionItem from '~/data-container/form-section/TFormSectionItem';
+
 
 describe('TFormSectionRow', () => {
 
@@ -28,5 +31,26 @@ describe('TFormSectionRow', () => {
             expect(root)
                 .toHaveStyle({width: '100%'});
         });
+
+        it('VerticalAlign prop applies to root', () => {
+
+            // Arrange
+            const labelText = 'Test Label';
+
+            render(
+                <TFormSection>
+                    <TFormSectionRow verticalAlign={'top'}>
+                        <TFormSectionItem label={labelText}>Content</TFormSectionItem>
+                    </TFormSectionRow>
+                </TFormSection>,
+            );
+            const itemRoot = screen.getByText(labelText);
+
+            // Assert
+            // eslint-disable-next-line testing-library/no-node-access
+            expect(itemRoot.parentElement)
+                .toHaveStyle({alignItems: 'flex-start'});
+        });
+
     });
 });

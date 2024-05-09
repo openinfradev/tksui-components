@@ -20,8 +20,11 @@ export interface TFormSectionProps extends TBaseProps {
     formLabelItemAlign?: 'horizontal' | 'vertical';
 }
 
+export type RowVerticalAlign = 'top' | 'middle';
+
 export interface TFormSectionRowProps extends TBaseProps {
     children: ReactNode,
+    verticalAlign?: RowVerticalAlign,
 }
 
 export interface TFormSectionItemProps extends TBaseProps {
@@ -32,6 +35,5 @@ export interface TFormSectionItemProps extends TBaseProps {
     required?: boolean,
     label?: string,
 
-    labelMarginBottom?: string,
     contentStyle?: CSSProperties,
 }

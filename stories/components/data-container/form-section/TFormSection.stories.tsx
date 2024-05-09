@@ -149,9 +149,12 @@ const Template = (args: TFormSectionProps) => {
                         </TFormSectionItem>
                     </TFormSectionRow>
 
-                    <TFormSectionRow>
-                        <TFormSectionItem label={'Description'} span={2}>
-                            <TTextField multiline counter={100} rows={5} {...profile} />
+                    <TFormSectionRow verticalAlign={'top'}>
+                        <TFormSectionItem label={'Description'} span={1}>
+                            <TTextField multiline counter={100} rows={5} {...description} />
+                        </TFormSectionItem>
+                        <TFormSectionItem label={'Description'} span={1}>
+                            <TTextField multiline counter={100} rows={5} {...description} />
                         </TFormSectionItem>
                     </TFormSectionRow>
                 </TFormSection>
@@ -176,10 +179,10 @@ const Template = (args: TFormSectionProps) => {
                         </TFormSectionItem>
                     </TFormSectionRow>
 
-                    <TFormSectionRow>
+                    <TFormSectionRow verticalAlign={'top'}>
                         <TFormSectionItem label={'Description'} span={2}>
                             <TTextField ref={noRowDescriptionRef} rules={[TValidatorRule.required()]} multiline
-                                        counter={100} rows={5} {...profile} />
+                                        counter={100} rows={5} {...description} />
                         </TFormSectionItem>
                     </TFormSectionRow>
                 </TFormSection>

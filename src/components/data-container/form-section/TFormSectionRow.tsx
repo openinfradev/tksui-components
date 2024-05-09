@@ -1,5 +1,6 @@
 import {CSSProperties, useMemo} from 'react';
 import {TFormSectionRowProps} from '@/components';
+import {formSectionRowContext} from '~/data-container/form-section/TFormSectionContext';
 
 const TFormSectionRow = (props: TFormSectionRowProps) => {
 
@@ -21,11 +22,20 @@ const TFormSectionRow = (props: TFormSectionRowProps) => {
 
     // endregion
 
+
     return (
         <div className={`t-form-section-row ${rootClass}`} style={rootStyle}>
-            {props.children}
+            <formSectionRowContext.Provider value={{verticalAlign: props.verticalAlign}}>
+                {props.children}
+            </formSectionRowContext.Provider>
         </div>
     );
 
 };
+
+TFormSectionRow.displayName = 'TFormSectionRow';
+TFormSectionRow.defaultProps = {
+    verticalAlign: 'middle',
+};
+
 export default TFormSectionRow;
