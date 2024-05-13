@@ -44,4 +44,8 @@ const TFormSectionRow = (props: TFormSectionRowProps) => {
 
 TFormSectionRow.displayName = 'TFormSectionRow';
 
+TFormSectionRow.defaultProps = {
+    verticalAlign: 'middle',
+};
+
 export default TFormSectionRow;
