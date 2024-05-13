@@ -1,4 +1,4 @@
-import {createContext, CSSProperties, MouseEvent} from 'react';
+import {createContext} from 'react';
 import {TTabBoxValue} from './TTabBox.interface';
 
 type tabBoxContext = {

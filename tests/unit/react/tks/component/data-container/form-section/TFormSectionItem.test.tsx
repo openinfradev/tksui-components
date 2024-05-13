@@ -98,26 +98,6 @@ describe('TFormSectionItem', () => {
 
         });
 
-        it('When labelMarginBottom prop is applied, it should be displayed on label area', () => {
-
-            // Arrange
-            const labelMarginBottom = '10px';
-            render(
-                <TFormSection>
-                    <TFormSectionRow>
-                        <TFormSectionItem label={'레이블'} labelMarginBottom={labelMarginBottom}>content</TFormSectionItem>
-                    </TFormSectionRow>
-                </TFormSection>,
-            );
-
-            // eslint-disable-next-line testing-library/no-node-access
-            const root = screen.getByText('레이블').parentElement;
-
-            // Assert
-            expect(root)
-                .toHaveStyle({marginBottom: labelMarginBottom});
-        });
-
         it('When contentStyle prop is applied, it should be displayed on label content area', () => {
 
             // Arrange

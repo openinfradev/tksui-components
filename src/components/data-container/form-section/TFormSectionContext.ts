@@ -1,12 +1,21 @@
 import {createContext} from 'react';
+import {RowVerticalAlign} from '@/components';
 
 
-interface FormContext {
+export interface TFormSectionContext {
     column: number,
     labelWidth: string,
+
+    rowVerticalAlign: RowVerticalAlign
 }
 
+export const TFormSectionContext = createContext<TFormSectionContext>({
+    column: 2,
+    labelWidth: '104px',
 
-export const formSectionContext = createContext<FormContext>(null);
-export default formSectionContext;
+    rowVerticalAlign: 'middle',
+
+});
+
+export default TFormSectionContext;
 
