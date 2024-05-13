@@ -78,7 +78,7 @@ const Template = (args: TFormSectionProps) => {
     const verticalRightAction = useMemo(() => (<>
         <TButton onClick={() => notify.info('취소 이벤트 발생')}>취소</TButton>
         <TButton main onClick={verticalValidate}>저장</TButton>
-    </>), []);
+    </>), [verticalValidate]);
 
     const noRowRightAction = useMemo(() => (<>
         <TButton onClick={() => notify.info('취소 이벤트 발생')}>취소</TButton>
@@ -90,8 +90,10 @@ const Template = (args: TFormSectionProps) => {
         <>
             <TToast/>
             <div style={{display: 'flex', flexDirection: 'column', gap: '24px'}}>
-                <TFormSection label={'Basic Properties'} column={2} {...args} customInformation={<>앱 생성 양식 예제입니다.</>}
-                >
+                <TFormSection label={'Basic Properties'}
+                              column={2}
+                              {...args}
+                              customInformation={<>앱 생성 양식 예제입니다.</>} formRowVerticalAlign={'top'}>
                     <TFormSectionRow>
                         <TFormSectionItem label={'Name'} required>
                             <TTextField counter={30} {...name} />
@@ -149,7 +151,7 @@ const Template = (args: TFormSectionProps) => {
                         </TFormSectionItem>
                     </TFormSectionRow>
 
-                    <TFormSectionRow verticalAlign={'top'}>
+                    <TFormSectionRow formRowVerticalAlign={'top'}>
                         <TFormSectionItem label={'Description'} span={1}>
                             <TTextField multiline counter={100} rows={5} {...description} />
                         </TFormSectionItem>
@@ -179,7 +181,7 @@ const Template = (args: TFormSectionProps) => {
                         </TFormSectionItem>
                     </TFormSectionRow>
 
-                    <TFormSectionRow verticalAlign={'top'}>
+                    <TFormSectionRow formRowVerticalAlign={'top'}>
                         <TFormSectionItem label={'Description'} span={2}>
                             <TTextField ref={noRowDescriptionRef} rules={[TValidatorRule.required()]} multiline
                                         counter={100} rows={5} {...description} />

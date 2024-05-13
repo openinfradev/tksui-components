@@ -39,7 +39,7 @@ describe('TFormSectionRow', () => {
 
             render(
                 <TFormSection>
-                    <TFormSectionRow verticalAlign={'top'}>
+                    <TFormSectionRow formRowVerticalAlign={'top'}>
                         <TFormSectionItem label={labelText}>Content</TFormSectionItem>
                     </TFormSectionRow>
                 </TFormSection>,

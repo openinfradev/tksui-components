@@ -2,7 +2,7 @@ import {CSSProperties, memo, useContext, useId, useMemo, useRef} from 'react';
 import TIcon from '~/icon/TIcon';
 import TTooltip from '~/guide/tooltip/TTooltip';
 import {TFormSectionItemProps} from '@/components';
-import FormContext, {formSectionRowContext} from './TFormSectionContext';
+import TFormSectionContext from './TFormSectionContext';
 import themeToken from '~style/designToken/ThemeToken.module.scss';
 
 
@@ -14,8 +14,7 @@ const TFormSectionItem = (props: TFormSectionItemProps) => {
     // region [Hooks]
 
     const rootRef = useRef<HTMLSpanElement>(null);
-    const {column, labelWidth} = useContext(FormContext);
-    const {verticalAlign} = useContext(formSectionRowContext);
+    const {column, labelWidth, rowVerticalAlign} = useContext(TFormSectionContext);
 
     const tooltipId = useId();
 
@@ -68,15 +67,15 @@ const TFormSectionItem = (props: TFormSectionItemProps) => {
         style.minWidth = labelWidth;
         style.maxWidth = labelWidth;
 
-        if (verticalAlign === 'middle') {
+        if (rowVerticalAlign === 'middle') {
             style.alignItems = 'center';
         }
-        if (verticalAlign === 'top') {
+        if (rowVerticalAlign === 'top') {
             style.alignItems = 'flex-start';
         }
 
         return style;
-    }, [labelWidth, verticalAlign]);
+    }, [labelWidth, rowVerticalAlign]);
 
 
     const contentStyle = useMemo((): CSSProperties => {
