@@ -33,7 +33,7 @@ const TFormSectionRow = (props: TFormSectionRowProps) => {
         <div className={`t-form-section-row ${rootClass}`} style={rootStyle}>
             <TFormSectionContext.Provider value={{
                 ...formContext,
-                rowVerticalAlign: props.formRowVerticalAlign,
+                rowVerticalAlign: props.verticalAlign,
             }}>
                 {props.children}
             </TFormSectionContext.Provider>

@@ -10,7 +10,7 @@ import TTextField from '@/components/input/text-field/TTextField';
 import useInputState from '@/common/hook/UseInputState';
 import TDropdown from '@/components/input/dropdown/TDropdown';
 import TToast, {notify} from '@/components/guide/toast/TToast';
-import {TDropdownRef, TTextFieldRef} from '@/components';
+import {TDropdownRef, TIconButton, TTextFieldRef} from '@/components';
 import TValidatorRule from '@/common/validator/TValidatorRule';
 
 
@@ -103,8 +103,9 @@ const Template = (args: TFormSectionProps) => {
                         </TFormSectionItem>
                     </TFormSectionRow>
                     <TFormSectionRow>
-                        <TFormSectionItem label={'Description'} span={2}>
-                            <TTextField counter={300} {...description} />
+                        <TFormSectionItem label={'Description'}>
+                            3대
+                            <TIconButton>search</TIconButton>
                         </TFormSectionItem>
                     </TFormSectionRow>
                 </TFormSection>
@@ -151,7 +152,7 @@ const Template = (args: TFormSectionProps) => {
                         </TFormSectionItem>
                     </TFormSectionRow>
 
-                    <TFormSectionRow formRowVerticalAlign={'top'}>
+                    <TFormSectionRow verticalAlign={'top'}>
                         <TFormSectionItem label={'Description'} span={1}>
                             <TTextField multiline counter={100} rows={5} {...description} />
                         </TFormSectionItem>
@@ -181,7 +182,7 @@ const Template = (args: TFormSectionProps) => {
                         </TFormSectionItem>
                     </TFormSectionRow>
 
-                    <TFormSectionRow formRowVerticalAlign={'top'}>
+                    <TFormSectionRow verticalAlign={'top'}>
                         <TFormSectionItem label={'Description'} span={2}>
                             <TTextField ref={noRowDescriptionRef} rules={[TValidatorRule.required()]} multiline
                                         counter={100} rows={5} {...description} />
