@@ -26,7 +26,7 @@ export interface TFormSectionProps extends TBaseProps {
 
 export interface TFormSectionRowProps extends TBaseProps {
     children: ReactNode,
-    formRowVerticalAlign?: RowVerticalAlign,
+    verticalAlign?: RowVerticalAlign,
 }
 
 export interface TFormSectionItemProps extends TBaseProps {
