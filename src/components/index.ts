@@ -14,7 +14,6 @@ export * from './data-container/form-section';
 export * from './data-container/action-bar';
 export * from './data-container/highlight-text';
 export * from './data-container/pagination';
-export * from './data-container/search-box';
 export * from './data-container/tab-box';
 export * from './data-container/step-box';
 export * from './data-container/card';
