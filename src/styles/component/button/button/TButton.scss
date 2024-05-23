@@ -36,30 +36,7 @@ $t-button-border--disabled: $t-gray-color-1;
         }
     }
 
-    // Variant
-    &.t-button--primary {
-        color: $t-primary-color;
-        background: $t-white-color;
-        border-color: $t-primary-color;
-    }
 
-    &.t-button--main {
-        color: $t-white-color;
-        background: $t-primary-color;
-        border: 1px solid $t-primary-color;
-    }
-
-    &.t-button--ghost {
-        color: $t-white-color;
-        background: transparent;
-        border: 1px solid $t-gray-color-5;
-    }
-
-    &.t-button--rounded {
-        color: $t-black-color;
-        background: $t-white-color;
-        border: 1px solid $t-gray-color-4;
-    }
 
     &:hover, &:focus-visible {
         color: $t-button-color--hover;
@@ -111,13 +88,28 @@ $t-button-border--disabled: $t-gray-color-1;
     }
 
     // [ Shape, Size ]
+
+    &.t-button--primary {
+        color: $t-primary-color;
+        background: $t-white-color;
+        border-color: $t-primary-color;
+    }
+    &.t-button--main {
+        color: $t-white-color;
+        background: $t-primary-color;
+        border: 1px solid $t-primary-color;
+    }
+    &.t-button--ghost {
+        color: $t-white-color;
+        background: transparent;
+        border: 1px solid $t-gray-color-5;
+    }
     &.t-button--loading {
         pointer-events: none;
     }
     &.t-button--rounded {
         border-radius: 50px;
     }
-
     &.t-button--xsmall {
         min-width: 32px;
         height: 20px;
