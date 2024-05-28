@@ -61,12 +61,6 @@ $t-button-border--disabled: $t-gray-color-1;
             background: rgba(0, 0, 0, 0.10);
             border: 1px solid $t-gray-color-5;
         }
-
-        &.t-button--rounded {
-            color: $t-black-color;
-            background: linear-gradient(0deg, rgba(0, 0, 0, 0.03) 0%, rgba(0, 0, 0, 0.03) 100%), $t-white-color;
-            border: 1px solid $t-gray-color-4;
-        }
     }
 
     &:focus-visible {
