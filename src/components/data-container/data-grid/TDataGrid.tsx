@@ -164,7 +164,7 @@ const TDataGrid = forwardRef((props: TDataGridProps, ref: Ref<AgGridReact>) => {
 });
 
 TDataGrid.defaultProps = {
-    maxRowsWithoutScroll: 6.5,
+    maxRowsWithoutScroll: 10.5,
     defaultColDef: {
         sortable: false,
         resizable: true,
