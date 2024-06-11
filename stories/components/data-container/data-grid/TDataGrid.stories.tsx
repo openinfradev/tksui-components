@@ -29,7 +29,6 @@ const Template = () => {
     useEffect(() => {
         fetch('https://www.ag-grid.com/example-assets/row-data.json')
             .then((result) => result.json())
-            .then((rows) => rows.slice(0, 2))
             .then((rows) => setRowData(rows));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
