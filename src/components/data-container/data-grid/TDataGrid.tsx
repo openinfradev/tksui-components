@@ -7,6 +7,9 @@ import TPagination from '../pagination/TPagination';
 import TActionBar from '~/data-container/action-bar/TActionBar';
 import NumberUtil from '@/common/util/NumberUtil';
 
+const DEFAULT_HEADER_HEIGHT = 32;
+const DEFAULT_ROW_HEIGHT = 40;
+
 const TDataGrid = forwardRef((props: TDataGridProps, ref: Ref<AgGridReact>) => {
 
     // region [Hooks]
@@ -24,15 +27,33 @@ const TDataGrid = forwardRef((props: TDataGridProps, ref: Ref<AgGridReact>) => {
 
     // region [Styles]
 
-    const generatedHeightProps = useMemo((): { height: string, domLayout: DomLayoutType } => {
+    const generatedHeightProps: { height: string, domLayout: DomLayoutType } = useMemo(() => {
+
         if (props.rowData.length === 0) {
-            return {height: props.height || '440px', domLayout: 'normal'};
+            return {
+                height: props.height || '440px',
+                domLayout: 'normal',
+            };
         }
         if (props.rowData.length > props.maxRowsWithoutScroll) {
-            return {height: props.height || '640px', domLayout: 'normal'};
+            return {
+                height: props.height || `${props.headerHeight + props.rowHeight * props.maxRowsWithoutScroll}px`,
+                domLayout: 'normal',
+            };
         }
-        return {height: '', domLayout: 'autoHeight'};
-    }, [props.height, props.maxRowsWithoutScroll, props.rowData.length]);
+
+        if (props.minRowsVisible) {
+            return {
+                height: props.height || `${props.headerHeight + props.rowHeight * props.minRowsVisible}px`,
+                domLayout: 'normal',
+            };
+        }
+
+        return {
+            height: '',
+            domLayout: 'autoHeight',
+        };
+    }, [props.headerHeight, props.height, props.maxRowsWithoutScroll, props.minRowsVisible, props.rowData.length, props.rowHeight]);
 
     const rootClass = useMemo((): string => {
         const clazz: string[] = [];
@@ -121,8 +142,6 @@ const TDataGrid = forwardRef((props: TDataGridProps, ref: Ref<AgGridReact>) => {
                              onSelectionChanged={onSelectionChanged}
                              {...props}
                              noRowsOverlayComponent={noRowsOverlayComponent}
-
-                             // TODO. [TR-YOO] 해당 옵션 검토하기
                              suppressPropertyNamesCheck
                              {...generatedHeightProps}
                 />
@@ -145,7 +164,7 @@ const TDataGrid = forwardRef((props: TDataGridProps, ref: Ref<AgGridReact>) => {
 });
 
 TDataGrid.defaultProps = {
-    maxRowsWithoutScroll: 6,
+    maxRowsWithoutScroll: 6.5,
     defaultColDef: {
         sortable: false,
         resizable: true,
@@ -155,8 +174,8 @@ TDataGrid.defaultProps = {
     popupParent: document.body,
     suppressRowClickSelection: true,
     enableCellTextSelection: true,
-    headerHeight: 32,
-    rowHeight: 40,
+    headerHeight: DEFAULT_HEADER_HEIGHT,
+    rowHeight: DEFAULT_ROW_HEIGHT,
 };
 
 TDataGrid.displayName = 'TDataGrid';

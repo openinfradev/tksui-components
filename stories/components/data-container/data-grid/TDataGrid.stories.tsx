@@ -26,12 +26,10 @@ const Template = () => {
 
     const selectedRows = useInputState([]);
 
-    const fruits = ['peach', 'banana', 'mango', 'apple', 'cherry', 'melon', 'water melon', 'strawberry', 'peach'];
-
     useEffect(() => {
         fetch('https://www.ag-grid.com/example-assets/row-data.json')
             .then((result) => result.json())
-            .then((rows) => rows.map((row) => ({...row, fruit: fruits[Math.floor(Math.random() * fruits.length)]})))
+            .then((rows) => rows.slice(0, 2))
             .then((rows) => setRowData(rows));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -50,7 +48,6 @@ const Template = () => {
         },
         {headerName: '브랜드', field: 'make'},
         {headerName: '가격', field: 'price', type: 'rightAligned'},
-        {headerName: '과일', field: 'fruit', flex: 1},
     ]);
 
     const gridRightAction = useMemo(() => (<>
@@ -63,7 +60,6 @@ const Template = () => {
     return (<>
         <TDataGrid ref={gridRef}
                    rowData={rowData}
-                   height={'300px'}
                    rowSelection={'multiple'}
                    columnDefs={columnDefs}
                    rightAction={gridRightAction}
