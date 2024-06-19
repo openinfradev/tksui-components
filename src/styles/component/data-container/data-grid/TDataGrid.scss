@@ -54,8 +54,11 @@
         --ag-row-border-color: #{$t-grid-border-color--02};
 
         --ag-header-cell-hover-background-color: #{$t-blue-gray-color-3};
+        --ag-header-background-color: #{$t-white-color};
         --ag-border-color: none;
         --ag-foreground-color: #{$t-gray-color-6};
+        --ag-background-color: #{$t-white-color};
+        --ag-row-hover-color: #{$t-gray-color-1};
 
         .ag-header {
 
