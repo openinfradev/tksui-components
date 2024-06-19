@@ -2,6 +2,7 @@ import {Fragment, useCallback, useContext} from 'react';
 import {TStepBoxHeaderProps} from '@/components';
 import TStepBoxContext from './TStepBoxContext';
 import TIcon from '~/icon/TIcon';
+import themeToken from '~style/designToken/ThemeToken.module.scss';
 
 const TStepBoxHeader = (props: TStepBoxHeaderProps) => {
 
@@ -72,7 +73,7 @@ const TStepBoxHeader = (props: TStepBoxHeaderProps) => {
                                 {/* Number */}
                                 {
                                     (item.stepNumber < context.currentStep)
-                                        ? <TIcon medium color={'white'}>check</TIcon>
+                                        ? <TIcon medium color={themeToken.tWhiteColor}>check</TIcon>
                                         : item.stepNumber
                                 }
 

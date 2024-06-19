@@ -19,6 +19,7 @@
 
             .t-page__title-area__title {
                 @include typo-h3;
+                color: $t-black-color;
             }
         }
 
@@ -112,6 +113,7 @@
         .t-page__information-area__title {
             @include typo-subtitle-2;
             margin-bottom: $t-spacing-10;
+            color: $t-black-color;
         }
 
         .t-page__information-area__content {
@@ -120,6 +122,7 @@
             width: calc(100% - $t-spacing-24 * 2);
             white-space: pre-line;
             overflow-y: auto;
+            color: $t-black-color;
 
             @include typo-body-3;
         }
