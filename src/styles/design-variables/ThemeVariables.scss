@@ -1,42 +1,4 @@
 :root {
-
-    // region [Color]
-
-    --t-primary-color: #3617CE;
-
-    --t-secondary-color-red: #E74C3C;
-    --t-secondary-color-orange: #FFBF00;
-    --t-secondary-color-salmon: #F2918D;
-    --t-secondary-color-yellow: #FFDA7C;
-    --t-secondary-color-blue: #95A8FF;
-    --t-secondary-color-purple-1: #704AEC;
-    --t-secondary-color-purple-2: #B098FF;
-    --t-secondary-color-purple-3: #C65DEB;
-    --t-secondary-color-purple-4: #E4DDFF;
-    --t-secondary-color-blue-gray: #F9FAFD;
-    --t-secondary-color-pink-1: #FA70B0;
-    --t-secondary-color-pink-2: #FFB4FF;
-
-    --t-white-color: #FFFFFF;
-
-    --t-gray-color--1: #F4F4F4;
-    --t-gray-color--2: #E3E3E4;
-    --t-gray-color--3: #B8BABC;
-    --t-gray-color--4: #999999;
-    --t-gray-color--5: #71747A;
-    --t-gray-color--6: #54575D;
-
-    --blue-gray-color-1: #F9FAFD;
-    --blue-gray-color-2: #EFF2FF;
-    --blue-gray-color-3: #E1E5F7;
-    --blue-gray-color-4: #4B5563;
-    --blue-gray-color-5: #2B394E;
-
-    --t-black-color: #121821;
-
-    // endregion
-
-
     // region [Typography]
 
     --t-font-family: Roboto, 'Noto Sans', 'Noto Sans KR', '맑은 고딕', 'Malgun Gothic', 'Apple SD Gothic Neo', '돋움', Dotum, 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -72,6 +34,48 @@
     --t-line-height-default: 1; // 텍스트의 배수;
     --t-line-height-header: 1.5; // 텍스트의 배수;
     --t-line-height-body: 1.75;
+
+    // endregion
+
+    // region [Color]
+
+    --t-primary-color: #3617CE;
+
+    --t-white-color: #FFFFFF;
+
+    --t-gray-color--1: #F4F4F4;
+    --t-gray-color--2: #E3E3E4;
+    --t-gray-color--3: #B8BABC;
+    --t-gray-color--4: #999999;
+    --t-gray-color--5: #71747A;
+    --t-gray-color--6: #54575D;
+
+    --t-black-color: #121821;
+
+    --blue-gray-color-1: #F9FAFD;
+    --blue-gray-color-2: #EFF2FF;
+    --blue-gray-color-3: #E1E5F7;
+    --blue-gray-color-4: #4B5563;
+    --blue-gray-color-5: #2B394E;
+
+    --t-secondary-color-blue: #95A8FF;
+    --t-secondary-color-purple-1: #704AEC;
+    --t-secondary-color-purple-2: #B098FF;
+    --t-secondary-color-purple-3: #C65DEB;
+    --t-secondary-color-purple-4: #E4DDFF;
+    --t-secondary-color-pink-1: #FA70B0;
+    --t-secondary-color-pink-2: #FFB4FF;
+
+    --t-secondary-color-red: #E74C3C;
+    --t-secondary-color-orange: #FFBF00;
+    --t-secondary-color-salmon: #F2918D;
+    --t-secondary-color-yellow: #FFDA7C;
+
+
+    // endregion
+
+
+
 
     // region [Shadow]
 
