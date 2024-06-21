@@ -3,7 +3,7 @@ $t-button-color--hover: $t-black-color;
 $t-button-color--disabled: $t-gray-color-4;
 
 $t-button-background--default: $t-white-color;
-$t-button-background--hover: linear-gradient(0deg, rgba(0, 0, 0, 0.03) 0%, rgba(0, 0, 0, 0.03) 100%), #FFF;
+$t-button-background--hover: $t-gray-color-1;
 $t-button-background--disabled: $t-gray-color-1;
 
 $t-button-border--default: $t-gray-color-4;

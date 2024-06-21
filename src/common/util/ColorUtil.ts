@@ -33,4 +33,28 @@ function tintColor(baseColor: string, amount: number): string {
     return isRGBA ? `rgba(${tintedColor.join(',')},${alpha})` : `rgb(${tintedColor.join(',')})`;
 }
 
-export default {shadeColor, tintColor};
+
+/**
+ * RGB 색상 문자열에서 밝기 값을 추출합니다.
+ *
+ * 이 함수는 `rgb(r, g, b)` 또는 `rgba(r, g, b, a)` 형식의 RGB 색상 문자열을 받아
+ * 밝기 값을 백분율 (0에서 100)로 반환합니다.
+ *
+ * @param {string} color - RGB 색상 문자열 (예: 'rgb(255, 0, 0)' 또는 'rgba(255, 0, 0, 1)').
+ * @returns {number} 밝기 값 (백분율, 0에서 100).
+ */
+function getLightness(color: string): number {
+
+    const rgb: number[] = color.match(/\d+/g)?.map(Number);
+
+    if (!rgb || rgb.length < 3) {
+        return 0;
+    }
+
+    const [r, g, b] = rgb.map((c) => c / 255);
+    const max = Math.max(r, g, b);
+    const min = Math.min(r, g, b);
+    return ((max + min) / 2) * 100;
+}
+
+export default {shadeColor, tintColor, getLightness};
