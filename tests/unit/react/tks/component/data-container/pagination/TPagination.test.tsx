@@ -6,6 +6,7 @@ import TPagination from '~/data-container/pagination/TPagination';
 
 jest.mock('@/common/util/ColorUtil', () => ({
     shadeColor: jest.fn(() => 'blue'),
+    getLightness: jest.fn(() => 50),
 }));
 
 describe('TPagination', () => {

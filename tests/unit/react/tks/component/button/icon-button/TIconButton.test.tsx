@@ -5,6 +5,7 @@ import TIconButton from '~/button/icon-button/TIconButton';
 
 jest.mock('@/common/util/ColorUtil', () => ({
     shadeColor: jest.fn(() => 'blue'),
+    getLightness: jest.fn(() => 50),
 }));
 
 describe('TIconButton', () => {

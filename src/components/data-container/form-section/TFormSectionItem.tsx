@@ -80,7 +80,7 @@ const TFormSectionItem = (props: TFormSectionItemProps) => {
 
     const contentStyle = useMemo((): CSSProperties => {
 
-        const style: CSSProperties = {...props.contentStyle};
+        let style: CSSProperties = {};
 
         if (rowVerticalAlign === 'middle') {
             style.alignItems = 'center';
@@ -88,6 +88,8 @@ const TFormSectionItem = (props: TFormSectionItemProps) => {
         if (rowVerticalAlign === 'top') {
             style.alignItems = 'flex-start';
         }
+
+        style = {...style, ...props.contentStyle};
 
         return style;
     }, [props.contentStyle, rowVerticalAlign]);

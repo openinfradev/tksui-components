@@ -38,6 +38,7 @@ const ValidationTemplate = (args: TTextArrayFieldProps) => {
                              rules={[rule.requiredArr('필수값 입니다.')]}
                              value={value}
                              onChange={setValue}
+                             placeholder={'값을 입력하고 엔터를 눌러주세요.'}
                              ref={textArrayFieldRef}
             />
 

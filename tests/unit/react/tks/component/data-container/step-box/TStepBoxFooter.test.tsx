@@ -5,6 +5,7 @@ import TStepBoxContext from '~/data-container/step-box/TStepBoxContext';
 
 jest.mock('@/common/util/ColorUtil', () => ({
     shadeColor: jest.fn(() => 'blue'),
+    getLightness: jest.fn(() => 50),
 }));
 
 describe('TStepBoxFooter', () => {

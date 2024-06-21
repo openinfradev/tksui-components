@@ -6,7 +6,7 @@ export interface TTextArrayFieldProps extends TValidatorProps, TBaseProps {
     value: string[],
     duplicable?: boolean,
     duplicateMessage?: string,
-    hint?: string,
+    placeholder?: string,
 
     onChange(value: string[]): void,
 }

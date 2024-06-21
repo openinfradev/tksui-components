@@ -5,6 +5,7 @@ import TFormSectionItem from '~/data-container/form-section/TFormSectionItem';
 
 jest.mock('@/common/util/ColorUtil', () => ({
     shadeColor: jest.fn(() => 'blue'),
+    getLightness: jest.fn(() => 50),
 }));
 
 describe('TFormSection', () => {

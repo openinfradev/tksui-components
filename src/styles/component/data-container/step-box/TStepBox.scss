@@ -44,7 +44,7 @@
                     width: max-content;
                 }
 
-                &.t-step-box-header__step__number--prev {background: $t-primary-color;}
+                &.t-step-box-header__step__number--prev {background: $t-primary-color; color: $t-black-color;}
                 &.t-step-box-header__step__number--current {outline: 2px solid $t-primary-color;color: $t-primary-color;}
                 &.t-step-box-header__step__number--next {outline: 2px solid $t-blue-gray-color-3;color: $t-gray-color-4;}
             }

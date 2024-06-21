@@ -79,7 +79,7 @@ const TTextArrayField = forwardRef((props: TTextArrayFieldProps, ref: Ref<TTextA
 
     // region [Events]
 
-    const onKeydownEnter = useCallback((e) => {
+    const onKeydownEnter = useCallback(() => {
 
         const candidateItem = currentInput.trim();
 
@@ -106,11 +106,6 @@ const TTextArrayField = forwardRef((props: TTextArrayFieldProps, ref: Ref<TTextA
         setCurrentInput(value);
     }, [validator]);
 
-    const onfocusText = useCallback(() => {
-
-        validator.clearValidation();
-    }, [validator]);
-
     const onClickInputContainer = useCallback(() => {
 
         textFieldRef.current?.focus();
@@ -133,10 +128,10 @@ const TTextArrayField = forwardRef((props: TTextArrayFieldProps, ref: Ref<TTextA
                     })
                 }
                 <TTextField value={currentInput}
-                            // onFocus={onfocusText}
                             onChange={onChangeText}
                             onKeyDownEnter={onKeydownEnter}
                             dense
+                            placeholder={props.value.length === 0 ? props.placeholder : null}
                             ref={textFieldRef}
                 />
             </span>
@@ -154,6 +149,7 @@ const TTextArrayField = forwardRef((props: TTextArrayFieldProps, ref: Ref<TTextA
 TTextArrayField.defaultProps = {
     lazy: true,
     duplicateMessage: '이미 입력된 값입니다.',
+    placeholder: '값을 입력하고 엔터를 눌러주세요.',
 };
 
 TTextArrayField.displayName = 'TTextArrayField';

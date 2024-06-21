@@ -57,7 +57,9 @@ const useRipple = (ref: MutableRefObject<HTMLElement>) => {
                 width: `${radius * 2}px`,
                 height: `${radius * 2}px`,
                 opacity: '0.1',
-                background: colorUtil.shadeColor(baseColor, 40),
+                background: colorUtil.getLightness(baseColor) < 50
+                    ? colorUtil.tintColor(baseColor, 40)
+                    : colorUtil.shadeColor(baseColor, 40),
                 borderRadius: '50%',
                 animation: '0.35s ripple linear',
             };

@@ -30,11 +30,13 @@
             font-family: $t-font-family;
             width: 100%;
             color: $t-black-color;
+            background-color: $t-white-color;
             border: none;
             outline: none;
             @include typo-body-3;
             background: transparent;
             resize: none;
+
 
             &::placeholder {
                 color: $t-font-color--placeholder;

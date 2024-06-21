@@ -1,6 +1,7 @@
 import {MouseEvent, MouseEventHandler, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import TIcon from '../../icon/TIcon';
 import {TPageProps} from '@/components';
+import themeToken from '~style/designToken/ThemeToken.module.scss';
 
 const defaultPanelWidth = '280px';
 
@@ -124,6 +125,7 @@ const TPage = (props: TPageProps) => {
                         props.infoPanelContent && (
                             <TIcon fill
                                    clickable
+                                   color={themeToken.tBlackColor}
                                    onClick={() => { setIsInfoPanelOpened(!isInfoPanelOpened); }}>info</TIcon>
                         )
                     }

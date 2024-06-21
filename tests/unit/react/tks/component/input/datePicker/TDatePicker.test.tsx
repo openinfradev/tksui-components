@@ -5,6 +5,7 @@ import {useInputState} from '@/common/hook';
 
 jest.mock('@/common/util/ColorUtil', () => ({
     shadeColor: jest.fn(() => 'blue'),
+    getLightness: jest.fn(() => 50),
 }));
 
 const datePickerTestId = 't-date-picker';

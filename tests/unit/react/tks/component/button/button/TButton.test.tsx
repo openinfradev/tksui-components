@@ -10,6 +10,7 @@ const sizeList = Object.values(buttonSize);
 
 jest.mock('@/common/util/ColorUtil', () => ({
     shadeColor: jest.fn(() => 'blue'),
+    getLightness: jest.fn(() => 50),
 }));
 
 describe('TButton', () => {

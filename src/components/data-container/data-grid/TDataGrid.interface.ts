@@ -16,6 +16,8 @@ export interface TPageResponseVO extends TPageRequestVO {
 
 export interface TDataGridProps extends TBaseProps, AgReactUiProps {
     height?: string,
+    maxRowsWithoutScroll?: number,
+    minRowsVisible?: number,
 
     leftAction?: ReactElement
     centerAction?: ReactElement,
@@ -27,7 +29,6 @@ export interface TDataGridProps extends TBaseProps, AgReactUiProps {
     noHeader?: boolean,
 
     paging?: TPageResponseVO,
-    maxRowsWithoutScroll?: number,
 
     noRowsOverlayComponent?: ReactNode,
 

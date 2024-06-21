@@ -14,6 +14,7 @@ const variantList = Object.values(ButtonGroupVariant);
 
 jest.mock('@/common/util/ColorUtil', () => ({
     shadeColor: jest.fn(() => 'blue'),
+    getLightness: jest.fn(() => 50),
 }));
 
 describe('TButtonGroup', () => {

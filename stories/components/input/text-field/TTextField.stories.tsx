@@ -29,7 +29,7 @@ const NormalTemplate = (args: TTextFieldProps) => {
         successTextFieldRef.current.validate();
         // errorTextAreaRef.current.validate();
         successTextAreaRef.current.validate();
-    }, []);
+    }, [errorTextFieldRef, successTextAreaRef, successTextFieldRef]);
 
     const containerStyle: CSSProperties = {
         width: '500px',

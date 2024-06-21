@@ -5,6 +5,7 @@ import TButton from '~/button/button/TButton';
 
 jest.mock('@/common/util/ColorUtil', () => ({
     shadeColor: jest.fn(() => 'blue'),
+    getLightness: jest.fn(() => 50),
 }));
 
 describe('TActionBar', () => {

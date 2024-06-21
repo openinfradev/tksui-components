@@ -2,6 +2,10 @@
     display: flex;
     flex-direction: column;
 
+    .t-section__header__label {
+        color: $t-black-color;
+    }
+
     .t-form-section__content {
         flex: 1 1 auto;
         display: flex;
@@ -20,6 +24,8 @@
             @include typo-element-3;
         }
     }
+
+
 
 
     &.t-form-section--form-label-item-align--vertical {

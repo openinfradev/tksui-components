@@ -21,12 +21,12 @@ const AlignmentTemplate = (args) => {
     ];
     return (
         <div style={{marginTop: '120px', display: 'flex', justifyContent: 'center', gap: '60px'}}>
-            <TDropHolder {...args} items={items} alignment={'bottom-left'}><TIcon>south_west</TIcon></TDropHolder>
-            <TDropHolder {...args} items={items} alignment={'bottom-center'}><TIcon>south</TIcon></TDropHolder>
-            <TDropHolder {...args} items={items} alignment={'bottom-right'}><TIcon>south_east</TIcon></TDropHolder>
-            <TDropHolder {...args} items={items} alignment={'top-left'}><TIcon>north_west</TIcon></TDropHolder>
-            <TDropHolder {...args} items={items} alignment={'top-center'}><TIcon>north</TIcon></TDropHolder>
-            <TDropHolder {...args} items={items} alignment={'top-right'}><TIcon>north_east</TIcon></TDropHolder>
+            <TDropHolder {...args} items={items} alignment={'bottom-left'}><TIcon color={'gray'}>south_west</TIcon></TDropHolder>
+            <TDropHolder {...args} items={items} alignment={'bottom-center'}><TIcon color={'gray'}>south</TIcon></TDropHolder>
+            <TDropHolder {...args} items={items} alignment={'bottom-right'}><TIcon color={'gray'}>south_east</TIcon></TDropHolder>
+            <TDropHolder {...args} items={items} alignment={'top-left'}><TIcon color={'gray'}>north_west</TIcon></TDropHolder>
+            <TDropHolder {...args} items={items} alignment={'top-center'}><TIcon color={'gray'}>north</TIcon></TDropHolder>
+            <TDropHolder {...args} items={items} alignment={'top-right'}><TIcon color={'gray'}>north_east</TIcon></TDropHolder>
         </div>
 
     );

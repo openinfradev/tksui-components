@@ -5,6 +5,7 @@ import TTabBoxContext from '~/data-container/tab-box/TTabBoxContext';
 
 jest.mock('@/common/util/ColorUtil', () => ({
     shadeColor: jest.fn(() => 'blue'),
+    getLightness: jest.fn(() => 50),
 }));
 
 describe('TTabItem', () => {

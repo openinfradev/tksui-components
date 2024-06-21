@@ -6,7 +6,7 @@ import materialIconGallery from './material-icon-gallery';
 import TTextField from '~/input/text-field/TTextField';
 import TSwitch from '~/input/switch/TSwitch';
 import TFormSection from '~/data-container/form-section/TFormSection';
-import {TButton, TFormItem, TFormRow} from '@/components';
+import {TButton, TFormSectionItem, TFormSectionRow} from '@/components';
 import TDropdown from '~/input/dropdown/TDropdown';
 import TToast, {notify} from '@/components/guide/toast/TToast';
 import TTooltip from '../../../src/components/guide/tooltip/TTooltip';
@@ -84,17 +84,17 @@ const Template = (args: TIconProps) => {
             </a>
         </div>
         <TFormSection column={2}>
-            <TFormRow>
-                <TFormItem label={'검색'}>
+            <TFormSectionRow>
+                <TFormSectionItem label={'검색'}>
                     <TTextField value={searchText} onChange={setSearchText} searchable/>
                     <TButton large onClick={onClickOfficialSearch}>공식 문서에서 검색</TButton>
-                </TFormItem>
-                <TFormItem label={'FILL'}>
+                </TFormSectionItem>
+                <TFormSectionItem label={'FILL'}>
                     <TSwitch value={isFilled} onChange={(value: boolean) => setIsFilled(value)}/>
-                </TFormItem>
-            </TFormRow>
-            <TFormRow>
-                <TFormItem label={'SIZE'}>
+                </TFormSectionItem>
+            </TFormSectionRow>
+            <TFormSectionRow>
+                <TFormSectionItem label={'SIZE'}>
                     <TDropdown value={size} onChange={(value: string) => setSize(value)} items={[
                         {text: 'XSmall(16x16)', value: 'xsmall'},
                         {text: 'Small(20x20)', value: 'small'},
@@ -102,11 +102,11 @@ const Template = (args: TIconProps) => {
                         {text: 'Large(32x32)', value: 'large'},
                         {text: 'XLarge(48x48)', value: 'xlarge'},
                     ]}/>
-                </TFormItem>
-                <TFormItem label={'COLOR'}>
+                </TFormSectionItem>
+                <TFormSectionItem label={'COLOR'}>
                     <TTextField value={color} onChange={setColor}/>
-                </TFormItem>
-            </TFormRow>
+                </TFormSectionItem>
+            </TFormSectionRow>
         </TFormSection>
 
         <div style={{
