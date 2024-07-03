@@ -1,3 +1,5 @@
+import themeToken from '~style/designToken/ThemeToken.module.scss';
+
 
 /* eslint-disable max-len */
 const TOriginalImage = {
@@ -14,31 +16,29 @@ const TOriginalImage = {
     ),
     t_checkbox_read_only_on: (
         <svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
-            <g>
-                <rect x='0.5' y='0.5' width='15' height='15' rx='3.5' fill='#F4F4F4' stroke='#B8BABC'/>
-                <path d='M6.58327 11.25L3.7666 8.41667L4.59993 7.58333L6.58327 9.55L11.3999 4.75L12.2333 5.6L6.58327 11.25Z' fill='#71747A'
-                      stroke='none'/>
-            </g>
+            <rect x='0.5' y='0.5' width='15' height='15' rx='3.5' fill={themeToken.tGrayColor1} stroke={themeToken.tGrayColor3} />
+            <path d='M6.58327 11.25L3.7666 8.41667L4.59993 7.58333L6.58327 9.55L11.3999 4.75L12.2333 5.6L6.58327 11.25Z' fill={themeToken.tGrayColor5}
+                  stroke='none'/>
         </svg>
     ),
     t_checkbox_read_only_off: (
         <svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
             <g>
-                <rect x='0.5' y='0.5' width='15' height='15' rx='3.5' fill='#F4F4F4' stroke='#B8BABC'/>
+                <rect x='0.5' y='0.5' width='15' height='15' rx='3.5' fill={themeToken.tGrayColor1} stroke={themeToken.tGrayColor3} />
             </g>
         </svg>
     ),
     t_checkbox_disabled_on: (
         <svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
-            <rect x='0.5' y='0.5' width='15' height='15' rx='3.5' fill='#F4F4F4' stroke='#B8BABC' />
-            <path d='M6.58327 11.25L3.7666 8.41667L4.59993 7.58333L6.58327 9.55L11.3999 4.75L12.2333 5.6L6.58327 11.25Z' fill='#B8BABC'
+            <rect x='0.5' y='0.5' width='15' height='15' rx='3.5' fill={themeToken.tGrayColor1} stroke={themeToken.tGrayColor3} />
+            <path d='M6.58327 11.25L3.7666 8.41667L4.59993 7.58333L6.58327 9.55L11.3999 4.75L12.2333 5.6L6.58327 11.25Z' fill={themeToken.tGrayColor3}
                   stroke='none'/>
         </svg>
     ),
     t_checkbox_disabled_off: (
         <svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
             <g>
-                <rect x='0.5' y='0.5' width='15' height='15' rx='3.5' fill='#F4F4F4' stroke='#B8BABC'/>
+                <rect x='0.5' y='0.5' width='15' height='15' rx='3.5' fill={themeToken.tGrayColor1} stroke={themeToken.tGrayColor3} />
             </g>
         </svg>
     ),
@@ -68,7 +68,7 @@ const TOriginalImage = {
 
     ),
     t_radio_disabled_off: (
-        <svg width='16' height='16' viewBox='0 0 16 16' fill='#F4F4F4' stroke='#B8BABC' xmlns='http://www.w3.org/2000/svg'>
+        <svg width='16' height='16' viewBox='0 0 16 16' fill={themeToken.tGrayColor1} stroke={themeToken.tGrayColor3} xmlns='http://www.w3.org/2000/svg'>
             <g>
                 <circle id='Ellipse 3258' cx='8' cy='8' r='7.5' />
             </g>

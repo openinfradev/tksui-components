@@ -9,7 +9,7 @@
         outline: none;
 
         .t-radio__icon { border-radius: 2px; }
-        .t-radio__label { @include typo-body-3; }
+        .t-radio__label { @include typo-body-3; color: $t-black-color; }
 
         &:is(:focus-within, :hover) .t-radio__icon.t-radio__icon--deselected svg { fill: $t-white-color; stroke: $t-primary-color; }
     }
