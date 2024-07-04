@@ -118,7 +118,6 @@
 
         .t-page__information-area__content {
             position: absolute;
-            line-height: $t-line-height-body;
             width: calc(100% - $t-spacing-24 * 2);
             white-space: pre-line;
             overflow-y: auto;

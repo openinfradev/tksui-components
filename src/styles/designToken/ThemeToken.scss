@@ -154,11 +154,6 @@ $t-shadow--modal: var(--t-shadow-modal);
 
 // content
 
-// remove
-$t-line-height-default: var(--t-line-height-default);
-$t-line-height-header: var(--t-line-height-header);
-$t-line-height-body: var(--t-line-height-body);
-
 
 $t-point-color: var(--t-point-color) !default;
 
@@ -195,16 +190,11 @@ $t-status-color--warning: var(--t-status-color--warning) !default;
 
 
 // font color
-$t-font-color--primary-01: $t-primary-color !default; // #333333
-$t-font-color--primary-02: $t-primary-color--tint-6 !default; // #333333
-$t-font-color--primary-03: $t-gray-color-5 !default; // #333333
 
 $t-font-color--selected: $t-primary-color;
 $t-font-color--placeholder: $t-gray-color-4;
 $t-font-color--read-only: $t-black-color;
 $t-font-color--disabled: $t-gray-color-4;
-$t-font-color--default: $t-gray-color-6;
-$t-font-color--label: $t-gray-color-3;
 
 
 $t-font-weight--selected: var(--t-font-weight-medium);
