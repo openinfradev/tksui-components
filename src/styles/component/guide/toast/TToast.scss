@@ -1,11 +1,7 @@
 .tks-toast {
 
     --toastify-color-light: #{$t-white-color};
-
-    --toastify-text-color-info: #{$t-black-color};
-    --toastify-text-color-success: #{$t-black-color};
-    --toastify-text-color-warning: #{$t-black-color};
-    --toastify-text-color-error: #{$t-black-color};
+    --toastify-text-color-light: #{$t-gray-color-4};
 
     --toastify-color-progress-light: #{$t-primary-color};
     --toastify-color-progress-info: #{$t-primary-color};
@@ -54,9 +50,13 @@
         }
     }
 
-    .Toastify__close-button > svg {
-        width: 20px;
-        height: 20px;
+    .Toastify__close-button {
+        color: $t-black-color;
+
+        & > svg {
+            width: 20px;
+            height: 20px;
+        }
     }
 
     .Toastify__progress-bar {

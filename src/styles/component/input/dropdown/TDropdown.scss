@@ -157,7 +157,7 @@
                 }
             }
 
-            &.t-dropdown__items__item--focused { background: $t-background-color--hover; }
+            &.t-dropdown__items__item--focused { background: $t-blue-gray-color-2; }
             &:focus-within { background: $t-blue-gray-color-1; }
             &:hover {
                 background: $t-blue-gray-color-1;

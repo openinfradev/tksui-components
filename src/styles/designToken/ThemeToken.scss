@@ -32,12 +32,6 @@ $t-blue-gray-color-5: var(--blue-gray-color-5) !default; // #2B394E
 
 $t-black-color: var(--t-black-color) !default; // #121821
 
-
-
-$t-background-color--hover: $t-blue-gray-color-2;
-$t-background-color--read-only: $t-gray-color-1;
-
-
 // endregion
 
 
@@ -137,6 +131,7 @@ $t-spacing-48: 48px;
 $t-spacing-56: 56px;
 $t-spacing-64: 64px;
 $t-spacing-72: 72px;
+$t-spacing-80: 80px;
 
 // endregion
 
@@ -214,31 +209,6 @@ $t-font-color--label: $t-gray-color-3;
 
 $t-font-weight--selected: var(--t-font-weight-medium);
 $t-border-color--default: $t-gray-color-3;
-
-// background color
-$t-background-color-01: $t-primary-color--tint-9;
-$t-background-color-02: $t-primary-color--tint-10;
-$t-background-color-03: $t-primary-color--tint-11;
-
-// chart color
-$t-chart-color-01: $t-primary-color--shade-1;
-$t-chart-color-02: $t-primary-color--shade-2;
-$t-chart-color-03: $t-primary-color--shade-3;
-$t-chart-color-04: $t-primary-color--shade-4;
-$t-chart-color-05: $t-primary-color--shade-5;
-$t-chart-color-06: color-mix(in srgb, var(--t-point-color), black 20%);
-$t-chart-color-07: color-mix(in srgb, var(--t-point-color), black 20%);
-$t-chart-color-08: color-mix(in srgb, var(--t-point-color), black 20%);
-$t-chart-color-09: color-mix(in srgb, var(--t-point-color), black 20%);
-$t-chart-color-10: color-mix(in srgb, var(--t-point-color), black 20%);
-
-// grid color
-$t-grid-border-color--01: #DDDDDD;
-$t-grid-border-color--02: $t-blue-gray-color-2;
-$t-grid-border-color--03: $t-black-color;
-$t-grid-background-color--01: $t-gray-color-2;
-
-$t-input-border-color--01: #CCCCCC;
 
 
 // endregion
