@@ -17,7 +17,6 @@
             @include icon-color($t-gray-color-4);
 
             &:hover { cursor: pointer; @include icon-color($t-primary-color);}
-            &:active { @include icon-color($t-primary-color--shade-2)}
 
             &.t-pagination__nav-button-container__button--disabled {
                 @include icon-color($t-gray-color-2);
