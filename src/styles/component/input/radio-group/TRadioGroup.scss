@@ -23,10 +23,10 @@
 
     &.t-radio-group--failure {
         @include animation-shake();
-        .t-radio-group__message {color: $t-status-color--error;}
+        .t-radio-group__message {color: $t-status-color-error;}
     }
     &.t-radio-group--success {
-        .t-radio-group__message {color: $t-status-color--success;}
+        .t-radio-group__message {color: $t-status-color-success;}
     }
 }
 

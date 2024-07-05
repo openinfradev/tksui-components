@@ -142,7 +142,7 @@
             &.t-dropdown__items__item--selected {
                 background: $t-blue-gray-color-1;
                 color: $t-font-color--selected;
-                font-weight: $t-font-weight--selected;
+                @include typo-body-2;
             }
 
             .t-dropdown__items__item__checkbox .t-checkbox__container:focus .t-checkbox__icon { outline: none; }
@@ -184,13 +184,13 @@
 
     &.t-dropdown--failure {
         @include animation-shake();
-        .t-dropdown__control {border-color: $t-status-color--error;color: $t-status-color--error;}
-        .t-dropdown__details {color: $t-status-color--error;}
+        .t-dropdown__control {border-color: $t-status-color-error;color: $t-status-color-error;}
+        .t-dropdown__details {color: $t-status-color-error;}
     }
 
     &.t-dropdown--success {
-        .t-dropdown__control {border-color: $t-status-color--success; color: $t-status-color--success;}
-        .t-dropdown__details {color: $t-status-color--success;}
+        .t-dropdown__control {border-color: $t-status-color-success; color: $t-status-color-success;}
+        .t-dropdown__details {color: $t-status-color-success;}
     }
 
     &.t-dropdown--underline .t-dropdown__control {

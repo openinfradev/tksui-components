@@ -99,12 +99,12 @@
 
         @include animation-shake();
 
-        .t-text-area__container {border-color: $t-status-color--error;}
-        .t-text-area__details {color: $t-status-color--error;}
+        .t-text-area__container {border-color: $t-status-color-error;}
+        .t-text-area__details {color: $t-status-color-error;}
     }
     &.t-text-area--success {
-        .t-text-area__container {border-color: $t-status-color--success;}
-        .t-text-area__details {color: $t-status-color--success;}
+        .t-text-area__container {border-color: $t-status-color-success;}
+        .t-text-area__details {color: $t-status-color-success;}
     }
 
 }

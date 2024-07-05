@@ -21,10 +21,10 @@
 
     &.t-checkbox-group--failure {
         @include animation-shake();
-        .t-checkbox-group__message {color: $t-status-color--error;}
+        .t-checkbox-group__message {color: $t-status-color-error;}
     }
     &.t-checkbox-group--success {
-        .t-checkbox-group__message {color: $t-status-color--success;}
+        .t-checkbox-group__message {color: $t-status-color-success;}
     }
 }
 
