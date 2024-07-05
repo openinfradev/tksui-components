@@ -34,10 +34,10 @@
 
     &.t-text-array-field--failure {
         @include animation-shake();
-        border-color: $t-status-color--error;
+        border-color: $t-status-color-error;
 
         .t-text-array-field__message {
-            color: $t-status-color--error;
+            color: $t-status-color-error;
         }
     }
 

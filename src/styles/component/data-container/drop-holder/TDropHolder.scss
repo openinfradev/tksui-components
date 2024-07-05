@@ -48,11 +48,6 @@
             &.t-drop-holder__items__item--divider {
                 border-top: 1px solid $t-blue-gray-color-3;
             }
-            &.t-drop-holder__items__item--selected {
-                background: $t-background-color--hover;
-                color: $t-font-color--selected;
-                font-weight: $t-font-weight--selected;
-            }
             &.t-drop-holder__items__item--disabled {
                 pointer-events: none;
                 cursor: default;
@@ -61,8 +56,8 @@
 
             .t-drop-holder__items__item__checkbox .t-checkbox__container:focus .t-checkbox__icon { outline: none; }
 
-            &.t-drop-holder__items__item--focused { background: $t-background-color--hover; }
-            &:hover { background: $t-background-color--hover; }
+            &.t-drop-holder__items__item--focused { background: $t-blue-gray-color-2; }
+            &:hover { background: $t-blue-gray-color-2; }
         }
 
     }

@@ -22,7 +22,7 @@
     color: $color;
 }
 
-@mixin require-mark { content: ' *'; color: $t-status-color--required; font-weight: $t-font-weight-bold; }
+@mixin require-mark { content: ' *'; color: $t-status-color-required; font-weight: $t-font-weight-bold; }
 
 @mixin typo-h1 {font-size: $t-font-size-h1; line-height: $t-line-height-h1; font-weight: $t-font-weight-h1; }
 @mixin typo-h2 {font-size: $t-font-size-h2; line-height: $t-line-height-h2; font-weight: $t-font-weight-h2; }

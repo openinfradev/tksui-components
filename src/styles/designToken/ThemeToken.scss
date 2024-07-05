@@ -11,9 +11,12 @@ $t-secondary-color-purple-1: var(--t-secondary-color-purple-1) !default;
 $t-secondary-color-purple-2: var(--t-secondary-color-purple-2) !default;
 $t-secondary-color-purple-3: var(--t-secondary-color-purple-3) !default;
 $t-secondary-color-purple-4: var(--t-secondary-color-purple-4) !default;
-$t-secondary-color-blue-gray: var(--t-secondary-color-blue-gray) !default;
 $t-secondary-color-pink-1: var(--t-secondary-color-pink-1) !default;
 $t-secondary-color-pink-2: var(--t-secondary-color-pink-2) !default;
+
+$t-status-color-required: var(--t-status-color-required) !default;
+$t-status-color-success: var(--t-status-color-success) !default;
+$t-status-color-error: var(--t-status-color-error) !default;
 
 $t-white-color: var(--t-white-color) !default; // #FFFFFF
 
@@ -31,12 +34,6 @@ $t-blue-gray-color-4: var(--blue-gray-color-4) !default; // #4B5563
 $t-blue-gray-color-5: var(--blue-gray-color-5) !default; // #2B394E
 
 $t-black-color: var(--t-black-color) !default; // #121821
-
-
-
-$t-background-color--hover: $t-blue-gray-color-2;
-$t-background-color--read-only: $t-gray-color-1;
-
 
 // endregion
 
@@ -137,6 +134,7 @@ $t-spacing-48: 48px;
 $t-spacing-56: 56px;
 $t-spacing-64: 64px;
 $t-spacing-72: 72px;
+$t-spacing-80: 80px;
 
 // endregion
 
@@ -150,105 +148,7 @@ $t-shadow--modal: var(--t-shadow-modal);
 // endregion
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////  Deprecated  ////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-// content
-
-// remove
-$t-line-height-default: var(--t-line-height-default);
-$t-line-height-header: var(--t-line-height-header);
-$t-line-height-body: var(--t-line-height-body);
-
-
-$t-point-color: var(--t-point-color) !default;
-
-$t-primary-color--shade-1: color-mix(in srgb, var(--t-primary-color), black 10%) !default;
-$t-primary-color--shade-2: color-mix(in srgb, var(--t-primary-color), black 20%) !default;
-$t-primary-color--shade-3: color-mix(in srgb, var(--t-primary-color), black 30%) !default;
-$t-primary-color--shade-4: color-mix(in srgb, var(--t-primary-color), black 40%) !default;
-$t-primary-color--shade-5: color-mix(in srgb, var(--t-primary-color), black 50%) !default;
-$t-primary-color--shade-6: color-mix(in srgb, var(--t-primary-color), black 60%) !default;
-$t-primary-color--shade-7: color-mix(in srgb, var(--t-primary-color), black 70%) !default;
-$t-primary-color--shade-8: color-mix(in srgb, var(--t-primary-color), black 80%) !default;
-$t-primary-color--shade-9: color-mix(in srgb, var(--t-primary-color), black 90%) !default;
-
-$t-primary-color--tint-1: color-mix(in srgb, var(--t-primary-color), white 10%) !default;
-$t-primary-color--tint-2: color-mix(in srgb, var(--t-primary-color), white 20%) !default;
-$t-primary-color--tint-3: color-mix(in srgb, var(--t-primary-color), white 30%) !default;
-$t-primary-color--tint-4: color-mix(in srgb, var(--t-primary-color), white 40%) !default;
-$t-primary-color--tint-5: color-mix(in srgb, var(--t-primary-color), white 50%) !default;
-$t-primary-color--tint-6: color-mix(in srgb, var(--t-primary-color), white 60%) !default;
-$t-primary-color--tint-7: color-mix(in srgb, var(--t-primary-color), white 70%) !default;
-$t-primary-color--tint-8: color-mix(in srgb, var(--t-primary-color), white 80%) !default;
-$t-primary-color--tint-9: color-mix(in srgb, var(--t-primary-color), white 90%) !default;
-$t-primary-color--tint-10: color-mix(in srgb, var(--t-primary-color), white 95%) !default;
-$t-primary-color--tint-11: color-mix(in srgb, var(--t-primary-color), white 98%) !default;
-
-
-$t-status-color--required: var(--t-status-color--required) !default;
-$t-status-color--success: var(--t-status-color--success) !default;
-$t-status-color--error: var(--t-status-color--error) !default;
-$t-status-color--default: var(--t-status-color--default) !default;
-$t-status-color--processing: var(--t-status-color--processing) !default;
-$t-status-color--warning: var(--t-status-color--warning) !default;
-
-
-
-// font color
-$t-font-color--primary-01: $t-primary-color !default; // #333333
-$t-font-color--primary-02: $t-primary-color--tint-6 !default; // #333333
-$t-font-color--primary-03: $t-gray-color-5 !default; // #333333
-
-$t-font-color--selected: $t-primary-color;
-$t-font-color--placeholder: $t-gray-color-4;
-$t-font-color--read-only: $t-black-color;
-$t-font-color--disabled: $t-gray-color-4;
-$t-font-color--default: $t-gray-color-6;
-$t-font-color--label: $t-gray-color-3;
-
-
-$t-font-weight--selected: var(--t-font-weight-medium);
-$t-border-color--default: $t-gray-color-3;
-
-// background color
-$t-background-color-01: $t-primary-color--tint-9;
-$t-background-color-02: $t-primary-color--tint-10;
-$t-background-color-03: $t-primary-color--tint-11;
-
-// chart color
-$t-chart-color-01: $t-primary-color--shade-1;
-$t-chart-color-02: $t-primary-color--shade-2;
-$t-chart-color-03: $t-primary-color--shade-3;
-$t-chart-color-04: $t-primary-color--shade-4;
-$t-chart-color-05: $t-primary-color--shade-5;
-$t-chart-color-06: color-mix(in srgb, var(--t-point-color), black 20%);
-$t-chart-color-07: color-mix(in srgb, var(--t-point-color), black 20%);
-$t-chart-color-08: color-mix(in srgb, var(--t-point-color), black 20%);
-$t-chart-color-09: color-mix(in srgb, var(--t-point-color), black 20%);
-$t-chart-color-10: color-mix(in srgb, var(--t-point-color), black 20%);
-
-// grid color
-$t-grid-border-color--01: #DDDDDD;
-$t-grid-border-color--02: $t-blue-gray-color-2;
-$t-grid-border-color--03: $t-black-color;
-$t-grid-background-color--01: $t-gray-color-2;
-
-$t-input-border-color--01: #CCCCCC;
-
-
-// endregion
-
-
-
 // region [Z-Index]
-
-// frame
-$t-z-index-header: 100;
 
 $t-z-index-tooltip: var(--t-z-index-tooltip);
 $t-z-index-modal: var(--t-z-index-modal);
@@ -256,3 +156,14 @@ $t-z-index-dropdown: var(--t-z-index-dropdown);
 $t-z-index-drop-holder: var(--t-z-index-drop-holder);
 
 // endregion
+
+////////////////////////////////////////
+/////////// Status tokens //////////////
+////////////////////////////////////////
+
+$t-font-color--selected: $t-primary-color;
+$t-font-color--placeholder: $t-gray-color-4;
+$t-font-color--read-only: $t-black-color;
+$t-font-color--disabled: $t-gray-color-4;
+
+

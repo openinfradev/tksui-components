@@ -18,10 +18,10 @@
             }
 
             &.t-input-validation-hint__rules__item--valid {
-                color: $t-status-color--success;
+                color: $t-status-color-success;
             }
             &.t-input-validation-hint__rules__item--invalid {
-                color: $t-status-color--error;
+                color: $t-status-color-error;
             }
         }
     }

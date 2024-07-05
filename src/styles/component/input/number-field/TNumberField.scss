@@ -140,12 +140,12 @@
 
         @include animation-shake();
 
-        .t-number-field__container {border-color: $t-status-color--error;}
-        .t-number-field__details {color: $t-status-color--error;}
+        .t-number-field__container {border-color: $t-status-color-error;}
+        .t-number-field__details {color: $t-status-color-error;}
     }
     &.t-number-field--success {
-        .t-number-field__container {border-color: $t-status-color--success;}
-        .t-number-field__details {color: $t-status-color--success;}
+        .t-number-field__container {border-color: $t-status-color-success;}
+        .t-number-field__details {color: $t-status-color-success;}
     }
 
 }

@@ -44,14 +44,14 @@
 
         --ag-checkbox-checked-color: #{$t-primary-color};
         --ag-checkbox-indeterminate-color: #{$t-primary-color};
-        --ag-checkbox-unchecked-color: #{$t-border-color--default};
+        --ag-checkbox-unchecked-color: #{$t-gray-color-3};
         --ag-checkbox-border-radius: 50%;
         --ag-checkbox-background-color: transparent;
 
         --ag-input-focus-box-shadow: none;
 
         --ag-cell-horizontal-padding: 32px;
-        --ag-row-border-color: #{$t-grid-border-color--02};
+        --ag-row-border-color: #{$t-blue-gray-color-2};
 
         --ag-header-cell-hover-background-color: #{$t-blue-gray-color-3};
         --ag-header-background-color: #{$t-white-color};
@@ -115,7 +115,7 @@
         }
 
         .ag-overlay-no-rows-wrapper {
-            border-bottom: 1px solid $t-grid-border-color--01;
+            border-bottom: 1px solid $t-blue-gray-color-2;
         }
 
         .ag-layout-print .ag-center-cols-clipper,

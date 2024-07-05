@@ -2,7 +2,6 @@
     position: relative;
     display: inline-block;
     width: 100%;
-    line-height: $t-line-height-default;
 
 
     .t-text-area__label {
@@ -100,12 +99,12 @@
 
         @include animation-shake();
 
-        .t-text-area__container {border-color: $t-status-color--error;}
-        .t-text-area__details {color: $t-status-color--error;}
+        .t-text-area__container {border-color: $t-status-color-error;}
+        .t-text-area__details {color: $t-status-color-error;}
     }
     &.t-text-area--success {
-        .t-text-area__container {border-color: $t-status-color--success;}
-        .t-text-area__details {color: $t-status-color--success;}
+        .t-text-area__container {border-color: $t-status-color-success;}
+        .t-text-area__details {color: $t-status-color-success;}
     }
 
 }

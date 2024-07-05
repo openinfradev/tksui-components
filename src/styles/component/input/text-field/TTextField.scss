@@ -158,17 +158,17 @@
 
         @include animation-shake();
         .t-text-field__container {
-            border-color: $t-status-color--error;
-            .t-text-field__container__counter__counted {color: $t-status-color--error;}
+            border-color: $t-status-color-error;
+            .t-text-field__container__counter__counted {color: $t-status-color-error;}
         }
-        .t-text-field__details {color: $t-status-color--error;}
+        .t-text-field__details {color: $t-status-color-error;}
     }
     &.t-text-field--success {
         .t-text-field__container {
-            border-color: $t-status-color--success !important;
-            .t-text-field__container__counter__counted {color: $t-status-color--success;}
+            border-color: $t-status-color-success !important;
+            .t-text-field__container__counter__counted {color: $t-status-color-success;}
         }
-        .t-text-field__details {color: $t-status-color--success;}
+        .t-text-field__details {color: $t-status-color-success;}
     }
 
 }
