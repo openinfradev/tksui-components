@@ -24,7 +24,7 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
 
     const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
     const [hasFocus, setHasFocus] = useState<boolean>(false);
-    const validator = useValidator(props.noTrim ? props.value : props.value.trim(), props.rules, props.successMessage);
+    const validator = useValidator(props.noTrim ? props.value : props.value?.trim(), props.rules, props.successMessage);
     const inputRef = useRef<HTMLInputElement>(null);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     const inputUuid = uniqueId();
