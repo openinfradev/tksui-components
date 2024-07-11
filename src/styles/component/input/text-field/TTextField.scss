@@ -1,7 +1,10 @@
+
+
 .t-text-field {
     display: inline-block;
     width: 100%;
     position: relative;
+
 
 
     .t-text-field__label {
@@ -34,7 +37,7 @@
             background-color: $t-white-color;
             border: none;
             outline: none;
-            padding: 0;
+            //padding: 0;
 
             &[type='password'] {
                 font: large Verdana, sans-serif;
@@ -75,7 +78,7 @@
 
         .t-text-field__container {
             height: auto;
-            padding: 9px $t-spacing-16;
+            padding: $t-spacing-8 $t-spacing-16;
         }
         .t-text-field__container__text-area {
             font-family: $t-font-family;
@@ -86,7 +89,7 @@
             background-color: $t-white-color;
             border: none;
             outline: none;
-            padding: 0;
+            padding: 0 $t-spacing-8 0 0;
             resize: none;
         }
 
@@ -169,6 +172,27 @@
             .t-text-field__container__counter__counted {color: $t-status-color-success;}
         }
         .t-text-field__details {color: $t-status-color-success;}
+    }
+
+
+    textarea {
+
+        /* 전체 스크롤바의 너비와 높이 */
+        &::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        /* 스크롤바의 핸들 (이동 가능한 부분) */
+        &::-webkit-scrollbar-thumb {
+            background: $t-gray-color-2;
+            border-radius: 10px;
+        }
+
+        /* 스크롤바의 핸들을 호버할 때 */
+        &::-webkit-scrollbar-thumb:hover {
+            background: $t-gray-color-3;
+        }
     }
 
 }

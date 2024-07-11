@@ -24,7 +24,7 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
 
     const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
     const [hasFocus, setHasFocus] = useState<boolean>(false);
-    const validator = useValidator(props.noTrim ? props.value : props.value.trim(), props.rules, props.successMessage);
+    const validator = useValidator(props.noTrim ? props.value : props.value?.trim(), props.rules, props.successMessage);
     const inputRef = useRef<HTMLInputElement>(null);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     const inputUuid = uniqueId();
@@ -289,8 +289,8 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
                     {validator.message || props.hint}
                 </div>
                 {
-                    props.counter && !props.disabled && props.multiline && (
-                        <div className={'t-text-field__details__text-area__counter'}>
+                    (props.counter && !props.disabled && props.multiline && (hasFocus || validator.message)) && (
+                        <div className={'t-text-field__details__text-area__counter'} data-testid={'text-area-counter'}>
                             <span className={'t-text-field__details__text-area__counter__counted'}>
                                 {counterLength}
                             </span>
