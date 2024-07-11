@@ -289,8 +289,8 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
                     {validator.message || props.hint}
                 </div>
                 {
-                    props.counter && !props.disabled && props.multiline && (
-                        <div className={'t-text-field__details__text-area__counter'}>
+                    (props.counter && !props.disabled && props.multiline && (hasFocus || validator.message)) && (
+                        <div className={'t-text-field__details__text-area__counter'} data-testid={'text-area-counter'}>
                             <span className={'t-text-field__details__text-area__counter__counted'}>
                                 {counterLength}
                             </span>

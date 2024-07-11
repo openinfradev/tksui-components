@@ -265,6 +265,26 @@ describe('TTextField', () => {
         expect(counterElement).toHaveTextContent(`${trimmedLength}/${lengthLimit}`);
     });
 
+    it('When textarea element has focused, the counter shows the trimmed length and length limit', async () => {
+        // Arrange
+        const mockOnBlur = jest.fn();
+        const value = ' foo ';
+        const lengthLimit = 10;
+        const trimmedLength = value.trim().length;
+
+        render(<TTextField value={value} multiline rows={3} onChange={mockOnChange} onBlur={mockOnBlur} counter={lengthLimit}/>);
+        const textareaElement = screen.getByTestId('text-field-text-area');
+
+        // Act
+        await act(async () => {
+            await userEvent.click(textareaElement);
+        });
+        const counterElement = screen.getByTestId('text-area-counter');
+
+        // Assert
+        expect(counterElement).toHaveTextContent(`${trimmedLength}/${lengthLimit}`);
+    });
+
 
     it('When hint prop is applied, the detail message shows the hint', () => {
         // Arrange

@@ -64,7 +64,7 @@ const NormalTemplate = (args: TTextFieldProps) => {
                     <TTextField {...args} value={'입력 불가능한 값'} label={'Disabled'} disabled/>
                     <TTextField {...args} value={'읽을 수만 있는 값'} label={'Read-only'} readOnly/>
                     <TTextField {...args} multiline value={value} onChange={setValue} label={'Multi-line'} rows={3}/>
-                    <TTextField {...args} multiline value={value} onChange={setValue} label={'Multi-line'} rows={3}/>
+                    <TTextField {...args} multiline value={value} onChange={setValue} label={'Multi-line counter'} rows={3} counter={100}/>
                     <TTextField {...args} ref={successTextAreaRef} multiline value={value} onChange={setValue}
                                 label={'Multi-line - Success'} rows={3}
                                 rules={[() => true]}
