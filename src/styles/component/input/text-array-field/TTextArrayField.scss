@@ -12,6 +12,7 @@
         gap: $t-spacing-4;
         cursor: text;
         padding: $t-spacing-4 $t-spacing-16;
+
         .t-chip { height: 24px; }
         .t-chip + .t-chip { margin-left: 0; }
     }
@@ -19,14 +20,14 @@
     .t-text-field {
         margin-left: 4px;
         flex: 1 0 80px;
+        width: auto;
+        min-width: 80px;
 
         .t-text-field__container {
             border: none;
             padding: 0;
             height: 24px;
         }
-        width: auto;
-        min-width: 80px;
     }
 
 
