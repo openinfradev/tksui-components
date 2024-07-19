@@ -80,8 +80,8 @@
     },
     "dependencies": {
         "@material-symbols/font-300": "^0.14.5",
-        "ag-grid-community": "^30.0.6",
-        "ag-grid-react": "^30.0.6",
+        "ag-grid-community": "^32.0.2",
+        "ag-grid-react": "^32.0.2",
         "lodash": "^4.17.21",
         "react-modal": "^3.16.1",
         "react-slick": "^0.29.0",

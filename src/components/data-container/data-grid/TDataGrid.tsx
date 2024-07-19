@@ -1,7 +1,6 @@
-import {DomLayoutType} from 'ag-grid-community/dist/lib/entities/gridOptions';
 import {CSSProperties, forwardRef, Ref, useCallback, useImperativeHandle, useMemo, useRef, useState} from 'react';
 import {AgGridReact} from 'ag-grid-react';
-import {SelectionChangedEvent} from 'ag-grid-community';
+import {DomLayoutType, SelectionChangedEvent} from 'ag-grid-community';
 import {TDataGridProps} from '@/components';
 import TPagination from '../pagination/TPagination';
 import TActionBar from '~/data-container/action-bar/TActionBar';
