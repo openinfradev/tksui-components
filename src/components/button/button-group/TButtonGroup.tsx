@@ -3,16 +3,33 @@ import TButton from '../button/TButton';
 import {buttonGroupSize, TButtonGroupProps, TButtonGroupValue} from '@/components';
 
 
-const TButtonGroup = (props: TButtonGroupProps) => {
+const TButtonGroup = ({
+    disabled = false,
+
+    onChange,
+    ...restProps
+}: TButtonGroupProps) => {
+
+    const props: TButtonGroupProps = {disabled, onChange, ...restProps};
 
     // region [Styles]
 
     const $_size = useMemo(() => {
-        if (props.size && props.size in buttonGroupSize) { return props.size; }
-        if (props.xsmall) { return buttonGroupSize.xsmall; }
-        if (props.small) { return buttonGroupSize.small; }
-        if (props.medium) { return buttonGroupSize.medium; }
-        if (props.large) { return buttonGroupSize.large; }
+        if (props.size && props.size in buttonGroupSize) {
+            return props.size;
+        }
+        if (props.xsmall) {
+            return buttonGroupSize.xsmall;
+        }
+        if (props.small) {
+            return buttonGroupSize.small;
+        }
+        if (props.medium) {
+            return buttonGroupSize.medium;
+        }
+        if (props.large) {
+            return buttonGroupSize.large;
+        }
         return buttonGroupSize.medium;
     }, [props.size, props.xsmall, props.small, props.medium, props.large]);
 
@@ -25,13 +42,25 @@ const TButtonGroup = (props: TButtonGroupProps) => {
         // }
 
         clazz.push(`t-button-group--${$_size}`);
-        if (props.className) { clazz.push(props.className); }
-        if (props.variant) { clazz.push(`t-button-group--${props.variant}`); }
-        if (props.primary) { clazz.push('t-button-group--primary'); }
-        if (props.main) { clazz.push('t-button-group--main'); }
+        if (props.className) {
+            clazz.push(props.className);
+        }
+        if (props.variant) {
+            clazz.push(`t-button-group--${props.variant}`);
+        }
+        if (props.primary) {
+            clazz.push('t-button-group--primary');
+        }
+        if (props.main) {
+            clazz.push('t-button-group--main');
+        }
 
-        if (props.multiSelect) { clazz.push('t-button-group--multi-select'); }
-        if (props.disabled) { clazz.push('t-button-group--disabled'); }
+        if (props.multiSelect) {
+            clazz.push('t-button-group--multi-select');
+        }
+        if (props.disabled) {
+            clazz.push('t-button-group--disabled');
+        }
 
         return clazz.join(' ');
     }, [props.variant, props.primary, props.main, props.className, props.multiSelect, props.disabled, $_size]);
@@ -39,7 +68,9 @@ const TButtonGroup = (props: TButtonGroupProps) => {
     const rootStyle = useMemo((): CSSProperties => {
         let style: CSSProperties = {};
 
-        if (props.style) { style = {...props.style}; }
+        if (props.style) {
+            style = {...props.style};
+        }
 
         return style;
     }, [props.style]);
@@ -55,17 +86,17 @@ const TButtonGroup = (props: TButtonGroupProps) => {
     const updateMultiSelectValue = useCallback((value: TButtonGroupValue, currentStatus: boolean) => {
         if (currentStatus) {
             const newValue = props.value.filter((val) => JSON.stringify(val) !== JSON.stringify(value));
-            props.onChange(newValue);
+            onChange(newValue);
         } else {
             const newValue = props.value.concat(value);
-            props.onChange(newValue);
+            onChange(newValue);
         }
         return value;
-    }, [props]);
+    }, [onChange, props.value]);
 
     const updateSingleSelectValue = useCallback((value: TButtonGroupValue) => {
-        props.onChange(value);
-    }, [props]);
+        onChange(value);
+    }, [onChange]);
 
     const isActive = useCallback((value) => {
         if (props.multiSelect) {
@@ -116,10 +147,6 @@ const TButtonGroup = (props: TButtonGroupProps) => {
 };
 
 TButtonGroup.displayName = 'TButtonGroup';
-
-TButtonGroup.defaultProps = {
-    disabled: false,
-};
 
 
 export default TButtonGroup;

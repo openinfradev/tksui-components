@@ -1,8 +1,7 @@
-
 import '@material-symbols/font-300/outlined.css';
 
 import {CSSProperties, KeyboardEvent, memo, MouseEvent, ReactElement, useCallback, useMemo} from 'react';
-import {TIconSource, TIconProps, iconSize} from './TIcon.interface';
+import {iconSize, TIconProps, TIconSource} from './TIcon.interface';
 import TOriginalImage from './TIconOriginal';
 import TooltipUtil from '@/common/util/TooltipUtil';
 
@@ -11,6 +10,7 @@ import TooltipUtil from '@/common/util/TooltipUtil';
  * If you want to know the list of icons, please visit the link
  */
 const TIcon = (props: TIconProps): ReactElement => {
+
 
     // region [Styles]
 
@@ -103,8 +103,8 @@ const TIcon = (props: TIconProps): ReactElement => {
 
     return (
         <span className={`t-icon material-symbols-outlined ${rootClass}`}
-              {...TooltipUtil.convertToTooltipAttributes(props)}
               tabIndex={(!props.disabled && (props.onKeyDownEnter || props.onKeyDownSpace)) ? 0 : -1}
+              {...TooltipUtil.convertToTooltipAttributes(props)}
               onClick={onClickRoot}
               onKeyDown={onKeyDown}
               role={'img'}
@@ -124,6 +124,5 @@ const TIcon = (props: TIconProps): ReactElement => {
 
 };
 
-TIcon.defaultProps = {};
 
 export default memo(TIcon);
