@@ -8,10 +8,15 @@ import themeToken from '~style/designToken/ThemeToken.module.scss';
 
 const gapSize = Number(themeToken.tSpacing40?.replace(/[^0-9]/g, '')) * 2 || 80;
 
-const TFormSectionItem = (props: TFormSectionItemProps) => {
+const TFormSectionItem = ({
+    span = 1,
+    ...restProps
+}: TFormSectionItemProps) => {
 
 
     // region [Hooks]
+
+    const props: TFormSectionItemProps = {span, ...restProps};
 
     const rootRef = useRef<HTMLSpanElement>(null);
     const {column, labelWidth, rowVerticalAlign} = useContext(TFormSectionContext);
@@ -121,11 +126,6 @@ const TFormSectionItem = (props: TFormSectionItemProps) => {
             {props.information && (<TTooltip id={tooltipId} openOnClick/>)}
         </span>
     );
-
-};
-
-TFormSectionItem.defaultProps = {
-    span: 1,
 };
 
 export default memo(TFormSectionItem);

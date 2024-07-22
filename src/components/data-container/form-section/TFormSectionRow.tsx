@@ -3,9 +3,14 @@ import {TFormSectionRowProps} from '@/components';
 import TFormSectionContext from '~/data-container/form-section/TFormSectionContext';
 
 
-const TFormSectionRow = (props: TFormSectionRowProps) => {
+const TFormSectionRow = ({
+    verticalAlign = 'middle',
+    ...restProps
+}: TFormSectionRowProps) => {
 
     // region [Hooks]
+
+    const props: TFormSectionRowProps = {verticalAlign, ...restProps};
 
     const formContext = useContext(TFormSectionContext);
 
@@ -44,8 +49,5 @@ const TFormSectionRow = (props: TFormSectionRowProps) => {
 
 TFormSectionRow.displayName = 'TFormSectionRow';
 
-TFormSectionRow.defaultProps = {
-    verticalAlign: 'middle',
-};
 
 export default TFormSectionRow;
