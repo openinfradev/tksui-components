@@ -1,5 +1,5 @@
 import {CSSProperties, useMemo} from 'react';
-import {TActionBarProps} from './TActionBar.interface';
+import {TActionBarProps} from '@/components';
 
 function TActionBar(props: TActionBarProps) {
 

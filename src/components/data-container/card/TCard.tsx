@@ -1,9 +1,19 @@
 import {CSSProperties, useMemo} from 'react';
 import {TIcon} from '~/icon';
-import {TCardProps} from './TCard.interface';
+import {TCardProps} from '@/components';
 import TooltipUtil from '@/common/util/TooltipUtil';
 
-const TCard = (props: TCardProps) => {
+const TCard = ({
+    iconSize = 'xlarge',
+    ...restProps
+}: TCardProps) => {
+
+    // region [Hooks]
+
+    const props = {iconSize, ...restProps};
+
+    // endregion
+
 
     // region [Templates]
 
@@ -65,11 +75,6 @@ const TCard = (props: TCardProps) => {
             {props.children}
         </div>
     );
-};
-
-TCard.defaultProps = {
-    iconSize: 'xlarge',
-    iconType: 'outlined',
 };
 
 TCard.displayName = 'TCard';

@@ -1,11 +1,11 @@
 import {CSSProperties, useMemo} from 'react';
-import {TCardContentProps} from './TCard.interface';
+import {TCardContentProps} from '@/components';
 
-const TCardContent = (props: TCardContentProps) => {
-
-    // region [Hooks]
-
-    const {className, style} = props;
+const TCardContent = ({
+    className,
+    style,
+    ...restProps
+}: TCardContentProps) => {
 
 
     // region [Templates]
@@ -26,13 +26,12 @@ const TCardContent = (props: TCardContentProps) => {
     // endregion
 
     return (
-        <section className={`t-card-content ${rootClass}`} style={rootStyle} id={props.id} data-testid={'card-content-root'}>
-            {props.children}
+        <section className={`t-card-content ${rootClass}`} style={rootStyle} id={restProps.id} data-testid={'card-content-root'}>
+            {restProps.children}
         </section>
     );
 };
 
-TCardContent.defaultProps = {};
 
 TCardContent.displayName = 'TCard';
 
