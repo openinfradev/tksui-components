@@ -91,9 +91,8 @@ const TStepBoxHeader = (props: TStepBoxHeaderProps) => {
     );
 };
 
-TStepBoxHeader.defaultProps = {};
 
-TStepBoxHeader.displayName = 'TStepBox';
+TStepBoxHeader.displayName = 'TStepBoxHeader';
 
 
 export default TStepBoxHeader;
