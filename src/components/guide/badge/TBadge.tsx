@@ -1,6 +1,6 @@
 import 'react-toastify/dist/ReactToastify.css';
 import {CSSProperties, useMemo} from 'react';
-import {TBadgeProps} from './TBadge.interface';
+import {TBadgeProps} from '@/components';
 
 const TBadge = (props: TBadgeProps) => {
 
@@ -10,7 +10,7 @@ const TBadge = (props: TBadgeProps) => {
 
         let style: CSSProperties = {};
 
-        if (props.style) style = {...style, ...props.style};
+        if (props.style) { style = {...style, ...props.style}; }
 
         return style;
     }, [props.style]);
@@ -43,7 +43,7 @@ const TBadge = (props: TBadgeProps) => {
 
         let style: CSSProperties = {};
 
-        if (props.color) style = {...style, backgroundColor: props.color};
+        if (props.color) { style = {...style, backgroundColor: props.color}; }
 
         return style;
     }, [props.color]);
@@ -79,6 +79,5 @@ const TBadge = (props: TBadgeProps) => {
     );
 };
 
-TBadge.defaultProps = {};
 
 export default TBadge;

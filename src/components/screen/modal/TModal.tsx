@@ -1,13 +1,19 @@
-import React, {MouseEvent, useCallback, useMemo, useRef, useEffect} from 'react';
+import React, {MouseEvent, useCallback, useEffect, useMemo, useRef} from 'react';
 import {createPortal} from 'react-dom';
 import ReactModal from 'react-modal';
 import TIcon from '../../icon/TIcon';
-import {modalSize, TModalProps} from './TModal.interface';
+import {modalSize, TModalProps} from '@/components';
 import themeToken from '~style/designToken/ThemeToken.module.scss';
 
-export default function TModal(props: TModalProps): JSX.Element {
+export default function TModal({
+    containerId = 'root',
+    ...restProps
+}: TModalProps) {
 
-    // region [Consts]
+    // region [Hooks]
+
+    const props:TModalProps = {containerId, ...restProps};
+
     const modalRef = useRef(null);
     const {onRequestClose} = props;
 
@@ -42,11 +48,11 @@ export default function TModal(props: TModalProps): JSX.Element {
     const bodyClassName = useMemo(() => {
         const clazz: string[] = [];
 
-        if (props.bodyClassName) clazz.push(props.bodyClassName);
+        if (props.bodyClassName) { clazz.push(props.bodyClassName); }
         clazz.push(`t-modal__overlay__body--${$_size}`);
 
         return clazz.join(' ');
-    }, [$_size, props]);
+    }, [$_size, props.bodyClassName]);
 
     // endregion
 
@@ -104,8 +110,4 @@ export default function TModal(props: TModalProps): JSX.Element {
         documentRoot,
     );
 }
-
-TModal.defaultProps = {
-    containerId: 'root',
-};
 
