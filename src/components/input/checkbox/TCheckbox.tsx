@@ -14,9 +14,18 @@ const checkboxIcons = {
     indeterminate: 't_checkbox_indeterminate',
 };
 
-const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => {
+const TCheckbox = forwardRef(({
+    positiveValue = true,
+    negativeValue = false,
+    checked = null,
+    lazy = true,
+    onChange,
+    ...restProps
+}: TCheckboxProps, ref: Ref<TCheckboxRef>) => {
 
     // region [Hooks]
+
+    const props: TCheckboxProps = {positiveValue, negativeValue, checked, lazy, onChange, ...restProps};
 
     const validator = useValidator(props.value, props.rules, props.successMessage);
     const rootRef = useRef<HTMLDivElement>(null);
@@ -68,17 +77,17 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
     // region [Privates]
 
     const emitChange = useCallback(() => {
-        if (typeof props.onChange !== 'function') {
+        if (typeof onChange !== 'function') {
             return;
         }
 
         if (status === 'check') {
-            props.onChange(props.negativeValue, props.positiveValue);
+            onChange(props.negativeValue, props.positiveValue);
         } else {
-            props.onChange(props.positiveValue);
+            onChange(props.positiveValue);
         }
 
-    }, [props, status]);
+    }, [onChange, props.negativeValue, props.positiveValue, status]);
 
     const modifyStatus = useCallback(() => {
         if (props.checked === true) {
@@ -190,13 +199,6 @@ const TCheckbox = forwardRef((props: TCheckboxProps, ref: Ref<TCheckboxRef>) => 
     // endregion
 
 });
-
-TCheckbox.defaultProps = {
-    positiveValue: true,
-    negativeValue: false,
-    checked: null,
-    lazy: true,
-};
 
 TCheckbox.displayName = 'TCheckbox';
 

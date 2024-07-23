@@ -1,14 +1,21 @@
 import {CSSProperties, forwardRef, KeyboardEvent, MouseEvent, Ref, useCallback, useImperativeHandle, useMemo, useRef} from 'react';
-import {TIconButtonProps, TIconButtonRef} from './TIconButton.interface';
+import {TIconButtonProps, TIconButtonRef} from '@/components';
 import useRipple from '@/common/hook/UseRipple';
 import TIcon from '../../icon/TIcon';
 import themeToken from '~style/designToken/ThemeToken.module.scss';
 import TooltipUtil from '@/common/util/TooltipUtil';
 
 
-const TIconButton = forwardRef((props: TIconButtonProps, ref: Ref<TIconButtonRef>) => {
+const TIconButton = forwardRef(({
+    shape = 'circle',
+    outline = 'elevation',
+    onClick,
+    ...restProps
+}: TIconButtonProps, ref: Ref<TIconButtonRef>) => {
 
     // region [Hooks]
+
+    const props: TIconButtonProps = {shape, outline, onClick, ...restProps};
 
     const rootRef = useRef<HTMLButtonElement>(null);
 
@@ -19,8 +26,8 @@ const TIconButton = forwardRef((props: TIconButtonProps, ref: Ref<TIconButtonRef
             rootRef?.current?.focus();
         },
         click() {
-            if (!props.disabled && props.onClick) {
-                props.onClick();
+            if (!props.disabled && onClick) {
+                onClick();
             }
         },
     }));
@@ -64,10 +71,10 @@ const TIconButton = forwardRef((props: TIconButtonProps, ref: Ref<TIconButtonRef
 
     const onMouseUp = useCallback((event: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>): void => {
         ripple.remove();
-        if (!props.disabled && props.onClick) {
-            props.onClick(event);
+        if (!props.disabled && onClick) {
+            onClick(event);
         }
-    }, [props, ripple]);
+    }, [onClick, props.disabled, ripple]);
 
     const onMouseLeave = useCallback((): void => {
         ripple.remove();
@@ -81,9 +88,9 @@ const TIconButton = forwardRef((props: TIconButtonProps, ref: Ref<TIconButtonRef
     const onKeyUp = useCallback((event: KeyboardEvent): void => {
         if (event.key === 'Enter' || event.key === ' ') {
             ripple.remove();
-            if (props.onClick) { props.onClick(event); }
+            if (onClick) { onClick(event); }
         }
-    }, [props, ripple]);
+    }, [onClick, ripple]);
 
     // endregion
 
@@ -111,10 +118,5 @@ const TIconButton = forwardRef((props: TIconButtonProps, ref: Ref<TIconButtonRef
 });
 
 TIconButton.displayName = 'TIconButton';
-
-TIconButton.defaultProps = {
-    shape: 'circle',
-    outline: 'elevation',
-};
 
 export default TIconButton;

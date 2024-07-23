@@ -1,5 +1,6 @@
-import {AgReactUiProps} from 'ag-grid-react/lib/shared/interfaces';
+
 import {ReactElement, ReactNode} from 'react';
+import {AgGridReactProps} from 'ag-grid-react';
 import {TBaseProps} from '@/common/base/TBase.interface';
 
 
@@ -14,7 +15,7 @@ export interface TPageResponseVO extends TPageRequestVO {
 }
 
 
-export interface TDataGridProps extends TBaseProps, AgReactUiProps {
+export interface TDataGridProps extends TBaseProps, AgGridReactProps {
     height?: string,
     maxRowsWithoutScroll?: number,
     minRowsVisible?: number,

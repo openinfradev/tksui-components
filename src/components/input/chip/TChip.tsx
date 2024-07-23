@@ -1,12 +1,17 @@
 import {CSSProperties, forwardRef, MouseEvent, Ref, useImperativeHandle, useMemo, useRef} from 'react';
-import {TChipProps, TChipRef} from './TChip.interface';
+import {TChipProps, TChipRef} from '@/components';
 import TIcon from '../../icon/TIcon';
 import themeToken from '~style/designToken/ThemeToken.module.scss';
 
 
-const TChip = forwardRef((props: TChipProps, ref: Ref<TChipRef>) => {
+const TChip = forwardRef(({
+    prevIconSize = 'xsmall',
+    ...restProps
+}: TChipProps, ref: Ref<TChipRef>) => {
 
     // region [Hooks]
+
+    const props:TChipProps = {prevIconSize, ...restProps};
 
     const rootRef = useRef<HTMLDivElement>(null);
 
@@ -99,9 +104,6 @@ const TChip = forwardRef((props: TChipProps, ref: Ref<TChipRef>) => {
 
 });
 
-TChip.defaultProps = {
-    prevIconSize: 'xsmall',
-};
 
 TChip.displayName = 'TChip';
 

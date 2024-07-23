@@ -13,8 +13,6 @@
 
         .t-form-section__content__info {
 
-            .t-icon {margin-top: $t-spacing-2;}
-
             display: flex;
             align-items: center;
             gap: $t-spacing-6;
@@ -22,6 +20,9 @@
             color: $t-gray-color-5;
             background: $t-gray-color-1;
             @include typo-element-3;
+
+            .t-icon {margin-top: $t-spacing-2;}
+
         }
     }
 

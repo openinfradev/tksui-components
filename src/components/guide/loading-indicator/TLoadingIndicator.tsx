@@ -4,8 +4,19 @@ import TDefaultSpinner from '~/guide/loading-indicator/variant/TDefaultSpinner';
 import TSunSpinner from '~/guide/loading-indicator/variant/TSunSpinner';
 
 
-const TLoadingIndicator = (props: TLoadingIndicatorProps) => {
+const TLoadingIndicator = ({
+    variant = 'default',
+    size = 'medium',
+    ...restProps
+}: TLoadingIndicatorProps) => {
 
+
+    // region [Hooks]
+
+    const props: TLoadingIndicatorProps = {variant, size, ...restProps};
+
+
+    // endregion
 
     // region [Styles]
 
@@ -64,9 +75,5 @@ const TLoadingIndicator = (props: TLoadingIndicatorProps) => {
     );
 };
 
-TLoadingIndicator.defaultProps = {
-    variant: 'default',
-    size: 'medium',
-};
 
 export default memo(TLoadingIndicator);

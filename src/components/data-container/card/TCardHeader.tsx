@@ -2,11 +2,16 @@ import {CSSProperties, useMemo} from 'react';
 import {TCardHeaderProps} from './TCard.interface';
 import {TIcon} from '~/icon';
 
-const TCardHeader = (props: TCardHeaderProps) => {
+const TCardHeader = ({
+    className,
+    style,
+    iconSize = 'large',
+    ...restProps
+}: TCardHeaderProps) => {
 
     // region [Hooks]
 
-    const {className, style} = props;
+    const props: TCardHeaderProps = {className, style, iconSize, ...restProps};
 
 
     // region [Privates]
@@ -22,7 +27,7 @@ const TCardHeader = (props: TCardHeaderProps) => {
         if (props.icon) { clazz.push('t-card-header--with-icon'); }
 
         return clazz.join(' ');
-    }, [className]);
+    }, [className, props.icon]);
 
     const rootStyle = useMemo((): CSSProperties => {
         if (style) { return style; }
@@ -54,12 +59,7 @@ const TCardHeader = (props: TCardHeaderProps) => {
     );
 };
 
-TCardHeader.defaultProps = {
-    iconSize: 'large',
-    iconType: 'outlined',
-};
-
-TCardHeader.displayName = 'TCard';
+TCardHeader.displayName = 'TCardHeader';
 
 
 export default TCardHeader;

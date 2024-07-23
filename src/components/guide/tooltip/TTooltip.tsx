@@ -1,19 +1,23 @@
 import {PlacesType, Tooltip as ReactTooltip} from 'react-tooltip';
-import {TTooltipProps} from './TTooltip.interface';
+import {TTooltipProps} from '@/components';
 
 
 // region [Tooltip]
 
-const TTooltip = (props: TTooltipProps) => (
-    <ReactTooltip {...props}
-                  className={`t-tooltip ${props.className}`}
-    />
-);
+const TTooltip = ({
+    place = 'bottom' as PlacesType,
+    ...restProps
+}: TTooltipProps) => {
 
-TTooltip.defaultProps = {
-    place: 'bottom' as PlacesType,
-    offset: '16',
+    const props: TTooltipProps = {place, ...restProps};
+
+    return (
+        <ReactTooltip {...props}
+                      className={`t-tooltip ${props.className}`}
+        />
+    );
 };
+
 
 // endregion
 

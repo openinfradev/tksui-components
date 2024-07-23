@@ -4,11 +4,20 @@ import TStepBoxContext from './TStepBoxContext';
 import TStepBoxHeader from '~/data-container/step-box/TStepBoxHeader';
 import TStepBoxItem from '~/data-container/step-box/TStepBoxItem';
 
-const TStepBox = (props: TStepBoxProps) => {
+const TStepBox = ({
+    prevButtonLabel = 'Previous',
+    nextButtonLabel = 'Next',
+    completeButtonLabel = 'Complete',
+    value,
+    children,
+    style,
+    className,
+    ...restProps
+}: TStepBoxProps) => {
 
     // region [Hooks]
 
-    const {value, children, style, className} = props;
+    const props: TStepBoxProps = {prevButtonLabel, nextButtonLabel, completeButtonLabel, value, children, style, className, ...restProps};
 
     // endregion
 
@@ -98,12 +107,6 @@ const TStepBox = (props: TStepBoxProps) => {
             </TStepBoxContext.Provider>
         </div>
     );
-};
-
-TStepBox.defaultProps = {
-    prevButtonLabel: 'Previous',
-    nextButtonLabel: 'Next',
-    completeButtonLabel: 'Complete',
 };
 
 TStepBox.displayName = 'TStepBox';

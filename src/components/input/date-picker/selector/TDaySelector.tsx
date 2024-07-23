@@ -181,7 +181,6 @@ const TDaySelector = () => {
     // endregion
 };
 
-TDaySelector.defaultProps = {};
 TDaySelector.displayName = 'TDaySelector';
 
 

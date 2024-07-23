@@ -3,10 +3,14 @@ import {TStepBoxItemProps} from '@/components';
 import TStepBoxFooter from '~/data-container/step-box/TStepBoxFooter';
 import TStepBoxContext from '~/data-container/step-box/TStepBoxContext';
 
-const TStepBoxItem = (props: TStepBoxItemProps) => {
+const TStepBoxItem = ({
+    contentDirection = 'top-bottom',
+    ...restProps
+}: TStepBoxItemProps) => {
 
     // region [Hooks]
 
+    const props: TStepBoxItemProps = {contentDirection, ...restProps};
     const stepBoxContext = useContext(TStepBoxContext);
 
     // endregion
@@ -61,9 +65,6 @@ const TStepBoxItem = (props: TStepBoxItemProps) => {
 };
 
 TStepBoxItem.displayName = 'TStepBoxItem';
-TStepBoxItem.defaultProps = {
-    contentDirection: 'top-bottom',
-};
 
 
 export default TStepBoxItem;

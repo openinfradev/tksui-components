@@ -3,7 +3,20 @@ import TModal from '../../screen/modal/TModal';
 import {TProgressProps, TLoadingIndicator} from '@/components';
 
 
-function TProgress(props: TProgressProps) {
+function TProgress({
+    message = '잠시만 기다려 주십시오',
+    containerId = 'root',
+    ...restProps
+
+}: TProgressProps) {
+
+    // region [Hooks]
+
+    const props: TProgressProps = {message, containerId, ...restProps};
+
+    // endregion
+
+    // region [Styles]
 
     const rootClass: string = useMemo((): string => {
         const clazz: string[] = [];
@@ -21,6 +34,7 @@ function TProgress(props: TProgressProps) {
         return style;
     }, [props.style]);
 
+    // endregion
 
     return (
         <TModal containerId={props.containerId}
@@ -40,11 +54,6 @@ function TProgress(props: TProgressProps) {
         </TModal>
     );
 }
-
-TProgress.defaultProps = {
-    message: '잠시만 기다려 주십시오',
-    containerId: 'root',
-};
 
 
 export default TProgress;

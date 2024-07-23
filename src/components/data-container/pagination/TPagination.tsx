@@ -7,12 +7,16 @@ import TNumberField from '~/input/number-field/TNumberField';
 import rule from '@/common/validator/TValidatorRule';
 
 
-const TPagination = forwardRef((props: TPaginationProps, ref: Ref<TPaginationRef>) => {
+const TPagination = forwardRef(({
+    jumperText = '바로가기',
+    onChangePageNumber,
+    ...restProps
+}: TPaginationProps, ref: Ref<TPaginationRef>) => {
 
 
     // region [Hooks]
 
-    const {onChangePageNumber} = props;
+    const props: TPaginationProps = {jumperText, onChangePageNumber, ...restProps};
 
     useImperativeHandle(ref, () => ({
         nextPage(): void { onClickNextPage(); },
@@ -198,9 +202,6 @@ const TPagination = forwardRef((props: TPaginationProps, ref: Ref<TPaginationRef
         </nav>
     );
 });
-TPagination.defaultProps = {
-    jumperText: '바로가기',
-};
 
 TPagination.displayName = 'TPagination';
 

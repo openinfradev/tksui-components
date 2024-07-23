@@ -2,11 +2,14 @@ import {cloneElement, CSSProperties, useCallback, useMemo, memo} from 'react';
 import {TTabBoxProps, TTabBoxValue} from '@/components';
 import TTabBoxContext from './TTabBoxContext';
 
-const TTabBox = (props: TTabBoxProps) => {
+const TTabBox = ({
+    onChange, value, children, style, className,
+    ...restProps
+}: TTabBoxProps) => {
 
     // region [Hooks]
 
-    const {onChange, value, children, style, className} = props;
+    const props: TTabBoxProps = {onChange, value, children, style, className, ...restProps};
 
     // endregion
 
@@ -72,7 +75,6 @@ const TTabBox = (props: TTabBoxProps) => {
     );
 };
 
-TTabBox.defaultProps = {};
 
 TTabBox.displayName = 'TTabBox';
 

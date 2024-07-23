@@ -56,5 +56,4 @@ function TSection(props: TSectionProps) {
 
 }
 
-TSection.defaultProps = {};
 export default TSection;

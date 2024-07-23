@@ -12,9 +12,16 @@ import TDateContext from '~/input/date-picker/TDatePickerContext';
 import TDatePickerHelpers from '~/input/date-picker/TDatePickerHelpers';
 
 
-const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef>) => {
+const TDatePicker = forwardRef(({
+    value = '',
+    valueType = 'date',
+    separator = '-',
+    ...restProps
+}: TDatePickerProps, ref: Ref<TDatePickerRef>) => {
 
     // region [Hooks]
+
+    const props:TDatePickerProps = {value, valueType, separator, ...restProps};
 
     const rootRef = useRef<HTMLDivElement>(null);
     const textFieldRef = useRef<TTextFieldRef>(null);
@@ -72,12 +79,12 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
     }, [dateRange, currentSelector]);
 
 
-    const modifyCurrentSelector = useCallback((value: TDatePickerMode) => {
+    const modifyCurrentSelector = useCallback((val: TDatePickerMode) => {
 
         if (props.valueType === 'date') {
-            setCurrentSelector(value);
-        } else if (props.valueType === 'month' && value !== 'date') {
-            setCurrentSelector(value);
+            setCurrentSelector(val);
+        } else if (props.valueType === 'month' && val !== 'date') {
+            setCurrentSelector(val);
         }
     }, [props.valueType]);
 
@@ -297,11 +304,7 @@ const TDatePicker = forwardRef((props: TDatePickerProps, ref: Ref<TDatePickerRef
     // endregion
 });
 
-TDatePicker.defaultProps = {
-    value: '',
-    valueType: 'date',
-    separator: '-',
-};
+
 TDatePicker.displayName = 'TDatePicker';
 
 export default TDatePicker;

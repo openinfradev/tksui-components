@@ -1,11 +1,24 @@
 import {CSSProperties, useMemo} from 'react';
 import TIcon from '~/icon/TIcon';
 import {TFormSectionProps} from '@/components';
-import TFormSectionContext from './TFormSectionContext';
 import TSection from '~/data-container/section/TSection';
+import TFormSectionContext from '~/data-container/form-section/TFormSectionContext';
 
 
-const TFormSection = (props: TFormSectionProps) => {
+const TFormSection = ({
+    column = 2,
+    labelWidth = '104px',
+    formLabelItemAlign = 'horizontal',
+    formRowVerticalAlign = 'middle',
+    ...restProps
+}: TFormSectionProps) => {
+
+    // region [Hooks]
+
+
+    const props: TFormSectionProps = {column, labelWidth, formLabelItemAlign, formRowVerticalAlign, ...restProps};
+
+    // endregion
 
 
     // region [Styles]
@@ -65,10 +78,5 @@ const TFormSection = (props: TFormSectionProps) => {
 
 };
 
-TFormSection.defaultProps = {
-    column: 2,
-    labelWidth: '104px',
-    formLabelItemAlign: 'horizontal',
-    formRowVerticalAlign: 'middle',
-};
+
 export default TFormSection;
