@@ -1,14 +1,34 @@
 // eslint-disable-next-line max-len
-import {CSSProperties, ForwardedRef, forwardRef, MouseEvent, MouseEventHandler, ReactNode, useCallback, useImperativeHandle, useMemo, useRef, useState} from 'react';
+import {
+    CSSProperties,
+    ForwardedRef,
+    forwardRef,
+    MouseEvent,
+    MouseEventHandler,
+    ReactNode,
+    useCallback,
+    useImperativeHandle,
+    useMemo,
+    useRef,
+    useState,
+} from 'react';
 import {DropHolderAlignment, TDropHolderItem, TDropHolderProps, TDropHolderRef} from '@/components';
 import useClickOutside from '@/common/hook/UseClickOutside';
 import {TIcon} from '~/icon';
 import themeToken from '~style/designToken/ThemeToken.module.scss';
 
 
-const TDropHolder = forwardRef((props: TDropHolderProps, ref: ForwardedRef<TDropHolderRef>) => {
+const TDropHolder = forwardRef(({
+    alignment = 'bottom-center' as DropHolderAlignment,
+    textKey = 'text',
+    offset = '4px',
+    itemTemplate,
+    ...restProps
+}: TDropHolderProps, ref: ForwardedRef<TDropHolderRef>) => {
 
     // region [Hooks]
+
+    const props: TDropHolderProps = {alignment, textKey, offset, itemTemplate, ...restProps};
 
     const [isOpened, setIsOpened] = useState(false);
     const rootRef = useRef<HTMLDivElement>(null);
@@ -120,8 +140,8 @@ const TDropHolder = forwardRef((props: TDropHolderProps, ref: ForwardedRef<TDrop
         if (item.itemTemplate) {
             return item.itemTemplate(item);
         }
-        if (props.itemTemplate) {
-            return props.itemTemplate(item);
+        if (itemTemplate) {
+            return itemTemplate(item);
         }
 
         return (<>
@@ -137,7 +157,7 @@ const TDropHolder = forwardRef((props: TDropHolderProps, ref: ForwardedRef<TDrop
         </>);
 
 
-    }, [props]);
+    }, [itemTemplate, props.textKey]);
 
     // endregion
 
@@ -193,11 +213,6 @@ const TDropHolder = forwardRef((props: TDropHolderProps, ref: ForwardedRef<TDrop
 
 });
 
-TDropHolder.defaultProps = {
-    alignment: 'bottom-center' as DropHolderAlignment,
-    textKey: 'text',
-    offset: '4px',
-};
 
 TDropHolder.displayName = 'TDropHolder';
 

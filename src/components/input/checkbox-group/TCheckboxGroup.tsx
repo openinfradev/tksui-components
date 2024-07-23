@@ -1,12 +1,20 @@
-import {forwardRef, Ref, useCallback, useImperativeHandle, useMemo, useRef} from 'react';
+import {FocusEvent, forwardRef, Ref, useCallback, useImperativeHandle, useMemo, useRef} from 'react';
 import useValidator from '@/common/hook/UseValidator';
 import {TCheckboxGroupProps, TCheckboxGroupRef, TCheckboxGroupValue, TCheckboxValue} from '@/components';
 import TCheckbox from '../checkbox/TCheckbox';
 
 
-const TCheckboxGroup = forwardRef((props: TCheckboxGroupProps, ref: Ref<TCheckboxGroupRef>) => {
+const TCheckboxGroup = forwardRef(({
+    textKey = 'text',
+    valueKey = 'value',
+    lazy = true,
+    onChange,
+    ...restProps
+}: TCheckboxGroupProps, ref: Ref<TCheckboxGroupRef>) => {
 
     // region [Hooks]
+
+    const props: TCheckboxGroupProps = {textKey, valueKey, lazy, onChange, ...restProps};
 
     const validator = useValidator(props.value, props.rules, props.successMessage);
     const rootRef = useRef<HTMLDivElement>(null);
@@ -33,7 +41,7 @@ const TCheckboxGroup = forwardRef((props: TCheckboxGroupProps, ref: Ref<TCheckbo
         if (validator.result && validator.message) { clazz.push('t-checkbox-group--success'); }
 
         return clazz.join(' ');
-    }, [props.className, props.disabled, validator]);
+    }, [props.className, props.disabled, props.readOnly, validator.message, validator.result]);
 
     const rootStyle = useMemo(() => {
         return props.style || {};
@@ -41,6 +49,21 @@ const TCheckboxGroup = forwardRef((props: TCheckboxGroupProps, ref: Ref<TCheckbo
 
     // endregion
 
+    // region [Privates]
+
+    const emitChange = useCallback((value: TCheckboxGroupValue) => {
+        onChange(value);
+    }, [onChange]);
+
+    const removeValue = useCallback((value: TCheckboxValue) => {
+        emitChange(props.value.filter((v) => v !== value));
+    }, [emitChange, props.value]);
+
+    const addValue = useCallback((value: TCheckboxValue) => {
+        emitChange([...props.value, value]);
+    }, [emitChange, props.value]);
+
+    // endregion
 
     // region [Events]
 
@@ -50,38 +73,21 @@ const TCheckboxGroup = forwardRef((props: TCheckboxGroupProps, ref: Ref<TCheckbo
         } else {
             addValue(value);
         }
-    }, [props.value]);
+    }, [addValue, removeValue]);
 
     const onFocus = useCallback(() => {
         if (props.rules) {
             validator.clearValidation();
         }
-    }, [props.rules]);
+    }, [props.rules, validator]);
 
-    const onBlur = useCallback((event) => {
+    const onBlur = useCallback((event: FocusEvent) => {
         const next = event.relatedTarget;
 
         if (props.rules && !props.lazy && !rootRef.current.contains(next)) {
             validator.validate();
         }
     }, [props.rules, props.lazy, validator]);
-
-    // endregion
-
-
-    // region [ETC]
-
-    const emitChange = useCallback((value: TCheckboxGroupValue) => {
-        props.onChange(value);
-    }, [props.onChange]);
-
-    const removeValue = useCallback((value: TCheckboxValue) => {
-        emitChange(props.value.filter((v) => v !== value));
-    }, [emitChange]);
-
-    const addValue = useCallback((value: TCheckboxValue) => {
-        emitChange([...props.value, value]);
-    }, [emitChange]);
 
     // endregion
 
@@ -126,12 +132,6 @@ const TCheckboxGroup = forwardRef((props: TCheckboxGroupProps, ref: Ref<TCheckbo
 
 
 });
-
-TCheckboxGroup.defaultProps = {
-    textKey: 'text',
-    valueKey: 'value',
-    lazy: true,
-};
 
 TCheckboxGroup.displayName = 'TCheckboxGroup';
 

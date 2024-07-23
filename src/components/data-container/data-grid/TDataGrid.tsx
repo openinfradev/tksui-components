@@ -9,9 +9,39 @@ import NumberUtil from '@/common/util/NumberUtil';
 const DEFAULT_HEADER_HEIGHT = 32;
 const DEFAULT_ROW_HEIGHT = 40;
 
-const TDataGrid = forwardRef((props: TDataGridProps, ref: Ref<AgGridReact>) => {
+const TDataGrid = forwardRef(({
+    maxRowsWithoutScroll = 10.5,
+    defaultColDef = {
+        sortable: false,
+        resizable: true,
+        showDisabledCheckboxes: true,
+    },
+    animateRows = true,
+    popupParent = document.body,
+    suppressRowClickSelection = true,
+    enableCellTextSelection = true,
+    headerHeight = DEFAULT_HEADER_HEIGHT,
+    rowHeight = DEFAULT_ROW_HEIGHT,
+    onChange,
+    onSelectionChanged,
+    ...restProps
+}: TDataGridProps, ref: Ref<AgGridReact>) => {
 
     // region [Hooks]
+
+    const props: TDataGridProps = {
+        maxRowsWithoutScroll,
+        defaultColDef,
+        animateRows,
+        popupParent,
+        suppressRowClickSelection,
+        enableCellTextSelection,
+        headerHeight,
+        rowHeight,
+        onChange,
+        onSelectionChanged,
+        ...restProps,
+    };
 
     const [selectedRows, setSelectedRows] = useState<any>([]);
 
@@ -73,20 +103,20 @@ const TDataGrid = forwardRef((props: TDataGridProps, ref: Ref<AgGridReact>) => {
 
     // region [Events]
 
-    const onSelectionChanged = useCallback((event: SelectionChangedEvent) => {
+    const onSelectionChangedAgGrid = useCallback((event: SelectionChangedEvent) => {
 
         const rows = gridRef.current.api.getSelectedRows();
 
         setSelectedRows(rows);
 
-        if (props.onChange) {
-            props.onChange(rows);
+        if (onChange) {
+            onChange(rows);
         }
 
-        if (props.onSelectionChanged) {
-            props.onSelectionChanged(event);
+        if (onSelectionChanged) {
+            onSelectionChanged(event);
         }
-    }, [props]);
+    }, [onChange, onSelectionChanged]);
 
     // endregion
 
@@ -138,7 +168,7 @@ const TDataGrid = forwardRef((props: TDataGridProps, ref: Ref<AgGridReact>) => {
                  style={{height: generatedHeightProps.height}}>
                 <AgGridReact className={''}
                              ref={gridRef}
-                             onSelectionChanged={onSelectionChanged}
+                             onSelectionChanged={onSelectionChangedAgGrid}
                              {...props}
                              noRowsOverlayComponent={noRowsOverlayComponent}
                              suppressPropertyNamesCheck
@@ -161,21 +191,6 @@ const TDataGrid = forwardRef((props: TDataGridProps, ref: Ref<AgGridReact>) => {
     );
 
 });
-
-TDataGrid.defaultProps = {
-    maxRowsWithoutScroll: 10.5,
-    defaultColDef: {
-        sortable: false,
-        resizable: true,
-        showDisabledCheckboxes: true,
-    },
-    animateRows: true,
-    popupParent: document.body,
-    suppressRowClickSelection: true,
-    enableCellTextSelection: true,
-    headerHeight: DEFAULT_HEADER_HEIGHT,
-    rowHeight: DEFAULT_ROW_HEIGHT,
-};
 
 TDataGrid.displayName = 'TDataGrid';
 

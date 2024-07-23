@@ -21,9 +21,39 @@ import TIcon from '~/icon/TIcon';
 import TChip from '~/input/chip/TChip';
 import themeToken from '~style/designToken/ThemeToken.module.scss';
 
-const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => {
+const TDropdown = forwardRef(({
+    type = 'outline',
+    valueKey = 'value',
+    textKey = 'text',
+    placeholder = '선택',
+    filterPlaceholder = '검색',
+    chip = true,
+    lazy = true,
+    noClearButton = false,
+    itemTemplate,
+    onOpen,
+    onClose,
+    onChange,
+    ...restProps
+}: TDropdownProps, ref: Ref<TDropdownRef>) => {
 
     // region [Hooks]
+
+    const props:TDropdownProps = {
+        type,
+        valueKey,
+        textKey,
+        placeholder,
+        filterPlaceholder,
+        chip,
+        lazy,
+        noClearButton,
+        itemTemplate,
+        onOpen,
+        onClose,
+        onChange,
+        ...restProps,
+    };
 
     const validator = useValidator(props.value, props.rules, props.successMessage);
 
@@ -65,19 +95,19 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
 
         if (props.multiple) {
             if (props.value.includes(newItem)) {
-                props.onChange((props.value as string[]).filter((v) => v !== newItem));
+                onChange((props.value as string[]).filter((v) => v !== newItem));
             } else {
-                props.onChange([...props.value, newItem]);
+                onChange([...props.value, newItem]);
             }
         } else {
-            props.onChange(newItem);
+            onChange(newItem);
         }
-    }, [props]);
+    }, [onChange, props.multiple, props.value]);
 
     const clearValue = useCallback((): void => {
-        props.onChange('');
+        onChange('');
 
-    }, [props]);
+    }, [onChange]);
 
     const initItemMap = useCallback(() => {
         const map = new Map();
@@ -89,18 +119,18 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
 
     const close = useCallback((setFocus: boolean): void => {
         setIsOpened(false);
-        props.onClose?.();
+        onClose?.();
         setFilterText('');
         if (setFocus) {
             focusToControl();
         }
-    }, [focusToControl, props]);
+    }, [focusToControl, onClose]);
 
     const open = useCallback((): void => {
         setIsOpened(true);
-        props.onOpen?.();
+        onOpen?.();
         validator.clearValidation();
-    }, [props, validator]);
+    }, [onOpen, validator]);
 
     const toggleIsOpened = useCallback((): void => {
         if (isOpened) {
@@ -120,8 +150,8 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
             return '';
         }
 
-        return props.itemTemplate ? props.itemTemplate(item) : item[props.textKey];
-    }, [props]);
+        return itemTemplate ? itemTemplate(item) : item[props.textKey];
+    }, [itemTemplate, props.textKey]);
 
 
     const getFilteredItems = useCallback((): TDropdownItem[] => {
@@ -164,7 +194,7 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
         clazz.push(`t-dropdown--${props.type}`);
 
         return clazz.join(' ');
-    }, [isOpened, props.className, props.disabled, props.type, validator.message, validator.result]);
+    }, [isOpened, props.className, props.dense, props.disabled, props.readOnly, props.type, validator.message, validator.result]);
 
     const selectedClass = useMemo((): string => {
         const clazz: string[] = [];
@@ -268,9 +298,9 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
 
     const onClearFilterText = useCallback((): void => {
         if (!props.multiple) {
-            props.onChange('');
+            onChange('');
         }
-    }, [props]);
+    }, [onChange, props.multiple]);
 
     // endregion
 
@@ -278,7 +308,7 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
     // region [Templates]
 
 
-    const placeholder = useMemo((): string => {
+    const calculatedPlaceholder = useMemo((): string => {
 
         if (props.value?.length === 0) {
             return props.placeholder;
@@ -320,7 +350,7 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
                 <div className={`t-dropdown__control__selected ${selectedClass}`}>
 
                     {/* Placeholder */}
-                    {placeholder}
+                    {calculatedPlaceholder}
 
                     {/* Multiple Chip */}
                     {
@@ -426,17 +456,6 @@ const TDropdown = forwardRef((props: TDropdownProps, ref: Ref<TDropdownRef>) => 
         </div>
     );
 });
-
-TDropdown.defaultProps = {
-    type: 'outline',
-    valueKey: 'value',
-    textKey: 'text',
-    placeholder: '선택',
-    filterPlaceholder: '검색',
-    chip: true,
-    lazy: true,
-    noClearButton: false,
-};
 
 TDropdown.displayName = 'TDropdown';
 

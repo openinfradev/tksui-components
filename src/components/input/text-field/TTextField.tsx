@@ -17,10 +17,23 @@ import useValidator from '@/common/hook/UseValidator';
 import themeToken from '~style/designToken/ThemeToken.module.scss';
 
 
-const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) => {
+const TTextField = forwardRef(({
+    lazy = true,
+    rows = 1,
+    onClear,
+    onBlur,
+    onFocus,
+    onKeyDown,
+    onChange,
+    onKeyDownEnter,
+    onClickSearch,
+    ...restProps
+}: TTextFieldProps, ref: Ref<TTextFieldRef>) => {
 
 
     // region [Hooks]
+
+    const props: TTextFieldProps = {lazy, rows, onClear, onBlur, onFocus, onKeyDown, onChange, onKeyDownEnter, onClickSearch, ...restProps};
 
     const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
     const [hasFocus, setHasFocus] = useState<boolean>(false);
@@ -64,59 +77,59 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
 
     // region [Events]
 
-    const onChange = useCallback((event): void => {
+    const onChangeInput = useCallback((event): void => {
 
         const newLength = props.noTrim ? event.target.value.length : event.target.value.trim().length;
 
         if (props.counter) {
             if (newLength > props.counter) {
-                props.onChange(event.target.value.substring(0, props.counter));
+                onChange(event.target.value.substring(0, props.counter));
                 return;
             }
         }
-        props.onChange(event.target.value);
-    }, [props]);
-    const onFocus = useCallback((): void => {
+        onChange(event.target.value);
+    }, [onChange, props.counter, props.noTrim]);
+    const onFocusInput = useCallback((): void => {
         validator.clearValidation();
         setHasFocus(true);
 
-        if (props.onFocus) {
-            props.onFocus();
+        if (onFocus) {
+            onFocus();
         }
-    }, [props, validator]);
+    }, [onFocus, validator]);
 
-    const onBlur = useCallback((): void => {
+    const onBlurInput = useCallback((): void => {
         if (!props.noTrim && props.value !== props.value.trim()) {
-            props.onChange(props.value.trim());
+            onChange(props.value.trim());
         }
         if (!props.lazy) {
             validator.validate();
         }
         setHasFocus(false);
-        if (props.onBlur) {
-            props.onBlur();
+        if (onBlur) {
+            onBlur();
         }
 
-    }, [props, validator]);
+    }, [onBlur, onChange, props.lazy, props.noTrim, props.value, validator]);
 
-    const onKeyDown = useCallback((event: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+    const onKeyDownInput = useCallback((event: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
 
         if (event.nativeEvent.isComposing) { return; }
 
-        if (event.key === 'Enter' && props.onKeyDownEnter) {
-            props.onKeyDownEnter(event);
+        if (event.key === 'Enter' && onKeyDownEnter) {
+            onKeyDownEnter(event);
         }
 
-        if (props.onKeyDown) {
-            props.onKeyDown(event);
+        if (onKeyDown) {
+            onKeyDown(event);
         }
-    }, [props]);
+    }, [onKeyDown, onKeyDownEnter]);
 
     const onClickClear = useCallback((event: MouseEvent): void => {
         event?.stopPropagation();
-        if (props.onChange) { props.onChange(''); }
-        if (props.onClear) { props.onClear(); }
-    }, [props]);
+        if (onChange) { onChange(''); }
+        if (onClear) { onClear(); }
+    }, [onChange, onClear]);
 
     // endregion
 
@@ -211,10 +224,10 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
                                  disabled={props.disabled || props.readOnly}
                                  placeholder={(props.disabled || props.readOnly) ? '' : props.placeholder}
                                  value={props.value}
-                                 onChange={onChange}
-                                 onKeyDown={onKeyDown}
-                                 onFocus={onFocus}
-                                 onBlur={onBlur}
+                                 onChange={onChangeInput}
+                                 onKeyDown={onKeyDownInput}
+                                 onFocus={onFocusInput}
+                                 onBlur={onBlurInput}
                                  autoComplete={props.autoComplete}
                                  data-testid={'text-field-input'}
                         />
@@ -226,10 +239,10 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
                             disabled={props.disabled || props.readOnly}
                             placeholder={(props.disabled || props.readOnly) ? '' : props.placeholder}
                             value={props.value}
-                            onChange={onChange}
-                            onKeyDown={onKeyDown}
-                            onFocus={onFocus}
-                            onBlur={onBlur}
+                            onChange={onChangeInput}
+                            onKeyDown={onKeyDownInput}
+                            onFocus={onFocusInput}
+                            onBlur={onBlurInput}
                             autoComplete={props.autoComplete}
                             data-testid={'text-field-text-area'}
                             rows={props.rows}
@@ -304,10 +317,6 @@ const TTextField = forwardRef((props: TTextFieldProps, ref: Ref<TTextFieldRef>) 
     );
 });
 
-TTextField.defaultProps = {
-    lazy: true,
-    rows: 1,
-};
 
 TTextField.displayName = 'TTextField';
 

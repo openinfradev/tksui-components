@@ -4,10 +4,18 @@ import {TTextArrayFieldProps, TTextArrayFieldRef} from '~/input/text-array-field
 import useValidator from '../../../common/hook/UseValidator';
 
 
-const TTextArrayField = forwardRef((props: TTextArrayFieldProps, ref: Ref<TTextArrayFieldRef>) => {
+const TTextArrayField = forwardRef(({
+    lazy = true,
+    duplicateMessage = '이미 입력된 값입니다.',
+    placeholder = '값을 입력하고 엔터를 눌러주세요.',
+    onChange,
+    ...restProps
+}: TTextArrayFieldProps, ref: Ref<TTextArrayFieldRef>) => {
 
 
     // region [Hooks]
+
+    const props: TTextArrayFieldProps = {lazy, duplicateMessage, placeholder, onChange, ...restProps};
 
     const validator = useValidator(props.value, props.rules, props.successMessage);
 
@@ -89,17 +97,17 @@ const TTextArrayField = forwardRef((props: TTextArrayFieldProps, ref: Ref<TTextA
         }
 
         if (candidateItem.length > 0) {
-            props.onChange([...props.value, candidateItem]);
+            onChange([...props.value, candidateItem]);
             setCurrentInput('');
         }
-    }, [currentInput, isDuplicatedItem, props, validator]);
+    }, [currentInput, isDuplicatedItem, onChange, props.duplicateMessage, props.value, validator]);
 
     const onRemoveItem = useCallback((targetIndex: number) => {
 
-        props.onChange(
+        onChange(
             props.value.filter((item, index) => index !== targetIndex),
         );
-    }, [props]);
+    }, [onChange, props.value]);
 
     const onChangeText = useCallback((value: string) => {
         validator.clearValidation();
@@ -145,12 +153,6 @@ const TTextArrayField = forwardRef((props: TTextArrayFieldProps, ref: Ref<TTextA
         </div>
     );
 });
-
-TTextArrayField.defaultProps = {
-    lazy: true,
-    duplicateMessage: '이미 입력된 값입니다.',
-    placeholder: '값을 입력하고 엔터를 눌러주세요.',
-};
 
 TTextArrayField.displayName = 'TTextArrayField';
 
