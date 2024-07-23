@@ -12,8 +12,8 @@ const TRadio = (props: TRadioProps) => {
     const getRootClass = useCallback(() => {
         const clazz: string[] = [];
 
-        if (props.className) clazz.push(props.className);
-        if (props.disabled) clazz.push('t-radio--disabled');
+        if (props.className) { clazz.push(props.className); }
+        if (props.disabled) { clazz.push('t-radio--disabled'); }
 
         return clazz.join(' ');
     }, [props.className, props.disabled]);
@@ -37,12 +37,12 @@ const TRadio = (props: TRadioProps) => {
     // region [Events]
 
     const onClickRadio = useCallback(() => {
-        if (props.disabled) return;
+        if (props.disabled) { return; }
         emitSelect();
     }, [props.disabled, emitSelect]);
 
     const onKeyDown = useCallback((event: KeyboardEvent) => {
-        if (props.disabled) return;
+        if (props.disabled) { return; }
         if (event.key === 'Enter' || event.key === ' ') {
             emitSelect();
         }
@@ -99,8 +99,6 @@ const TRadio = (props: TRadioProps) => {
 
     // endregion
 };
-
-TRadio.defaultProps = {};
 
 TRadio.displayName = 'TRadio';
 

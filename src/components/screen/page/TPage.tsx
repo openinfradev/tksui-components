@@ -1,14 +1,19 @@
-import {MouseEvent, MouseEventHandler, useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import TIcon from '../../icon/TIcon';
-import {TPageProps} from '@/components';
+import {EventHandler, MouseEvent, MouseEventHandler, useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import {TIcon, TPageProps} from '@/components';
 import themeToken from '~style/designToken/ThemeToken.module.scss';
+
 
 const defaultPanelWidth = '280px';
 
-const TPage = (props: TPageProps) => {
+const TPage = ({
+    contentDirection = 'top-bottom',
+    ...restProps
+}: TPageProps) => {
 
 
     // region [Hooks]
+
+    const props:TPageProps = {contentDirection, ...restProps};
 
     const [isInfoPanelOpened, setIsInfoPanelOpened] = useState<boolean>(false);
     const [isInfoPanelResizing, setIsInfoPanelResizing] = useState<boolean>(false);
@@ -30,7 +35,7 @@ const TPage = (props: TPageProps) => {
     const onMouseDown = ((clickEvent: MouseEvent): void => {
         clickEvent.stopPropagation();
 
-        const mouseMoveHandler = (mouseEvent): void => {
+        const mouseMoveHandler = (mouseEvent: MouseEvent): void => {
             const width: number = window.innerWidth - mouseEvent.pageX;
 
             setIsInfoPanelResizing(true);
@@ -42,16 +47,16 @@ const TPage = (props: TPageProps) => {
             if (width <= 200) {
                 setPanelWidth(defaultPanelWidth);
                 setIsInfoPanelOpened(false);
-                document.removeEventListener('mousemove', mouseMoveHandler);
+                document.removeEventListener('mousemove', mouseMoveHandler as EventHandler<any>);
             }
         };
 
         const mouseUpHandler = () => {
-            document.removeEventListener('mousemove', mouseMoveHandler);
+            document.removeEventListener('mousemove', mouseMoveHandler as EventHandler<any>);
             setIsInfoPanelResizing(false);
         };
 
-        document.addEventListener('mousemove', mouseMoveHandler);
+        document.addEventListener('mousemove', mouseMoveHandler as EventHandler<any>);
         document.addEventListener('mouseup', mouseUpHandler, {once: true});
     }) as MouseEventHandler;
 
@@ -171,10 +176,6 @@ const TPage = (props: TPageProps) => {
             }
         </div>
     );
-};
-
-TPage.defaultProps = {
-    contentDirection: 'top-bottom',
 };
 
 
