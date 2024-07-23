@@ -164,7 +164,6 @@ const TMonthSelector = () => {
     // endregion
 };
 
-TMonthSelector.defaultProps = {};
 TMonthSelector.displayName = 'TMonthSelector';
 
 

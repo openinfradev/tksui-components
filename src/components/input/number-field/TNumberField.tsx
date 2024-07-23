@@ -1,12 +1,35 @@
-import {CSSProperties, forwardRef, KeyboardEvent, Ref, useCallback, useImperativeHandle, useMemo, useRef, useState} from 'react';
+import {
+    ChangeEvent,
+    CSSProperties,
+    forwardRef,
+    KeyboardEvent,
+    Ref,
+    useCallback,
+    useImperativeHandle,
+    useMemo,
+    useRef,
+    useState,
+} from 'react';
 import useValidator from '@/common/hook/UseValidator';
 import {TNumberFieldProps, TNumberFieldRef} from '@/components';
 
 
-const TNumberField = forwardRef((props: TNumberFieldProps, ref: Ref<TNumberFieldRef>) => {
+const TNumberField = forwardRef(({
+    type = 'outline',
+    lazy = true,
+    min = -100000000000,
+    max = 100000000000,
+    step = 1,
+    onChange,
+    onKeyDown,
+    onKeyDownEnter,
+    ...restProps
+}: TNumberFieldProps, ref: Ref<TNumberFieldRef>) => {
 
 
     // region [Hooks]
+
+    const props: TNumberFieldProps = {type, lazy, min, max, step, onChange, onKeyDown, onKeyDownEnter, ...restProps};
 
     const [hasFocus, setHasFocus] = useState<boolean>(false);
     const validator = useValidator(props.value, props.rules, props.successMessage);
@@ -104,17 +127,17 @@ const TNumberField = forwardRef((props: TNumberFieldProps, ref: Ref<TNumberField
         // Check NaN
         if (Number.isNaN(value)) {
             inputRef.current.value = '';
-            props.onChange('');
+            onChange('');
             return;
         }
 
         // Check violating step
         const remainder: number = (value - props.min) % props.step;
         if (remainder !== 0) {
-            props.onChange(`${value - remainder}`);
+            onChange(`${value - remainder}`);
         }
 
-    }, [props]);
+    }, [onChange, props.min, props.step, props.value]);
 
     const inputPlaceholder: string = useMemo((): string => {
         if (props.label && !hasFocus) { return ''; }
@@ -156,50 +179,50 @@ const TNumberField = forwardRef((props: TNumberFieldProps, ref: Ref<TNumberField
 
     }, [props.max]);
 
-    const onChange = useCallback((e): void => {
+    const onChangeInput = useCallback((e: ChangeEvent<HTMLInputElement>): void => {
 
         if (isInputtableValue(e.target.value)) {
-            props.onChange(e.target.value);
+            onChange(e.target.value);
         }
-    }, [isInputtableValue, props]);
+    }, [isInputtableValue, onChange]);
 
 
     const onClickStepUp = useCallback((): void => {
 
         inputRef.current.stepUp();
         if (props.value !== inputRef.current.value) {
-            props.onChange(inputRef.current.value);
+            onChange(inputRef.current.value);
         }
 
-    }, [props]);
+    }, [onChange, props.value]);
 
     const onClickStepDown = useCallback((): void => {
 
         inputRef.current.stepDown();
         if (props.value !== inputRef.current.value) {
-            props.onChange(inputRef.current.value);
+            onChange(inputRef.current.value);
         }
-    }, [props]);
+    }, [onChange, props.value]);
 
-    const onKeyDown = useCallback((event: KeyboardEvent<HTMLInputElement>): void => {
+    const onKeyDownInput = useCallback((event: KeyboardEvent<HTMLInputElement>): void => {
 
         if (event.key === '-' && props.min >= -1) {
             event.preventDefault();
-            props.onChange(`${props.min}`);
+            onChange(`${props.min}`);
         }
         if (event.key === '+') {
             event.preventDefault();
         }
 
-        if (event.key === 'Enter' && props.onKeyDownEnter) {
-            props.onKeyDownEnter(event);
+        if (event.key === 'Enter' && onKeyDownEnter) {
+            onKeyDownEnter(event);
         }
 
 
-        if (props.onKeyDown) {
-            props.onKeyDown(event);
+        if (onKeyDown) {
+            onKeyDown(event);
         }
-    }, [props]);
+    }, [onChange, onKeyDown, onKeyDownEnter, props.min]);
 
     // endregion
 
@@ -227,8 +250,8 @@ const TNumberField = forwardRef((props: TNumberFieldProps, ref: Ref<TNumberField
                        min={props.min}
                        max={props.max}
                        step={props.step}
-                       onChange={onChange}
-                       onKeyDown={onKeyDown}
+                       onChange={onChangeInput}
+                       onKeyDown={onKeyDownInput}
                        onFocus={onFocus}
                        onBlur={onBlur}
                        data-testid={'number-field-input-root'}
@@ -257,13 +280,6 @@ const TNumberField = forwardRef((props: TNumberFieldProps, ref: Ref<TNumberField
         </div>
     );
 });
-TNumberField.defaultProps = {
-    type: 'outline',
-    lazy: true,
-    min: -100000000000,
-    max: 100000000000,
-    step: 1,
-};
 
 TNumberField.displayName = 'TNumberField';
 

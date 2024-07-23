@@ -153,8 +153,6 @@ const TYearSelector = () => {
     // endregion
 };
 
-TYearSelector.defaultProps = {};
-
 TYearSelector.displayName = 'TYearSelector';
 
 
