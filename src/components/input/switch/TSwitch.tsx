@@ -1,15 +1,27 @@
 import {CSSProperties, KeyboardEvent, useCallback, useMemo} from 'react';
-import {TSwitchProps} from './TSwitch.interface';
+import {TSwitchProps} from '@/components';
 
 
-function TSwitch(props: TSwitchProps) {
+function TSwitch({
+    positiveValue = true,
+    negativeValue = false,
+    onChange,
+    ...restProps
+}: TSwitchProps) {
+
+    // region [Hooks]
+
+    const props = {positiveValue, negativeValue, ...restProps};
+
+    // endregion
+
 
     // region [Privates]
 
     const emitChange = useCallback((): void => {
         const next = props.value === props.positiveValue ? props.negativeValue : props.positiveValue;
-        props.onChange(next);
-    }, [props]);
+        onChange(next);
+    }, [onChange, props.negativeValue, props.positiveValue, props.value]);
 
     // endregion
 
@@ -38,7 +50,7 @@ function TSwitch(props: TSwitchProps) {
     const getRootStyle = useMemo((): CSSProperties => {
         let style: CSSProperties = {};
 
-        if (props.style) style = {...props.style};
+        if (props.style) { style = {...props.style}; }
 
         return style;
     }, [props.style]);
@@ -82,11 +94,6 @@ function TSwitch(props: TSwitchProps) {
         </div>
     );
 }
-
-TSwitch.defaultProps = {
-    positiveValue: true,
-    negativeValue: false,
-};
 
 TSwitch.displayName = 'TSwitch';
 
