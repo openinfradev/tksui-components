@@ -1,7 +1,7 @@
 import {Meta, StoryObj} from '@storybook/react';
 import {useEffect, useMemo, useRef, useState} from 'react';
 import {AgGridReact} from 'ag-grid-react';
-import {ColDef} from 'ag-grid-community/dist/lib/entities/colDef';
+import {ColDef} from 'ag-grid-community';
 import TDataGrid from '@/components/data-container/data-grid/TDataGrid';
 import TButton from '@/components/button/button/TButton';
 import useInputState from '@/common/hook/UseInputState';

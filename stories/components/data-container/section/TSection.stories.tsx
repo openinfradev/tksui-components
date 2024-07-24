@@ -1,12 +1,12 @@
 import {Meta, StoryObj} from '@storybook/react';
+import {useEffect, useMemo, useRef, useState} from 'react';
+import {AgGridReact} from 'ag-grid-react';
+import {ColDef} from 'ag-grid-community';
 import TButton from '@/components/button/button/TButton';
 import TSection from '~/data-container/section/TSection';
 import {TSectionProps} from '@/components';
 import useInputState from '@/common/hook/UseInputState';
 import TToast, {notify} from '@/components/guide/toast/TToast';
-import {useEffect, useMemo, useRef, useState} from 'react';
-import {AgGridReact} from 'ag-grid-react';
-import {ColDef} from 'ag-grid-community/dist/lib/entities/colDef';
 import TDataGrid from '../../../../src/components/data-container/data-grid/TDataGrid';
 
 
