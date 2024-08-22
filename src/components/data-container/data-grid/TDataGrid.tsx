@@ -168,10 +168,10 @@ const TDataGrid = forwardRef(({
                  style={{height: generatedHeightProps.height}}>
                 <AgGridReact className={''}
                              ref={gridRef}
-                             onSelectionChanged={onSelectionChangedAgGrid}
                              {...props}
                              noRowsOverlayComponent={noRowsOverlayComponent}
                              suppressPropertyNamesCheck
+                             onSelectionChanged={onSelectionChangedAgGrid}
                              {...generatedHeightProps}
                 />
             </div>

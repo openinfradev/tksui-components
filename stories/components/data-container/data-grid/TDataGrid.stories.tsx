@@ -56,7 +56,7 @@ const Template = () => {
         <TButton>다운로드</TButton>
     </>), [selectedRows.value.length]);
 
-    return (<>
+    return (
         <TDataGrid ref={gridRef}
                    rowData={rowData}
                    rowSelection={'multiple'}
@@ -64,7 +64,7 @@ const Template = () => {
                    rightAction={gridRightAction}
                    onChange={selectedRows.onChange}
         />
-    </>);
+    );
 };
 
 
