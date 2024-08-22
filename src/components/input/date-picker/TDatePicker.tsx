@@ -7,7 +7,7 @@ import TDropHolder from '~/data-container/drop-holder/TDropHolder';
 import TDaySelector from '~/input/date-picker/selector/TDaySelector';
 import TMonthSelector from '~/input/date-picker/selector/TMonthSelector';
 import TYearSelector from '~/input/date-picker/selector/TYearSelector';
-import themeToken from '~style//designToken/ThemeToken.module.scss';
+import themeToken from '~style/designToken/ThemeToken.module.scss';
 import TDateContext from '~/input/date-picker/TDatePickerContext';
 import TDatePickerHelpers from '~/input/date-picker/TDatePickerHelpers';
 
