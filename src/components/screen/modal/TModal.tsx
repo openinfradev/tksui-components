@@ -1,14 +1,14 @@
-import React, {MouseEvent, useCallback, useEffect, useMemo, useRef} from 'react';
+import React, {memo, MouseEvent, useCallback, useEffect, useMemo, useRef} from 'react';
 import {createPortal} from 'react-dom';
 import ReactModal from 'react-modal';
 import TIcon from '../../icon/TIcon';
 import {modalSize, TModalProps} from '@/components';
 import themeToken from '~style/designToken/ThemeToken.module.scss';
 
-export default function TModal({
+const TModal = ({
     containerId = 'root',
     ...restProps
-}: TModalProps) {
+}: TModalProps) => {
 
     // region [Hooks]
 
@@ -109,5 +109,6 @@ export default function TModal({
         ),
         documentRoot,
     );
-}
+};
 
+export default memo(TModal);

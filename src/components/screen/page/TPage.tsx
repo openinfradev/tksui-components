@@ -1,4 +1,4 @@
-import {EventHandler, MouseEvent, MouseEventHandler, useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import {EventHandler, memo, MouseEvent, MouseEventHandler, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {TIcon, TPageProps} from '@/components';
 import themeToken from '~style/designToken/ThemeToken.module.scss';
 
@@ -181,5 +181,5 @@ const TPage = ({
 
 TPage.displayName = 'TPage';
 
-export default TPage;
+export default memo(TPage);
 

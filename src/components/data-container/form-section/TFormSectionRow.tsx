@@ -1,4 +1,4 @@
-import {CSSProperties, useContext, useMemo} from 'react';
+import {CSSProperties, memo, useContext, useMemo} from 'react';
 import {TFormSectionRowProps} from '@/components';
 import TFormSectionContext from '~/data-container/form-section/TFormSectionContext';
 
@@ -50,4 +50,4 @@ const TFormSectionRow = ({
 TFormSectionRow.displayName = 'TFormSectionRow';
 
 
-export default TFormSectionRow;
+export default memo(TFormSectionRow);

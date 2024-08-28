@@ -1,7 +1,7 @@
 import {
     CSSProperties,
     forwardRef,
-    KeyboardEvent,
+    KeyboardEvent, memo,
     MouseEvent,
     Ref,
     useCallback,
@@ -321,4 +321,4 @@ const TTextField = forwardRef(({
 TTextField.displayName = 'TTextField';
 
 
-export default TTextField;
+export default memo(TTextField);

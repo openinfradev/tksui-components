@@ -1,4 +1,4 @@
-import {CSSProperties, forwardRef, KeyboardEvent, MouseEvent, Ref, useCallback, useImperativeHandle, useMemo, useRef} from 'react';
+import {CSSProperties, forwardRef, KeyboardEvent, memo, MouseEvent, Ref, useCallback, useImperativeHandle, useMemo, useRef} from 'react';
 import {TLoadingIndicator, ButtonSize, buttonSize, buttonVariant, TButtonProps, TButtonRef} from '@/components';
 import useRipple from '@/common/hook/UseRipple';
 import TIcon from '../../icon/TIcon';
@@ -170,4 +170,4 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
 
 TButton.displayName = 'TButton';
 
-export default TButton;
+export default memo(TButton);

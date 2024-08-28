@@ -1,7 +1,7 @@
 import {
     CSSProperties,
     forwardRef,
-    KeyboardEvent,
+    KeyboardEvent, memo,
     MouseEvent,
     Ref,
     useCallback,
@@ -460,4 +460,4 @@ const TDropdown = forwardRef(({
 TDropdown.displayName = 'TDropdown';
 
 
-export default TDropdown;
+export default memo(TDropdown);
