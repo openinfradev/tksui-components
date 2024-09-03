@@ -1,21 +1,21 @@
 import React, {memo, MouseEvent, useCallback, useEffect, useMemo, useRef} from 'react';
 import {createPortal} from 'react-dom';
 import ReactModal from 'react-modal';
-import TIcon from '../../icon/TIcon';
-import {modalSize, TModalProps} from '@/components';
+
+import {modalSize, TIcon, TModalProps} from '@/components';
 import themeToken from '~style/designToken/ThemeToken.module.scss';
 
 const TModal = ({
     containerId = 'root',
+    onRequestClose,
     ...restProps
 }: TModalProps) => {
 
     // region [Hooks]
 
-    const props:TModalProps = {containerId, ...restProps};
+    const props:TModalProps = {containerId, onRequestClose, ...restProps};
 
     const modalRef = useRef(null);
-    const {onRequestClose} = props;
 
     const documentRoot: HTMLElement = document.getElementById(props.containerId) as HTMLElement;
     ReactModal.setAppElement(`#${props.containerId}`);
@@ -56,6 +56,19 @@ const TModal = ({
 
     // endregion
 
+    // region [Events]
+
+    const onClickCloseButton = useCallback(
+        (e) => closeModal(e),
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [],
+    );
+
+
+    // endregion
+
+
     // region [Effect]
 
     useEffect(() => {
@@ -85,9 +98,14 @@ const TModal = ({
                         shouldCloseOnOverlayClick={false}
             >
                 {/* Close Button */}
-                <TIcon className={'t-modal__overlay__body__close-icon'}
-                       color={themeToken.tGrayColor5}
-                       clickable onClick={(e) => { closeModal(e); }}>close</TIcon>
+                <TIcon
+                    className={'t-modal__overlay__body__close-icon'}
+                    color={themeToken.tGrayColor5}
+                    clickable
+                    onClick={onClickCloseButton}
+                >
+                    close
+                </TIcon>
                 {/* Modal Header */}
                 <header className={'t-modal__overlay__body__header'}>
                     {
