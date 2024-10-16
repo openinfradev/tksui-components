@@ -67,7 +67,7 @@ const TCheckboxGroup = forwardRef(({
 
     // region [Events]
 
-    const onChangeChildren = useCallback((value: string, positiveValue: boolean) => {
+    const onChangeChildren = useCallback((value: TCheckboxValue, positiveValue: TCheckboxValue) => {
         if (value === null) {
             removeValue(positiveValue);
         } else {
