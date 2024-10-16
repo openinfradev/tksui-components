@@ -62,7 +62,7 @@ const TForm = ({
 
 
     const rows = useMemo(() => {
-        return props.rows.map((row, index) => {
+        return props.rows?.map((row, index) => {
 
             return (
                 formRow({
