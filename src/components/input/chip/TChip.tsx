@@ -1,3 +1,5 @@
+'use client';
+
 import {CSSProperties, forwardRef, MouseEvent, Ref, useImperativeHandle, useMemo, useRef} from 'react';
 import {TChipProps, TChipRef} from '@/components';
 import TIcon from '../../icon/TIcon';

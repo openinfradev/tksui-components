@@ -1,3 +1,5 @@
+'use client';
+
 import {MouseEvent, useCallback, useContext, useMemo, useRef} from 'react';
 import {TTabItemProps} from '@/components';
 import TTabBoxContext from './TTabBoxContext';

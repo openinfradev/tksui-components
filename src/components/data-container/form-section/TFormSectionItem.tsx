@@ -1,3 +1,5 @@
+'use client';
+
 import {CSSProperties, memo, useContext, useId, useMemo, useRef} from 'react';
 import TIcon from '~/icon/TIcon';
 import TTooltip from '~/guide/tooltip/TTooltip';
