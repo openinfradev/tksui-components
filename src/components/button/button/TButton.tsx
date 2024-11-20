@@ -1,3 +1,5 @@
+'use client';
+
 import {CSSProperties, forwardRef, KeyboardEvent, memo, MouseEvent, Ref, useCallback, useImperativeHandle, useMemo, useRef} from 'react';
 import {TLoadingIndicator, ButtonSize, buttonSize, buttonVariant, TButtonProps, TButtonRef} from '@/components';
 import useRipple from '@/common/hook/UseRipple';
