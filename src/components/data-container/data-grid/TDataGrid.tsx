@@ -1,10 +1,11 @@
 import {CSSProperties, forwardRef, memo, Ref, useCallback, useImperativeHandle, useMemo, useRef, useState} from 'react';
 import {AgGridReact} from 'ag-grid-react';
 import {DomLayoutType, SelectionChangedEvent} from 'ag-grid-community';
-import {TDataGridProps} from '@/components';
+
 import TPagination from '../pagination/TPagination';
 import TActionBar from '~/data-container/action-bar/TActionBar';
 import NumberUtil from '@/common/util/NumberUtil';
+import {TDataGridProps} from '~/data-container/data-grid/TDataGrid.interface';
 
 const DEFAULT_HEADER_HEIGHT = 32;
 const DEFAULT_ROW_HEIGHT = 40;
