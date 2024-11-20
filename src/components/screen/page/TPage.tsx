@@ -1,3 +1,5 @@
+'use client';
+
 import {EventHandler, memo, MouseEvent, MouseEventHandler, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {TIcon, TPageProps} from '@/components';
 import themeToken from '~style/designToken/ThemeToken.module.scss';

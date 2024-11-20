@@ -1,3 +1,5 @@
+'use client';
+
 import {CSSProperties, forwardRef, Ref, useCallback, useEffect, useImperativeHandle, useMemo, useState} from 'react';
 import {
     TInputValidationHintProps, TInputValidationHintRef,

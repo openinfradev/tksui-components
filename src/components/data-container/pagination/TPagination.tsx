@@ -1,3 +1,5 @@
+'use client';
+
 import {CSSProperties, forwardRef, memo, Ref, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState} from 'react';
 
 import {TPaginationProps, TPaginationRef} from '@/components';
