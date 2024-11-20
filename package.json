@@ -76,9 +76,6 @@
         "vite": "^5.3.3",
         "vite-plugin-compression2": "^0.10.4"
     },
-    "peerDependencies": {
-        "react": "^18.0.0"
-    },
     "dependencies": {
         "@material-symbols/font-300": "^0.14.5",
         "ag-grid-community": "^32.0.2",
