@@ -7,13 +7,13 @@ import {
     memo,
     MouseEvent,
     Ref,
-    useCallback, useEffect,
+    useCallback,
+    useEffect,
     useImperativeHandle,
     useMemo,
     useRef,
     useState,
 } from 'react';
-import uniqueId from 'lodash/uniqueId';
 import TIcon from '../../icon/TIcon';
 import {TTextFieldProps, TTextFieldRef} from '@/components';
 import useValidator from '@/common/hook/UseValidator';
@@ -47,7 +47,6 @@ const TTextField = forwardRef(({
     const validator = useValidator(props.noTrim ? innerValue : innerValue?.trim(), props.rules, props.successMessage);
     const inputRef = useRef<HTMLInputElement>(null);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
-    const inputUuid = uniqueId();
 
     useImperativeHandle(ref, () => ({
         focus() {
@@ -223,6 +222,8 @@ const TTextField = forwardRef(({
 
     useEffect(() => {
 
+        if (props.value === undefined) { return; }
+
         setInnerValue((prevState) => {
 
             if (prevState === props.value) { return prevState; }
@@ -237,7 +238,7 @@ const TTextField = forwardRef(({
         <div className={`t-text-field ${rootClass}`} style={rootStyle} id={props.id} data-testid={'text-field-root'}>
             {
                 props.label && (
-                    <label className={`t-text-field__label ${labelClass}`} htmlFor={inputUuid}>
+                    <label className={`t-text-field__label ${labelClass}`}>
                         {props.label}
                     </label>
                 )
@@ -245,8 +246,7 @@ const TTextField = forwardRef(({
             <div className={'t-text-field__container'}>
                 {
                     !props.multiline
-                        ? <input id={inputUuid}
-                                 ref={inputRef}
+                        ? <input ref={inputRef}
                                  type={inputType}
                                  tabIndex={(props.disabled || props.readOnly) ? -1 : 0}
                                  className={`t-text-field__container__input ${inputClass}`}
@@ -262,7 +262,6 @@ const TTextField = forwardRef(({
                                  data-testid={'text-field-input'}
                         />
                         : <textarea
-                            id={inputUuid}
                             ref={textareaRef}
                             tabIndex={(props.disabled || props.readOnly) ? -1 : 0}
                             className={`t-text-field__container__text-area ${inputClass}`}
