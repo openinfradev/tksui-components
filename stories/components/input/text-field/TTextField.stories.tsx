@@ -2,7 +2,7 @@ import {Meta, StoryObj} from '@storybook/react';
 
 import {CSSProperties, useEffect, useState} from 'react';
 import TTextField from '@/components/input/text-field/TTextField';
-import {TTextFieldProps, TTextFieldRef} from '@/components/input/text-field/TTextField.interface';
+import {TTextFieldRef} from '@/components/input/text-field/TTextField.interface';
 import rule from '@/common/validator/TValidatorRule';
 import useInputState from '@/common/hook/UseInputState';
 import TButton from '@/components/button/button/TButton';
@@ -19,7 +19,7 @@ type Story = StoryObj<typeof TTextField>;
 
 // region [Normal]
 
-const NormalTemplate = (args: TTextFieldProps) => {
+const NormalTemplate = (args: any) => {
 
     const [value, setValue] = useState('');
     const [errorTextFieldRef, successTextFieldRef, successTextAreaRef, errorTextAreaRef] = useRefs<TTextFieldRef>(4);
@@ -46,7 +46,7 @@ const NormalTemplate = (args: TTextFieldProps) => {
             <div>
                 <span style={{fontSize: '20px'}}>Normal</span>
                 <div style={containerStyle}>
-                    <TTextField {...args} value={value} onChange={setValue} label={'무옵션'}/>
+                    <TTextField {...args} value={value} onChange={setValue} />
                     <TTextField {...args} value={value} onChange={setValue} label={'Dense'} dense/>
                     <TTextField {...args} value={value} onChange={setValue} label={'Clearable'} clearable/>
                     <TTextField {...args} value={value} onChange={setValue} label={'Required'} required/>
@@ -90,6 +90,91 @@ const NormalTemplate = (args: TTextFieldProps) => {
 
 export const Default: Story = {
     render: NormalTemplate,
+    args: {},
+};
+
+
+const NameTemplate = (args: any) => {
+
+
+    const [textField1Ref, textField2Ref, textField3Ref, textField4Ref] = useRefs(4);
+
+    const containerStyle: CSSProperties = {
+        width: '500px',
+        border: '1px solid lightgray',
+        padding: '16px',
+        marginTop: '16px',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '16px',
+    };
+
+    const validateChildren = () => {
+        textField1Ref.current.validate();
+        textField2Ref.current.validate();
+        textField3Ref.current.validate();
+        textField4Ref.current.validate();
+    };
+
+    return (<>
+        <TButton main onClick={validateChildren}>검사</TButton>
+        <div style={{display: 'flex', gap: '24px'}}>
+            <div style={containerStyle}>
+
+
+                <TTextField {...args}
+                            label={'Default'}
+                            rules={[
+                                rule.required(),
+                                rule.lengthBetween(3, 12),
+                            ]}
+                            ref={textField1Ref}
+                            placeholder={'값을 입력해 주세요'}
+                            counter={12}
+                />
+                <TTextField {...args}
+                            name={'dense'}
+                            label={'Dense'}
+                            rules={[
+                                rule.required(),
+                                rule.lengthBetween(3, 12),
+                            ]}
+                            ref={textField2Ref}
+                            placeholder={'값을 입력해 주세요'}
+                            counter={12}
+                            dense
+                />
+                <TTextField {...args}
+                            name={'customlong'}
+                            label={'Custom Long Message'}
+                            rules={[
+                                rule.required(
+                                    '에러 메시지가 길면 벽에 닿아서 말 줄임표로 표현됩니다. 에러 메시지가 길면 벽에 닿아서 말 줄임표로 표현됩니다.',
+                                ),
+                                rule.lengthBetween(3, 12),
+                            ]}
+                            ref={textField3Ref}
+                            counter={12}
+                />
+                <TTextField {...args}
+                            label={'Success Message'}
+                            rules={[
+                                rule.required(),
+                                rule.lengthBetween(3, 12),
+                            ]}
+                            counter={12}
+                            name={'success'}
+                            ref={textField4Ref}
+                            successMessage={'사용할 수 있는 아이디입니다'}
+                />
+            </div>
+
+        </div>
+    </>);
+};
+
+export const Name: Story = {
+    render: NameTemplate,
     args: {
         label: 'Hello World',
     },
@@ -101,7 +186,7 @@ export const Default: Story = {
 
 // region [Trim]
 
-const TrimTemplate = (args: TTextFieldProps) => {
+const TrimTemplate = (args: any) => {
 
     const [trimValue, setTrimValue] = useState('');
     const [noTrimValue, setNoTrimValue] = useState('');
@@ -130,11 +215,9 @@ const TrimTemplate = (args: TTextFieldProps) => {
 };
 
 
-export const Trim = {
+export const Trim: Story = {
     render: TrimTemplate,
-    args: {
-        type: 'outline',
-    },
+    args: {},
 };
 
 
@@ -143,14 +226,14 @@ export const Trim = {
 
 // region [Validation]
 
-const ValidationTemplate = (args: TTextFieldProps) => {
+const ValidationTemplate = (args: any) => {
 
     const textField1 = useInputState('');
     const textField2 = useInputState('');
     const textField3 = useInputState('');
     const textField4 = useInputState('');
 
-    const [textField1Ref, textField2Ref, textField3Ref, textField4Ref, textField5Ref, textField6Ref] = useRefs(6);
+    const [textField1Ref, textField2Ref, textField3Ref, textField4Ref] = useRefs(4);
 
     const containerStyle: CSSProperties = {
         width: '500px',
