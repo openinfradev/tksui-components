@@ -1,3 +1,5 @@
+'use client';
+
 import '@material-symbols/font-300/outlined.css';
 
 import {CSSProperties, KeyboardEvent, memo, MouseEvent, ReactElement, useCallback, useMemo} from 'react';
