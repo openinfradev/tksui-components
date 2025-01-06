@@ -20,19 +20,19 @@ export default function usePagination(initialPageSize = 20) {
 
         setValue((prev) => ({
             ...prev,
-            totalPages: pageResponse.totalPages,
-            totalRows: pageResponse.totalRows,
+            totalPages: Number(pageResponse.totalPages),
+            totalRows: Number(pageResponse.totalRows),
         }));
     }, []);
 
     const setPageSize = useCallback((pageSize: number): void => {
 
-        setValue((prev) => ({...prev, pageSize}));
+        setValue((prev) => ({...prev, pageSize: Number(pageSize)}));
     }, []);
 
     const setPageNumber = useCallback((pageNumber: number): void => {
 
-        setValue((prev) => ({...prev, pageNumber}));
+        setValue((prev) => ({...prev, pageNumber: Number(pageNumber)}));
     }, []);
 
     const getPageRequest = useCallback((): TPageRequestVO => {
