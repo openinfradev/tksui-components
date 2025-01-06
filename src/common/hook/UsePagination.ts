@@ -7,22 +7,33 @@ export default function usePagination(initialPageSize = 20) {
         {totalPages: 1, pageNumber: 1, pageSize: initialPageSize, totalRows: 0},
     );
 
+
+    const setPagination = useCallback((pagination: Partial<TPageResponseVO>): void => {
+
+        setValue((prev) => ({
+            ...prev,
+            ...pagination,
+        }));
+    }, []);
+
     const setTotalPagesAndRows = useCallback((pageResponse: TPageResponseVO): void => {
 
-        setValue({
-            ...value,
+        setValue((prev) => ({
+            ...prev,
             totalPages: pageResponse.totalPages,
             totalRows: pageResponse.totalRows,
-        });
-    }, [value]);
+        }));
+    }, []);
 
     const setPageSize = useCallback((pageSize: number): void => {
-        setValue({...value, pageSize});
-    }, [value]);
+
+        setValue((prev) => ({...prev, pageSize}));
+    }, []);
 
     const setPageNumber = useCallback((pageNumber: number): void => {
-        setValue({...value, pageNumber});
-    }, [value]);
+
+        setValue((prev) => ({...prev, pageNumber}));
+    }, []);
 
     const getPageRequest = useCallback((): TPageRequestVO => {
         return {
@@ -32,5 +43,5 @@ export default function usePagination(initialPageSize = 20) {
     }, [value.pageNumber, value.pageSize]);
 
 
-    return {value, setTotalPagesAndRows, setPageSize, setPageNumber, getPageRequest, ...value};
+    return {value, setPagination, setTotalPagesAndRows, setPageSize, setPageNumber, getPageRequest, ...value};
 }
