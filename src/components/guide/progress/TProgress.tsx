@@ -1,3 +1,5 @@
+'use client';
+
 import {CSSProperties, useMemo} from 'react';
 import TModal from '../../screen/modal/TModal';
 import {TProgressProps, TLoadingIndicator} from '@/components';
