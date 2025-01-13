@@ -20,7 +20,7 @@ const TModal = ({
     const modalRef = useRef(null);
 
     const documentRoot: HTMLElement = document.getElementById(props.containerId) as HTMLElement;
-    ReactModal.setAppElement(`#${props.containerId}`);
+    ReactModal.setAppElement(document.getElementById(props.containerId));
 
     // endregion
 
