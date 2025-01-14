@@ -1,6 +1,6 @@
 'use client';
 
-import React, {memo, MouseEvent, useCallback, useEffect, useMemo, useRef} from 'react';
+import React, {memo, MouseEvent, useCallback, useEffect, useLayoutEffect, useMemo, useRef} from 'react';
 import {createPortal} from 'react-dom';
 import ReactModal from 'react-modal';
 
@@ -19,8 +19,7 @@ const TModal = ({
 
     const modalRef = useRef(null);
 
-    const documentRoot: HTMLElement = document.getElementById(props.containerId) as HTMLElement;
-    ReactModal.setAppElement(documentRoot);
+    const documentRootRef = useRef<HTMLElement>(null);
 
     // endregion
 
@@ -61,7 +60,7 @@ const TModal = ({
     // region [Events]
 
     const onClickCloseButton = useCallback(
-        (e) => closeModal(e),
+        (e: MouseEvent) => closeModal(e),
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
         [],
@@ -73,6 +72,15 @@ const TModal = ({
 
     // region [Effect]
 
+    useLayoutEffect(() => {
+
+        documentRootRef.current = document.getElementById(props.containerId) as HTMLElement;
+        ReactModal.setAppElement(documentRootRef.current);
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+
     useEffect(() => {
         if (props.testId) {
             modalRef.current?.node.setAttribute('data-testid', props.testId);
@@ -82,7 +90,7 @@ const TModal = ({
     // endregion
 
 
-    return createPortal(
+    return documentRootRef.current && createPortal(
         (
             // Official document: https://reactcommunity.org/react-modal/
             <ReactModal ref={modalRef}
@@ -127,7 +135,7 @@ const TModal = ({
 
             </ReactModal>
         ),
-        documentRoot,
+        documentRootRef.current,
     );
 };
 
