@@ -1,10 +1,8 @@
-
 import {act, render, renderHook, screen} from '@testing-library/react';
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import userEvent from '@testing-library/user-event';
 import TCheckboxGroup from '~/input/checkbox-group/TCheckboxGroup';
 import TValidatorRule from '@/common/validator/TValidatorRule';
-import {useInputState} from '@/common/hook';
 
 describe('TCheckboxGroup', () => {
 
@@ -515,14 +513,16 @@ describe('TCheckboxGroup', () => {
             // Arrange
             const user = userEvent.setup();
 
-            const ChecboxGroupTest = () => {
-                const useInput = useInputState([]);
+            const CheckboxGroupTest = () => {
+                const [value, setValue] = useState([]);
+
+
                 return (
-                    <TCheckboxGroup onChange={useInput.onChange} value={useInput.value} items={items}/>
+                    <TCheckboxGroup value={value} onChange={setValue} items={items}/>
                 );
             };
 
-            render(<ChecboxGroupTest/>);
+            render(<CheckboxGroupTest/>);
 
             const appleButton = screen.getByText(items[0].text);
             const bananaButton = screen.getByText(items[1].text);

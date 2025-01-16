@@ -31,7 +31,7 @@ const Template = () => {
     const [searchText, setSearchText] = useState('');
 
     return (<div style={{lineHeight: 1.5}}>
-        <TTextField onChange={setSearchText} value={searchText} placeholder={'하이라이트 할 텍스트를 입력해주세요'} style={{marginBottom: '24px'}}/>
+        <TTextField noTrim onChange={setSearchText} value={searchText} placeholder={'하이라이트 할 텍스트를 입력해주세요'} style={{marginBottom: '24px'}}/>
         <THighlightText keyword={searchText}>{dummyText}</THighlightText>
         <br/>
         <br/>

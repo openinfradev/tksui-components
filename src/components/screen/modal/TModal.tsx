@@ -1,6 +1,6 @@
 'use client';
 
-import React, {memo, MouseEvent, useCallback, useEffect, useLayoutEffect, useMemo, useRef} from 'react';
+import React, {memo, MouseEvent, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState} from 'react';
 import {createPortal} from 'react-dom';
 import ReactModal from 'react-modal';
 
@@ -20,6 +20,8 @@ const TModal = ({
     const modalRef = useRef(null);
 
     const documentRootRef = useRef<HTMLElement>(null);
+
+    const [documentRoot, setDocumentRoot] = useState<HTMLElement | null>(null);
 
     // endregion
 
@@ -74,23 +76,18 @@ const TModal = ({
 
     useLayoutEffect(() => {
 
-        documentRootRef.current = document.getElementById(props.containerId) as HTMLElement;
-        ReactModal.setAppElement(documentRootRef.current);
+        const rootElement: HTMLElement = document.getElementById(props.containerId);
 
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        setDocumentRoot(rootElement);
+        ReactModal.setAppElement(rootElement);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
-
-    useEffect(() => {
-        if (props.testId) {
-            modalRef.current?.node.setAttribute('data-testid', props.testId);
-        }
-    }, [props.testId]);
 
     // endregion
 
 
-    return documentRootRef.current && createPortal(
+    return documentRoot && createPortal(
         (
             // Official document: https://reactcommunity.org/react-modal/
             <ReactModal ref={modalRef}
@@ -106,6 +103,7 @@ const TModal = ({
                         className={`t-modal__overlay__body ${bodyClassName ?? ''}`.trim()}
                         closeTimeoutMS={200}
                         shouldCloseOnOverlayClick={false}
+                        testId={props.testId}
             >
                 {/* Close Button */}
                 <TIcon
@@ -135,7 +133,7 @@ const TModal = ({
 
             </ReactModal>
         ),
-        documentRootRef.current,
+        documentRoot,
     );
 };
 

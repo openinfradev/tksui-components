@@ -1,7 +1,7 @@
 import {act, render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import {useState} from 'react';
 import {TDatePicker} from '~/input/date-picker';
-import {useInputState} from '@/common/hook';
 
 jest.mock('@/common/util/ColorUtil', () => ({
     shadeColor: jest.fn(() => 'blue'),
@@ -311,9 +311,10 @@ describe('TDatePicker', () => {
             const openTo = '20240220';
             const user = userEvent.setup();
             const TestDatePicker = () => {
-                const dateInput = useInputState(testValue);
+
+                const [dateInput, setDateInput] = useState<any>(testValue);
                 return (
-                    <TDatePicker valueType={'date'} value={dateInput.value} onChange={dateInput.onChange}
+                    <TDatePicker valueType={'date'} value={dateInput} onChange={setDateInput}
                                  openFrom={openFrom} openTo={openTo}/>
                 );
             };
@@ -464,9 +465,11 @@ describe('TDatePicker', () => {
                 const nextMonth = month === 12 ? (month - 1) : (month + 1);
 
                 const TestDatePicker = () => {
-                    const dateInput = useInputState(today);
+
+                    const [dateInput, setDateInput] = useState<any>(today);
+
                     return (
-                        <TDatePicker valueType={'date'} value={today} onChange={dateInput.onChange}/>
+                        <TDatePicker valueType={'date'} value={dateInput} onChange={setDateInput}/>
                     );
                 };
                 render(<TestDatePicker/>);
@@ -569,18 +572,19 @@ describe('TDatePicker', () => {
 
                 // Arrange
                 const user = userEvent.setup();
-                const testDate = '202401';
-                const selectedMonth = Number(testDate.substring(4, 6));
+                const selectedMonth = Number(today.substring(4, 6));
                 const currentYearText = `${today.substring(0, 4)}년`;
                 const prevYearText = `${Number(today.substring(0, 4)) - 1}년`;
-                const nextYearText = `${Number(today.substring(0, 4)) + 1}년`;
                 const targetDate = '202607';
+
                 const TestDatePicker = () => {
-                    const dateInput = useInputState(testDate);
+
+                    const [value, setValue] = useState<any>(today);
                     return (
-                        <TDatePicker valueType={'month'} value={dateInput.value} onChange={dateInput.onChange}/>
+                        <TDatePicker valueType={'month'} value={value} onChange={setValue}/>
                     );
                 };
+
                 render(<TestDatePicker/>);
                 const calendarIcon = screen.getByRole('img');
 
@@ -656,9 +660,10 @@ describe('TDatePicker', () => {
             const openTo = '2027';
             const user = userEvent.setup();
             const TestDatePicker = () => {
-                const dateInput = useInputState(testYear);
+
+                const [dateInput, setDateInput] = useState<any>(testYear);
                 return (
-                    <TDatePicker valueType={'year'} value={dateInput.value} onChange={dateInput.onChange}
+                    <TDatePicker valueType={'year'} value={dateInput} onChange={setDateInput}
                                  openFrom={openFrom} openTo={openTo}/>
                 );
             };
@@ -698,9 +703,10 @@ describe('TDatePicker', () => {
             const secondInvalidDate = '20240202';
 
             const TestDatePicker = () => {
-                const dateInput = useInputState('');
+
+                const [dateInput, setDateInput] = useState<any>('');
                 return (
-                    <TDatePicker valueType={'date'} value={dateInput.value} onChange={dateInput.onChange}
+                    <TDatePicker valueType={'date'} value={dateInput} onChange={setDateInput}
                                  openFrom={openFrom} openTo={openTo}/>
                 );
             };
