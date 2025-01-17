@@ -8,8 +8,10 @@
     --toastify-color-progress-success: #{$t-primary-color};
     --toastify-color-progress-warning: #{$t-primary-color};
     --toastify-color-progress-error: #{$t-primary-color};
+    --toastify-color-progress-bgo: 0.15;
 
     --toastify-toast-width: 320px;
+
 
     $t-toastify-progress-bar-height: 5px;
 
@@ -20,16 +22,22 @@
 
             .Toastify__toast {
 
-                padding: $t-spacing-16 $t-spacing-10 calc($t-spacing-16 + $t-toastify-progress-bar-height) $t-spacing-16;
+                padding-top: $t-spacing-16;
+                padding-right: calc($t-spacing-16 + $t-spacing-20 + $t-spacing-10);
+                padding-bottom: calc($t-spacing-16 + $t-toastify-progress-bar-height);
+                padding-left: $t-spacing-16;
+
+
                 border-radius: 4px;
                 font-weight: normal;
+                @include typo-element-3
             }
 
-            .Toastify__toast-body {
-                margin: 0;
-                padding: 0 $t-spacing-16 0 0;
 
-                @include typo-element-3
+            .Toastify__close-button {
+                padding-top: 10px;
+                margin-left: $t-spacing-16;
+
             }
 
         }
@@ -61,6 +69,7 @@
 
     .Toastify__progress-bar {
         height: $t-toastify-progress-bar-height;
+        opacity: 1;
     }
 
 }

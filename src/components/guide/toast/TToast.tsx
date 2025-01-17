@@ -1,15 +1,14 @@
-import 'react-toastify/dist/ReactToastify.css';
-import {Theme, toast, ToastContainer} from 'react-toastify';
-import {ToastPosition} from 'react-toastify/dist/types';
-import {TToastProps} from './TToast.interface';
+'use client';
+
+import {Theme, toast, ToastContainer, ToastPosition} from 'react-toastify';
+
+import {TToastProps} from '@/components';
 
 function TToast({
     theme = 'light' as Theme,
     className = 'tks-toast-container',
     autoClose = 5000,
     toastClassName = 'tks-toast',
-    bodyClassName = 'tks-toast__body',
-    progressClassName = 'tks-toast__progress',
     position = 'top-right' as ToastPosition,
     draggable = false,
     ...restProps
@@ -20,10 +19,9 @@ function TToast({
         className,
         autoClose,
         toastClassName,
-        bodyClassName,
-        progressClassName,
         position,
         draggable,
+
         ...restProps,
     };
 
@@ -32,5 +30,8 @@ function TToast({
     );
 }
 
-export const notify = toast;
+const notify = toast;
+
+export {notify, toast};
+
 export default TToast;

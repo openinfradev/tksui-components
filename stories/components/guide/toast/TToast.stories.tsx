@@ -1,6 +1,7 @@
 import {Meta, StoryObj} from '@storybook/react';
 import React from 'react';
-import {ToastPosition} from 'react-toastify/dist/types';
+
+import {ToastPosition} from 'react-toastify';
 import TToast, {notify} from '@/components/guide/toast/TToast';
 import TButton from '@/components/button/button/TButton';
 
@@ -56,10 +57,8 @@ export const Default: Story = {
     render: Template,
     args: {
         className: 'tks-toast-container',
-        autoClose: 5000,
+        autoClose: 10000,
         toastClassName: 'tks-toast',
-        bodyClassName: 'tks-toast__body',
-        progressClassName: 'tks-toast__progress',
         position: 'top-right' as ToastPosition,
         draggable: false,
     },
