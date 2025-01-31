@@ -8,14 +8,15 @@ import {modalSize, TIcon, TModalProps} from '@/components';
 import themeToken from '~style/designToken/ThemeToken.module.scss';
 
 const TModal = ({
-    containerId = 'root',
+    appId = 'root',
+    portalId,
     onRequestClose,
     ...restProps
 }: TModalProps) => {
 
     // region [Hooks]
 
-    const props:TModalProps = {containerId, onRequestClose, ...restProps};
+    const props:TModalProps = {appId, portalId, onRequestClose, ...restProps};
 
     const modalRef = useRef(null);
 
@@ -32,6 +33,16 @@ const TModal = ({
 
         onRequestClose(e);
     }, [onRequestClose]);
+
+    const parentSelector = useMemo(() => {
+
+        if(portalId) {
+            return () => document.querySelector(`#${portalId}`) as HTMLElement;
+        }
+
+        return undefined;
+
+    }, [portalId])
 
     // endregion
 
@@ -76,7 +87,7 @@ const TModal = ({
 
     useLayoutEffect(() => {
 
-        const rootElement: HTMLElement = document.getElementById(props.containerId);
+        const rootElement: HTMLElement = document.getElementById(props.appId);
 
         setDocumentRoot(rootElement);
         ReactModal.setAppElement(rootElement);
@@ -90,20 +101,22 @@ const TModal = ({
     return documentRoot && createPortal(
         (
             // Official document: https://reactcommunity.org/react-modal/
-            <ReactModal ref={modalRef}
-                        id={props.id}
-                        isOpen={props.isOpen}
-                        contentLabel={props.contentLabel}
-                        onAfterOpen={props.onAfterOpen}
-                        onAfterClose={() => props.onAfterClose?.()}
-                        onRequestClose={(event: React.MouseEvent | React.KeyboardEvent) => props.onRequestClose(event)}
-                        bodyOpenClassName={'t-modal-body--open'}
-                        portalClassName={`t-modal ${props.className ?? ''}`.trim()}
-                        overlayClassName={`t-modal__overlay ${props.overlayClassName ?? ''}`.trim()}
-                        className={`t-modal__overlay__body ${bodyClassName ?? ''}`.trim()}
-                        closeTimeoutMS={200}
-                        shouldCloseOnOverlayClick={false}
-                        testId={props.testId}
+            <ReactModal
+                ref={modalRef}
+                id={props.id}
+                isOpen={props.isOpen}
+                contentLabel={props.contentLabel}
+                onAfterOpen={props.onAfterOpen}
+                onAfterClose={() => props.onAfterClose?.()}
+                onRequestClose={(event: React.MouseEvent | React.KeyboardEvent) => props.onRequestClose(event)}
+                bodyOpenClassName={'t-modal-body--open'}
+                portalClassName={`t-modal ${props.className ?? ''}`.trim()}
+                overlayClassName={`t-modal__overlay ${props.overlayClassName ?? ''}`.trim()}
+                className={`t-modal__overlay__body ${bodyClassName ?? ''}`.trim()}
+                closeTimeoutMS={200}
+                shouldCloseOnOverlayClick={false}
+                testId={props.testId}
+                parentSelector={parentSelector}
             >
                 {/* Close Button */}
                 <TIcon

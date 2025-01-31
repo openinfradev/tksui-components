@@ -27,7 +27,7 @@ const Template = () => {
 
     return (<>
         <TButton onClick={progressOn}>Progress 3초간 열기</TButton>
-        <TProgress containerId={'storybook-root'}
+        <TProgress appId={'storybook-root'}
                    isOpen={isProgressOpen}
                    onRequestClose={() => setProgressOpen(false)}
                    message={'3초 후 닫힙니다'}

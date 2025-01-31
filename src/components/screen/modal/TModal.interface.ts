@@ -6,7 +6,9 @@ export const modalSize = {sm: 'small', md: 'medium', lg: 'large', xlg: 'xlarge',
 type modalSize = typeof modalSize[keyof typeof modalSize];
 
 export interface TModalProps extends TBaseProps {
-    containerId?: string,
+    appId?: string,
+    portalId?: string,
+
     className?: string,
     overlayClassName?: string,
     bodyClassName?: string,

@@ -1,6 +1,7 @@
 import {Meta, StoryObj} from '@storybook/react';
 
 import {useState} from 'react';
+import ReactModal from 'react-modal';
 import TModal from '@/components/screen/modal/TModal';
 import TButton from '@/components/button/button/TButton';
 
@@ -9,7 +10,8 @@ const meta: Meta<typeof TModal> = {
     title: 'Screen/TModal',
     component: TModal,
     args: {
-        containerId: 'storybook-root',
+        appId: 'storybook-root',
+        portalId: 'storybook-root'
     },
 
 };
@@ -27,8 +29,12 @@ const Template = (args) => {
         <TButton size={'large'} main>저장</TButton>
     </>);
 
+
+    ReactModal.setAppElement('#storybook-root');
+
     return (
         <>
+            <div id={'test-test'} />
             <TButton onClick={() => setIsOpen(true)}>모달 열기</TButton>
             <TModal {...args}
                     title={'클러스터 생성'}

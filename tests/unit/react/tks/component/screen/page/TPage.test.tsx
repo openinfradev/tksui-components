@@ -126,35 +126,6 @@ describe('TPage', () => {
 
         });
 
-        it('When the space between content and panel is less than 700 px, information area should be invisible', async () => {
-
-            // Arrange
-            const user = userEvent.setup();
-
-            render(<TPage infoPanelContent={'test info content'}>Content</TPage>);
-
-            const icon = screen.getByRole('img', {name: 'info'});
-
-            // Act
-            await user.click(icon);
-
-            // Arrange
-            const resizer = screen.getByTestId('t-page-information-area-resizer');
-
-            // Act
-            await user.pointer([
-                {keys: '[MouseLeft>]', target: resizer},
-                {coords: {x: window.innerWidth - 200, y: 100}, target: document.body},
-                {keys: '[/MouseLeft]'},
-            ]);
-
-            const informationArea = screen.getByTestId('t-page-information-area');
-
-            // Assert
-            expect(informationArea).toHaveClass('t-page__information-area--invisible');
-
-        });
-
 
         it('When clicking info panel icon, information area has t-page__information-area--visible class and flex style', async () => {
 

@@ -7,14 +7,14 @@ import {TProgressProps, TLoadingIndicator} from '@/components';
 
 function TProgress({
     message = '잠시만 기다려 주십시오',
-    containerId = 'root',
+    appId = 'root',
     ...restProps
 
 }: TProgressProps) {
 
     // region [Hooks]
 
-    const props: TProgressProps = {message, containerId, ...restProps};
+    const props: TProgressProps = {message, appId, ...restProps};
 
     // endregion
 
@@ -39,7 +39,7 @@ function TProgress({
     // endregion
 
     return (
-        <TModal containerId={props.containerId}
+        <TModal appId={props.appId}
                 isOpen={props.isOpen}
                 onRequestClose={props.onRequestClose}
                 className={`t-progress ${rootClass}`}
