@@ -2,7 +2,7 @@ import {MouseEvent, KeyboardEvent, ReactNode} from 'react';
 import {TValidatorProps} from '@/common/validator/TValidator.interface';
 import {TBaseProps} from '@/common/base/TBase.interface';
 
-export interface TTextFieldProps extends TValidatorProps, TBaseProps {
+interface TTextFieldBaseProps extends TValidatorProps, TBaseProps {
 
     disabled?: boolean,
     password?: boolean,
@@ -18,13 +18,11 @@ export interface TTextFieldProps extends TValidatorProps, TBaseProps {
     label?: string,
     hint?: string,
     counter?: number,
-    value: string,
     width?: string,
     autoComplete?: 'new-password' | 'off' | undefined,
     multiline?: boolean
     rows?: number,
 
-    onChange(value: string): void,
     onBlur?(): void,
     onFocus?(): void,
     onKeyDown?(event: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>): void,
@@ -32,6 +30,24 @@ export interface TTextFieldProps extends TValidatorProps, TBaseProps {
     onClickSearch?(event: MouseEvent): void,
     onClear?(): void,
 }
+
+export interface TTextFieldControlledProps extends TTextFieldBaseProps {
+
+    value: string;
+    onChange: (value: string) => void;
+
+    name?: never;
+}
+
+export interface TTextFieldUncontrolledProps extends TTextFieldBaseProps {
+
+    value?: never;
+    onChange?: never;
+
+    name: string;
+}
+
+export type TTextFieldProps = TTextFieldControlledProps | TTextFieldUncontrolledProps
 
 
 export interface TTextFieldRef {

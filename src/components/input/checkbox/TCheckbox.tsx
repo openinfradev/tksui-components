@@ -1,4 +1,18 @@
-import {CSSProperties, forwardRef, KeyboardEvent, Ref, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState} from 'react';
+'use client';
+
+import {
+    CSSProperties,
+    forwardRef,
+    KeyboardEvent,
+    memo,
+    Ref,
+    useCallback,
+    useEffect,
+    useImperativeHandle,
+    useMemo,
+    useRef,
+    useState,
+} from 'react';
 import TIcon from '../../icon/TIcon';
 import {TCheckboxProps, TCheckboxRef, TCheckBoxStatus} from '@/components';
 import useValidator from '@/common/hook/UseValidator';
@@ -202,4 +216,4 @@ const TCheckbox = forwardRef(({
 
 TCheckbox.displayName = 'TCheckbox';
 
-export default TCheckbox;
+export default memo(TCheckbox);

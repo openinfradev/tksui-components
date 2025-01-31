@@ -1,5 +1,5 @@
-import {CSSProperties, useMemo} from 'react';
-import {TSectionProps} from './TSection.interface';
+import {CSSProperties, memo, useMemo} from 'react';
+import {TSectionProps} from '@/components';
 
 function TSection(props: TSectionProps) {
 
@@ -56,4 +56,4 @@ function TSection(props: TSectionProps) {
 
 }
 
-export default TSection;
+export default memo(TSection);

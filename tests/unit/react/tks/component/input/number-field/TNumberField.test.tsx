@@ -1,8 +1,7 @@
 import {act, render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import {CSSProperties} from 'react';
+import {CSSProperties, useState} from 'react';
 import TNumberField from '~/input/number-field/TNumberField';
-import useInputState from '@/common/hook/UseInputState';
 
 
 describe('TNumberField', () => {
@@ -21,8 +20,8 @@ describe('TNumberField', () => {
         label?: string,
         placeholder?: string,
     }) => {
-        const numberField = useInputState<string>(props.initialValue);
-        return (<TNumberField value={numberField.value} onChange={numberField.onChange} {...props} />);
+        const [numberField, setNumberField] = useState<string>(props.initialValue);
+        return (<TNumberField value={numberField} onChange={setNumberField} {...props} />);
     };
 
     describe('style', () => {

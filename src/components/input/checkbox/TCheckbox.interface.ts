@@ -13,14 +13,13 @@ export interface TCheckboxProps extends TValidatorProps, TBaseProps {
     value?: TCheckboxValue,
     checked?: boolean,
     indeterminate?: boolean,
-    positiveValue?: boolean | string
-    negativeValue?: boolean | string
+    positiveValue?: TCheckboxValue
+    negativeValue?: TCheckboxValue
 
     disabled?: boolean,
     readOnly?: boolean,
 
-    onChange?(value: boolean | string, positiveValue?: boolean | string): void,
-
+    onChange?: (value: TCheckboxValue, positiveValue?: TCheckboxValue) => void,
 }
 
 

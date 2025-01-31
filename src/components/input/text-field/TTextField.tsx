@@ -1,16 +1,19 @@
+'use client';
+
 import {
     CSSProperties,
     forwardRef,
     KeyboardEvent,
+    memo,
     MouseEvent,
     Ref,
     useCallback,
+    useEffect,
     useImperativeHandle,
     useMemo,
     useRef,
     useState,
 } from 'react';
-import uniqueId from 'lodash/uniqueId';
 import TIcon from '../../icon/TIcon';
 import {TTextFieldProps, TTextFieldRef} from '@/components';
 import useValidator from '@/common/hook/UseValidator';
@@ -20,6 +23,7 @@ import themeToken from '~style/designToken/ThemeToken.module.scss';
 const TTextField = forwardRef(({
     lazy = true,
     rows = 1,
+    name,
     onClear,
     onBlur,
     onFocus,
@@ -33,14 +37,16 @@ const TTextField = forwardRef(({
 
     // region [Hooks]
 
-    const props: TTextFieldProps = {lazy, rows, onClear, onBlur, onFocus, onKeyDown, onChange, onKeyDownEnter, onClickSearch, ...restProps};
+    // @ts-ignore
+    const props: TTextFieldProps = {lazy, rows, name, onClear, onBlur, onFocus, onKeyDown, onChange, onKeyDownEnter, onClickSearch, ...restProps};
 
     const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
     const [hasFocus, setHasFocus] = useState<boolean>(false);
-    const validator = useValidator(props.noTrim ? props.value : props.value?.toString().trim(), props.rules, props.successMessage);
+    const [innerValue, setInnerValue] = useState<string>(props.value || '');
+
+    const validator = useValidator(props.noTrim ? innerValue : innerValue?.trim(), props.rules, props.successMessage);
     const inputRef = useRef<HTMLInputElement>(null);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
-    const inputUuid = uniqueId();
 
     useImperativeHandle(ref, () => ({
         focus() {
@@ -79,16 +85,19 @@ const TTextField = forwardRef(({
 
     const onChangeInput = useCallback((event): void => {
 
-        const newLength = props.noTrim ? event.target.value.length : event.target.value.trim().length;
+        let newValue = props.noTrim ? event.target.value : event.target.value.trim();
 
-        if (props.counter) {
-            if (newLength > props.counter) {
-                onChange(event.target.value.substring(0, props.counter));
-                return;
-            }
+        if (props.counter && newValue.length > props.counter) {
+
+            newValue = event.target.value.substring(0, props.counter);
         }
-        onChange(event.target.value);
+
+        setInnerValue(newValue);
+        onChange?.(newValue);
+
     }, [onChange, props.counter, props.noTrim]);
+
+
     const onFocusInput = useCallback((): void => {
         validator.clearValidation();
         setHasFocus(true);
@@ -98,9 +107,11 @@ const TTextField = forwardRef(({
         }
     }, [onFocus, validator]);
 
+
     const onBlurInput = useCallback((): void => {
-        if (!props.noTrim && props.value !== props.value.trim()) {
-            onChange(props.value.trim());
+        if (!props.noTrim && innerValue !== innerValue.trim()) {
+            onChange?.(innerValue.trim());
+            setInnerValue((prevState) => prevState.trim());
         }
         if (!props.lazy) {
             validator.validate();
@@ -111,6 +122,7 @@ const TTextField = forwardRef(({
         }
 
     }, [onBlur, onChange, props.lazy, props.noTrim, props.value, validator]);
+
 
     const onKeyDownInput = useCallback((event: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
 
@@ -124,6 +136,7 @@ const TTextField = forwardRef(({
             onKeyDown(event);
         }
     }, [onKeyDown, onKeyDownEnter]);
+
 
     const onClickClear = useCallback((event: MouseEvent): void => {
         event?.stopPropagation();
@@ -149,10 +162,10 @@ const TTextField = forwardRef(({
     const counterLength = useMemo((): number => {
 
         if (props.noTrim) {
-            return props.value?.length;
+            return innerValue?.length;
         }
-        return props.value?.toString().trim().length;
-    }, [props.noTrim, props.value]);
+        return innerValue?.toString().trim().length;
+    }, [props.noTrim, innerValue]);
 
 
     // endregion
@@ -204,11 +217,28 @@ const TTextField = forwardRef(({
 
     // endregion
 
+
+    // region [Effects]
+
+    useEffect(() => {
+
+        if (props.value === undefined) { return; }
+
+        setInnerValue((prevState) => {
+
+            if (prevState === props.value) { return prevState; }
+            return props.value;
+        });
+
+    }, [props.value]);
+
+    // endregion
+
     return (
         <div className={`t-text-field ${rootClass}`} style={rootStyle} id={props.id} data-testid={'text-field-root'}>
             {
                 props.label && (
-                    <label className={`t-text-field__label ${labelClass}`} htmlFor={inputUuid}>
+                    <label className={`t-text-field__label ${labelClass}`}>
                         {props.label}
                     </label>
                 )
@@ -216,14 +246,14 @@ const TTextField = forwardRef(({
             <div className={'t-text-field__container'}>
                 {
                     !props.multiline
-                        ? <input id={inputUuid}
-                                 ref={inputRef}
+                        ? <input ref={inputRef}
                                  type={inputType}
                                  tabIndex={(props.disabled || props.readOnly) ? -1 : 0}
                                  className={`t-text-field__container__input ${inputClass}`}
                                  disabled={props.disabled || props.readOnly}
                                  placeholder={(props.disabled || props.readOnly) ? '' : props.placeholder}
-                                 value={props.value}
+                                 name={name}
+                                 value={innerValue}
                                  onChange={onChangeInput}
                                  onKeyDown={onKeyDownInput}
                                  onFocus={onFocusInput}
@@ -232,13 +262,13 @@ const TTextField = forwardRef(({
                                  data-testid={'text-field-input'}
                         />
                         : <textarea
-                            id={inputUuid}
                             ref={textareaRef}
                             tabIndex={(props.disabled || props.readOnly) ? -1 : 0}
                             className={`t-text-field__container__text-area ${inputClass}`}
                             disabled={props.disabled || props.readOnly}
                             placeholder={(props.disabled || props.readOnly) ? '' : props.placeholder}
-                            value={props.value}
+                            name={name}
+                            value={innerValue}
                             onChange={onChangeInput}
                             onKeyDown={onKeyDownInput}
                             onFocus={onFocusInput}
@@ -321,4 +351,4 @@ const TTextField = forwardRef(({
 TTextField.displayName = 'TTextField';
 
 
-export default TTextField;
+export default memo(TTextField);

@@ -1,4 +1,4 @@
-import {CSSProperties, useMemo} from 'react';
+import {CSSProperties, memo, useMemo} from 'react';
 import TIcon from '~/icon/TIcon';
 import {TFormSectionProps} from '@/components';
 import TSection from '~/data-container/section/TSection';
@@ -79,4 +79,4 @@ const TFormSection = ({
 };
 
 
-export default TFormSection;
+export default memo(TFormSection);

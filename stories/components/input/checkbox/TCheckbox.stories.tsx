@@ -1,9 +1,8 @@
 import {Meta, StoryObj} from '@storybook/react';
 import {CSSProperties, ReactNode, useState} from 'react';
-import useInputState from '@/common/hook/UseInputState';
 
 import TCheckbox from '@/components/input/checkbox/TCheckbox';
-import {TCheckboxProps} from '@/components/input/checkbox/TCheckbox.interface';
+import {TCheckboxProps, TCheckboxValue} from '@/components/input/checkbox/TCheckbox.interface';
 import TButton from '@/components/button/button/TButton';
 import TValidatorRule from '@/common/validator/TValidatorRule';
 import useRefs from '@/common/hook/UseRefs';
@@ -40,63 +39,60 @@ const ItemContainer = ({label, children}: { label?: string, children: ReactNode 
 const NormalTemplate = (args: TCheckboxProps) => {
 
 
-    const checkbox1 = useInputState(false);
-    const checkbox2 = useInputState('N');
-    const checkbox3 = useInputState(true);
-    const checkbox4 = useInputState(false);
-
-    const checkbox5 = useInputState(true);
-    const checkbox6 = useInputState(false);
+    const [checkbox1, setCheckbox1] = useState<TCheckboxValue>(false);
+    const [checkbox2, setCheckbox2] = useState<TCheckboxValue>('N');
+    const [checkbox3, setCheckbox3] = useState<TCheckboxValue>(true);
+    const [checkbox4, setCheckbox4] = useState<TCheckboxValue>(false);
+    const [checkbox5, setCheckbox5] = useState<TCheckboxValue>(true);
+    const [checkbox6, setCheckbox6] = useState<TCheckboxValue>(false);
 
     const [checkbox5Indeterminate, setCheckbox5Indeterminate] = useState(true);
 
-    function onChangeCheckbox5(value: boolean) {
-        checkbox5.onChange(value);
+    function onChangeCheckbox5(value: TCheckboxValue) {
+        setCheckbox5(value);
         setCheckbox5Indeterminate(false);
     }
 
 
     return (
         <Container>
-            <ItemContainer label={`Boolean Value(value: ${checkbox1.value.toString()})`}>
-                <TCheckbox {...args} onChange={checkbox1.onChange} value={checkbox1.value}>사과</TCheckbox>
-                <TCheckbox {...args} onChange={checkbox1.onChange} value={checkbox1.value}>Apple</TCheckbox>
+            <ItemContainer label={`Boolean Value(value: ${checkbox1.toString()})`}>
+                <TCheckbox {...args} onChange={setCheckbox1} value={checkbox1}>사과</TCheckbox>
+                <TCheckbox {...args} onChange={setCheckbox1} value={checkbox1}>Apple</TCheckbox>
 
             </ItemContainer>
 
-            <ItemContainer label={`Custom Value(value: ${checkbox2.value.toString()})`}>
-                <TCheckbox {...args} onChange={checkbox2.onChange} value={checkbox2.value} positiveValue={'Y'}
+            <ItemContainer label={`Custom Value(value: ${checkbox2.toString()})`}>
+                <TCheckbox {...args} onChange={setCheckbox2} value={checkbox2} positiveValue={'Y'}
                            negativeValue={'N'}>파인애플</TCheckbox>
-                <TCheckbox {...args} onChange={checkbox2.onChange} value={checkbox2.value} positiveValue={'Y'}
+                <TCheckbox {...args} onChange={setCheckbox2} value={checkbox2} positiveValue={'Y'}
                            negativeValue={'N'}>Pineapple</TCheckbox>
             </ItemContainer>
 
-            <ItemContainer label={`Disabled checked (value: ${checkbox3.value.toString()})`}>
-                <TCheckbox {...args} disabled onChange={checkbox3.onChange} value={checkbox3.value}>오렌지</TCheckbox>
-                <TCheckbox {...args} disabled onChange={checkbox3.onChange} value={checkbox3.value}>Orange</TCheckbox>
+            <ItemContainer label={`Disabled checked (value: ${checkbox3.toString()})`}>
+                <TCheckbox {...args} disabled onChange={setCheckbox3} value={checkbox3}>오렌지</TCheckbox>
+                <TCheckbox {...args} disabled onChange={setCheckbox3} value={checkbox3}>Orange</TCheckbox>
             </ItemContainer>
 
-            <ItemContainer label={`Disabled unchecked (value: ${checkbox4.value.toString()})`}>
-                <TCheckbox {...args} disabled onChange={checkbox4.onChange} value={checkbox4.value}>오렌지</TCheckbox>
-                <TCheckbox {...args} disabled onChange={checkbox4.onChange} value={checkbox4.value}>Orange</TCheckbox>
+            <ItemContainer label={`Disabled unchecked (value: ${checkbox4.toString()})`}>
+                <TCheckbox {...args} disabled onChange={setCheckbox4} value={checkbox4}>오렌지</TCheckbox>
+                <TCheckbox {...args} disabled onChange={setCheckbox4} value={checkbox4}>Orange</TCheckbox>
             </ItemContainer>
 
-            <ItemContainer label={`ReadOnly checked (value: ${checkbox5.value.toString()})`}>
-                <TCheckbox {...args} readOnly onChange={checkbox5.onChange} value={checkbox5.value}>바나나</TCheckbox>
-                <TCheckbox {...args} readOnly onChange={checkbox5.onChange} value={checkbox5.value}>Banana</TCheckbox>
+            <ItemContainer label={`ReadOnly checked (value: ${checkbox5.toString()})`}>
+                <TCheckbox {...args} readOnly onChange={setCheckbox5} value={checkbox5}>바나나</TCheckbox>
+                <TCheckbox {...args} readOnly onChange={setCheckbox5} value={checkbox5}>Banana</TCheckbox>
             </ItemContainer>
 
-            <ItemContainer label={`ReadOnly unchecked (value: ${checkbox6.value.toString()})`}>
-                <TCheckbox {...args} readOnly onChange={checkbox6.onChange} value={checkbox6.value}>오렌지</TCheckbox>
-                <TCheckbox {...args} readOnly onChange={checkbox6.onChange} value={checkbox6.value}>Orange</TCheckbox>
+            <ItemContainer label={`ReadOnly unchecked (value: ${checkbox6.toString()})`}>
+                <TCheckbox {...args} readOnly onChange={setCheckbox6} value={checkbox6}>오렌지</TCheckbox>
+                <TCheckbox {...args} readOnly onChange={setCheckbox6} value={checkbox6}>Orange</TCheckbox>
             </ItemContainer>
 
 
-            <ItemContainer label={`Indeterminate(${checkbox5Indeterminate}) (value: ${checkbox5.value.toString()}) : `}>
-                <TCheckbox {...args} onChange={onChangeCheckbox5} value={checkbox5.value}
-                           indeterminate={checkbox5Indeterminate}>수박</TCheckbox>
-                <TCheckbox {...args} onChange={onChangeCheckbox5} value={checkbox5.value}
-                           indeterminate={checkbox5Indeterminate}>WaterMelon</TCheckbox>
+            <ItemContainer label={`Indeterminate(${checkbox5Indeterminate}) (value: ${checkbox5.toString()}) : `}>
+                <TCheckbox {...args} onChange={onChangeCheckbox5} value={checkbox5} indeterminate={checkbox5Indeterminate}>수박</TCheckbox>
+                <TCheckbox {...args} onChange={onChangeCheckbox5} value={checkbox5} indeterminate={checkbox5Indeterminate}>WaterMelon</TCheckbox>
             </ItemContainer>
 
         </Container>
@@ -116,8 +112,8 @@ export const Default: Story = {
 
 const ValidationTemplate = (args: TCheckboxProps) => {
 
-    const checkbox1 = useInputState(false);
-    const checkbox2 = useInputState(false);
+    const [checkbox1, setCheckbox1] = useState<TCheckboxValue>(false);
+    const [checkbox2, setCheckbox2] = useState<TCheckboxValue>(false);
     const [checkbox1Ref, checkbox2Ref] = useRefs(2);
 
     function validateAll() {
@@ -128,8 +124,8 @@ const ValidationTemplate = (args: TCheckboxProps) => {
     return (<>
         <TCheckbox {...args}
                    ref={checkbox1Ref}
-                   onChange={checkbox1.onChange}
-                   value={checkbox1.value}
+                   onChange={setCheckbox1}
+                   value={checkbox1}
                    rules={[TValidatorRule.equal(true, '약관에 동의하지 않으시면 서비스 이용이 불가합니다')]}
                    successMessage={'약관에 동의하셨습니다'}>
             약관을 읽고, 동의합니다. (성공, 실패 메시지 표시)
@@ -138,8 +134,8 @@ const ValidationTemplate = (args: TCheckboxProps) => {
 
         <TCheckbox {...args}
                    ref={checkbox2Ref}
-                   onChange={checkbox2.onChange}
-                   value={checkbox2.value}
+                   onChange={setCheckbox2}
+                   value={checkbox2}
                    rules={[TValidatorRule.equal(true, '약관에 동의하지 않으시면 서비스 이용이 불가합니다')]}>
             약관을 읽고, 동의합니다. (실패 메시지 표시)
         </TCheckbox>

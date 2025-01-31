@@ -1,4 +1,4 @@
-import {CSSProperties, useMemo} from 'react';
+import {CSSProperties, memo, useMemo} from 'react';
 import {TActionBarProps} from '@/components';
 
 function TActionBar(props: TActionBarProps) {
@@ -64,4 +64,4 @@ function TActionBar(props: TActionBarProps) {
 
 }
 
-export default TActionBar;
+export default memo(TActionBar);

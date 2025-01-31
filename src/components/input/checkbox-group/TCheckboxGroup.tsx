@@ -1,3 +1,5 @@
+'use client';
+
 import {FocusEvent, forwardRef, Ref, useCallback, useImperativeHandle, useMemo, useRef} from 'react';
 import useValidator from '@/common/hook/UseValidator';
 import {TCheckboxGroupProps, TCheckboxGroupRef, TCheckboxGroupValue, TCheckboxValue} from '@/components';
@@ -67,7 +69,7 @@ const TCheckboxGroup = forwardRef(({
 
     // region [Events]
 
-    const onChangeChildren = useCallback((value: string, positiveValue: boolean) => {
+    const onChangeChildren = useCallback((value: TCheckboxValue, positiveValue: TCheckboxValue) => {
         if (value === null) {
             removeValue(positiveValue);
         } else {

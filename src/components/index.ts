@@ -17,6 +17,7 @@ export * from './data-container/pagination';
 export * from './data-container/tab-box';
 export * from './data-container/step-box';
 export * from './data-container/card';
+export * from './data-container/form';
 
 
 // guide

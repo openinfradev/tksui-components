@@ -1,3 +1,5 @@
+'use client';
+
 import {CSSProperties, forwardRef, Ref, useImperativeHandle, useRef} from 'react';
 import useValidator from '@/common/hook/UseValidator';
 import TRadio from '../radio/TRadio';

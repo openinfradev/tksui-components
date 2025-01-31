@@ -1,24 +1,23 @@
 import {render, screen} from '@testing-library/react';
-import * as Modal from 'react-modal';
 import TModal from '~/screen/modal/TModal';
 import {modalSize as modalSizeList} from '@/components';
 
 const sizeList = Object.values(modalSizeList);
 
-describe('TDropdown', () => {
+describe('TModal', () => {
 
     const mockFn = jest.fn();
     let root: HTMLDivElement;
     let modalContainer: HTMLDivElement;
 
     beforeEach(() => {
+
         root = document.createElement('div');
-        modalContainer = document.createElement('div');
-
         root.id = 'root';
-        modalContainer.id = 'modal-div';
-
         document.body.appendChild(root);
+
+        modalContainer = document.createElement('div');
+        modalContainer.id = 'modal-div';
         document.body.appendChild(modalContainer);
 
         mockFn.mockClear();
@@ -34,7 +33,6 @@ describe('TDropdown', () => {
         it('renders without errors', () => {
 
             // Arrange
-            Modal.setAppElement = () => null;
             render(
                 <TModal title={'Modal Title'} isOpen onRequestClose={mockFn}>
                     Modal Content

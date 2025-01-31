@@ -1,4 +1,6 @@
-import {CSSProperties, forwardRef, Ref, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState} from 'react';
+'use client';
+
+import {CSSProperties, forwardRef, memo, Ref, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState} from 'react';
 
 import {TPaginationProps, TPaginationRef} from '@/components';
 import TIcon from '../../icon/TIcon';
@@ -206,4 +208,4 @@ const TPagination = forwardRef(({
 TPagination.displayName = 'TPagination';
 
 
-export default TPagination;
+export default memo(TPagination);

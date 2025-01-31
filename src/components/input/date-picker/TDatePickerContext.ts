@@ -1,3 +1,5 @@
+'use client';
+
 import {createContext, Dispatch, SetStateAction} from 'react';
 import {TDatePickerMode, TDatePickerBounds, TDateValue, ViewInfoType} from '~/input/date-picker/TDatePicker.interface';
 

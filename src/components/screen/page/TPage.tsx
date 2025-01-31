@@ -1,4 +1,6 @@
-import {EventHandler, MouseEvent, MouseEventHandler, useCallback, useEffect, useMemo, useRef, useState} from 'react';
+'use client';
+
+import {EventHandler, memo, MouseEvent, MouseEventHandler, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {TIcon, TPageProps} from '@/components';
 import themeToken from '~style/designToken/ThemeToken.module.scss';
 
@@ -30,6 +32,9 @@ const TPage = ({
         setIsInfoPanelOpened(false);
     }, []);
 
+    const onClickInfoToggle = useCallback(() => {
+        setIsInfoPanelOpened((prevState) => !prevState);
+    }, []);
 
     // TODO. info panel 별도 컴포넌트로 분리, 드래그 관련 기능 util로 분리, 너비 minmax 변수화
     const onMouseDown = ((clickEvent: MouseEvent): void => {
@@ -104,7 +109,7 @@ const TPage = ({
     // endregion
 
 
-    // region [Hooks - Lifecycles]
+    // region [Effects]
 
     useEffect(() => {
         if (isInfoPanelOpened) {
@@ -131,7 +136,9 @@ const TPage = ({
                             <TIcon fill
                                    clickable
                                    color={themeToken.tBlackColor}
-                                   onClick={() => { setIsInfoPanelOpened(!isInfoPanelOpened); }}>info</TIcon>
+                                   onClick={onClickInfoToggle}>
+                                info
+                            </TIcon>
                         )
                     }
                 </div>
@@ -181,5 +188,5 @@ const TPage = ({
 
 TPage.displayName = 'TPage';
 
-export default TPage;
+export default memo(TPage);
 

@@ -1,3 +1,5 @@
+'use client';
+
 import {CSSProperties, forwardRef, MouseEvent, Ref, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState} from 'react';
 import {TDatePickerBounds, TDatePickerProps, TDatePickerRef, TDatePickerMode, TDateValue, TDropHolderRef} from '@/components';
 import useValidator from '@/common/hook/UseValidator';

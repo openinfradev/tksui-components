@@ -1,3 +1,5 @@
+'use client';
+
 import {CSSProperties, forwardRef, Ref, useCallback, useImperativeHandle, useMemo, useRef, useState} from 'react';
 import {TChip, TTextField, TTextFieldRef} from '@/components';
 import {TTextArrayFieldProps, TTextArrayFieldRef} from '~/input/text-array-field/TTextArrayField.interface';

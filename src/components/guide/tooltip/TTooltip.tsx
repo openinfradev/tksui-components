@@ -1,3 +1,5 @@
+'use client';
+
 import {PlacesType, Tooltip as ReactTooltip} from 'react-tooltip';
 import {TTooltipProps} from '@/components';
 

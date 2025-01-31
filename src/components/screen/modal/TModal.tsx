@@ -1,24 +1,28 @@
-import React, {MouseEvent, useCallback, useEffect, useMemo, useRef} from 'react';
+'use client';
+
+import React, {memo, MouseEvent, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState} from 'react';
 import {createPortal} from 'react-dom';
 import ReactModal from 'react-modal';
-import TIcon from '../../icon/TIcon';
-import {modalSize, TModalProps} from '@/components';
+
+import {modalSize, TIcon, TModalProps} from '@/components';
 import themeToken from '~style/designToken/ThemeToken.module.scss';
 
-export default function TModal({
-    containerId = 'root',
+const TModal = ({
+    appId = 'root',
+    portalId,
+    onRequestClose,
     ...restProps
-}: TModalProps) {
+}: TModalProps) => {
 
     // region [Hooks]
 
-    const props:TModalProps = {containerId, ...restProps};
+    const props:TModalProps = {appId, portalId, onRequestClose, ...restProps};
 
     const modalRef = useRef(null);
-    const {onRequestClose} = props;
 
-    const documentRoot: HTMLElement = document.getElementById(props.containerId) as HTMLElement;
-    ReactModal.setAppElement(`#${props.containerId}`);
+    const documentRootRef = useRef<HTMLElement>(null);
+
+    const [documentRoot, setDocumentRoot] = useState<HTMLElement | null>(null);
 
     // endregion
 
@@ -29,6 +33,16 @@ export default function TModal({
 
         onRequestClose(e);
     }, [onRequestClose]);
+
+    const parentSelector = useMemo(() => {
+
+        if(portalId) {
+            return () => document.querySelector(`#${portalId}`) as HTMLElement;
+        }
+
+        return undefined;
+
+    }, [portalId])
 
     // endregion
 
@@ -56,38 +70,63 @@ export default function TModal({
 
     // endregion
 
-    // region [Effect]
+    // region [Events]
 
-    useEffect(() => {
-        if (props.testId) {
-            modalRef.current?.node.setAttribute('data-testid', props.testId);
-        }
-    }, [props.testId]);
+    const onClickCloseButton = useCallback(
+        (e: MouseEvent) => closeModal(e),
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [],
+    );
+
 
     // endregion
 
 
-    return createPortal(
+    // region [Effect]
+
+    useLayoutEffect(() => {
+
+        const rootElement: HTMLElement = document.getElementById(props.appId);
+
+        setDocumentRoot(rootElement);
+        ReactModal.setAppElement(rootElement);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    // endregion
+
+
+    return documentRoot && createPortal(
         (
             // Official document: https://reactcommunity.org/react-modal/
-            <ReactModal ref={modalRef}
-                        id={props.id}
-                        isOpen={props.isOpen}
-                        contentLabel={props.contentLabel}
-                        onAfterOpen={props.onAfterOpen}
-                        onAfterClose={() => props.onAfterClose?.()}
-                        onRequestClose={(event: React.MouseEvent | React.KeyboardEvent) => props.onRequestClose(event)}
-                        bodyOpenClassName={'t-modal-body--open'}
-                        portalClassName={`t-modal ${props.className ?? ''}`.trim()}
-                        overlayClassName={`t-modal__overlay ${props.overlayClassName ?? ''}`.trim()}
-                        className={`t-modal__overlay__body ${bodyClassName ?? ''}`.trim()}
-                        closeTimeoutMS={200}
-                        shouldCloseOnOverlayClick={false}
+            <ReactModal
+                ref={modalRef}
+                id={props.id}
+                isOpen={props.isOpen}
+                contentLabel={props.contentLabel}
+                onAfterOpen={props.onAfterOpen}
+                onAfterClose={() => props.onAfterClose?.()}
+                onRequestClose={(event: React.MouseEvent | React.KeyboardEvent) => props.onRequestClose(event)}
+                bodyOpenClassName={'t-modal-body--open'}
+                portalClassName={`t-modal ${props.className ?? ''}`.trim()}
+                overlayClassName={`t-modal__overlay ${props.overlayClassName ?? ''}`.trim()}
+                className={`t-modal__overlay__body ${bodyClassName ?? ''}`.trim()}
+                closeTimeoutMS={200}
+                shouldCloseOnOverlayClick={false}
+                testId={props.testId}
+                parentSelector={parentSelector}
             >
                 {/* Close Button */}
-                <TIcon className={'t-modal__overlay__body__close-icon'}
-                       color={themeToken.tGrayColor5}
-                       clickable onClick={(e) => { closeModal(e); }}>close</TIcon>
+                <TIcon
+                    className={'t-modal__overlay__body__close-icon'}
+                    color={themeToken.tGrayColor5}
+                    clickable
+                    onClick={onClickCloseButton}
+                >
+                    close
+                </TIcon>
                 {/* Modal Header */}
                 <header className={'t-modal__overlay__body__header'}>
                     {
@@ -109,5 +148,6 @@ export default function TModal({
         ),
         documentRoot,
     );
-}
+};
 
+export default memo(TModal);

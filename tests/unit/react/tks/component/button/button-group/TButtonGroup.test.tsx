@@ -1,8 +1,7 @@
 import {act, getAllByRole, render, screen} from '@testing-library/react';
-import {CSSProperties} from 'react';
+import {CSSProperties, useState} from 'react';
 import userEvent from '@testing-library/user-event';
 import TButtonGroup from '~/button/button-group/TButtonGroup';
-import useInputState from '@/common/hook/UseInputState';
 import {
     ButtonGroupVariant,
     ButtonGroupVariantType,
@@ -38,9 +37,10 @@ describe('TButtonGroup', () => {
 
         initialValue?: string | string[], // additional
     }) => {
-        const buttonGroup = useInputState<any>(props.initialValue || '');
+        const [buttonGroup, setButtonGroup] = useState<any>(props.initialValue || '');
+
         const defaultItems = [{template: 'Bold', value: 'b'}, {template: 'Italic', value: 'i'}];
-        return (<TButtonGroup value={buttonGroup.value} onChange={buttonGroup.onChange} items={props.items || defaultItems} {...props} />);
+        return (<TButtonGroup value={buttonGroup} onChange={setButtonGroup} items={props.items || defaultItems} {...props} />);
     };
 
     const value = '1d';

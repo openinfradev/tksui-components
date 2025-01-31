@@ -1,4 +1,6 @@
-import {CSSProperties, forwardRef, Ref, useCallback, useImperativeHandle, useMemo, useRef, useState} from 'react';
+'use client';
+
+import {CSSProperties, forwardRef, memo, Ref, useCallback, useImperativeHandle, useMemo, useRef, useState} from 'react';
 import {AgGridReact} from 'ag-grid-react';
 import {DomLayoutType, SelectionChangedEvent} from 'ag-grid-community';
 import {TDataGridProps} from '@/components';
@@ -195,4 +197,4 @@ const TDataGrid = forwardRef(({
 TDataGrid.displayName = 'TDataGrid';
 
 
-export default TDataGrid;
+export default memo(TDataGrid);

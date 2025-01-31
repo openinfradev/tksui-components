@@ -1,4 +1,17 @@
-import {CSSProperties, forwardRef, KeyboardEvent, MouseEvent, Ref, useCallback, useImperativeHandle, useMemo, useRef} from 'react';
+'use client';
+
+import {
+    CSSProperties,
+    forwardRef,
+    KeyboardEvent,
+    memo,
+    MouseEvent,
+    Ref,
+    useCallback,
+    useImperativeHandle,
+    useMemo,
+    useRef,
+} from 'react';
 import {TIconButtonProps, TIconButtonRef} from '@/components';
 import useRipple from '@/common/hook/UseRipple';
 import TIcon from '../../icon/TIcon';
@@ -119,4 +132,4 @@ const TIconButton = forwardRef(({
 
 TIconButton.displayName = 'TIconButton';
 
-export default TIconButton;
+export default memo(TIconButton);

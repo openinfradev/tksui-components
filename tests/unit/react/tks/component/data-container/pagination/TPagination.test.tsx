@@ -1,7 +1,6 @@
 import {act, render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import {CSSProperties} from 'react';
-import useInputState from '@/common/hook/UseInputState';
+import {CSSProperties, useState} from 'react';
 import TPagination from '~/data-container/pagination/TPagination';
 
 jest.mock('@/common/util/ColorUtil', () => ({
@@ -19,10 +18,10 @@ describe('TPagination', () => {
         noJumper?: boolean,
         jumperText?: string,
     }) => {
-        const pageNumber = useInputState<number>(1);
+        const [pageNumber, setPageNumber] = useState<number>(1);
         return (
-            <TPagination pageNumber={pageNumber.value}
-                         onChangePageNumber={pageNumber.onChange}
+            <TPagination pageNumber={pageNumber}
+                         onChangePageNumber={setPageNumber}
                          {...props}
             />
         );
