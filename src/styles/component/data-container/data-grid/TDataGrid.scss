@@ -86,6 +86,16 @@
                 cursor: pointer;
             }
         }
+        .ag-checkbox {
+            position: absolute;
+            left: $t-spacing-16;
+        }
+        .ag-column-first .ag-checkbox:not([aria-hidden]) + .ag-header-cell-comp-wrapper .ag-header-cell-label {
+            z-index: -1;
+        }
+
+
+
 
         .ag-overlay {
             height: calc(100% - 60px);
@@ -113,10 +123,6 @@
                 justify-content: flex-end;
             }
 
-        }
-        .ag-checkbox {
-            position: absolute;
-            left: $t-spacing-16;
         }
 
         .ag-overlay-no-rows-wrapper {
