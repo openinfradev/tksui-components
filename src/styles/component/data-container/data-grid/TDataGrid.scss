@@ -112,6 +112,11 @@
             &.ag-right-aligned-cell {
                 justify-content: flex-end;
             }
+
+        }
+        .ag-checkbox {
+            position: absolute;
+            left: $t-spacing-16;
         }
 
         .ag-overlay-no-rows-wrapper {
