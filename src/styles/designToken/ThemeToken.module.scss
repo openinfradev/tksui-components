@@ -1,4 +1,4 @@
-@import 'ThemeToken';
+@use 'ThemeToken' as *;
 
 :export {
     tPrimaryColor: $t-primary-color;

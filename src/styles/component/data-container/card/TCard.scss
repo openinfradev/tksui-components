@@ -1,3 +1,5 @@
+@use 'src/styles/designToken/Entry' as *;
+
 .t-card {
     border: 1px solid $t-blue-gray-color-3;
     border-radius: 8px;

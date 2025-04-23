@@ -1,6 +1,11 @@
 /* Bundler (vite, webpack) will import this in order to use in all scss files */
 /* This file import all official tokens, functions and mixins */
 
-@import 'Function';
-@import 'ThemeToken';
-@import 'Mixin';
+@use 'Function' as *;
+@use 'ThemeToken' as *;
+@use 'Mixin' as *;
+
+@forward 'Function';
+@forward 'ThemeToken';
+@forward 'Mixin';
+@forward 'src/styles/component/Common';

@@ -10,7 +10,7 @@
     ],
     "scripts": {
         "clean": "rimraf lib",
-        "css-build": "sass --no-source-map src/styles/Entry.scss:lib/styles/index.css src/styles/designToken/ThemeToken.module.scss:lib/styles/ThemeToken.module.css",
+        "css-build": "sass --no-source-map --load-path=. src/styles/Entry.scss:lib/styles/index.css src/styles/designToken/ThemeToken.module.scss:lib/styles/ThemeToken.module.css",
         "css-minify": "esbuild lib/styles/index.css --minify --allow-overwrite --outfile=lib/styles/index.css && esbuild lib/styles/ThemeToken.module.css --minify --allow-overwrite --outfile=lib/styles/ThemeToken.module.css",
         "js-build": "tsc --project tsconfig.esm.json && tsc-alias -p tsconfig.esm.json",
         "js-content-replace": "node build-content-replacer.js",

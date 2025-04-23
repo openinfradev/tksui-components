@@ -1,3 +1,5 @@
+@use 'src/styles/designToken/Entry' as *;
+
 .t-checkbox {
 
     .t-checkbox__container {
@@ -51,6 +53,7 @@
     &.t-checkbox--failure {
 
         @include animation-shake();
+
 
         .t-text-field__container {border-color: $t-status-color-error;}
         .t-checkbox__message {color: $t-status-color-error;}
