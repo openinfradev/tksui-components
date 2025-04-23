@@ -32,7 +32,6 @@ const commonConfig = () => ({
     css: {
         preprocessorOptions: {
             scss: {
-                additionalData: '@import "/src/styles/designToken/Entry.scss";',
             },
         },
         devSourcemap: true,

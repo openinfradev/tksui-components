@@ -5,16 +5,6 @@ const resolve = (dir) => path.join(__dirname, '.', dir);
 
 module.exports = {
     stories: ['../stories/components/**/*.stories.tsx'],
-    addons: [
-        '@storybook/addon-links', '@storybook/addon-essentials', '@storybook/addon-interactions', {
-            name: '@storybook/preset-scss',
-            options: {
-                sassLoaderOptions: {
-                    additionalData: '@import "/src/styles/designToken/Entry.scss";',
-                },
-            },
-        }
-    ],
     framework: {
         name: '@storybook/react-vite',
         options: {},
@@ -26,6 +16,7 @@ module.exports = {
             resolve: {
                 alias: {
                     '@': path.resolve('src'),
+                    'src': path.resolve('src'),
                     '~': path.resolve('src/components'),
                     '~style': path.resolve('src/styles'),
                 },
@@ -33,10 +24,14 @@ module.exports = {
             css: {
                 preprocessorOptions: {
                     scss: {
-                        additionalData: '@import "/src/styles/designToken/Entry.scss";',
-                    },
-                },
-            },
+                        api: 'modern',
+                        includePaths: [
+                            path.resolve(__dirname, '../node_modules'),
+                            path.resolve(__dirname, '../')
+                        ]
+                    }
+                }
+            }
         });
     },
     docs: {

@@ -38,12 +38,8 @@ const Template = () => {
             headerName: '모델',
             tooltipField: 'price',
             field: 'model',
-            pinned: 'left',
             lockPinned: true,
             lockPosition: true,
-            headerCheckboxSelection: true,
-            checkboxSelection: true,
-            showDisabledCheckboxes: true,
         },
         {headerName: '브랜드', field: 'make'},
         {headerName: '가격', field: 'price', type: 'rightAligned'},
@@ -59,7 +55,7 @@ const Template = () => {
     return (
         <TDataGrid ref={gridRef}
                    rowData={rowData}
-                   rowSelection={'multiple'}
+                   rowSelection={{mode: 'multiRow', enableClickSelection: false}}
                    columnDefs={columnDefs}
                    rightAction={gridRightAction}
                    onChange={selectedRows.onChange}

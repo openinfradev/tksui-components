@@ -17,6 +17,7 @@ dist-ssr
 *.local
 storybook-static
 coverage
+lib
 
 
 # Editor directories and files

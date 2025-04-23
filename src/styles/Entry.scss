@@ -1,8 +1,12 @@
-@import 'design-variables/ThemeVariables';
-@import 'designToken/Entry.scss';
+@use 'design-variables/ThemeVariables' as *;
+@use 'designToken/Entry' as *;
 
-@import 'init/Reset';
-@import 'init/Common';
+@use 'init/Reset' as *;
+@use 'init/Common' as *;
 
-@import 'component/Entry';
+@use 'component/Entry' as *;
 
+/* External Libraries CSS */
+@import 'ag-grid-community/styles/ag-grid.css';
+@import 'ag-grid-community/styles/ag-theme-material.css';
+@import 'react-tooltip/dist/react-tooltip.css';

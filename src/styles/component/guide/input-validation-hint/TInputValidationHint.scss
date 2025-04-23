@@ -1,3 +1,5 @@
+@use 'src/styles/designToken/Entry' as *;
+
 .t-input-validation-hint {
     @include typo-element-4;
 

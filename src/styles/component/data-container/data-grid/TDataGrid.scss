@@ -1,5 +1,4 @@
-@import 'ag-grid-community/styles/ag-grid.css';
-@import 'ag-grid-community/styles/ag-theme-material.css';
+@use 'src/styles/designToken/Entry' as *;
 
 // AG Grid's customizable variables
 // https://www.ag-grid.com/react-data-grid/global-style-customisation-variables/
@@ -86,6 +85,16 @@
                 cursor: pointer;
             }
         }
+        .ag-checkbox {
+            position: absolute;
+            left: $t-spacing-16;
+        }
+        .ag-column-first .ag-checkbox:not([aria-hidden]) + .ag-header-cell-comp-wrapper .ag-header-cell-label {
+            z-index: -1;
+        }
+
+
+
 
         .ag-overlay {
             height: calc(100% - 60px);
@@ -112,6 +121,7 @@
             &.ag-right-aligned-cell {
                 justify-content: flex-end;
             }
+
         }
 
         .ag-overlay-no-rows-wrapper {

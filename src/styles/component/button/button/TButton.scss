@@ -1,3 +1,5 @@
+@use 'src/styles/designToken/Entry' as *;
+
 $t-button-color--default: $t-black-color;
 $t-button-color--hover: $t-black-color;
 $t-button-color--disabled: $t-gray-color-4;

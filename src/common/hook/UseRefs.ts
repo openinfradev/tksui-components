@@ -1,3 +1,5 @@
+'use client';
+
 import {MutableRefObject, useRef} from 'react';
 
 

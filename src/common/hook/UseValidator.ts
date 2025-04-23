@@ -1,3 +1,5 @@
+'use client';
+
 import {useState} from 'react';
 import {TRadioGroupValue} from '../../components/input/radio-group/TRadioGroup.interface';
 import {TCheckboxGroupValue} from '../../components/input/checkbox-group/TCheckboxGroup.interface';

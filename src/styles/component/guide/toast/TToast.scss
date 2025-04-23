@@ -1,3 +1,5 @@
+@use 'src/styles/designToken/Entry' as *;
+
 .tks-toast {
 
     --toastify-color-light: #{$t-white-color};

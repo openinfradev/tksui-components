@@ -1,3 +1,4 @@
+@use 'src/styles/designToken/Entry' as *;
 
 *::selection {
     background: $t-gray-color-2;

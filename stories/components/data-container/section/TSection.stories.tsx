@@ -42,12 +42,8 @@ const Template = (args: TSectionProps) => {
             headerName: '모델',
             tooltipField: 'price',
             field: 'model',
-            pinned: 'left',
             lockPinned: true,
             lockPosition: true,
-            headerCheckboxSelection: true,
-            checkboxSelection: true,
-            showDisabledCheckboxes: true,
         },
         {headerName: '브랜드', field: 'make'},
         {headerName: '가격', field: 'price', type: 'rightAligned'},
@@ -77,10 +73,11 @@ const Template = (args: TSectionProps) => {
             <TSection label={'Basic Properties'} {...args} leftAction={leftAction()} rightAction={rightAction()}>
                 <TDataGrid ref={gridRef}
                            rowData={rowData}
-                           rowSelection={'multiple'}
+                           rowSelection={{mode: 'multiRow', enableClickSelection: false}}
                            rightAction={gridRightAction}
                            columnDefs={columnDefs}
                            onChange={selectedRows.onChange}
+
                 />
             </TSection>
         </>
