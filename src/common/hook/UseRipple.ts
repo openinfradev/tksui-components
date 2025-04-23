@@ -1,3 +1,5 @@
+'use client';
+
 import {CSSProperties, KeyboardEvent, MouseEvent, MutableRefObject, useRef} from 'react';
 import colorUtil from '../util/ColorUtil';
 import lodashUtil from '@/common/util/lodashUtil';

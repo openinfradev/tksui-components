@@ -16,10 +16,22 @@ module.exports = {
             resolve: {
                 alias: {
                     '@': path.resolve('src'),
+                    'src': path.resolve('src'),
                     '~': path.resolve('src/components'),
                     '~style': path.resolve('src/styles'),
                 },
             },
+            css: {
+                preprocessorOptions: {
+                    scss: {
+                        api: 'modern',
+                        includePaths: [
+                            path.resolve(__dirname, '../node_modules'),
+                            path.resolve(__dirname, '../')
+                        ]
+                    }
+                }
+            }
         });
     },
     docs: {
