@@ -3,7 +3,6 @@ import {ReactNode, useCallback, useState} from 'react';
 import TButtonGroup from '@/components/button/button-group/TButtonGroup';
 import TIcon from '@/components/icon/TIcon';
 
-
 const meta: Meta<typeof TButtonGroup> = {
     title: 'Button/TButtonGroup',
     component: TButtonGroup,
@@ -12,7 +11,7 @@ export default meta;
 
 type Story = StoryObj<typeof TButtonGroup>;
 
-const Container = ({label, children}: { label: string, children: ReactNode }) => {
+const Container = ({label, children}: {label: string; children: ReactNode}) => {
     return (
         <div style={{display: 'flex', alignItems: 'flex-start', flexDirection: 'column', gap: '8px'}}>
             <p style={{fontSize: '14px'}}>{label}</p>
@@ -22,7 +21,6 @@ const Container = ({label, children}: { label: string, children: ReactNode }) =>
 };
 
 const Template = (args) => {
-
     const [searchParam, setSearchParam] = useState<string | string[]>(args.value);
 
     const onChangeSearchParam = useCallback((value) => {
@@ -31,25 +29,28 @@ const Template = (args) => {
 
     return (
         <div style={{display: 'flex', flexDirection: 'column', gap: '24px'}}>
-            <Container label={`Default(value: ${args.multiSelect ? (searchParam as string[]).join(', ') : searchParam})`}>
-                <TButtonGroup {...args} value={searchParam} onChange={onChangeSearchParam}/>
+            <Container
+                label={`Default(value: ${args.multiSelect ? (searchParam as string[]).join(', ') : searchParam})`}
+            >
+                <TButtonGroup {...args} value={searchParam} onChange={onChangeSearchParam} />
             </Container>
 
-            <Container label={`Primary(value: ${args.multiSelect ? (searchParam as string[]).join(', ') : searchParam})`}>
-                <TButtonGroup {...args} primary value={searchParam} onChange={onChangeSearchParam}/>
+            <Container
+                label={`Primary(value: ${args.multiSelect ? (searchParam as string[]).join(', ') : searchParam})`}
+            >
+                <TButtonGroup {...args} primary value={searchParam} onChange={onChangeSearchParam} />
             </Container>
 
             <Container label={`Main(value: ${args.multiSelect ? (searchParam as string[]).join(', ') : searchParam})`}>
-                <TButtonGroup {...args} main value={searchParam} onChange={onChangeSearchParam}/>
+                <TButtonGroup {...args} main value={searchParam} onChange={onChangeSearchParam} />
             </Container>
 
             <Container label={'Disabled'}>
-                <TButtonGroup {...args} disabled value={searchParam} onChange={onChangeSearchParam}/>
+                <TButtonGroup {...args} disabled value={searchParam} onChange={onChangeSearchParam} />
             </Container>
-
-        </div>);
+        </div>
+    );
 };
-
 
 export const SingleSelect: Story = {
     render: Template,

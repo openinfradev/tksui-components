@@ -3,17 +3,15 @@ import type {Meta, StoryObj} from '@storybook/react';
 import TButton from '@/components/button/button/TButton';
 import {TButtonProps} from '@/components';
 
-
 const meta: Meta<typeof TButton> = {
     title: 'Button/TButton',
     component: TButton,
 };
 export default meta;
 
-
 type Story = StoryObj<typeof TButton>;
 
-const Container = ({label, children}: { label: string, children: ReactNode }) => {
+const Container = ({label, children}: {label: string; children: ReactNode}) => {
     return (
         <div style={{display: 'flex', alignItems: 'flex-start', flexDirection: 'column', gap: '8px'}}>
             <p style={{fontSize: '14px'}}>{label}</p>
@@ -22,7 +20,8 @@ const Container = ({label, children}: { label: string, children: ReactNode }) =>
     );
 };
 
-const Template = (args: TButtonProps) => (
+const Template = (args: TButtonProps) =>
+    // prettier-ignore
     <div style={{display: 'flex', flexDirection: 'column', gap: '32px'}}>
         <Container label={'Default'}>
             <TButton {...args} >Normal</TButton>
@@ -48,7 +47,7 @@ const Template = (args: TButtonProps) => (
             <TButton {...args} rounded loading>rounded</TButton>
             <TButton {...args} icon={'info'} loading>Icon Button</TButton>
         </Container>
-    </div>);
+    </div>;
 
 export const XSmall: Story = {
     render: Template,
