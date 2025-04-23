@@ -16,6 +16,8 @@
         "js-content-replace": "node build-content-replacer.js",
         "js-minify": "esbuild lib/esm/**/*.js --minify --allow-overwrite --outdir=lib/esm",
         "build-all": "npm run clean && npm run css-build && npm run css-minify && npm run js-build && npm run js-content-replace && npm run js-minify",
+        "yalc-publish": "npm run build-all && npx yalc publish",
+        "yalc-push": "npm run build-all && npx yalc push",
         "patch": "npm run build-all && npm version patch && npm publish && npm run clean",
         "minor": "npm run build-all && npm version minor && npm publish && npm run clean",
         "major": "npm run build-all && npm version major && npm publish && npm run clean",
@@ -74,7 +76,8 @@
         "typescript": "^5.0.2",
         "typescript-plugin-css-modules": "^5.0.2",
         "vite": "^5.3.3",
-        "vite-plugin-compression2": "^0.10.4"
+        "vite-plugin-compression2": "^0.10.4",
+        "yalc": "^1.0.0-pre.53"
     },
     "dependencies": {
         "@material-symbols/font-300": "^0.14.5",
