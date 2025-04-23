@@ -1,8 +1,10 @@
 'use client';
 
-import {CSSProperties, KeyboardEvent, MouseEvent, MutableRefObject, useRef} from 'react';
-import colorUtil from '../util/ColorUtil';
+import type {CSSProperties, KeyboardEvent, MouseEvent, MutableRefObject} from 'react';
+import {useRef} from 'react';
+
 import lodashUtil from '@/common/util/lodashUtil';
+import colorUtil from '../util/ColorUtil';
 
 type RippleStatus = 'on' | 'off';
 
@@ -10,7 +12,6 @@ const rippleClass = 't-ripple';
 const rippleElementTag = 'span';
 
 const useRipple = (ref: MutableRefObject<HTMLElement>) => {
-
     // region [Hooks]
 
     const status = useRef<RippleStatus>('off');
@@ -18,19 +19,21 @@ const useRipple = (ref: MutableRefObject<HTMLElement>) => {
 
     // endregion
 
-
     // region [Privates]
 
     const register = (event: MouseEvent | KeyboardEvent) => {
-
         if (event.type.includes('key')) {
             const keyboardEvent = event as KeyboardEvent;
-            if (keyboardEvent.key !== 'Enter' && keyboardEvent.key !== ' ') { return; }
+            if (keyboardEvent.key !== 'Enter' && keyboardEvent.key !== ' ') {
+                return;
+            }
 
             const targetElement = event.target as HTMLElement;
             const rippleElements = targetElement.getElementsByClassName(rippleClass);
 
-            if (status.current === 'on' || rippleElements?.length > 0) { return; }
+            if (status.current === 'on' || rippleElements?.length > 0) {
+                return;
+            }
         }
 
         status.current = 'on';
@@ -39,9 +42,10 @@ const useRipple = (ref: MutableRefObject<HTMLElement>) => {
         lastRipplePromise.current = new Promise((resolve) => {
             const {x, y, width, height} = ref.current.getBoundingClientRect();
 
-            const { // Default values for Keyboard event
-                clientX = x + (width / 2),
-                clientY = y + (height / 2),
+            const {
+                // Default values for Keyboard event
+                clientX = x + width / 2,
+                clientY = y + height / 2,
             } = event as MouseEvent;
             const radius = Math.sqrt(width * width + height * height);
 
@@ -49,8 +53,7 @@ const useRipple = (ref: MutableRefObject<HTMLElement>) => {
             ripple.classList.add(rippleClass);
             ripple.classList.add(uniqueRippleClass);
 
-            const baseColor = window.getComputedStyle(ref.current)
-                .getPropertyValue('background-color');
+            const baseColor = window.getComputedStyle(ref.current).getPropertyValue('background-color');
 
             const rippleStyle: CSSProperties = {
                 position: 'absolute',
@@ -59,9 +62,10 @@ const useRipple = (ref: MutableRefObject<HTMLElement>) => {
                 width: `${radius * 2}px`,
                 height: `${radius * 2}px`,
                 opacity: '0.1',
-                background: colorUtil.getLightness(baseColor) < 50
-                    ? colorUtil.tintColor(baseColor, 40)
-                    : colorUtil.shadeColor(baseColor, 40),
+                background:
+                    colorUtil.getLightness(baseColor) < 50
+                        ? colorUtil.tintColor(baseColor, 40)
+                        : colorUtil.shadeColor(baseColor, 40),
                 borderRadius: '50%',
                 animation: '0.35s ripple linear',
             };
@@ -73,18 +77,17 @@ const useRipple = (ref: MutableRefObject<HTMLElement>) => {
             ref.current.append(ripple);
 
             setTimeout(() => {
-
                 resolve(uniqueRippleClass);
             }, 350);
         });
-
     };
 
     const remove = () => {
-
         lastRipplePromise.current?.then((rippleTargetClass) => {
             const rippleElement = ref.current?.getElementsByClassName(rippleTargetClass);
-            if (rippleElement) { rippleElement[0]?.remove(); }
+            if (rippleElement) {
+                rippleElement[0]?.remove();
+            }
 
             status.current = 'off';
         });

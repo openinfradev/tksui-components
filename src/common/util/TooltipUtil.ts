@@ -7,7 +7,6 @@ function generateTooltipHtml({tooltipTitle, tooltipContent}: TBaseTooltipProps):
     return divTitle + divContent;
 }
 
-
 function convertToTooltipAttributes({
     tooltipId,
     tooltipPlace,
@@ -34,6 +33,5 @@ function convertToTooltipAttributes({
 
     return ret;
 }
-
 
 export default {convertToTooltipAttributes};

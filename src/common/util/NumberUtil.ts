@@ -6,9 +6,7 @@
  * @returns {string} 변환된 한국어 형식의 문자열, 숫자의 경우 세 자리마다 콤마가 찍힌 형태.
  */
 function toLocaleString(value: number | string): string {
-
     return value.toLocaleString('ko-KR');
-
 }
 
 export default {toLocaleString};
