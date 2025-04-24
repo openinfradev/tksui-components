@@ -1,27 +1,21 @@
 import {render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+
 import {TIcon} from '~/icon';
 
-
 describe('TIcon', () => {
-
     describe('Style', () => {
-
         it('Classname prop applies to root', () => {
-
             // Arrange
             const testData = 'class-name-prop';
             render(<TIcon className={'class-name-prop'}>image</TIcon>);
             const root = screen.getByRole('img');
 
-
             // Assert
             expect(root).toHaveClass(testData);
-
         });
 
         it('Style prop applies to root', () => {
-
             // Arrange
             const testData = {width: '50px'};
             render(<TIcon style={testData}>close</TIcon>);
@@ -33,7 +27,6 @@ describe('TIcon', () => {
         });
 
         it('ID prop applies to root', () => {
-
             // Arrange
             const testData = 'test-id';
             render(<TIcon id={testData}>close</TIcon>);
@@ -54,7 +47,6 @@ describe('TIcon', () => {
         });
 
         it('Fill prop applies to root', () => {
-
             // Arrange
             render(<TIcon fill>close</TIcon>);
             const root = screen.getByRole('img');
@@ -63,19 +55,19 @@ describe('TIcon', () => {
 
             expect(root).toHaveClass('t-icon-material--fill');
         });
-
     });
 
     describe('Size', () => {
-
         it('When valid size is entered, it will be applied in the classname', () => {
-            render(<>
-                <TIcon size={'xsmall'}>close</TIcon>
-                <TIcon size={'small'}>close</TIcon>
-                <TIcon size={'medium'}>close</TIcon>
-                <TIcon size={'large'}>close</TIcon>
-                <TIcon size={'xlarge'}>close</TIcon>
-            </>);
+            render(
+                <>
+                    <TIcon size={'xsmall'}>close</TIcon>
+                    <TIcon size={'small'}>close</TIcon>
+                    <TIcon size={'medium'}>close</TIcon>
+                    <TIcon size={'large'}>close</TIcon>
+                    <TIcon size={'xlarge'}>close</TIcon>
+                </>
+            );
 
             const icons = screen.getAllByRole('img');
 
@@ -86,12 +78,14 @@ describe('TIcon', () => {
             expect(icons[4]).toHaveClass('t-icon--xlarge');
         });
 
-
         it('When invalid size is entered or not entered, medium size will is applied', () => {
-            render(<>
-                <TIcon size={'invalid'}>close</TIcon>
-                <TIcon>close</TIcon>
-            </>);
+            render(
+                <>
+                    {/* @ts-ignore */}
+                    <TIcon size={'invalid'}>close</TIcon>
+                    <TIcon>close</TIcon>
+                </>
+            );
 
             const icons = screen.getAllByRole('img');
 
@@ -131,26 +125,26 @@ describe('TIcon', () => {
             expect(button).toHaveClass('t-icon--xlarge');
         });
 
-
         it('When both size and shortcut prop are applied, size prop will be applied.', () => {
-            render(<TIcon size={'large'} small>close</TIcon>);
+            render(
+                <TIcon size={'large'} small>
+                    close
+                </TIcon>
+            );
 
             const button = screen.getByRole('img');
 
             expect(button).toHaveClass('t-icon--large');
         });
-
-
     });
 
-
     describe('Event', () => {
-
         it('When icon is clicked, onClick event handler will be executed', async () => {
-
             // Arrange
             const user = userEvent.setup();
-            const mockOnClick = jest.fn(() => { /* Just test */ });
+            const mockOnClick = jest.fn(() => {
+                /* Just test */
+            });
             render(<TIcon onClick={mockOnClick}>close</TIcon>);
 
             const root = screen.getByRole('img');
@@ -162,13 +156,17 @@ describe('TIcon', () => {
             expect(mockOnClick).toHaveBeenCalledTimes(1);
         });
 
-
         it('When icon is disabled, onClick event handler will be NOT executed', async () => {
-
             // Arrange
             const user = userEvent.setup();
-            const mockOnClick = jest.fn(() => { /* Just test */ });
-            render(<TIcon disabled onClick={mockOnClick}>close</TIcon>);
+            const mockOnClick = jest.fn(() => {
+                /* Just test */
+            });
+            render(
+                <TIcon disabled onClick={mockOnClick}>
+                    close
+                </TIcon>
+            );
 
             const root = screen.getByRole('img');
 
@@ -180,7 +178,6 @@ describe('TIcon', () => {
         });
 
         it('When the icon is clicked, the onClick event handler should receive the event parameter', async () => {
-
             // Arrange
             const user = userEvent.setup();
             const mockOnClick = jest.fn();
@@ -201,18 +198,25 @@ describe('TIcon', () => {
         });
 
         it('When icon has focused and user type something, onKeyDown event handler will be executed', async () => {
-
             // Arrange
             const user = userEvent.setup();
-            const mockOnKeyDown = jest.fn(() => { /* Just test */ });
-            const mockOnKeyDownEnter = jest.fn(() => { /* Just test */ });
-            const mockOnKeyDownSpace = jest.fn(() => { /* Just test */ });
+            const mockOnKeyDown = jest.fn(() => {
+                /* Just test */
+            });
+            const mockOnKeyDownEnter = jest.fn(() => {
+                /* Just test */
+            });
+            const mockOnKeyDownSpace = jest.fn(() => {
+                /* Just test */
+            });
             render(
-                <TIcon onKeyDown={mockOnKeyDown}
-                       onKeyDownEnter={mockOnKeyDownEnter}
-                       onKeyDownSpace={mockOnKeyDownSpace}>
+                <TIcon
+                    onKeyDown={mockOnKeyDown}
+                    onKeyDownEnter={mockOnKeyDownEnter}
+                    onKeyDownSpace={mockOnKeyDownSpace}
+                >
                     close
-                </TIcon>,
+                </TIcon>
             );
 
             // Act
@@ -227,19 +231,26 @@ describe('TIcon', () => {
         });
 
         it('When icon is disabled and user type something on Icon, onKeyDown event handler will be NOT executed', async () => {
-
             // Arrange
             const user = userEvent.setup();
-            const mockOnKeyDown = jest.fn(() => { /* Just test */ });
-            const mockOnKeyDownEnter = jest.fn(() => { /* Just test */ });
-            const mockOnKeyDownSpace = jest.fn(() => { /* Just test */ });
+            const mockOnKeyDown = jest.fn(() => {
+                /* Just test */
+            });
+            const mockOnKeyDownEnter = jest.fn(() => {
+                /* Just test */
+            });
+            const mockOnKeyDownSpace = jest.fn(() => {
+                /* Just test */
+            });
             render(
-                <TIcon disabled
-                       onKeyDown={mockOnKeyDown}
-                       onKeyDownEnter={mockOnKeyDownEnter}
-                       onKeyDownSpace={mockOnKeyDownSpace}>
+                <TIcon
+                    disabled
+                    onKeyDown={mockOnKeyDown}
+                    onKeyDownEnter={mockOnKeyDownEnter}
+                    onKeyDownSpace={mockOnKeyDownSpace}
+                >
                     close
-                </TIcon>,
+                </TIcon>
             );
 
             // Act
@@ -252,7 +263,5 @@ describe('TIcon', () => {
             expect(mockOnKeyDownEnter).toHaveBeenCalledTimes(0);
             expect(mockOnKeyDownSpace).toHaveBeenCalledTimes(0);
         });
-
     });
-
 });

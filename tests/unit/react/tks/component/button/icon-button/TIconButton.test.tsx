@@ -1,6 +1,7 @@
 import {act, render, screen, within} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {useState} from 'react';
+
 import TIconButton from '~/button/icon-button/TIconButton';
 
 jest.mock('@/common/util/ColorUtil', () => ({
@@ -9,7 +10,6 @@ jest.mock('@/common/util/ColorUtil', () => ({
 }));
 
 describe('TIconButton', () => {
-
     const mockOnClick = jest.fn();
     const baseProps = {
         children: 'icon',
@@ -21,26 +21,24 @@ describe('TIconButton', () => {
     });
 
     describe('Render', () => {
-
         it('Renders without errors', () => {
-
             // Arrange
             render(<TIconButton {...baseProps}>Test IconButton</TIconButton>);
 
             // Assert
             expect(screen.getByRole('button')).toBeInTheDocument();
         });
-
     });
 
-
     describe('Style', () => {
-
         it('Classname prop applies to root', () => {
-
             // Arrange
             const testClass = 'test-class';
-            render(<TIconButton {...baseProps} className={testClass}>Test IconButton</TIconButton>);
+            render(
+                <TIconButton {...baseProps} className={testClass}>
+                    Test IconButton
+                </TIconButton>
+            );
             const root = screen.getByRole('button');
 
             // Assert
@@ -48,10 +46,13 @@ describe('TIconButton', () => {
         });
 
         it('Style prop applies to root', () => {
-
             // Arrange
             const testStyle = {border: '1px solid blue'};
-            render(<TIconButton {...baseProps} style={testStyle}>Test IconButton</TIconButton>);
+            render(
+                <TIconButton {...baseProps} style={testStyle}>
+                    Test IconButton
+                </TIconButton>
+            );
             const root = screen.getByRole('button');
 
             // Assert
@@ -59,10 +60,13 @@ describe('TIconButton', () => {
         });
 
         it('ID prop applies to root', () => {
-
             // Arrange
             const testId = 'test-id';
-            render(<TIconButton {...baseProps} id={testId}>Test IconButton</TIconButton>);
+            render(
+                <TIconButton {...baseProps} id={testId}>
+                    Test IconButton
+                </TIconButton>
+            );
             const root = screen.getByRole('button');
 
             // Assert
@@ -70,9 +74,12 @@ describe('TIconButton', () => {
         });
 
         it('Shape class applies to root', () => {
-
             // Arrange
-            render(<TIconButton {...baseProps} shape={'circle'}>Test IconButton</TIconButton>);
+            render(
+                <TIconButton {...baseProps} shape={'circle'}>
+                    Test IconButton
+                </TIconButton>
+            );
             const root = screen.getByRole('button');
 
             // Assert
@@ -80,9 +87,12 @@ describe('TIconButton', () => {
         });
 
         it('Outline class applies to root', () => {
-
             // Arrange
-            render(<TIconButton {...baseProps} outline={'elevation'}>Test IconButton</TIconButton>);
+            render(
+                <TIconButton {...baseProps} outline={'elevation'}>
+                    Test IconButton
+                </TIconButton>
+            );
             const root = screen.getByRole('button');
 
             // Assert
@@ -90,9 +100,12 @@ describe('TIconButton', () => {
         });
 
         it('Disabled class applies to root if disabled', () => {
-
             // Arrange
-            render(<TIconButton {...baseProps} disabled>Test IconButton</TIconButton>);
+            render(
+                <TIconButton {...baseProps} disabled>
+                    Test IconButton
+                </TIconButton>
+            );
             const root = screen.getByRole('button');
 
             // Assert
@@ -101,16 +114,14 @@ describe('TIconButton', () => {
     });
 
     describe('onClick & disabled', () => {
-
         it('When button is clicked, onClick event handler will be executed', async () => {
-
             // Arrange
             const user = userEvent.setup();
             const TIconButtonWithClickHandler = () => {
                 const [isClicked, setIsClicked] = useState<boolean>(false);
                 return <TIconButton onClick={() => setIsClicked(true)}>{isClicked.toString()}</TIconButton>;
             };
-            render(<TIconButtonWithClickHandler/>);
+            render(<TIconButtonWithClickHandler />);
             const root = screen.getByRole('button');
 
             // Assert
@@ -118,7 +129,9 @@ describe('TIconButton', () => {
             expect(buttonContent).toHaveTextContent('false');
 
             // Act
-            await act(async () => { await user.click(root); });
+            await act(async () => {
+                await user.click(root);
+            });
 
             // Assert
             buttonContent = within(root).queryByText('true');
@@ -126,10 +139,13 @@ describe('TIconButton', () => {
         });
 
         it('Does not call onClick when clicked if disabled', async () => {
-
             // Arrange
             const user = userEvent.setup();
-            render(<TIconButton {...baseProps} disabled>Test IconButton</TIconButton>);
+            render(
+                <TIconButton {...baseProps} disabled>
+                    Test IconButton
+                </TIconButton>
+            );
             const root = screen.getByRole('button');
             await act(async () => {
                 await user.click(root);
@@ -140,14 +156,13 @@ describe('TIconButton', () => {
         });
 
         it('When enter key is typed, onClick event handler will be executed', async () => {
-
             // Arrange
             const user = userEvent.setup();
             const TIconButtonWithClickHandler = () => {
                 const [isClicked, setIsClicked] = useState<boolean>(false);
                 return <TIconButton onClick={() => setIsClicked(true)}>{isClicked.toString()}</TIconButton>;
             };
-            render(<TIconButtonWithClickHandler/>);
+            render(<TIconButtonWithClickHandler />);
             const root = screen.getByRole('button');
 
             // Assert
@@ -155,7 +170,9 @@ describe('TIconButton', () => {
             expect(buttonContent).toHaveTextContent('false');
 
             // Act
-            await act(async () => { await user.type(root, '{enter}'); });
+            await act(async () => {
+                await user.type(root, '{enter}');
+            });
 
             // Assert
             buttonContent = within(root).queryByText('true');
@@ -163,14 +180,13 @@ describe('TIconButton', () => {
         });
 
         it('When space key is typed, onClick event handler will be executed', async () => {
-
             // Arrange
             const user = userEvent.setup();
             const TIconButtonWithClickHandler = () => {
                 const [isClicked, setIsClicked] = useState<boolean>(false);
                 return <TIconButton onClick={() => setIsClicked(true)}>{isClicked.toString()}</TIconButton>;
             };
-            render(<TIconButtonWithClickHandler/>);
+            render(<TIconButtonWithClickHandler />);
             const root = screen.getByRole('button');
 
             // Assert
@@ -178,12 +194,13 @@ describe('TIconButton', () => {
             expect(buttonContent).toHaveTextContent('false');
 
             // Act
-            await act(async () => { await user.type(root, ' '); });
+            await act(async () => {
+                await user.type(root, ' ');
+            });
 
             // Assert
             buttonContent = within(root).queryByText('true');
             expect(buttonContent).toHaveTextContent('true');
         });
-
     });
 });

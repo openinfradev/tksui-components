@@ -1,4 +1,5 @@
 import {render, screen} from '@testing-library/react';
+
 import TCardHeader from '~/data-container/card/TCardHeader';
 
 describe('TCardHeader', () => {
@@ -9,7 +10,6 @@ describe('TCardHeader', () => {
 
     describe('Style', () => {
         it('Renders without errors', () => {
-
             // Arrange
             render(<TCardHeader {...baseProps} />);
 
@@ -18,10 +18,9 @@ describe('TCardHeader', () => {
         });
 
         it('ClassName prop applies to the root', () => {
-
             // Arrange
             const testClassName = 'test-class';
-            render(<TCardHeader {...baseProps} className={testClassName}/>);
+            render(<TCardHeader {...baseProps} className={testClassName} />);
             const root = screen.getByTestId('card-header-root');
 
             // Assert
@@ -29,10 +28,9 @@ describe('TCardHeader', () => {
         });
 
         it('Style prop applies to the root', () => {
-
             // Arrange
-            const testStyle = { width: '300px', color: 'red' };
-            render(<TCardHeader {...baseProps} style={testStyle}/>);
+            const testStyle = {width: '300px', color: 'red'};
+            render(<TCardHeader {...baseProps} style={testStyle} />);
             const root = screen.getByTestId('card-header-root');
 
             // Assert
@@ -40,19 +38,16 @@ describe('TCardHeader', () => {
         });
 
         it('ID prop applies to root', () => {
-
             // Arrange
-            const testStyle = { width: '300px', color: 'red' };
-            render(<TCardHeader {...baseProps} style={testStyle}/>);
+            const testStyle = {width: '300px', color: 'red'};
+            render(<TCardHeader {...baseProps} style={testStyle} />);
             const root = screen.getByTestId('card-header-root');
 
             // Assert
             expect(root).toHaveStyle(testStyle);
         });
 
-
         it('Renders title and subTitle correctly', () => {
-
             // Arrange
             render(<TCardHeader {...baseProps} />);
             const title = screen.getByText('Test Title');

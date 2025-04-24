@@ -1,30 +1,30 @@
 import {render, screen} from '@testing-library/react';
+
 import TStepBox from '~/data-container/step-box/TStepBox';
 
 describe('TStepBox', () => {
-
     const mockOnChange = jest.fn();
     const stepLabels = ['Step 1', 'Step 2', 'Step 3'];
     const steps = [
-        <div data-testid='step-1' key={1}>Step 1 Content</div>,
-        <div data-testid='step-2' key={2}>Step 2 Content</div>,
-        <div data-testid='step-3' key={3}>Step 3 Content</div>,
+        <div data-testid='step-1' key={1}>
+            Step 1 Content
+        </div>,
+        <div data-testid='step-2' key={2}>
+            Step 2 Content
+        </div>,
+        <div data-testid='step-3' key={3}>
+            Step 3 Content
+        </div>,
     ];
 
     describe('Style', () => {
-
         it('Classname prop applies to root', () => {
-
             // Arrange
             const testClassName = 'test-class';
             render(
-                <TStepBox value={1}
-                          stepLabels={stepLabels}
-                          onChange={mockOnChange}
-                          className={testClassName}
-                >
+                <TStepBox value={1} stepLabels={stepLabels} onChange={mockOnChange} className={testClassName}>
                     {steps}
-                </TStepBox>,
+                </TStepBox>
             );
             const root = screen.getByTestId('step-box-root');
 
@@ -33,18 +33,12 @@ describe('TStepBox', () => {
         });
 
         it('Style prop applies to root', () => {
-
             // Arrange
             const testStyle = {width: '500px', color: 'blue'};
             render(
-                <TStepBox
-                    value={1}
-                    stepLabels={stepLabels}
-                    onChange={mockOnChange}
-                    style={testStyle}
-                >
+                <TStepBox value={1} stepLabels={stepLabels} onChange={mockOnChange} style={testStyle}>
                     {steps}
-                </TStepBox>,
+                </TStepBox>
             );
             const root = screen.getByTestId('step-box-root');
 
@@ -52,43 +46,29 @@ describe('TStepBox', () => {
             expect(root).toHaveStyle(testStyle);
         });
 
-
         it('ID prop applies to root', () => {
-
             // Arrange
             const testId = 'test-class';
             render(
-                <TStepBox
-                    value={1}
-                    stepLabels={stepLabels}
-                    onChange={mockOnChange}
-                    id={testId}
-                >
+                <TStepBox value={1} stepLabels={stepLabels} onChange={mockOnChange} id={testId}>
                     {steps}
-                </TStepBox>,
+                </TStepBox>
             );
             const root = screen.getByTestId('step-box-root');
 
             // Assert
             expect(root).toHaveProperty('id');
             expect(root.id).toEqual(testId);
-
         });
     });
 
     describe('Render', () => {
-
         it('Renders without errors', () => {
-
             // Arrange
             render(
-                <TStepBox
-                    value={1}
-                    stepLabels={stepLabels}
-                    onChange={mockOnChange}
-                >
+                <TStepBox value={1} stepLabels={stepLabels} onChange={mockOnChange}>
                     {steps}
-                </TStepBox>,
+                </TStepBox>
             );
 
             // Assert
@@ -96,16 +76,11 @@ describe('TStepBox', () => {
         });
 
         it('Renders with default labels and buttons', () => {
-
             // Arrange
             render(
-                <TStepBox
-                    value={1}
-                    stepLabels={stepLabels}
-                    onChange={mockOnChange}
-                >
+                <TStepBox value={1} stepLabels={stepLabels} onChange={mockOnChange}>
                     {steps}
-                </TStepBox>,
+                </TStepBox>
             );
             const root = screen.getByTestId('step-box-root');
 
@@ -121,17 +96,17 @@ describe('TStepBox', () => {
         });
 
         it('Renders custom button labels', () => {
-
             // Arrange
             render(
-                <TStepBox value={1}
-                          stepLabels={stepLabels}
-                          onChange={mockOnChange}
-                          prevButtonLabel='Custom Prev'
-                          nextButtonLabel='Custom Next'
+                <TStepBox
+                    value={1}
+                    stepLabels={stepLabels}
+                    onChange={mockOnChange}
+                    prevButtonLabel='Custom Prev'
+                    nextButtonLabel='Custom Next'
                 >
                     {steps}
-                </TStepBox>,
+                </TStepBox>
             );
 
             // Assert

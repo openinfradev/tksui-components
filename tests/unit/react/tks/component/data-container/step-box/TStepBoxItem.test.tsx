@@ -1,8 +1,8 @@
 import {render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import TStepBoxItem from '~/data-container/step-box/TStepBoxItem';
-import TStepBoxContext from '~/data-container/step-box/TStepBoxContext';
 
+import TStepBoxContext from '~/data-container/step-box/TStepBoxContext';
+import TStepBoxItem from '~/data-container/step-box/TStepBoxItem';
 
 jest.mock('@/common/util/ColorUtil', () => ({
     shadeColor: jest.fn(() => 'blue'),
@@ -41,7 +41,6 @@ describe('TStepBoxItem', () => {
 
     describe('Render', () => {
         it('Renders without errors', () => {
-
             // Arrange
             render(<TStepBoxItem {...baseProps}>Content</TStepBoxItem>);
 
@@ -50,32 +49,29 @@ describe('TStepBoxItem', () => {
         });
 
         it('Renders custom button labels', () => {
-
             // Arrange
             render(
                 <TStepBoxItem
                     prevButtonLabel={'Custom Prev'}
                     nextButtonLabel={'Custom Next'}
                     completeButtonLabel={'Custom CompleteButton'}
-                />,
+                />
             );
 
             // Assert
             expect(screen.getByRole('button', {name: 'Custom Prev'})).toBeInTheDocument();
             expect(screen.getByRole('button', {name: 'Custom CompleteButton'})).toBeInTheDocument();
         });
-
     });
 
     describe('Style', () => {
         it('Classname prop applies to root', () => {
-
             // Arrange
             const testClassName = 'test-class';
             render(
                 <TStepBoxItem {...baseProps} className={testClassName}>
                     Content
-                </TStepBoxItem>,
+                </TStepBoxItem>
             );
             const root = screen.getByTestId('step-box-item-root');
 
@@ -84,13 +80,12 @@ describe('TStepBoxItem', () => {
         });
 
         it('Style prop applies to root', () => {
-
             // Arrange
             const testStyle = {width: '500px', color: 'blue'};
             render(
                 <TStepBoxItem {...baseProps} style={testStyle}>
                     Content
-                </TStepBoxItem>,
+                </TStepBoxItem>
             );
             const root = screen.getByTestId('step-box-item-root');
 
@@ -105,10 +100,8 @@ describe('TStepBoxItem', () => {
             const user = userEvent.setup();
             render(
                 <TStepBoxContext.Provider value={baseContext}>
-                    <TStepBoxContext.Consumer>
-                        {() => <TStepBoxItem {...baseProps}/>}
-                    </TStepBoxContext.Consumer>
-                </TStepBoxContext.Provider>,
+                    <TStepBoxContext.Consumer>{() => <TStepBoxItem {...baseProps} />}</TStepBoxContext.Consumer>
+                </TStepBoxContext.Provider>
             );
             const prevButton = screen.getByRole('button', {name: 'Prev'});
 
@@ -123,16 +116,13 @@ describe('TStepBoxItem', () => {
         });
 
         it('Calls onClickNext and onChangeCurrentStep when clicking the next button if validation passes', async () => {
-
             // Arrange
             const user = userEvent.setup();
             mockValidateStep.mockReturnValue(true);
             render(
                 <TStepBoxContext.Provider value={baseContext}>
-                    <TStepBoxContext.Consumer>
-                        {() => <TStepBoxItem {...baseProps}/>}
-                    </TStepBoxContext.Consumer>
-                </TStepBoxContext.Provider>,
+                    <TStepBoxContext.Consumer>{() => <TStepBoxItem {...baseProps} />}</TStepBoxContext.Consumer>
+                </TStepBoxContext.Provider>
             );
             const nextButton = screen.getByRole('button', {name: 'Complete'});
 

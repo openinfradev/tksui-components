@@ -1,11 +1,10 @@
 import {render, screen} from '@testing-library/react';
+
 import TCardContent from '~/data-container/card/TCardContent';
 
 describe('TCardContent', () => {
-
     describe('Style', () => {
         it('Renders without errors', () => {
-
             // Arrange
             render(<TCardContent>Test Content</TCardContent>);
 
@@ -14,7 +13,6 @@ describe('TCardContent', () => {
         });
 
         it('Classname prop applies to root', () => {
-
             // Arrange
             const testClassName = 'test-class';
             render(<TCardContent className={testClassName}>Test Content</TCardContent>);
@@ -25,9 +23,8 @@ describe('TCardContent', () => {
         });
 
         it('Style prop applies to root', () => {
-
             // Arrange
-            const testStyle = { width: '300px' };
+            const testStyle = {width: '300px'};
             render(<TCardContent style={testStyle}>Test Content</TCardContent>);
             const root = screen.getByTestId('card-content-root');
 
@@ -36,7 +33,6 @@ describe('TCardContent', () => {
         });
 
         it('ID prop applies to root', () => {
-
             // Arrange
             const testData = 'test-id';
 
@@ -47,14 +43,11 @@ describe('TCardContent', () => {
             // Assert
             expect(root).toHaveProperty('id');
             expect(root.id).toEqual(testData);
-
         });
     });
 
     describe('Children', () => {
-
         it('Renders children without error', () => {
-
             // Arrange
             const testContent = 'Test Content';
             render(<TCardContent>{testContent}</TCardContent>);
@@ -63,7 +56,5 @@ describe('TCardContent', () => {
             // Assert
             expect(root).toHaveTextContent(testContent);
         });
-
     });
-
 });

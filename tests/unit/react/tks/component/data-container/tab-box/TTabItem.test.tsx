@@ -1,7 +1,8 @@
 import {render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import TTabItem from '~/data-container/tab-box/TTabItem';
+
 import TTabBoxContext from '~/data-container/tab-box/TTabBoxContext';
+import TTabItem from '~/data-container/tab-box/TTabItem';
 
 jest.mock('@/common/util/ColorUtil', () => ({
     shadeColor: jest.fn(() => 'blue'),
@@ -9,7 +10,6 @@ jest.mock('@/common/util/ColorUtil', () => ({
 }));
 
 describe('TTabItem', () => {
-
     const mockOnChangeActiveTab = jest.fn();
 
     const baseProps = {
@@ -37,7 +37,6 @@ describe('TTabItem', () => {
 
     describe('Render', () => {
         it('Renders without errors', () => {
-
             // Arrange
             render(<TTabItem {...baseProps} />);
 
@@ -46,14 +45,11 @@ describe('TTabItem', () => {
         });
 
         it('Applies active class when activeTab matches value', () => {
-
             // Arrange
             render(
                 <TTabBoxContext.Provider value={baseContext}>
-                    <TTabBoxContext.Consumer>
-                        {() => <TTabItem {...baseProps}/>}
-                    </TTabBoxContext.Consumer>
-                </TTabBoxContext.Provider>,
+                    <TTabBoxContext.Consumer>{() => <TTabItem {...baseProps} />}</TTabBoxContext.Consumer>
+                </TTabBoxContext.Provider>
             );
             const root = screen.getByTestId('tab-box-item-root');
 
@@ -64,15 +60,12 @@ describe('TTabItem', () => {
 
     describe('Event', () => {
         it('Registers ripple effect on mouse click', async () => {
-
             // Arrange
             const user = userEvent.setup();
             render(
                 <TTabBoxContext.Provider value={baseContext}>
-                    <TTabBoxContext.Consumer>
-                        {() => <TTabItem {...tab2Props}/>}
-                    </TTabBoxContext.Consumer>
-                </TTabBoxContext.Provider>,
+                    <TTabBoxContext.Consumer>{() => <TTabItem {...tab2Props} />}</TTabBoxContext.Consumer>
+                </TTabBoxContext.Provider>
             );
             const root = screen.getByTestId('tab-box-item-root');
 
@@ -85,15 +78,12 @@ describe('TTabItem', () => {
         });
 
         it('Calls onChangeActiveTab, when click the disabled tab', async () => {
-
             // Arrange
             const user = userEvent.setup();
             render(
                 <TTabBoxContext.Provider value={baseContext}>
-                    <TTabBoxContext.Consumer>
-                        {() => <TTabItem {...tab2Props}/>}
-                    </TTabBoxContext.Consumer>
-                </TTabBoxContext.Provider>,
+                    <TTabBoxContext.Consumer>{() => <TTabItem {...tab2Props} />}</TTabBoxContext.Consumer>
+                </TTabBoxContext.Provider>
             );
             const root = screen.getByTestId('tab-box-item-root');
 
@@ -107,5 +97,4 @@ describe('TTabItem', () => {
             expect(mockOnChangeActiveTab).toHaveBeenCalledTimes(1);
         });
     });
-
 });

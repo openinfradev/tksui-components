@@ -1,7 +1,8 @@
 import {render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import TStepBoxFooter from '~/data-container/step-box/TStepBoxFooter';
+
 import TStepBoxContext from '~/data-container/step-box/TStepBoxContext';
+import TStepBoxFooter from '~/data-container/step-box/TStepBoxFooter';
 
 jest.mock('@/common/util/ColorUtil', () => ({
     shadeColor: jest.fn(() => 'blue'),
@@ -9,7 +10,6 @@ jest.mock('@/common/util/ColorUtil', () => ({
 }));
 
 describe('TStepBoxFooter', () => {
-
     const mockOnClickPrev = jest.fn();
     const mockOnClickNext = jest.fn();
     const mockValidateStep = jest.fn();
@@ -41,9 +41,7 @@ describe('TStepBoxFooter', () => {
     });
 
     describe('Render', () => {
-
         it('Renders without errors', () => {
-
             // Arrange
             render(<TStepBoxFooter {...baseProps} />);
 
@@ -52,14 +50,13 @@ describe('TStepBoxFooter', () => {
         });
 
         it('Renders custom button labels', () => {
-
             // Arrange
             render(
                 <TStepBoxFooter
                     prevButtonLabel={'Custom Prev'}
                     nextButtonLabel={'Custom Next'}
                     completeButtonLabel={'Custom CompleteButton'}
-                />,
+                />
             );
 
             // Assert
@@ -70,15 +67,12 @@ describe('TStepBoxFooter', () => {
 
     describe('Event', () => {
         it('Calls onClickPrev when clicking the previous button', async () => {
-
             // Arrange
             const user = userEvent.setup();
             render(
                 <TStepBoxContext.Provider value={baseContext}>
-                    <TStepBoxContext.Consumer>
-                        {() => <TStepBoxFooter {...baseProps}/>}
-                    </TStepBoxContext.Consumer>
-                </TStepBoxContext.Provider>,
+                    <TStepBoxContext.Consumer>{() => <TStepBoxFooter {...baseProps} />}</TStepBoxContext.Consumer>
+                </TStepBoxContext.Provider>
             );
             const prevButton = screen.getByRole('button', {name: 'Prev'});
 
@@ -93,16 +87,13 @@ describe('TStepBoxFooter', () => {
         });
 
         it('Calls onClickNext and onChangeCurrentStep when clicking the next button if validation passes', async () => {
-
             // Arrange
             const user = userEvent.setup();
             mockValidateStep.mockReturnValue(true);
             render(
                 <TStepBoxContext.Provider value={baseContext}>
-                    <TStepBoxContext.Consumer>
-                        {() => <TStepBoxFooter {...baseProps}/>}
-                    </TStepBoxContext.Consumer>
-                </TStepBoxContext.Provider>,
+                    <TStepBoxContext.Consumer>{() => <TStepBoxFooter {...baseProps} />}</TStepBoxContext.Consumer>
+                </TStepBoxContext.Provider>
             );
             const nextButton = screen.getByRole('button', {name: 'Complete'});
 

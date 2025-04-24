@@ -1,11 +1,12 @@
 import {act, render, renderHook, screen} from '@testing-library/react';
-import React, {useRef, useState} from 'react';
 import userEvent from '@testing-library/user-event';
-import TCheckboxGroup from '~/input/checkbox-group/TCheckboxGroup';
+import React, {useRef, useState} from 'react';
+
 import TValidatorRule from '@/common/validator/TValidatorRule';
 
-describe('TCheckboxGroup', () => {
+import TCheckboxGroup from '~/input/checkbox-group/TCheckboxGroup';
 
+describe('TCheckboxGroup', () => {
     const items = [
         {text: 'Apple', koreanText: '사과', value: 'apple', value2: 'a'},
         {text: 'Banana', koreanText: '바나나', value: 'banana', value2: 'b'},
@@ -14,72 +15,64 @@ describe('TCheckboxGroup', () => {
 
     const mockFn = jest.fn();
 
-    beforeEach(() => { mockFn.mockClear(); });
+    beforeEach(() => {
+        mockFn.mockClear();
+    });
 
     describe('Style', () => {
-
         it('Classname prop applies to root', () => {
-
             // Arrange
             const testData = 'class-name-prop';
             const testValue = [];
 
-            render(<TCheckboxGroup className={testData} onChange={mockFn} value={testValue} items={items}/>);
+            render(<TCheckboxGroup className={testData} onChange={mockFn} value={testValue} items={items} />);
 
             const root = screen.getByTestId('t-checkbox-group-root');
 
             // Assert
             expect(root).toHaveClass(testData);
-
         });
 
         it('Style prop applies to root', () => {
-
             // Arrange
             const testData = {width: '50px'};
             const testValue = [];
 
-            render(<TCheckboxGroup style={testData} onChange={mockFn} value={testValue} items={items}/>);
+            render(<TCheckboxGroup style={testData} onChange={mockFn} value={testValue} items={items} />);
 
             const root = screen.getByTestId('t-checkbox-group-root');
 
             // Assert
             expect(root).toHaveStyle(testData);
-
         });
 
         it('ID prop applies to root', () => {
-
             // Arrange
             const testData = 'test-id';
             const testValue = [];
 
-            render(<TCheckboxGroup id={testData} onChange={mockFn} value={testValue} items={items}/>);
+            render(<TCheckboxGroup id={testData} onChange={mockFn} value={testValue} items={items} />);
 
             const root = screen.getByTestId('t-checkbox-group-root');
 
             // Assert
             expect(root).toHaveProperty('id');
             expect(root.id).toEqual(testData);
-
         });
 
         it('When disabled prop is applied, root has t-checkbox-group--disabled class', () => {
-
             // Arrange
             const testValue = [];
 
-            render(<TCheckboxGroup disabled={true} onChange={mockFn} value={testValue} items={items}/>);
+            render(<TCheckboxGroup disabled={true} onChange={mockFn} value={testValue} items={items} />);
 
             const root = screen.getByTestId('t-checkbox-group-root');
 
             // Assert
             expect(root).toHaveClass('t-checkbox-group--disabled');
-
         });
 
         it('When readOnly prop is applied, root has t-checkbox-group--read-only class', () => {
-
             // Arrange
             const testValue = [];
             const testItems = [
@@ -87,32 +80,27 @@ describe('TCheckboxGroup', () => {
                 {text: 'Banana', koreanText: '바나나', value: 'banana', value2: 'b'},
             ];
 
-            render(<TCheckboxGroup readOnly={true} onChange={mockFn} value={testValue} items={testItems}/>);
+            render(<TCheckboxGroup readOnly={true} onChange={mockFn} value={testValue} items={testItems} />);
 
             const root = screen.getByTestId('t-checkbox-group-root');
 
             // Assert
             expect(root).toHaveClass('t-checkbox-group--read-only');
-
         });
 
-
         it('When disabled prop is applied, root will be applied -1 to tabIndex', () => {
-
             // Arrange
             const testValue = [];
 
-            render(<TCheckboxGroup disabled={true} onChange={mockFn} value={testValue} items={items}/>);
+            render(<TCheckboxGroup disabled={true} onChange={mockFn} value={testValue} items={items} />);
 
             const root = screen.getByTestId('t-checkbox-group-root');
 
             // Assert
             expect(root).toHaveAttribute('tabIndex', '-1');
-
         });
 
         it('When value is an invalid, root has t-radio-group--failure class', () => {
-
             // Arrange
             const testValue = [];
 
@@ -120,12 +108,13 @@ describe('TCheckboxGroup', () => {
             const radioGroupRef = result.current;
 
             render(
-                <TCheckboxGroup ref={radioGroupRef}
-                                onChange={mockFn}
-                                value={testValue}
-                                items={items}
-                                rules={[TValidatorRule.requiredArr('과일을 선택해 주세요')]}
-                />,
+                <TCheckboxGroup
+                    ref={radioGroupRef}
+                    onChange={mockFn}
+                    value={testValue}
+                    items={items}
+                    rules={[TValidatorRule.requiredArr('과일을 선택해 주세요')]}
+                />
             );
 
             const root = screen.getByTestId('t-checkbox-group-root');
@@ -137,11 +126,9 @@ describe('TCheckboxGroup', () => {
 
             // Assert
             expect(root).toHaveClass('t-checkbox-group--failure');
-
         });
 
         it('When value is an valid, root has t-radio-group--success class', () => {
-
             // Arrange
             const testValue = ['apple'];
 
@@ -149,13 +136,14 @@ describe('TCheckboxGroup', () => {
             const radioGroupRef = result.current;
 
             render(
-                <TCheckboxGroup ref={radioGroupRef}
-                                onChange={mockFn}
-                                value={testValue}
-                                items={items}
-                                successMessage={'test success message'}
-                                rules={[TValidatorRule.requiredArr('과일을 선택해 주세요')]}
-                />,
+                <TCheckboxGroup
+                    ref={radioGroupRef}
+                    onChange={mockFn}
+                    value={testValue}
+                    items={items}
+                    successMessage={'test success message'}
+                    rules={[TValidatorRule.requiredArr('과일을 선택해 주세요')]}
+                />
             );
 
             const root = screen.getByTestId('t-checkbox-group-root');
@@ -167,22 +155,17 @@ describe('TCheckboxGroup', () => {
 
             // Assert
             expect(root).toHaveClass('t-checkbox-group--success');
-
         });
-
     });
 
     describe('Event', () => {
-
         it('When value is changed, onChange handler is called', async () => {
-
             // Arrange
             const testValue = [];
 
             const user = userEvent.setup();
 
-            render(<TCheckboxGroup onChange={mockFn} value={testValue} items={items}/>);
-
+            render(<TCheckboxGroup onChange={mockFn} value={testValue} items={items} />);
 
             const item = screen.getByText('Apple');
 
@@ -190,23 +173,22 @@ describe('TCheckboxGroup', () => {
 
             // Assert
             expect(mockFn).toHaveBeenCalledTimes(1);
-
         });
 
-
         it('When item is checked and that is clicked, it is removed from array', async () => {
-
             // Arrange
             let testData: any = ['apple'];
 
             const user = userEvent.setup();
 
             render(
-                <TCheckboxGroup value={testData}
-                                onChange={(value) => {
-                                    testData = value;
-                                }}
-                                items={items}/>,
+                <TCheckboxGroup
+                    value={testData}
+                    onChange={(value) => {
+                        testData = value;
+                    }}
+                    items={items}
+                />
             );
 
             const item = screen.getByText('Apple');
@@ -215,22 +197,22 @@ describe('TCheckboxGroup', () => {
 
             // Assert
             expect(testData.length).toBe(0);
-
         });
 
         it('When item is unchecked and that is clicked, it is added to array', async () => {
-
             // Arrange
             let testData: any = [];
 
             const user = userEvent.setup();
 
             render(
-                <TCheckboxGroup value={testData}
-                                onChange={(value) => {
-                                    testData = value;
-                                }}
-                                items={items}/>,
+                <TCheckboxGroup
+                    value={testData}
+                    onChange={(value) => {
+                        testData = value;
+                    }}
+                    items={items}
+                />
             );
 
             const item = screen.getByText('Apple');
@@ -239,11 +221,9 @@ describe('TCheckboxGroup', () => {
 
             // Assert
             expect(testData.length).toBe(1);
-
         });
 
         it('When focussing, validate message should be clear', async () => {
-
             // Arrange
             const testData = 'test success message';
             const testValue = ['apple'];
@@ -252,13 +232,14 @@ describe('TCheckboxGroup', () => {
             const radioGroupRef = result.current;
 
             render(
-                <TCheckboxGroup ref={radioGroupRef}
-                                onChange={mockFn}
-                                value={testValue}
-                                items={items}
-                                successMessage={testData}
-                                rules={[TValidatorRule.requiredArr('과일을 선택해 주세요')]}
-                />,
+                <TCheckboxGroup
+                    ref={radioGroupRef}
+                    onChange={mockFn}
+                    value={testValue}
+                    items={items}
+                    successMessage={testData}
+                    rules={[TValidatorRule.requiredArr('과일을 선택해 주세요')]}
+                />
             );
 
             const root = screen.getByTestId('t-checkbox-group-root');
@@ -275,11 +256,9 @@ describe('TCheckboxGroup', () => {
             // Assert
             expect(root).toHaveFocus();
             expect(message?.textContent).not.toBe(testData);
-
         });
 
         it('When lazy prop false and focus out, validate message should be displayed on message area', async () => {
-
             // Arrange
             const testData = 'test success message';
             const testValue = ['apple'];
@@ -290,14 +269,15 @@ describe('TCheckboxGroup', () => {
             const user = userEvent.setup();
 
             render(
-                <TCheckboxGroup ref={radioGroupRef}
-                                onChange={mockFn}
-                                value={testValue}
-                                items={items}
-                                lazy={false}
-                                successMessage={testData}
-                                rules={[TValidatorRule.requiredArr('과일을 선택해 주세요')]}
-                />,
+                <TCheckboxGroup
+                    ref={radioGroupRef}
+                    onChange={mockFn}
+                    value={testValue}
+                    items={items}
+                    lazy={false}
+                    successMessage={testData}
+                    rules={[TValidatorRule.requiredArr('과일을 선택해 주세요')]}
+                />
             );
 
             const root = screen.getByTestId('t-checkbox-group-root');
@@ -314,15 +294,11 @@ describe('TCheckboxGroup', () => {
 
             // Assert
             expect(message?.textContent).toBe(testData);
-
         });
     });
 
-
     describe('Content', () => {
-
         it('When rules prop is applied, validate message should be displayed on message area', () => {
-
             // Arrange
             const testData = '가장 좋아하는 과일을 선택해 주세요';
             const testValue = [];
@@ -331,12 +307,13 @@ describe('TCheckboxGroup', () => {
             const radioGroupRef = result.current;
 
             render(
-                <TCheckboxGroup ref={radioGroupRef}
-                                onChange={mockFn}
-                                value={testValue}
-                                items={items}
-                                rules={[TValidatorRule.requiredArr(testData)]}
-                />,
+                <TCheckboxGroup
+                    ref={radioGroupRef}
+                    onChange={mockFn}
+                    value={testValue}
+                    items={items}
+                    rules={[TValidatorRule.requiredArr(testData)]}
+                />
             );
 
             // Act
@@ -349,12 +326,9 @@ describe('TCheckboxGroup', () => {
 
             // Assert
             expect(content).toHaveTextContent(testData);
-
         });
 
-
         it('When successMessage prop is applied and value is an valid, it should be displayed on content area', () => {
-
             // Arrange
             const testData = 'test success message';
             const testValue = ['apple'];
@@ -363,13 +337,14 @@ describe('TCheckboxGroup', () => {
             const radioGroupRef = result.current;
 
             render(
-                <TCheckboxGroup ref={radioGroupRef}
-                                onChange={mockFn}
-                                value={testValue}
-                                items={items}
-                                successMessage={testData}
-                                rules={[TValidatorRule.requiredArr('가장 좋아하는 과일을 선택해 주세요')]}
-                />,
+                <TCheckboxGroup
+                    ref={radioGroupRef}
+                    onChange={mockFn}
+                    value={testValue}
+                    items={items}
+                    successMessage={testData}
+                    rules={[TValidatorRule.requiredArr('가장 좋아하는 과일을 선택해 주세요')]}
+                />
             );
 
             // Act
@@ -382,14 +357,12 @@ describe('TCheckboxGroup', () => {
 
             // Assert
             expect(content).toHaveTextContent(testData);
-
         });
 
         it('When items prop applied, it should be displayed on content area', () => {
-
             // Arrange
             const testValue = [];
-            render(<TCheckboxGroup onChange={mockFn} value={testValue} items={items}/>);
+            render(<TCheckboxGroup onChange={mockFn} value={testValue} items={items} />);
 
             const apple = screen.getByText('Apple');
             const banana = screen.getByText('Banana');
@@ -397,30 +370,21 @@ describe('TCheckboxGroup', () => {
             // Assert
             expect(apple).toBeInTheDocument();
             expect(banana).toBeInTheDocument();
-
         });
 
         it('When disabled attribute is applied to an item, that item should not be changed', () => {
-
             // Arrange
             const testValue = [];
 
-            render(
-                <TCheckboxGroup onChange={mockFn}
-                                value={testValue}
-                                items={items}
-                />,
-            );
+            render(<TCheckboxGroup onChange={mockFn} value={testValue} items={items} />);
 
             const checkboxButtons = screen.getAllByTestId('t-checkbox-root');
 
             // Assert
             expect(checkboxButtons[2]).toHaveClass('t-checkbox--disabled');
-
         });
 
         it('When readOnly attribute is applied to an item, that item should not be changed', () => {
-
             // Arrange
             const testValue = [];
             const testItems = [
@@ -429,100 +393,71 @@ describe('TCheckboxGroup', () => {
                 {text: 'ReadOnly', koreanText: '선택 불가 과일', value: 'readonly', value2: 'd2', readOnly: true},
             ];
 
-            render(
-                <TCheckboxGroup onChange={mockFn}
-                                value={testValue}
-                                items={testItems}
-                />,
-            );
+            render(<TCheckboxGroup onChange={mockFn} value={testValue} items={testItems} />);
 
             const checkboxButtons = screen.getAllByTestId('t-checkbox-root');
 
             // Assert
             expect(checkboxButtons[2]).toHaveClass('t-checkbox--read-only');
-
         });
 
-
         it('When textKey prop is applied, the text will have the key of that item', () => {
-
             // Arrange
             const testData = '사과';
             const testValue = [];
 
-            render(
-                <TCheckboxGroup onChange={mockFn}
-                                value={testValue}
-                                items={items}
-                                textKey={'koreanText'}
-                />,
-            );
-
+            render(<TCheckboxGroup onChange={mockFn} value={testValue} items={items} textKey={'koreanText'} />);
 
             const item = screen.getByText(testData);
 
             // Assert
             expect(item).toHaveTextContent(testData);
-
         });
 
         it('When valueKey prop is applied, the value will have the key of that item.', async () => {
-
             // Arrange
             const testValue = ['a'];
 
-            render(
-                <TCheckboxGroup onChange={mockFn}
-                                value={testValue}
-                                items={items}
-                                valueKey={'value2'}
-                />,
-            );
+            render(<TCheckboxGroup onChange={mockFn} value={testValue} items={items} valueKey={'value2'} />);
 
             const icons = screen.getAllByRole('img');
 
             // Assert
             expect(icons[0]).toHaveClass('t-checkbox__icon--check');
-
         });
 
         it('When labelTemplate prop is applied, it should be displayed on content area', () => {
-
             // Arrange
             const testData = 'a';
             const testValue = ['a'];
 
             render(
-                <TCheckboxGroup onChange={mockFn}
-                                value={testValue}
-                                items={items}
-                                valueKey={'value2'}
-                                labelTemplate={(item) => item.value2}
-                />,
+                <TCheckboxGroup
+                    onChange={mockFn}
+                    value={testValue}
+                    items={items}
+                    valueKey={'value2'}
+                    labelTemplate={(item) => item.value2}
+                />
             );
 
             const item = screen.getByText(testData);
 
             // Assert
             expect(item).toHaveTextContent(testData);
-
         });
 
         it('When values is changed, Be changed correctly', async () => {
-
             // Arrange
             const user = userEvent.setup();
 
             const CheckboxGroupTest = () => {
                 const [value, setValue] = useState([]);
 
-
-                return (
-                    <TCheckboxGroup value={value} onChange={setValue} items={items}/>
-                );
+                return <TCheckboxGroup value={value} onChange={setValue} items={items} />;
             };
 
-            render(<CheckboxGroupTest/>);
+            render(<CheckboxGroupTest />);
 
             const appleButton = screen.getByText(items[0].text);
             const bananaButton = screen.getByText(items[1].text);
@@ -544,7 +479,6 @@ describe('TCheckboxGroup', () => {
             // Assert
             expect(bananaExpectedCheckIcon).toHaveClass('t-checkbox__icon--check');
 
-
             // Act
             await user.click(appleButton);
 
@@ -556,16 +490,11 @@ describe('TCheckboxGroup', () => {
             // Act
             await user.click(bananaButton);
 
-
             const bananaExpectedUncheckIcon = bananaButton?.parentElement?.children[0];
             /* eslint-disable testing-library/no-node-access */
 
             // Assert
             expect(bananaExpectedUncheckIcon).toHaveClass('t-checkbox__icon--uncheck');
-
         });
-
-
     });
-
 });
