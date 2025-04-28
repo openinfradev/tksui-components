@@ -1,132 +1,128 @@
 'use client';
 
-import {CSSProperties, forwardRef, Ref, useImperativeHandle, useRef} from 'react';
+import type {CSSProperties, Ref} from 'react';
+import {forwardRef, useImperativeHandle, useRef} from 'react';
+
 import useValidator from '@/common/hook/UseValidator';
+import type {TRadioGroupProps, TRadioGroupRef, TRadioGroupValue, TRadioValue} from '@/components';
 import TRadio from '../radio/TRadio';
-import {TRadioGroupProps, TRadioGroupRef, TRadioGroupValue, TRadioValue} from '@/components';
 
+const TRadioGroup = forwardRef(
+    ({textKey = 'text', valueKey = 'value', lazy = true, ...restProps}: TRadioGroupProps, ref: Ref<TRadioGroupRef>) => {
+        // region [Hooks]
 
-const TRadioGroup = forwardRef(({
-    textKey = 'text',
-    valueKey = 'value',
-    lazy = true,
-    ...restProps
-}: TRadioGroupProps, ref: Ref<TRadioGroupRef>) => {
+        const props: TRadioGroupProps = {textKey, valueKey, lazy, ...restProps};
 
-    // region [Hooks]
+        const validator = useValidator(props.value, props.rules, props.successMessage);
+        const rootRef = useRef<HTMLDivElement>(null);
 
-    const props: TRadioGroupProps = {textKey, valueKey, lazy, ...restProps};
+        useImperativeHandle(ref, () => ({
+            validate() {
+                return validator.validate();
+            },
+            scrollToComponent(options: ScrollIntoViewOptions = {behavior: 'smooth', block: 'center'}) {
+                rootRef?.current?.scrollIntoView(options);
+            },
+        }));
 
-    const validator = useValidator(props.value, props.rules, props.successMessage);
-    const rootRef = useRef<HTMLDivElement>(null);
+        // endregion
 
+        // region [Styles]
 
-    useImperativeHandle(ref, () => ({
-        validate() { return validator.validate(); },
-        scrollToComponent(options: ScrollIntoViewOptions = {behavior: 'smooth', block: 'center'}) {
-            rootRef?.current?.scrollIntoView(options);
-        },
-    }));
+        function getRootClass(): string {
+            const clazz: string[] = [];
 
-    // endregion
+            if (props.className) {
+                clazz.push(props.className);
+            }
+            if (props.disabled) {
+                clazz.push('t-radio-group--disabled');
+            }
+            if (!validator.result) {
+                clazz.push('t-radio-group--failure');
+            }
+            if (validator.result && validator.message) {
+                clazz.push('t-radio-group--success');
+            }
 
-
-    // region [Styles]
-
-    function getRootClass(): string {
-        const clazz: string[] = [];
-
-        if (props.className) { clazz.push(props.className); }
-        if (props.disabled) { clazz.push('t-radio-group--disabled'); }
-        if (!validator.result) { clazz.push('t-radio-group--failure'); }
-        if (validator.result && validator.message) { clazz.push('t-radio-group--success'); }
-
-        return clazz.join(' ');
-    }
-
-    function getRootStyle(): CSSProperties {
-        let style: CSSProperties = {};
-
-        if (props.style) { style = {...props.style}; }
-
-        return style;
-    }
-
-    // endregion
-
-
-    // region [Events]
-
-    function onSelectRadio(value: TRadioValue): void {
-
-        emitChange(value);
-    }
-
-    function onFocus(): void {
-        if (props.rules) {
-            validator.clearValidation();
+            return clazz.join(' ');
         }
-    }
 
-    function onBlur(event): void {
-        const next = event.relatedTarget;
+        function getRootStyle(): CSSProperties {
+            let style: CSSProperties = {};
 
-        if (props.rules && !props.lazy && !rootRef.current.contains(next)) {
-            validator.validate();
+            if (props.style) {
+                style = {...props.style};
+            }
+
+            return style;
         }
-    }
 
-    // endregion
+        // endregion
 
+        // region [Events]
 
-    // region [ETC]
+        function onSelectRadio(value: TRadioValue): void {
+            emitChange(value);
+        }
 
+        function onFocus(): void {
+            if (props.rules) {
+                validator.clearValidation();
+            }
+        }
 
-    function emitChange(value: TRadioGroupValue): void {
-        props.onChange(value);
-    }
+        function onBlur(event): void {
+            const next = event.relatedTarget;
 
+            if (props.rules && !props.lazy && !rootRef.current.contains(next)) {
+                validator.validate();
+            }
+        }
 
-    // endregion
+        // endregion
 
+        // region [ETC]
 
-    // region [Templates]
+        function emitChange(value: TRadioGroupValue): void {
+            props.onChange(value);
+        }
 
-    return (
-        <div className={`t-radio-group ${getRootClass()}`}
-             style={getRootStyle()}
-             ref={rootRef}
-             tabIndex={props.disabled ? -1 : 0}
-             onFocus={onFocus}
-             onBlur={onBlur}
-             id={props.id}
-             data-testid={'t-radio-group-root'}>
-            <div className={'t-radio-group__container'}>
-                {
-                    props.items.map((item, index) => (
-                        <TRadio key={index}
-                                positiveValue={item[props.valueKey]}
-                                selected={props.value === item[props.valueKey]}
-                                disabled={props.disabled || item.disabled}
-                                onSelect={onSelectRadio}
+        // endregion
+
+        // region [Templates]
+
+        return (
+            <div
+                className={`t-radio-group ${getRootClass()}`}
+                style={getRootStyle()}
+                ref={rootRef}
+                tabIndex={props.disabled ? -1 : 0}
+                onFocus={onFocus}
+                onBlur={onBlur}
+                id={props.id}
+                data-testid={'t-radio-group-root'}
+            >
+                <div className={'t-radio-group__container'}>
+                    {props.items.map((item, index) => (
+                        <TRadio
+                            key={index}
+                            positiveValue={item[props.valueKey]}
+                            selected={props.value === item[props.valueKey]}
+                            disabled={props.disabled || item.disabled}
+                            onSelect={onSelectRadio}
                         >
-
                             {props.labelTemplate ? props.labelTemplate(item) : item[props.textKey]}
                         </TRadio>
-                    ))
-                }
+                    ))}
+                </div>
+                {props.rules && <div className={'t-radio-group__message'}>{validator.message}</div>}
             </div>
-            {
-                props.rules
-                && <div className={'t-radio-group__message'}>{validator.message}</div>
-            }
-        </div>
-    );
+        );
 
-    // endregion
-
-
-});
+        // endregion
+    }
+);
 
 // TRadioGroup.defaultProps = {
 //     textKey = 'text',
@@ -135,6 +131,5 @@ const TRadioGroup = forwardRef(({
 // };
 
 TRadioGroup.displayName = 'TRadioGroup';
-
 
 export default TRadioGroup;

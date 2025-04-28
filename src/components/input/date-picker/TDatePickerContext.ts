@@ -1,26 +1,32 @@
 'use client';
 
-import {createContext, Dispatch, SetStateAction} from 'react';
-import {TDatePickerMode, TDatePickerBounds, TDateValue, ViewInfoType} from '~/input/date-picker/TDatePicker.interface';
+import type {Dispatch, SetStateAction} from 'react';
+import {createContext} from 'react';
 
+import type {
+    TDatePickerBounds,
+    TDatePickerMode,
+    TDateValue,
+    ViewInfoType,
+} from '~/input/date-picker/TDatePicker.interface';
 
 export interface TDatePickerContext {
-    nowDate: () => TDateValue,
+    nowDate: () => TDateValue;
 
-    dateValue: string,
+    dateValue: string;
 
-    displayDateObject: TDateValue,
-    setDisplayDateObject: Dispatch<SetStateAction<TDateValue>>
+    displayDateObject: TDateValue;
+    setDisplayDateObject: Dispatch<SetStateAction<TDateValue>>;
 
-    onChangeValue: (date: string) => void,
-    viewMode: ViewInfoType,
-    changeViewMode: (view: TDatePickerMode) => void,
+    onChangeValue: (date: string) => void;
+    viewMode: ViewInfoType;
+    changeViewMode: (view: TDatePickerMode) => void;
 
-    dateRange: TDatePickerBounds,
-    validDateRange: (date: string) => boolean
+    dateRange: TDatePickerBounds;
+    validDateRange: (date: string) => boolean;
 
-    parseDateString: (date: string) => TDateValue,
-    parseDateObject: (dateObj: TDateValue) => string,
+    parseDateString: (date: string) => TDateValue;
+    parseDateObject: (dateObj: TDateValue) => string;
 }
 
 export const datePickerConText = createContext<TDatePickerContext>({
@@ -42,4 +48,3 @@ export const datePickerConText = createContext<TDatePickerContext>({
     parseDateObject: null,
 });
 export default datePickerConText;
-

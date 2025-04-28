@@ -1,19 +1,20 @@
 'use client';
 
-import '@material-symbols/font-300/outlined.css';
+import type {CSSProperties, KeyboardEvent, MouseEvent, ReactElement} from 'react';
+import {memo, useCallback, useMemo} from 'react';
 
-import {CSSProperties, KeyboardEvent, memo, MouseEvent, ReactElement, useCallback, useMemo} from 'react';
-import {iconSize, TIconProps, TIconSource} from './TIcon.interface';
-import TOriginalImage from './TIconOriginal';
 import TooltipUtil from '@/common/util/TooltipUtil';
+import type {TIconProps, TIconSource} from './TIcon.interface';
+import {iconSize} from './TIcon.interface';
+import TOriginalImage from './TIconOriginal';
+
+import '@material-symbols/font-300/outlined.css';
 
 /**
  * We are using Google Material Symbols {@link https://fonts.google.com/icons?icon.set=Material+Symbols} <br/>
  * If you want to know the list of icons, please visit the link
  */
 const TIcon = (props: TIconProps): ReactElement => {
-
-
     // region [Styles]
 
     const iconSource: TIconSource = useMemo((): TIconSource => {
@@ -24,26 +25,46 @@ const TIcon = (props: TIconProps): ReactElement => {
     }, [props.children]);
 
     const $_size = useMemo(() => {
-        if (props.size && props.size in iconSize) { return props.size; }
-        if (props.xsmall) { return 'xsmall'; }
-        if (props.small) { return 'small'; }
-        if (props.medium) { return 'medium'; }
-        if (props.large) { return 'large'; }
-        if (props.xlarge) { return 'xlarge'; }
+        if (props.size && props.size in iconSize) {
+            return props.size;
+        }
+        if (props.xsmall) {
+            return 'xsmall';
+        }
+        if (props.small) {
+            return 'small';
+        }
+        if (props.medium) {
+            return 'medium';
+        }
+        if (props.large) {
+            return 'large';
+        }
+        if (props.xlarge) {
+            return 'xlarge';
+        }
         return 'medium';
     }, [props.large, props.medium, props.size, props.small, props.xlarge, props.xsmall]);
 
     const rootClass: string = useMemo((): string => {
         const clazz = [];
-        if (props.className) { clazz.push(props.className); }
-        if (props.clickable) { clazz.push('t-icon--clickable'); }
-        if (props.disabled) { clazz.push('t-icon--disabled'); }
+        if (props.className) {
+            clazz.push(props.className);
+        }
+        if (props.clickable) {
+            clazz.push('t-icon--clickable');
+        }
+        if (props.disabled) {
+            clazz.push('t-icon--disabled');
+        }
 
         // Material icon
 
         if (iconSource === 'material') {
             clazz.push('t-icon-material');
-            if (props.fill) { clazz.push('t-icon-material--fill'); }
+            if (props.fill) {
+                clazz.push('t-icon-material--fill');
+            }
         } else {
             clazz.push('t-icon-original');
         }
@@ -57,7 +78,9 @@ const TIcon = (props: TIconProps): ReactElement => {
     const rootStyle: CSSProperties = useMemo((): CSSProperties => {
         let style: CSSProperties = {};
 
-        if (props.style) { style = {...props.style}; }
+        if (props.style) {
+            style = {...props.style};
+        }
 
         if (props.color && !props.disabled) {
             style.color = props.color;
@@ -72,59 +95,59 @@ const TIcon = (props: TIconProps): ReactElement => {
 
     // region [Events]
 
-    const onClickRoot = useCallback((event: MouseEvent<HTMLSpanElement>): void => {
-        if (props.disabled) {
-            return;
-        }
+    const onClickRoot = useCallback(
+        (event: MouseEvent<HTMLSpanElement>): void => {
+            if (props.disabled) {
+                return;
+            }
 
-        props.onClick?.(event);
-    }, [props]);
+            props.onClick?.(event);
+        },
+        [props]
+    );
 
-    const onKeyDown = useCallback((event: KeyboardEvent<HTMLInputElement>): void => {
-        if (props.disabled) {
-            return;
-        }
+    const onKeyDown = useCallback(
+        (event: KeyboardEvent<HTMLInputElement>): void => {
+            if (props.disabled) {
+                return;
+            }
 
-        if (event.key === 'Enter' && props.onKeyDownEnter) {
-            props.onKeyDownEnter(event);
-        }
+            if (event.key === 'Enter' && props.onKeyDownEnter) {
+                props.onKeyDownEnter(event);
+            }
 
-        if (event.key === ' ' && props.onKeyDownSpace) {
-            props.onKeyDownSpace(event);
-        }
+            if (event.key === ' ' && props.onKeyDownSpace) {
+                props.onKeyDownSpace(event);
+            }
 
-        if (props.onKeyDown) {
-            props.onKeyDown(event);
-        }
-    }, [props]);
-
+            if (props.onKeyDown) {
+                props.onKeyDown(event);
+            }
+        },
+        [props]
+    );
 
     // endregion
 
     // region [Templates]
 
     return (
-        <span className={`t-icon material-symbols-outlined ${rootClass}`}
-              tabIndex={(!props.disabled && (props.onKeyDownEnter || props.onKeyDownSpace)) ? 0 : -1}
-              {...TooltipUtil.convertToTooltipAttributes(props)}
-              onClick={onClickRoot}
-              onKeyDown={onKeyDown}
-              role={'img'}
-              aria-label={props.children}
-              style={rootStyle}
-              id={props.id}
+        <span
+            className={`t-icon material-symbols-outlined ${rootClass}`}
+            tabIndex={!props.disabled && (props.onKeyDownEnter || props.onKeyDownSpace) ? 0 : -1}
+            {...TooltipUtil.convertToTooltipAttributes(props)}
+            onClick={onClickRoot}
+            onKeyDown={onKeyDown}
+            role={'img'}
+            aria-label={props.children}
+            style={rootStyle}
+            id={props.id}
         >
-            {
-                (iconSource === 'original')
-                    ? (TOriginalImage[props.children])
-                    : props.children
-            }
+            {iconSource === 'original' ? TOriginalImage[props.children] : props.children}
         </span>
     );
 
     // endregion
-
 };
-
 
 export default memo(TIcon);

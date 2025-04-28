@@ -1,20 +1,17 @@
-import {ReactNode} from 'react';
-import {TBaseProps} from '@/common/base/TBase.interface';
+import type {ReactNode} from 'react';
 
+import type {TBaseProps} from '@/common/base/TBase.interface';
 
 export type TSwitchValue = boolean | string;
 
 export interface TSwitchProps extends TBaseProps {
-    
-    disabled?: boolean,
-    
-    value?: TSwitchValue,
-    positiveValue?: TSwitchValue,
-    negativeValue?: TSwitchValue,
-    
-    label?: ReactNode,
+    disabled?: boolean;
 
-    onChange(value: TSwitchValue): void,
-    
+    value?: TSwitchValue;
+    positiveValue?: TSwitchValue;
+    negativeValue?: TSwitchValue;
+
+    label?: ReactNode;
+
+    onChange(value: TSwitchValue): void;
 }
-

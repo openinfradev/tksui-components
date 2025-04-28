@@ -1,40 +1,29 @@
-import {CSSProperties, useMemo} from 'react';
-import {TIcon} from '~/icon';
-import {TCardProps} from '@/components';
+import type {CSSProperties} from 'react';
+import {useMemo} from 'react';
+
 import TooltipUtil from '@/common/util/TooltipUtil';
+import type {TCardProps} from '@/components';
 
-const TCard = ({
-    iconSize = 'xlarge',
-    ...restProps
-}: TCardProps) => {
+import {TIcon} from '~/icon';
 
+const TCard = ({iconSize = 'xlarge', ...restProps}: TCardProps) => {
     // region [Hooks]
 
     const props = {iconSize, ...restProps};
 
     // endregion
 
-
     // region [Templates]
 
+    // prettier-ignore
     const rootClass = useMemo((): string => {
         const clazz: string[] = [];
 
-        if (props.className) {
-            clazz.push(props.className);
-        }
-        if (props.dashed) {
-            clazz.push('t-card--dashed');
-        }
-        if (props.center) {
-            clazz.push('t-card--center');
-        }
-        if (props.clickable) {
-            clazz.push('t-card--clickable');
-        }
-        if (props.selected) {
-            clazz.push('t-card--selected');
-        }
+        if (props.className) {clazz.push(props.className);}
+        if (props.dashed) {clazz.push('t-card--dashed');}
+        if (props.center) {clazz.push('t-card--center');}
+        if (props.clickable) {clazz.push('t-card--clickable');}
+        if (props.selected) {clazz.push('t-card--selected');}
 
         return clazz.join(' ');
     }, [props.center, props.className, props.clickable, props.dashed, props.selected]);
@@ -58,26 +47,28 @@ const TCard = ({
     // endregion
 
     return (
-        <div className={`t-card ${rootClass}`}
-             style={rootStyle}
-             onClick={props.onClick}
-             {...TooltipUtil.convertToTooltipAttributes(props)}
-             data-testid={'card-root'}
+        <div
+            className={`t-card ${rootClass}`}
+            style={rootStyle}
+            onClick={props.onClick}
+            {...TooltipUtil.convertToTooltipAttributes(props)}
+            data-testid={'card-root'}
         >
-            {
-                props.icon && (
-                    <TIcon className={'t-card-top__icon'} size={props.iconSize}
-                           fill={props.iconFill} color={props.iconColor}>
-                        {props.icon}
-                    </TIcon>
-                )
-            }
+            {props.icon && (
+                <TIcon
+                    className={'t-card-top__icon'}
+                    size={props.iconSize}
+                    fill={props.iconFill}
+                    color={props.iconColor}
+                >
+                    {props.icon}
+                </TIcon>
+            )}
             {props.children}
         </div>
     );
 };
 
 TCard.displayName = 'TCard';
-
 
 export default TCard;

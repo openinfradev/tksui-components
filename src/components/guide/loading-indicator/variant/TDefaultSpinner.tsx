@@ -1,18 +1,18 @@
-import {CSSProperties, memo} from 'react';
+import type {CSSProperties} from 'react';
+import {memo} from 'react';
 
 interface TDefaultSpinnerProps {
-    style: CSSProperties
+    style: CSSProperties;
 }
 
 const childElementCount = 3;
 
 const TDefaultSpinner = ({style}: TDefaultSpinnerProps) => {
-
     return (
         <>
-            { Array.from({length: childElementCount}, (_, index) => (
-                <div key={index} className={'t-default-spinner__slice'} style={style}/>
-            )) }
+            {Array.from({length: childElementCount}, (_, index) => (
+                <div key={index} className={'t-default-spinner__slice'} style={style} />
+            ))}
         </>
     );
 };

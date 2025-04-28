@@ -1,52 +1,50 @@
+import type {AgGridReactProps} from 'ag-grid-react';
+import type {ReactElement, ReactNode} from 'react';
 
-import {ReactElement, ReactNode} from 'react';
-import {AgGridReactProps} from 'ag-grid-react';
-import {TBaseProps} from '@/common/base/TBase.interface';
-
+import type {TBaseProps} from '@/common/base/TBase.interface';
 
 export interface TPageRequestVO {
-    pageNumber?: number,
-    pageSize?: number,
+    pageNumber?: number;
+    pageSize?: number;
 }
 
 export interface TPageResponseVO extends TPageRequestVO {
-    totalPages: number,
-    totalRows: number,
+    totalPages: number;
+    totalRows: number;
 }
 
-
 export interface TDataGridProps extends TBaseProps, AgGridReactProps {
-    height?: string,
-    maxRowsWithoutScroll?: number,
-    minRowsVisible?: number,
+    height?: string;
+    maxRowsWithoutScroll?: number;
+    minRowsVisible?: number;
 
-    leftAction?: ReactElement
-    centerAction?: ReactElement,
-    rightAction?: ReactElement
+    leftAction?: ReactElement;
+    centerAction?: ReactElement;
+    rightAction?: ReactElement;
 
-    onChange?: (value: any[]) => void
-    noTotalRows?: boolean,
-    noPagination?: boolean,
-    noHeader?: boolean,
+    onChange?: (value: any[]) => void;
+    noTotalRows?: boolean;
+    noPagination?: boolean;
+    noHeader?: boolean;
 
-    paging?: TPageResponseVO,
+    paging?: TPageResponseVO;
 
-    noRowsOverlayComponent?: ReactNode,
+    noRowsOverlayComponent?: ReactNode;
 
-    noJumper?: boolean,
-    jumperText?: string,
+    noJumper?: boolean;
+    jumperText?: string;
 
     /**
      * @deprecated This prop will be removed before release v1.0.0.
      */
-    noDataText?: string,
+    noDataText?: string;
     /**
      * @deprecated This prop will be removed before release v1.0.0.
      */
     noDataContent?: {
-        title: string,
-        addButtonHandler(): void,
-    }
+        title: string;
+        addButtonHandler(): void;
+    };
 
-    onChangePageNumber?(value): void,
+    onChangePageNumber?(value): void;
 }

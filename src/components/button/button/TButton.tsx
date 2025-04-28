@@ -1,15 +1,17 @@
 'use client';
 
-import {CSSProperties, forwardRef, KeyboardEvent, memo, MouseEvent, Ref, useCallback, useImperativeHandle, useMemo, useRef} from 'react';
-import {TLoadingIndicator, ButtonSize, buttonSize, buttonVariant, TButtonProps, TButtonRef} from '@/components';
+import type {CSSProperties, KeyboardEvent, MouseEvent, Ref} from 'react';
+import {forwardRef, memo, useCallback, useImperativeHandle, useMemo, useRef} from 'react';
+
 import useRipple from '@/common/hook/UseRipple';
-import TIcon from '../../icon/TIcon';
 import TooltipUtil from '@/common/util/TooltipUtil';
+import type {ButtonSize, TButtonProps, TButtonRef} from '@/components';
+import {buttonSize, buttonVariant, TLoadingIndicator} from '@/components';
+import TIcon from '../../icon/TIcon';
+
 import themeToken from '~style/designToken/ThemeToken.module.scss';
 
-
 const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
-
     // region [Hooks]
 
     const rootRef = useRef<HTMLButtonElement>(null);
@@ -31,45 +33,57 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
 
     // region [Events]
 
-    const onMouseDown = useCallback((event: MouseEvent<HTMLButtonElement>): void => {
-        if (!props.disabled) {
-            ripple.register(event);
-        }
-    }, [props.disabled, ripple]);
+    const onMouseDown = useCallback(
+        (event: MouseEvent<HTMLButtonElement>): void => {
+            if (!props.disabled) {
+                ripple.register(event);
+            }
+        },
+        [props.disabled, ripple]
+    );
 
-    const onMouseUp = useCallback((event: MouseEvent<Element, globalThis.MouseEvent> | KeyboardEvent<Element>): void => {
-        ripple.remove();
-        if (!props.disabled && props.onClick) {
-            props.onClick(event);
-        }
-    }, [props, ripple]);
+    const onMouseUp = useCallback(
+        (event: MouseEvent<Element, globalThis.MouseEvent> | KeyboardEvent<Element>): void => {
+            ripple.remove();
+            if (!props.disabled && props.onClick) {
+                props.onClick(event);
+            }
+        },
+        [props, ripple]
+    );
 
     const onMouseLeave = useCallback((): void => {
         ripple.remove();
     }, [ripple]);
 
-    const onKeyDown = useCallback((event: KeyboardEvent): void => {
-        ripple.register(event);
-    }, [ripple]);
+    const onKeyDown = useCallback(
+        (event: KeyboardEvent): void => {
+            ripple.register(event);
+        },
+        [ripple]
+    );
 
-    const onKeyUp = useCallback((event: KeyboardEvent): void => {
-
-        if (event.key === 'Enter' || event.key === ' ') {
-            ripple.remove();
-            if (props.onClick) { props.onClick(event); }
-        }
-    }, [props, ripple]);
+    const onKeyUp = useCallback(
+        (event: KeyboardEvent): void => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                ripple.remove();
+                if (props.onClick) {
+                    props.onClick(event);
+                }
+            }
+        },
+        [props, ripple]
+    );
 
     const onClick = useCallback((event: MouseEvent) => {
-
         event.stopPropagation();
     }, []);
 
     // endregion
 
-
     // region [Styles]
 
+    // prettier-ignore
     const $_size = useMemo(() => {
         if (props.size && props.size in buttonSize) { return props.size; }
         if (props.xsmall) { return buttonSize.xsmall; }
@@ -80,8 +94,8 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
         return buttonSize.medium;
     }, [props.size, props.xsmall, props.small, props.medium, props.large, props.xlarge]);
 
-    const contentIconInfo = useMemo((): { render: boolean, size: ButtonSize } => {
-
+    // prettier-ignore
+    const contentIconInfo = useMemo((): {render: boolean; size: ButtonSize} => {
         const iconInfo = {render: true, size: undefined};
         if ($_size === 'medium') { return {...iconInfo, size: 'xsmall'}; }
         if ($_size === 'large') { return {...iconInfo, size: 'xsmall'}; }
@@ -90,6 +104,7 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
         return {...iconInfo, render: false};
     }, [$_size]);
 
+    // prettier-ignore
     const rootClass: string = useMemo(() => {
         const clazz = [];
 
@@ -109,20 +124,27 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
     const rootStyle: CSSProperties = useMemo(() => {
         let style: CSSProperties = {};
 
-        if (props.width) { style = {...style, width: props.width, minWidth: props.width}; }
-        if (props.style) { style = {...style, ...props.style}; }
+        if (props.width) {
+            style = {...style, width: props.width, minWidth: props.width};
+        }
+        if (props.style) {
+            style = {...style, ...props.style};
+        }
 
         return style;
     }, [props.style, props.width]);
 
     const loadingIndicatorSize = useMemo(() => {
-        if ($_size === 'xsmall' || $_size === 'small') { return 'xsmall'; }
-        if ($_size === 'xlarge') { return 'medium'; }
+        if ($_size === 'xsmall' || $_size === 'small') {
+            return 'xsmall';
+        }
+        if ($_size === 'xlarge') {
+            return 'medium';
+        }
         return 'small';
     }, [$_size]);
 
     const spinnerColor = useMemo(() => {
-
         if (props.variant === 'primary' || props.primary) {
             return themeToken.tPrimaryColor;
         }
@@ -138,34 +160,33 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
 
     // endregion
 
-
     return (
-        <button className={`t-button ${rootClass}`}
-                style={rootStyle}
-                onMouseDown={onMouseDown}
-                onMouseUp={onMouseUp}
-                onMouseLeave={onMouseLeave}
-                onKeyDown={onKeyDown}
-                onKeyUp={onKeyUp}
-                onClick={onClick}
-                disabled={props.disabled}
-                tabIndex={(props.disabled || props.loading) ? -1 : 0}
-                {...TooltipUtil.convertToTooltipAttributes(props)}
-                ref={rootRef}>
-            {
-                !props.loading
-                    ? (
-                        <div className={'t-button__content'}>
-                            {
-                                props.icon && contentIconInfo.render && (
-                                    <TIcon size={contentIconInfo.size} className={'t-button__content__icon'}>{props.icon}</TIcon>
-                                )
-                            }
-                            {props.children}
-                        </div>
-                    )
-                    : (<TLoadingIndicator size={loadingIndicatorSize} color={spinnerColor}/>)
-            }
+        <button
+            className={`t-button ${rootClass}`}
+            style={rootStyle}
+            onMouseDown={onMouseDown}
+            onMouseUp={onMouseUp}
+            onMouseLeave={onMouseLeave}
+            onKeyDown={onKeyDown}
+            onKeyUp={onKeyUp}
+            onClick={onClick}
+            disabled={props.disabled}
+            tabIndex={props.disabled || props.loading ? -1 : 0}
+            {...TooltipUtil.convertToTooltipAttributes(props)}
+            ref={rootRef}
+        >
+            {!props.loading ? (
+                <div className={'t-button__content'}>
+                    {props.icon && contentIconInfo.render && (
+                        <TIcon size={contentIconInfo.size} className={'t-button__content__icon'}>
+                            {props.icon}
+                        </TIcon>
+                    )}
+                    {props.children}
+                </div>
+            ) : (
+                <TLoadingIndicator size={loadingIndicatorSize} color={spinnerColor} />
+            )}
         </button>
     );
 });

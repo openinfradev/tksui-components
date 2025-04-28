@@ -1,22 +1,19 @@
-import {ReactNode} from 'react';
-import {TBaseProps} from '@/common/base/TBase.interface';
+import type {ReactNode} from 'react';
 
+import type {TBaseProps} from '@/common/base/TBase.interface';
 
 export type TPageMode = 'read' | 'write' | 'update';
 
 export const contentDirection = {tb: 'top-bottom', lr: 'left-right'} as const;
-type contentDirection = typeof contentDirection[keyof typeof contentDirection];
-
+type contentDirectionType = (typeof contentDirection)[keyof typeof contentDirection];
 
 export interface TPageProps extends TBaseProps {
-    children: ReactNode,
+    children: ReactNode;
 
-    title?: string,
+    title?: string;
 
-    infoPanelTitle?: string,
-    infoPanelContent?: ReactNode,
+    infoPanelTitle?: string;
+    infoPanelContent?: ReactNode;
 
-    contentDirection?: contentDirection,
-
+    contentDirection?: contentDirectionType;
 }
-

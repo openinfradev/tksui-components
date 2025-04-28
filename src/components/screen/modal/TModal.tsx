@@ -1,68 +1,75 @@
 'use client';
 
-import React, {memo, MouseEvent, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState} from 'react';
+import type {MouseEvent} from 'react';
+import React, {memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState} from 'react';
 import {createPortal} from 'react-dom';
 import ReactModal from 'react-modal';
 
-import {modalSize, TIcon, TModalProps} from '@/components';
+import type {TModalProps} from '@/components';
+import {modalSize, TIcon} from '@/components';
+
 import themeToken from '~style/designToken/ThemeToken.module.scss';
 
-const TModal = ({
-    appId = 'root',
-    portalId,
-    onRequestClose,
-    ...restProps
-}: TModalProps) => {
-
+const TModal = ({appId = 'root', portalId, onRequestClose, ...restProps}: TModalProps) => {
     // region [Hooks]
 
-    const props:TModalProps = {appId, portalId, onRequestClose, ...restProps};
+    const props: TModalProps = {appId, portalId, onRequestClose, ...restProps};
 
     const modalRef = useRef(null);
-
-    const documentRootRef = useRef<HTMLElement>(null);
 
     const [documentRoot, setDocumentRoot] = useState<HTMLElement | null>(null);
 
     // endregion
 
-
     // region [Privates]
 
-    const closeModal = useCallback((e: MouseEvent) => {
-
-        onRequestClose(e);
-    }, [onRequestClose]);
+    const closeModal = useCallback(
+        (e: MouseEvent) => {
+            onRequestClose(e);
+        },
+        [onRequestClose]
+    );
 
     const parentSelector = useMemo(() => {
-
-        if(portalId) {
+        if (portalId) {
             return () => document.querySelector(`#${portalId}`) as HTMLElement;
         }
 
         return undefined;
-
-    }, [portalId])
+    }, [portalId]);
 
     // endregion
-
 
     // region [Styles]
 
     const $_size = useMemo(() => {
-        if (props.size) { return props.size; }
-        if (props.small) { return modalSize.sm; }
-        if (props.medium) { return modalSize.md; }
-        if (props.large) { return modalSize.lg; }
-        if (props.xlarge) { return modalSize.xlg; }
-        if (props.xxlarge) { return modalSize.xxlg; }
+        if (props.size) {
+            return props.size;
+        }
+        if (props.small) {
+            return modalSize.sm;
+        }
+        if (props.medium) {
+            return modalSize.md;
+        }
+        if (props.large) {
+            return modalSize.lg;
+        }
+        if (props.xlarge) {
+            return modalSize.xlg;
+        }
+        if (props.xxlarge) {
+            return modalSize.xxlg;
+        }
         return modalSize.md;
     }, [props.large, props.medium, props.size, props.small, props.xlarge, props.xxlarge]);
 
     const bodyClassName = useMemo(() => {
         const clazz: string[] = [];
 
-        if (props.bodyClassName) { clazz.push(props.bodyClassName); }
+        if (props.bodyClassName) {
+            clazz.push(props.bodyClassName);
+        }
         clazz.push(`t-modal__overlay__body--${$_size}`);
 
         return clazz.join(' ');
@@ -76,30 +83,27 @@ const TModal = ({
         (e: MouseEvent) => closeModal(e),
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        [],
+        []
     );
 
-
     // endregion
-
 
     // region [Effect]
 
     useLayoutEffect(() => {
-
         const rootElement: HTMLElement = document.getElementById(props.appId);
 
         setDocumentRoot(rootElement);
         ReactModal.setAppElement(rootElement);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     // endregion
 
-
-    return documentRoot && createPortal(
-        (
+    return (
+        documentRoot &&
+        createPortal(
             // Official document: https://reactcommunity.org/react-modal/
             <ReactModal
                 ref={modalRef}
@@ -129,24 +133,21 @@ const TModal = ({
                 </TIcon>
                 {/* Modal Header */}
                 <header className={'t-modal__overlay__body__header'}>
-                    {
-                        props.header ? props.header : <h2 className={'t-modal__overlay__body__header__text'}>{props.title}</h2>
-                    }
+                    {props.header ? (
+                        props.header
+                    ) : (
+                        <h2 className={'t-modal__overlay__body__header__text'}>{props.title}</h2>
+                    )}
                 </header>
 
                 {/* Modal Content */}
-                <section className={'t-modal__overlay__body__content'}>
-                    {props.children}
-                </section>
+                <section className={'t-modal__overlay__body__content'}>{props.children}</section>
 
                 {/* Modal Footer */}
-                <footer className={'t-modal__overlay__body__footer'}>
-                    {props.footer}
-                </footer>
-
-            </ReactModal>
-        ),
-        documentRoot,
+                <footer className={'t-modal__overlay__body__footer'}>{props.footer}</footer>
+            </ReactModal>,
+            documentRoot
+        )
     );
 };
 

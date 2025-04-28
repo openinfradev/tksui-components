@@ -1,41 +1,38 @@
-import {CSSProperties, useMemo, memo} from 'react';
-import {TLoadingIndicatorProps} from '~/guide/loading-indicator/TLoadingIndicator.interface';
+import type {CSSProperties} from 'react';
+import {memo, useMemo} from 'react';
+
+import type {TLoadingIndicatorProps} from '~/guide/loading-indicator/TLoadingIndicator.interface';
 import TDefaultSpinner from '~/guide/loading-indicator/variant/TDefaultSpinner';
 import TSunSpinner from '~/guide/loading-indicator/variant/TSunSpinner';
 
-
-const TLoadingIndicator = ({
-    variant = 'default',
-    size = 'medium',
-    ...restProps
-}: TLoadingIndicatorProps) => {
-
-
+const TLoadingIndicator = ({variant = 'default', size = 'medium', ...restProps}: TLoadingIndicatorProps) => {
     // region [Hooks]
 
     const props: TLoadingIndicatorProps = {variant, size, ...restProps};
-
 
     // endregion
 
     // region [Styles]
 
     const rootClass: string = useMemo((): string => {
-
         const clazz: string[] = [];
 
-        if (props.className) { clazz.push(props.className); }
+        if (props.className) {
+            clazz.push(props.className);
+        }
 
-        if (props.variant) { clazz.push(`t-loading-indicator--${props.variant}`); }
+        if (props.variant) {
+            clazz.push(`t-loading-indicator--${props.variant}`);
+        }
 
-        if (props.variant || props.size) { clazz.push(`t-loading-indicator--${props.size}`); }
+        if (props.variant || props.size) {
+            clazz.push(`t-loading-indicator--${props.size}`);
+        }
 
         return clazz.join(' ');
     }, [props.className, props.size, props.variant]);
 
-
     const rootStyle: CSSProperties = useMemo((): CSSProperties => {
-
         const style = {...props.style};
 
         if (props.variant === 'sun' && props.color) {
@@ -45,9 +42,7 @@ const TLoadingIndicator = ({
         return style;
     }, [props.color, props.style, props.variant]);
 
-
     const spinnerStyle: CSSProperties = useMemo(() => {
-
         const style = {} as CSSProperties;
 
         if (props.variant === 'default' && props.color) {
@@ -59,21 +54,23 @@ const TLoadingIndicator = ({
 
     // endregion
 
-
     // region [Templates]
     // endregion
 
-
     return (
-        <div id={props.id} className={`t-loading-indicator ${rootClass}`} style={rootStyle} data-testid={'t-loading-indicator-root'}>
+        <div
+            id={props.id}
+            className={`t-loading-indicator ${rootClass}`}
+            style={rootStyle}
+            data-testid={'t-loading-indicator-root'}
+        >
             <div className='t-loading-indicator__body'>
-                {props.variant === 'default' && <TDefaultSpinner style={spinnerStyle}/>}
-                {props.variant === 'sun' && <TSunSpinner/>}
+                {props.variant === 'default' && <TDefaultSpinner style={spinnerStyle} />}
+                {props.variant === 'sun' && <TSunSpinner />}
             </div>
-            {props.message && (<p className={'t-loading-indicator__message'}>{props.message}</p>)}
+            {props.message && <p className={'t-loading-indicator__message'}>{props.message}</p>}
         </div>
     );
 };
-
 
 export default memo(TLoadingIndicator);

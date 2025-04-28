@@ -1,35 +1,37 @@
-import {ReactNode} from 'react';
-import {TBaseProps, TBaseTooltipProps} from '@/common/base/TBase.interface';
-import {TIconSize} from '~/icon';
+import type {ReactNode} from 'react';
+
+import type {TBaseProps, TBaseTooltipProps} from '@/common/base/TBase.interface';
+
+import type {TIconSize} from '~/icon';
 
 export interface TCardProps extends TBaseProps, TBaseTooltipProps {
-    children?: ReactNode,
-    width?: string,
-    height?: string,
-    dashed?: boolean,
-    center?: boolean,
+    children?: ReactNode;
+    width?: string;
+    height?: string;
+    dashed?: boolean;
+    center?: boolean;
 
-    icon?: string
-    iconFill?: boolean,
-    iconSize?: TIconSize,
-    iconColor?: string,
+    icon?: string;
+    iconFill?: boolean;
+    iconSize?: TIconSize;
+    iconColor?: string;
 
-    selected?: boolean,
-    clickable?: boolean,
+    selected?: boolean;
+    clickable?: boolean;
 
-    onClick?: () => void,
+    onClick?: () => void;
 }
 
 export interface TCardHeaderProps extends TBaseProps {
-    title?: string,
-    subTitle?: string,
+    title?: string;
+    subTitle?: string;
 
-    icon?: string
-    iconFill?: boolean,
-    iconSize?: TIconSize,
-    iconColor?: string,
+    icon?: string;
+    iconFill?: boolean;
+    iconSize?: TIconSize;
+    iconColor?: string;
 }
 
 export interface TCardContentProps extends TBaseProps {
-    children: ReactNode,
+    children: ReactNode;
 }

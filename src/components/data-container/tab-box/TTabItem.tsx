@@ -1,12 +1,13 @@
 'use client';
 
-import {MouseEvent, useCallback, useContext, useMemo, useRef} from 'react';
-import {TTabItemProps} from '@/components';
-import TTabBoxContext from './TTabBoxContext';
+import type {MouseEvent} from 'react';
+import {useCallback, useContext, useMemo, useRef} from 'react';
+
 import useRipple from '@/common/hook/UseRipple';
+import type {TTabItemProps} from '@/components';
+import TTabBoxContext from './TTabBoxContext';
 
 const TTabItem = (props: TTabItemProps) => {
-
     // region [Hooks]
 
     const {value, index, label} = props;
@@ -16,12 +17,14 @@ const TTabItem = (props: TTabItemProps) => {
 
     // endregion
 
-
     // region [Events]
 
-    const onMouseDown = useCallback((event: MouseEvent<HTMLLIElement>): void => {
-        ripple.register(event);
-    }, [ripple]);
+    const onMouseDown = useCallback(
+        (event: MouseEvent<HTMLLIElement>): void => {
+            ripple.register(event);
+        },
+        [ripple]
+    );
 
     const onMouseUp = useCallback((): void => {
         ripple.remove();
@@ -50,9 +53,9 @@ const TTabItem = (props: TTabItemProps) => {
 
     // endregion
 
-
     return (
-        <li ref={itemRef}
+        <li
+            ref={itemRef}
             className={`t-tab-item-label ${rootClass}`}
             onMouseDown={onMouseDown}
             onMouseUp={onMouseUp}
@@ -63,6 +66,5 @@ const TTabItem = (props: TTabItemProps) => {
         </li>
     );
 };
-
 
 export default TTabItem;

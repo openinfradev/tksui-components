@@ -1,14 +1,14 @@
 'use client';
 
 import {createContext} from 'react';
-import {RowVerticalAlign} from '@/components';
 
+import type {RowVerticalAlign} from '@/components';
 
 export interface TFormSectionContext {
-    column: number,
-    labelWidth: string,
+    column: number;
+    labelWidth: string;
 
-    rowVerticalAlign: RowVerticalAlign
+    rowVerticalAlign: RowVerticalAlign;
 }
 
 export const TFormSectionContext = createContext<TFormSectionContext>({
@@ -16,8 +16,6 @@ export const TFormSectionContext = createContext<TFormSectionContext>({
     labelWidth: '104px',
 
     rowVerticalAlign: 'middle',
-
 });
 
 export default TFormSectionContext;
-

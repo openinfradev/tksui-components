@@ -1,5 +1,4 @@
 import {act, render, renderHook, screen} from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import {useRef} from 'react';
 
 import TChip from '~/input/chip/TChip';

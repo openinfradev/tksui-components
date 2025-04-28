@@ -1,19 +1,18 @@
-import {CSSProperties} from 'react';
+import type {CSSProperties} from 'react';
+
 import TFormColumn from './TFormColumn';
-import {TFormColumnProps, TFormRowProps} from '~/data-container/form/TForm.interface';
 
-const TFormRow = ({
-    labelVerticalAlign,
-    ...restProps
-}: TFormRowProps) => {
+import type {TFormColumnProps, TFormRowProps} from '~/data-container/form/TForm.interface';
 
+const TFormRow = ({labelVerticalAlign, ...restProps}: TFormRowProps) => {
     const props: TFormRowProps = {labelVerticalAlign, ...restProps};
-
 
     const rootClass = (): string => {
         const clazz: string[] = [];
 
-        if (props.className) { clazz.push(props.className); }
+        if (props.className) {
+            clazz.push(props.className);
+        }
 
         return clazz.join(' ');
     };
@@ -23,29 +22,20 @@ const TFormRow = ({
     const formColumn = (columnProps: TFormColumnProps) => TFormColumn(columnProps);
 
     const items = props.columns.map((item, index) => {
-
-        return (
-            formColumn({
-                ...item,
-                key: `${props.key}${index}`,
-                column: props.column,
-                labelWidth: props.labelWidth,
-                labelVerticalAlign,
-            })
-        );
+        return formColumn({
+            ...item,
+            key: `${props.key}${index}`,
+            column: props.column,
+            labelWidth: props.labelWidth,
+            labelVerticalAlign,
+        });
     });
 
-
     return (
-        <div
-            className={`t-form-row ${rootClass()}`}
-            style={rootStyle}
-            key={props.key}
-        >
+        <div className={`t-form-row ${rootClass()}`} style={rootStyle} key={props.key}>
             {items}
         </div>
     );
-
 };
 
 export default TFormRow;

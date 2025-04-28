@@ -1,18 +1,17 @@
 'use client';
 
 import {createContext} from 'react';
-import {TTabBoxValue} from './TTabBox.interface';
+
+import type {TTabBoxValue} from '@/components';
 
 type tabBoxContext = {
-    activeTab: TTabBoxValue,
-    onChangeActiveTab: (activeTab: TTabBoxValue) => void,
-}
+    activeTab: TTabBoxValue;
+    onChangeActiveTab: (activeTab: TTabBoxValue) => void;
+};
 
-export const tabBoxContext = createContext<tabBoxContext>(
-    {
-        activeTab: 0,
-        onChangeActiveTab: null,
-    },
-);
+export const tabBoxContext = createContext<tabBoxContext>({
+    activeTab: 0,
+    onChangeActiveTab: null,
+});
 
 export default tabBoxContext;

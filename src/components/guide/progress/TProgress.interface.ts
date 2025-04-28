@@ -1,9 +1,8 @@
-import {TBaseProps} from '@/common/base/TBase.interface';
+import type {TBaseProps} from '@/common/base/TBase.interface';
 
 export interface TProgressProps extends TBaseProps {
-    isOpen?: boolean,
-    onRequestClose?: () => void,
-    message?: string,
-    appId?: string,
+    isOpen?: boolean;
+    onRequestClose?: () => void;
+    message?: string;
+    appId?: string;
 }
-

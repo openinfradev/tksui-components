@@ -1,39 +1,36 @@
-import {KeyboardEvent} from 'react';
-import {TValidatorProps} from '@/common/validator/TValidator.interface';
-import {TBaseProps} from '@/common/base/TBase.interface';
+import type {KeyboardEvent} from 'react';
 
-const numberFieldType = ['outline', 'underline'] as const;
-type numberFieldType = typeof numberFieldType[number];
+import type {TBaseProps} from '@/common/base/TBase.interface';
+import type {TValidatorProps} from '@/common/validator/TValidator.interface';
+
+const numberField = ['outline', 'underline'] as const;
+type numberFieldType = (typeof numberField)[number];
 
 export interface TNumberFieldProps extends TBaseProps, TValidatorProps {
+    type?: numberFieldType;
 
+    min?: number;
+    max?: number;
+    step?: number;
 
-    type?: numberFieldType,
+    disabled?: boolean;
+    required?: boolean;
 
-    min?: number,
-    max?: number,
-    step?: number,
+    placeholder?: string;
+    label?: string;
+    hint?: string;
+    value: string;
+    width?: string;
 
-    disabled?: boolean,
-    required?: boolean,
+    onChange(value: string): void;
 
-    placeholder?: string,
-    label?: string,
-    hint?: string,
-    value: string,
-    width?: string,
-
-    onChange(value: string): void,
-
-    onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void,
-    onKeyDownEnter?: (event: KeyboardEvent<HTMLInputElement>) => void,
+    onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
+    onKeyDownEnter?: (event: KeyboardEvent<HTMLInputElement>) => void;
 }
 
-
 export interface TNumberFieldRef {
-
-    focus(): void,
-    validate(): true | string,
-    manualValidate(result: boolean, message?: string): void,
-    scrollToComponent(): void,
+    focus(): void;
+    validate(): true | string;
+    manualValidate(result: boolean, message?: string): void;
+    scrollToComponent(): void;
 }

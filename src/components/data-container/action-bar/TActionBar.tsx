@@ -1,16 +1,14 @@
-import {CSSProperties, memo, useMemo} from 'react';
-import {TActionBarProps} from '@/components';
+import type {CSSProperties} from 'react';
+import {memo, useMemo} from 'react';
+
+import type {TActionBarProps} from '@/components';
 
 function TActionBar(props: TActionBarProps) {
-
     // region [Styles]
 
     const rootClass = useMemo((): string => {
-
-        return (props.className) ? props.className : '';
-
+        return props.className ? props.className : '';
     }, [props.className]);
-
 
     const rootStyle: CSSProperties = useMemo(() => {
         const style: CSSProperties = {...props.style};
@@ -29,39 +27,28 @@ function TActionBar(props: TActionBarProps) {
     // endregion
 
     return (
-
         <div className={`t-action-bar ${rootClass}`} style={rootStyle} id={props.id} data-testid={'t-action-bar-root'}>
-            {
-
-                (props.leftAction || props.rightAction || props.centerAction) && (
-                    <div className={`t-action-bar__container ${containerClass}`} data-testid={'t-action-bar__container'}>
-                        {
-                            (props.leftAction || props.rightAction) && (
-                                <div className={'t-action-bar__container__left-action'}>
-                                    {props.leftAction && (props.leftAction)}
-                                </div>
-                            )
-                        }
-                        {
-                            props.centerAction && (
-                                <div className={'t-action-bar__container__center-action'}>
-                                    {props.centerAction && (props.centerAction)}
-                                </div>
-                            )
-                        }
-                        {
-                            (props.leftAction || props.rightAction) && (
-                                <div className={'t-action-bar__container__right-action'}>
-                                    {props.rightAction && (props.rightAction)}
-                                </div>
-                            )
-                        }
-                    </div>
-                )
-            }
+            {(props.leftAction || props.rightAction || props.centerAction) && (
+                <div className={`t-action-bar__container ${containerClass}`} data-testid={'t-action-bar__container'}>
+                    {(props.leftAction || props.rightAction) && (
+                        <div className={'t-action-bar__container__left-action'}>
+                            {props.leftAction && props.leftAction}
+                        </div>
+                    )}
+                    {props.centerAction && (
+                        <div className={'t-action-bar__container__center-action'}>
+                            {props.centerAction && props.centerAction}
+                        </div>
+                    )}
+                    {(props.leftAction || props.rightAction) && (
+                        <div className={'t-action-bar__container__right-action'}>
+                            {props.rightAction && props.rightAction}
+                        </div>
+                    )}
+                </div>
+            )}
         </div>
     );
-
 }
 
 export default memo(TActionBar);

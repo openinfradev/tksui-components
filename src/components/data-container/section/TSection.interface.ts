@@ -1,15 +1,15 @@
-import {ReactElement, ReactNode} from 'react';
-import {TBaseProps} from '@/common/base/TBase.interface';
+import type {ReactElement, ReactNode} from 'react';
+
+import type {TBaseProps} from '@/common/base/TBase.interface';
 
 export interface TSectionProps extends TBaseProps {
-
     children: ReactNode;
 
-    label?: string,
-    customLabel?: ReactElement,
+    label?: string;
+    customLabel?: ReactElement;
 
-    leftAction?: ReactElement,
-    rightAction?: ReactElement,
+    leftAction?: ReactElement;
+    rightAction?: ReactElement;
 
-    contentClassName?: string,
+    contentClassName?: string;
 }
