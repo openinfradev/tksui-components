@@ -20,6 +20,6 @@ jobs:
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.COMPONENT_SHOWCASE }}
+          github_token: ${{ secrets.FRONT_SECRET }}
           publish_dir: ./storybook-static
-          jekyll: true
+          enable_jekyll: 'true'
