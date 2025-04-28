@@ -586,7 +586,7 @@ describe('TCheckbox', () => {
                 <TCheckbox
                     value={true}
                     negativeValue={testNegativeValue}
-                    onChange={(negative, positive) => {
+                    onChange={(negative) => {
                         testData = negative;
                     }}
                 >

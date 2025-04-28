@@ -1,10 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react';
-import React, {useRef, useState} from 'react';
+import React, {useState} from 'react';
 
-import {TTextFieldRef} from '@/components';
-import StackCreateCspStep from './StackCreateCspStep';
-
-import TButton from '~/button/button/TButton';
 import TStepBox from '~/data-container/step-box/TStepBox';
 import TStepBoxItem from '~/data-container/step-box/TStepBoxItem';
 

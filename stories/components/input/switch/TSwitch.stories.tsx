@@ -1,5 +1,4 @@
 import type {Meta, StoryObj} from '@storybook/react';
-import {Decorator} from '@storybook/react';
 
 import useInputState from '@/common/hook/UseInputState';
 import TSwitch from '@/components/input/switch/TSwitch';

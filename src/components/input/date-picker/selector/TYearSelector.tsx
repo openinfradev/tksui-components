@@ -85,7 +85,7 @@ const TYearSelector = () => {
                 onChangeValue(clickedYear?.toString());
             }
         },
-        [onChangeValue]
+        [changeViewMode, onChangeValue, setDisplayDateObject, validDateRange, viewMode]
     );
 
     const onMoveYear = useCallback((move: 'next' | 'prev') => {

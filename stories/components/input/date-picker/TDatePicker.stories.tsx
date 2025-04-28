@@ -1,11 +1,10 @@
 import type {Meta, StoryObj} from '@storybook/react';
 import type {ReactNode} from 'react';
-import React, {useRef} from 'react';
+import React from 'react';
 
 import useInputState from '@/common/hook/UseInputState';
 
 import type {TDatePickerProps} from '~/input/date-picker';
-import {TDatePickerRef} from '~/input/date-picker';
 import TDatePicker from '~/input/date-picker/TDatePicker';
 
 const meta: Meta<typeof TDatePicker> = {

@@ -104,7 +104,7 @@ const TMonthSelector = () => {
                 onChangeValue(dateStr);
             }
         },
-        [viewMode, displayDateObject, onChangeValue]
+        [displayDateObject.year, viewMode, validDateRange, setDisplayDateObject, changeViewMode, onChangeValue]
     );
 
     const onMoveMonth = useCallback((move: 'next' | 'prev') => {

@@ -115,7 +115,7 @@ const TDatePicker = forwardRef(
 
                 dropHolderRef.current?.close();
             },
-            [props.onChange]
+            [props]
         );
 
         const clearDate = useCallback(() => {
