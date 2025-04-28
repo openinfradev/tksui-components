@@ -6,7 +6,7 @@ import type {TCheckboxGroupValue, TCheckboxValue, TRadioGroupValue} from '@/comp
 
 export default function useValidator(
     target: string | number | boolean | TRadioGroupValue | TCheckboxGroupValue | TCheckboxValue,
-    rules?: ((v: any) => true | string)[],
+    rules?: ((v: unknown) => true | string)[],
     successMessage?: string,
     initialResult = true
 ) {

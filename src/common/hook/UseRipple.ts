@@ -95,6 +95,9 @@ const useRipple = (ref: MutableRefObject<HTMLElement>) => {
 
     // endregion
 
-    return {register, remove};
+    return {
+        register,
+        remove,
+    };
 };
 export default useRipple;

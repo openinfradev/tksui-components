@@ -1,6 +1,6 @@
 export default {
     requiredArr(errorMessage?: string) {
-        return (v: any[]) => (v.length > 0 || errorMessage) ?? '1개 이상 선택해 주세요';
+        return (v: unknown[]) => (v.length > 0 || errorMessage) ?? '1개 이상 선택해 주세요';
     },
     required(errorMessage?: string) {
         return (v: string | number) => (!!v || errorMessage) ?? '값을 입력해 주세요';
@@ -31,7 +31,7 @@ export default {
             (values.some((value) => value === Number.parseInt(v, 10)) || errorMessage) ??
             `[${values.join(', ')}] 중 선택해 주세요`;
     },
-    equal(value: any, errorMessage?: string) {
+    equal(value: unknown, errorMessage?: string) {
         return (v: string) => (v === value || errorMessage) ?? '올바른 값을 입력해 주세요';
     },
     email(errorMessage?: string) {
