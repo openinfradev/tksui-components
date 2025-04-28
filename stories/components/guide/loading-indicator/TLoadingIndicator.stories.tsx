@@ -1,6 +1,7 @@
-import {Meta, StoryObj} from '@storybook/react';
-import {TLoadingIndicator, TLoadingIndicatorProps} from '@/components';
+import type {Meta, StoryObj} from '@storybook/react';
 
+import type {TLoadingIndicatorProps} from '@/components';
+import {TLoadingIndicator} from '@/components';
 
 const meta: Meta<typeof TLoadingIndicator> = {
     title: 'Guide/TLoadingIndicator',
@@ -10,20 +11,17 @@ export default meta;
 
 type Story = StoryObj<typeof TLoadingIndicator>;
 
-
 const Template = (args: TLoadingIndicatorProps) => {
-
     return (
         <div style={{display: 'flex', alignItems: 'center', gap: '16px'}}>
-            <TLoadingIndicator {...args} size={'xsmall'}/>
-            <TLoadingIndicator {...args} size={'small'}/>
-            <TLoadingIndicator {...args} size={'medium'}/>
-            <TLoadingIndicator {...args} size={'large'}/>
-            <TLoadingIndicator {...args} size={'xlarge'}/>
+            <TLoadingIndicator {...args} size={'xsmall'} />
+            <TLoadingIndicator {...args} size={'small'} />
+            <TLoadingIndicator {...args} size={'medium'} />
+            <TLoadingIndicator {...args} size={'large'} />
+            <TLoadingIndicator {...args} size={'xlarge'} />
         </div>
     );
 };
-
 
 export const Default: Story = {
     render: Template,

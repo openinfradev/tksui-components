@@ -1,5 +1,7 @@
-import {Meta, StoryObj} from '@storybook/react';
-import {ReactNode, useCallback, useState} from 'react';
+import type {Meta, StoryObj} from '@storybook/react';
+import type {ReactNode} from 'react';
+import {useCallback, useState} from 'react';
+
 import TButtonGroup from '@/components/button/button-group/TButtonGroup';
 import TIcon from '@/components/icon/TIcon';
 

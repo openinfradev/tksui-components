@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
+
 import TStepBoxItem from '~/data-container/step-box/TStepBoxItem';
 
-
 const StackCreateCspStep = () => {
-
     // region [Hooks]
 
     const [cloudService, setCloudService] = useState<string>('');

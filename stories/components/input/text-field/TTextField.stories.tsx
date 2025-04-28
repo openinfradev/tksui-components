@@ -1,13 +1,13 @@
-import {Meta, StoryObj} from '@storybook/react';
+import type {Meta, StoryObj} from '@storybook/react';
+import type {CSSProperties} from 'react';
+import {useEffect, useState} from 'react';
 
-import {CSSProperties, useEffect, useState} from 'react';
-import TTextField from '@/components/input/text-field/TTextField';
-import {TTextFieldRef} from '@/components/input/text-field/TTextField.interface';
-import rule from '@/common/validator/TValidatorRule';
 import useInputState from '@/common/hook/UseInputState';
-import TButton from '@/components/button/button/TButton';
 import useRefs from '@/common/hook/UseRefs';
-
+import rule from '@/common/validator/TValidatorRule';
+import TButton from '@/components/button/button/TButton';
+import TTextField from '@/components/input/text-field/TTextField';
+import type {TTextFieldRef} from '@/components/input/text-field/TTextField.interface';
 
 const meta: Meta<typeof TTextField> = {
     title: 'Input/TTextField',
@@ -20,7 +20,6 @@ type Story = StoryObj<typeof TTextField>;
 // region [Normal]
 
 const NormalTemplate = (args: any) => {
-
     const [value, setValue] = useState('');
     const [errorTextFieldRef, successTextFieldRef, successTextAreaRef, errorTextAreaRef] = useRefs<TTextFieldRef>(4);
 
@@ -41,51 +40,112 @@ const NormalTemplate = (args: any) => {
         gap: '24px',
     };
 
-    return (<>
-        <div style={{display: 'flex', gap: '24px'}}>
-            <div>
-                <span style={{fontSize: '20px'}}>Normal</span>
-                <div style={containerStyle}>
-                    <TTextField {...args} value={value} onChange={setValue} />
-                    <TTextField {...args} value={value} onChange={setValue} label={'Dense'} dense/>
-                    <TTextField {...args} value={value} onChange={setValue} label={'Clearable'} clearable/>
-                    <TTextField {...args} value={value} onChange={setValue} label={'Required'} required/>
-                    <TTextField {...args} value={value} onChange={setValue} label={'Password'} password clearable/>
-                    <TTextField {...args} value={value} onChange={setValue} label={'Searchable'} searchable placeholder={'검색어를 입력해주세요'}
-                                clearable/>
-                    <TTextField {...args} value={value} onChange={setValue} label={'Counter'} counter={20}/>
-                    <TTextField {...args} value={value} onChange={setValue} label={'Guide Message'}
-                                hint={'개수를 줄이시면 가장 마지막 호스트네임부터 삭제 됩니다.'}/>
-                    <TTextField {...args} ref={errorTextFieldRef} value={value} onChange={setValue} label={'Error'}
-                                rules={[rule.required('이미 사용중인 네임스페이스 입니다.')]} successMessage={'사용 할 수 있는 네임스페이스 입니다.'}
-                                counter={200} lazy={false} clearable/>
-                    <TTextField {...args} ref={successTextFieldRef} value={value} onChange={setValue} rules={[() => true]}
-                                successMessage={'사용 할 수 있는 이름 입니다.'} label={'Success'} lazy={false} counter={10}/>
-                    <TTextField {...args} value={'입력 불가능한 값'} label={'Disabled'} disabled/>
-                    <TTextField {...args} value={'읽을 수만 있는 값'} label={'Read-only'} readOnly/>
-                    <TTextField {...args} multiline value={value} onChange={setValue} label={'Multi-line'} rows={3}/>
-                    <TTextField {...args} multiline value={value} onChange={setValue} label={'Multi-line counter'} rows={3} counter={100}/>
-                    <TTextField {...args} ref={successTextAreaRef} multiline value={value} onChange={setValue}
-                                label={'Multi-line - Success'} rows={3}
-                                rules={[() => true]}
-                                successMessage={'사용 할 수 있는 이름 입니다.'} lazy={false}
-                                placeholder={'placeholder'}
-                                counter={10}
-                    />
-                    <TTextField {...args} ref={errorTextAreaRef} multiline value={value} onChange={setValue} label={'Multi-line - Error'}
-                                rows={3}
-                                placeholder={'placeholder'}
-                                rules={[rule.required('이미 사용중인 네임스페이스 입니다.')]}
-                                successMessage={'사용 할 수 있는 이름 입니다.'} lazy={false}
-                                counter={10}
-                    />
-                    <TTextField {...args} value={value} onChange={setValue} label={'너비-400'} width={'400px'}/>
-                    <TTextField {...args} value={value} onChange={setValue} label={'너비-300'} width={'300px'}/>
-                    <TTextField {...args} value={value} onChange={setValue} label={'너비-200'} width={'200px'}/>
+    return (
+        <>
+            <div style={{display: 'flex', gap: '24px'}}>
+                <div>
+                    <span style={{fontSize: '20px'}}>Normal</span>
+                    <div style={containerStyle}>
+                        <TTextField {...args} value={value} onChange={setValue} />
+                        <TTextField {...args} value={value} onChange={setValue} label={'Dense'} dense />
+                        <TTextField {...args} value={value} onChange={setValue} label={'Clearable'} clearable />
+                        <TTextField {...args} value={value} onChange={setValue} label={'Required'} required />
+                        <TTextField {...args} value={value} onChange={setValue} label={'Password'} password clearable />
+                        <TTextField
+                            {...args}
+                            value={value}
+                            onChange={setValue}
+                            label={'Searchable'}
+                            searchable
+                            placeholder={'검색어를 입력해주세요'}
+                            clearable
+                        />
+                        <TTextField {...args} value={value} onChange={setValue} label={'Counter'} counter={20} />
+                        <TTextField
+                            {...args}
+                            value={value}
+                            onChange={setValue}
+                            label={'Guide Message'}
+                            hint={'개수를 줄이시면 가장 마지막 호스트네임부터 삭제 됩니다.'}
+                        />
+                        <TTextField
+                            {...args}
+                            ref={errorTextFieldRef}
+                            value={value}
+                            onChange={setValue}
+                            label={'Error'}
+                            rules={[rule.required('이미 사용중인 네임스페이스 입니다.')]}
+                            successMessage={'사용 할 수 있는 네임스페이스 입니다.'}
+                            counter={200}
+                            lazy={false}
+                            clearable
+                        />
+                        <TTextField
+                            {...args}
+                            ref={successTextFieldRef}
+                            value={value}
+                            onChange={setValue}
+                            rules={[() => true]}
+                            successMessage={'사용 할 수 있는 이름 입니다.'}
+                            label={'Success'}
+                            lazy={false}
+                            counter={10}
+                        />
+                        <TTextField {...args} value={'입력 불가능한 값'} label={'Disabled'} disabled />
+                        <TTextField {...args} value={'읽을 수만 있는 값'} label={'Read-only'} readOnly />
+                        <TTextField
+                            {...args}
+                            multiline
+                            value={value}
+                            onChange={setValue}
+                            label={'Multi-line'}
+                            rows={3}
+                        />
+                        <TTextField
+                            {...args}
+                            multiline
+                            value={value}
+                            onChange={setValue}
+                            label={'Multi-line counter'}
+                            rows={3}
+                            counter={100}
+                        />
+                        <TTextField
+                            {...args}
+                            ref={successTextAreaRef}
+                            multiline
+                            value={value}
+                            onChange={setValue}
+                            label={'Multi-line - Success'}
+                            rows={3}
+                            rules={[() => true]}
+                            successMessage={'사용 할 수 있는 이름 입니다.'}
+                            lazy={false}
+                            placeholder={'placeholder'}
+                            counter={10}
+                        />
+                        <TTextField
+                            {...args}
+                            ref={errorTextAreaRef}
+                            multiline
+                            value={value}
+                            onChange={setValue}
+                            label={'Multi-line - Error'}
+                            rows={3}
+                            placeholder={'placeholder'}
+                            rules={[rule.required('이미 사용중인 네임스페이스 입니다.')]}
+                            successMessage={'사용 할 수 있는 이름 입니다.'}
+                            lazy={false}
+                            counter={10}
+                        />
+                        <TTextField {...args} value={value} onChange={setValue} label={'너비-400'} width={'400px'} />
+                        <TTextField {...args} value={value} onChange={setValue} label={'너비-300'} width={'300px'} />
+                        <TTextField {...args} value={value} onChange={setValue} label={'너비-200'} width={'200px'} />
+                    </div>
                 </div>
             </div>
-        </div>
-    </>);
+        </>
+    );
 };
 
 export const Default: Story = {
@@ -93,10 +153,7 @@ export const Default: Story = {
     args: {},
 };
 
-
 const NameTemplate = (args: any) => {
-
-
     const [textField1Ref, textField2Ref, textField3Ref, textField4Ref] = useRefs(4);
 
     const containerStyle: CSSProperties = {
@@ -116,61 +173,57 @@ const NameTemplate = (args: any) => {
         textField4Ref.current.validate();
     };
 
-    return (<>
-        <TButton main onClick={validateChildren}>검사</TButton>
-        <div style={{display: 'flex', gap: '24px'}}>
-            <div style={containerStyle}>
-
-
-                <TTextField {...args}
-                            label={'Default'}
-                            rules={[
-                                rule.required(),
-                                rule.lengthBetween(3, 12),
-                            ]}
-                            ref={textField1Ref}
-                            placeholder={'값을 입력해 주세요'}
-                            counter={12}
-                />
-                <TTextField {...args}
-                            name={'dense'}
-                            label={'Dense'}
-                            rules={[
-                                rule.required(),
-                                rule.lengthBetween(3, 12),
-                            ]}
-                            ref={textField2Ref}
-                            placeholder={'값을 입력해 주세요'}
-                            counter={12}
-                            dense
-                />
-                <TTextField {...args}
-                            name={'customlong'}
-                            label={'Custom Long Message'}
-                            rules={[
-                                rule.required(
-                                    '에러 메시지가 길면 벽에 닿아서 말 줄임표로 표현됩니다. 에러 메시지가 길면 벽에 닿아서 말 줄임표로 표현됩니다.',
-                                ),
-                                rule.lengthBetween(3, 12),
-                            ]}
-                            ref={textField3Ref}
-                            counter={12}
-                />
-                <TTextField {...args}
-                            label={'Success Message'}
-                            rules={[
-                                rule.required(),
-                                rule.lengthBetween(3, 12),
-                            ]}
-                            counter={12}
-                            name={'success'}
-                            ref={textField4Ref}
-                            successMessage={'사용할 수 있는 아이디입니다'}
-                />
+    return (
+        <>
+            <TButton main onClick={validateChildren}>
+                검사
+            </TButton>
+            <div style={{display: 'flex', gap: '24px'}}>
+                <div style={containerStyle}>
+                    <TTextField
+                        {...args}
+                        label={'Default'}
+                        rules={[rule.required(), rule.lengthBetween(3, 12)]}
+                        ref={textField1Ref}
+                        placeholder={'값을 입력해 주세요'}
+                        counter={12}
+                    />
+                    <TTextField
+                        {...args}
+                        name={'dense'}
+                        label={'Dense'}
+                        rules={[rule.required(), rule.lengthBetween(3, 12)]}
+                        ref={textField2Ref}
+                        placeholder={'값을 입력해 주세요'}
+                        counter={12}
+                        dense
+                    />
+                    <TTextField
+                        {...args}
+                        name={'customlong'}
+                        label={'Custom Long Message'}
+                        rules={[
+                            rule.required(
+                                '에러 메시지가 길면 벽에 닿아서 말 줄임표로 표현됩니다. 에러 메시지가 길면 벽에 닿아서 말 줄임표로 표현됩니다.'
+                            ),
+                            rule.lengthBetween(3, 12),
+                        ]}
+                        ref={textField3Ref}
+                        counter={12}
+                    />
+                    <TTextField
+                        {...args}
+                        label={'Success Message'}
+                        rules={[rule.required(), rule.lengthBetween(3, 12)]}
+                        counter={12}
+                        name={'success'}
+                        ref={textField4Ref}
+                        successMessage={'사용할 수 있는 아이디입니다'}
+                    />
+                </div>
             </div>
-
-        </div>
-    </>);
+        </>
+    );
 };
 
 export const Name: Story = {
@@ -180,14 +233,11 @@ export const Name: Story = {
     },
 };
 
-
 // endregion
-
 
 // region [Trim]
 
 const TrimTemplate = (args: any) => {
-
     const [trimValue, setTrimValue] = useState('');
     const [noTrimValue, setNoTrimValue] = useState('');
 
@@ -201,33 +251,44 @@ const TrimTemplate = (args: any) => {
         gap: '16px',
     };
 
-    return (<>
-        <div style={{display: 'flex', gap: '24px'}}>
-            <div>
-                <span style={{fontSize: '20px'}}>Normal, 일반 웹페이지</span>
-                <div style={containerStyle}>
-                    <TTextField {...args} value={trimValue} onChange={setTrimValue} label={'Trim (Default)'} counter={20}/>
-                    <TTextField {...args} value={noTrimValue} onChange={setNoTrimValue} label={'No Trim'} noTrim counter={20}/>
+    return (
+        <>
+            <div style={{display: 'flex', gap: '24px'}}>
+                <div>
+                    <span style={{fontSize: '20px'}}>Normal, 일반 웹페이지</span>
+                    <div style={containerStyle}>
+                        <TTextField
+                            {...args}
+                            value={trimValue}
+                            onChange={setTrimValue}
+                            label={'Trim (Default)'}
+                            counter={20}
+                        />
+                        <TTextField
+                            {...args}
+                            value={noTrimValue}
+                            onChange={setNoTrimValue}
+                            label={'No Trim'}
+                            noTrim
+                            counter={20}
+                        />
+                    </div>
                 </div>
             </div>
-        </div>
-    </>);
+        </>
+    );
 };
-
 
 export const Trim: Story = {
     render: TrimTemplate,
     args: {},
 };
 
-
 // endregion
-
 
 // region [Validation]
 
 const ValidationTemplate = (args: any) => {
-
     const textField1 = useInputState('');
     const textField2 = useInputState('');
     const textField3 = useInputState('');
@@ -252,64 +313,59 @@ const ValidationTemplate = (args: any) => {
         textField4Ref.current.validate();
     };
 
-    return (<>
-        <TButton main onClick={validateChildren}>검사</TButton>
-        <div style={{display: 'flex', gap: '24px'}}>
-            <div style={containerStyle}>
-
-
-                <TTextField {...args}
-                            label={'Default'}
-                            rules={[
-                                rule.required(),
-                                rule.lengthBetween(3, 12),
-                            ]}
-                            {...textField1}
-                            ref={textField1Ref}
-                            placeholder={'값을 입력해 주세요'}
-                            counter={12}
-                />
-                <TTextField {...args}
-                            label={'Dense'}
-                            rules={[
-                                rule.required(),
-                                rule.lengthBetween(3, 12),
-                            ]}
-                            {...textField2}
-                            ref={textField2Ref}
-                            placeholder={'값을 입력해 주세요'}
-                            counter={12}
-                            dense
-                />
-                <TTextField {...args}
-                            label={'Custom Long Message'}
-                            rules={[
-                                rule.required(
-                                    '에러 메시지가 길면 벽에 닿아서 말 줄임표로 표현됩니다. 에러 메시지가 길면 벽에 닿아서 말 줄임표로 표현됩니다.',
-                                ),
-                                rule.lengthBetween(3, 12),
-                            ]}
-                            {...textField3}
-                            ref={textField3Ref}
-                            counter={12}
-                />
-                <TTextField {...args}
-                            label={'Success Message'}
-                            rules={[
-                                rule.required(),
-                                rule.lengthBetween(3, 12),
-                            ]}
-                            counter={12}
-                            {...textField4}
-                            ref={textField4Ref}
-                            successMessage={'사용할 수 있는 아이디입니다'}
-                />
+    return (
+        <>
+            <TButton main onClick={validateChildren}>
+                검사
+            </TButton>
+            <div style={{display: 'flex', gap: '24px'}}>
+                <div style={containerStyle}>
+                    <TTextField
+                        {...args}
+                        label={'Default'}
+                        rules={[rule.required(), rule.lengthBetween(3, 12)]}
+                        {...textField1}
+                        ref={textField1Ref}
+                        placeholder={'값을 입력해 주세요'}
+                        counter={12}
+                    />
+                    <TTextField
+                        {...args}
+                        label={'Dense'}
+                        rules={[rule.required(), rule.lengthBetween(3, 12)]}
+                        {...textField2}
+                        ref={textField2Ref}
+                        placeholder={'값을 입력해 주세요'}
+                        counter={12}
+                        dense
+                    />
+                    <TTextField
+                        {...args}
+                        label={'Custom Long Message'}
+                        rules={[
+                            rule.required(
+                                '에러 메시지가 길면 벽에 닿아서 말 줄임표로 표현됩니다. 에러 메시지가 길면 벽에 닿아서 말 줄임표로 표현됩니다.'
+                            ),
+                            rule.lengthBetween(3, 12),
+                        ]}
+                        {...textField3}
+                        ref={textField3Ref}
+                        counter={12}
+                    />
+                    <TTextField
+                        {...args}
+                        label={'Success Message'}
+                        rules={[rule.required(), rule.lengthBetween(3, 12)]}
+                        counter={12}
+                        {...textField4}
+                        ref={textField4Ref}
+                        successMessage={'사용할 수 있는 아이디입니다'}
+                    />
+                </div>
             </div>
-
-        </div>
-    </>);
+        </>
+    );
 };
-
 
 export const Validation: Story = {
     render: ValidationTemplate,

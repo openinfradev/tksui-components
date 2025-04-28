@@ -1,7 +1,8 @@
-import {ReactNode} from 'react';
 import type {Meta, StoryObj} from '@storybook/react';
+import type {ReactNode} from 'react';
+
+import type {TButtonProps} from '@/components';
 import TButton from '@/components/button/button/TButton';
-import {TButtonProps} from '@/components';
 
 const meta: Meta<typeof TButton> = {
     title: 'Button/TButton',

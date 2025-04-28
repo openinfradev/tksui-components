@@ -1,16 +1,18 @@
-import {Meta, StoryObj} from '@storybook/react';
-import React, {CSSProperties, ReactElement, useCallback, useState} from 'react';
-import TIcon from '@/components/icon/TIcon';
-import {TIconProps, TIconSize} from '@/components/icon/TIcon.interface';
-import materialIconGallery from './material-icon-gallery';
-import TTextField from '~/input/text-field/TTextField';
-import TSwitch from '~/input/switch/TSwitch';
-import TFormSection from '~/data-container/form-section/TFormSection';
-import {TButton, TFormSectionItem, TFormSectionRow} from '@/components';
-import TDropdown from '~/input/dropdown/TDropdown';
-import TToast, {notify} from '@/components/guide/toast/TToast';
-import TTooltip from '../../../src/components/guide/tooltip/TTooltip';
+import type {Meta, StoryObj} from '@storybook/react';
+import type {CSSProperties, ReactElement} from 'react';
+import React, {useCallback, useState} from 'react';
 
+import {TButton, TFormSectionItem, TFormSectionRow} from '@/components';
+import TToast, {notify} from '@/components/guide/toast/TToast';
+import TIcon from '@/components/icon/TIcon';
+import type {TIconProps, TIconSize} from '@/components/icon/TIcon.interface';
+import TTooltip from '../../../src/components/guide/tooltip/TTooltip';
+import materialIconGallery from './material-icon-gallery';
+
+import TFormSection from '~/data-container/form-section/TFormSection';
+import TDropdown from '~/input/dropdown/TDropdown';
+import TSwitch from '~/input/switch/TSwitch';
+import TTextField from '~/input/text-field/TTextField';
 
 const meta: Meta<typeof TIcon> = {
     title: 'Input/TIcon',
@@ -29,19 +31,18 @@ const showCaseStyle: CSSProperties = {
     cursor: 'pointer',
 };
 
-const Showcase = (props: { children: ReactElement, onClick?: () => void }): ReactElement => {
+const Showcase = (props: {children: ReactElement; onClick?: () => void}): ReactElement => {
     return (
-        <div style={showCaseStyle}
-             onClick={props?.onClick}>
+        <div style={showCaseStyle} onClick={props?.onClick}>
             {props.children}
             {props.children.props.children}
-        </div>);
+        </div>
+    );
 };
 
 const officialSearchUrl = 'https://fonts.google.com/icons?icon.query=';
 
 const Template = (args: TIconProps) => {
-
     const onSuccessToast = useCallback((text: string) => {
         notify.success(`${text} 복사했습니다.`);
     }, []);
@@ -67,76 +68,88 @@ const Template = (args: TIconProps) => {
     const [color, setColor] = useState<string>('');
     const [size, setSize] = useState<TIconSize>('medium');
 
-
     const onClickOfficialSearch = useCallback(() => {
         const searchStr = searchText.trim();
-        if (searchStr !== '') { window.open(officialSearchUrl + searchStr); }
+        if (searchStr !== '') {
+            window.open(officialSearchUrl + searchStr);
+        }
     }, [searchText]);
 
-    return (<>
-        <TToast/>
+    return (
+        <>
+            <TToast />
 
-        <div style={{marginBottom: '16px'}}>
-            <a href={'https://fonts.google.com/icons'} target={'_blank'} rel='noreferrer'>
-                <TButton large>
-                    아이콘 라이브러리 링크 바로가기
-                </TButton>
-            </a>
-        </div>
-        <TFormSection column={2}>
-            <TFormSectionRow>
-                <TFormSectionItem label={'검색'}>
-                    <TTextField value={searchText} onChange={setSearchText} searchable/>
-                    <TButton large onClick={onClickOfficialSearch}>공식 문서에서 검색</TButton>
-                </TFormSectionItem>
-                <TFormSectionItem label={'FILL'}>
-                    <TSwitch value={isFilled} onChange={(value: boolean) => setIsFilled(value)}/>
-                </TFormSectionItem>
-            </TFormSectionRow>
-            <TFormSectionRow>
-                <TFormSectionItem label={'SIZE'}>
-                    <TDropdown value={size} onChange={(value: string) => setSize(value)} items={[
-                        {text: 'XSmall(16x16)', value: 'xsmall'},
-                        {text: 'Small(20x20)', value: 'small'},
-                        {text: 'Medium(24x24)', value: 'medium'},
-                        {text: 'Large(32x32)', value: 'large'},
-                        {text: 'XLarge(48x48)', value: 'xlarge'},
-                    ]}/>
-                </TFormSectionItem>
-                <TFormSectionItem label={'COLOR'}>
-                    <TTextField value={color} onChange={setColor}/>
-                </TFormSectionItem>
-            </TFormSectionRow>
-        </TFormSection>
+            <div style={{marginBottom: '16px'}}>
+                <a href={'https://fonts.google.com/icons'} target={'_blank'} rel='noreferrer'>
+                    <TButton large>아이콘 라이브러리 링크 바로가기</TButton>
+                </a>
+            </div>
+            <TFormSection column={2}>
+                <TFormSectionRow>
+                    <TFormSectionItem label={'검색'}>
+                        <TTextField value={searchText} onChange={setSearchText} searchable />
+                        <TButton large onClick={onClickOfficialSearch}>
+                            공식 문서에서 검색
+                        </TButton>
+                    </TFormSectionItem>
+                    <TFormSectionItem label={'FILL'}>
+                        <TSwitch value={isFilled} onChange={(value: boolean) => setIsFilled(value)} />
+                    </TFormSectionItem>
+                </TFormSectionRow>
+                <TFormSectionRow>
+                    <TFormSectionItem label={'SIZE'}>
+                        <TDropdown
+                            value={size}
+                            onChange={(value: string) => setSize(value)}
+                            items={[
+                                {text: 'XSmall(16x16)', value: 'xsmall'},
+                                {text: 'Small(20x20)', value: 'small'},
+                                {text: 'Medium(24x24)', value: 'medium'},
+                                {text: 'Large(32x32)', value: 'large'},
+                                {text: 'XLarge(48x48)', value: 'xlarge'},
+                            ]}
+                        />
+                    </TFormSectionItem>
+                    <TFormSectionItem label={'COLOR'}>
+                        <TTextField value={color} onChange={setColor} />
+                    </TFormSectionItem>
+                </TFormSectionRow>
+            </TFormSection>
 
-        <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, 150px)',
-            marginTop: '32px',
-            rowGap: '40px',
-        }}>
-            {
-                materialIconGallery
+            <div
+                style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fill, 150px)',
+                    marginTop: '32px',
+                    rowGap: '40px',
+                }}
+            >
+                {materialIconGallery
                     .filter((icon) => icon.includes(searchText))
                     .map((icon) => (
-                        <Showcase key={icon} onClick={() => { copyText(icon); }}>
-                            <TIcon {...args}
-                                   fill={isFilled}
-                                   color={color}
-                                   size={size}
-                                   tooltipTitle={icon}
-                                   tooltipContent={size}
+                        <Showcase
+                            key={icon}
+                            onClick={() => {
+                                copyText(icon);
+                            }}
+                        >
+                            <TIcon
+                                {...args}
+                                fill={isFilled}
+                                color={color}
+                                size={size}
+                                tooltipTitle={icon}
+                                tooltipContent={size}
                             >
                                 {icon}
                             </TIcon>
                         </Showcase>
-                    ))
-            }
-        </div>
-        <TTooltip id={'icon-tooltip'}/>
-    </>);
+                    ))}
+            </div>
+            <TTooltip id={'icon-tooltip'} />
+        </>
+    );
 };
-
 
 export const Default: Story = {
     render: Template,
@@ -145,4 +158,3 @@ export const Default: Story = {
         tooltipId: 'icon-tooltip',
     },
 };
-
