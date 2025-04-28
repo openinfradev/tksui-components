@@ -11,7 +11,7 @@ export type DropHolderAlignment =
     | 'bottom-right';
 
 export interface TDropHolderItem {
-    [key: string]: any;
+    [key: string]: unknown;
     disabled?: boolean;
     onClick?: (event?: MouseEvent) => void;
     divideSection?: boolean;

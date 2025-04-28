@@ -3,8 +3,7 @@ import type {KeyboardEvent} from 'react';
 import type {TBaseProps} from '@/common/base/TBase.interface';
 import type {TValidatorProps} from '@/common/validator/TValidator.interface';
 
-const numberField = ['outline', 'underline'] as const;
-type numberFieldType = (typeof numberField)[number];
+type numberFieldType = ['outline', 'underline'][number];
 
 export interface TNumberFieldProps extends TBaseProps, TValidatorProps {
     type?: numberFieldType;

@@ -5,8 +5,7 @@ import type {TBaseProps} from '@/common/base/TBase.interface';
 
 import type {TIconSize} from '~/icon';
 
-const chipType = ['outlined', 'fill'] as const;
-type chipType = (typeof chipType)[number];
+type chipType = ['outlined', 'fill'][number];
 
 export interface TChipProps extends TBaseProps {
     children?: ReactNode;

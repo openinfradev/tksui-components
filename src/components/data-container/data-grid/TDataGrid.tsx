@@ -48,7 +48,7 @@ const TDataGrid = forwardRef(
             ...restProps,
         };
 
-        const [selectedRows, setSelectedRows] = useState<any>([]);
+        const [selectedRows, setSelectedRows] = useState<unknown[]>([]);
 
         const gridRef = useRef<AgGridReact>(null);
 

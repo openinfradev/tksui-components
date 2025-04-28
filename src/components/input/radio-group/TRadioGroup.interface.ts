@@ -2,12 +2,12 @@ import type {CSSProperties} from 'react';
 
 import type {TBaseProps} from '@/common/base/TBase.interface';
 import type {TValidatorProps} from '@/common/validator/TValidator.interface';
-import type {TRadioValue} from '../radio/TRadio.interface';
+import type {TRadioValue} from '@/components';
 
 export type TRadioGroupValue = TRadioValue;
 
 export interface TRadioGroupItem {
-    [key: string]: any;
+    [key: string]: unknown;
 }
 
 export interface TRadioGroupProps extends TBaseProps, TValidatorProps {

@@ -1,7 +1,7 @@
 'use client';
 
 import type {MouseEvent} from 'react';
-import React, {memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState} from 'react';
+import React, {memo, useCallback, useLayoutEffect, useMemo, useRef, useState} from 'react';
 import {createPortal} from 'react-dom';
 import ReactModal from 'react-modal';
 

@@ -124,7 +124,7 @@ const TTextField = forwardRef(
             if (onBlur) {
                 onBlur();
             }
-        }, [onBlur, onChange, props.lazy, props.noTrim, props.value, validator]);
+        }, [innerValue, onBlur, onChange, props.lazy, props.noTrim, validator]);
 
         const onKeyDownInput = useCallback(
             (event: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
