@@ -37,10 +37,9 @@ export default defineConfig([
 
     // 3. 모든 파일 (js, ts, json 등) 설정
     {
-        files: ['**/*.{js,jsx,ts,tsx,json}'],
+        files: ['**/*.{js,jsx,ts,tsx}'],
 
         plugins: {
-            '@typescript-eslint': fixupPluginRules(typescriptEslint),
             react: fixupPluginRules(react),
             'react-hooks': fixupPluginRules(reactHooks),
             'jsx-a11y': fixupPluginRules(jsxA11Y),
@@ -58,7 +57,6 @@ export default defineConfig([
                 ecmaFeatures: {
                     jsx: true,
                 },
-                project: './tsconfig.json',
             },
             globals: {
                 ...globals.browser,
@@ -85,20 +83,6 @@ export default defineConfig([
         rules: {
             // Next.js 관련
             '@next/next/no-html-link-for-pages': 'off',
-
-            // TypeScript 관련
-            '@typescript-eslint/no-unused-vars': ['warn', {argsIgnorePattern: '^_'}],
-            '@typescript-eslint/no-explicit-any': 'warn',
-            '@typescript-eslint/explicit-function-return-type': 'off',
-            '@typescript-eslint/explicit-module-boundary-types': 'off',
-            '@typescript-eslint/no-non-null-assertion': 'warn',
-            '@typescript-eslint/consistent-type-imports': [
-                'error',
-                {
-                    prefer: 'type-imports',
-                    fixStyle: 'separate-type-imports',
-                },
-            ],
 
             // React 관련
             'react/react-in-jsx-scope': 'off',
@@ -148,6 +132,51 @@ export default defineConfig([
             'arrow-parens': ['error', 'always'],
 
             'no-var': 'error',
+        },
+    },
+
+    {
+        files: ['**/*.{ts,tsx}'],
+        plugins: {
+            '@typescript-eslint': fixupPluginRules(typescriptEslint),
+            react: fixupPluginRules(react),
+            'react-hooks': fixupPluginRules(reactHooks),
+            'jsx-a11y': fixupPluginRules(jsxA11Y),
+            import: fixupPluginRules(_import),
+            'simple-import-sort': simpleImportSort,
+            '@next/next': nextPlugin,
+        },
+
+        languageOptions: {
+            ecmaVersion: 'latest',
+            sourceType: 'module',
+
+            parser: tsParser,
+            parserOptions: {
+                ecmaFeatures: {
+                    jsx: true,
+                },
+                project: './tsconfig.json',
+            },
+            globals: {
+                ...globals.browser,
+                ...globals.node,
+            },
+        },
+        rules: {
+            // TypeScript 관련
+            '@typescript-eslint/no-unused-vars': ['warn', {argsIgnorePattern: '^_'}],
+            '@typescript-eslint/no-explicit-any': 'off',
+            '@typescript-eslint/explicit-function-return-type': 'off',
+            '@typescript-eslint/explicit-module-boundary-types': 'off',
+            '@typescript-eslint/no-non-null-assertion': 'warn',
+            '@typescript-eslint/consistent-type-imports': [
+                'error',
+                {
+                    prefer: 'type-imports',
+                    fixStyle: 'separate-type-imports',
+                },
+            ],
         },
     },
 

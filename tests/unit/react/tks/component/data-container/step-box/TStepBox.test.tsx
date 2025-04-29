@@ -85,11 +85,8 @@ describe('TStepBox', () => {
             const root = screen.getByTestId('step-box-root');
 
             // Assert
-            // eslint-disable-next-line testing-library/no-node-access
             expect(root.getElementsByClassName('t-step-box-header__step__number').length).toBe(3);
-            // eslint-disable-next-line testing-library/no-node-access
             expect(root.getElementsByClassName('t-step-box-header__step__label').length).toBe(3);
-            // eslint-disable-next-line testing-library/no-node-access
             expect(root.getElementsByClassName('t-step-box-item').length).toBe(1);
             expect(screen.getByRole('button', {name: 'Previous'})).toBeInTheDocument();
             expect(screen.getByRole('button', {name: 'Next'})).toBeInTheDocument();

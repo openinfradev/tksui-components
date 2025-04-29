@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import fs from 'fs';
-import path from 'path';
 import {glob} from 'glob';
+import path from 'path';
 
 const replaceRules = [
     {
@@ -14,7 +14,6 @@ const replaceRules = [
     },
 ];
 const replaceContent = async (filePath) => {
-
     let fileContent = await fs.promises.readFile(filePath, 'utf8');
 
     replaceRules.forEach((rule) => {
@@ -25,20 +24,15 @@ const replaceContent = async (filePath) => {
     await fs.promises.writeFile(filePath, fileContent, 'utf8');
 };
 
-
 const replaceBuildContents = async () => {
-
     const absolutePath = path.resolve('lib/esm/src/components/**/T*.js');
     const ignorePattern = '**/*.interface.js';
 
     try {
-
         const files = glob.sync(absolutePath, {nodir: true, ignore: ignorePattern});
         console.log('Files found:', files);
 
-        // eslint-disable-next-line no-restricted-syntax
         for (const file of files) {
-            // eslint-disable-next-line no-await-in-loop
             await replaceContent(file);
         }
         console.log('ThemToken path replacement complete.');
@@ -47,4 +41,6 @@ const replaceBuildContents = async () => {
     }
 };
 
-replaceBuildContents().then(() => { /* Nothing to do */ });
+replaceBuildContents().then(() => {
+    /* Nothing to do */
+});

@@ -151,7 +151,6 @@ describe('TDataGrid', () => {
             const root: HTMLButtonElement = screen.getByText(buttonText);
 
             // Assert
-            // eslint-disable-next-line testing-library/no-node-access
             expect(root.parentElement).toHaveClass('t-action-bar__container__left-action');
         });
 
@@ -163,7 +162,6 @@ describe('TDataGrid', () => {
             const root: HTMLButtonElement = screen.getByText(buttonText);
 
             // Assert
-            // eslint-disable-next-line testing-library/no-node-access
             expect(root.parentElement).toHaveClass('t-action-bar__container__center-action');
         });
 
@@ -175,7 +173,6 @@ describe('TDataGrid', () => {
             const root = screen.getByText(buttonText);
 
             // Assert
-            // eslint-disable-next-line testing-library/no-node-access
             expect(root.parentElement).toHaveClass('t-action-bar__container__right-action');
         });
     });

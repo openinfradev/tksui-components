@@ -1,5 +1,6 @@
-import {KeyboardEvent, MouseEvent, ReactNode} from 'react';
-import {TBaseProps, TBaseTooltipProps} from '@/common/base/TBase.interface';
+import type {KeyboardEvent, MouseEvent, ReactNode} from 'react';
+
+import type {TBaseProps, TBaseTooltipProps} from '@/common/base/TBase.interface';
 
 export const buttonSize = {
     xsmall: 'xsmall',

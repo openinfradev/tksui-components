@@ -40,7 +40,6 @@ describe('TFormSectionRow', () => {
             const itemRoot = screen.getByText(labelText);
 
             // Assert
-            // eslint-disable-next-line testing-library/no-node-access
             expect(itemRoot.parentElement).toHaveStyle({alignItems: 'flex-start'});
         });
     });

@@ -2,12 +2,11 @@ import type {Meta, StoryObj} from '@storybook/react';
 import type {ReactNode} from 'react';
 import React, {useState} from 'react';
 
-import TTooltip from '../../../../src/components/guide/tooltip/TTooltip';
+import {TTooltip} from '@/components';
 
 import TCard from '~/data-container/card/TCard';
 import TCardContent from '~/data-container/card/TCardContent';
 import TCardHeader from '~/data-container/card/TCardHeader';
-import {TIcon} from '~/icon';
 
 const meta: Meta<typeof TCard> = {
     title: 'DataContainer/TCard',

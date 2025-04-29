@@ -1,4 +1,4 @@
-import type {Meta, StoryObj} from '@storybook/react';
+import type {Meta} from '@storybook/react';
 import React from 'react';
 
 import TButton from '@/components/button/button/TButton';
@@ -6,14 +6,11 @@ import TTooltip from '@/components/guide/tooltip/TTooltip';
 import type {TTooltipProps} from '@/components/guide/tooltip/TTooltip.interface';
 import TIcon from '@/components/icon/TIcon';
 
-// fixme. need to add generic
-const meta: Meta = {
+const meta: Meta<typeof TTooltip> = {
     title: 'Guide/TTooltip',
     component: TTooltip,
 };
 export default meta;
-
-type Story = StoryObj<typeof TTooltip>;
 
 // region [Wrapper]
 

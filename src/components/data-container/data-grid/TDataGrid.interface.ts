@@ -22,7 +22,7 @@ export interface TDataGridProps extends TBaseProps, AgGridReactProps {
     centerAction?: ReactElement;
     rightAction?: ReactElement;
 
-    onChange?: (value: any[]) => void;
+    onChange?: (value: unknown[]) => void;
     noTotalRows?: boolean;
     noPagination?: boolean;
     noHeader?: boolean;

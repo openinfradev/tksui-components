@@ -30,14 +30,14 @@ const NormalTemplate = (args: TDropdownProps) => {
     const singleSelect8 = useInputState<string>('');
     const singleSelect9 = useInputState<string>('');
 
-    const multiSelect1 = useInputState<any[]>([]);
-    const multiSelect2 = useInputState<any[]>(['melon', 'banana']);
-    const multiSelect3 = useInputState<any[]>([]);
-    const multiSelect4 = useInputState<any[]>([]);
-    const multiSelect5 = useInputState<any[]>([]);
-    const multiSelect6 = useInputState<any[]>([]);
-    const multiSelect7 = useInputState<any[]>([]);
-    const multiSelect8 = useInputState<any[]>([]);
+    const multiSelect1 = useInputState<string[]>([]);
+    const multiSelect2 = useInputState<string[]>(['melon', 'banana']);
+    const multiSelect3 = useInputState<string[]>([]);
+    const multiSelect4 = useInputState<string[]>([]);
+    const multiSelect5 = useInputState<string[]>([]);
+    const multiSelect6 = useInputState<string[]>([]);
+    const multiSelect7 = useInputState<string[]>([]);
+    const multiSelect8 = useInputState<string[]>([]);
 
     const containerStyle: CSSProperties = {
         width: '500px',
@@ -141,10 +141,10 @@ const ValidationTemplate = (args: TDropdownProps) => {
     const singleSelect3 = useInputState<string>('');
     const singleSelect4 = useInputState<string>('');
 
-    const multiSelect1 = useInputState<any[]>([]);
-    const multiSelect2 = useInputState<any[]>(['melon', 'banana']);
-    const multiSelect3 = useInputState<any[]>([]);
-    const multiSelect4 = useInputState<any[]>([]);
+    const multiSelect1 = useInputState<string[]>([]);
+    const multiSelect2 = useInputState<string[]>(['melon', 'banana']);
+    const multiSelect3 = useInputState<string[]>([]);
+    const multiSelect4 = useInputState<string[]>([]);
 
     const [
         singleSelect1Ref,

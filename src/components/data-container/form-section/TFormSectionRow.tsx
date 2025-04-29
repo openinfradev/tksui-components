@@ -3,7 +3,7 @@ import {memo, useContext, useMemo} from 'react';
 
 import type {TFormSectionRowProps} from '@/components';
 
-import TFormSectionContext from '~/data-container/form-section/TFormSectionContext';
+import TFormSectionContext from '~/data-container/form-section/TFormSectionContextInterface';
 
 const TFormSectionRow = ({verticalAlign = 'middle', ...restProps}: TFormSectionRowProps) => {
     // region [Hooks]

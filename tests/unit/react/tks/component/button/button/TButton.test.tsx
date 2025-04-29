@@ -211,7 +211,6 @@ describe('TButton', () => {
             expect(buttonContent).toHaveTextContent('false');
 
             // Act
-            // eslint-disable-next-line testing-library/no-unnecessary-act
             await act(async () => {
                 await userEvent.click(button);
             });
@@ -235,7 +234,6 @@ describe('TButton', () => {
             expect(buttonContent).toHaveTextContent('false');
 
             // Act
-            // eslint-disable-next-line testing-library/no-unnecessary-act
             await act(async () => {
                 await userEvent.type(button, '{enter}');
             });

@@ -22,16 +22,17 @@ const NormalTemplate = (args: TSwitchProps) => {
 
     return (
         <div>
-            <TSwitch {...switch1} label={`Normal (${switch1.value})`} /> <br />
+            <TSwitch {...switch1} label={`Normal (${switch1.value})`} {...args} /> <br />
             <TSwitch
                 {...switch2}
+                {...args}
                 label={`Custom Value (${switch2.value})`}
                 positiveValue={'Y'}
                 negativeValue={'N'}
             />{' '}
             <br />
-            <TSwitch {...switch3} label={`Disabled On (${switch3.value})`} disabled /> <br />
-            <TSwitch {...switch4} label={`Disabled Off (${switch4.value})`} disabled /> <br />
+            <TSwitch {...switch3} {...args} label={`Disabled On (${switch3.value})`} disabled /> <br />
+            <TSwitch {...switch4} {...args} label={`Disabled Off (${switch4.value})`} disabled /> <br />
         </div>
     );
 };

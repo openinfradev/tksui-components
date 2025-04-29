@@ -1,9 +1,11 @@
-import type {THighlightTextProps} from './THightlightText.interface';
+import type {ReactNode} from 'react';
+
+import type {THighlightTextProps} from '@/components';
 
 function THighlightText(props: THighlightTextProps) {
     // region [ETCs]
 
-    function parseHighlightedText(): JSX.Element {
+    function parseHighlightedText(): ReactNode {
         const keyword = props.keyword.toLowerCase();
 
         if (keyword !== '' && props.children.toString().toLowerCase().includes(keyword)) {

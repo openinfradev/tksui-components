@@ -88,7 +88,6 @@ const TDropdown = forwardRef(
         }, []);
 
         const modifyValue = useCallback(
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             (newItem: any): void => {
                 if (props.multiple) {
                     if (props.value.includes(newItem)) {

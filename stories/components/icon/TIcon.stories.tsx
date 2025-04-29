@@ -47,21 +47,24 @@ const Template = (args: TIconProps) => {
         notify.success(`${text} 복사했습니다.`);
     }, []);
 
-    const copyText = useCallback((text: string) => {
-        try {
-            navigator.clipboard.writeText(text).then(() => {
+    const copyText = useCallback(
+        (text: string) => {
+            try {
+                navigator.clipboard.writeText(text).then(() => {
+                    onSuccessToast(text);
+                });
+            } catch {
+                const textElement = document.createElement('textarea');
+                textElement.value = text;
+                document.body.appendChild(textElement);
+                textElement.select();
+                document.execCommand('copy');
+                document.body.removeChild(textElement);
                 onSuccessToast(text);
-            });
-        } catch (error) {
-            const textElement = document.createElement('textarea');
-            textElement.value = text;
-            document.body.appendChild(textElement);
-            textElement.select();
-            document.execCommand('copy');
-            document.body.removeChild(textElement);
-            onSuccessToast(text);
-        }
-    }, []);
+            }
+        },
+        [onSuccessToast]
+    );
 
     const [searchText, setSearchText] = useState<string>('');
     const [isFilled, setIsFilled] = useState<boolean>(false);

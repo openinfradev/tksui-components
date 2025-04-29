@@ -1,4 +1,4 @@
-import {TBaseTooltipProps} from '@/common/base/TBase.interface';
+import type {TBaseTooltipProps} from '@/common/base/TBase.interface';
 
 function generateTooltipHtml({tooltipTitle, tooltipContent}: TBaseTooltipProps): string {
     const divTitle = tooltipTitle !== undefined ? `<div class='t-tooltip__title'>${tooltipTitle}</div>` : '';
@@ -26,7 +26,7 @@ function convertToTooltipAttributes({
     } else {
         try {
             ret['data-tooltip-html'] = generateTooltipHtml({tooltipTitle, tooltipContent});
-        } catch (e) {
+        } catch {
             ret['data-tooltip-html'] = '';
         }
     }

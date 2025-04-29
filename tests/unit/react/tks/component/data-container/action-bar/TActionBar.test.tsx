@@ -41,7 +41,6 @@ describe('TActionBar', () => {
             // Arrange
             render(<TActionBar leftAction={<TButton>left action button</TButton>} />);
 
-            // eslint-disable-next-line testing-library/no-node-access
             const root = screen.getByRole('button').parentElement;
             // Assert
 
@@ -52,7 +51,6 @@ describe('TActionBar', () => {
             // Arrange
             render(<TActionBar centerAction={<TButton>center action button</TButton>} />);
 
-            // eslint-disable-next-line testing-library/no-node-access
             const container = screen.getByTestId('t-action-bar__container');
             // Assert
 
@@ -63,7 +61,6 @@ describe('TActionBar', () => {
             // Arrange
             render(<TActionBar rightAction={<TButton>right action button</TButton>} />);
 
-            // eslint-disable-next-line testing-library/no-node-access
             const root = screen.getByRole('button').parentElement;
             // Assert
 

@@ -3,7 +3,7 @@ import {memo, useMemo} from 'react';
 
 import type {TFormSectionProps} from '@/components';
 
-import TFormSectionContext from '~/data-container/form-section/TFormSectionContext';
+import TFormSectionContext from '~/data-container/form-section/TFormSectionContextInterface';
 import TSection from '~/data-container/section/TSection';
 import TIcon from '~/icon/TIcon';
 

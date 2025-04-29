@@ -465,7 +465,6 @@ describe('TCheckboxGroup', () => {
             // Act
             await user.click(appleButton);
 
-            /* eslint-disable testing-library/no-node-access */
             const appleExpectedCheckIcon = appleButton?.parentElement?.children[0];
 
             // Assert
@@ -491,7 +490,6 @@ describe('TCheckboxGroup', () => {
             await user.click(bananaButton);
 
             const bananaExpectedUncheckIcon = bananaButton?.parentElement?.children[0];
-            /* eslint-disable testing-library/no-node-access */
 
             // Assert
             expect(bananaExpectedUncheckIcon).toHaveClass('t-checkbox__icon--uncheck');

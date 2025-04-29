@@ -57,7 +57,6 @@ describe('TFormSection', () => {
             // Arrange
             const infoText = 'Information Content';
             render(<TFormSection information={infoText}>form section content</TFormSection>);
-            // eslint-disable-next-line testing-library/no-node-access
             const root = screen.getByText(infoText).parentElement;
 
             // Assert
@@ -83,7 +82,6 @@ describe('TFormSection', () => {
             // Arrange
             const infoText = 'Custom Information Content';
             render(<TFormSection customInformation={<>{infoText}</>}>form section content</TFormSection>);
-            // eslint-disable-next-line testing-library/no-node-access
             const root = screen.getByText(infoText).parentElement;
 
             // Assert
@@ -104,7 +102,6 @@ describe('TFormSection', () => {
                 </>
             );
 
-            // eslint-disable-next-line testing-library/no-node-access
             const formSectionItemLabel = screen.getByText('레이블').parentElement;
 
             // Assert

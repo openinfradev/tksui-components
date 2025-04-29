@@ -4,7 +4,7 @@ import type {CSSProperties} from 'react';
 import {memo, useContext, useId, useMemo, useRef} from 'react';
 
 import type {TFormSectionItemProps} from '@/components';
-import TFormSectionContext from './TFormSectionContext';
+import TFormSectionContext from './TFormSectionContextInterface';
 
 import themeToken from '~style/designToken/ThemeToken.module.scss';
 

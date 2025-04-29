@@ -35,7 +35,7 @@ jobs:
           github_token: ${{ secrets.FRONT_SECRET }}
           reporter: github-pr-review
           level: warning
-          prettier_flags: './**/*.{js,jsx,ts,tsx,json,css,scss,md}'
+          prettier_flags: './**/*.{js,jsx,ts,tsx}'
 
       - name: Check overall result
         id: overall
