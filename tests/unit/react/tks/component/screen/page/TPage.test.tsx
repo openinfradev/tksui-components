@@ -1,12 +1,11 @@
 import {render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import {contentDirection, TPage} from '@/components';
 
+import {contentDirection, TPage} from '@/components';
 
 const contentDirectionList = Object.values(contentDirection);
 
 describe('TPage', () => {
-
     Object.defineProperties(MouseEvent.prototype, {
         pageX: {
             get() {
@@ -21,9 +20,7 @@ describe('TPage', () => {
     });
 
     describe('Style', () => {
-
         it('Classname prop applies to root', () => {
-
             // Arrange
             const testData = 'class-name-prop';
 
@@ -33,11 +30,9 @@ describe('TPage', () => {
 
             // Assert
             expect(root).toHaveClass(testData);
-
         });
 
         it('Style prop applies to root', () => {
-
             // Arrange
             const testData = {width: '50px'};
 
@@ -60,11 +55,8 @@ describe('TPage', () => {
         });
     });
 
-
     describe('Event', () => {
-
         it('When resizer is moved, root has t-page--resizing class', async () => {
-
             // Arrange
             const user = userEvent.setup();
 
@@ -81,8 +73,17 @@ describe('TPage', () => {
 
             // Act
             await user.pointer([
-                {keys: '[MouseLeft>]', target: resizer},
-                {coords: {x: window.innerWidth - 700, y: 100}, target: document.body},
+                {
+                    keys: '[MouseLeft>]',
+                    target: resizer,
+                },
+                {
+                    coords: {
+                        x: window.innerWidth - 700,
+                        y: 100,
+                    },
+                    target: document.body,
+                },
             ]);
 
             // Assert
@@ -90,11 +91,9 @@ describe('TPage', () => {
 
             // Act
             await user.pointer({keys: '/[MouseLeft]'});
-
         });
 
         it('When the space between content and panel is less than 200 px, the width of info title will be changed', async () => {
-
             // Arrange
             const defaultPanelWidth = '360px';
 
@@ -110,11 +109,19 @@ describe('TPage', () => {
             // Arrange
             const resizer = screen.queryByTestId('t-page-information-area-resizer');
 
-
             // Act
             await user.pointer([
-                {keys: '[MouseLeft>]', target: resizer},
-                {coords: {x: window.innerWidth - 700, y: 100}, target: document.body},
+                {
+                    keys: '[MouseLeft>]',
+                    target: resizer,
+                },
+                {
+                    coords: {
+                        x: window.innerWidth - 700,
+                        y: 100,
+                    },
+                    target: document.body,
+                },
                 {keys: '[/MouseLeft]'},
             ]);
 
@@ -123,12 +130,9 @@ describe('TPage', () => {
             // Assert
             expect(informationArea).toHaveClass('t-page__information-area--visible');
             expect(informationArea).not.toHaveStyle({flex: `0 0 ${defaultPanelWidth}`});
-
         });
 
-
         it('When clicking info panel icon, information area has t-page__information-area--visible class and flex style', async () => {
-
             // Arrange
             const infoContent = 'test information data';
 
@@ -146,11 +150,9 @@ describe('TPage', () => {
 
             // Assert
             expect(informationArea).toHaveClass('t-page__information-area--visible');
-
         });
 
         it('When clicking close icon, information pannel will be closed', async () => {
-
             // Arrange
             const infoContent = 'test information data';
 
@@ -173,11 +175,9 @@ describe('TPage', () => {
 
             // Assert
             expect(afterInfoArea).toHaveClass('t-page__information-area--invisible');
-
         });
 
         it('When info panel opened and clicking info panel icon, information content should be displayed on information area', async () => {
-
             // Arrange
             const infoContent = 'test information data';
 
@@ -203,15 +203,11 @@ describe('TPage', () => {
 
             // Assert
             expect(afterInfoArea).toHaveClass('t-page__information-area--invisible');
-
         });
-
     });
 
     describe('Content', () => {
-
         it('When children prop applied, it should be displayed on content area', () => {
-
             // Arrange
             const pageContent = 'test content';
 
@@ -221,11 +217,9 @@ describe('TPage', () => {
 
             // Assert
             expect(root).toHaveTextContent(pageContent);
-
         });
 
         it('When title prop applied, it should be displayed on title area', () => {
-
             // Arrange
             const pageTitle = 'Test Title';
 
@@ -235,11 +229,9 @@ describe('TPage', () => {
 
             // Assert
             expect(title).toHaveTextContent(pageTitle);
-
         });
 
         it('When infoPanelContent prop applied, it should be displayed on content area', () => {
-
             // Arrange
             const infoContent = 'test info content';
 
@@ -249,11 +241,9 @@ describe('TPage', () => {
 
             // Assert
             expect(title).toHaveTextContent(infoContent);
-
         });
 
         it('When infoPanelContent prop applied, icon should be displayed on content area', () => {
-
             // Arrange
             const infoContent = 'test info content';
 
@@ -265,9 +255,6 @@ describe('TPage', () => {
             // Assert
             expect(informationIcon).toBeInTheDocument();
             expect(closeIcon).toBeInTheDocument();
-
         });
-
     });
-
 });

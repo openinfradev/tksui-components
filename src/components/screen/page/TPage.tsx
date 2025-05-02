@@ -1,21 +1,19 @@
 'use client';
 
-import {EventHandler, memo, MouseEvent, MouseEventHandler, useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import {TIcon, TPageProps} from '@/components';
-import themeToken from '~style/designToken/ThemeToken.module.scss';
+import type {EventHandler, MouseEvent, MouseEventHandler} from 'react';
+import {memo, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 
+import type {TPageProps} from '@/components';
+import {TIcon} from '@/components';
+
+import themeToken from '~style/designToken/ThemeToken.module.scss';
 
 const defaultPanelWidth = '280px';
 
-const TPage = ({
-    contentDirection = 'top-bottom',
-    ...restProps
-}: TPageProps) => {
-
-
+const TPage = ({contentDirection = 'top-bottom', ...restProps}: TPageProps) => {
     // region [Hooks]
 
-    const props:TPageProps = {contentDirection, ...restProps};
+    const props: TPageProps = {contentDirection, ...restProps};
 
     const [isInfoPanelOpened, setIsInfoPanelOpened] = useState<boolean>(false);
     const [isInfoPanelResizing, setIsInfoPanelResizing] = useState<boolean>(false);
@@ -24,7 +22,6 @@ const TPage = ({
     const rootRef = useRef<HTMLDivElement>(null);
 
     // endregion
-
 
     // region [Events]
 
@@ -67,18 +64,20 @@ const TPage = ({
 
     // endregion
 
-
     // region [Styles]
 
     const rootClass = useMemo((): string => {
         const clazz: string[] = [];
 
-        if (props.className) { clazz.push(props.className); }
-        if (isInfoPanelResizing) { clazz.push('t-page--resizing'); }
+        if (props.className) {
+            clazz.push(props.className);
+        }
+        if (isInfoPanelResizing) {
+            clazz.push('t-page--resizing');
+        }
 
         return clazz.join(' ');
     }, [isInfoPanelResizing, props.className]);
-
 
     const infoPanelClass = useMemo((): string => {
         const clazz: string[] = [];
@@ -89,25 +88,22 @@ const TPage = ({
             clazz.push('t-page__information-area--invisible');
         }
 
-        if (isInfoPanelResizing) { clazz.push('t-page__information-area--resizing'); }
+        if (isInfoPanelResizing) {
+            clazz.push('t-page__information-area--resizing');
+        }
 
         return clazz.join(' ');
     }, [isInfoPanelOpened, isInfoPanelResizing]);
 
-
-    const contentAreaClass = useMemo(() : string => {
-
+    const contentAreaClass = useMemo((): string => {
         return `t-page__content-area--direction-${props.contentDirection}`;
     }, [props.contentDirection]);
 
-
     const containerWidth = useMemo(() => {
-
         return isInfoPanelOpened ? `calc(100% - ${panelWidth})` : '100%';
     }, [isInfoPanelOpened, panelWidth]);
 
     // endregion
-
 
     // region [Effects]
 
@@ -120,73 +116,62 @@ const TPage = ({
 
     // endregion
 
-
     return (
-        <div className={`t-page ${rootClass}`}
-             style={props.style}
-             ref={rootRef}
-             id={props.id}
-             data-testid={'t-page-root'}>
+        <div
+            className={`t-page ${rootClass}`}
+            style={props.style}
+            ref={rootRef}
+            id={props.id}
+            data-testid={'t-page-root'}
+        >
             <div className={'t-page__content-container'} style={{width: containerWidth}}>
                 <div className={'t-page__title-area'}>
                     <h3 className={'t-page__title-area__title'}>{props.title}</h3>
 
-                    {
-                        props.infoPanelContent && (
-                            <TIcon fill
-                                   clickable
-                                   color={themeToken.tBlackColor}
-                                   onClick={onClickInfoToggle}>
-                                info
-                            </TIcon>
-                        )
-                    }
+                    {props.infoPanelContent && (
+                        <TIcon fill clickable color={themeToken.tBlackColor} onClick={onClickInfoToggle}>
+                            info
+                        </TIcon>
+                    )}
                 </div>
 
-                <article className={`t-page__content-area ${contentAreaClass}`}>
-                    {props.children}
-                </article>
+                <article className={`t-page__content-area ${contentAreaClass}`}>{props.children}</article>
             </div>
 
-            {
-                props.infoPanelContent && (
-                    <div className={`t-page__information-area ${infoPanelClass}`}
-                         style={isInfoPanelOpened ? {flex: `0 0 ${panelWidth}`} : {}}
-                         data-testid='t-page-information-area'>
-                        {
-                            isInfoPanelOpened && (
-                                <div className={'t-page__information-area__resizer'}
-                                     onMouseDown={onMouseDown}
-                                     data-testid={'t-page-information-area-resizer'}
-                                />
-                            )
-                        }
-                        <div className={'t-page__information-area__container'}>
-                            <div className={'t-page__information-area__header'}>
-                                <TIcon className={'t-page__information-area__header__close'}
-                                       clickable
-                                       onClick={onClickInfoClose}>close</TIcon>
-                            </div>
-                            {
-                                props.infoPanelTitle && (
-                                    <div className={'t-page__information-area__title'}>
-                                        {props.infoPanelTitle}
-                                    </div>
-                                )
-                            }
-                            <div className={'t-page__information-area__content'}>
-                                {props.infoPanelContent}
-                            </div>
+            {props.infoPanelContent && (
+                <div
+                    className={`t-page__information-area ${infoPanelClass}`}
+                    style={isInfoPanelOpened ? {flex: `0 0 ${panelWidth}`} : {}}
+                    data-testid='t-page-information-area'
+                >
+                    {isInfoPanelOpened && (
+                        <div
+                            className={'t-page__information-area__resizer'}
+                            onMouseDown={onMouseDown}
+                            data-testid={'t-page-information-area-resizer'}
+                        />
+                    )}
+                    <div className={'t-page__information-area__container'}>
+                        <div className={'t-page__information-area__header'}>
+                            <TIcon
+                                className={'t-page__information-area__header__close'}
+                                clickable
+                                onClick={onClickInfoClose}
+                            >
+                                close
+                            </TIcon>
                         </div>
+                        {props.infoPanelTitle && (
+                            <div className={'t-page__information-area__title'}>{props.infoPanelTitle}</div>
+                        )}
+                        <div className={'t-page__information-area__content'}>{props.infoPanelContent}</div>
                     </div>
-                )
-            }
+                </div>
+            )}
         </div>
     );
 };
 
-
 TPage.displayName = 'TPage';
 
 export default memo(TPage);
-

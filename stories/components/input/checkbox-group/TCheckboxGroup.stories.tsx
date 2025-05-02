@@ -1,11 +1,11 @@
-import {Meta, StoryObj} from '@storybook/react';
+import type {Meta, StoryObj} from '@storybook/react';
+
 import useInputState from '@/common/hook/UseInputState';
 import useRefs from '@/common/hook/UseRefs';
-import TCheckboxGroup from '@/components/input/checkbox-group/TCheckboxGroup';
-import {TCheckboxGroupValue} from '@/components/input/checkbox-group/TCheckboxGroup.interface';
 import TValidatorRule from '@/common/validator/TValidatorRule';
 import TButton from '@/components/button/button/TButton';
-
+import TCheckboxGroup from '@/components/input/checkbox-group/TCheckboxGroup';
+import type {TCheckboxGroupValue} from '@/components/input/checkbox-group/TCheckboxGroup.interface';
 
 const meta: Meta<typeof TCheckboxGroup> = {
     title: 'Input/TCheckboxGroup',
@@ -29,53 +29,56 @@ const items = [
 // region [Normal]
 
 const NormalTemplate = () => {
-
     const checkboxGroup1 = useInputState<TCheckboxGroupValue>([]);
     const checkboxGroup2 = useInputState<TCheckboxGroupValue>([]);
     const checkboxGroup3 = useInputState<TCheckboxGroupValue>([]);
 
-
-    return (<>
-        Value Key 예제: {checkboxGroup1.value.join(', ')} <br/><br/>
-        <TCheckboxGroup value={checkboxGroup1.value}
-                        onChange={checkboxGroup1.onChange}
-                        items={items}
-                        valueKey={'value2'}
-        />
-        <br/><br/><br/>
-
-        Text Key 예제: {checkboxGroup2.value.join(', ')} <br/><br/>
-        <TCheckboxGroup value={checkboxGroup2.value}
-                        onChange={checkboxGroup2.onChange}
-                        items={items}
-                        textKey={'koreanText'}
-        />
-        <br/><br/><br/>
-
-        Label Template: {checkboxGroup3.value.join(', ')} <br/><br/>
-        <TCheckboxGroup value={checkboxGroup3.value}
-                        onChange={checkboxGroup3.onChange}
-                        items={items}
-                        labelTemplate={(item) => `${item.koreanText} (${item.text})`}
-        />
-        <br/>
-
-    </>);
+    return (
+        <>
+            Value Key 예제: {checkboxGroup1.value.join(', ')} <br />
+            <br />
+            <TCheckboxGroup
+                value={checkboxGroup1.value}
+                onChange={checkboxGroup1.onChange}
+                items={items}
+                valueKey={'value2'}
+            />
+            <br />
+            <br />
+            <br />
+            Text Key 예제: {checkboxGroup2.value.join(', ')} <br />
+            <br />
+            <TCheckboxGroup
+                value={checkboxGroup2.value}
+                onChange={checkboxGroup2.onChange}
+                items={items}
+                textKey={'koreanText'}
+            />
+            <br />
+            <br />
+            <br />
+            Label Template: {checkboxGroup3.value.join(', ')} <br />
+            <br />
+            <TCheckboxGroup
+                value={checkboxGroup3.value}
+                onChange={checkboxGroup3.onChange}
+                items={items}
+                labelTemplate={(item) => `${item.koreanText} (${item.text})`}
+            />
+            <br />
+        </>
+    );
 };
-
 
 export const Default: Story = {
     render: NormalTemplate,
 };
 
-
 // endregion
-
 
 // region [Validation]
 
 const ValidationTemplate = (args) => {
-
     const checkboxGroup1 = useInputState<TCheckboxGroupValue>([]);
     const checkboxGroup2 = useInputState<TCheckboxGroupValue>([]);
 
@@ -86,35 +89,45 @@ const ValidationTemplate = (args) => {
         checkboxGroup2Ref.current.validate();
     }
 
-    return (<>
-        <TButton main onClick={validateAll}>검사</TButton>
-        <br/><br/><br/><br/>
-
-        실패메시지 표시<br/><br/>
-        <TCheckboxGroup {...args}
-                        ref={checkboxGroup1Ref}
-                        value={checkboxGroup1.value}
-                        onChange={checkboxGroup1.onChange}
-                        items={items}
-                        valueKey={'value2'}
-                        rules={[TValidatorRule.requiredArr('과일을 1개 이상 선택해 주세요')]}
-        />
-
-        <br/><br/>
-
-        성공, 실패메시지 표시<br/><br/>
-        <TCheckboxGroup {...args}
-                        ref={checkboxGroup2Ref}
-                        value={checkboxGroup2.value}
-                        onChange={checkboxGroup2.onChange}
-                        items={items}
-                        valueKey={'value2'}
-                        rules={[TValidatorRule.requiredArr('과일을 1개 이상 선택해 주세요')]}
-                        successMessage={'드디어 과일을 선택하셨군요!'}
-        />
-    </>);
+    return (
+        <>
+            <TButton main onClick={validateAll}>
+                검사
+            </TButton>
+            <br />
+            <br />
+            <br />
+            <br />
+            실패메시지 표시
+            <br />
+            <br />
+            <TCheckboxGroup
+                {...args}
+                ref={checkboxGroup1Ref}
+                value={checkboxGroup1.value}
+                onChange={checkboxGroup1.onChange}
+                items={items}
+                valueKey={'value2'}
+                rules={[TValidatorRule.requiredArr('과일을 1개 이상 선택해 주세요')]}
+            />
+            <br />
+            <br />
+            성공, 실패메시지 표시
+            <br />
+            <br />
+            <TCheckboxGroup
+                {...args}
+                ref={checkboxGroup2Ref}
+                value={checkboxGroup2.value}
+                onChange={checkboxGroup2.onChange}
+                items={items}
+                valueKey={'value2'}
+                rules={[TValidatorRule.requiredArr('과일을 1개 이상 선택해 주세요')]}
+                successMessage={'드디어 과일을 선택하셨군요!'}
+            />
+        </>
+    );
 };
-
 
 export const Validation: Story = {
     render: ValidationTemplate,

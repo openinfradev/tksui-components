@@ -1,9 +1,9 @@
-import {Meta, StoryObj} from '@storybook/react';
-import {ReactNode} from 'react';
-import TChip from '@/components/input/chip/TChip';
-import {TChipProps} from '@/components/input/chip/TChip.interface';
-import TToast, {notify} from '@/components/guide/toast/TToast';
+import type {Meta, StoryObj} from '@storybook/react';
+import type {ReactNode} from 'react';
 
+import TToast, {notify} from '@/components/guide/toast/TToast';
+import TChip from '@/components/input/chip/TChip';
+import type {TChipProps} from '@/components/input/chip/TChip.interface';
 
 const meta: Meta<typeof TChip> = {
     title: 'Input/TChip',
@@ -13,20 +13,17 @@ export default meta;
 
 type Story = StoryObj<typeof TChip>;
 
-
-const Container = ({label, children}: { label: string, children: ReactNode }) => {
+const Container = ({label, children}: {label: string; children: ReactNode}) => {
     return (
         <div style={{border: '1px solid #eee', padding: '16px'}}>
             <p style={{marginBottom: '16px', fontSize: '14px'}}>{label}</p>
-            <div style={{display: 'flex', alignItems: 'center', gap: '16px'}}>
-                {children}
-            </div>
+            <div style={{display: 'flex', alignItems: 'center', gap: '16px'}}>{children}</div>
         </div>
     );
 };
 
-
-const NormalTemplate = (args: TChipProps) => (
+const NormalTemplate = (args: TChipProps) =>
+    //prettier-ignore
     <div style={{display: 'flex', flexDirection: 'column', gap: '32px'}}>
 
         <Container label={'Chip(type: Outlined)'}>
@@ -45,11 +42,9 @@ const NormalTemplate = (args: TChipProps) => (
         </Container>
 
         <TToast/>
-    </div>);
-
+    </div>;
 
 export const Default: Story = {
     render: NormalTemplate,
     args: {onRemove: undefined},
 };
-

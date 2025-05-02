@@ -1,4 +1,5 @@
 import {render, screen} from '@testing-library/react';
+
 import TStepBoxHeader from '~/data-container/step-box/TStepBoxHeader';
 
 describe('TStepBoxHeader', () => {
@@ -11,9 +12,7 @@ describe('TStepBoxHeader', () => {
     };
 
     describe('Render', () => {
-
         it('Renders without errors', () => {
-
             // Arrange
             render(<TStepBoxHeader {...baseProps} />);
 
@@ -22,7 +21,6 @@ describe('TStepBoxHeader', () => {
         });
 
         it('Renders steps with correct numbering and labels', () => {
-
             // Arrange
             render(<TStepBoxHeader {...baseProps} />);
 
@@ -36,22 +34,17 @@ describe('TStepBoxHeader', () => {
                 expect(listItems[index]).toHaveTextContent(item.stepNumber.toString());
                 expect(listItems[index]).toHaveTextContent(item.label);
             });
-
         });
 
         it('ID prop applies to root', () => {
-
             // Arrange
             const testId = 'test-id';
-            render(<TStepBoxHeader content={[]} id={testId}/>);
+            render(<TStepBoxHeader content={[]} id={testId} />);
             const root = screen.getByTestId('step-box-header-root');
 
             // Assert
             expect(root).toHaveProperty('id');
             expect(root.id).toEqual(testId);
-
         });
-
     });
-
 });

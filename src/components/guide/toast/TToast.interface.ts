@@ -1,3 +1,3 @@
-import {ToastContainerProps} from 'react-toastify';
+import type {ToastContainerProps} from 'react-toastify';
 
 export type TToastProps = ToastContainerProps;

@@ -1,6 +1,9 @@
-import {CSSProperties, ReactElement, useMemo} from 'react';
-import {TStepBoxProps} from '@/components';
+import type {CSSProperties, ReactElement} from 'react';
+import {useMemo} from 'react';
+
+import type {TStepBoxProps} from '@/components';
 import TStepBoxContext from './TStepBoxContext';
+
 import TStepBoxHeader from '~/data-container/step-box/TStepBoxHeader';
 import TStepBoxItem from '~/data-container/step-box/TStepBoxItem';
 
@@ -14,93 +17,95 @@ const TStepBox = ({
     className,
     ...restProps
 }: TStepBoxProps) => {
-
     // region [Hooks]
 
-    const props: TStepBoxProps = {prevButtonLabel, nextButtonLabel, completeButtonLabel, value, children, style, className, ...restProps};
+    const props: TStepBoxProps = {
+        prevButtonLabel,
+        nextButtonLabel,
+        completeButtonLabel,
+        value,
+        children,
+        style,
+        className,
+        ...restProps,
+    };
 
     // endregion
 
-    const headerContent: {stepNumber: number, label: string | ReactElement}[] = useMemo(() => {
-
-        return props.stepLabels.map(
-            (item: string | ReactElement, index: number) => ({
-                stepNumber: index + 1,
-                label: item,
-            }),
-        );
+    const headerContent: {stepNumber: number; label: string | ReactElement}[] = useMemo(() => {
+        return props.stepLabels.map((item: string | ReactElement, index: number) => ({
+            stepNumber: index + 1,
+            label: item,
+        }));
     }, [props.stepLabels]);
 
-    const stepItemContent = useMemo(
-        () => {
-            let content = null;
+    const stepItemContent = useMemo(() => {
+        let content = null;
 
-            if (children?.length === undefined) {
-                if (!children) { // children 안들어옴
-                    return null;
-                }
-                content = children; // children 1개
-            } else { // children 2개 이상
-                content = children[value - 1];
+        if (children?.length === undefined) {
+            if (!children) {
+                // children 안들어옴
+                return null;
             }
+            content = children; // children 1개
+        } else {
+            // children 2개 이상
+            content = children[value - 1];
+        }
 
-            if (!content.props.children) {
-                return content;
-            }
+        if (!content.props.children) {
+            return content;
+        }
 
-            return (
-                <TStepBoxItem prevButtonLabel={props.prevButtonLabel}
-                              nextButtonLabel={props.nextButtonLabel}
-                              completeButtonLabel={props.completeButtonLabel}
-                              {...content.props}
-                />
-            );
-        },
-
-        [children, props.completeButtonLabel, props.nextButtonLabel, props.prevButtonLabel, value],
-    );
-
+        return (
+            <TStepBoxItem
+                prevButtonLabel={props.prevButtonLabel}
+                nextButtonLabel={props.nextButtonLabel}
+                completeButtonLabel={props.completeButtonLabel}
+                {...content.props}
+            />
+        );
+    }, [children, props.completeButtonLabel, props.nextButtonLabel, props.prevButtonLabel, value]);
 
     // region [Privates]
 
-
     // endregion
-
 
     // region [Templates]
 
     const rootClass = useMemo((): string => {
         const clazz: string[] = [];
 
-        if (className) { clazz.push(className); }
+        if (className) {
+            clazz.push(className);
+        }
 
         return clazz.join(' ');
     }, [className]);
 
     const rootStyle = useMemo((): CSSProperties => {
-        if (style) { return style; }
+        if (style) {
+            return style;
+        }
         return {};
     }, [style]);
 
     // endregion
 
     return (
-        <div
-            className={`t-step-box ${rootClass}`}
-            style={rootStyle}
-            id={props.id}
-            data-testid={'step-box-root'}
-        >
-            <TStepBoxContext.Provider value={{
-                currentStep: value,
-                totalStep: children?.length,
-                onChangeCurrentStep: props.onChange,
-                nextButtonLabel: props.nextButtonLabel,
-                prevButtonLabel: props.prevButtonLabel,
-                completeButtonLabel: props.completeButtonLabel,
-            }}>
+        <div className={`t-step-box ${rootClass}`} style={rootStyle} id={props.id} data-testid={'step-box-root'}>
+            <TStepBoxContext.Provider
+                value={{
+                    currentStep: value,
+                    totalStep: children?.length,
+                    onChangeCurrentStep: props.onChange,
+                    nextButtonLabel: props.nextButtonLabel,
+                    prevButtonLabel: props.prevButtonLabel,
+                    completeButtonLabel: props.completeButtonLabel,
+                }}
+            >
                 {/* Header */}
-                <TStepBoxHeader content={headerContent}/>
+                <TStepBoxHeader content={headerContent} />
 
                 {/* Content & Footer */}
                 {stepItemContent}
@@ -110,6 +115,5 @@ const TStepBox = ({
 };
 
 TStepBox.displayName = 'TStepBox';
-
 
 export default TStepBox;

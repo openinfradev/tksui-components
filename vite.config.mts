@@ -1,12 +1,11 @@
 import path from 'path';
-import {defineConfig, UserConfigExport, type PluginOption, loadEnv} from 'vite';
+import {defineConfig, type PluginOption, UserConfigExport} from 'vite';
 import react from '@vitejs/plugin-react';
 import {visualizer} from 'rollup-plugin-visualizer';
 
 import compression from 'vite-plugin-compression2';
 
-const resolve = (dir) => path.join(__dirname, '.', dir);
-
+const resolve = (dir: string) => path.join(__dirname, '.', dir);
 
 // region [Common Config]
 
@@ -21,8 +20,8 @@ const commonConfig = () => ({
     resolve: {
         extensions: ['.tsx', '.ts', '.scss', '.js'],
         alias: {
-            // IntelliJ doesn't recognize vite alias yet
-            // Aliases should be set in tsconfig.json, main.ts as well
+            // IntelliJ doesn't recognize vite alias, yet
+            // Aliases should be set in tsconfig.json, main.mts as well
             // @See https://youtrack.jetbrains.com/issue/WEB-55332/Vite-aliases-in-vite.config-support
             '@': resolve('src'),
             '~': resolve('src/components'),
@@ -31,20 +30,44 @@ const commonConfig = () => ({
     },
     css: {
         preprocessorOptions: {
-            scss: {
-            },
+            scss: {},
         },
         devSourcemap: true,
     },
     envDir: './dotenv',
     // @formatter:off
-    envPrefix: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
-        'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
+    envPrefix: [
+        'A',
+        'B',
+        'C',
+        'D',
+        'E',
+        'F',
+        'G',
+        'H',
+        'I',
+        'J',
+        'K',
+        'L',
+        'M',
+        'N',
+        'O',
+        'P',
+        'Q',
+        'R',
+        'S',
+        'T',
+        'U',
+        'V',
+        'W',
+        'X',
+        'Y',
+        'Z',
+    ],
     // @formatter:on
 });
 
 // endregion
-
 
 // region [DevServer Config]
 
@@ -68,7 +91,6 @@ const devServerConfig = () => ({
 
 // endregion
 
-
 // region [Production Config]
 
 const outputConfig = () => ({
@@ -79,38 +101,34 @@ const outputConfig = () => ({
 
 // endregion
 
-
 /**
  * Vite Manual, Vite 매뉴얼
  * https://vitejs.dev/config/
  * https://vitejs-kr.github.io/
  */
-export default defineConfig(
-    ({mode, command}) => {
-        // dev (dev, serve), preview (prod, serve), build (prod, build)
+export default defineConfig(({mode, command}) => {
+    // dev (dev, serve), preview (prod, serve), build (prod, build)
 
-        let config: UserConfigExport = {...commonConfig()};
+    let config: UserConfigExport = {...commonConfig()};
 
-        if (command === 'serve') {
-            config = {...config, ...devServerConfig()};
+    if (command === 'serve') {
+        config = {...config, ...devServerConfig()};
+    }
+    if (mode === 'production') {
+        config = {...config, ...outputConfig()};
+        if (process.env.npm_lifecycle_event === 'analyze') {
+            config.plugins = [
+                ...config.plugins,
+                visualizer({
+                    // https://github.com/btd/rollup-plugin-visualizer
+                    title: 'TKS Bundle Report',
+                    filename: './dist/tks-bundle-report.html',
+                    open: true,
+                    gzipSize: true,
+                }) as unknown as PluginOption,
+            ];
         }
-        if (mode === 'production') {
-            config = {...config, ...outputConfig()};
-            if (process.env.npm_lifecycle_event === 'analyze') {
-                config.plugins = [
-                    ...config.plugins,
-                    visualizer({
-                        // https://github.com/btd/rollup-plugin-visualizer
-                        title: 'TKS Bundle Report',
-                        filename: './dist/tks-bundle-report.html',
-                        open: true,
-                        gzipSize: true,
-                    }) as unknown as PluginOption,
-                ];
-            }
-        }
+    }
 
-        return config;
-    },
-);
-
+    return config;
+});

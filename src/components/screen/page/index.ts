@@ -1,3 +1,2 @@
-export { default as TPage } from './TPage';
-
+export {default as TPage} from './TPage';
 export * from './TPage.interface';

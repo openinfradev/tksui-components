@@ -1,14 +1,15 @@
-import {Meta, StoryObj} from '@storybook/react';
+import type {Meta, StoryObj} from '@storybook/react';
+import type {ColDef} from 'ag-grid-community';
+import type {AgGridReact} from 'ag-grid-react';
 import {useEffect, useMemo, useRef, useState} from 'react';
-import {AgGridReact} from 'ag-grid-react';
-import {ColDef} from 'ag-grid-community';
-import TButton from '@/components/button/button/TButton';
-import TSection from '~/data-container/section/TSection';
-import {TSectionProps} from '@/components';
+
 import useInputState from '@/common/hook/UseInputState';
+import type {TSectionProps} from '@/components';
+import TButton from '@/components/button/button/TButton';
 import TToast, {notify} from '@/components/guide/toast/TToast';
 import TDataGrid from '../../../../src/components/data-container/data-grid/TDataGrid';
 
+import TSection from '~/data-container/section/TSection';
 
 const meta: Meta<typeof TSection> = {
     title: 'DataContainer/TSection',
@@ -18,9 +19,7 @@ export default meta;
 
 type Story = StoryObj<typeof TSection>;
 
-
 const Template = (args: TSectionProps) => {
-
     const gridRef = useRef<AgGridReact>(null);
 
     const [rowData, setRowData] = useState([]);
@@ -50,34 +49,44 @@ const Template = (args: TSectionProps) => {
         {headerName: '과일', field: 'fruit', flex: 1},
     ]);
 
-    const gridRightAction = useMemo(() => (<>
-        <TButton onClick={() => notify.info('생성하기 이벤트 발생')}>생성하기</TButton>
-        <TButton onClick={() => notify.info('삭제 이벤트 발생')} disabled={selectedRows.value.length === 0}>삭제</TButton>
-        <TButton onClick={() => notify.info('수정 이벤트 발생')} disabled={selectedRows.value.length !== 1}>수정</TButton>
-        <TButton onClick={() => notify.info('다운로드 이벤트 발생')}>다운로드</TButton>
-    </>), [selectedRows.value.length]);
-
-    const leftAction = () => (
-        <TButton onClick={() => notify.info('목록 돌아가기 이벤트 발생')}>목록</TButton>
+    const gridRightAction = useMemo(
+        () => (
+            <>
+                <TButton onClick={() => notify.info('생성하기 이벤트 발생')}>생성하기</TButton>
+                <TButton onClick={() => notify.info('삭제 이벤트 발생')} disabled={selectedRows.value.length === 0}>
+                    삭제
+                </TButton>
+                <TButton onClick={() => notify.info('수정 이벤트 발생')} disabled={selectedRows.value.length !== 1}>
+                    수정
+                </TButton>
+                <TButton onClick={() => notify.info('다운로드 이벤트 발생')}>다운로드</TButton>
+            </>
+        ),
+        [selectedRows.value.length]
     );
 
-    const rightAction = () => (<>
-        <TButton onClick={() => notify.info('취소 이벤트 발생')}>취소</TButton>
-        <TButton main onClick={() => notify.info('저장 이벤트 발생')}>저장</TButton>
-    </>);
+    const leftAction = () => <TButton onClick={() => notify.info('목록 돌아가기 이벤트 발생')}>목록</TButton>;
 
+    const rightAction = () => (
+        <>
+            <TButton onClick={() => notify.info('취소 이벤트 발생')}>취소</TButton>
+            <TButton main onClick={() => notify.info('저장 이벤트 발생')}>
+                저장
+            </TButton>
+        </>
+    );
 
     return (
         <>
-            <TToast/>
+            <TToast />
             <TSection label={'Basic Properties'} {...args} leftAction={leftAction()} rightAction={rightAction()}>
-                <TDataGrid ref={gridRef}
-                           rowData={rowData}
-                           rowSelection={{mode: 'multiRow', enableClickSelection: false}}
-                           rightAction={gridRightAction}
-                           columnDefs={columnDefs}
-                           onChange={selectedRows.onChange}
-
+                <TDataGrid
+                    ref={gridRef}
+                    rowData={rowData}
+                    rowSelection={{mode: 'multiRow', enableClickSelection: false}}
+                    rightAction={gridRightAction}
+                    columnDefs={columnDefs}
+                    onChange={selectedRows.onChange}
                 />
             </TSection>
         </>

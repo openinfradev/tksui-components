@@ -1,80 +1,70 @@
 import {act, render, renderHook, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {useRef} from 'react';
-import TTextField from '~/input/text-field/TTextField';
-import {TTextFieldRef} from '@/components';
-import TValidatorRule from '@/common/validator/TValidatorRule';
 
+import TValidatorRule from '@/common/validator/TValidatorRule';
+import type {TTextFieldRef} from '@/components';
+
+import TTextField from '~/input/text-field/TTextField';
 
 describe('TTextField', () => {
-
     const mockOnChange = jest.fn();
     const baseProps = {
         value: 'hello',
         onChange: mockOnChange,
     };
 
-    beforeEach(() => { mockOnChange.mockClear(); });
-
+    beforeEach(() => {
+        mockOnChange.mockClear();
+    });
 
     // region [Styles]
 
     describe('Styles', () => {
-
-
         it('renders without errors', () => {
-            render(<TTextField value={'hello'} onChange={mockOnChange}/>);
-            expect(screen.getByTestId('text-field-root'))
-                .toBeInTheDocument();
+            render(<TTextField value={'hello'} onChange={mockOnChange} />);
+            expect(screen.getByTestId('text-field-root')).toBeInTheDocument();
         });
 
         it('Classname prop applies to root', () => {
-
             // Arrange
-            render(<TTextField {...baseProps} className={'class-name-prop'}/>);
+            render(<TTextField {...baseProps} className={'class-name-prop'} />);
 
             // Assert
             const root = screen.getByTestId('text-field-root');
 
-            expect(root)
-                .toHaveClass('class-name-prop');
+            expect(root).toHaveClass('class-name-prop');
         });
 
         it('Style prop applies to root', () => {
-
             // Arrange
-            render(<TTextField {...baseProps} style={{width: '300px'}}/>);
+            render(<TTextField {...baseProps} style={{width: '300px'}} />);
 
             // Assert
             const root = screen.getByTestId('text-field-root');
 
-            expect(root)
-                .toHaveStyle({width: '300px'});
+            expect(root).toHaveStyle({width: '300px'});
         });
 
         it('Width prop applies to root', () => {
-
             // Arrange
-            render(<TTextField {...baseProps} width={'300px'}/>);
+            render(<TTextField {...baseProps} width={'300px'} />);
 
             // Assert
             const root = screen.getByTestId('text-field-root');
 
-            expect(root)
-                .toHaveStyle({width: '300px'});
+            expect(root).toHaveStyle({width: '300px'});
         });
 
         it('Id prop applies to root', () => {
-
             // Arrange
             const idProp = 'my-id';
-            render(<TTextField {...baseProps} id={idProp}/>);
+            render(<TTextField {...baseProps} id={idProp} />);
 
             // Assert
             const root = screen.getByTestId('text-field-root');
 
-            expect(root)
-                .toHaveAttribute('id', idProp);
+            expect(root).toHaveAttribute('id', idProp);
         });
     });
 
@@ -83,16 +73,21 @@ describe('TTextField', () => {
     // region [Value, Name]
 
     describe('Value, Name', () => {
-
         it('When name prop is applied, it triggers onKeyDown and validates input correctly', async () => {
-
             // Arrange
             const mockOnKeyDown = jest.fn();
 
             const {result} = renderHook(() => useRef<TTextFieldRef>(null));
             const textFieldRef = result.current;
 
-            render(<TTextField name={'test'} onKeyDown={mockOnKeyDown} ref={textFieldRef} rules={[TValidatorRule.required()]} />);
+            render(
+                <TTextField
+                    name={'test'}
+                    onKeyDown={mockOnKeyDown}
+                    ref={textFieldRef}
+                    rules={[TValidatorRule.required()]}
+                />
+            );
 
             // Assert
             const inputElement = screen.getByTestId('text-field-input');
@@ -103,12 +98,9 @@ describe('TTextField', () => {
             });
 
             // Assert
-            expect(mockOnKeyDown)
-                .toHaveBeenCalledTimes(1);
+            expect(mockOnKeyDown).toHaveBeenCalledTimes(1);
 
-            expect(textFieldRef.current.getValidateResult())
-                .toBe(true);
-
+            expect(textFieldRef.current.getValidateResult()).toBe(true);
         });
     });
 
@@ -118,142 +110,115 @@ describe('TTextField', () => {
 
     describe('Shape', () => {
         it('When label prop is applies, label is shown', () => {
-
             // Arrange
             const labelText = 'foo';
-            render(<TTextField {...baseProps} label={labelText}/>);
+            render(<TTextField {...baseProps} label={labelText} />);
 
             // Assert
             const label = screen.getByText(labelText);
 
-            expect(label)
-                .toBeInTheDocument();
+            expect(label).toBeInTheDocument();
         });
 
         it('When required prop is applies, label has t-text-field__label--required class', () => {
-
             // Arrange
             const labelText = 'foo';
-            render(<TTextField {...baseProps} label={labelText} required/>);
+            render(<TTextField {...baseProps} label={labelText} required />);
 
             // Assert
             const label = screen.getByText(labelText);
 
-            expect(label)
-                .toHaveClass('t-text-field__label--required');
+            expect(label).toHaveClass('t-text-field__label--required');
         });
 
         it('When placeholder prop is applies, label has t-text-field__label--required class', () => {
-
             // Arrange
             const labelText = 'foo';
-            render(<TTextField {...baseProps} label={labelText} required/>);
+            render(<TTextField {...baseProps} label={labelText} required />);
 
             // Assert
             const label = screen.getByText(labelText);
 
-            expect(label)
-                .toHaveClass('t-text-field__label--required');
+            expect(label).toHaveClass('t-text-field__label--required');
         });
 
-
         it('When disabled prop is applies, root has t-text-field--disabled class', () => {
-
             // Arrange
-            render(<TTextField {...baseProps} disabled/>);
+            render(<TTextField {...baseProps} disabled />);
 
             // Assert
             const root = screen.getByTestId('text-field-root');
 
-            expect(root)
-                .toHaveClass('t-text-field--disabled');
+            expect(root).toHaveClass('t-text-field--disabled');
         });
 
         it('When readOnly prop is applies, root has t-text-field--read-only class', () => {
-
             // Arrange
-            render(<TTextField {...baseProps} readOnly/>);
+            render(<TTextField {...baseProps} readOnly />);
 
             // Assert
             const root = screen.getByTestId('text-field-root');
 
-            expect(root)
-                .toHaveClass('t-text-field--read-only');
+            expect(root).toHaveClass('t-text-field--read-only');
         });
 
         it('When dense prop is applies, root has t-text-field--dense class', () => {
-
             // Arrange
-            render(<TTextField {...baseProps} dense/>);
+            render(<TTextField {...baseProps} dense />);
 
             // Assert
             const root = screen.getByTestId('text-field-root');
 
-            expect(root)
-                .toHaveClass('t-text-field--dense');
+            expect(root).toHaveClass('t-text-field--dense');
         });
 
-
         it('When placeholder prop is applies, input has placeholder attribute', () => {
-
             // Arrange
             const placeholderText = 'foo';
-            render(<TTextField {...baseProps} placeholder={placeholderText}/>);
+            render(<TTextField {...baseProps} placeholder={placeholderText} />);
 
             // Assert
             const inputElement = screen.getByTestId('text-field-input');
 
-            expect(inputElement)
-                .toHaveAttribute('placeholder', placeholderText);
+            expect(inputElement).toHaveAttribute('placeholder', placeholderText);
         });
 
         it('When placeholder and disabled props are applied , input has NOT placeholder attribute', () => {
-
             // Arrange
             const placeholderText = 'foo';
-            render(<TTextField {...baseProps} placeholder={placeholderText} disabled/>);
+            render(<TTextField {...baseProps} placeholder={placeholderText} disabled />);
 
             // Assert
             const inputElement = screen.getByTestId('text-field-input');
 
-            expect(inputElement)
-                .not
-                .toHaveAttribute('placeholder', placeholderText);
+            expect(inputElement).not.toHaveAttribute('placeholder', placeholderText);
         });
 
         it('When placeholder and readOnly props are applied , input has NOT placeholder attribute', () => {
-
             // Arrange
             const placeholderText = 'foo';
-            render(<TTextField {...baseProps} placeholder={placeholderText} readOnly/>);
+            render(<TTextField {...baseProps} placeholder={placeholderText} readOnly />);
 
             // Assert
             const inputElement = screen.getByTestId('text-field-input');
 
-            expect(inputElement)
-                .not
-                .toHaveAttribute('placeholder', placeholderText);
+            expect(inputElement).not.toHaveAttribute('placeholder', placeholderText);
         });
 
         it('When readonly and searchable props are applied , search icon is shown', () => {
-
             // Arrange
-            render(<TTextField {...baseProps} readOnly searchable/>);
+            render(<TTextField {...baseProps} readOnly searchable />);
 
             // Assert
             const root = screen.getByTestId('text-field-root');
             const searchIcon = screen.getByLabelText('search');
 
-            expect(root)
-                .toHaveClass('t-text-field--read-only');
-            expect(searchIcon)
-                .toBeInTheDocument();
+            expect(root).toHaveClass('t-text-field--read-only');
+            expect(searchIcon).toBeInTheDocument();
         });
-
     });
 
     // endregion
-
 
     // region [Blur, Trim, Counter, Hint]
 
@@ -261,7 +226,7 @@ describe('TTextField', () => {
         it('When noTrim prop is not applied, the input value is not trimmed', async () => {
             // Arrange
             const mockOnBlur = jest.fn();
-            render(<TTextField value={' a '} onChange={mockOnChange} onBlur={mockOnBlur}/>);
+            render(<TTextField value={' a '} onChange={mockOnChange} onBlur={mockOnBlur} />);
             const inputElement = screen.getByTestId('text-field-input');
 
             // Act
@@ -272,18 +237,15 @@ describe('TTextField', () => {
                 await userEvent.tab();
             });
 
-
             // Assert
-            expect(mockOnChange)
-                .toHaveBeenCalledWith('a');
-            expect(mockOnBlur)
-                .toHaveBeenCalledTimes(1);
+            expect(mockOnChange).toHaveBeenCalledWith('a');
+            expect(mockOnBlur).toHaveBeenCalledTimes(1);
         });
 
         it('When noTrim prop is applied, the input value is trimmed', async () => {
             // Arrange
             const mockOnBlur = jest.fn();
-            render(<TTextField noTrim value={' a '} onChange={mockOnChange} onBlur={mockOnBlur}/>);
+            render(<TTextField noTrim value={' a '} onChange={mockOnChange} onBlur={mockOnBlur} />);
             const inputElement = screen.getByTestId('text-field-input');
 
             // Act
@@ -295,12 +257,9 @@ describe('TTextField', () => {
             });
 
             // Assert
-            expect(mockOnChange)
-                .toHaveBeenCalledTimes(0);
-            expect(mockOnBlur)
-                .toHaveBeenCalledTimes(1);
+            expect(mockOnChange).toHaveBeenCalledTimes(0);
+            expect(mockOnBlur).toHaveBeenCalledTimes(1);
         });
-
 
         it('When input element has focused, the counter shows the trimmed length and length limit', async () => {
             // Arrange
@@ -309,7 +268,7 @@ describe('TTextField', () => {
             const lengthLimit = 10;
             const trimmedLength = value.trim().length;
 
-            render(<TTextField value={value} onChange={mockOnChange} onBlur={mockOnBlur} counter={lengthLimit}/>);
+            render(<TTextField value={value} onChange={mockOnChange} onBlur={mockOnBlur} counter={lengthLimit} />);
             const inputElement = screen.getByTestId('text-field-input');
 
             // Act
@@ -319,8 +278,7 @@ describe('TTextField', () => {
             const counterElement = screen.getByTestId('text-field-counter');
 
             // Assert
-            expect(counterElement)
-                .toHaveTextContent(`${trimmedLength}/${lengthLimit}`);
+            expect(counterElement).toHaveTextContent(`${trimmedLength}/${lengthLimit}`);
         });
 
         it('When textarea element has focused, the counter shows the trimmed length and length limit', async () => {
@@ -330,7 +288,16 @@ describe('TTextField', () => {
             const lengthLimit = 10;
             const trimmedLength = value.trim().length;
 
-            render(<TTextField value={value} multiline rows={3} onChange={mockOnChange} onBlur={mockOnBlur} counter={lengthLimit}/>);
+            render(
+                <TTextField
+                    value={value}
+                    multiline
+                    rows={3}
+                    onChange={mockOnChange}
+                    onBlur={mockOnBlur}
+                    counter={lengthLimit}
+                />
+            );
             const textareaElement = screen.getByTestId('text-field-text-area');
 
             // Act
@@ -340,62 +307,48 @@ describe('TTextField', () => {
             const counterElement = screen.getByTestId('text-area-counter');
 
             // Assert
-            expect(counterElement)
-                .toHaveTextContent(`${trimmedLength}/${lengthLimit}`);
+            expect(counterElement).toHaveTextContent(`${trimmedLength}/${lengthLimit}`);
         });
-
 
         it('When hint prop is applied, the detail message shows the hint', () => {
             // Arrange
             const hintText = 'hint text';
 
-
             // Act
-            render(<TTextField {...baseProps} hint={hintText}/>);
+            render(<TTextField {...baseProps} hint={hintText} />);
             const message = screen.getByTestId('text-field-message');
 
             // Assert
-            expect(message)
-                .toHaveTextContent(hintText);
+            expect(message).toHaveTextContent(hintText);
         });
-
     });
 
-
     // endregion
-
 
     // region [Password, Searchable, AutoComplete, customAction]
 
     describe('Password, Searchable, AutoComplete, customAction', () => {
         it('When password prop is applies, input type is password and password icon is shown', () => {
             // Arrange
-            render(<TTextField {...baseProps} password/>);
+            render(<TTextField {...baseProps} password />);
             const passwordInput = screen.getByTestId('text-field-input');
             const passwordIcon = screen.getByLabelText('visibility');
 
             // Assert
-            expect(passwordInput)
-                .toHaveAttribute('type', 'password');
-            expect(passwordIcon)
-                .toBeInTheDocument();
+            expect(passwordInput).toHaveAttribute('type', 'password');
+            expect(passwordIcon).toBeInTheDocument();
         });
 
-
         it('When click the password icon, it toggles visibility of password', async () => {
-
             // Arrange
-            render(<TTextField {...baseProps} password/>);
+            render(<TTextField {...baseProps} password />);
 
             // Act
             let showPasswordIcon = screen.queryByLabelText('visibility');
             let hidePasswordIcon = screen.queryByLabelText('visibility_off');
 
-            expect(showPasswordIcon)
-                .toBeInTheDocument();
-            expect(hidePasswordIcon)
-                .not
-                .toBeInTheDocument();
+            expect(showPasswordIcon).toBeInTheDocument();
+            expect(hidePasswordIcon).not.toBeInTheDocument();
 
             await act(async () => {
                 await userEvent.click(showPasswordIcon);
@@ -403,11 +356,8 @@ describe('TTextField', () => {
             showPasswordIcon = screen.queryByLabelText('visibility');
             hidePasswordIcon = screen.queryByLabelText('visibility_off');
 
-            expect(showPasswordIcon)
-                .not
-                .toBeInTheDocument();
-            expect(hidePasswordIcon)
-                .toBeInTheDocument();
+            expect(showPasswordIcon).not.toBeInTheDocument();
+            expect(hidePasswordIcon).toBeInTheDocument();
 
             await act(async () => {
                 await userEvent.click(hidePasswordIcon);
@@ -415,102 +365,86 @@ describe('TTextField', () => {
             showPasswordIcon = screen.queryByLabelText('visibility');
             hidePasswordIcon = screen.queryByLabelText('visibility_off');
 
-            expect(showPasswordIcon)
-                .toBeInTheDocument();
-            expect(hidePasswordIcon)
-                .not
-                .toBeInTheDocument();
+            expect(showPasswordIcon).toBeInTheDocument();
+            expect(hidePasswordIcon).not.toBeInTheDocument();
         });
 
         it('When clearable prop is applies, clear icon is shown', () => {
             // Arrange
-            render(<TTextField {...baseProps} clearable/>);
+            render(<TTextField {...baseProps} clearable />);
             const clearIcon = screen.getByLabelText('clear');
 
             // Assert
-            expect(clearIcon)
-                .toBeInTheDocument();
+            expect(clearIcon).toBeInTheDocument();
         });
 
         it('When click the clear icon, value is cleared', async () => {
             // Arrange
-            render(<TTextField {...baseProps} clearable/>);
+            render(<TTextField {...baseProps} clearable />);
             const clearIcon = screen.getByLabelText('clear');
 
             // Act
             await userEvent.click(clearIcon);
 
             // Assert
-            expect(mockOnChange)
-                .toHaveBeenCalledWith('');
+            expect(mockOnChange).toHaveBeenCalledWith('');
         });
-
 
         it('When searchable prop is applies, search icon is shown', () => {
             // Arrange
-            render(<TTextField {...baseProps} searchable/>);
+            render(<TTextField {...baseProps} searchable />);
             const searchIcon = screen.getByLabelText('search');
 
             // Assert
-            expect(searchIcon)
-                .toBeInTheDocument();
+            expect(searchIcon).toBeInTheDocument();
         });
 
         it('When click the search icon, search handler is called', async () => {
             // Arrange
             const mockOnSearch = jest.fn();
-            render(<TTextField {...baseProps} searchable onClickSearch={mockOnSearch}/>);
+            render(<TTextField {...baseProps} searchable onClickSearch={mockOnSearch} />);
             const searchIcon = screen.getByLabelText('search');
 
             // Act
             await userEvent.click(searchIcon);
 
             // Assert
-            expect(mockOnSearch)
-                .toHaveBeenCalledTimes(1);
+            expect(mockOnSearch).toHaveBeenCalledTimes(1);
         });
 
         it('When autoComplete prop is applied, input element has autoComplete attribute', () => {
-
             // Arrange
             const autoCompleteValue = 'new-password';
-            render(<TTextField {...baseProps} password autoComplete={autoCompleteValue}/>);
+            render(<TTextField {...baseProps} password autoComplete={autoCompleteValue} />);
 
             // Assert
             const inputElement = screen.getByTestId('text-field-input');
 
-            expect(inputElement)
-                .toHaveAttribute('autocomplete', autoCompleteValue);
+            expect(inputElement).toHaveAttribute('autocomplete', autoCompleteValue);
         });
 
         it('When customAction prop is applied, input element has customAction attribute', () => {
-
             // Arrange
             const customTestId = 'custom-action';
-            const CustomActionComponent = () => (<div data-testid={customTestId}>Custom</div>);
-            render(<TTextField {...baseProps} customAction={<CustomActionComponent/>}/>);
+            const CustomActionComponent = () => <div data-testid={customTestId}>Custom</div>;
+            render(<TTextField {...baseProps} customAction={<CustomActionComponent />} />);
 
             // Assert
             const customActionRoot = screen.getByTestId(customTestId);
 
-            expect(customActionRoot)
-                .toBeInTheDocument();
+            expect(customActionRoot).toBeInTheDocument();
         });
-
     });
 
-
     // endregion
-
 
     // region [Events]
 
     describe('Events', () => {
         it('When type enter, onKeyDownEnter handler is called', async () => {
-
             // Arrange
             const mockOnKeyDownEnter = jest.fn();
-            render(<TTextField {...baseProps} password onKeyDownEnter={mockOnKeyDownEnter}/>);
+            render(<TTextField {...baseProps} password onKeyDownEnter={mockOnKeyDownEnter} />);
 
             // Assert
             const inputElement = screen.getByTestId('text-field-input');
@@ -520,15 +454,13 @@ describe('TTextField', () => {
             });
 
             // Assert
-            expect(mockOnKeyDownEnter)
-                .toHaveBeenCalledTimes(1);
+            expect(mockOnKeyDownEnter).toHaveBeenCalledTimes(1);
         });
 
         it('When type any key, onKeyDown handler is called', async () => {
-
             // Arrange
             const mockOnKeyDown = jest.fn();
-            render(<TTextField {...baseProps} password onKeyDown={mockOnKeyDown}/>);
+            render(<TTextField {...baseProps} password onKeyDown={mockOnKeyDown} />);
 
             // Assert
             const inputElement = screen.getByTestId('text-field-input');
@@ -538,14 +470,9 @@ describe('TTextField', () => {
             });
 
             // Assert
-            expect(mockOnKeyDown)
-                .toHaveBeenCalledTimes(1);
+            expect(mockOnKeyDown).toHaveBeenCalledTimes(1);
         });
-
     });
 
-
     // endregion
-
-
 });

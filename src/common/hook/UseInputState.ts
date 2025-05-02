@@ -2,7 +2,6 @@
 
 import {useState} from 'react';
 
-
 export default function useInputState<T>(initialValue: T) {
     const [state, setState] = useState<T>(initialValue);
 

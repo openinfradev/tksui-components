@@ -1,16 +1,15 @@
-import {ReactNode} from 'react';
-import {TBaseProps} from '@/common/base/TBase.interface';
+import type {ReactNode} from 'react';
+
+import type {TBaseProps} from '@/common/base/TBase.interface';
 
 export type TRadioValue = boolean | string;
 
 export interface TRadioProps extends TBaseProps {
+    children?: ReactNode;
+    positiveValue?: TRadioValue;
 
-    children?: ReactNode,
-    positiveValue?: TRadioValue,
+    selected?: boolean;
+    disabled?: boolean;
 
-    selected?: boolean,
-    disabled?: boolean,
-
-    onSelect(value: TRadioValue): void,
-
+    onSelect(value: TRadioValue): void;
 }

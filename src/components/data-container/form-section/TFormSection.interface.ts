@@ -1,41 +1,41 @@
-import {ReactElement, ReactNode, CSSProperties} from 'react';
-import {TBaseProps} from '@/common/base/TBase.interface';
+import type {CSSProperties, ReactElement, ReactNode} from 'react';
+
+import type {TBaseProps} from '@/common/base/TBase.interface';
 
 export type RowVerticalAlign = 'top' | 'middle';
 export type LabelItemAlign = 'horizontal' | 'vertical';
 
 export interface TFormSectionProps extends TBaseProps {
-    children: ReactNode,
+    children: ReactNode;
 
-    column?: number,
-    label?: string,
-    customLabel?: ReactElement,
-    information?: string,
-    customInformation?: ReactElement,
+    column?: number;
+    label?: string;
+    customLabel?: ReactElement;
+    information?: string;
+    customInformation?: ReactElement;
 
-    labelWidth?: string,
-    noRowDivider?: boolean,
+    labelWidth?: string;
+    noRowDivider?: boolean;
 
-    leftAction?: ReactElement,
-    rightAction?: ReactElement,
+    leftAction?: ReactElement;
+    rightAction?: ReactElement;
 
     formLabelItemAlign?: LabelItemAlign;
-    formRowVerticalAlign?: RowVerticalAlign,
+    formRowVerticalAlign?: RowVerticalAlign;
 }
 
-
 export interface TFormSectionRowProps extends TBaseProps {
-    children: ReactNode,
-    verticalAlign?: RowVerticalAlign,
+    children: ReactNode;
+    verticalAlign?: RowVerticalAlign;
 }
 
 export interface TFormSectionItemProps extends TBaseProps {
-    children: ReactNode,
+    children: ReactNode;
 
-    information?: string,
-    span?: number,
-    required?: boolean,
-    label?: string,
+    information?: string;
+    span?: number;
+    required?: boolean;
+    label?: string;
 
-    contentStyle?: CSSProperties,
+    contentStyle?: CSSProperties;
 }

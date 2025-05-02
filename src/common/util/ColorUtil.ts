@@ -10,11 +10,10 @@ function shadeColor(baseColor: string, amount: number): string {
     const isRGBA = baseColor.startsWith('rgba');
     const baseColorRGB = baseColor.match(/\d+(\.\d+)?/g).map(Number);
     const alpha = isRGBA ? baseColorRGB.pop() : 1;
-    const shadedColor = baseColorRGB.map((color) => Math.max(0, color - (color * (amount / 100))));
+    const shadedColor = baseColorRGB.map((color) => Math.max(0, color - color * (amount / 100)));
 
     return isRGBA ? `rgba(${shadedColor.join(',')},${alpha})` : `rgb(${shadedColor.join(',')})`;
 }
-
 
 /**
  * 주어진 기본 색상(baseColor)의 밝기를 주어진 퍼센트(amount)만큼 증가시켜 밝게 조절하여 RGB 또는 RGBA 문자열 형태로 반환합니다.
@@ -28,11 +27,10 @@ function tintColor(baseColor: string, amount: number): string {
     const isRGBA = baseColor.startsWith('rgba');
     const baseColorRGB = baseColor.match(/\d+(\.\d+)?/g).map(Number);
     const alpha = isRGBA ? baseColorRGB.pop() : 1;
-    const tintedColor = baseColorRGB.map((color) => Math.min(255, color + ((255 - color) * (amount / 100))));
+    const tintedColor = baseColorRGB.map((color) => Math.min(255, color + (255 - color) * (amount / 100)));
 
     return isRGBA ? `rgba(${tintedColor.join(',')},${alpha})` : `rgb(${tintedColor.join(',')})`;
 }
-
 
 /**
  * RGB 색상 문자열에서 밝기 값을 추출합니다.
@@ -44,7 +42,6 @@ function tintColor(baseColor: string, amount: number): string {
  * @returns {number} 밝기 값 (백분율, 0에서 100).
  */
 function getLightness(color: string): number {
-
     const rgb: number[] = color.match(/\d+/g)?.map(Number);
 
     if (!rgb || rgb.length < 3) {

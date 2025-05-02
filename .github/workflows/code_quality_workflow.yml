@@ -1,0 +1,51 @@
+name: ESLint + Prettier
+
+on: [pull_request]
+
+jobs:
+  lint-format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Get list of changed files
+        id: changed-files
+        run: |
+          git fetch origin ${{ github.base_ref }} --depth=1
+          echo "CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- '*.js' '*.jsx' '*.ts' '*.tsx' | paste -sd ' ' -)" >> $GITHUB_ENV
+
+      - name: Run ESLint with reviewdog
+        id: eslint
+        uses: reviewdog/action-eslint@v1
+        continue-on-error: true
+        with:
+          github_token: ${{ secrets.FRONT_SECRET }}
+          reporter: github-pr-review
+          eslint_flags: ${{ env.CHANGED_FILES }}
+          fail_level: 'any'
+
+      - name: Run Prettier with reviewdog
+        id: prettier
+        uses: EPMatt/reviewdog-action-prettier@v1
+        continue-on-error: true
+        with:
+          github_token: ${{ secrets.FRONT_SECRET }}
+          reporter: github-pr-review
+          level: warning
+          prettier_flags: ${{ env.CHANGED_FILES }}
+
+      - name: Check overall result
+        id: overall
+        if: steps.eslint.outcome == 'failure' || steps.prettier.outcome == 'failure'
+        run: exit 1

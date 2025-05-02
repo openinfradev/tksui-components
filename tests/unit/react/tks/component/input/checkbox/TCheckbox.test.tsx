@@ -1,19 +1,20 @@
 import {act, render, renderHook, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React, {useRef} from 'react';
-import TCheckbox from '~/input/checkbox/TCheckbox';
+
 import TValidatorRule from '@/common/validator/TValidatorRule';
 
-describe('TCheckbox', () => {
+import TCheckbox from '~/input/checkbox/TCheckbox';
 
+describe('TCheckbox', () => {
     const mockFn = jest.fn();
 
-    beforeEach(() => { mockFn.mockClear(); });
+    beforeEach(() => {
+        mockFn.mockClear();
+    });
 
     describe('Style', () => {
-
         it('Classname prop applies to root', () => {
-
             // Arrange
             const testData = 'class-name-prop';
 
@@ -23,11 +24,9 @@ describe('TCheckbox', () => {
 
             // Assert
             expect(root).toHaveClass(testData);
-
         });
 
         it('Style prop applies to root', () => {
-
             // Arrange
             const testData = {width: '50px'};
 
@@ -37,11 +36,9 @@ describe('TCheckbox', () => {
 
             // Assert
             expect(root).toHaveStyle(testData);
-
         });
 
         it('ID prop applies to root', () => {
-
             // Arrange
             const testData = 'test-id';
 
@@ -51,11 +48,9 @@ describe('TCheckbox', () => {
 
             // Assert
             expect(root).toHaveAttribute('id', testData);
-
         });
 
         it('When readOnly prop is applied, root has t-checkbox--read-only class', () => {
-
             // Arrange
             render(<TCheckbox readOnly>Test</TCheckbox>);
 
@@ -63,11 +58,9 @@ describe('TCheckbox', () => {
 
             // Assert
             expect(root).toHaveClass('t-checkbox--read-only');
-
         });
 
         it('When disabled prop is applied, root has t-checkbox--disabled class', () => {
-
             // Arrange
             render(<TCheckbox disabled>Test</TCheckbox>);
 
@@ -75,11 +68,9 @@ describe('TCheckbox', () => {
 
             // Assert
             expect(root).toHaveClass('t-checkbox--disabled');
-
         });
 
         it('When disabled prop is applied, root will be applied -1 to tabIndex', () => {
-
             // Arrange
             render(<TCheckbox disabled>Test</TCheckbox>);
 
@@ -87,21 +78,17 @@ describe('TCheckbox', () => {
 
             // Assert
             expect(container).toHaveAttribute('tabIndex', '-1');
-
         });
 
         it('When value is an invalid, root has t-checkbox--failure class', async () => {
-
             // Arrange
             const {result} = renderHook(() => useRef(null));
             const checkboxRef = result.current;
 
             render(
-                <TCheckbox ref={checkboxRef}
-                           rules={[TValidatorRule.required('test error message')]}
-                >
+                <TCheckbox ref={checkboxRef} rules={[TValidatorRule.required('test error message')]}>
                     Test
-                </TCheckbox>,
+                </TCheckbox>
             );
 
             const root = screen.getByTestId('t-checkbox-root');
@@ -113,11 +100,9 @@ describe('TCheckbox', () => {
 
             // Assert
             expect(root).toHaveClass('t-checkbox--failure');
-
         });
 
         it('When value is an valid, root has t-checkbox--success class', async () => {
-
             // Arrange
             const {result} = renderHook(() => useRef(null));
             const checkboxRef = result.current;
@@ -130,7 +115,7 @@ describe('TCheckbox', () => {
                     rules={[TValidatorRule.required('test error message')]}
                 >
                     Test
-                </TCheckbox>,
+                </TCheckbox>
             );
 
             const root = screen.getByTestId('t-checkbox-root');
@@ -142,11 +127,9 @@ describe('TCheckbox', () => {
 
             // Assert
             expect(root).toHaveClass('t-checkbox--success');
-
         });
 
         it('When indeterminate prop applied, icon has t-checkbox__icon--indeterminate class', () => {
-
             // Arrange
             render(<TCheckbox indeterminate>Test</TCheckbox>);
 
@@ -154,11 +137,9 @@ describe('TCheckbox', () => {
 
             // Assert
             expect(icon).toHaveClass('t-checkbox__icon--indeterminate');
-
         });
 
         it('When checkbox checked, icon has t-checkbox__icon--check class', () => {
-
             // Arrange
             render(<TCheckbox checked>Test</TCheckbox>);
 
@@ -166,11 +147,9 @@ describe('TCheckbox', () => {
 
             // Assert
             expect(icon).toHaveClass('t-checkbox__icon--check');
-
         });
 
         it('When checkbox unchecked, icon has t-checkbox__icon--unchecked class', () => {
-
             // Arrange
             render(<TCheckbox checked={false}>Test</TCheckbox>);
 
@@ -178,20 +157,20 @@ describe('TCheckbox', () => {
 
             // Assert
             expect(icon).toHaveClass('t-checkbox__icon--uncheck');
-
         });
-
     });
 
     describe('Handler', () => {
-
         it('When onfocus handler is triggered, container should have focus', async () => {
-
             // Arrange
             const {result} = renderHook(() => useRef(null));
             const checkboxRef = result.current;
 
-            render(<TCheckbox ref={checkboxRef} value={true}>Test</TCheckbox>);
+            render(
+                <TCheckbox ref={checkboxRef} value={true}>
+                    Test
+                </TCheckbox>
+            );
 
             const container = screen.getByTestId('t-checkbox-container');
 
@@ -202,11 +181,9 @@ describe('TCheckbox', () => {
 
             // Assert
             expect(container).toHaveFocus();
-
         });
 
         it('When validate handler is triggered, the validate message should be displayed on message area', async () => {
-
             // Arrange
             const testData = 'test success message';
             const testValue = true;
@@ -222,7 +199,7 @@ describe('TCheckbox', () => {
                     rules={[TValidatorRule.required('test error message')]}
                 >
                     Test
-                </TCheckbox>,
+                </TCheckbox>
             );
 
             // Act
@@ -235,11 +212,9 @@ describe('TCheckbox', () => {
 
             // Assert
             expect(message).toHaveTextContent(testData);
-
         });
 
         it('When onChange prop is not applied, onChange handler is not called', async () => {
-
             // Arrange
             const testChildren = 'test children';
 
@@ -249,12 +224,9 @@ describe('TCheckbox', () => {
             const checkboxRef = result.current;
 
             render(
-                <TCheckbox
-                    ref={checkboxRef}
-                    value={true}
-                >
+                <TCheckbox ref={checkboxRef} value={true}>
                     {testChildren}
-                </TCheckbox>,
+                </TCheckbox>
             );
 
             const content = screen.getByText(testChildren);
@@ -264,11 +236,9 @@ describe('TCheckbox', () => {
 
             // Assert
             expect(mockFn).toHaveBeenCalledTimes(0);
-
         });
 
         it('When the checkbox is checked and clicked, it should be pass negative and positive values to the onChange handler', async () => {
-
             // Arrange
             let negativeValue = null;
             let positiveValue = null;
@@ -289,7 +259,7 @@ describe('TCheckbox', () => {
                     }}
                 >
                     {testChildren}
-                </TCheckbox>,
+                </TCheckbox>
             );
 
             const content = screen.getByText(testChildren);
@@ -300,11 +270,9 @@ describe('TCheckbox', () => {
             // Assert
             expect(negativeValue).not.toBe(undefined);
             expect(positiveValue).not.toBe(undefined);
-
         });
 
         it('When the checkbox is unchecked and it is clicked, it should be pass positive value to the onChange handler', async () => {
-
             // Arrange
             let negativeValue = null;
             let positiveValue = null;
@@ -325,7 +293,7 @@ describe('TCheckbox', () => {
                     }}
                 >
                     {testChildren}
-                </TCheckbox>,
+                </TCheckbox>
             );
 
             const content = screen.getByText(testChildren);
@@ -336,15 +304,11 @@ describe('TCheckbox', () => {
             // Assert
             expect(negativeValue).toBe(undefined);
             expect(positiveValue).not.toBe(undefined);
-
         });
-
     });
 
     describe('Event', () => {
-
         it('Checkbox click invokes the provided onClick handler', async () => {
-
             // Arrange
             const testChildren = 'test Children';
 
@@ -359,12 +323,9 @@ describe('TCheckbox', () => {
 
             // Assert
             expect(mockFn).toHaveBeenCalledTimes(1);
-
         });
 
-
         it('When pressing Enter on the icon, onChange handler is called', async () => {
-
             // Arrange
             const testChildren = 'test children';
 
@@ -374,13 +335,9 @@ describe('TCheckbox', () => {
             const checkboxRef = result.current;
 
             render(
-                <TCheckbox
-                    ref={checkboxRef}
-                    value={false}
-                    onChange={mockFn}
-                >
+                <TCheckbox ref={checkboxRef} value={false} onChange={mockFn}>
                     {testChildren}
-                </TCheckbox>,
+                </TCheckbox>
             );
 
             const content = screen.getByText(testChildren);
@@ -394,11 +351,9 @@ describe('TCheckbox', () => {
 
             // Assert
             expect(mockFn).toHaveBeenCalledTimes(1);
-
         });
 
         it('When pressing Space on the icon, onChange handler is called', async () => {
-
             // Arrange
             const testChildren = 'test children';
 
@@ -408,13 +363,9 @@ describe('TCheckbox', () => {
             const checkboxRef = result.current;
 
             render(
-                <TCheckbox
-                    ref={checkboxRef}
-                    value={false}
-                    onChange={mockFn}
-                >
+                <TCheckbox ref={checkboxRef} value={false} onChange={mockFn}>
                     {testChildren}
-                </TCheckbox>,
+                </TCheckbox>
             );
 
             const content = screen.getByText(testChildren);
@@ -428,11 +379,9 @@ describe('TCheckbox', () => {
 
             // Assert
             expect(mockFn).toHaveBeenCalledTimes(1);
-
         });
 
         it('When focussing, validate message should be clear', async () => {
-
             // Arrange
             const testData = 'test success message';
 
@@ -447,7 +396,7 @@ describe('TCheckbox', () => {
                     rules={[TValidatorRule.required('test error message')]}
                 >
                     Test
-                </TCheckbox>,
+                </TCheckbox>
             );
 
             const container = screen.getByTestId('t-checkbox-container');
@@ -464,11 +413,9 @@ describe('TCheckbox', () => {
             // Assert
             expect(container).toHaveFocus();
             expect(message?.textContent).not.toBe(testData);
-
         });
 
         it('When lazy prop false and focus out, validate message should be displayed on message area', async () => {
-
             // Arrange
             const testData = 'test success message';
 
@@ -482,7 +429,7 @@ describe('TCheckbox', () => {
                     rules={[TValidatorRule.required('test error message')]}
                 >
                     Test
-                </TCheckbox>,
+                </TCheckbox>
             );
 
             const container = screen.getByTestId('t-checkbox-container');
@@ -499,15 +446,11 @@ describe('TCheckbox', () => {
 
             // // Assert
             expect(message?.textContent).toBe(testData);
-
         });
-
     });
 
     describe('Content', () => {
-
         it('When rules prop is applied, validate message should be displayed on message area', () => {
-
             // Arrange
             const testData = 'test error message';
 
@@ -515,12 +458,9 @@ describe('TCheckbox', () => {
             const checkboxRef = result.current;
 
             render(
-                <TCheckbox
-                    ref={checkboxRef}
-                    rules={[TValidatorRule.required(testData)]}
-                >
+                <TCheckbox ref={checkboxRef} rules={[TValidatorRule.required(testData)]}>
                     Test
-                </TCheckbox>,
+                </TCheckbox>
             );
 
             // Act
@@ -533,11 +473,9 @@ describe('TCheckbox', () => {
 
             // Assert
             expect(message).toHaveTextContent(testData);
-
         });
 
         it('When successMessage prop is applied and value is an valid, it should be displayed on content area', () => {
-
             // Arrange
             const testData = 'test success message';
 
@@ -552,7 +490,7 @@ describe('TCheckbox', () => {
                     rules={[TValidatorRule.required('test error message')]}
                 >
                     Test
-                </TCheckbox>,
+                </TCheckbox>
             );
 
             // Act
@@ -565,11 +503,9 @@ describe('TCheckbox', () => {
 
             // Assert
             expect(message).toHaveTextContent(testData);
-
         });
 
         it('When children prop applied, it should be displayed on content area', () => {
-
             // Arrange
             const testData = 'children message';
             render(<TCheckbox>{testData}</TCheckbox>);
@@ -578,40 +514,41 @@ describe('TCheckbox', () => {
 
             // Assert
             expect(content).toHaveTextContent(testData);
-
         });
 
         it('When positive value applied and value is that value, checkbox should be checked', () => {
-
             // Arrange
             const testData = 'changePositive';
 
-            render(<TCheckbox value={testData} positiveValue={testData}>Test</TCheckbox>);
+            render(
+                <TCheckbox value={testData} positiveValue={testData}>
+                    Test
+                </TCheckbox>
+            );
 
             const icon = screen.getByRole('img');
 
             // Assert
             expect(icon).toHaveClass('t-checkbox__icon--check');
-
         });
 
         it('When negative value applied, the checkbox should be unchecked if it matches that value', async () => {
-
             // Arrange
             const testData = 'testNegative';
 
-            render(<TCheckbox value={testData} negativeValue={'testNegative'}>Test</TCheckbox>);
+            render(
+                <TCheckbox value={testData} negativeValue={'testNegative'}>
+                    Test
+                </TCheckbox>
+            );
 
             const icon = screen.getByRole('img');
 
             // Assert
             expect(icon).toHaveClass('t-checkbox__icon--uncheck');
-
         });
 
-
         it('When positive value applied and the checkbox button selected, positive value pass on onChanged handler', async () => {
-
             // Arrange
             let testData = null;
             const testPositiveValue = 'changePositive';
@@ -619,12 +556,14 @@ describe('TCheckbox', () => {
             const user = userEvent.setup();
 
             render(
-                <TCheckbox positiveValue={testPositiveValue}
-                           onChange={(positiveValue) => {
-                               testData = positiveValue;
-                           }}>
+                <TCheckbox
+                    positiveValue={testPositiveValue}
+                    onChange={(positiveValue) => {
+                        testData = positiveValue;
+                    }}
+                >
                     Test
-                </TCheckbox>,
+                </TCheckbox>
             );
 
             const icon = screen.getByRole('img');
@@ -634,11 +573,9 @@ describe('TCheckbox', () => {
 
             // Assert
             expect(testData).toBe(testPositiveValue);
-
         });
 
         it('When negative value applied and the checkbox button unchecked, positive value pass on onChanged handler', async () => {
-
             // Arrange
             let testData = null;
             const testNegativeValue = 'changeNegative';
@@ -646,13 +583,15 @@ describe('TCheckbox', () => {
             const user = userEvent.setup();
 
             render(
-                <TCheckbox value={true}
-                           negativeValue={testNegativeValue}
-                           onChange={(negative, positive) => {
-                               testData = negative;
-                           }}>
+                <TCheckbox
+                    value={true}
+                    negativeValue={testNegativeValue}
+                    onChange={(negative) => {
+                        testData = negative;
+                    }}
+                >
                     Test
-                </TCheckbox>,
+                </TCheckbox>
             );
 
             const icon = screen.getByRole('img');
@@ -661,9 +600,6 @@ describe('TCheckbox', () => {
 
             // Assert
             expect(testData).toBe(testNegativeValue);
-
         });
-
     });
-
 });

@@ -1,21 +1,12 @@
 'use client';
 
-import {
-    CSSProperties,
-    forwardRef,
-    KeyboardEvent,
-    memo,
-    Ref,
-    useCallback,
-    useEffect,
-    useImperativeHandle,
-    useMemo,
-    useRef,
-    useState,
-} from 'react';
-import TIcon from '../../icon/TIcon';
-import {TCheckboxProps, TCheckboxRef, TCheckBoxStatus} from '@/components';
+import type {CSSProperties, KeyboardEvent, Ref} from 'react';
+import {forwardRef, memo, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState} from 'react';
+
 import useValidator from '@/common/hook/UseValidator';
+import type {TCheckboxProps, TCheckboxRef, TCheckBoxStatus} from '@/components';
+import TIcon from '../../icon/TIcon';
+
 import themeToken from '~style/designToken/ThemeToken.module.scss';
 
 const checkboxIcons = {
@@ -28,191 +19,213 @@ const checkboxIcons = {
     indeterminate: 't_checkbox_indeterminate',
 };
 
-const TCheckbox = forwardRef(({
-    positiveValue = true,
-    negativeValue = false,
-    checked = null,
-    lazy = true,
-    onChange,
-    ...restProps
-}: TCheckboxProps, ref: Ref<TCheckboxRef>) => {
+const TCheckbox = forwardRef(
+    (
+        {
+            positiveValue = true,
+            negativeValue = false,
+            checked = null,
+            lazy = true,
+            onChange,
+            ...restProps
+        }: TCheckboxProps,
+        ref: Ref<TCheckboxRef>
+    ) => {
+        // region [Hooks]
 
-    // region [Hooks]
+        const props: TCheckboxProps = {positiveValue, negativeValue, checked, lazy, onChange, ...restProps};
 
-    const props: TCheckboxProps = {positiveValue, negativeValue, checked, lazy, onChange, ...restProps};
+        const validator = useValidator(props.value, props.rules, props.successMessage);
+        const rootRef = useRef<HTMLDivElement>(null);
+        const containerRef = useRef<HTMLDivElement>(null);
+        const [status, setStatus] = useState<TCheckBoxStatus>('uncheck');
 
-    const validator = useValidator(props.value, props.rules, props.successMessage);
-    const rootRef = useRef<HTMLDivElement>(null);
-    const containerRef = useRef<HTMLDivElement>(null);
-    const [status, setStatus] = useState<TCheckBoxStatus>('uncheck');
+        useImperativeHandle(ref, () => ({
+            focus() {
+                containerRef?.current?.focus();
+            },
+            validate() {
+                return validator.validate();
+            },
+            scrollToComponent(options: ScrollIntoViewOptions = {behavior: 'smooth', block: 'center'}) {
+                rootRef?.current?.scrollIntoView(options);
+            },
+        }));
 
-    useImperativeHandle(ref, () => ({
-        focus() { containerRef?.current?.focus(); },
-        validate() { return validator.validate(); },
-        scrollToComponent(options: ScrollIntoViewOptions = {behavior: 'smooth', block: 'center'}) {
-            rootRef?.current?.scrollIntoView(options);
-        },
-    }));
+        // endregion
 
-    // endregion
+        // region [Styles]
 
-    // region [Styles]
+        const getRootClass = useCallback(() => {
+            const clazz: string[] = [];
 
-    const getRootClass = useCallback(() => {
-        const clazz: string[] = [];
+            if (props.className) {
+                clazz.push(props.className);
+            }
+            if (props.readOnly) {
+                clazz.push('t-checkbox--read-only');
+            }
+            if (props.disabled) {
+                clazz.push('t-checkbox--disabled');
+            }
+            if (!validator.result) {
+                clazz.push('t-checkbox--failure');
+            }
+            if (validator.result && validator.message) {
+                clazz.push('t-checkbox--success');
+            }
 
-        if (props.className) { clazz.push(props.className); }
-        if (props.readOnly) { clazz.push('t-checkbox--read-only'); }
-        if (props.disabled) { clazz.push('t-checkbox--disabled'); }
-        if (!validator.result) { clazz.push('t-checkbox--failure'); }
-        if (validator.result && validator.message) { clazz.push('t-checkbox--success'); }
+            return clazz.join(' ');
+        }, [props.className, props.readOnly, props.disabled, validator.result, validator.message]);
 
-        return clazz.join(' ');
-    }, [props.className, props.readOnly, props.disabled, validator.result, validator.message]);
+        const getRootStyle = useCallback(() => {
+            let style: CSSProperties = {};
 
-    const getRootStyle = useCallback(() => {
-        let style: CSSProperties = {};
+            if (props.style) {
+                style = {...props.style};
+            }
 
-        if (props.style) { style = {...props.style}; }
+            return style;
+        }, [props.style]);
 
-        return style;
-    }, [props.style]);
+        const iconColorByStatus = useMemo(() => {
+            if (props.disabled) {
+                return themeToken.tGrayColor2;
+            }
+            if (status === 'check' || status === 'indeterminate') {
+                return themeToken.tPrimaryColor;
+            }
+            if (status === 'uncheck' || props.disabled) {
+                return themeToken.tGrayColor3;
+            }
+            return '';
+        }, [props.disabled, status]);
 
-    const iconColorByStatus = useMemo(() => {
-        if (props.disabled) { return themeToken.tGrayColor2; }
-        if (status === 'check' || status === 'indeterminate') { return themeToken.tPrimaryColor; }
-        if (status === 'uncheck' || props.disabled) { return themeToken.tGrayColor3; }
-        return '';
-    }, [props.disabled, status]);
+        // endregion
 
-    // endregion
+        // region [Privates]
 
+        const emitChange = useCallback(() => {
+            if (typeof onChange !== 'function') {
+                return;
+            }
 
-    // region [Privates]
+            if (status === 'check') {
+                onChange(props.negativeValue, props.positiveValue);
+            } else {
+                onChange(props.positiveValue);
+            }
+        }, [onChange, props.negativeValue, props.positiveValue, status]);
 
-    const emitChange = useCallback(() => {
-        if (typeof onChange !== 'function') {
-            return;
-        }
+        const modifyStatus = useCallback(() => {
+            if (props.checked === true) {
+                setStatus('check');
+            } else if (props.checked === false) {
+                setStatus('uncheck');
+            } else if (props.indeterminate) {
+                setStatus('indeterminate');
+            } else if (props.value === props.positiveValue) {
+                setStatus('check');
+            } else {
+                setStatus('uncheck');
+            }
+        }, [props.value, props.checked, props.indeterminate, props.positiveValue]);
 
-        if (status === 'check') {
-            onChange(props.negativeValue, props.positiveValue);
-        } else {
-            onChange(props.positiveValue);
-        }
+        // endregion
 
-    }, [onChange, props.negativeValue, props.positiveValue, status]);
+        // region [Events]
 
-    const modifyStatus = useCallback(() => {
-        if (props.checked === true) {
-            setStatus('check');
-        } else if (props.checked === false) {
-            setStatus('uncheck');
-        } else if (props.indeterminate) {
-            setStatus('indeterminate');
-        } else if (props.value === props.positiveValue) {
-            setStatus('check');
-        } else {
-            setStatus('uncheck');
-        }
-    }, [props.value, props.checked, props.indeterminate, props.positiveValue]);
-
-    // endregion
-
-    // region [Events]
-
-    const onClickCheckbox = useCallback(() => {
-        emitChange();
-    }, [emitChange]);
-
-    const onBlur = useCallback(() => {
-        if (!props.lazy) {
-            validator.validate();
-        }
-    }, [props.lazy, validator]);
-
-    const onKeyDown = useCallback((event: KeyboardEvent) => {
-        if (event.key === 'Enter' || event.key === ' ') {
-            event.preventDefault();
+        const onClickCheckbox = useCallback(() => {
             emitChange();
-        }
-    }, [emitChange]);
+        }, [emitChange]);
 
-    // endregion
+        const onBlur = useCallback(() => {
+            if (!props.lazy) {
+                validator.validate();
+            }
+        }, [props.lazy, validator]);
 
-    // region [Templates]
+        const onKeyDown = useCallback(
+            (event: KeyboardEvent) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    emitChange();
+                }
+            },
+            [emitChange]
+        );
 
-    const iconTemplate = useCallback(() => {
-        let iconType = '';
+        // endregion
 
-        if (status === 'indeterminate') {
-            iconType = checkboxIcons.indeterminate;
-        } else if (status === 'check' && !props.disabled && !props.readOnly) {
-            iconType = checkboxIcons.check;
-        } else if (status === 'check' && !props.disabled && props.readOnly) {
-            iconType = checkboxIcons.readOnlyCheck;
-        } else if (status === 'check' && props.disabled && !props.readOnly) {
-            iconType = checkboxIcons.disabledCheck;
-        } else if (status === 'uncheck' && props.disabled && !props.readOnly) {
-            iconType = checkboxIcons.disabledUnCheck;
-        } else if (status === 'uncheck' && !props.disabled && props.readOnly) {
-            iconType = checkboxIcons.readOnlyUnCheck;
-        } else if (status === 'uncheck' && !props.disabled && !props.readOnly) {
-            iconType = checkboxIcons.uncheck;
-        } else {
-            throw Error('Invalid status');
-        }
+        // region [Templates]
+
+        const iconTemplate = useCallback(() => {
+            let iconType = '';
+
+            if (status === 'indeterminate') {
+                iconType = checkboxIcons.indeterminate;
+            } else if (status === 'check' && !props.disabled && !props.readOnly) {
+                iconType = checkboxIcons.check;
+            } else if (status === 'check' && !props.disabled && props.readOnly) {
+                iconType = checkboxIcons.readOnlyCheck;
+            } else if (status === 'check' && props.disabled && !props.readOnly) {
+                iconType = checkboxIcons.disabledCheck;
+            } else if (status === 'uncheck' && props.disabled && !props.readOnly) {
+                iconType = checkboxIcons.disabledUnCheck;
+            } else if (status === 'uncheck' && !props.disabled && props.readOnly) {
+                iconType = checkboxIcons.readOnlyUnCheck;
+            } else if (status === 'uncheck' && !props.disabled && !props.readOnly) {
+                iconType = checkboxIcons.uncheck;
+            } else {
+                throw Error('Invalid status');
+            }
+
+            return (
+                <TIcon xsmall className={`t-checkbox__icon t-checkbox__icon--${status}`} color={iconColorByStatus} fill>
+                    {iconType}
+                </TIcon>
+            );
+        }, [iconColorByStatus, props.disabled, props.readOnly, status]);
+
+        // region [Effect]
+
+        useEffect(() => {
+            modifyStatus();
+        }, [props.value, props.indeterminate, props.checked, props.positiveValue, modifyStatus]);
+
+        // endregion
 
         return (
-            <TIcon xsmall
-                   className={`t-checkbox__icon t-checkbox__icon--${status}`}
-                   color={iconColorByStatus}
-                   fill
-            >{iconType}</TIcon>);
-    }, [iconColorByStatus, props.disabled, props.readOnly, status]);
-
-    // region [Effect]
-
-    useEffect(() => {
-        modifyStatus();
-    }, [props.value, props.indeterminate, props.checked, props.positiveValue, modifyStatus]);
-
-    // endregion
-
-
-    return (
-        <div ref={rootRef}
-             className={`t-checkbox ${getRootClass()}`}
-             id={props.id}
-             data-testid={'t-checkbox-root'}
-             style={getRootStyle()}>
-
-            {/* Main */}
-            <div ref={containerRef}
-                 className={'t-checkbox__container'}
-                 tabIndex={props.disabled ? -1 : 0}
-                 onFocus={validator.clearValidation}
-                 onBlur={onBlur}
-                 onKeyDown={onKeyDown}
-                 onClick={onClickCheckbox}
-                 data-testid={'t-checkbox-container'}>
-                {iconTemplate()}
-                <span className={'t-checkbox__label'}>{props.children}</span>
-            </div>
-
-            {/* Validation message, rule 이 설정된 경우에만 그려지게 합니다 */}
-            {
-                props.rules
-                && <div className={'t-checkbox__message'}>
-                    {validator.message}
+            <div
+                ref={rootRef}
+                className={`t-checkbox ${getRootClass()}`}
+                id={props.id}
+                data-testid={'t-checkbox-root'}
+                style={getRootStyle()}
+            >
+                {/* Main */}
+                <div
+                    ref={containerRef}
+                    className={'t-checkbox__container'}
+                    tabIndex={props.disabled ? -1 : 0}
+                    onFocus={validator.clearValidation}
+                    onBlur={onBlur}
+                    onKeyDown={onKeyDown}
+                    onClick={onClickCheckbox}
+                    data-testid={'t-checkbox-container'}
+                >
+                    {iconTemplate()}
+                    <span className={'t-checkbox__label'}>{props.children}</span>
                 </div>
-            }
-        </div>
-    );
 
-    // endregion
+                {/* Validation message, rule 이 설정된 경우에만 그려지게 합니다 */}
+                {props.rules && <div className={'t-checkbox__message'}>{validator.message}</div>}
+            </div>
+        );
 
-});
+        // endregion
+    }
+);
 
 TCheckbox.displayName = 'TCheckbox';
 

@@ -1,16 +1,17 @@
 import {act, render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+
+import type {TIconSize} from '@/components/icon/TIcon.interface';
+
 import TCard from '~/data-container/card/TCard';
-import TCardHeader from '~/data-container/card/TCardHeader';
 import TCardContent from '~/data-container/card/TCardContent';
-import {TIconSize} from '@/components/icon/TIcon.interface';
+import TCardHeader from '~/data-container/card/TCardHeader';
 
 jest.mock('@/common/util/ColorUtil', () => ({
     shadeColor: jest.fn(() => 'blue'),
     getLightness: jest.fn(() => 50),
 }));
 describe('TCard', () => {
-
     const mockOnClick = jest.fn();
 
     const testStyle = {
@@ -40,14 +41,12 @@ describe('TCard', () => {
         tooltipHidden: false,
     };
 
-
     beforeEach(() => {
         mockOnClick.mockClear();
     });
 
     describe('Render', () => {
         it('Renders without errors', () => {
-
             // Arrange
             render(<TCard {...baseProps}>Card Content</TCard>);
 
@@ -57,12 +56,14 @@ describe('TCard', () => {
     });
 
     describe('Style', () => {
-
         it('Classname prop applies to root', () => {
-
             // Arrange
             const testClassName = 'test-class';
-            render(<TCard {...baseProps} className={'test-class'}>Card Content</TCard>);
+            render(
+                <TCard {...baseProps} className={'test-class'}>
+                    Card Content
+                </TCard>
+            );
             const root = screen.getByTestId('card-root');
 
             // Assert
@@ -70,7 +71,6 @@ describe('TCard', () => {
         });
 
         it('Clickable class applies to root', () => {
-
             // Arrange
             const clickableClass = 't-card--clickable';
             render(<TCard {...baseProps}>Card Content</TCard>);
@@ -81,7 +81,6 @@ describe('TCard', () => {
         });
 
         it('Selected class applies to root', () => {
-
             // Arrange
             const selectedClass = 't-card--selected';
             render(<TCard {...baseProps}>Card Content</TCard>);
@@ -92,7 +91,6 @@ describe('TCard', () => {
         });
 
         it('Dashed class applies to root', () => {
-
             // Arrange
             const dashedClass = 't-card--dashed';
             render(<TCard {...baseProps}>Card Content</TCard>);
@@ -103,7 +101,6 @@ describe('TCard', () => {
         });
 
         it('Center class applies to root', () => {
-
             // Arrange
             const centerClass = 't-card--center';
             render(<TCard {...baseProps}>Card Content</TCard>);
@@ -114,7 +111,6 @@ describe('TCard', () => {
         });
 
         it('Width and height applies to root style', () => {
-
             // Arrange
             render(<TCard {...baseProps}>Card Content</TCard>);
             const root = screen.getByTestId('card-root');
@@ -124,7 +120,6 @@ describe('TCard', () => {
         });
 
         it('Icon to applies root style', () => {
-
             // Arrange
             const iconClass = 't-card-top__icon';
             render(<TCard {...baseProps}>Card Content</TCard>);
@@ -135,12 +130,15 @@ describe('TCard', () => {
         });
 
         it('Icon props applies to root', () => {
-
             // Arrange
             const iconSize = 'large';
             const iconFill = true;
             const iconColor = 'red';
-            render(<TCard {...baseProps} icon={'title'} iconSize={iconSize} iconFill={iconFill} iconColor={iconColor}>Card Content</TCard>);
+            render(
+                <TCard {...baseProps} icon={'title'} iconSize={iconSize} iconFill={iconFill} iconColor={iconColor}>
+                    Card Content
+                </TCard>
+            );
             const iconRoot = screen.getByRole('img');
 
             // Assert
@@ -150,21 +148,22 @@ describe('TCard', () => {
         });
 
         it('IconSize prop applies to root', () => {
-
             // Arrange
             const iconSize = 'large';
-            render(<TCard {...baseProps} iconSize={iconSize}>Card Content</TCard>);
+            render(
+                <TCard {...baseProps} iconSize={iconSize}>
+                    Card Content
+                </TCard>
+            );
             const root = screen.getByRole('img');
 
             // Assert
             expect(root).toHaveClass('t-icon--large');
         });
-
     });
 
     describe('Action', () => {
         it('Calls onClick handler when clicked', async () => {
-
             // Arrange
             const user = userEvent.setup();
             render(<TCard {...baseProps}>Card Content</TCard>);
@@ -178,7 +177,6 @@ describe('TCard', () => {
         });
 
         it('Tooltip attributes applies to root', () => {
-
             // Arrange
             render(<TCard {...baseProps}>Card Content</TCard>);
             const root = screen.getByTestId('card-root');
@@ -190,19 +188,16 @@ describe('TCard', () => {
         });
     });
 
-
     describe('Card Header, Content Style', () => {
-
         it('Renders without errors', () => {
-
             // Arrange
             const cardTitle = 'Card Title';
             const cardContent = 'Card cardContent';
             render(
                 <TCard>
-                    <TCardHeader title={cardTitle}/>
+                    <TCardHeader title={cardTitle} />
                     <TCardContent>{cardContent}</TCardContent>
-                </TCard>,
+                </TCard>
             );
             // Assert
             expect(screen.getByText(cardTitle)).toBeInTheDocument();
@@ -210,14 +205,13 @@ describe('TCard', () => {
         });
 
         it('Custom className applies to root', () => {
-
             // Arrange
             const customClass = 'card__custom__class';
             render(
                 <TCard>
-                    <TCardHeader className={customClass}/>
+                    <TCardHeader className={customClass} />
                     <TCardContent className={customClass}>Card Content</TCardContent>
-                </TCard>,
+                </TCard>
             );
 
             const headerRoot = screen.getByTestId('card-header-root');
@@ -229,13 +223,12 @@ describe('TCard', () => {
         });
 
         it('Custom Style applies to root', () => {
-
             // Arrange
             render(
                 <TCard>
-                    <TCardHeader title={'Card Title'} style={testStyle}/>
+                    <TCardHeader title={'Card Title'} style={testStyle} />
                     <TCardContent style={testStyle}>Card Content</TCardContent>
-                </TCard>,
+                </TCard>
             );
             const headerRoot = screen.getByTestId('card-header-root');
             const contentRoot = screen.getByTestId('card-content-root');
@@ -246,15 +239,20 @@ describe('TCard', () => {
         });
 
         it('Icon props style applies to root', () => {
-
             // Arrange
             const iconSize = 'large';
             const iconFill = true;
             const iconColor = 'red';
             render(
                 <TCard>
-                    <TCardHeader title={'Card Title'} icon={'edit'} iconSize={iconSize} iconFill={iconFill} iconColor={iconColor}/>
-                </TCard>,
+                    <TCardHeader
+                        title={'Card Title'}
+                        icon={'edit'}
+                        iconSize={iconSize}
+                        iconFill={iconFill}
+                        iconColor={iconColor}
+                    />
+                </TCard>
             );
             const iconRoot = screen.getByRole('img');
 
@@ -265,19 +263,18 @@ describe('TCard', () => {
         });
 
         it('SubTitle applies to TCardHeader', () => {
-
             // Arrange
             const subTitle = 'Card Sub Title';
             render(
-                <TCard> <TCardHeader subTitle={subTitle}/> </TCard>,
+                <TCard>
+                    {' '}
+                    <TCardHeader subTitle={subTitle} />{' '}
+                </TCard>
             );
             const headerRoot = screen.getByText(subTitle);
 
             // Assert
             expect(headerRoot).toBeInTheDocument();
         });
-
-
     });
-
 });

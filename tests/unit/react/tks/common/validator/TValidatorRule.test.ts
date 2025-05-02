@@ -1,10 +1,7 @@
 import TValidatorRule from '@/common/validator/TValidatorRule';
 
-
 describe('TValidatorRule', () => {
-
     describe('requiredArr', () => {
-
         const defaultMessage = '1개 이상 선택해 주세요';
 
         it('When input array is not empty, should return true', () => {
@@ -58,13 +55,10 @@ describe('TValidatorRule', () => {
         });
     });
 
-
     describe('required', () => {
-
         const defaultMessage = '값을 입력해 주세요';
 
         it('When input is not empty, should return true', () => {
-
             // Arrange
             const checkFunction = TValidatorRule.required();
             const checkValue = 'user input';
@@ -76,9 +70,7 @@ describe('TValidatorRule', () => {
             expect(result).toEqual(true);
         });
 
-
         it('When input is empty, should return default message', () => {
-
             // Arrange
             const checkFunction = TValidatorRule.required();
             const checkValue = '';
@@ -91,7 +83,6 @@ describe('TValidatorRule', () => {
         });
 
         it('When input is empty and error message is given, should return the message', () => {
-
             // Arrange
             const customMessage = '필수 값입니다.';
             const checkFunction = TValidatorRule.required(customMessage);
@@ -105,7 +96,6 @@ describe('TValidatorRule', () => {
         });
 
         it('When input is empty and empty string is given as error message, should return empty string', () => {
-
             // Arrange
             const customMessage = '';
             const checkFunction = TValidatorRule.required(customMessage);
@@ -119,11 +109,8 @@ describe('TValidatorRule', () => {
         });
     });
 
-
     describe('lengthMin', () => {
-
         it('When input length is equal to the minimum length, should return true', () => {
-
             // Arrange
             const minLength = 5;
             const checkFunction = TValidatorRule.lengthMin(minLength);
@@ -137,7 +124,6 @@ describe('TValidatorRule', () => {
         });
 
         it('When input length is greater than the minimum length, should return true', () => {
-
             // Arrange
             const minLength = 5;
             const checkFunction = TValidatorRule.lengthMin(minLength);
@@ -178,27 +164,22 @@ describe('TValidatorRule', () => {
             expect(result).toEqual(customMessage);
         });
 
-        it(
-            'When input length is less than the minimum length and empty string is given as error message, should return empty string',
-            () => {
-                // Arrange
-                const minLength = 5;
-                const customMessage = '';
-                const checkFunction = TValidatorRule.lengthMin(minLength, customMessage);
-                const checkValue = '123';
+        it('When input length is less than the minimum length and empty string is given as error message, should return empty string', () => {
+            // Arrange
+            const minLength = 5;
+            const customMessage = '';
+            const checkFunction = TValidatorRule.lengthMin(minLength, customMessage);
+            const checkValue = '123';
 
-                // Act
-                const result = checkFunction(checkValue);
+            // Act
+            const result = checkFunction(checkValue);
 
-                // Assert
-                expect(result).toEqual(customMessage);
-            },
-        );
+            // Assert
+            expect(result).toEqual(customMessage);
+        });
     });
 
-
     describe('lengthMax', () => {
-
         it('When input length is equal to the maximum length, should return true', () => {
             // Arrange
             const maxLength = 10;
@@ -253,27 +234,22 @@ describe('TValidatorRule', () => {
             expect(result).toEqual(customMessage);
         });
 
-        it(
-            'When input length is greater than the maximum length and empty string is given as error message, should return empty string',
-            () => {
-                // Arrange
-                const maxLength = 10;
-                const customMessage = '';
-                const checkFunction = TValidatorRule.lengthMax(maxLength, customMessage);
-                const checkValue = '12345678901';
+        it('When input length is greater than the maximum length and empty string is given as error message, should return empty string', () => {
+            // Arrange
+            const maxLength = 10;
+            const customMessage = '';
+            const checkFunction = TValidatorRule.lengthMax(maxLength, customMessage);
+            const checkValue = '12345678901';
 
-                // Act
-                const result = checkFunction(checkValue);
+            // Act
+            const result = checkFunction(checkValue);
 
-                // Assert
-                expect(result).toEqual(customMessage);
-            },
-        );
+            // Assert
+            expect(result).toEqual(customMessage);
+        });
     });
 
-
     describe('lengthBetween', () => {
-
         it('When input length is equal to the minimum length, should return true', () => {
             // Arrange
             const minLength = 5;
@@ -376,28 +352,23 @@ describe('TValidatorRule', () => {
             expect(result).toEqual(customMessage);
         });
 
-        it(
-            'When input length is greater than the maximum length and empty string is given as error message, should return empty string',
-            () => {
-                // Arrange
-                const minLength = 5;
-                const maxLength = 10;
-                const customMessage = '';
-                const checkFunction = TValidatorRule.lengthBetween(minLength, maxLength, customMessage);
-                const checkValue = '12345678901';
+        it('When input length is greater than the maximum length and empty string is given as error message, should return empty string', () => {
+            // Arrange
+            const minLength = 5;
+            const maxLength = 10;
+            const customMessage = '';
+            const checkFunction = TValidatorRule.lengthBetween(minLength, maxLength, customMessage);
+            const checkValue = '12345678901';
 
-                // Act
-                const result = checkFunction(checkValue);
+            // Act
+            const result = checkFunction(checkValue);
 
-                // Assert
-                expect(result).toEqual(customMessage);
-            },
-        );
+            // Assert
+            expect(result).toEqual(customMessage);
+        });
     });
 
-
     describe('valueMin', () => {
-
         it('When input value is greater than or equal to the minimum value, should return true', () => {
             // Arrange
             const minValue = 10;
@@ -454,9 +425,7 @@ describe('TValidatorRule', () => {
         });
     });
 
-
     describe('valueMax', () => {
-
         it('When input value is less than or equal to the maximum value, should return true', () => {
             // Arrange
             const maxValue = 100;
@@ -498,27 +467,22 @@ describe('TValidatorRule', () => {
             expect(result).toEqual(customMessage);
         });
 
-        it(
-            'When input value is greater than the maximum value and empty string is given as error message, should return empty string',
-            () => {
-                // Arrange
-                const maxValue = 100;
-                const customMessage = '';
-                const checkFunction = TValidatorRule.valueMax(maxValue, customMessage);
-                const checkValue = '101';
+        it('When input value is greater than the maximum value and empty string is given as error message, should return empty string', () => {
+            // Arrange
+            const maxValue = 100;
+            const customMessage = '';
+            const checkFunction = TValidatorRule.valueMax(maxValue, customMessage);
+            const checkValue = '101';
 
-                // Act
-                const result = checkFunction(checkValue);
+            // Act
+            const result = checkFunction(checkValue);
 
-                // Assert
-                expect(result).toEqual(customMessage);
-            },
-        );
+            // Assert
+            expect(result).toEqual(customMessage);
+        });
     });
 
-
     describe('valueBetween', () => {
-
         it('When input value is within the valid range, should return true', () => {
             // Arrange
             const minValue = 10;
@@ -621,28 +585,23 @@ describe('TValidatorRule', () => {
             expect(result).toEqual(customMessage);
         });
 
-        it(
-            'When input value is greater than the maximum value and empty string is given as error message, should return empty string',
-            () => {
-                // Arrange
-                const minValue = 10;
-                const maxValue = 100;
-                const customMessage = '';
-                const checkFunction = TValidatorRule.valueBetween(minValue, maxValue, customMessage);
-                const checkValue = '150';
+        it('When input value is greater than the maximum value and empty string is given as error message, should return empty string', () => {
+            // Arrange
+            const minValue = 10;
+            const maxValue = 100;
+            const customMessage = '';
+            const checkFunction = TValidatorRule.valueBetween(minValue, maxValue, customMessage);
+            const checkValue = '150';
 
-                // Act
-                const result = checkFunction(checkValue);
+            // Act
+            const result = checkFunction(checkValue);
 
-                // Assert
-                expect(result).toEqual(customMessage);
-            },
-        );
+            // Assert
+            expect(result).toEqual(customMessage);
+        });
     });
 
-
     describe('valueSpecified', () => {
-
         it('When input value is one of the specified values, should return true', () => {
             // Arrange
             const values = [1, 2, 3, 4, 5];
@@ -684,27 +643,22 @@ describe('TValidatorRule', () => {
             expect(result).toEqual(customMessage);
         });
 
-        it(
-            'When input value is not one of the specified values and empty string is given as error message, should return empty string',
-            () => {
-                // Arrange
-                const values = [1, 2, 3, 4, 5];
-                const customMessage = '';
-                const checkFunction = TValidatorRule.valueSpecified(values, customMessage);
-                const checkValue = '6';
+        it('When input value is not one of the specified values and empty string is given as error message, should return empty string', () => {
+            // Arrange
+            const values = [1, 2, 3, 4, 5];
+            const customMessage = '';
+            const checkFunction = TValidatorRule.valueSpecified(values, customMessage);
+            const checkValue = '6';
 
-                // Act
-                const result = checkFunction(checkValue);
+            // Act
+            const result = checkFunction(checkValue);
 
-                // Assert
-                expect(result).toEqual(customMessage);
-            },
-        );
+            // Assert
+            expect(result).toEqual(customMessage);
+        });
     });
 
-
     describe('equal', () => {
-
         it('When input value is equal to the specified value, should return true', () => {
             // Arrange
             const valueToEqual = 'abc';
@@ -746,27 +700,22 @@ describe('TValidatorRule', () => {
             expect(result).toEqual(customMessage);
         });
 
-        it(
-            'When input value is not equal to the specified value and empty string is given as error message, should return empty string',
-            () => {
-                // Arrange
-                const valueToEqual = 'abc';
-                const customMessage = '';
-                const checkFunction = TValidatorRule.equal(valueToEqual, customMessage);
-                const checkValue = 'def';
+        it('When input value is not equal to the specified value and empty string is given as error message, should return empty string', () => {
+            // Arrange
+            const valueToEqual = 'abc';
+            const customMessage = '';
+            const checkFunction = TValidatorRule.equal(valueToEqual, customMessage);
+            const checkValue = 'def';
 
-                // Act
-                const result = checkFunction(checkValue);
+            // Act
+            const result = checkFunction(checkValue);
 
-                // Assert
-                expect(result).toEqual(customMessage);
-            },
-        );
+            // Assert
+            expect(result).toEqual(customMessage);
+        });
     });
 
-
     describe('email', () => {
-
         it('When input value is a valid email address, should return true', () => {
             // Arrange
             const checkFunction = TValidatorRule.email();
@@ -819,19 +768,15 @@ describe('TValidatorRule', () => {
         });
     });
 
-
     describe('RegExp', () => {
-
         describe('RegExp - App Serving Environment Variables', () => {
-
             const errorMessage = '{"KEY": "VALUE", ...} 형식으로 입력해 주세요';
-            const checkFunction: (string) => true | string =  TValidatorRule.regexp(
+            const checkFunction: (string: string) => true | string = TValidatorRule.regexp(
                 /^(\s*{\s*"[a-z0-9가-힣 _-]+"\s*:\s*"[a-z0-9가-힣 _-]*"\s*(,\s*"[a-z0-9가-힣 _-]+"\s*:\s*"[a-z0-9가-힣 _-]*"\s*)*\s*}\s*)?$/i,
-                '{"KEY": "VALUE", ...} 형식으로 입력해 주세요',
+                '{"KEY": "VALUE", ...} 형식으로 입력해 주세요'
             );
 
             it('Should allow inputs in the specified format', () => {
-
                 // Arrange
                 const validValues = [
                     '',
@@ -871,7 +816,6 @@ describe('TValidatorRule', () => {
             });
 
             it('Should not allow inputs in invalid formats', () => {
-
                 // Arrange
                 const invalidValues = [
                     ' ',
@@ -894,8 +838,6 @@ describe('TValidatorRule', () => {
                 expect(results).toContain(errorMessage);
                 expect(results).not.toContain(true);
             });
-
-
         });
     });
 });

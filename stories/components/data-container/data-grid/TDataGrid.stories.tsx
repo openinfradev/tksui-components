@@ -1,11 +1,11 @@
-import {Meta, StoryObj} from '@storybook/react';
+import type {Meta, StoryObj} from '@storybook/react';
+import type {ColDef} from 'ag-grid-community';
+import type {AgGridReact} from 'ag-grid-react';
 import {useEffect, useMemo, useRef, useState} from 'react';
-import {AgGridReact} from 'ag-grid-react';
-import {ColDef} from 'ag-grid-community';
-import TDataGrid from '@/components/data-container/data-grid/TDataGrid';
-import TButton from '@/components/button/button/TButton';
-import useInputState from '@/common/hook/UseInputState';
 
+import useInputState from '@/common/hook/UseInputState';
+import TButton from '@/components/button/button/TButton';
+import TDataGrid from '@/components/data-container/data-grid/TDataGrid';
 
 const meta: Meta<typeof TDataGrid> = {
     title: 'DataContainer/TDataGrid',
@@ -17,9 +17,7 @@ export default meta;
 
 type Story = StoryObj<typeof TDataGrid>;
 
-
 const Template = () => {
-
     const gridRef = useRef<AgGridReact>(null);
 
     const [rowData, setRowData] = useState([]);
@@ -30,7 +28,6 @@ const Template = () => {
         fetch('https://www.ag-grid.com/example-assets/row-data.json')
             .then((result) => result.json())
             .then((rows) => setRowData(rows));
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const [columnDefs] = useState<ColDef[]>([
@@ -45,24 +42,29 @@ const Template = () => {
         {headerName: '가격', field: 'price', type: 'rightAligned'},
     ]);
 
-    const gridRightAction = useMemo(() => (<>
-        <TButton>생성하기</TButton>
-        <TButton disabled={selectedRows.value.length === 0}>삭제</TButton>
-        <TButton disabled={selectedRows.value.length !== 1}>수정</TButton>
-        <TButton>다운로드</TButton>
-    </>), [selectedRows.value.length]);
+    const gridRightAction = useMemo(
+        () => (
+            <>
+                <TButton>생성하기</TButton>
+                <TButton disabled={selectedRows.value.length === 0}>삭제</TButton>
+                <TButton disabled={selectedRows.value.length !== 1}>수정</TButton>
+                <TButton>다운로드</TButton>
+            </>
+        ),
+        [selectedRows.value.length]
+    );
 
     return (
-        <TDataGrid ref={gridRef}
-                   rowData={rowData}
-                   rowSelection={{mode: 'multiRow', enableClickSelection: false}}
-                   columnDefs={columnDefs}
-                   rightAction={gridRightAction}
-                   onChange={selectedRows.onChange}
+        <TDataGrid
+            ref={gridRef}
+            rowData={rowData}
+            rowSelection={{mode: 'multiRow', enableClickSelection: false}}
+            columnDefs={columnDefs}
+            rightAction={gridRightAction}
+            onChange={selectedRows.onChange}
         />
     );
 };
-
 
 export const Default: Story = {
     render: Template,

@@ -1,3 +1,2 @@
-export { default as TDropdown } from './TDropdown';
-
+export {default as TDropdown} from './TDropdown';
 export * from './TDropdown.interface';

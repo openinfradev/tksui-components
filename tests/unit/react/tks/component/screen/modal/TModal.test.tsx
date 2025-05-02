@@ -1,17 +1,17 @@
 import {render, screen} from '@testing-library/react';
-import TModal from '~/screen/modal/TModal';
+
 import {modalSize as modalSizeList} from '@/components';
+
+import TModal from '~/screen/modal/TModal';
 
 const sizeList = Object.values(modalSizeList);
 
 describe('TModal', () => {
-
     const mockFn = jest.fn();
     let root: HTMLDivElement;
     let modalContainer: HTMLDivElement;
 
     beforeEach(() => {
-
         root = document.createElement('div');
         root.id = 'root';
         document.body.appendChild(root);
@@ -29,14 +29,12 @@ describe('TModal', () => {
     });
 
     describe('style', () => {
-
         it('renders without errors', () => {
-
             // Arrange
             render(
                 <TModal title={'Modal Title'} isOpen onRequestClose={mockFn}>
                     Modal Content
-                </TModal>,
+                </TModal>
             );
             const modalRoot = screen.getByRole('dialog');
 
@@ -45,13 +43,12 @@ describe('TModal', () => {
         });
 
         it('Classname prop applies to root', () => {
-
             // Arrange
             const modalClass = 'modal-classname';
             render(
                 <TModal title={'Hi'} isOpen bodyClassName={modalClass} onRequestClose={mockFn}>
                     Modal Content
-                </TModal>,
+                </TModal>
             );
             const modalRoot = screen.getByRole('dialog');
 
@@ -60,13 +57,12 @@ describe('TModal', () => {
         });
 
         it('Id prop applies to root', () => {
-
             // Arrange
             const modalId = 'modal-id-test';
             render(
                 <TModal title={'Hi'} isOpen id={modalId} onRequestClose={mockFn}>
                     Modal Content
-                </TModal>,
+                </TModal>
             );
             const modalRoot = screen.getByRole('dialog');
 
@@ -74,14 +70,12 @@ describe('TModal', () => {
             expect(modalRoot).toHaveAttribute('id', modalId);
         });
 
-
         it.each(sizeList)('All size prop applies to root ', (size) => {
-
             // Arrange
             render(
                 <TModal title={'Hi'} isOpen onRequestClose={mockFn} size={size}>
                     Modal Content
-                </TModal>,
+                </TModal>
             );
             const modalRoot = screen.getByRole('dialog');
 
@@ -90,14 +84,13 @@ describe('TModal', () => {
         });
 
         it.each(sizeList)('All sizes in the boolean type are applies to the root', (size) => {
-
             // Arrange
             const sizeProp = {};
             sizeProp[size] = true;
             render(
                 <TModal title={'Hi'} isOpen onRequestClose={mockFn} {...sizeProp}>
                     Modal Content
-                </TModal>,
+                </TModal>
             );
             const modalRoot = screen.getByRole('dialog');
 
@@ -106,13 +99,12 @@ describe('TModal', () => {
         });
 
         it('Children prop applies to root', () => {
-
             // Arrange
             const contentText = 'Modal Content';
             render(
                 <TModal title={'Modal Title'} isOpen onRequestClose={mockFn}>
                     {contentText}
-                </TModal>,
+                </TModal>
             );
             const modalRoot = screen.getByText(contentText);
 
@@ -121,13 +113,12 @@ describe('TModal', () => {
         });
 
         it('Title prop applies to root', () => {
-
             // Arrange
             const modalTitle = 'Modal Title Test';
             render(
                 <TModal title={modalTitle} isOpen onRequestClose={mockFn}>
                     Modal Content
-                </TModal>,
+                </TModal>
             );
             const modalRoot = screen.getByText(modalTitle);
 
@@ -136,22 +127,15 @@ describe('TModal', () => {
         });
 
         it('Header, Footer prop applies to root', () => {
-
             // Arrange
             const headerContent = 'Header Content';
             const footerContent = 'Footer Content';
             const Header = () => <div>{headerContent}</div>;
             const Footer = () => <div>{footerContent}</div>;
             render(
-                <TModal
-                    title={'Modal Title'}
-                    isOpen
-                    onRequestClose={mockFn}
-                    header={<Header/>}
-                    footer={<Footer/>}
-                >
+                <TModal title={'Modal Title'} isOpen onRequestClose={mockFn} header={<Header />} footer={<Footer />}>
                     Modal Content
-                </TModal>,
+                </TModal>
             );
             const modalHeaderRoot = screen.getByText(headerContent);
             const modalFooterRoot = screen.getByText(footerContent);
@@ -162,18 +146,12 @@ describe('TModal', () => {
         });
 
         it('ContentLabel prop applies to root', () => {
-
             // Arrange
             const ContentLabel = 'Content Label!';
             render(
-                <TModal
-                    title={'Modal Title'}
-                    isOpen
-                    onRequestClose={mockFn}
-                    contentLabel={ContentLabel}
-                >
+                <TModal title={'Modal Title'} isOpen onRequestClose={mockFn} contentLabel={ContentLabel}>
                     Modal Content
-                </TModal>,
+                </TModal>
             );
             const modalRoot = screen.getByLabelText(ContentLabel);
 
@@ -182,19 +160,12 @@ describe('TModal', () => {
         });
 
         it('TestId prop applies to root', () => {
-
             // Arrange
             const testId = 't-modal-testId-test';
             render(
-                <TModal
-                    title={'Modal Title'}
-                    isOpen
-                    onRequestClose={mockFn}
-                    testId={testId}
-                    contentLabel={testId}
-                >
+                <TModal title={'Modal Title'} isOpen onRequestClose={mockFn} testId={testId} contentLabel={testId}>
                     Modal Content
-                </TModal>,
+                </TModal>
             );
             const modalRoot = screen.getByTestId(testId);
 
@@ -202,5 +173,4 @@ describe('TModal', () => {
             expect(modalRoot).toBeInTheDocument();
         });
     });
-
 });

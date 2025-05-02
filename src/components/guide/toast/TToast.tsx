@@ -1,8 +1,9 @@
 'use client';
 
-import {Theme, toast, ToastContainer, ToastPosition} from 'react-toastify';
+import type {Theme, ToastPosition} from 'react-toastify';
+import {toast, ToastContainer} from 'react-toastify';
 
-import {TToastProps} from '@/components';
+import type {TToastProps} from '@/components';
 
 function TToast({
     theme = 'light' as Theme,
@@ -13,7 +14,6 @@ function TToast({
     draggable = false,
     ...restProps
 }: TToastProps) {
-
     const props = {
         theme,
         className,
@@ -25,9 +25,7 @@ function TToast({
         ...restProps,
     };
 
-    return (
-        <ToastContainer {...props} />
-    );
+    return <ToastContainer {...props} />;
 }
 
 const notify = toast;

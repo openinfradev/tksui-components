@@ -1,5 +1,4 @@
-
-import {MaterialSymbol} from '@material-symbols/font-300';
+import type {MaterialSymbol} from '@material-symbols/font-300';
 
 const materialSymbols: MaterialSymbol[] = [
     '123',
@@ -3209,6 +3208,5 @@ const materialSymbols: MaterialSymbol[] = [
     'zoom_out',
     'zoom_out_map',
 ];
-
 
 export default materialSymbols;

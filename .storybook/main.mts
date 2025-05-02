@@ -1,9 +1,7 @@
-import {mergeConfig} from 'vite';
 import path from 'path';
+import {mergeConfig} from 'vite';
 
-const resolve = (dir) => path.join(__dirname, '.', dir);
-
-module.exports = {
+const config = {
     stories: ['../stories/components/**/*.stories.tsx'],
     framework: {
         name: '@storybook/react-vite',
@@ -16,7 +14,7 @@ module.exports = {
             resolve: {
                 alias: {
                     '@': path.resolve('src'),
-                    'src': path.resolve('src'),
+                    src: path.resolve('src'),
                     '~': path.resolve('src/components'),
                     '~style': path.resolve('src/styles'),
                 },
@@ -25,16 +23,15 @@ module.exports = {
                 preprocessorOptions: {
                     scss: {
                         api: 'modern',
-                        includePaths: [
-                            path.resolve(__dirname, '../node_modules'),
-                            path.resolve(__dirname, '../')
-                        ]
-                    }
-                }
-            }
+                        includePaths: [path.resolve(__dirname, '../node_modules'), path.resolve(__dirname, '../')],
+                    },
+                },
+            },
         });
     },
     docs: {
         autodocs: false,
     },
 };
+
+export default config;

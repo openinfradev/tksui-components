@@ -1,7 +1,9 @@
-import {CSSProperties, useCallback, useMemo} from 'react';
-import TButton from '../button/TButton';
-import {buttonGroupSize, TButtonGroupProps, TButtonGroupValue} from '@/components';
+import type {CSSProperties} from 'react';
+import {useCallback, useMemo} from 'react';
 
+import type {TButtonGroupProps, TButtonGroupValue} from '@/components';
+import {buttonGroupSize} from '@/components';
+import TButton from '../button/TButton';
 
 const TButtonGroup = ({
     disabled = false,
@@ -9,7 +11,6 @@ const TButtonGroup = ({
     onChange,
     ...restProps
 }: TButtonGroupProps) => {
-
     const props: TButtonGroupProps = {disabled, onChange, ...restProps};
 
     // region [Styles]
@@ -32,7 +33,6 @@ const TButtonGroup = ({
         }
         return buttonGroupSize.medium;
     }, [props.size, props.xsmall, props.small, props.medium, props.large]);
-
 
     const rootClass = useMemo((): string => {
         const clazz: string[] = [];
@@ -83,70 +83,80 @@ const TButtonGroup = ({
 
     // region [Privates]
 
-    const updateMultiSelectValue = useCallback((value: TButtonGroupValue, currentStatus: boolean) => {
-        if (currentStatus) {
-            const newValue = props.value.filter((val) => JSON.stringify(val) !== JSON.stringify(value));
-            onChange(newValue);
-        } else {
-            const newValue = props.value.concat(value);
-            onChange(newValue);
-        }
-        return value;
-    }, [onChange, props.value]);
+    const updateMultiSelectValue = useCallback(
+        (value: TButtonGroupValue, currentStatus: boolean) => {
+            if (currentStatus) {
+                const newValue = props.value.filter((val) => JSON.stringify(val) !== JSON.stringify(value));
+                onChange(newValue);
+            } else {
+                const newValue = props.value.concat(value);
+                onChange(newValue);
+            }
+            return value;
+        },
+        [onChange, props.value]
+    );
 
-    const updateSingleSelectValue = useCallback((value: TButtonGroupValue) => {
-        onChange(value);
-    }, [onChange]);
+    const updateSingleSelectValue = useCallback(
+        (value: TButtonGroupValue) => {
+            onChange(value);
+        },
+        [onChange]
+    );
 
-    const isActive = useCallback((value) => {
-        if (props.multiSelect) {
-            return props.value.some((val) => {
-                return JSON.stringify(val) === JSON.stringify(value);
-            });
-        }
+    const isActive = useCallback(
+        (value) => {
+            if (props.multiSelect) {
+                return props.value.some((val) => {
+                    return JSON.stringify(val) === JSON.stringify(value);
+                });
+            }
 
-        if (typeof props.value === 'object') {
-            return JSON.stringify(props.value) === JSON.stringify(value);
-        }
+            if (typeof props.value === 'object') {
+                return JSON.stringify(props.value) === JSON.stringify(value);
+            }
 
-        return props.value === value;
-    }, [props.multiSelect, props.value]);
+            return props.value === value;
+        },
+        [props.multiSelect, props.value]
+    );
 
     // endregion
 
     // region [Events]
 
-    const onClickItem = useCallback((value: TButtonGroupValue, currentStatus: boolean) => {
-
-        if (props.multiSelect) {
-            updateMultiSelectValue(value, currentStatus);
-        } else {
-            updateSingleSelectValue(value);
-        }
-
-    }, [props.multiSelect, updateMultiSelectValue, updateSingleSelectValue]);
+    const onClickItem = useCallback(
+        (value: TButtonGroupValue, currentStatus: boolean) => {
+            if (props.multiSelect) {
+                updateMultiSelectValue(value, currentStatus);
+            } else {
+                updateSingleSelectValue(value);
+            }
+        },
+        [props.multiSelect, updateMultiSelectValue, updateSingleSelectValue]
+    );
 
     // endregion
 
     return (
         <div className={`t-button-group ${rootClass}`} style={rootStyle} data-testid={'button-group-root'}>
-            {
-                props.items.map((item, index) => {
-                    return (
-                        <TButton key={index}
-                                 className={`t-button-group__button ${buttonClass(isActive(item.value))}`}
-                                 small
-                                 disabled={props.disabled}
-                                 onClick={() => onClickItem(item.value, isActive(item.value))}
-                        >{item.template}</TButton>
-                    );
-                })
-            }
+            {props.items.map((item, index) => {
+                return (
+                    <TButton
+                        key={index}
+                        className={`t-button-group__button ${buttonClass(isActive(item.value))}`}
+                        small
+                        disabled={props.disabled}
+                        onClick={() => onClickItem(item.value, isActive(item.value))}
+                    >
+                        {item.template}
+                    </TButton>
+                );
+            })}
         </div>
     );
 };
 
 TButtonGroup.displayName = 'TButtonGroup';
-
 
 export default TButtonGroup;

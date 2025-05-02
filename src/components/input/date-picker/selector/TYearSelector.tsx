@@ -1,18 +1,24 @@
 import {useCallback, useContext, useMemo} from 'react';
-import TIcon from '~/icon/TIcon';
-import TButton from '~/button/button/TButton';
-import themeToken from '~style/designToken/ThemeToken.module.scss';
-import datePickerConText from '~/input/date-picker/TDatePickerContext';
-import {TDateValue} from '~/input/date-picker';
 
+import themeToken from '~style/designToken/ThemeToken.module.scss';
+
+import TButton from '~/button/button/TButton';
+import TIcon from '~/icon/TIcon';
+import type {TDateValue} from '~/input/date-picker';
+import datePickerConText from '~/input/date-picker/TDatePickerContext';
 
 const TYearSelector = () => {
-
     // region [Hooks]
 
     const {
-        dateValue, onChangeValue, displayDateObject, setDisplayDateObject,
-        changeViewMode, validDateRange, nowDate, viewMode,
+        dateValue,
+        onChangeValue,
+        displayDateObject,
+        setDisplayDateObject,
+        changeViewMode,
+        validDateRange,
+        nowDate,
+        viewMode,
     } = useContext(datePickerConText);
 
     const displayYearRange = useMemo(() => {
@@ -22,12 +28,12 @@ const TYearSelector = () => {
 
     // endregion
 
-
     // region [Privates]
 
     const selectedDateObject = useMemo((): TDateValue => {
-
-        if (dateValue === '') { return {year: null, month: null, day: null}; }
+        if (dateValue === '') {
+            return {year: null, month: null, day: null};
+        }
         const year = Number(dateValue.substring(0, 4));
 
         return {year, month: null, day: null};
@@ -35,12 +41,10 @@ const TYearSelector = () => {
 
     // endregion
 
-
     // region [Styles]
 
     const dateLabelClass = useCallback(
         (year: number): string => {
-
             const clazz = [];
 
             if (year === selectedDateObject.year) {
@@ -55,7 +59,7 @@ const TYearSelector = () => {
 
             return clazz.join(' ');
         },
-        [selectedDateObject, nowDate, validDateRange],
+        [selectedDateObject, nowDate, validDateRange]
     );
 
     const iconClass = useMemo(() => {
@@ -67,22 +71,22 @@ const TYearSelector = () => {
 
     // endregion
 
-
     // region [Events]
 
-    const onClickDate = useCallback((clickedYear: number) => {
+    const onClickDate = useCallback(
+        (clickedYear: number) => {
+            if (viewMode.current !== viewMode.original) {
+                setDisplayDateObject((prev) => ({...prev, year: clickedYear}));
+                changeViewMode(viewMode.original);
+                return;
+            }
 
-        if (viewMode.current !== viewMode.original) {
-            setDisplayDateObject((prev) => ({...prev, year: clickedYear}));
-            changeViewMode(viewMode.original);
-            return;
-        }
-
-        if (validDateRange(clickedYear?.toString())) {
-            onChangeValue(clickedYear?.toString());
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [onChangeValue]);
+            if (validDateRange(clickedYear?.toString())) {
+                onChangeValue(clickedYear?.toString());
+            }
+        },
+        [changeViewMode, onChangeValue, setDisplayDateObject, validDateRange, viewMode]
+    );
 
     const onMoveYear = useCallback((move: 'next' | 'prev') => {
         if (move === 'next' || move === 'prev') {
@@ -95,20 +99,22 @@ const TYearSelector = () => {
                 }
                 return prev;
             });
-        } else { throw new Error('Invalid move value'); }
+        } else {
+            throw new Error('Invalid move value');
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const onClickToggleViewMode = useCallback(() => {
-        if (viewMode.original !== viewMode.current) { changeViewMode(viewMode.original); }
+        if (viewMode.original !== viewMode.current) {
+            changeViewMode(viewMode.original);
+        }
     }, [viewMode, changeViewMode]);
 
     // endregion
 
-
     // region [Effects]
     // endregion
-
 
     // region [Templates]
 
@@ -116,23 +122,44 @@ const TYearSelector = () => {
         <div className={'t-year-selector'} data-testid={'t-year-selector'}>
             <div className={'t-year-selector__header'}>
                 <div className={'t-year-selector__header__current-display-date'}>
-                    <div onClick={() => { changeViewMode('year'); }}>
+                    <div
+                        onClick={() => {
+                            changeViewMode('year');
+                        }}
+                    >
                         {`${displayYearRange[0]}년 - ${displayYearRange[displayYearRange.length - 1]}년`}
                     </div>
-                    <TIcon xsmall onClick={onClickToggleViewMode}
-                           className={`t-year-selector__header__current-display-date__icon ${iconClass}`}>
+                    <TIcon
+                        xsmall
+                        onClick={onClickToggleViewMode}
+                        className={`t-year-selector__header__current-display-date__icon ${iconClass}`}
+                    >
                         arrow_drop_down
                     </TIcon>
                 </div>
 
                 <div className={'t-year-selector__header__control'}>
-                    <TButton onClick={() => { onMoveYear('prev'); }} xsmall
-                             className={'t-year-selector__header__control__icon-button'}>
-                        <TIcon xsmall color={themeToken.tGrayColor5}>arrow_left</TIcon>
+                    <TButton
+                        onClick={() => {
+                            onMoveYear('prev');
+                        }}
+                        xsmall
+                        className={'t-year-selector__header__control__icon-button'}
+                    >
+                        <TIcon xsmall color={themeToken.tGrayColor5}>
+                            arrow_left
+                        </TIcon>
                     </TButton>
-                    <TButton onClick={() => { onMoveYear('next'); }} xsmall
-                             className={'t-year-selector__header__control__icon-button'}>
-                        <TIcon xsmall color={themeToken.tGrayColor5}>arrow_right</TIcon>
+                    <TButton
+                        onClick={() => {
+                            onMoveYear('next');
+                        }}
+                        xsmall
+                        className={'t-year-selector__header__control__icon-button'}
+                    >
+                        <TIcon xsmall color={themeToken.tGrayColor5}>
+                            arrow_right
+                        </TIcon>
                     </TButton>
                 </div>
             </div>
@@ -140,8 +167,13 @@ const TYearSelector = () => {
             <div className={'t-year-selector__content'} data-testid={'t-day-selector-control'}>
                 <div className={'t-year-selector__content__year-container'}>
                     {displayYearRange.map((year) => (
-                        <span className={`t-year-selector__content__year-container__item ${dateLabelClass(year)}`}
-                              onClick={() => { onClickDate(year); }} key={year}>
+                        <span
+                            className={`t-year-selector__content__year-container__item ${dateLabelClass(year)}`}
+                            onClick={() => {
+                                onClickDate(year);
+                            }}
+                            key={year}
+                        >
                             {year}
                         </span>
                     ))}
@@ -154,6 +186,5 @@ const TYearSelector = () => {
 };
 
 TYearSelector.displayName = 'TYearSelector';
-
 
 export default TYearSelector;

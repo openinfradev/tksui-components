@@ -1,5 +1,6 @@
 import {act, render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+
 import TSwitch from '~/input/switch/TSwitch';
 
 describe('TSwitch', () => {
@@ -17,11 +18,9 @@ describe('TSwitch', () => {
 
     // region [Styles]
 
-
     // region [Value Handling]
 
     it('renders without errors', () => {
-
         // Arrange
         render(<TSwitch {...baseProps} />);
 
@@ -30,10 +29,9 @@ describe('TSwitch', () => {
     });
 
     it('Classname prop applies to root', () => {
-
         // Arrange
         const classNameProp = 'class-name-prop';
-        render(<TSwitch {...baseProps} className={classNameProp}/>);
+        render(<TSwitch {...baseProps} className={classNameProp} />);
         const root = screen.getByTestId('t-switch-root');
 
         // Assert
@@ -41,9 +39,8 @@ describe('TSwitch', () => {
     });
 
     it('Style prop applies to root', () => {
-
         // Arrange
-        render(<TSwitch {...baseProps} style={{width: '300px'}}/>);
+        render(<TSwitch {...baseProps} style={{width: '300px'}} />);
         const root = screen.getByTestId('t-switch-root');
 
         // Assert
@@ -51,9 +48,8 @@ describe('TSwitch', () => {
     });
 
     it('When disabled prop is applied, root has t-switch--disabled class', () => {
-
         // Arrange
-        render(<TSwitch {...baseProps} disabled/>);
+        render(<TSwitch {...baseProps} disabled />);
         const root = screen.getByTestId('t-switch-root');
 
         // Assert
@@ -61,21 +57,18 @@ describe('TSwitch', () => {
     });
 
     it('When label prop is provided, it is shown', () => {
-
         // Arrange
         const labelText = 'Switch Label';
-        render(<TSwitch {...baseProps} label={labelText}/>);
+        render(<TSwitch {...baseProps} label={labelText} />);
         const label = screen.getByText(labelText);
 
         // Assert
         expect(label).toBeInTheDocument();
     });
 
-
     it('When value is same with positiveValue, container has t-switch__container--on class', () => {
-
         // Arrange
-        render(<TSwitch {...baseProps} value={true}/>);
+        render(<TSwitch {...baseProps} value={true} />);
         const container = screen.getByTestId('t-switch-container');
 
         // Assert
@@ -83,18 +76,15 @@ describe('TSwitch', () => {
     });
 
     it('When value is same with negativeValue, container has t-switch__container--off class', () => {
-
         // Arrange
-        render(<TSwitch {...baseProps} value={false}/>);
+        render(<TSwitch {...baseProps} value={false} />);
         const container = screen.getByTestId('t-switch-container');
 
         // Assert
         expect(container).toHaveClass('t-switch__container--off');
     });
 
-
     it('When clicking the root, onChange handler is called', async () => {
-
         // Arrange
         const user = userEvent.setup();
         render(<TSwitch {...baseProps} />);
@@ -111,7 +101,6 @@ describe('TSwitch', () => {
     });
 
     it('When pressing Enter on the thumb, onChange handler is called', async () => {
-
         // Arrange
         const user = userEvent.setup();
         render(<TSwitch {...baseProps} />);
@@ -128,7 +117,6 @@ describe('TSwitch', () => {
     });
 
     it('When pressing Space on the thumb, onChange handler is called', async () => {
-
         // Arrange
         const user = userEvent.setup();
         render(<TSwitch {...baseProps} />);
@@ -144,12 +132,10 @@ describe('TSwitch', () => {
         expect(mockOnChange).toHaveBeenCalledWith(true);
     });
 
-
     it('When switch is disabled, pressing Tab should not focus on the thumb', async () => {
-
         // Arrange
         const user = userEvent.setup();
-        render(<TSwitch {...baseProps} disabled/>);
+        render(<TSwitch {...baseProps} disabled />);
         const thumb = screen.getByTestId('t-switch-thumb');
 
         // Act
@@ -161,12 +147,10 @@ describe('TSwitch', () => {
         expect(thumb).not.toHaveFocus();
     });
 
-
     it('When disabled, pressing Enter on the thumb does not trigger onChange', async () => {
-
         // Arrange
         const user = userEvent.setup();
-        render(<TSwitch {...baseProps} disabled/>);
+        render(<TSwitch {...baseProps} disabled />);
 
         // Act
         await act(async () => {
@@ -178,8 +162,5 @@ describe('TSwitch', () => {
         expect(mockOnChange).toHaveBeenCalledTimes(0);
     });
 
-
     // endregion
-
-
 });

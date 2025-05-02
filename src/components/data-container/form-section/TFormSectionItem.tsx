@@ -1,21 +1,19 @@
 'use client';
 
-import {CSSProperties, memo, useContext, useId, useMemo, useRef} from 'react';
-import TIcon from '~/icon/TIcon';
-import TTooltip from '~/guide/tooltip/TTooltip';
-import {TFormSectionItemProps} from '@/components';
-import TFormSectionContext from './TFormSectionContext';
+import type {CSSProperties} from 'react';
+import {memo, useContext, useId, useMemo, useRef} from 'react';
+
+import type {TFormSectionItemProps} from '@/components';
+import TFormSectionContext from './TFormSectionContextInterface';
+
 import themeToken from '~style/designToken/ThemeToken.module.scss';
 
+import TTooltip from '~/guide/tooltip/TTooltip';
+import TIcon from '~/icon/TIcon';
 
 const gapSize = Number(themeToken.tSpacing40?.replace(/[^0-9]/g, '')) * 2 || 80;
 
-const TFormSectionItem = ({
-    span = 1,
-    ...restProps
-}: TFormSectionItemProps) => {
-
-
+const TFormSectionItem = ({span = 1, ...restProps}: TFormSectionItemProps) => {
     // region [Hooks]
 
     const props: TFormSectionItemProps = {span, ...restProps};
@@ -27,38 +25,38 @@ const TFormSectionItem = ({
 
     // endregion
 
-
     // region [Styles]
 
     const rootClass = useMemo((): string => {
-
         const clazz: string[] = [];
 
-        if (props.className) { clazz.push(props.className); }
-        if (props.required) { clazz.push('t-form-section-item--required'); }
+        if (props.className) {
+            clazz.push(props.className);
+        }
+        if (props.required) {
+            clazz.push('t-form-section-item--required');
+        }
 
         return clazz.join(' ');
     }, [props.className, props.required]);
 
-
     const excludedGap = useMemo(() => {
-
-        if (column === props.span) { return '0px'; }
+        if (column === props.span) {
+            return '0px';
+        }
 
         return `${gapSize * (column - 1)}px`;
     }, [column, props.span]);
 
-
     const includedGap = useMemo(() => {
-
-        if (column === props.span || props.span === 1) { return '0px'; }
+        if (column === props.span || props.span === 1) {
+            return '0px';
+        }
 
         return `(${gapSize}px * ${props.span - 1})`;
     }, [column, props.span]);
 
-
     const rootStyle = useMemo((): CSSProperties => {
-
         const style: CSSProperties = props.style ? props.style : {};
 
         style.width = `calc(((100% - ${excludedGap}) / ${column} * ${props.span}) + ${includedGap})`;
@@ -66,9 +64,7 @@ const TFormSectionItem = ({
         return style;
     }, [props.style, column, props.span, excludedGap, includedGap]);
 
-
     const labelStyle = useMemo((): CSSProperties => {
-
         const style: CSSProperties = {};
 
         style.minWidth = labelWidth;
@@ -84,9 +80,7 @@ const TFormSectionItem = ({
         return style;
     }, [labelWidth, rowVerticalAlign]);
 
-
     const contentStyle = useMemo((): CSSProperties => {
-
         let style: CSSProperties = {};
 
         if (rowVerticalAlign === 'middle') {
@@ -103,29 +97,29 @@ const TFormSectionItem = ({
 
     // endregion
 
-
     return (
-        <span ref={rootRef} className={`t-form-section-item ${rootClass}`}
-              style={rootStyle} role={'group'}>
-            {
-                props.label && (
-                    <label className={'t-form-section-item__label'} style={labelStyle}>
+        <span ref={rootRef} className={`t-form-section-item ${rootClass}`} style={rootStyle} role={'group'}>
+            {props.label && (
+                <label className={'t-form-section-item__label'} style={labelStyle}>
+                    <span className={'t-form-section-item__label__text'}>{props.label}</span>
 
-                        <span className={'t-form-section-item__label__text'}>{props.label}</span>
-
-                        {
-                            (props.information) && (
-                                <TIcon className={'t-form-section-item__label__info-icon'}
-                                       small tooltipContent={props.information}
-                                       tooltipId={tooltipId} clickable>info</TIcon>
-                            )
-                        }
-
-                    </label>
-                )
-            }
-            <div className={'t-form-section-item__content'} style={contentStyle}>{props.children} </div>
-            {props.information && (<TTooltip id={tooltipId} openOnClick/>)}
+                    {props.information && (
+                        <TIcon
+                            className={'t-form-section-item__label__info-icon'}
+                            small
+                            tooltipContent={props.information}
+                            tooltipId={tooltipId}
+                            clickable
+                        >
+                            info
+                        </TIcon>
+                    )}
+                </label>
+            )}
+            <div className={'t-form-section-item__content'} style={contentStyle}>
+                {props.children}{' '}
+            </div>
+            {props.information && <TTooltip id={tooltipId} openOnClick />}
         </span>
     );
 };

@@ -1,22 +1,19 @@
 import {render, screen} from '@testing-library/react';
+
 import THighlightText from '~/data-container/highlight-text/THighlightText';
 
 describe('THighlightText', () => {
-
     describe('Render', () => {
         it('Renders without errors', () => {
-
             // Arrange
-            render(<THighlightText keyword="Test Text">Render Test</THighlightText>);
-
+            render(<THighlightText keyword='Test Text'>Render Test</THighlightText>);
 
             expect(screen.getByText('Render Test')).toBeInTheDocument();
         });
 
         it('Renders the children with highlighting when a keyword is provided', () => {
-
             // Arrange
-            render(<THighlightText keyword="sample">Sample Text</THighlightText>);
+            render(<THighlightText keyword='sample'>Sample Text</THighlightText>);
             const highlightedText = screen.getByTestId('highlighted-text-root');
 
             // Assert
@@ -25,9 +22,8 @@ describe('THighlightText', () => {
         });
 
         it('Correctly handles case-insensitive highlighting', () => {
-
             // Arrange
-            render(<THighlightText keyword="sample">Sample sample</THighlightText>);
+            render(<THighlightText keyword='sample'>Sample sample</THighlightText>);
             const highlightedText = screen.getByTestId('highlighted-text-root');
 
             // Assert
@@ -36,13 +32,11 @@ describe('THighlightText', () => {
         });
 
         it('Renders the children without highlighting when keyword is not present', () => {
-
             // Arrange
-            render(<THighlightText keyword="noKeyword">Sample Text</THighlightText>);
+            render(<THighlightText keyword='noKeyword'>Sample Text</THighlightText>);
 
             // Assert
             expect(screen.getByText('Sample Text')).toBeInTheDocument();
         });
-
     });
 });

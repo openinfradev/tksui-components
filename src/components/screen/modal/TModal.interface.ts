@@ -1,39 +1,41 @@
-import React, {ReactNode} from 'react';
-import {OnAfterOpenCallback} from 'react-modal';
-import {TBaseProps} from '@/common/base/TBase.interface';
+import type {ReactNode} from 'react';
+import type React from 'react';
+import type {OnAfterOpenCallback} from 'react-modal';
+
+import type {TBaseProps} from '@/common/base/TBase.interface';
 
 export const modalSize = {sm: 'small', md: 'medium', lg: 'large', xlg: 'xlarge', xxlg: 'xxlarge'} as const;
-type modalSize = typeof modalSize[keyof typeof modalSize];
+type modalSizeType = (typeof modalSize)[keyof typeof modalSize];
 
 export interface TModalProps extends TBaseProps {
-    appId?: string,
-    portalId?: string,
+    appId?: string;
+    portalId?: string;
 
-    className?: string,
-    overlayClassName?: string,
-    bodyClassName?: string,
+    className?: string;
+    overlayClassName?: string;
+    bodyClassName?: string;
 
-    children?: ReactNode,
-    title?: string,
-    header?: ReactNode,
-    footer?: ReactNode,
+    children?: ReactNode;
+    title?: string;
+    header?: ReactNode;
+    footer?: ReactNode;
 
-    isOpen: boolean,
-    contentLabel?: string,
+    isOpen: boolean;
+    contentLabel?: string;
 
-    testId?: string,
+    testId?: string;
 
     onRequestClose(event: React.MouseEvent | React.KeyboardEvent): void;
 
     onAfterClose?(): void;
 
-    onAfterOpen?: OnAfterOpenCallback,
+    onAfterOpen?: OnAfterOpenCallback;
 
-    size?: modalSize,
+    size?: modalSizeType;
 
-    small?: boolean,
-    medium?: boolean,
-    large?: boolean,
-    xlarge?: boolean,
-    xxlarge?: boolean,
+    small?: boolean;
+    medium?: boolean;
+    large?: boolean;
+    xlarge?: boolean;
+    xxlarge?: boolean;
 }

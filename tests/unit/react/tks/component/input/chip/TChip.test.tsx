@@ -1,18 +1,17 @@
 import {act, render, renderHook, screen} from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import {useRef} from 'react';
+
 import TChip from '~/input/chip/TChip';
 
 describe('TChip', () => {
-
     const mockFn = jest.fn();
 
-    beforeEach(() => { mockFn.mockClear(); });
+    beforeEach(() => {
+        mockFn.mockClear();
+    });
 
     describe('Style', () => {
-
         it('Classname prop applies to root', () => {
-
             // Arrange
             const testData = 'class-name-prop';
             render(<TChip className={testData}>hello</TChip>);
@@ -23,7 +22,6 @@ describe('TChip', () => {
         });
 
         it('Style prop applies to root', () => {
-
             // Arrange
             const testData = {width: '50px'};
             render(<TChip style={testData}>hello</TChip>);
@@ -34,7 +32,6 @@ describe('TChip', () => {
         });
 
         it('ID prop applies to root', () => {
-
             // Arrange
             const testData = 'test-id';
             render(<TChip id={testData}>hello</TChip>);
@@ -46,7 +43,6 @@ describe('TChip', () => {
         });
 
         it('Fill prop applies to root', () => {
-
             // Arrange
             render(<TChip fill>hello</TChip>);
             const root = screen.getByTestId('t-chip-root');
@@ -56,7 +52,6 @@ describe('TChip', () => {
         });
 
         it('Outlined prop applies to root', () => {
-
             // Arrange
             render(<TChip outlined>hello</TChip>);
             const root = screen.getByTestId('t-chip-root');
@@ -66,7 +61,6 @@ describe('TChip', () => {
         });
 
         it('When type prop is set to filled, root has t-chip--fill class', () => {
-
             // Arrange
             render(<TChip type={'fill'}>hello</TChip>);
             const chip = screen.getByTestId('t-chip-root');
@@ -76,7 +70,6 @@ describe('TChip', () => {
         });
 
         it('When type prop is set to outlined, root has t-chip--outlined class', () => {
-
             // Arrange
             render(<TChip type={'outlined'}>hello</TChip>);
             const root = screen.getByTestId('t-chip-root');
@@ -86,7 +79,6 @@ describe('TChip', () => {
         });
 
         it('When prevIcon prop is applied, it should be displayed on content area', () => {
-
             // Arrange
             const importedIcon = 'chips';
             render(<TChip prevIcon={importedIcon}>hello</TChip>);
@@ -97,11 +89,14 @@ describe('TChip', () => {
         });
 
         it('When icon prevIconColor is applied, it should be displayed on content area', () => {
-
             // Arrange
             const importedIcon = 'chips';
             const testColor = 'red';
-            render(<TChip prevIcon={importedIcon} prevIconColor={'red'}>hello</TChip>);
+            render(
+                <TChip prevIcon={importedIcon} prevIconColor={'red'}>
+                    hello
+                </TChip>
+            );
             const root = screen.getByText(importedIcon);
 
             // Assert
@@ -109,43 +104,43 @@ describe('TChip', () => {
         });
 
         it('When icon prevIconSize is applied, it should be displayed on content area', () => {
-
             // Arrange
             const importedIcon = 'chips';
             const testIconSize = 'xlarge';
-            render(<TChip prevIcon={importedIcon} prevIconSize={testIconSize}>hello</TChip>);
+            render(
+                <TChip prevIcon={importedIcon} prevIconSize={testIconSize}>
+                    hello
+                </TChip>
+            );
             const root = screen.getByText(importedIcon);
 
             // Assert
             expect(root).toHaveClass(`t-icon--${testIconSize}`);
         });
 
-        it(
-            'When onRemove prop applied, removeIcon is visible',
-            async () => {
+        it('When onRemove prop applied, removeIcon is visible', async () => {
+            // Arrange
+            render(<TChip onRemove={mockFn}>TChip</TChip>);
+            const removeIconElement = screen.getByRole('img');
 
-                // Arrange
-                render(<TChip onRemove={mockFn}>TChip</TChip>);
-                const removeIconElement = screen.getByRole('img');
+            // Assert
+            expect(removeIconElement).toBeInTheDocument();
 
-                // Assert
-                expect(removeIconElement).toBeInTheDocument();
-
-                // Assert
-            },
-        );
-
+            // Assert
+        });
     });
 
     describe('Event', () => {
-
         it('When remove handler is triggered, onRemove handler is called', async () => {
-
             // Arrange
             const {result} = renderHook(() => useRef(null));
             const chipRef = result.current;
 
-            render(<TChip ref={chipRef} onRemove={mockFn}>hello</TChip>);
+            render(
+                <TChip ref={chipRef} onRemove={mockFn}>
+                    hello
+                </TChip>
+            );
 
             // Act
             act(() => {
@@ -154,9 +149,6 @@ describe('TChip', () => {
 
             // Assert
             expect(mockFn).toHaveBeenCalledTimes(1);
-
         });
-
     });
-
 });
