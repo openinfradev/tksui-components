@@ -1,4 +1,4 @@
-import {render, screen} from '@testing-library/react';
+import {act, render, screen} from '@testing-library/react';
 import React from 'react';
 
 import TToast, {notify} from '~/guide/toast/TToast';
@@ -10,7 +10,10 @@ describe('TToast', () => {
             const message = 'test message';
 
             render(<TToast />);
-            notify(message);
+
+            await act(async () => {
+                notify(message);
+            });
 
             const toastElement = await screen.findByText(message);
 
@@ -25,7 +28,10 @@ describe('TToast', () => {
             const message = 'test message';
 
             render(<TToast />);
-            notify(message);
+
+            await act(async () => {
+                notify(message);
+            });
 
             const toastElement = await screen.findByText(message);
 
@@ -39,7 +45,10 @@ describe('TToast', () => {
             const message = 'test message';
 
             render(<TToast />);
-            notify.success(message);
+
+            await act(async () => {
+                notify.success(message);
+            });
 
             const toastElement = await screen.findByText(message);
 
@@ -53,7 +62,10 @@ describe('TToast', () => {
             const message = 'test message';
 
             render(<TToast />);
-            notify.error(message);
+
+            await act(async () => {
+                notify.error(message);
+            });
 
             const toastElement = await screen.findByText(message);
 
@@ -67,7 +79,10 @@ describe('TToast', () => {
             const message = 'test message';
 
             render(<TToast />);
-            notify.warn(message);
+
+            await act(async () => {
+                notify.warn(message);
+            });
 
             const toastElement = await screen.findByText(message);
 
@@ -81,7 +96,10 @@ describe('TToast', () => {
             const message = 'test message';
 
             render(<TToast />);
-            notify.info(message);
+
+            await act(async () => {
+                notify.info(message);
+            });
 
             const toastElement = await screen.findByText(message);
 
