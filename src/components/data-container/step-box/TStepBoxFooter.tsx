@@ -1,4 +1,4 @@
-import {useCallback, useContext} from 'react';
+import {use, useCallback} from 'react';
 
 import type {TStepBoxFooterProps} from '@/components';
 
@@ -8,7 +8,7 @@ import TStepBoxContext from '~/data-container/step-box/TStepBoxContext';
 const TStepBoxFooter = (props: TStepBoxFooterProps) => {
     // region [Hooks]
 
-    const context = useContext(TStepBoxContext);
+    const context = use(TStepBoxContext);
 
     // endregion
 

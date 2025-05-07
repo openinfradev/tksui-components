@@ -1,5 +1,5 @@
 import type {CSSProperties} from 'react';
-import {memo, useContext, useMemo} from 'react';
+import {memo, use, useMemo} from 'react';
 
 import type {TFormSectionRowProps} from '@/components';
 
@@ -10,7 +10,7 @@ const TFormSectionRow = ({verticalAlign = 'middle', ...restProps}: TFormSectionR
 
     const props: TFormSectionRowProps = {verticalAlign, ...restProps};
 
-    const formContext = useContext(TFormSectionContext);
+    const formContext = use(TFormSectionContext);
 
     // endregion
 

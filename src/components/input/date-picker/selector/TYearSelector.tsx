@@ -1,4 +1,4 @@
-import {useCallback, useContext, useMemo} from 'react';
+import {use, useCallback, useMemo} from 'react';
 
 import themeToken from '~style/designToken/ThemeToken.module.scss';
 
@@ -19,7 +19,7 @@ const TYearSelector = () => {
         validDateRange,
         nowDate,
         viewMode,
-    } = useContext(datePickerConText);
+    } = use(datePickerConText);
 
     const displayYearRange = useMemo(() => {
         const startYear = Math.floor(displayDateObject.year / 10) * 10;

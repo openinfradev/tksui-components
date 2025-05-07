@@ -1,10 +1,10 @@
 'use client';
 
-import type {CSSProperties, KeyboardEvent, Ref} from 'react';
+import type {CSSProperties, KeyboardEvent} from 'react';
 import {memo, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState} from 'react';
 
 import useValidator from '@/common/hook/UseValidator';
-import type {TCheckboxProps, TCheckboxRef, TCheckBoxStatus} from '@/components';
+import type {TCheckboxProps, TCheckBoxStatus} from '@/components';
 import TIcon from '../../icon/TIcon';
 
 import themeToken from '~style/designToken/ThemeToken.module.scss';
