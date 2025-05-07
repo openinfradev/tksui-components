@@ -6,6 +6,5 @@ export default {
         '^~/(.*)$': '<rootDir>/src/components/$1',
         '\\.(css|less|scss)$': '<rootDir>/tests/styleMock.js',
     },
-    setupFiles: ['<rootDir>/jest.setup.js'],
-    setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
+    setupFilesAfterEnv: ['<rootDir>/jest.setup.js', '@testing-library/jest-dom'],
 };
