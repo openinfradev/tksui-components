@@ -1,4 +1,4 @@
-import {act, render, screen} from '@testing-library/react';
+import {render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import type {CSSProperties} from 'react';
 import {useState} from 'react';
@@ -79,18 +79,15 @@ describe('TPagination', () => {
             expect(page2Button).not.toHaveClass('t-pagination__page-container__page__button--active');
 
             // Act
-            await act(async () => {
-                await user.click(nextPageIcon);
-            });
+
+            await user.click(nextPageIcon);
 
             // Assert
             expect(page1Button).not.toHaveClass('t-pagination__page-container__page__button--active');
             expect(page2Button).toHaveClass('t-pagination__page-container__page__button--active');
 
             // Act
-            await act(async () => {
-                await user.click(prevPageIcon);
-            });
+            await user.click(prevPageIcon);
 
             // Assert
             expect(page1Button).toHaveClass('t-pagination__page-container__page__button--active');
@@ -109,9 +106,7 @@ describe('TPagination', () => {
             expect(page3Button).not.toHaveClass('t-pagination__page-container__page__button--active');
 
             // Act
-            await act(async () => {
-                await user.click(page3Button);
-            });
+            await user.click(page3Button);
 
             // Assert
             expect(page1Button).not.toHaveClass('t-pagination__page-container__page__button--active');
@@ -138,9 +133,7 @@ describe('TPagination', () => {
             const nextPageIcon = screen.getByLabelText('keyboard_arrow_right');
 
             // Act
-            await act(async () => {
-                await user.click(nextPageIcon);
-            });
+            await user.click(nextPageIcon);
 
             // Arrange
             const previousPageSetIcon = screen.getByLabelText('keyboard_double_arrow_left');
@@ -170,9 +163,7 @@ describe('TPagination', () => {
             const nextPageSetIcon = screen.getByLabelText('keyboard_double_arrow_right');
 
             // Act
-            await act(async () => {
-                await user.click(nextPageIcon);
-            });
+            await user.click(nextPageIcon);
 
             // Assert
             expect(nextPageSetIcon).toHaveClass('t-icon--disabled');
@@ -205,9 +196,8 @@ describe('TPagination', () => {
 
             // Act
             // next set (range 1-10 -> 11-13, current 1 -> 11)
-            await act(async () => {
-                await user.click(nextPageSetIcon);
-            });
+            await user.click(nextPageSetIcon);
+
             pageButtons = screen.getAllByRole('button');
 
             // Assert
@@ -217,9 +207,8 @@ describe('TPagination', () => {
 
             // Act
             // prev set (range 11-13 -> 1-10, current 11 -> 10)
-            await act(async () => {
-                await user.click(prevPageSetIcon);
-            });
+            await user.click(prevPageSetIcon);
+
             pageButtons = screen.getAllByRole('button');
 
             // Assert
@@ -244,9 +233,8 @@ describe('TPagination', () => {
 
             // Act
             // next set (range 1-5 not changed, current 1 to last page 5)
-            await act(async () => {
-                await user.click(nextPageSetIcon);
-            });
+            await user.click(nextPageSetIcon);
+
             pageButtons = screen.getAllByRole('button');
 
             // Assert
@@ -257,9 +245,9 @@ describe('TPagination', () => {
 
             // Act
             // next set (range 1-5 not changed, current 5 to first page 1)
-            await act(async () => {
-                await user.click(prevPageSetIcon);
-            });
+
+            await user.click(prevPageSetIcon);
+
             pageButtons = screen.getAllByRole('button');
 
             // Assert
@@ -280,12 +268,11 @@ describe('TPagination', () => {
             const numberFieldElement = screen.getByTestId('number-field-input-root');
 
             // Act
-            await act(async () => {
-                await user.click(numberFieldElement);
-                await user.clear(numberFieldElement);
-                await user.keyboard(testPageNumber);
-                await user.click(jumperButtonElement);
-            });
+            await user.click(numberFieldElement);
+            await user.clear(numberFieldElement);
+            await user.keyboard(testPageNumber);
+            await user.click(jumperButtonElement);
+
             const activePageNumberButton = screen.getByText(testPageNumber);
 
             // Assert
@@ -301,12 +288,11 @@ describe('TPagination', () => {
             const numberFieldInputElement = screen.getByTestId('number-field-input-root');
 
             // Act
-            await act(async () => {
-                await user.click(numberFieldInputElement);
-                await user.clear(numberFieldInputElement);
-                await user.keyboard(invalidNumber);
-                await user.click(jumperButtonElement);
-            });
+            await user.click(numberFieldInputElement);
+            await user.clear(numberFieldInputElement);
+            await user.keyboard(invalidNumber);
+            await user.click(jumperButtonElement);
+
             const failureElement = screen.getByTestId('number-field-root');
 
             // Assert
@@ -322,11 +308,10 @@ describe('TPagination', () => {
             const numberFieldInputElement = screen.getByTestId('number-field-input-root');
 
             // Act
-            await act(async () => {
-                await user.click(numberFieldInputElement);
-                await user.clear(numberFieldInputElement);
-                await user.keyboard(invalidNumber.toString());
-            });
+            await user.click(numberFieldInputElement);
+            await user.clear(numberFieldInputElement);
+            await user.keyboard(invalidNumber.toString());
+
             const inputElement: HTMLInputElement = screen.getByTestId('number-field-input-root');
             const typedNumber = Number(inputElement.value);
 
@@ -342,9 +327,8 @@ describe('TPagination', () => {
             const targetPageNumberElement = screen.getByText(targetNumberPage);
 
             // Act
-            await act(async () => {
-                await user.click(targetPageNumberElement);
-            });
+            await user.click(targetPageNumberElement);
+
             const numberFieldInputElement: HTMLInputElement = screen.getByTestId('number-field-input-root');
 
             // Assert
@@ -360,15 +344,14 @@ describe('TPagination', () => {
             const jumperButtonElement = screen.getByText('바로가기');
 
             // Act
-            await act(async () => {
-                await user.click(jumperNumberFieldElement);
-                await user.keyboard('70');
-                await user.click(jumperButtonElement);
-                await user.clear(jumperNumberFieldElement);
-                await user.click(jumperNumberFieldElement);
-                await user.keyboard(targetNumberPage);
-                await user.click(jumperButtonElement);
-            });
+            await user.click(jumperNumberFieldElement);
+            await user.keyboard('70');
+            await user.click(jumperButtonElement);
+            await user.clear(jumperNumberFieldElement);
+            await user.click(jumperNumberFieldElement);
+            await user.keyboard(targetNumberPage);
+            await user.click(jumperButtonElement);
+
             const activeNumberElement = screen.getByText(targetNumberPage);
 
             // Assert

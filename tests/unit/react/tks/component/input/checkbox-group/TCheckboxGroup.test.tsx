@@ -283,9 +283,7 @@ describe('TCheckboxGroup', () => {
             const root = screen.getByTestId('t-checkbox-group-root');
 
             // Act
-            act(() => {
-                root.focus();
-            });
+            root.focus();
 
             await user.click(document.body);
 

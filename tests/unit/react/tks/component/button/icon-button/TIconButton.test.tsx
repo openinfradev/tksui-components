@@ -129,9 +129,7 @@ describe('TIconButton', () => {
             expect(buttonContent).toHaveTextContent('false');
 
             // Act
-            await act(async () => {
-                await user.click(root);
-            });
+            await user.click(root);
 
             // Assert
             buttonContent = within(root).queryByText('true');
@@ -147,9 +145,7 @@ describe('TIconButton', () => {
                 </TIconButton>
             );
             const root = screen.getByRole('button');
-            await act(async () => {
-                await user.click(root);
-            });
+            await user.click(root);
 
             // Assert
             expect(mockOnClick).not.toHaveBeenCalled();
@@ -170,9 +166,7 @@ describe('TIconButton', () => {
             expect(buttonContent).toHaveTextContent('false');
 
             // Act
-            await act(async () => {
-                await user.type(root, '{enter}');
-            });
+            await user.type(root, '{enter}');
 
             // Assert
             buttonContent = within(root).queryByText('true');
@@ -194,9 +188,7 @@ describe('TIconButton', () => {
             expect(buttonContent).toHaveTextContent('false');
 
             // Act
-            await act(async () => {
-                await user.type(root, ' ');
-            });
+            await user.type(root, ' ');
 
             // Assert
             buttonContent = within(root).queryByText('true');

@@ -1,4 +1,4 @@
-import {act, render, screen} from '@testing-library/react';
+import {render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import TSwitch from '~/input/switch/TSwitch';
@@ -91,9 +91,7 @@ describe('TSwitch', () => {
         const root = screen.getByTestId('t-switch-root');
 
         // Act
-        await act(async () => {
-            await user.click(root);
-        });
+        await user.click(root);
 
         // Assert
         expect(mockOnChange).toHaveBeenCalledTimes(1);
@@ -106,10 +104,8 @@ describe('TSwitch', () => {
         render(<TSwitch {...baseProps} />);
 
         // Act
-        await act(async () => {
-            await user.tab();
-            await user.keyboard('{enter}');
-        });
+        await user.tab();
+        await user.keyboard('{enter}');
 
         // Assert
         expect(mockOnChange).toHaveBeenCalledTimes(1);
@@ -122,10 +118,8 @@ describe('TSwitch', () => {
         render(<TSwitch {...baseProps} />);
 
         // Act
-        await act(async () => {
-            await user.tab();
-            await user.keyboard(' ');
-        });
+        await user.tab();
+        await user.keyboard(' ');
 
         // Assert
         expect(mockOnChange).toHaveBeenCalledTimes(1);
@@ -139,9 +133,7 @@ describe('TSwitch', () => {
         const thumb = screen.getByTestId('t-switch-thumb');
 
         // Act
-        await act(async () => {
-            await user.tab();
-        });
+        await user.tab();
 
         // Assert
         expect(thumb).not.toHaveFocus();
@@ -153,10 +145,8 @@ describe('TSwitch', () => {
         render(<TSwitch {...baseProps} disabled />);
 
         // Act
-        await act(async () => {
-            await user.tab();
-            await user.keyboard('{enter}');
-        });
+        await user.tab();
+        await user.keyboard('{enter}');
 
         // Assert
         expect(mockOnChange).toHaveBeenCalledTimes(0);

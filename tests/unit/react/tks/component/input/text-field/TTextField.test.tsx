@@ -230,12 +230,8 @@ describe('TTextField', () => {
             const inputElement = screen.getByTestId('text-field-input');
 
             // Act
-            await act(async () => {
-                await userEvent.click(inputElement);
-            });
-            await act(async () => {
-                await userEvent.tab();
-            });
+            await userEvent.click(inputElement);
+            await userEvent.tab();
 
             // Assert
             expect(mockOnChange).toHaveBeenCalledWith('a');
@@ -249,12 +245,8 @@ describe('TTextField', () => {
             const inputElement = screen.getByTestId('text-field-input');
 
             // Act
-            await act(async () => {
-                await userEvent.click(inputElement);
-            });
-            await act(async () => {
-                await userEvent.tab();
-            });
+            await userEvent.click(inputElement);
+            await userEvent.tab();
 
             // Assert
             expect(mockOnChange).toHaveBeenCalledTimes(0);
@@ -272,9 +264,7 @@ describe('TTextField', () => {
             const inputElement = screen.getByTestId('text-field-input');
 
             // Act
-            await act(async () => {
-                await userEvent.click(inputElement);
-            });
+            await userEvent.click(inputElement);
             const counterElement = screen.getByTestId('text-field-counter');
 
             // Assert
@@ -301,9 +291,7 @@ describe('TTextField', () => {
             const textareaElement = screen.getByTestId('text-field-text-area');
 
             // Act
-            await act(async () => {
-                await userEvent.click(textareaElement);
-            });
+            await userEvent.click(textareaElement);
             const counterElement = screen.getByTestId('text-area-counter');
 
             // Assert
@@ -350,18 +338,14 @@ describe('TTextField', () => {
             expect(showPasswordIcon).toBeInTheDocument();
             expect(hidePasswordIcon).not.toBeInTheDocument();
 
-            await act(async () => {
-                await userEvent.click(showPasswordIcon);
-            });
+            await userEvent.click(showPasswordIcon);
             showPasswordIcon = screen.queryByLabelText('visibility');
             hidePasswordIcon = screen.queryByLabelText('visibility_off');
 
             expect(showPasswordIcon).not.toBeInTheDocument();
             expect(hidePasswordIcon).toBeInTheDocument();
 
-            await act(async () => {
-                await userEvent.click(hidePasswordIcon);
-            });
+            await userEvent.click(hidePasswordIcon);
             showPasswordIcon = screen.queryByLabelText('visibility');
             hidePasswordIcon = screen.queryByLabelText('visibility_off');
 
@@ -449,9 +433,7 @@ describe('TTextField', () => {
             // Assert
             const inputElement = screen.getByTestId('text-field-input');
 
-            await act(async () => {
-                await userEvent.type(inputElement, '{enter}');
-            });
+            await userEvent.type(inputElement, '{enter}');
 
             // Assert
             expect(mockOnKeyDownEnter).toHaveBeenCalledTimes(1);
@@ -465,9 +447,7 @@ describe('TTextField', () => {
             // Assert
             const inputElement = screen.getByTestId('text-field-input');
 
-            await act(async () => {
-                await userEvent.type(inputElement, '1');
-            });
+            await userEvent.type(inputElement, '1');
 
             // Assert
             expect(mockOnKeyDown).toHaveBeenCalledTimes(1);
