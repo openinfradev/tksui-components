@@ -1,16 +1,16 @@
 'use client';
 
-import type {CSSProperties, Ref} from 'react';
-import {forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useState} from 'react';
+import type {CSSProperties} from 'react';
+import {useCallback, useEffect, useImperativeHandle, useMemo, useState} from 'react';
 
-import type {TInputValidationHintProps, TInputValidationHintRef, TInputValidationHintRuleVO} from '@/components';
+import type {TInputValidationHintProps, TInputValidationHintRuleVO} from '@/components';
 
-const TInputValidationHint = forwardRef((props: TInputValidationHintProps, ref: Ref<TInputValidationHintRef>) => {
+const TInputValidationHint = (props: TInputValidationHintProps) => {
     // region [Hooks]
 
     const [validationResult, setValidationResult] = useState<TInputValidationHintRuleVO[]>([]);
 
-    useImperativeHandle(ref, () => ({
+    useImperativeHandle(props.ref, () => ({
         manualValidate() {
             validate();
         },
@@ -97,7 +97,7 @@ const TInputValidationHint = forwardRef((props: TInputValidationHintProps, ref: 
             </ul>
         </div>
     );
-});
+};
 
 TInputValidationHint.displayName = 'TInputValidationHint';
 

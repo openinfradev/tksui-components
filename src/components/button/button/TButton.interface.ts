@@ -1,4 +1,4 @@
-import type {KeyboardEvent, MouseEvent, ReactNode} from 'react';
+import type {KeyboardEvent, MouseEvent, ReactNode, Ref} from 'react';
 
 import type {TBaseProps, TBaseTooltipProps} from '@/common/base/TBase.interface';
 
@@ -46,6 +46,8 @@ export interface TButtonProps extends TBaseProps, TBaseTooltipProps {
 
     disabled?: boolean;
     loading?: boolean;
+
+    ref?: Ref<TButtonRef>;
 
     onClick?: (event?: MouseEvent | KeyboardEvent) => void;
 }

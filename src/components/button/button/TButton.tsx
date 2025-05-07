@@ -1,24 +1,24 @@
 'use client';
 
-import type {CSSProperties, KeyboardEvent, MouseEvent, Ref} from 'react';
-import {forwardRef, memo, useCallback, useImperativeHandle, useMemo, useRef} from 'react';
+import type {CSSProperties, KeyboardEvent, MouseEvent} from 'react';
+import {memo, useCallback, useImperativeHandle, useMemo, useRef} from 'react';
 
 import useRipple from '@/common/hook/UseRipple';
 import TooltipUtil from '@/common/util/TooltipUtil';
-import type {ButtonSize, TButtonProps, TButtonRef} from '@/components';
+import type {ButtonSize, TButtonProps} from '@/components';
 import {buttonSize, buttonVariant, TLoadingIndicator} from '@/components';
 import TIcon from '../../icon/TIcon';
 
 import themeToken from '~style/designToken/ThemeToken.module.scss';
 
-const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
+const TButton = (props: TButtonProps) => {
     // region [Hooks]
 
     const rootRef = useRef<HTMLButtonElement>(null);
 
     const ripple = useRipple(rootRef);
 
-    useImperativeHandle(ref, () => ({
+    useImperativeHandle(props.ref, () => ({
         focus() {
             rootRef?.current?.focus();
         },
@@ -189,7 +189,7 @@ const TButton = forwardRef((props: TButtonProps, ref: Ref<TButtonRef>) => {
             )}
         </button>
     );
-});
+};
 
 TButton.displayName = 'TButton';
 

@@ -1,4 +1,4 @@
-import type {MouseEvent, ReactNode} from 'react';
+import type {ForwardedRef, MouseEvent, ReactNode} from 'react';
 
 import type {TBaseProps} from '@/common/base/TBase.interface';
 
@@ -27,6 +27,8 @@ export interface TDropHolderProps extends TBaseProps {
     textKey?: string;
     customItem?: ReactNode;
     offset?: string;
+
+    ref?: ForwardedRef<TDropHolderRef>;
 
     onOpen?(): void;
     onClose?(): void;

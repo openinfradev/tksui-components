@@ -1,17 +1,17 @@
 'use client';
 
-import type {CSSProperties, MouseEvent, Ref} from 'react';
-import {forwardRef, useImperativeHandle, useMemo, useRef} from 'react';
+import type {CSSProperties, MouseEvent} from 'react';
+import {useImperativeHandle, useMemo, useRef} from 'react';
 
-import type {TChipProps, TChipRef} from '@/components';
+import type {TChipProps} from '@/components';
 import TIcon from '../../icon/TIcon';
 
 import themeToken from '~style/designToken/ThemeToken.module.scss';
 
-const TChip = forwardRef(({prevIconSize = 'xsmall', ...restProps}: TChipProps, ref: Ref<TChipRef>) => {
+const TChip = ({prevIconSize = 'xsmall', ref, ...restProps}: TChipProps) => {
     // region [Hooks]
 
-    const props: TChipProps = {prevIconSize, ...restProps};
+    const props: TChipProps = {prevIconSize, ref, ...restProps};
 
     const rootRef = useRef<HTMLDivElement>(null);
 
@@ -95,7 +95,7 @@ const TChip = forwardRef(({prevIconSize = 'xsmall', ...restProps}: TChipProps, r
     );
 
     // endregion
-});
+};
 
 TChip.displayName = 'TChip';
 

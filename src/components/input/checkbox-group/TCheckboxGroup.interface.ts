@@ -1,3 +1,5 @@
+import type {Ref} from 'react';
+
 import type {TBaseProps} from '@/common/base/TBase.interface';
 import type {TValidatorProps} from '@/common/validator/TValidator.interface';
 import type {TCheckboxValue} from '@/components';
@@ -18,6 +20,8 @@ export interface TCheckboxGroupProps extends TBaseProps, TValidatorProps {
     valueKey?: string;
 
     labelTemplate?: (item: TCheckboxGroupItem) => string;
+
+    ref?: Ref<TCheckboxGroupRef>;
 
     onChange(value: TCheckboxGroupValue): void;
 }

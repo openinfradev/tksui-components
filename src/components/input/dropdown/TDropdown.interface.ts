@@ -1,3 +1,5 @@
+import type {Ref} from 'react';
+
 import type {TBaseProps} from '@/common/base/TBase.interface';
 import type {TValidatorProps} from '@/common/validator/TValidator.interface';
 
@@ -32,6 +34,8 @@ export interface TDropdownProps extends TValidatorProps, TBaseProps {
     valueKey?: string;
 
     itemTemplate?: (item: TDropdownItem) => string;
+
+    ref?: Ref<TDropdownRef>;
 
     onChange(value: string | string[]): void;
     onOpen?(): void;

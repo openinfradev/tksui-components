@@ -1,5 +1,5 @@
 import type {MaterialSymbol} from '@material-symbols/font-300';
-import type {MouseEvent, ReactNode} from 'react';
+import type {MouseEvent, ReactNode, Ref} from 'react';
 
 import type {TBaseProps} from '@/common/base/TBase.interface';
 
@@ -17,6 +17,8 @@ export interface TChipProps extends TBaseProps {
     prevIcon?: MaterialSymbol;
     prevIconColor?: string;
     prevIconSize?: TIconSize;
+
+    ref?: Ref<TChipRef>;
 
     onRemove?: (event?: MouseEvent) => void;
 }

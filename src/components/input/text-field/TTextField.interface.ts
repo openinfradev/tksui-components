@@ -1,4 +1,4 @@
-import type {KeyboardEvent, MouseEvent, ReactNode} from 'react';
+import type {KeyboardEvent, MouseEvent, ReactNode, Ref} from 'react';
 
 import type {TBaseProps} from '@/common/base/TBase.interface';
 import type {TValidatorProps} from '@/common/validator/TValidator.interface';
@@ -22,6 +22,8 @@ interface TTextFieldBaseProps extends TValidatorProps, TBaseProps {
     autoComplete?: 'new-password' | 'off' | undefined;
     multiline?: boolean;
     rows?: number;
+
+    ref?: Ref<TTextFieldRef>;
 
     onBlur?(): void;
     onFocus?(): void;

@@ -1,5 +1,5 @@
-import type {AgGridReactProps} from 'ag-grid-react';
-import type {ReactElement, ReactNode} from 'react';
+import type {AgGridReact, AgGridReactProps} from 'ag-grid-react';
+import type {ReactElement, ReactNode, Ref} from 'react';
 
 import type {TBaseProps} from '@/common/base/TBase.interface';
 
@@ -45,6 +45,8 @@ export interface TDataGridProps extends TBaseProps, AgGridReactProps {
         title: string;
         addButtonHandler(): void;
     };
+
+    ref?: Ref<AgGridReact>;
 
     onChangePageNumber?(value): void;
 }

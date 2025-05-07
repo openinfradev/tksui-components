@@ -1,3 +1,5 @@
+import type {Ref} from 'react';
+
 import type {TBaseProps} from '@/common/base/TBase.interface';
 import type {TValidatorProps} from '@/common/validator/TValidator.interface';
 
@@ -19,6 +21,8 @@ export interface TDatePickerProps extends TBaseProps, TValidatorProps {
 
     // dateFormat?: 'YYYY-MM-DD' | 'DD-MM-YYYY' | 'MM-DD-YYYY', // TODO. Should be implemented
     separator?: string;
+
+    ref?: Ref<TDatePickerRef>;
 
     onChange?(value: boolean | string, positiveValue?: boolean | string): void;
 }
