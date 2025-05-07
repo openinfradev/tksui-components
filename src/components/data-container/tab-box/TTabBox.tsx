@@ -53,7 +53,7 @@ const TTabBox = ({onChange, value, children, style, className, ...restProps}: TT
                     {children.map((child, index) =>
                         cloneElement(child, {
                             index,
-                            key: child.props.value || index,
+                            key: child.props.value ?? index,
                         })
                     )}
                 </TTabBoxContext.Provider>
