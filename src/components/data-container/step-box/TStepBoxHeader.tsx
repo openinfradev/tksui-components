@@ -1,4 +1,4 @@
-import {Fragment, useCallback, useContext} from 'react';
+import {Fragment, use, useCallback} from 'react';
 
 import type {TStepBoxHeaderProps} from '@/components';
 import TStepBoxContext from './TStepBoxContext';
@@ -10,7 +10,7 @@ import TIcon from '~/icon/TIcon';
 const TStepBoxHeader = (props: TStepBoxHeaderProps) => {
     // region [Hooks]
 
-    const context = useContext(TStepBoxContext);
+    const context = use(TStepBoxContext);
 
     // endregion
 

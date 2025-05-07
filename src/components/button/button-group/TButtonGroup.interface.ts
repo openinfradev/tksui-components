@@ -2,7 +2,7 @@ import type {ReactNode} from 'react';
 
 import type {TBaseProps} from '@/common/base/TBase.interface';
 
-export type TButtonGroupValue = unknown;
+export type TButtonGroupValue = any;
 
 export interface TButtonGroupItem {
     template: ReactNode;

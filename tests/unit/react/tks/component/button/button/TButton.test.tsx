@@ -211,9 +211,7 @@ describe('TButton', () => {
             expect(buttonContent).toHaveTextContent('false');
 
             // Act
-            await act(async () => {
-                await userEvent.click(button);
-            });
+            await userEvent.click(button);
 
             // Assert
             buttonContent = within(button).queryByText('true');
@@ -234,9 +232,7 @@ describe('TButton', () => {
             expect(buttonContent).toHaveTextContent('false');
 
             // Act
-            await act(async () => {
-                await userEvent.type(button, '{enter}');
-            });
+            await userEvent.type(button, '{enter}');
 
             // Assert
             buttonContent = within(button).queryByText('true');

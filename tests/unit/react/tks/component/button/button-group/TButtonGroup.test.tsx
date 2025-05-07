@@ -180,9 +180,7 @@ describe('TButtonGroup', () => {
             expect(italicButton).not.toHaveClass('t-button-group__button--active');
 
             // Act
-            await act(async () => {
-                await userEvent.click(italicButton);
-            });
+            await userEvent.click(italicButton);
 
             // Assert
             expect(boldButton).not.toHaveClass('t-button-group__button--active');
@@ -201,25 +199,19 @@ describe('TButtonGroup', () => {
             expect(italicButton).toHaveClass('t-button-group__button');
 
             // Act
-            await act(async () => {
-                await userEvent.click(boldButton);
-            });
+            await userEvent.click(boldButton);
 
             // Assert
             expect(boldButton).toHaveClass('t-button-group__button--active');
 
             // Act
-            await act(async () => {
-                await userEvent.click(italicButton);
-            });
+            await userEvent.click(italicButton);
 
             // Assert
             expect(italicButton).toHaveClass('t-button-group__button--active');
 
             // Act
-            await act(async () => {
-                await userEvent.click(boldButton);
-            });
+            await userEvent.click(boldButton);
 
             // Assert
             expect(boldButton).toHaveClass('t-button-group__button');

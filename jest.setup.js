@@ -1,4 +1,1 @@
-import {TextDecoder, TextEncoder} from 'util';
-
-// When this code is missing, we will be faced error "ReferenceError: TextEncoder is not defined"
-Object.assign(global, {TextDecoder, TextEncoder});
+import '@testing-library/jest-dom';

@@ -111,9 +111,7 @@ describe('TNumberField', () => {
             const numberInput = screen.getByRole('spinbutton');
 
             // Act
-            await act(async () => {
-                await userEvent.click(numberInput);
-            });
+            await userEvent.click(numberInput);
 
             // Assert
             expect(numberInput).toHaveFocus();
@@ -178,9 +176,7 @@ describe('TNumberField', () => {
             expect(decrementButton).not.toHaveClass('t-number-field__container__action-icon__decrement--disabled');
 
             // Arrange
-            await act(async () => {
-                await userEvent.click(incrementButton);
-            });
+            await userEvent.click(incrementButton);
 
             // Assert +5
             expect(incrementButton).toHaveClass('t-number-field__container__action-icon__increment--disabled');
@@ -188,10 +184,8 @@ describe('TNumberField', () => {
             expect(decrementButton).not.toHaveClass('t-number-field__container__action-icon__decrement--disabled');
 
             // Arrange
-            await act(async () => {
-                await userEvent.click(decrementButton);
-                await userEvent.click(decrementButton);
-            });
+            await userEvent.click(decrementButton);
+            await userEvent.click(decrementButton);
 
             // Assert -5
 
@@ -211,28 +205,22 @@ describe('TNumberField', () => {
             expect(inputElement).toHaveValue(null);
 
             // Act
-            await act(async () => {
-                await userEvent.type(inputElement, '-');
-                await userEvent.tab();
-            });
+            await userEvent.type(inputElement, '-');
+            await userEvent.tab();
 
             // Assert
             expect(inputElement).toHaveValue(null);
 
             // Act
-            await act(async () => {
-                await userEvent.type(inputElement, '--');
-                await userEvent.tab();
-            });
+            await userEvent.type(inputElement, '--');
+            await userEvent.tab();
 
             // Assert
             expect(inputElement).toHaveValue(null);
 
             // Act
-            await act(async () => {
-                await userEvent.type(inputElement, 'e');
-                await userEvent.tab();
-            });
+            await userEvent.type(inputElement, 'e');
+            await userEvent.tab();
 
             // Assert
             expect(inputElement).toHaveValue(null);
@@ -245,12 +233,8 @@ describe('TNumberField', () => {
             const inputElement = screen.getByRole('spinbutton');
 
             // Act
-            await act(async () => {
-                await userEvent.type(inputElement, '-');
-            });
-            await act(async () => {
-                await userEvent.tab();
-            });
+            await userEvent.type(inputElement, '-');
+            await userEvent.tab();
 
             // Assert
             expect(inputElement).toHaveValue(minValue);
@@ -262,12 +246,8 @@ describe('TNumberField', () => {
             const inputElement = screen.getByRole('spinbutton');
 
             // Act
-            await act(async () => {
-                await userEvent.type(inputElement, '+');
-            });
-            await act(async () => {
-                await userEvent.tab();
-            });
+            await userEvent.type(inputElement, '+');
+            await userEvent.tab();
 
             // Assert
             expect(inputElement).toHaveValue(null);
@@ -279,12 +259,8 @@ describe('TNumberField', () => {
             const inputElement = screen.getByRole('spinbutton');
 
             // Act
-            await act(async () => {
-                await userEvent.type(inputElement, '7');
-            });
-            await act(async () => {
-                await userEvent.tab();
-            });
+            await userEvent.type(inputElement, '7');
+            await userEvent.tab();
 
             // Assert
             expect(inputElement).toHaveValue(5);
@@ -296,10 +272,8 @@ describe('TNumberField', () => {
             const inputElement = screen.getByRole('spinbutton');
 
             // Act
-            await act(async () => {
-                await userEvent.type(inputElement, '7');
-                await userEvent.tab();
-            });
+            await userEvent.type(inputElement, '7');
+            await userEvent.tab();
 
             // Assert
             expect(inputElement).toHaveValue(6);
@@ -311,10 +285,8 @@ describe('TNumberField', () => {
             const inputElement = screen.getByRole('spinbutton');
 
             // Act
-            await act(async () => {
-                await userEvent.type(inputElement, '3');
-                await userEvent.tab();
-            });
+            await userEvent.type(inputElement, '3');
+            await userEvent.tab();
 
             // Assert
             expect(inputElement).toHaveValue(6);

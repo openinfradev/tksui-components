@@ -1,4 +1,4 @@
-import type {KeyboardEvent} from 'react';
+import type {KeyboardEvent, Ref} from 'react';
 
 import type {TBaseProps} from '@/common/base/TBase.interface';
 import type {TValidatorProps} from '@/common/validator/TValidator.interface';
@@ -20,6 +20,8 @@ export interface TNumberFieldProps extends TBaseProps, TValidatorProps {
     hint?: string;
     value: string;
     width?: string;
+
+    ref?: Ref<TNumberFieldRef>;
 
     onChange(value: string): void;
 

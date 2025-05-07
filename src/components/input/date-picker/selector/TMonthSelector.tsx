@@ -1,4 +1,4 @@
-import {useCallback, useContext, useMemo} from 'react';
+import {use, useCallback, useMemo} from 'react';
 
 import themeToken from '~style/designToken/ThemeToken.module.scss';
 
@@ -34,7 +34,7 @@ const TMonthSelector = () => {
         nowDate,
         viewMode,
         validDateRange,
-    } = useContext(datePickerConText);
+    } = use(datePickerConText);
 
     const selectedDateObject = useMemo((): TDateValue => {
         if (dateValue === '') {

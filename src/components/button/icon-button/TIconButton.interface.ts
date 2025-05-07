@@ -1,4 +1,4 @@
-import type {KeyboardEvent, MouseEvent} from 'react';
+import type {KeyboardEvent, MouseEvent, Ref} from 'react';
 
 import type {TBaseProps, TBaseTooltipProps} from '@/common/base/TBase.interface';
 
@@ -21,6 +21,8 @@ export interface TIconButtonProps extends TBaseProps, TBaseTooltipProps {
     disabled?: boolean;
 
     onClick?: (event?: MouseEvent | KeyboardEvent) => void | Promise<void>;
+
+    ref?: Ref<TIconButtonRef>;
 
     /**
      * @deprecated This prop will be removed before release v1.0.0.

@@ -108,9 +108,7 @@ describe('TDropHolder', () => {
 
             const user = userEvent.setup();
             const root = screen.getByTestId('drop-holder-root');
-            await act(async () => {
-                await user.click(root);
-            });
+            await user.click(root);
 
             const titleElement = screen.getByTestId('drop-holder-title');
 
@@ -141,9 +139,7 @@ describe('TDropHolder', () => {
             const root = screen.getByTestId('drop-holder-root');
 
             // Act
-            await act(async () => {
-                await user.click(root);
-            });
+            await user.click(root);
 
             // Arrange
             const itemElements = screen.getAllByRole('listitem');
@@ -165,17 +161,13 @@ describe('TDropHolder', () => {
             expect(root).not.toHaveClass('t-drop-holder--open');
 
             // Act
-            await act(async () => {
-                await user.click(root);
-            });
+            await user.click(root);
 
             // Assert
             expect(root).toHaveClass('t-drop-holder--open');
 
             // Act
-            await act(async () => {
-                await user.click(root);
-            });
+            await user.click(root);
 
             // Assert
             expect(root).not.toHaveClass('t-drop-holder--open');
@@ -192,9 +184,7 @@ describe('TDropHolder', () => {
             const root = screen.getByTestId('drop-holder-root');
 
             // Act
-            await act(async () => {
-                await user.click(root);
-            });
+            await user.click(root);
 
             // Assert
             expect(mockOnOpen).toHaveBeenCalledTimes(1);
@@ -211,12 +201,8 @@ describe('TDropHolder', () => {
             const root = screen.getByTestId('drop-holder-root');
 
             // Act
-            await act(async () => {
-                await user.click(root);
-            });
-            await act(async () => {
-                await user.click(root);
-            });
+            await user.click(root);
+            await user.click(root);
 
             // Assert
             expect(mockOnClose).toHaveBeenCalledTimes(1);
@@ -231,17 +217,13 @@ describe('TDropHolder', () => {
             document.body.appendChild(outsideElement);
 
             // Act
-            await act(async () => {
-                await user.click(root);
-            });
+            await user.click(root);
 
             // Assert
             expect(root).toHaveClass('t-drop-holder--open');
 
             // Act
-            await act(async () => {
-                await user.click(outsideElement);
-            });
+            await user.click(outsideElement);
 
             // Assert
             expect(root).not.toHaveClass('t-drop-holder--open');
@@ -254,9 +236,7 @@ describe('TDropHolder', () => {
             const root = screen.getByTestId('drop-holder-root');
 
             // Act
-            await act(async () => {
-                await user.click(root);
-            });
+            await user.click(root);
 
             // Assert
             baseProps.items.forEach((item) => {
@@ -274,15 +254,11 @@ describe('TDropHolder', () => {
             // Act
 
             for (const item of baseProps.items) {
-                await act(async () => {
-                    await user.click(root);
-                });
+                await user.click(root);
 
                 const itemElement = screen.getByText(item.text);
 
-                await act(async () => {
-                    await userEvent.click(itemElement);
-                });
+                await userEvent.click(itemElement);
             }
 
             // Assert
@@ -303,9 +279,7 @@ describe('TDropHolder', () => {
             const root = screen.getByTestId('drop-holder-root');
 
             // Act
-            await act(async () => {
-                await user.click(root);
-            });
+            await user.click(root);
 
             // Assert
             const customItemRoot = screen.getByTestId(customTestId);

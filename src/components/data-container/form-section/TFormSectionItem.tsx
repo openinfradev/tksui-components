@@ -1,7 +1,7 @@
 'use client';
 
 import type {CSSProperties} from 'react';
-import {memo, useContext, useId, useMemo, useRef} from 'react';
+import {memo, use, useId, useMemo, useRef} from 'react';
 
 import type {TFormSectionItemProps} from '@/components';
 import TFormSectionContext from './TFormSectionContextInterface';
@@ -19,7 +19,7 @@ const TFormSectionItem = ({span = 1, ...restProps}: TFormSectionItemProps) => {
     const props: TFormSectionItemProps = {span, ...restProps};
 
     const rootRef = useRef<HTMLSpanElement>(null);
-    const {column, labelWidth, rowVerticalAlign} = useContext(TFormSectionContext);
+    const {column, labelWidth, rowVerticalAlign} = use(TFormSectionContext);
 
     const tooltipId = useId();
 

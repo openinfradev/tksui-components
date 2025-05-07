@@ -15,7 +15,7 @@ const useRipple = (ref: MutableRefObject<HTMLElement>) => {
     // region [Hooks]
 
     const status = useRef<RippleStatus>('off');
-    const lastRipplePromise = useRef<Promise<string>>();
+    const lastRipplePromise = useRef<Promise<string>>(null);
 
     // endregion
 

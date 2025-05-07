@@ -1,3 +1,5 @@
+import type {Ref} from 'react';
+
 import type {TBaseProps} from '@/common/base/TBase.interface';
 
 export interface TPaginationProps extends TBaseProps {
@@ -5,6 +7,8 @@ export interface TPaginationProps extends TBaseProps {
     pageNumber: number;
     noJumper?: boolean;
     jumperText?: string;
+
+    ref?: Ref<TPaginationRef>;
 
     onChangePageNumber(value: number): void;
 }

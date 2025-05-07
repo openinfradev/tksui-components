@@ -1,4 +1,4 @@
-import type {ReactElement, ReactNode} from 'react';
+import type {ReactElement, ReactNode, Ref} from 'react';
 
 import type {TBaseProps} from '@/common/base/TBase.interface';
 import type {TValidatorProps} from '@/common/validator/TValidator.interface';
@@ -20,6 +20,7 @@ export interface TCheckboxProps extends TValidatorProps, TBaseProps {
     disabled?: boolean;
     readOnly?: boolean;
 
+    ref?: Ref<TCheckboxRef>;
     onChange?: (value: TCheckboxValue, positiveValue?: TCheckboxValue) => void;
 }
 

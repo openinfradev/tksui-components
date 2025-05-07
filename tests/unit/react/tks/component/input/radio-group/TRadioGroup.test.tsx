@@ -178,9 +178,7 @@ describe('TRadioGroup', () => {
             const message = screen.queryByText(testData);
 
             // Act
-            act(() => {
-                root.focus();
-            });
+            root.focus();
 
             // Assert
             expect(root).toHaveFocus();
@@ -208,9 +206,7 @@ describe('TRadioGroup', () => {
             const root = screen.getByTestId('t-radio-group-root');
 
             // Act
-            act(() => {
-                root.focus();
-            });
+            root.focus();
 
             await user.click(document.body);
 

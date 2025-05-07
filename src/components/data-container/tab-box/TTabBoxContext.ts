@@ -4,7 +4,7 @@ import {createContext} from 'react';
 
 import type {TTabBoxValue} from '@/components';
 
-type tabBoxContextType = {
+export type tabBoxContextType = {
     activeTab: TTabBoxValue;
     onChangeActiveTab: (activeTab: TTabBoxValue) => void;
 };

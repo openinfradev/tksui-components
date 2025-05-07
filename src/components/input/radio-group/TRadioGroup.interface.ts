@@ -1,4 +1,4 @@
-import type {CSSProperties} from 'react';
+import type {CSSProperties, Ref} from 'react';
 
 import type {TBaseProps} from '@/common/base/TBase.interface';
 import type {TValidatorProps} from '@/common/validator/TValidator.interface';
@@ -7,7 +7,7 @@ import type {TRadioValue} from '@/components';
 export type TRadioGroupValue = TRadioValue;
 
 export interface TRadioGroupItem {
-    [key: string]: unknown;
+    [key: string]: any;
 }
 
 export interface TRadioGroupProps extends TBaseProps, TValidatorProps {
@@ -23,6 +23,8 @@ export interface TRadioGroupProps extends TBaseProps, TValidatorProps {
     valueKey?: string;
 
     labelTemplate?: (item: TRadioGroupItem) => string;
+
+    ref?: Ref<TRadioGroupRef>;
 
     onChange(value: TRadioGroupValue): void;
 }

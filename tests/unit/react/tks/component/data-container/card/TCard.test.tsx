@@ -170,9 +170,7 @@ describe('TCard', () => {
             const root = screen.getByTestId('card-root');
 
             // Assert
-            await act(async () => {
-                await user.click(root);
-            });
+            await user.click(root);
             expect(mockOnClick).toHaveBeenCalledTimes(1);
         });
 

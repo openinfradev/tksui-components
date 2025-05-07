@@ -1,4 +1,4 @@
-import {act, render, screen} from '@testing-library/react';
+import {render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {useState} from 'react';
 
@@ -107,9 +107,7 @@ describe('TDropdown', () => {
             const control = screen.getByTestId('dropdown-control');
 
             // Act
-            await act(async () => {
-                await user.click(control);
-            });
+            await user.click(control);
 
             // Assert
             expect(mockOnOpen).toHaveBeenCalledTimes(1);
@@ -122,12 +120,8 @@ describe('TDropdown', () => {
             const control = screen.getByTestId('dropdown-control');
 
             // Act
-            await act(async () => {
-                await user.click(control);
-            });
-            await act(async () => {
-                await user.click(control);
-            });
+            await user.click(control);
+            await user.click(control);
 
             // Assert
             expect(mockOnClose).toHaveBeenCalledTimes(1);
@@ -153,17 +147,13 @@ describe('TDropdown', () => {
             expect(mockOnChange).toHaveBeenCalledTimes(0);
 
             // Act
-            await act(async () => {
-                await user.click(control);
-            });
+            await user.click(control);
 
             // Arrange
             const testItemRoot = screen.getByText(testItems[0].text);
 
             // Act
-            await act(async () => {
-                await user.click(testItemRoot);
-            });
+            await user.click(testItemRoot);
 
             // Assert
             expect(mockOnClose).toHaveBeenCalledTimes(1);

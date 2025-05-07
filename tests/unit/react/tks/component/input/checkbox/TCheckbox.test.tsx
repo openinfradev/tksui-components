@@ -343,9 +343,7 @@ describe('TCheckbox', () => {
             const content = screen.getByText(testChildren);
 
             // Act
-            act(() => {
-                checkboxRef.current.focus();
-            });
+            checkboxRef.current.focus();
 
             await user.type(content, '{enter}', {skipClick: true});
 

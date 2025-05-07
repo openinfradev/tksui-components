@@ -1,5 +1,5 @@
 import type {CSSProperties} from 'react';
-import {useContext, useMemo} from 'react';
+import {use, useMemo} from 'react';
 
 import type {TStepBoxItemProps} from '@/components';
 
@@ -10,7 +10,7 @@ const TStepBoxItem = ({contentDirection = 'top-bottom', ...restProps}: TStepBoxI
     // region [Hooks]
 
     const props: TStepBoxItemProps = {contentDirection, ...restProps};
-    const stepBoxContext = useContext(TStepBoxContext);
+    const stepBoxContext = use(TStepBoxContext);
 
     // endregion
 
