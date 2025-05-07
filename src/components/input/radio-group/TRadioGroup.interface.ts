@@ -7,7 +7,7 @@ import type {TRadioValue} from '@/components';
 export type TRadioGroupValue = TRadioValue;
 
 export interface TRadioGroupItem {
-    [key: string]: unknown;
+    [key: string]: any;
 }
 
 export interface TRadioGroupProps extends TBaseProps, TValidatorProps {

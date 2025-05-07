@@ -5,13 +5,14 @@ import {useCallback, useContext, useMemo, useRef} from 'react';
 
 import useRipple from '@/common/hook/UseRipple';
 import type {TTabItemProps} from '@/components';
+import type {tabBoxContextType} from './TTabBoxContext';
 import TTabBoxContext from './TTabBoxContext';
 
 const TTabItem = (props: TTabItemProps) => {
     // region [Hooks]
 
     const {value, index, label} = props;
-    const context = useContext<typeof TTabBoxContext>(TTabBoxContext);
+    const context = useContext<tabBoxContextType>(TTabBoxContext);
     const itemRef = useRef<HTMLLIElement>(null);
     const ripple = useRipple(itemRef);
 
