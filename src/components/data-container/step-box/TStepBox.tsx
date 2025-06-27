@@ -12,6 +12,7 @@ const TStepBox = ({
     nextButtonLabel = 'Next',
     completeButtonLabel = 'Complete',
     value,
+    onChange,
     children,
     style,
     className,
@@ -24,6 +25,7 @@ const TStepBox = ({
         nextButtonLabel,
         completeButtonLabel,
         value,
+        onChange,
         children,
         style,
         className,
@@ -43,11 +45,12 @@ const TStepBox = ({
         let content = null;
 
         if (children?.length === undefined) {
+            // children 안 들어옴
             if (!children) {
-                // children 안들어옴
                 return null;
             }
-            content = children; // children 1개
+            // children 1개
+            content = children;
         } else {
             // children 2개 이상
             content = children[value - 1];

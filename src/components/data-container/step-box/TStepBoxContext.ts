@@ -16,7 +16,7 @@ type stepBoxContext = {
 export const tabBoxContext = createContext<stepBoxContext>({
     totalStep: 0,
     currentStep: 0,
-    onChangeCurrentStep: null,
+    onChangeCurrentStep: () => {},
     prevButtonLabel: '',
     nextButtonLabel: '',
     completeButtonLabel: '',

@@ -1,6 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react';
+import {useState} from 'react';
 
-import useInputState from '@/common/hook/UseInputState';
 import TTabBox from '@/components/data-container/tab-box/TTabBox';
 import type {TTabBoxValue} from '@/components/data-container/tab-box/TTabBox.interface';
 import TTabItem from '@/components/data-container/tab-box/TTabItem';
@@ -15,11 +15,14 @@ export default meta;
 type Story = StoryObj<typeof TTabBox>;
 
 const Template = (args) => {
-    const tab = useInputState<TTabBoxValue>(0);
+    const [tab, setTab] = useState<TTabBoxValue>(0);
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const {onChange, ...restArgs} = args;
 
     return (
         <>
-            <TTabBox {...tab} {...args}>
+            <TTabBox value={tab} onChange={setTab} {...restArgs}>
                 <TTabItem label={'One'} content={<div>Tab One</div>} />
                 <TTabItem label={'Two'} content={<div>Tab Two</div>} />
                 <TTabItem label={'Three'} content={<div>Tab Three</div>} />
