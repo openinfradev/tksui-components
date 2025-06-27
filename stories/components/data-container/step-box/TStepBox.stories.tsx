@@ -16,8 +16,12 @@ type Story = StoryObj<typeof TStepBox>;
 const Template = (args) => {
     const [stepNumber, setStepNumber] = useState<number>(1);
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const {onChange, ...restArgs} = args;
+
     return (
         <>
+            {stepNumber}
             <TStepBox
                 value={stepNumber}
                 onChange={setStepNumber}
@@ -29,7 +33,7 @@ const Template = (args) => {
                     '정책 선택',
                     '확인 및 생성',
                 ]}
-                {...args}
+                {...restArgs}
             >
                 <TStepBoxItem contentDirection={'top-bottom'}>
                     <div>Step 1-1 Content</div>
@@ -68,7 +72,7 @@ const Template = (args) => {
                     '정책 선택',
                     '확인 및 생성',
                 ]}
-                {...args}
+                {...restArgs}
             >
                 <TStepBoxItem contentDirection={'left-right'}>
                     <div>Step 1-1 Content</div>
