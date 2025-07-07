@@ -21,7 +21,6 @@ const Template = (args) => {
 
     return (
         <>
-            {stepNumber}
             <TStepBox
                 value={stepNumber}
                 onChange={setStepNumber}
