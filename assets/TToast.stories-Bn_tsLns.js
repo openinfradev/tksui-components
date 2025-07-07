@@ -1,0 +1,10 @@
+import{j as o}from"./jsx-runtime-D_zvdyIk.js";import{a as s}from"./TButtonGroup-cB7rwFoT.js";import{T as j,n as e}from"./TChip-KzMSgKKz.js";import"./index-75N07mRN.js";import"./TTabItem-DPqjR3tx.js";import"./TIcon-DLBXrsGZ.js";import"./index-BJirbR3n.js";import"./index-Bj-N6E0A.js";import"./TBadge-B58EEO3d.js";import"./UseValidator-BSroX4ym.js";import"./TDropHolder-CeUkRMWI.js";import"./THighlightText-pTj3K_4-.js";import"./TInputValidationHint-DqK32PRs.js";import"./TTextField-Cw9y-yB4.js";import"./TSwitch-DoTj_LFj.js";const _={title:"Guide/TToast",component:j},f=h=>{const t="Hello world",n="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry";function a(r){e(r)}function c(r){e.success(r)}function l(r){e.error(r)}function m(r){e.warn(r)}function p(r){e.info(r)}return o.jsxs(o.Fragment,{children:[o.jsx(s,{onClick:()=>a(t),children:"Plain short"}),o.jsx(s,{onClick:()=>a(n),children:"Plain long"}),o.jsx("br",{}),o.jsx("br",{}),o.jsx(s,{onClick:()=>c(t),children:"Success short"}),o.jsx(s,{onClick:()=>c(n),children:"Success long"}),o.jsx("br",{}),o.jsx("br",{}),o.jsx(s,{onClick:()=>l(t),children:"Error short"}),o.jsx(s,{onClick:()=>l(n),children:"Error long"}),o.jsx("br",{}),o.jsx("br",{}),o.jsx(s,{onClick:()=>m(t),children:"Warn short"}),o.jsx(s,{onClick:()=>m(n),children:"Warn long"}),o.jsx("br",{}),o.jsx("br",{}),o.jsx(s,{onClick:()=>p(t),children:"Info short"}),o.jsx(s,{onClick:()=>p(n),children:"Info long"}),o.jsx("br",{}),o.jsx("br",{}),o.jsx(j,{...h})]})},i={render:f,args:{className:"tks-toast-container",autoClose:1e4,toastClassName:"tks-toast",position:"top-right",draggable:!1}};var x,d,u;i.parameters={...i.parameters,docs:{...(x=i.parameters)==null?void 0:x.docs,source:{originalSource:`{
+  render: Template,
+  args: {
+    className: 'tks-toast-container',
+    autoClose: 10000,
+    toastClassName: 'tks-toast',
+    position: 'top-right' as ToastPosition,
+    draggable: false
+  }
+}`,...(u=(d=i.parameters)==null?void 0:d.docs)==null?void 0:u.source}}};const B=["Default"];export{i as Default,B as __namedExportsOrder,_ as default};
