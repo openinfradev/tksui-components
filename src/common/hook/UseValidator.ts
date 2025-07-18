@@ -2,10 +2,10 @@
 
 import {useState} from 'react';
 
-import type {TCheckboxGroupValue, TCheckboxValue, TRadioGroupValue} from '@/components';
+import type {TCheckboxGroupValue, TCheckboxValue, TDropdownValue, TRadioGroupValue} from '@/components';
 
 export default function useValidator(
-    target: string | number | boolean | TRadioGroupValue | TCheckboxGroupValue | TCheckboxValue,
+    target: string | number | boolean | TRadioGroupValue | TCheckboxGroupValue | TCheckboxValue | TDropdownValue,
     rules?: ((v: unknown) => true | string)[],
     successMessage?: string,
     initialResult = true

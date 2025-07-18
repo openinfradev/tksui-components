@@ -87,10 +87,10 @@ const TDropdown = ({
     const modifyValue = useCallback(
         (newItem: any): void => {
             if (props.multiple) {
-                if (props.value.includes(newItem)) {
+                if ((props.value as any[]).includes(newItem)) {
                     onChange((props.value as string[]).filter((v) => v !== newItem));
                 } else {
-                    onChange([...props.value, newItem]);
+                    onChange([...(props.value as any[]), newItem]);
                 }
             } else {
                 onChange(newItem);
@@ -202,12 +202,12 @@ const TDropdown = ({
     const selectedClass = useMemo((): string => {
         const clazz: string[] = [];
 
-        if (props.value?.length === 0) {
+        if ((props.value as any)?.length === 0) {
             clazz.push('t-dropdown__control__selected--empty');
         }
 
         return clazz.join(' ');
-    }, [props.value?.length]);
+    }, [props.value]);
 
     const itemsClass = useMemo((): string => {
         const clazz: string[] = [];
@@ -229,9 +229,9 @@ const TDropdown = ({
         (item: TDropdownItem): string => {
             const clazz: string[] = [];
 
-            if (typeof props.value === 'object' && props.value.includes(item[props.valueKey])) {
+            if (Array.isArray(props.value) && (props.value as any[]).includes(item[props.valueKey])) {
                 clazz.push('t-dropdown__items__item--selected');
-            } else if (typeof props.value === 'string' && props.value === item[props.valueKey]) {
+            } else if (!Array.isArray(props.value) && props.value === item[props.valueKey]) {
                 clazz.push('t-dropdown__items__item--selected');
             }
 
@@ -247,7 +247,10 @@ const TDropdown = ({
             style = {...props.style};
         }
         if (props.width) {
-            style = {...style, width: props.width};
+            style = {
+                ...style,
+                width: props.width,
+            };
         }
 
         return style;
@@ -338,7 +341,7 @@ const TDropdown = ({
     // region [Templates]
 
     const calculatedPlaceholder = useMemo((): string => {
-        if (props.value?.length === 0) {
+        if ((props.value as any)?.length === 0) {
             return props.placeholder;
         }
         return null;
@@ -383,7 +386,7 @@ const TDropdown = ({
                     {/* Multiple Chip */}
                     {props.multiple &&
                         props.chip &&
-                        (props.value as string[]).map((value) => (
+                        (props.value as any[]).map((value) => (
                             <TChip key={value} onRemove={props.disabled ? null : () => onClickItem(value)}>
                                 {getItemTemplate(itemMap.get(value))}
                             </TChip>
@@ -392,7 +395,7 @@ const TDropdown = ({
                     {/* Multiple Text */}
                     {props.multiple &&
                         !props.chip &&
-                        (props.value as string[]).map((value) => getItemTemplate(itemMap.get(value))).join(', ')}
+                        (props.value as any[]).map((value) => getItemTemplate(itemMap.get(value))).join(', ')}
 
                     {/* Single Text */}
                     {!props.multiple && getItemTemplate(itemMap.get(props.value))}
@@ -449,7 +452,7 @@ const TDropdown = ({
                                 {props.multiple && (
                                     <TCheckbox
                                         className={'t-dropdown__items__item__checkbox'}
-                                        checked={(props.value as string[]).includes(item[props.valueKey])}
+                                        checked={(props.value as any[]).includes(item[props.valueKey])}
                                     />
                                 )}
                                 <THighlightText keyword={filterText}>{getItemTemplate(item)}</THighlightText>
