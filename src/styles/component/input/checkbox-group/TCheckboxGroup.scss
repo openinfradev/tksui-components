@@ -6,8 +6,9 @@
     .t-checkbox-group__container {
         display: flex;
         align-items: center;
+        gap: $t-spacing-64;
+        flex-wrap: wrap;
     }
-    .t-checkbox + .t-checkbox { margin-left: $t-spacing-64; }
 
     .t-checkbox-group__message {
         height: 18px;
