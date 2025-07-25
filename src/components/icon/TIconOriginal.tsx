@@ -206,12 +206,12 @@ const TOriginalImage = {
     ),
     t_arrow_up: (
         <svg viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
-            <path d='M3 6L8 11L13 6' stroke='currentColor' strokeLinecap='round' strokeLinejoin='round'/>
+            <path d='M3 10L8 5L13 10' stroke='currentColor' strokeLinecap='round' strokeLinejoin='round'/>
         </svg>
     ),
     t_arrow_down: (
         <svg viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
-            <path d='M3 10L8 5L13 10' stroke='currentColor' strokeLinecap='round' strokeLinejoin='round'/>
+            <path d='M3 6L8 11L13 6' stroke='currentColor' strokeLinecap='round' strokeLinejoin='round'/>
         </svg>
     ),
     t_monitor_light: (
