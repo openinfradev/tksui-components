@@ -21,6 +21,7 @@ export interface TChipProps extends TBaseProps {
     ref?: Ref<TChipRef>;
 
     onRemove?: (event?: MouseEvent) => void;
+    onClick?: (event?: MouseEvent) => void;
 }
 
 export interface TChipRef {
