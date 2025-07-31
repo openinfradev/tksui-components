@@ -51,6 +51,7 @@ describe('TChip', () => {
 
             // Assert
             expect(root).toHaveClass('t-chip--fill');
+            expect(root).not.toHaveClass('t-chip--outlined');
         });
 
         it('Outlined prop applies to root', () => {
@@ -62,7 +63,30 @@ describe('TChip', () => {
             expect(root).toHaveClass('t-chip--outlined');
         });
 
-        it('When type prop is set to filled, root has t-chip--fill class', () => {
+        it('Fill prop applies when no type and no outlined are specified', () => {
+            // Arrange
+            render(<TChip fill>hello</TChip>);
+            const root = screen.getByTestId('t-chip-root');
+
+            // Assert
+            expect(root).toHaveClass('t-chip--fill');
+        });
+
+        it('Outlined prop takes precedence over fill prop', () => {
+            // Arrange
+            render(
+                <TChip outlined fill>
+                    hello
+                </TChip>
+            );
+            const root = screen.getByTestId('t-chip-root');
+
+            // Assert
+            expect(root).toHaveClass('t-chip--outlined');
+            expect(root).not.toHaveClass('t-chip--fill');
+        });
+
+        it('When type prop is set to fill, root has t-chip--fill class', () => {
             // Arrange
             render(<TChip type={'fill'}>hello</TChip>);
             const chip = screen.getByTestId('t-chip-root');
@@ -80,7 +104,7 @@ describe('TChip', () => {
             expect(root).toHaveClass('t-chip--outlined');
         });
 
-        it('When no type prop is provided, defaults to outlined style', () => {
+        it('When no type, outlined, or fill props are provided, defaults to outlined style', () => {
             // Arrange
             render(<TChip>hello</TChip>);
             const root = screen.getByTestId('t-chip-root');
@@ -91,7 +115,11 @@ describe('TChip', () => {
 
         it('When type prop takes precedence over outlined and fill props', () => {
             // Arrange
-            render(<TChip type={'fill'} outlined>hello</TChip>);
+            render(
+                <TChip type={'fill'} outlined>
+                    hello
+                </TChip>
+            );
             const root = screen.getByTestId('t-chip-root');
 
             // Assert
@@ -190,6 +218,120 @@ describe('TChip', () => {
         });
     });
 
+    describe('Value prop', () => {
+        it('Value prop is passed to onClick handler', () => {
+            // Arrange
+            const testValue = 'test-value';
+            render(
+                <TChip value={testValue} onClick={mockOnClick}>
+                    hello
+                </TChip>
+            );
+            const root = screen.getByTestId('t-chip-root');
+
+            // Act
+            fireEvent.click(root);
+
+            // Assert
+            expect(mockOnClick).toHaveBeenCalledWith(expect.any(Object), testValue);
+        });
+
+        it('Value prop is passed to onRemove handler', () => {
+            // Arrange
+            const testValue = 'test-value';
+            render(
+                <TChip value={testValue} onRemove={mockFn}>
+                    hello
+                </TChip>
+            );
+            const removeIcon = screen.getByText('close');
+
+            // Act
+            fireEvent.click(removeIcon);
+
+            // Assert
+            expect(mockFn).toHaveBeenCalledWith(expect.any(Object), testValue);
+        });
+
+        it('Value prop is passed to onRemove handler via ref', () => {
+            // Arrange
+            const {result} = renderHook(() => useRef(null));
+            const chipRef = result.current;
+            const testValue = 'test-value';
+
+            render(
+                <TChip ref={chipRef} value={testValue} onRemove={mockFn}>
+                    hello
+                </TChip>
+            );
+
+            // Act
+            act(() => {
+                chipRef.current.remove();
+            });
+
+            // Assert
+            expect(mockFn).toHaveBeenCalledWith(undefined, testValue);
+        });
+
+        it('When value is undefined, null is passed to onRemove handler', () => {
+            // Arrange
+            const {result} = renderHook(() => useRef(null));
+            const chipRef = result.current;
+
+            render(
+                <TChip ref={chipRef} onRemove={mockFn}>
+                    hello
+                </TChip>
+            );
+
+            // Act
+            act(() => {
+                chipRef.current.remove();
+            });
+
+            // Assert
+            expect(mockFn).toHaveBeenCalledWith(undefined, null);
+        });
+
+        it('When value is null, null is passed to onRemove handler', () => {
+            // Arrange
+            const {result} = renderHook(() => useRef(null));
+            const chipRef = result.current;
+
+            render(
+                <TChip ref={chipRef} value={null} onRemove={mockFn}>
+                    hello
+                </TChip>
+            );
+
+            // Act
+            act(() => {
+                chipRef.current.remove();
+            });
+
+            // Assert
+            expect(mockFn).toHaveBeenCalledWith(undefined, null);
+        });
+
+        it('Complex value objects are passed correctly', () => {
+            // Arrange
+            const testValue = {id: 1, name: 'test', data: [1, 2, 3]};
+            render(
+                <TChip value={testValue} onClick={mockOnClick}>
+                    hello
+                </TChip>
+            );
+            const root = screen.getByTestId('t-chip-root');
+
+            // Act
+            fireEvent.click(root);
+
+            // Assert
+            expect(mockOnClick).toHaveBeenCalledWith(expect.any(Object), testValue);
+        });
+    });
+
     describe('Event', () => {
         it('When remove handler is triggered via ref, onRemove handler is called', async () => {
             // Arrange
@@ -225,7 +367,11 @@ describe('TChip', () => {
 
         it('When remove icon is clicked, event propagation is stopped', () => {
             // Arrange
-            render(<TChip onRemove={mockFn} onClick={mockOnClick}>hello</TChip>);
+            render(
+                <TChip onRemove={mockFn} onClick={mockOnClick}>
+                    hello
+                </TChip>
+            );
             const removeIcon = screen.getByText('close');
 
             // Act
@@ -313,7 +459,11 @@ describe('TChip', () => {
             const {result} = renderHook(() => useRef(null));
             const chipRef = result.current;
 
-            render(<TChip ref={chipRef} onRemove={undefined}>hello</TChip>);
+            render(
+                <TChip ref={chipRef} onRemove={undefined}>
+                    hello
+                </TChip>
+            );
 
             // Act & Assert
             expect(() => {
@@ -339,7 +489,11 @@ describe('TChip', () => {
             const {result} = renderHook(() => useRef(null));
             const chipRef = result.current;
 
-            render(<TChip ref={chipRef} onRemove={undefined}>hello</TChip>);
+            render(
+                <TChip ref={chipRef} onRemove={undefined}>
+                    hello
+                </TChip>
+            );
 
             // Act & Assert
             expect(() => {
@@ -363,7 +517,11 @@ describe('TChip', () => {
             const {result} = renderHook(() => useRef(null));
             const chipRef = result.current;
 
-            render(<TChip ref={chipRef} onRemove={null}>hello</TChip>);
+            render(
+                <TChip ref={chipRef} onRemove={null}>
+                    hello
+                </TChip>
+            );
 
             // Act & Assert
             expect(() => {
@@ -400,7 +558,11 @@ describe('TChip', () => {
             const {result} = renderHook(() => useRef(null));
             const chipRef = result.current;
 
-            render(<TChip ref={chipRef} onRemove={mockFn}>hello</TChip>);
+            render(
+                <TChip ref={chipRef} onRemove={mockFn}>
+                    hello
+                </TChip>
+            );
 
             // Assert
             expect(chipRef.current).toHaveProperty('remove');

@@ -1,7 +1,7 @@
 'use client';
 
-import type {CSSProperties, MouseEvent} from 'react';
-import {useCallback, useImperativeHandle, useMemo, useRef} from 'react';
+import type {MouseEvent} from 'react';
+import {useCallback, useImperativeHandle, useMemo} from 'react';
 
 import type {TChipProps} from '@/components';
 import TIcon from '../../icon/TIcon';
@@ -9,19 +9,20 @@ import TIcon from '../../icon/TIcon';
 import themeToken from '~style/designToken/ThemeToken.module.scss';
 
 const TChip = ({
-    prevIconSize = 'xsmall',
-    ref,
-    className,
+    children,
+    value,
     type,
     outlined,
-    style,
     fill,
-    prevIconColor,
     prevIcon,
-    onClick,
-    id,
+    prevIconColor,
+    prevIconSize = 'xsmall',
+    ref,
     onRemove,
-    children,
+    onClick,
+    className,
+    style,
+    id,
 }: TChipProps) => {
     // region [Hooks]
 
@@ -61,18 +62,18 @@ const TChip = ({
 
     const onClickRemove = useCallback(
         (event?: MouseEvent) => {
-            onRemove?.(event);
+            onRemove?.(event, value ?? null);
             event?.stopPropagation();
         },
-        [onRemove]
+        [onRemove, value]
     );
 
     const onClickRoot = useCallback(
         (event?: MouseEvent) => {
-            onClick?.(event);
+            onClick?.(event, value ?? null);
             event?.stopPropagation();
         },
-        [onClick]
+        [onClick, value]
     );
 
     // endregion
