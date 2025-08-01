@@ -33,7 +33,7 @@ cula cursus lorem ac tempor.`;
 const Template = (args: TPageProps) => {
     return (
         <>
-            <TPage title={'클러스터 관리'} {...args}>
+            <TPage title={'클러스터 관리'} breadcrumb={'설정 > 클러스터 > 목록'} {...args}>
                 <TSection label={'컨텐츠 1'}>
                     <p>
                         여기에 컨텐츠를 구현합니다. <br />
