@@ -11,7 +11,6 @@ import materialIconGallery from './material-icon-gallery';
 
 import TFormSection from '~/data-container/form-section/TFormSection';
 import TIconOriginal from '~/icon/TIconOriginal';
-import TOriginalImage from '~/icon/TIconOriginal';
 import TDropdown from '~/input/dropdown/TDropdown';
 import TSwitch from '~/input/switch/TSwitch';
 import TTextField from '~/input/text-field/TTextField';
@@ -129,7 +128,7 @@ const Template = (args: TIconProps) => {
                     rowGap: '40px',
                 }}
             >
-                {[...Object.keys(TOriginalImage), ...materialIconGallery]
+                {[...Object.keys(TIconOriginal), ...materialIconGallery]
                     .filter((icon) => icon.includes(searchText))
                     .map((icon) => (
                         <Showcase
