@@ -1,19 +1,30 @@
 'use client';
 
-import type {CSSProperties, MouseEvent} from 'react';
-import {useImperativeHandle, useMemo, useRef} from 'react';
+import type {MouseEvent} from 'react';
+import {useCallback, useImperativeHandle, useMemo} from 'react';
 
 import type {TChipProps} from '@/components';
 import TIcon from '../../icon/TIcon';
 
 import themeToken from '~style/designToken/ThemeToken.module.scss';
 
-const TChip = ({prevIconSize = 'xsmall', ref, ...restProps}: TChipProps) => {
+const TChip = ({
+    children,
+    value,
+    type,
+    outlined,
+    fill,
+    prevIcon,
+    prevIconColor,
+    prevIconSize = 'xsmall',
+    ref,
+    onRemove,
+    onClick,
+    className,
+    style,
+    id,
+}: TChipProps) => {
     // region [Hooks]
-
-    const props: TChipProps = {prevIconSize, ref, ...restProps};
-
-    const rootRef = useRef<HTMLDivElement>(null);
 
     useImperativeHandle(ref, () => ({
         remove() {
@@ -28,32 +39,42 @@ const TChip = ({prevIconSize = 'xsmall', ref, ...restProps}: TChipProps) => {
     const rootClass = useMemo((): string => {
         const clazz: string[] = [];
 
-        if (props.className) {
-            clazz.push(props.className);
+        if (className) {
+            clazz.push(className);
         }
 
-        if (props.type) {
-            clazz.push(`t-chip--${props.type}`);
-        } else if (props.type === 'outlined' || props.outlined) {
+        if (type) {
+            clazz.push(`t-chip--${type}`);
+        } else if (outlined) {
             clazz.push('t-chip--outlined');
-        } else if (props.type === 'fill' || props.fill) {
+        } else if (fill) {
             clazz.push('t-chip--fill');
         } else {
             clazz.push('t-chip--outlined');
         }
 
         return clazz.join(' ');
-    }, [props.type, props.className, props.fill, props.outlined]);
-
-    const rootStyle = useMemo((): CSSProperties => props.style, [props.style]);
+    }, [type, className, fill, outlined]);
 
     // endregion
 
     // region [Events]
 
-    const onClickRemove = (event?: MouseEvent) => {
-        props.onRemove(event);
-    };
+    const onClickRemove = useCallback(
+        (event?: MouseEvent) => {
+            onRemove?.(event, value ?? null);
+            event?.stopPropagation();
+        },
+        [onRemove, value]
+    );
+
+    const onClickRoot = useCallback(
+        (event?: MouseEvent) => {
+            onClick?.(event, value ?? null);
+            event?.stopPropagation();
+        },
+        [onClick, value]
+    );
 
     // endregion
 
@@ -63,23 +84,16 @@ const TChip = ({prevIconSize = 'xsmall', ref, ...restProps}: TChipProps) => {
     // region [Templates]
 
     return (
-        <div
-            ref={rootRef}
-            className={`t-chip ${rootClass}`}
-            onClick={(event) => event.stopPropagation()}
-            style={rootStyle}
-            id={props.id}
-            data-testid={'t-chip-root'}
-        >
-            {props.prevIcon && (
-                <TIcon fill color={props.prevIconColor} size={props.prevIconSize} className={'t-chip__prev-icon'}>
-                    {props.prevIcon}
+        <div className={`t-chip ${rootClass}`} onClick={onClickRoot} style={style} id={id} data-testid={'t-chip-root'}>
+            {prevIcon && (
+                <TIcon fill color={prevIconColor} size={prevIconSize} className={'t-chip__prev-icon'}>
+                    {prevIcon}
                 </TIcon>
             )}
 
-            <div className={'t-chip__label'}>{props.children}</div>
+            <div className={'t-chip__label'}>{children}</div>
 
-            {!!props.onRemove && (
+            {!!onRemove && (
                 <TIcon
                     fill
                     xsmall

@@ -9,6 +9,7 @@ type chipType = ['outlined', 'fill'][number];
 
 export interface TChipProps extends TBaseProps {
     children?: ReactNode;
+    value?: any;
 
     type?: chipType;
     outlined?: boolean;
@@ -20,7 +21,8 @@ export interface TChipProps extends TBaseProps {
 
     ref?: Ref<TChipRef>;
 
-    onRemove?: (event?: MouseEvent) => void;
+    onRemove?: (event?: MouseEvent, value?: any) => void;
+    onClick?: (event?: MouseEvent, value?: any) => void;
 }
 
 export interface TChipRef {

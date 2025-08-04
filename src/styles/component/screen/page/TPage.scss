@@ -17,10 +17,18 @@
 
             @include vertical-mid;
             gap: 10px;
+            justify-content: space-between;
 
             .t-page__title-area__title {
+                display: flex;
+                gap: 10px;
+                @include vertical-mid;
                 @include typo-h3;
                 color: $t-black-color;
+            }
+
+            .t-page__title-area__breadcrumb {
+                color: $t-gray-color-5;
             }
         }
 

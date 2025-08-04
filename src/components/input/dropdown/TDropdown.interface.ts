@@ -9,7 +9,7 @@ export interface TDropdownItem {
     [key: string]: any;
 }
 
-export type TDropdownValue = string | string[];
+export type TDropdownValue = (string | number) | (string | number)[];
 
 export interface TDropdownProps extends TValidatorProps, TBaseProps {
     itemsClassName?: string;
@@ -37,7 +37,7 @@ export interface TDropdownProps extends TValidatorProps, TBaseProps {
 
     ref?: Ref<TDropdownRef>;
 
-    onChange(value: string | string[]): void;
+    onChange(value: TDropdownValue): void;
     onOpen?(): void;
     onClose?(): void;
 }

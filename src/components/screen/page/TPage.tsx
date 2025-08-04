@@ -10,7 +10,7 @@ import themeToken from '~style/designToken/ThemeToken.module.scss';
 
 const defaultPanelWidth = '280px';
 
-const TPage = ({contentDirection = 'top-bottom', ...restProps}: TPageProps) => {
+const TPage = ({contentDirection = 'top-bottom', breadcrumb, ...restProps}: TPageProps) => {
     // region [Hooks]
 
     const props: TPageProps = {contentDirection, ...restProps};
@@ -126,13 +126,16 @@ const TPage = ({contentDirection = 'top-bottom', ...restProps}: TPageProps) => {
         >
             <div className={'t-page__content-container'} style={{width: containerWidth}}>
                 <div className={'t-page__title-area'}>
-                    <h3 className={'t-page__title-area__title'}>{props.title}</h3>
+                    <span className={'t-page__title-area__title'}>
+                        <h3>{props.title}</h3>
 
-                    {props.infoPanelContent && (
-                        <TIcon fill clickable color={themeToken.tBlackColor} onClick={onClickInfoToggle}>
-                            info
-                        </TIcon>
-                    )}
+                        {props.infoPanelContent && (
+                            <TIcon fill clickable color={themeToken.tBlackColor} onClick={onClickInfoToggle}>
+                                info
+                            </TIcon>
+                        )}
+                    </span>
+                    <div className={'t-page__title-area__breadcrumb'}>{breadcrumb}</div>
                 </div>
 
                 <article className={`t-page__content-area ${contentAreaClass}`}>{props.children}</article>
