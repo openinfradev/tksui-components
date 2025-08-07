@@ -85,7 +85,7 @@ const TTextField = ({
 
     const onChangeInput = useCallback(
         (event): void => {
-            let newValue = props.noTrim ? event.target.value : event.target.value.trim();
+            let newValue = event.target.value;
 
             if (props.counter && newValue.length > props.counter) {
                 newValue = event.target.value.substring(0, props.counter);
@@ -94,7 +94,7 @@ const TTextField = ({
             setInnerValue(newValue);
             onChange?.(newValue);
         },
-        [onChange, props.counter, props.noTrim]
+        [onChange, props.counter]
     );
 
     const onFocusInput = useCallback((): void => {
@@ -140,6 +140,7 @@ const TTextField = ({
     const onClickClear = useCallback(
         (event: MouseEvent): void => {
             event?.stopPropagation();
+            setInnerValue('');
             if (onChange) {
                 onChange('');
             }
@@ -312,7 +313,7 @@ const TTextField = ({
                     />
                 )}
 
-                {props.clearable && props.value && props.value.length > 0 && !props.disabled && (
+                {props.clearable && innerValue && innerValue.length > 0 && !props.disabled && (
                     <TIcon small className={'t-text-field__container__action-icon'} clickable onClick={onClickClear}>
                         clear
                     </TIcon>
@@ -322,7 +323,7 @@ const TTextField = ({
                         small
                         className={'t-text-field__container__action-icon'}
                         clickable
-                        color={props.value ? themeToken.tGrayColor6 : themeToken.tGrayColor5}
+                        color={innerValue ? themeToken.tGrayColor6 : themeToken.tGrayColor5}
                         onClick={props.onClickSearch}
                     >
                         search
