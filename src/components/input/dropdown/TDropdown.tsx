@@ -24,6 +24,7 @@ const TDropdown = ({
     chip = true,
     lazy = true,
     noClearButton = false,
+    filterable = false,
     itemTemplate,
     onOpen,
     onClose,
@@ -424,19 +425,21 @@ const TDropdown = ({
             {/* Floating */}
             <div className={`t-dropdown__items ${itemsClass}`}>
                 {/* Control - Filter Text */}
-                <TTextField
-                    ref={inputRef}
-                    className={'t-dropdown__items__filter-text'}
-                    value={filterText}
-                    placeholder={props.filterPlaceholder}
-                    disabled={props.disabled}
-                    noTrim
-                    searchable
-                    dense={props.dense}
-                    onChange={onChangeFilterText}
-                    onClear={onClearFilterText}
-                    onKeyDown={onKeyDownFilterText}
-                />
+                {filterable && (
+                    <TTextField
+                        ref={inputRef}
+                        className={'t-dropdown__items__filter-text'}
+                        value={filterText}
+                        placeholder={props.filterPlaceholder}
+                        disabled={props.disabled}
+                        noTrim
+                        searchable
+                        dense={props.dense}
+                        onChange={onChangeFilterText}
+                        onClear={onClearFilterText}
+                        onKeyDown={onKeyDownFilterText}
+                    />
+                )}
                 <div className={'t-dropdown__items__wrapper'}>
                     {isOpened &&
                         getFilteredItems().map((item) => (
