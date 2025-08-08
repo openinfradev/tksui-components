@@ -98,7 +98,7 @@ describe('TDropdown', () => {
 
             // Assert - Only arrow_drop_down icon should be present, no clear icon
             const iconElements = screen.getAllByRole('img');
-            const clearIcon = iconElements.find(icon => icon.textContent === 'cancel');
+            const clearIcon = iconElements.find((icon) => icon.textContent === 'cancel');
             expect(clearIcon).toBeUndefined();
         });
     });
