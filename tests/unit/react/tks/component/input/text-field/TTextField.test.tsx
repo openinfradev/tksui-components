@@ -253,6 +253,96 @@ describe('TTextField', () => {
             expect(mockOnBlur).toHaveBeenCalledTimes(1);
         });
 
+        it('When typing, spaces should be allowed during input', async () => {
+            // Arrange
+            render(<TTextField value={''} onChange={mockOnChange} />);
+            const inputElement = screen.getByTestId('text-field-input');
+
+            // Act
+            await userEvent.type(inputElement, 'hello world');
+
+            // Assert
+            expect(mockOnChange).toHaveBeenCalledWith('hello world');
+        });
+
+        it('When typing spaces only, input should allow spaces during typing but trim on blur', async () => {
+            // Arrange
+            render(<TTextField value={''} onChange={mockOnChange} />);
+            const inputElement = screen.getByTestId('text-field-input');
+
+            // Act - Type spaces
+            await userEvent.type(inputElement, '   ');
+            expect(mockOnChange).toHaveBeenLastCalledWith('   ');
+
+            // Act - Blur to trigger trim
+            await userEvent.tab();
+
+            // Assert - Should be trimmed to empty string on blur
+            expect(mockOnChange).toHaveBeenLastCalledWith('');
+        });
+
+        it('When typing text with leading/trailing spaces, should allow during input but trim on blur', async () => {
+            // Arrange
+            render(<TTextField value={''} onChange={mockOnChange} />);
+            const inputElement = screen.getByTestId('text-field-input');
+
+            // Act - Type text with spaces
+            await userEvent.type(inputElement, '  hello world  ');
+            expect(mockOnChange).toHaveBeenLastCalledWith('  hello world  ');
+
+            // Act - Blur to trigger trim
+            await userEvent.tab();
+
+            // Assert - Should be trimmed on blur
+            expect(mockOnChange).toHaveBeenLastCalledWith('hello world');
+        });
+
+        it('When noTrim is true, spaces should not be trimmed even on blur', async () => {
+            // Arrange
+            render(<TTextField noTrim value={''} onChange={mockOnChange} />);
+            const inputElement = screen.getByTestId('text-field-input');
+
+            // Act - Type text with spaces
+            await userEvent.type(inputElement, '  hello world  ');
+            expect(mockOnChange).toHaveBeenLastCalledWith('  hello world  ');
+
+            // Act - Blur should not trigger trim when noTrim is true
+            await userEvent.tab();
+
+            // Assert - Should not be trimmed
+            expect(mockOnChange).toHaveBeenLastCalledWith('  hello world  ');
+        });
+
+        it('When counter is set, input should not exceed the limit', async () => {
+            // Arrange
+            render(<TTextField value={''} onChange={mockOnChange} counter={5} />);
+            const inputElement = screen.getByTestId('text-field-input');
+
+            // Act - Try to type more than counter limit
+            await userEvent.type(inputElement, 'hello world');
+
+            // Assert - Should be truncated to counter limit
+            expect(mockOnChange).toHaveBeenLastCalledWith('hello');
+        });
+
+        it('When counter is set with spaces, should count all characters including spaces', async () => {
+            // Arrange
+            render(<TTextField value={''} onChange={mockOnChange} counter={7} />);
+            const inputElement = screen.getByTestId('text-field-input');
+
+            // Act - Type text with spaces within limit
+            await userEvent.type(inputElement, 'hi bye');
+
+            // Assert - Should allow exactly 6 characters (including space)
+            expect(mockOnChange).toHaveBeenLastCalledWith('hi bye');
+
+            // Act - Try to add one more character
+            await userEvent.type(inputElement, '!');
+
+            // Assert - Should be truncated to counter limit
+            expect(mockOnChange).toHaveBeenLastCalledWith('hi bye!');
+        });
+
         it('When input element has focused, the counter shows the trimmed length and length limit', async () => {
             // Arrange
             const mockOnBlur = jest.fn();
@@ -355,23 +445,34 @@ describe('TTextField', () => {
 
         it('When clearable prop is applies, clear icon is shown', () => {
             // Arrange
-            render(<TTextField {...baseProps} clearable />);
+            render(<TTextField value={'hello'} onChange={mockOnChange} clearable />);
             const clearIcon = screen.getByLabelText('clear');
 
             // Assert
             expect(clearIcon).toBeInTheDocument();
         });
 
-        it('When click the clear icon, value is cleared', async () => {
+        it('When clearable prop is applied but value is empty, clear icon is not shown', () => {
             // Arrange
-            render(<TTextField {...baseProps} clearable />);
+            render(<TTextField value={''} onChange={mockOnChange} clearable />);
+            const clearIcon = screen.queryByLabelText('clear');
+
+            // Assert
+            expect(clearIcon).not.toBeInTheDocument();
+        });
+
+        it('When click the clear icon, value is cleared and innerValue is reset', async () => {
+            // Arrange
+            render(<TTextField value={'hello'} onChange={mockOnChange} clearable />);
             const clearIcon = screen.getByLabelText('clear');
+            const inputElement = screen.getByTestId('text-field-input');
 
             // Act
             await userEvent.click(clearIcon);
 
             // Assert
             expect(mockOnChange).toHaveBeenCalledWith('');
+            expect(inputElement).toHaveValue('');
         });
 
         it('When searchable prop is applies, search icon is shown', () => {

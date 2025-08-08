@@ -9,7 +9,7 @@ import TIcon from '~/icon/TIcon';
 
 const TFormSection = ({
     column = 2,
-    labelWidth = '104px',
+    labelWidth = 'var(--t-form-label-width, 104px)',
     formLabelItemAlign = 'horizontal',
     formRowVerticalAlign = 'middle',
     ...restProps

@@ -97,6 +97,7 @@ const TButton = (props: TButtonProps) => {
     // prettier-ignore
     const contentIconInfo = useMemo((): {render: boolean; size: ButtonSize} => {
         const iconInfo = {render: true, size: undefined};
+        if ($_size === 'small') { return {...iconInfo, size: 'xsmall'}; }
         if ($_size === 'medium') { return {...iconInfo, size: 'xsmall'}; }
         if ($_size === 'large') { return {...iconInfo, size: 'xsmall'}; }
         if ($_size === 'xlarge') { return {...iconInfo, size: 'medium'}; }
