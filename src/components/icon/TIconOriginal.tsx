@@ -443,8 +443,8 @@ const TOriginalImage = {
                     width='15'
                     height='15'
                     rx='3.5'
-                    fill={themeToken.tGrayColor1}
-                    stroke={themeToken.tGrayColor3}
+                    fill={"#E5E5E5"}
+                    stroke={"#CCCCCC"}
                 />
             </g>
         </svg>
@@ -476,8 +476,8 @@ const TOriginalImage = {
                     width='15'
                     height='15'
                     rx='3.5'
-                    fill={themeToken.tGrayColor1}
-                    stroke={themeToken.tGrayColor3}
+                    fill={"#E5E5E5"}
+                    stroke={"#CCCCCC"}
                 />
             </g>
         </svg>
