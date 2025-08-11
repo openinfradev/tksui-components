@@ -4,6 +4,31 @@ import themeToken from '~style/designToken/ThemeToken.module.scss';
 const TOriginalImage = {
 
     // region [Gaia]
+    t_radiobutton_on: (
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0.5" y="0.5" width="19" height="19" rx="9.5" />
+            <rect x="0.5" y="0.5" width="19" height="19" rx="9.5" />
+            <rect x="4" y="4" width="12" height="12" rx="6" fill="currentColor"/>
+        </svg>
+    ),
+    t_radiobutton_off: (
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0.5" y="0.5" width="19" height="19" rx="9.5" />
+            <rect x="0.5" y="0.5" width="19" height="19" rx="9.5" />
+        </svg>
+    ),
+    t_checkbox_active: (
+        <svg viewBox="0 0 16 16" fill="currentColor" stroke="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="16" height="16" rx="5" />
+            <path d="M11.4932 5.23292L7.03986 9.68626L4.4532 7.09959C4.32829 6.97542 4.15932 6.90573 3.9832 6.90573C3.80707 6.90573 3.63811 6.97542 3.5132 7.09959C3.38903 7.2245 3.31934 7.39347 3.31934 7.56959C3.31934 7.74571 3.38903 7.91468 3.5132 8.03959L6.5732 11.0996C6.69811 11.2238 6.86707 11.2935 7.0432 11.2935C7.21932 11.2935 7.38829 11.2238 7.5132 11.0996L12.4332 6.17959C12.4957 6.11762 12.5453 6.04388 12.5791 5.96264C12.613 5.8814 12.6304 5.79427 12.6304 5.70626C12.6304 5.61825 12.613 5.53111 12.5791 5.44987C12.5453 5.36863 12.4957 5.2949 12.4332 5.23292C12.3083 5.10876 12.1393 5.03906 11.9632 5.03906C11.7871 5.03906 11.6181 5.10876 11.4932 5.23292Z" fill="white"/>
+        </svg>
+    ),
+    t_checkbox_g_indeterminate: (
+        <svg viewBox="0 0 16 16" fill="currentColor" stroke="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="16" height="16" rx="5" />
+            <path d="M12 7.25C12.4142 7.25 12.75 7.58579 12.75 8C12.75 8.41421 12.4142 8.75 12 8.75H4C3.58579 8.75 3.25 8.41421 3.25 8C3.25 7.58579 3.58579 7.25 4 7.25H12Z" fill="white"/>
+        </svg>
+    ),
     t_resource_ibsw: (
         <svg viewBox="0 0 30 30" fill="currentColor" stroke="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M15 6.5C21.248 6.5 26.5 11.3244 26.5 17.5H22.5C22.5 13.7345 19.2454 10.5 15 10.5C10.7546 10.5 7.5 13.7345 7.5 17.5H3.5C3.5 11.3244 8.75199 6.5 15 6.5Z" fillOpacity="0.5"/>
@@ -443,8 +468,8 @@ const TOriginalImage = {
                     width='15'
                     height='15'
                     rx='3.5'
-                    fill={themeToken.tGrayColor1}
-                    stroke={themeToken.tGrayColor3}
+                    fill={"#E5E5E5"}
+                    stroke={"#CCCCCC"}
                 />
             </g>
         </svg>
@@ -476,8 +501,8 @@ const TOriginalImage = {
                     width='15'
                     height='15'
                     rx='3.5'
-                    fill={themeToken.tGrayColor1}
-                    stroke={themeToken.tGrayColor3}
+                    fill={"#E5E5E5"}
+                    stroke={"#CCCCCC"}
                 />
             </g>
         </svg>
