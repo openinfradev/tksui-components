@@ -17,8 +17,11 @@ function TSection(props: TSectionProps) {
     }, [props.className]);
 
     const rootStyle = useMemo((): CSSProperties => {
-        return props.style || {};
-    }, [props.style]);
+        return {
+            ...props.style,
+            ...(props.width && {width: props.width}),
+        };
+    }, [props.style, props.width]);
 
     // endregion
 
