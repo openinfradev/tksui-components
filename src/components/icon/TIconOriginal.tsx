@@ -388,31 +388,6 @@ const TOriginalImage = {
             <path d="M34.4962 47.664C33.3088 49.4452 30.6914 49.4452 29.5039 47.664L11.1095 21.0723C9.78037 19.0786 11.2095 16.4082 13.6056 16.4082L50.3945 16.4082C52.7906 16.4082 54.2198 19.0786 52.8907 21.0723L34.4962 47.664Z" />
         </svg>
     ),
-    t_radiobutton_on: (
-        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <rect x="0.5" y="0.5" width="19" height="19" rx="9.5" />
-            <rect x="0.5" y="0.5" width="19" height="19" rx="9.5" />
-            <rect x="4" y="4" width="12" height="12" rx="6" fill="currentColor"/>
-        </svg>
-    ),
-    t_radiobutton_off: (
-        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <rect x="0.5" y="0.5" width="19" height="19" rx="9.5" />
-            <rect x="0.5" y="0.5" width="19" height="19" rx="9.5" />
-        </svg>
-    ),
-    t_checkbox_active: (
-        <svg viewBox="0 0 16 16" fill="currentColor" stroke="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="16" height="16" rx="5" />
-            <path d="M11.4932 5.23292L7.03986 9.68626L4.4532 7.09959C4.32829 6.97542 4.15932 6.90573 3.9832 6.90573C3.80707 6.90573 3.63811 6.97542 3.5132 7.09959C3.38903 7.2245 3.31934 7.39347 3.31934 7.56959C3.31934 7.74571 3.38903 7.91468 3.5132 8.03959L6.5732 11.0996C6.69811 11.2238 6.86707 11.2935 7.0432 11.2935C7.21932 11.2935 7.38829 11.2238 7.5132 11.0996L12.4332 6.17959C12.4957 6.11762 12.5453 6.04388 12.5791 5.96264C12.613 5.8814 12.6304 5.79427 12.6304 5.70626C12.6304 5.61825 12.613 5.53111 12.5791 5.44987C12.5453 5.36863 12.4957 5.2949 12.4332 5.23292C12.3083 5.10876 12.1393 5.03906 11.9632 5.03906C11.7871 5.03906 11.6181 5.10876 11.4932 5.23292Z" fill="white"/>
-        </svg>
-    ),
-    t_checkbox_g_indeterminate: (
-        <svg viewBox="0 0 16 16" fill="currentColor" stroke="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="16" height="16" rx="5" />
-            <path d="M12 7.25C12.4142 7.25 12.75 7.58579 12.75 8C12.75 8.41421 12.4142 8.75 12 8.75H4C3.58579 8.75 3.25 8.41421 3.25 8C3.25 7.58579 3.58579 7.25 4 7.25H12Z" fill="white"/>
-        </svg>
-    ),
     t_info: (
         <svg viewBox="0 0 64 64" fill="currentColor" stroke="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M32 29C33.6569 29 35 30.3431 35 32V46C35 47.6569 33.6569 49 32 49C30.3431 49 29 47.6569 29 46V32C29 30.3431 30.3431 29 32 29Z" />
@@ -460,13 +435,9 @@ const TOriginalImage = {
 
     // region [TKS]
     t_checkbox_on: (
-        <svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
-            <rect x='0.5' y='0.5' width='15' height='15' rx='3.5' fill='currentColor' />
-            <path
-                d='M6.58327 11.25L3.7666 8.41667L4.59993 7.58333L6.58327 9.55L11.3999 4.75L12.2333 5.6L6.58327 11.25Z'
-                fill='white'
-                stroke='white'
-            />
+        <svg viewBox="0 0 16 16" fill="currentColor" stroke="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="16" height="16" rx="5" />
+            <path d="M11.4932 5.23292L7.03986 9.68626L4.4532 7.09959C4.32829 6.97542 4.15932 6.90573 3.9832 6.90573C3.80707 6.90573 3.63811 6.97542 3.5132 7.09959C3.38903 7.2245 3.31934 7.39347 3.31934 7.56959C3.31934 7.74571 3.38903 7.91468 3.5132 8.03959L6.5732 11.0996C6.69811 11.2238 6.86707 11.2935 7.0432 11.2935C7.21932 11.2935 7.38829 11.2238 7.5132 11.0996L12.4332 6.17959C12.4957 6.11762 12.5453 6.04388 12.5791 5.96264C12.613 5.8814 12.6304 5.79427 12.6304 5.70626C12.6304 5.61825 12.613 5.53111 12.5791 5.44987C12.5453 5.36863 12.4957 5.2949 12.4332 5.23292C12.3083 5.10876 12.1393 5.03906 11.9632 5.03906C11.7871 5.03906 11.6181 5.10876 11.4932 5.23292Z" fill="white"/>
         </svg>
     ),
     t_checkbox_off: (
@@ -508,59 +479,34 @@ const TOriginalImage = {
         </svg>
     ),
     t_checkbox_disabled_on: (
-        <svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
-            <rect
-                x='0.5'
-                y='0.5'
-                width='15'
-                height='15'
-                rx='3.5'
-                fill={themeToken.tGrayColor1}
-                stroke={themeToken.tGrayColor3}
-            />
-            <path
-                d='M6.58327 11.25L3.7666 8.41667L4.59993 7.58333L6.58327 9.55L11.3999 4.75L12.2333 5.6L6.58327 11.25Z'
-                fill={themeToken.tGrayColor3}
-                stroke='none'
-            />
+        <svg viewBox="0 0 16 16" fill="none">
+            <rect width="16" height="16" rx="5" fill="#BEB4EB" stroke='none'/>
+            <path d="M11.4932 5.23292L7.03986 9.68626L4.4532 7.09959C4.32829 6.97542 4.15932 6.90573 3.9832 6.90573C3.80707 6.90573 3.63811 6.97542 3.5132 7.09959C3.38903 7.2245 3.31934 7.39347 3.31934 7.56959C3.31934 7.74571 3.38903 7.91468 3.5132 8.03959L6.5732 11.0996C6.69811 11.2238 6.86707 11.2935 7.0432 11.2935C7.21932 11.2935 7.38829 11.2238 7.5132 11.0996L12.4332 6.17959C12.4957 6.11762 12.5453 6.04388 12.5791 5.96264C12.613 5.8814 12.6304 5.79427 12.6304 5.70626C12.6304 5.61825 12.613 5.53111 12.5791 5.44987C12.5453 5.36863 12.4957 5.2949 12.4332 5.23292C12.3083 5.10876 12.1393 5.03906 11.9632 5.03906C11.7871 5.03906 11.6181 5.10876 11.4932 5.23292Z" stroke="none" fill="white"/>
         </svg>
     ),
     t_checkbox_disabled_off: (
-        <svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
-            <g>
-                <rect
-                    x='0.5'
-                    y='0.5'
-                    width='15'
-                    height='15'
-                    rx='3.5'
-                    fill={"#E5E5E5"}
-                    stroke={"#CCCCCC"}
-                />
-            </g>
+        <svg viewBox="0 0 16 16" fill="none" stroke="none">
+            <rect x="0.5" y="0.5" width="15" height="15" rx="4.5" fill="#E5E5E5"/>
+            <rect x="0.5" y="0.5" width="15" height="15" rx="4.5" stroke="#CCCCCC"/>
         </svg>
     ),
     t_checkbox_indeterminate: (
-        <svg width='15' height='15' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
-            <g>
-                <rect x='0.5' y='0.5' width='15' height='15' rx='3.5' fill='currentColor' />
-                <path id='Vector' d='M3.8667 8.5999V7.3999H12.1334V8.5999H3.8667Z' fill='white' stroke='white' />
-            </g>
+        <svg viewBox="0 0 16 16" fill="none">
+            <rect width="16" height="16" rx="5" fill="#BEB4EB" stroke="none"/>
+            <path d="M12 7.25C12.4142 7.25 12.75 7.58579 12.75 8C12.75 8.41421 12.4142 8.75 12 8.75H4C3.58579 8.75 3.25 8.41421 3.25 8C3.25 7.58579 3.58579 7.25 4 7.25H12Z" stroke="none" fill="white"/>
         </svg>
     ),
     t_radio_on: (
-        <svg width='16' height='16' viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'>
-            <g>
-                <circle id='Ellipse 3258' cx='8' cy='8' r='7.5' />
-                <circle id='Ellipse 3259' cx='8' cy='8' r='3.5' fill='white' />
-            </g>
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0.5" y="0.5" width="19" height="19" rx="9.5" />
+            <rect x="0.5" y="0.5" width="19" height="19" rx="9.5" />
+            <rect x="4" y="4" width="12" height="12" rx="6" fill="currentColor"/>
         </svg>
     ),
     t_radio_off: (
-        <svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
-            <g>
-                <circle id='Ellipse 3257' cx='8' cy='8' r='7.5' />
-            </g>
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0.5" y="0.5" width="19" height="19" rx="9.5" />
+            <rect x="0.5" y="0.5" width="19" height="19" rx="9.5" />
         </svg>
     ),
     t_radio_disabled_off: (
