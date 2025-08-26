@@ -125,7 +125,8 @@ const TDropHolder = ({
 
     // region [Events]
 
-    const onClickRoot = (): void => {
+    const onClickRoot = (event: MouseEvent): void => {
+        event.stopPropagation();
         if (isOpened) {
             close();
         } else {

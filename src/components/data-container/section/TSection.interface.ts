@@ -12,4 +12,5 @@ export interface TSectionProps extends TBaseProps {
     rightAction?: ReactElement;
 
     contentClassName?: string;
+    width?: string;
 }

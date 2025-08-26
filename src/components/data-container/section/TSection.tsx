@@ -7,23 +7,24 @@ function TSection(props: TSectionProps) {
     // region [Styles]
 
     const rootClass: string = useMemo((): string => {
-        const clazz: string[] = [];
-
-        if (props.className) {
-            clazz.push(props.className);
-        }
-
-        return clazz.join(' ');
+        return ['t-section', props.className].filter(Boolean).join(' ');
     }, [props.className]);
 
+    const contentClassName: string = useMemo((): string => {
+        return ['t-section__content', props.contentClassName].filter(Boolean).join(' ');
+    }, [props.contentClassName]);
+
     const rootStyle = useMemo((): CSSProperties => {
-        return props.style || {};
-    }, [props.style]);
+        return {
+            ...props.style,
+            ...(props.width && {width: props.width}),
+        };
+    }, [props.style, props.width]);
 
     // endregion
 
     return (
-        <section className={`t-section ${rootClass}`} style={rootStyle} id={props.id} data-testid={'t-section-root'}>
+        <section className={rootClass} style={rootStyle} id={props.id} data-testid={'t-section-root'}>
             {(props.label || props.customLabel || props.leftAction || props.rightAction) && (
                 <header className={'t-section__header'}>
                     {(props.label || props.customLabel) && (
@@ -43,7 +44,7 @@ function TSection(props: TSectionProps) {
                     )}
                 </header>
             )}
-            <div className={`t-section__content ${props.contentClassName}`}>{props.children}</div>
+            <div className={contentClassName}>{props.children}</div>
         </section>
     );
 }
