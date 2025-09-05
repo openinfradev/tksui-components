@@ -106,7 +106,7 @@ const TDatePicker = ({
 
     const modifyCurrentSelector = useCallback(
         (val: TDatePickerMode) => {
-            if (valueType === 'date') {
+            if (valueType === 'date' || valueType === 'date-time') {
                 setCurrentSelector(val);
             } else if (valueType === 'month' && val !== 'date') {
                 setCurrentSelector(val);
@@ -199,13 +199,18 @@ const TDatePicker = ({
             const isValidDate: boolean = TDatePickerHelpers.validateDateFormat(sanitizedDate, currentSelector);
             const isValidRange: boolean = validateDateRange(sanitizedDate);
 
-            const {year, month, day} = TDatePickerHelpers.convertToDateValue(sanitizedDate);
+            const {year, month, day, hour, minute} = TDatePickerHelpers.convertToDateValue(sanitizedDate);
             const formattedDateStr: string = TDatePickerHelpers.convertToDateString({year, month, day});
 
             if (isValidDate && isValidRange) {
                 switch (currentSelector) {
                     case 'date': {
                         setDate(formattedDateStr);
+                        break;
+                    }
+                    case 'date-time': {
+                        const formattedDateTimeStr = TDatePickerHelpers.convertToDateString({year, month, day, hour, minute});
+                        setDate(formattedDateTimeStr);
                         break;
                     }
                     case 'month': {
@@ -309,6 +314,7 @@ const TDatePicker = ({
                                         onClick={onClickDropHolder}
                                     >
                                         {currentSelector === 'date' && <TDaySelector />}
+                                        {currentSelector === 'date-time' && <TDaySelector />}
                                         {currentSelector === 'month' && <TMonthSelector />}
                                         {currentSelector === 'year' && <TYearSelector />}
                                     </div>

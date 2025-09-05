@@ -7,12 +7,16 @@ import TIcon from '~/icon/TIcon';
 import type {TDateValue} from '~/input/date-picker';
 import datePickerConText from '~/input/date-picker/TDatePickerContext';
 
+interface TDaySelectorProps {
+    showTime?: boolean;
+}
+
 const weekList = ['일', '월', '화', '수', '목', '금', '토'];
 
 const DaySpan = ({day}: {day: string}) => <span className={'t-day-selector__content__weekday__item'}>{day}</span>;
 const MemoizedDaySpan = memo(DaySpan);
 
-const TDaySelector = () => {
+const TDaySelector = ({showTime = false}: TDaySelectorProps) => {
     // region [Hooks]
 
     const {

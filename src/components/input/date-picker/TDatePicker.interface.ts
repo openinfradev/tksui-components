@@ -11,7 +11,7 @@ export interface TDateValue {
     minute?: number | null;
 }
 
-export type TDatePickerMode = 'date' | 'date-time' | 'month' | 'year';
+export type TDatePickerMode = 'time' | 'date' | 'date-time' | 'month' | 'year';
 
 export interface TDatePickerProps extends TBaseProps, TValidatorProps {
     value?: string;

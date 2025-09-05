@@ -121,7 +121,7 @@ const currentDateValue = (): TDateValue => {
 const generateTimeOptions = (): string[] => {
     const options: string[] = [];
     for (let hour = 0; hour < 24; hour++) {
-        for (let minute = 0; minute < 60; minute += 10) {
+        for (let minute = 0; minute < 60; minute += 30) {
             const pad = (num: number) => String(num).padStart(2, '0');
             options.push(`${pad(hour)}:${pad(minute)}`);
         }

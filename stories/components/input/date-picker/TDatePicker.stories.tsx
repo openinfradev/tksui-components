@@ -1,10 +1,11 @@
 import type {Meta, StoryObj} from '@storybook/react';
 import type {ReactNode} from 'react';
-import React from 'react';
+import React, {useState} from 'react';
 
 import useInputState from '@/common/hook/UseInputState';
 
 import type {TDatePickerProps} from '~/input/date-picker';
+import TTimeSelector from '~/input/date-picker/selector/TTimeSelector';
 import TDatePicker from '~/input/date-picker/TDatePicker';
 
 const meta: Meta<typeof TDatePicker> = {
@@ -78,6 +79,28 @@ const NormalTemplate = (args: TDatePickerProps) => {
             </Container>
         </Wrapper>
     );
+};
+
+const TimeTemplate = (args: TDatePickerProps) => {
+    const [time, setTime] = useState(args.value);
+
+    return (
+        <Wrapper>
+            <Container>
+                <TTimeSelector value={time} onChange={setTime} />
+            </Container>
+        </Wrapper>
+    );
+};
+
+export const TimeType: Story = {
+    render: TimeTemplate,
+    args: {
+        valueType: 'time',
+        value: '20240212',
+        openFrom: '20240210',
+        openTo: '20240320',
+    },
 };
 
 export const DateTimeType: Story = {
