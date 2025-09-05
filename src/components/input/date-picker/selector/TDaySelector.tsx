@@ -5,10 +5,11 @@ import themeToken from '~style/designToken/ThemeToken.module.scss';
 import TButton from '~/button/button/TButton';
 import TIcon from '~/icon/TIcon';
 import type {TDateValue} from '~/input/date-picker';
+import TTimeSelector from '~/input/date-picker/selector/TTimeSelector';
 import datePickerConText from '~/input/date-picker/TDatePickerContext';
 
 interface TDaySelectorProps {
-    showTime?: boolean;
+    // props removed - using context instead
 }
 
 const weekList = ['일', '월', '화', '수', '목', '금', '토'];
@@ -16,7 +17,7 @@ const weekList = ['일', '월', '화', '수', '목', '금', '토'];
 const DaySpan = ({day}: {day: string}) => <span className={'t-day-selector__content__weekday__item'}>{day}</span>;
 const MemoizedDaySpan = memo(DaySpan);
 
-const TDaySelector = ({showTime = false}: TDaySelectorProps) => {
+const TDaySelector = ({}: TDaySelectorProps) => {
     // region [Hooks]
 
     const {
@@ -28,6 +29,7 @@ const TDaySelector = ({showTime = false}: TDaySelectorProps) => {
         nowDate,
         parseDateString,
         validDateRange,
+        showTime,
     } = use(datePickerConText);
 
     const selectedDateObject = useMemo((): TDateValue => {
@@ -132,87 +134,96 @@ const TDaySelector = ({showTime = false}: TDaySelectorProps) => {
 
     return (
         <div className={'t-day-selector'} data-testid={'t-day-selector'}>
-            <div className={'t-day-selector__header'}>
-                <div className={'t-day-selector__header__current-display-date'}>
-                    <div
-                        className={'t-day-selector-display-year-month'}
-                        data-testid={'t-day-selector-display-year-month'}
-                        onClick={() => {
-                            changeViewMode('month');
-                        }}
-                    >
-                        {`${displayDateObject.year}년 ${displayDateObject.month}월`}
-                    </div>
-                    <TIcon
-                        onClick={() => {
-                            changeViewMode('year');
-                        }}
-                        xsmall
-                        className={'t-day-selector-display-date__icon'}
-                    >
-                        arrow_drop_down
-                    </TIcon>
-                </div>
-
-                <div className={'t-day-selector__header__control'} data-testid={'t-day-selector-control'}>
-                    <TButton
-                        onClick={() => {
-                            onMoveMonth('prev');
-                        }}
-                        xsmall
-                        className={'t-day-selector__header__control__icon-button'}
-                    >
-                        <TIcon xsmall color={themeToken.tGrayColor5}>
-                            arrow_left
-                        </TIcon>
-                    </TButton>
-                    <TButton
-                        onClick={() => {
-                            onMoveMonth('today');
-                        }}
-                        xsmall
-                        className={'t-day-selector__header__control__today-button'}
-                    >
-                        오늘
-                    </TButton>
-                    <TButton
-                        onClick={() => {
-                            onMoveMonth('next');
-                        }}
-                        xsmall
-                        className={'t-day-selector__header__control__icon-button'}
-                    >
-                        <TIcon xsmall color={themeToken.tGrayColor5}>
-                            arrow_right
-                        </TIcon>
-                    </TButton>
-                </div>
-            </div>
-
-            <div className={'t-day-selector__content'}>
-                <div className={'t-day-selector__content__weekday'}>
-                    {weekList?.map((day) => <MemoizedDaySpan key={day} day={day} />)}
-                </div>
-
-                <div className={'t-day-selector__content__day-container'}>
-                    {daysInMonth?.map((a) => (
+            <div className={'t-day-selector__date-section'}>
+                <div className={'t-day-selector__header'}>
+                    <div className={'t-day-selector__header__current-display-date'}>
                         <div
-                            key={a}
-                            className={'t-day-selector__content__day-container__item'}
-                            style={a === 0 ? {gridColumn: firstDayOfWeek} : {}}
+                            className={'t-day-selector-display-year-month'}
+                            data-testid={'t-day-selector-display-year-month'}
                             onClick={() => {
-                                onClickDate(a + 1);
+                                changeViewMode('month');
                             }}
                         >
-                            <div
-                                className={`t-day-selector__content__day-container__item__day ${dateLabelClass(a + 1)}`}
-                            >
-                                {a + 1}
-                            </div>
+                            {`${displayDateObject.year}년 ${displayDateObject.month}월`}
                         </div>
-                    ))}
+                        <TIcon
+                            onClick={() => {
+                                changeViewMode('year');
+                            }}
+                            xsmall
+                            className={'t-day-selector-display-date__icon'}
+                        >
+                            arrow_drop_down
+                        </TIcon>
+                    </div>
+
+                    <div className={'t-day-selector__header__control'} data-testid={'t-day-selector-control'}>
+                        <TButton
+                            onClick={() => {
+                                onMoveMonth('prev');
+                            }}
+                            xsmall
+                            className={'t-day-selector__header__control__icon-button'}
+                        >
+                            <TIcon xsmall color={themeToken.tGrayColor5}>
+                                arrow_left
+                            </TIcon>
+                        </TButton>
+                        <TButton
+                            onClick={() => {
+                                onMoveMonth('today');
+                            }}
+                            xsmall
+                            className={'t-day-selector__header__control__today-button'}
+                        >
+                            오늘
+                        </TButton>
+                        <TButton
+                            onClick={() => {
+                                onMoveMonth('next');
+                            }}
+                            xsmall
+                            className={'t-day-selector__header__control__icon-button'}
+                        >
+                            <TIcon xsmall color={themeToken.tGrayColor5}>
+                                arrow_right
+                            </TIcon>
+                        </TButton>
+                    </div>
+                </div>
+
+                <div className={'t-day-selector__content'}>
+                    <div className={'t-day-selector__content__weekday'}>
+                        {weekList?.map((day) => <MemoizedDaySpan key={day} day={day} />)}
+                    </div>
+
+                    <div className={'t-day-selector__content__day-container'}>
+                        {daysInMonth?.map((a) => (
+                            <div
+                                key={a}
+                                className={'t-day-selector__content__day-container__item'}
+                                style={a === 0 ? {gridColumn: firstDayOfWeek} : {}}
+                                onClick={() => {
+                                    onClickDate(a + 1);
+                                }}
+                            >
+                                <div
+                                    className={`t-day-selector__content__day-container__item__day ${dateLabelClass(a + 1)}`}
+                                >
+                                    {a + 1}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
+
+            {showTime && (
+                <div className={'t-day-selector__time-section'}>
+                    <TTimeSelector />
+                    {/* Time selector will be implemented here */}
+                </div>
+            )}
         </div>
     );
     // endregion

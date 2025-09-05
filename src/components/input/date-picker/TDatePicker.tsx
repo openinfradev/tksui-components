@@ -307,6 +307,7 @@ const TDatePicker = ({
                                         nowDate: TDatePickerHelpers.currentDateValue,
                                         parseDateString: TDatePickerHelpers.convertToDateValue,
                                         parseDateObject: TDatePickerHelpers.convertToDateString,
+                                        showTime: valueType === 'date-time',
                                     }}
                                 >
                                     <div
