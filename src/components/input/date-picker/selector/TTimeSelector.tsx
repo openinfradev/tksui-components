@@ -1,7 +1,7 @@
 import {memo, use} from 'react';
 
-import TDatePickerHelpers from '../TDatePickerHelpers';
 import datePickerConText from '../TDatePickerContext';
+import TDatePickerHelpers from '../TDatePickerHelpers';
 
 interface TTimeSelectorProps {
     // props removed - using context instead
@@ -10,13 +10,7 @@ interface TTimeSelectorProps {
 const TTimeSelector = ({}: TTimeSelectorProps) => {
     // region [Hooks]
 
-    const {
-        timeValue,
-        onChangeTimeValue,
-        onChangeTempTime,
-        showTime,
-        tempTimeValue,
-    } = use(datePickerConText);
+    const {timeValue, onChangeTimeValue, onChangeTempTime, showTime, tempTimeValue} = use(datePickerConText);
 
     const timeOptions = TDatePickerHelpers.generateTimeOptions();
 
@@ -31,17 +25,24 @@ const TTimeSelector = ({}: TTimeSelectorProps) => {
                     <div
                         key={time}
                         className={`t-time-selector__content__time-list__item ${
-                            (showTime && tempTimeValue ? tempTimeValue === time : timeValue === time) 
-                                ? 't-time-selector__content__time-list__item--selected' 
+                            (
+                                showTime && tempTimeValue
+                                    ? tempTimeValue === time.replace(':', '')
+                                    : timeValue === time.replace(':', '')
+                            )
+                                ? 't-time-selector__content__time-list__item--selected'
                                 : ''
                         }`}
                         onClick={() => {
+                            // HH:MM 형식을 HHMM 형식으로 변환
+                            const timeInHHMM = time.replace(':', '');
+
                             if (showTime) {
                                 // date-time 모드: 임시값으로 저장
-                                onChangeTempTime(time);
+                                onChangeTempTime(timeInHHMM);
                             } else {
                                 // 일반 모드: 즉시 적용
-                                onChangeTimeValue(time);
+                                onChangeTimeValue(timeInHHMM);
                             }
                         }}
                     >

@@ -133,7 +133,7 @@ const TDatePicker = ({
     const onChangeTimeValue = useCallback(
         (time: string) => {
             setTimeValue(time);
-            
+
             // If we have both date and time, combine them
             if (dateValue && valueType === 'date-time') {
                 const combinedDateTime = `${dateValue}${time}`;
@@ -144,48 +144,45 @@ const TDatePicker = ({
         [dateValue, valueType, onChange, separator]
     );
 
-    const onChangeTempDate = useCallback(
-        (date: string) => {
-            setTempDateValue(date);
-        },
-        []
-    );
+    const onChangeTempDate = useCallback((date: string) => {
+        setTempDateValue(date);
+    }, []);
 
-    const onChangeTempTime = useCallback(
-        (time: string) => {
-            setTempTimeValue(time);
-        },
-        []
-    );
+    const onChangeTempTime = useCallback((time: string) => {
+        setTempTimeValue(time);
+    }, []);
 
     const onConfirm = useCallback(() => {
         if (valueType === 'date-time') {
-            // 임시값들을 실제값으로 적용
-            const finalDate = tempDateValue || dateValue;
+            let finalDate = tempDateValue || dateValue;
             const finalTime = tempTimeValue || timeValue;
-            
+
+            if (finalDate.length > 8) {
+                finalDate = finalDate.substring(0, 8);
+            }
+
             if (finalDate) {
                 let finalValue = finalDate;
                 if (finalTime) {
                     finalValue = `${finalDate}${finalTime}`;
                 }
-                
+
                 setDateValue(finalDate);
                 setTimeValue(finalTime);
                 setDisplayValue(finalValue);
                 onChange?.(TDatePickerHelpers.addDateSeparator(finalValue, separator));
             }
         }
-        
+
         // 드롭다운 닫기
         dropHolderRef.current?.close();
-    }, [tempDateValue, tempTimeValue, dateValue, timeValue, valueType, onChange, separator]);
+    }, [valueType, dateValue, timeValue, tempDateValue, tempTimeValue, onChange, separator]);
 
     const onCancel = useCallback(() => {
         // 임시값들 초기화
         setTempDateValue('');
         setTempTimeValue('');
-        
+
         // 드롭다운 닫기
         dropHolderRef.current?.close();
     }, []);
@@ -272,7 +269,13 @@ const TDatePicker = ({
                         break;
                     }
                     case 'date-time': {
-                        const formattedDateTimeStr = TDatePickerHelpers.convertToDateString({year, month, day, hour, minute});
+                        const formattedDateTimeStr = TDatePickerHelpers.convertToDateString({
+                            year,
+                            month,
+                            day,
+                            hour,
+                            minute,
+                        });
                         setDate(formattedDateTimeStr);
                         break;
                     }
@@ -347,7 +350,7 @@ const TDatePicker = ({
                 value={TDatePickerHelpers.addDateSeparator(displayValue, separator)}
                 onChange={onChangeDisplayDateValue}
                 onBlur={onBlurTextField}
-                width={'156px'}
+                width={'170px'}
                 disabled={disabled}
                 customAction={
                     <TDropHolder
