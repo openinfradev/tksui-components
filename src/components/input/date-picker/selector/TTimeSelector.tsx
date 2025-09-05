@@ -1,27 +1,21 @@
-import {memo, useCallback} from 'react';
+import {memo, use} from 'react';
 
 import TDatePickerHelpers from '../TDatePickerHelpers';
+import datePickerConText from '../TDatePickerContext';
 
 interface TTimeSelectorProps {
-    value?: string;
-    onChange?: (time: string) => void;
+    // props removed - using context instead
 }
 
-const TTimeSelector = ({value, onChange}: TTimeSelectorProps) => {
+const TTimeSelector = ({}: TTimeSelectorProps) => {
     // region [Hooks]
 
+    const {
+        timeValue,
+        onChangeTimeValue,
+    } = use(datePickerConText);
+
     const timeOptions = TDatePickerHelpers.generateTimeOptions();
-
-    // endregion
-
-    // region [Events]
-
-    const onClickTime = useCallback(
-        (time: string) => {
-            onChange?.(time);
-        },
-        [onChange]
-    );
 
     // endregion
 
@@ -29,15 +23,14 @@ const TTimeSelector = ({value, onChange}: TTimeSelectorProps) => {
 
     return (
         <div className={'t-time-selector'} data-testid={'t-time-selector'}>
-            -value: {value}
             <div className={'t-time-selector__content__time-list'}>
                 {timeOptions.map((time) => (
                     <div
                         key={time}
                         className={`t-time-selector__content__time-list__item ${
-                            value === time ? 't-time-selector__content__time-list__item--selected' : ''
+                            timeValue === time ? 't-time-selector__content__time-list__item--selected' : ''
                         }`}
-                        onClick={() => onClickTime(time)}
+                        onClick={() => onChangeTimeValue(time)}
                     >
                         {time}
                     </div>

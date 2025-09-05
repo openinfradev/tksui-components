@@ -29,6 +29,8 @@ export interface TDatePickerContext {
     parseDateObject: (dateObj: TDateValue) => string;
 
     showTime: boolean;
+    timeValue: string;
+    onChangeTimeValue: (time: string) => void;
 }
 
 export const datePickerConText = createContext<TDatePickerContext>({
@@ -50,5 +52,7 @@ export const datePickerConText = createContext<TDatePickerContext>({
     parseDateObject: null,
 
     showTime: false,
+    timeValue: '',
+    onChangeTimeValue: (time) => time,
 });
 export default datePickerConText;

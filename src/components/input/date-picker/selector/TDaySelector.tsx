@@ -221,6 +221,12 @@ const TDaySelector = ({}: TDaySelectorProps) => {
             {showTime && (
                 <div className={'t-day-selector__time-section'}>
                     <TTimeSelector />
+                    <div className={'t-day-selector__time-section__actions'}>
+                        <TButton small>cancel</TButton>
+                        <TButton small main>
+                            confirm
+                        </TButton>
+                    </div>
                     {/* Time selector will be implemented here */}
                 </div>
             )}

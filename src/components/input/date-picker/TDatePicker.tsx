@@ -49,6 +49,7 @@ const TDatePicker = ({
     const [currentSelector, setCurrentSelector] = useState<TDatePickerMode>(valueType);
     const [displayValue, setDisplayValue] = useState('');
     const [dateValue, setDateValue] = useState(value);
+    const [timeValue, setTimeValue] = useState('');
     const [displayDateObject, setDisplayDateObject] = useState<TDateValue>({
         ...TDatePickerHelpers.currentDateValue(),
     });
@@ -125,6 +126,20 @@ const TDatePicker = ({
             dropHolderRef.current?.close();
         },
         [onChange, separator]
+    );
+
+    const onChangeTimeValue = useCallback(
+        (time: string) => {
+            setTimeValue(time);
+            
+            // If we have both date and time, combine them
+            if (dateValue && valueType === 'date-time') {
+                const combinedDateTime = `${dateValue}${time}`;
+                setDisplayValue(combinedDateTime);
+                onChange?.(TDatePickerHelpers.addDateSeparator(combinedDateTime, separator));
+            }
+        },
+        [dateValue, valueType, onChange, separator]
     );
 
     const clearDate = useCallback(() => {
@@ -308,6 +323,8 @@ const TDatePicker = ({
                                         parseDateString: TDatePickerHelpers.convertToDateValue,
                                         parseDateObject: TDatePickerHelpers.convertToDateString,
                                         showTime: valueType === 'date-time',
+                                        timeValue,
+                                        onChangeTimeValue,
                                     }}
                                 >
                                     <div

@@ -47,6 +47,7 @@
             border-radius: 4px;
             cursor: pointer;
             border: 1px solid dt.$t-gray-color-2;
+            background-color: dt.$t-white-color;
             @include dt.typo-element-2;
 
             &:hover {
@@ -64,7 +65,6 @@
 
 .t-day-selector {
     min-width: 260px;
-    padding: dt.$t-spacing-20;
     border-radius: 8px;
     box-shadow: dt.$t-shadow--modal;
 
@@ -73,6 +73,7 @@
     position: relative;
 
     .t-day-selector__date-section {
+        padding: dt.$t-spacing-20;
         flex: 1 0 auto;
         /* Header */
         .t-day-selector__header {
@@ -191,6 +192,22 @@
     .t-day-selector__time-section {
         flex: 1 0 auto;
         height: 100%;
+        display: flex;
+        flex-direction: column;
+        border-left: 1px solid dt.$t-blue-gray-color-3;
+
+        .t-time-selector {
+            background-color: dt.$t-blue-gray-color-2;
+        }
+
+        .t-day-selector__time-section__actions {
+            border-top: 1px solid dt.$t-blue-gray-color-3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: dt.$t-spacing-8;
+            .t-button {width: 53px;}
+        }
     }
 
 
