@@ -29,6 +29,7 @@ const TTimeSelector = ({value, onChange}: TTimeSelectorProps) => {
 
     return (
         <div className={'t-time-selector'} data-testid={'t-time-selector'}>
+            -value: {value}
             <div className={'t-time-selector__content__time-list'}>
                 {timeOptions.map((time) => (
                     <div

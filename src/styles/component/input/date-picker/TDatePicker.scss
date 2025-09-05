@@ -30,6 +30,8 @@
 
 .t-time-selector {
     width: 138px;
+    height: 100%;
+    overflow: auto;
     padding: dt.$t-spacing-16;
 
     .t-time-selector__content__time-list {
@@ -61,123 +63,136 @@
 }
 
 .t-day-selector {
-    width: 260px;
+    min-width: 260px;
     padding: dt.$t-spacing-20;
     border-radius: 8px;
     box-shadow: dt.$t-shadow--modal;
 
-    /* Header */
-    .t-day-selector__header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        height: 24px;
+    display: flex;
+    height: 304px;
+    position: relative;
 
-        @include dt.typo-subtitle-3;
-
-        .t-day-selector__header__current-display-date {
-            display: inline-flex;
+    .t-day-selector__date-section {
+        flex: 1 0 auto;
+        /* Header */
+        .t-day-selector__header {
+            display: flex;
             align-items: center;
-            gap: dt.$t-spacing-2;
+            justify-content: space-between;
+            width: 100%;
+            height: 24px;
 
-            .t-day-selector-display-year-month,
-            .t-day-selector-display-date__icon {
-                cursor: pointer;
+            @include dt.typo-subtitle-3;
+
+            .t-day-selector__header__current-display-date {
+                display: inline-flex;
+                align-items: center;
+                gap: dt.$t-spacing-2;
+
+                .t-day-selector-display-year-month,
+                .t-day-selector-display-date__icon {
+                    cursor: pointer;
+                }
             }
-        }
 
-        .t-day-selector__header__control {
-            display: inline-flex;
-            align-items: center;
-
-            .t-day-selector__header__control__icon-button {
-                width: 20px;
-                min-width: 20px;
-                padding: 0;
-                margin: 0;
-                border-color: dt.$t-gray-color-2;
-            }
-            .t-day-selector__header__control__today-button {
-                width: 36px;
-                min-width: 36px;
-                padding: 0 dt.$t-spacing-8;
-                border-color: dt.$t-gray-color-2;
-            }
-            .t-button--xsmall + .t-button--xsmall {
-                margin-left: dt.$t-spacing-2;
-            }
-        }
-    }
-
-    .t-day-selector__content {
-        height: calc(100% - 44px);
-        margin-top: dt.$t-spacing-20;
-
-        .t-day-selector__content__weekday {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            flex: 0 1 auto;
-            padding: 0 dt.$t-spacing-2;
-            margin-bottom: dt.$t-spacing-16;
-            color: dt.$t-gray-color-5;
-
-            @include dt.typo-element-3;
-
-            .t-day-selector__content__weekday__item {
-                text-align: center;
-            }
-        }
-
-        .t-day-selector__content__day-container {
-            display: grid;
-            row-gap: dt.$t-spacing-16;
-            grid-template-columns: repeat(7, 1fr);
-            grid-template-rows: repeat(0, 24px);
-
-            .t-day-selector__content__day-container__item {
-                position: relative;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
+            .t-day-selector__header__control {
+                display: inline-flex;
                 align-items: center;
 
+                .t-day-selector__header__control__icon-button {
+                    width: 20px;
+                    min-width: 20px;
+                    padding: 0;
+                    margin: 0;
+                    border-color: dt.$t-gray-color-2;
+                }
+                .t-day-selector__header__control__today-button {
+                    width: 36px;
+                    min-width: 36px;
+                    padding: 0 dt.$t-spacing-8;
+                    border-color: dt.$t-gray-color-2;
+                }
+                .t-button--xsmall + .t-button--xsmall {
+                    margin-left: dt.$t-spacing-2;
+                }
+            }
+        }
 
-                .t-day-selector__content__day-container__item__day {
+        .t-day-selector__content {
+            height: calc(100% - 44px);
+            margin-top: dt.$t-spacing-20;
+
+            .t-day-selector__content__weekday {
+                display: grid;
+                grid-template-columns: repeat(7, 1fr);
+                flex: 0 1 auto;
+                padding: 0 dt.$t-spacing-2;
+                margin-bottom: dt.$t-spacing-16;
+                color: dt.$t-gray-color-5;
+
+                @include dt.typo-element-3;
+
+                .t-day-selector__content__weekday__item {
+                    text-align: center;
+                }
+            }
+
+            .t-day-selector__content__day-container {
+                display: grid;
+                row-gap: dt.$t-spacing-16;
+                grid-template-columns: repeat(7, 1fr);
+                grid-template-rows: repeat(0, 24px);
+
+                .t-day-selector__content__day-container__item {
                     position: relative;
                     display: flex;
+                    flex-direction: column;
                     justify-content: center;
                     align-items: center;
-                    width: 24px;
-                    height: 24px;
-                    border-radius: 50%;
-                    cursor: pointer;
-                    color: dt.$t-black-color;
 
-                    @include dt.typo-element-2;
 
-                    &:hover {
-                        border: 1px solid dt.$t-gray-color-1;
-                        background: dt.$t-gray-color-1;
+                    .t-day-selector__content__day-container__item__day {
+                        position: relative;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 24px;
+                        height: 24px;
+                        border-radius: 50%;
+                        cursor: pointer;
+                        color: dt.$t-black-color;
+
+                        @include dt.typo-element-2;
+
+                        &:hover {
+                            border: 1px solid dt.$t-gray-color-1;
+                            background: dt.$t-gray-color-1;
+                        }
+                        &.t-day-selector__content__day-container__item__day--today {
+                            color: dt.$t-primary-color;
+                            border: 1px solid dt.$t-secondary-color-blue;
+                        }
+                        &.t-day-selector__content__day-container__item__day--selected {
+                            color: dt.$t-white-color;
+                            border: 1px solid dt.$t-primary-color;
+                            background-color: dt.$t-primary-color;
+                        }
+                        &.t-day-selector__content__day-container__item__day--disabled {
+                            color: dt.$t-gray-color-4;
+                            pointer-events: none;
+                        }
                     }
-                    &.t-day-selector__content__day-container__item__day--today {
-                        color: dt.$t-primary-color;
-                        border: 1px solid dt.$t-secondary-color-blue;
-                    }
-                    &.t-day-selector__content__day-container__item__day--selected {
-                        color: dt.$t-white-color;
-                        border: 1px solid dt.$t-primary-color;
-                        background-color: dt.$t-primary-color;
-                    }
-                    &.t-day-selector__content__day-container__item__day--disabled {
-                        color: dt.$t-gray-color-4;
-                        pointer-events: none;
-                    }
+
                 }
-
             }
         }
     }
+
+    .t-day-selector__time-section {
+        flex: 1 0 auto;
+        height: 100%;
+    }
+
 
 }
 
