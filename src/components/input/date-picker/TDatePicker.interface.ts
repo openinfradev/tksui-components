@@ -7,9 +7,11 @@ export interface TDateValue {
     year: number | null;
     month: number | null;
     day: number | null;
+    hour?: number | null;
+    minute?: number | null;
 }
 
-export type TDatePickerMode = 'date' | 'month' | 'year';
+export type TDatePickerMode = 'date' | 'date-time' | 'month' | 'year';
 
 export interface TDatePickerProps extends TBaseProps, TValidatorProps {
     value?: string;

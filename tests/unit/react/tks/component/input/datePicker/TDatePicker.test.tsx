@@ -13,12 +13,15 @@ const datePickerTestId = 't-date-picker';
 const invalidDates = ['2029199', '20999999', '20100000', '20100099', '21230010', '00000000', '01232323'];
 const invalidMonths = ['219900', '000000', '999999', '01021201', '123413', '202577'];
 const invalidYears = ['0000', '999', '123', '1', '66', '00004', '0101', '0001'];
+const invalidDateTimes = ['202901991234', '209999999999', '201000000000', '202112312525', '202112312389', '000000000000'];
 
 const dateFormatter = (date: string): string => {
     const dateLength = date.length;
     const yearStr = date.substring(0, 4);
     const monthStr = date.substring(4, 6);
     const dayStr = date.substring(6, 8);
+    const hourStr = date.substring(8, 10);
+    const minuteStr = date.substring(10, 12);
 
     if (dateLength < 5) {
         return yearStr;
@@ -26,7 +29,13 @@ const dateFormatter = (date: string): string => {
     if (dateLength < 7) {
         return `${yearStr}-${monthStr}`;
     }
-    return `${yearStr}-${monthStr}-${dayStr}`;
+    if (dateLength < 9) {
+        return `${yearStr}-${monthStr}-${dayStr}`;
+    }
+    if (dateLength < 11) {
+        return `${yearStr}-${monthStr}-${dayStr} ${hourStr}`;
+    }
+    return `${yearStr}-${monthStr}-${dayStr} ${hourStr}:${minuteStr}`;
 };
 
 describe('TDatePicker', () => {
@@ -94,6 +103,16 @@ describe('TDatePicker', () => {
 
             // Assert
             expect(monthPickerRoot).toHaveValue(testYearValue);
+        });
+
+        it('Value prop applies to date-time type root', () => {
+            // Arrange
+            const testDateTimeValue = '202402071430';
+            render(<TDatePicker valueType={'date-time'} value={testDateTimeValue} />);
+            const dateTimePickerRoot = screen.getByTestId('text-field-input');
+
+            // Assert
+            expect(dateTimePickerRoot).toHaveValue(dateFormatter(testDateTimeValue));
         });
 
         it('Dropdown displays on the screen correctly to date view type root', async () => {
@@ -235,6 +254,17 @@ describe('TDatePicker', () => {
             expect(yearPickerRoot).toHaveValue(validYearDate);
         });
 
+        it('Displays correctly when incorrect value is provided to date-time type root', () => {
+            // Arrange
+            const validDateTimeValue = '202912121430';
+            const pollutedDate = `${validDateTimeValue} !@# ${9999}`;
+            render(<TDatePicker valueType={'date-time'} value={pollutedDate} />);
+            const dateTimePickerRoot = screen.getByTestId('text-field-input');
+
+            // Assert
+            expect(dateTimePickerRoot).toHaveValue(dateFormatter(validDateTimeValue));
+        });
+
         it.each(invalidDates)(
             'Displays correctly when incorrect value is provided to date type root. data: #%s',
             (invalidDate) => {
@@ -264,6 +294,18 @@ describe('TDatePicker', () => {
             (invalidDate) => {
                 // Arrange
                 render(<TDatePicker valueType={'year'} value={invalidDate} />);
+                const root = screen.getByTestId('text-field-input');
+
+                // Assert
+                expect(root).toHaveValue('');
+            }
+        );
+
+        it.each(invalidDateTimes)(
+            'Displays correctly when incorrect value is provided to date-time type root. data: #%s',
+            (invalidDateTime) => {
+                // Arrange
+                render(<TDatePicker valueType={'date-time'} value={invalidDateTime} />);
                 const root = screen.getByTestId('text-field-input');
 
                 // Assert
@@ -359,6 +401,20 @@ describe('TDatePicker', () => {
             const splitDate = dateInputRoot.value.split(testSeparator);
             // Assert
             expect(splitDate.length).toBe(2);
+        });
+
+        it('Displays correctly when separator is provided to date-time type root', () => {
+            // Arrange
+            const testDateTime = '202304121530';
+            const testSeparator = '/';
+            render(<TDatePicker valueType={'date-time'} value={testDateTime} separator={testSeparator} />);
+            const dateTimeInputRoot = screen.getByTestId('text-field-input') as HTMLInputElement;
+
+            // 2023/04/12 15:30 형태가 되므로 separator로 split하면 3개 부분으로 나뉨
+            const splitDate = dateTimeInputRoot.value.split(testSeparator);
+            // Assert
+            expect(splitDate.length).toBe(3);
+            expect(dateTimeInputRoot.value).toContain('15:30');
         });
     });
 
@@ -713,6 +769,61 @@ describe('TDatePicker', () => {
 
             // Assert
             expect(firstInvalidTypedInput).toHaveValue(dateFormatter(validDate));
+        });
+
+        it('If the user enters the blur state after entering the date-time, the value changes normally.', async () => {
+            // Arrange
+            const user = userEvent.setup();
+            const openFrom = '202402051000';
+            const openTo = '202402242359';
+            const validDateTime = '202402111430';
+            const firstInvalidDateTime = '202402282530'; // 잘못된 시간
+            const secondInvalidDateTime = '202402021000'; // 범위 밖
+
+            const TestDatePicker = () => {
+                const [dateInput, setDateInput] = useState<any>('');
+                return (
+                    <TDatePicker
+                        valueType={'date-time'}
+                        value={dateInput}
+                        onChange={setDateInput}
+                        openFrom={openFrom}
+                        openTo={openTo}
+                    />
+                );
+            };
+            render(<TestDatePicker />);
+            const textInput = screen.getByTestId('text-field-input');
+
+            // Act
+            await user.click(textInput);
+            await user.keyboard(validDateTime);
+            await user.tab();
+
+            // Arrange
+            const typedTextInput = screen.getByTestId('text-field-input');
+
+            // Assert
+            expect(typedTextInput).toHaveValue(dateFormatter(validDateTime));
+
+            // Act
+            await user.clear(typedTextInput);
+            await user.keyboard(firstInvalidDateTime);
+            await user.tab();
+
+            // Arrange
+            const firstInvalidTypedInput = screen.getByTestId('text-field-input');
+
+            // Assert
+            expect(firstInvalidTypedInput).toHaveValue(dateFormatter(validDateTime));
+
+            // Act
+            await user.clear(firstInvalidTypedInput);
+            await user.keyboard(secondInvalidDateTime);
+            await user.tab();
+
+            // Assert
+            expect(firstInvalidTypedInput).toHaveValue(dateFormatter(validDateTime));
         });
     });
 });

@@ -80,6 +80,16 @@ const NormalTemplate = (args: TDatePickerProps) => {
     );
 };
 
+export const DateTimeType: Story = {
+    render: NormalTemplate,
+    args: {
+        valueType: 'date-time',
+        value: '20240212',
+        openFrom: '20240210',
+        openTo: '20240320',
+    },
+};
+
 export const DateType: Story = {
     render: NormalTemplate,
     args: {

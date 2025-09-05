@@ -27,7 +27,8 @@ const Template = () => {
     useEffect(() => {
         fetch('https://www.ag-grid.com/example-assets/row-data.json')
             .then((result) => result.json())
-            .then((rows) => setRowData(rows));
+            .then((rows) => setRowData(rows.slice(0, 3)));
+        // .then((rows) => setRowData(rows));
     }, []);
 
     const [columnDefs] = useState<ColDef[]>([
@@ -62,6 +63,7 @@ const Template = () => {
             columnDefs={columnDefs}
             rightAction={gridRightAction}
             onChange={selectedRows.onChange}
+            height={'500px'}
         />
     );
 };
