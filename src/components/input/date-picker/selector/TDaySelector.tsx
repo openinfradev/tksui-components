@@ -8,16 +8,12 @@ import type {TDateValue} from '~/input/date-picker';
 import TTimeSelector from '~/input/date-picker/selector/TTimeSelector';
 import datePickerConText from '~/input/date-picker/TDatePickerContext';
 
-interface TDaySelectorProps {
-    // props removed - using context instead
-}
-
 const weekList = ['일', '월', '화', '수', '목', '금', '토'];
 
 const DaySpan = ({day}: {day: string}) => <span className={'t-day-selector__content__weekday__item'}>{day}</span>;
 const MemoizedDaySpan = memo(DaySpan);
 
-const TDaySelector = ({}: TDaySelectorProps) => {
+const TDaySelector = () => {
     // region [Hooks]
 
     const {
@@ -30,14 +26,21 @@ const TDaySelector = ({}: TDaySelectorProps) => {
         parseDateString,
         validDateRange,
         showTime,
+        onChangeTempDate,
+        tempDateValue,
+        onConfirm,
+        onCancel,
     } = use(datePickerConText);
 
     const selectedDateObject = useMemo((): TDateValue => {
-        if (dateValue === '') {
+        // showTime이 true일 때는 tempDateValue 우선, 아니면 dateValue 사용
+        const targetValue = showTime && tempDateValue ? tempDateValue : dateValue;
+
+        if (targetValue === '') {
             return {year: null, month: null, day: null};
         }
 
-        const {year, month, day} = parseDateString(dateValue);
+        const {year, month, day} = parseDateString(targetValue);
 
         if (year !== 0 && month !== 0 && day !== 0) {
             return {year, month, day};
@@ -45,7 +48,7 @@ const TDaySelector = ({}: TDaySelectorProps) => {
 
         return {year: null, month: null, day: null};
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dateValue]);
+    }, [dateValue, tempDateValue, showTime]);
 
     // endregion
 
@@ -102,11 +105,17 @@ const TDaySelector = ({}: TDaySelectorProps) => {
 
             const dateStr = `${displayDateObject.year}${twoDigitMonth}${twoDigitDate}`;
 
-            if (onChangeValue) {
-                onChangeValue(dateStr);
+            if (showTime) {
+                // date-time 모드: 임시값으로 저장 (드롭다운 닫지 않음)
+                onChangeTempDate(dateStr);
+            } else {
+                // date 모드: 즉시 적용 (기존 동작)
+                if (onChangeValue) {
+                    onChangeValue(dateStr);
+                }
             }
         },
-        [onChangeValue, displayDateObject]
+        [onChangeValue, onChangeTempDate, displayDateObject, showTime]
     );
 
     const onMoveMonth = useCallback((move: 'next' | 'prev' | 'today') => {
@@ -222,12 +231,13 @@ const TDaySelector = ({}: TDaySelectorProps) => {
                 <div className={'t-day-selector__time-section'}>
                     <TTimeSelector />
                     <div className={'t-day-selector__time-section__actions'}>
-                        <TButton small>cancel</TButton>
-                        <TButton small main>
+                        <TButton small onClick={onCancel}>
+                            cancel
+                        </TButton>
+                        <TButton small main onClick={onConfirm}>
                             confirm
                         </TButton>
                     </div>
-                    {/* Time selector will be implemented here */}
                 </div>
             )}
         </div>

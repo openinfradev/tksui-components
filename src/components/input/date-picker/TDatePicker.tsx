@@ -50,6 +50,8 @@ const TDatePicker = ({
     const [displayValue, setDisplayValue] = useState('');
     const [dateValue, setDateValue] = useState(value);
     const [timeValue, setTimeValue] = useState('');
+    const [tempDateValue, setTempDateValue] = useState('');
+    const [tempTimeValue, setTempTimeValue] = useState('');
     const [displayDateObject, setDisplayDateObject] = useState<TDateValue>({
         ...TDatePickerHelpers.currentDateValue(),
     });
@@ -141,6 +143,52 @@ const TDatePicker = ({
         },
         [dateValue, valueType, onChange, separator]
     );
+
+    const onChangeTempDate = useCallback(
+        (date: string) => {
+            setTempDateValue(date);
+        },
+        []
+    );
+
+    const onChangeTempTime = useCallback(
+        (time: string) => {
+            setTempTimeValue(time);
+        },
+        []
+    );
+
+    const onConfirm = useCallback(() => {
+        if (valueType === 'date-time') {
+            // 임시값들을 실제값으로 적용
+            const finalDate = tempDateValue || dateValue;
+            const finalTime = tempTimeValue || timeValue;
+            
+            if (finalDate) {
+                let finalValue = finalDate;
+                if (finalTime) {
+                    finalValue = `${finalDate}${finalTime}`;
+                }
+                
+                setDateValue(finalDate);
+                setTimeValue(finalTime);
+                setDisplayValue(finalValue);
+                onChange?.(TDatePickerHelpers.addDateSeparator(finalValue, separator));
+            }
+        }
+        
+        // 드롭다운 닫기
+        dropHolderRef.current?.close();
+    }, [tempDateValue, tempTimeValue, dateValue, timeValue, valueType, onChange, separator]);
+
+    const onCancel = useCallback(() => {
+        // 임시값들 초기화
+        setTempDateValue('');
+        setTempTimeValue('');
+        
+        // 드롭다운 닫기
+        dropHolderRef.current?.close();
+    }, []);
 
     const clearDate = useCallback(() => {
         setDisplayValue('');
@@ -325,6 +373,12 @@ const TDatePicker = ({
                                         showTime: valueType === 'date-time',
                                         timeValue,
                                         onChangeTimeValue,
+                                        tempDateValue,
+                                        tempTimeValue,
+                                        onChangeTempDate,
+                                        onChangeTempTime,
+                                        onConfirm,
+                                        onCancel,
                                     }}
                                 >
                                     <div

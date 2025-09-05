@@ -13,6 +13,9 @@ const TTimeSelector = ({}: TTimeSelectorProps) => {
     const {
         timeValue,
         onChangeTimeValue,
+        onChangeTempTime,
+        showTime,
+        tempTimeValue,
     } = use(datePickerConText);
 
     const timeOptions = TDatePickerHelpers.generateTimeOptions();
@@ -28,9 +31,19 @@ const TTimeSelector = ({}: TTimeSelectorProps) => {
                     <div
                         key={time}
                         className={`t-time-selector__content__time-list__item ${
-                            timeValue === time ? 't-time-selector__content__time-list__item--selected' : ''
+                            (showTime && tempTimeValue ? tempTimeValue === time : timeValue === time) 
+                                ? 't-time-selector__content__time-list__item--selected' 
+                                : ''
                         }`}
-                        onClick={() => onChangeTimeValue(time)}
+                        onClick={() => {
+                            if (showTime) {
+                                // date-time 모드: 임시값으로 저장
+                                onChangeTempTime(time);
+                            } else {
+                                // 일반 모드: 즉시 적용
+                                onChangeTimeValue(time);
+                            }
+                        }}
                     >
                         {time}
                     </div>
