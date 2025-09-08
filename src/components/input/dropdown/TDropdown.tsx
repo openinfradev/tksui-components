@@ -406,7 +406,7 @@ const TDropdown = ({
                 {!props.multiple && props.value && !props.noClearButton && (
                     <TIcon
                         className={'t-dropdown__control__remover'}
-                        small
+                        xsmall
                         fill
                         color={themeToken.tGrayColor3}
                         onClick={onClickClear}
@@ -415,10 +415,11 @@ const TDropdown = ({
                     </TIcon>
                 )}
                 <TIcon
+                    xsmall
                     className={`t-dropdown__control__opener ${isOpened ? 't-dropdown__control__opener--open' : ''}`}
                     color={props.disabled || props.readOnly ? themeToken.tGrayColor4 : themeToken.tGrayColor6}
                 >
-                    arrow_drop_down
+                    t_arrow_down
                 </TIcon>
             </div>
 
