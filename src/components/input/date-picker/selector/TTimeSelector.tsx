@@ -3,11 +3,7 @@ import {memo, use} from 'react';
 import datePickerConText from '../TDatePickerContext';
 import TDatePickerHelpers from '../TDatePickerHelpers';
 
-interface TTimeSelectorProps {
-    // props removed - using context instead
-}
-
-const TTimeSelector = ({}: TTimeSelectorProps) => {
+const TTimeSelector = () => {
     // region [Hooks]
 
     const {timeValue, onChangeTimeValue, onChangeTempTime, showTime, tempTimeValue} = use(datePickerConText);

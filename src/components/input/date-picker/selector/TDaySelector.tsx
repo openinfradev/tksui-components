@@ -1,3 +1,4 @@
+import {context} from 'esbuild';
 import {memo, use, useCallback, useMemo} from 'react';
 
 import themeToken from '~style/designToken/ThemeToken.module.scss';
@@ -28,6 +29,7 @@ const TDaySelector = () => {
         showTime,
         onChangeTempDate,
         tempDateValue,
+        tempTimeValue,
         onConfirm,
         onCancel,
     } = use(datePickerConText);
@@ -93,6 +95,10 @@ const TDaySelector = () => {
         },
         [validDateRange, selectedDateObject, displayDateObject, nowDate]
     );
+
+    const confirmButtonDisabled = useMemo(() => {
+        return !(tempDateValue && tempTimeValue);
+    }, [tempDateValue, tempTimeValue]);
 
     // endregion
 
@@ -234,7 +240,7 @@ const TDaySelector = () => {
                         <TButton small onClick={onCancel}>
                             cancel
                         </TButton>
-                        <TButton small main onClick={onConfirm}>
+                        <TButton small main onClick={onConfirm} disabled={confirmButtonDisabled}>
                             confirm
                         </TButton>
                     </div>

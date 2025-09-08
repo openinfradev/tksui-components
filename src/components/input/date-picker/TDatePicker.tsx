@@ -27,6 +27,7 @@ import TDatePickerHelpers from '~/input/date-picker/TDatePickerHelpers';
 const TDatePicker = ({
     value = '',
     valueType = 'date',
+    width = '170px',
     separator = '-',
     rules,
     successMessage,
@@ -350,7 +351,7 @@ const TDatePicker = ({
                 value={TDatePickerHelpers.addDateSeparator(displayValue, separator)}
                 onChange={onChangeDisplayDateValue}
                 onBlur={onBlurTextField}
-                width={'170px'}
+                width={width}
                 disabled={disabled}
                 customAction={
                     <TDropHolder

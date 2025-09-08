@@ -17,6 +17,7 @@ export interface TDatePickerProps extends TBaseProps, TValidatorProps {
     value?: string;
     valueType?: TDatePickerMode;
 
+    width?: string;
     disabled?: boolean;
     openFrom?: string;
     openTo?: string;
