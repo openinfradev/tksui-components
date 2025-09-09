@@ -175,18 +175,15 @@ const TDatePicker = ({
             }
         }
 
-        // 드롭다운 닫기
         dropHolderRef.current?.close();
     }, [valueType, dateValue, timeValue, tempDateValue, tempTimeValue, onChange, separator]);
 
     const onCancel = useCallback(() => {
-        // 임시값들 초기화
-        setTempDateValue('');
-        setTempTimeValue('');
+        setTempDateValue(dateValue);
+        setTempTimeValue(timeValue);
 
-        // 드롭다운 닫기
         dropHolderRef.current?.close();
-    }, []);
+    }, [dateValue, timeValue]);
 
     const clearDate = useCallback(() => {
         setDisplayValue('');
@@ -308,6 +305,18 @@ const TDatePicker = ({
         (dateStr: string) => {
             const sanitizeDate = TDatePickerHelpers.sanitizeDateInput(dateStr, valueType);
             setDisplayValue(sanitizeDate);
+
+            if (valueType === 'date-time') {
+                if (sanitizeDate.length > 8) {
+                    const datePart = sanitizeDate.substring(0, 8);
+                    const timePart = sanitizeDate.substring(8);
+                    setTempDateValue(datePart);
+                    setTempTimeValue(timePart);
+                } else {
+                    setTempDateValue(sanitizeDate);
+                    setTempTimeValue('');
+                }
+            }
         },
         [valueType]
     );
@@ -323,6 +332,32 @@ const TDatePicker = ({
     // endregion
 
     // region [Effects]
+
+    // 컴포넌트 마운트 시 tempValue 초기화
+    useEffect(() => {
+        if (valueType === 'date-time' && dateValue) {
+            if (dateValue.length > 8) {
+                const datePart = dateValue.substring(0, 8);
+                const timePart = dateValue.substring(8);
+                setTempDateValue(datePart);
+                setTempTimeValue(timePart);
+
+                const {year, month} = TDatePickerHelpers.convertToDateValue(datePart);
+                if (year !== 0 && month !== 0) {
+                    setDisplayDateObject({year, month, day: null});
+                }
+            } else {
+                setTempDateValue(dateValue);
+                setTempTimeValue(timeValue);
+
+                const {year, month} = TDatePickerHelpers.convertToDateValue(dateValue);
+                if (year !== 0 && month !== 0) {
+                    setDisplayDateObject({year, month, day: null});
+                }
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     useEffect(() => {
         updateDateValueIfValid(value);
