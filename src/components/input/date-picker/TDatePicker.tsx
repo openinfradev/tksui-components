@@ -336,9 +336,12 @@ const TDatePicker = ({
     // 컴포넌트 마운트 시 tempValue 초기화
     useEffect(() => {
         if (valueType === 'date-time' && dateValue) {
-            if (dateValue.length > 8) {
-                const datePart = dateValue.substring(0, 8);
-                const timePart = dateValue.substring(8);
+            // dateValue를 sanitize 처리 후 사용
+            const sanitizedDateValue = TDatePickerHelpers.sanitizeDateInput(dateValue, valueType);
+            
+            if (sanitizedDateValue.length > 8) {
+                const datePart = sanitizedDateValue.substring(0, 8);
+                const timePart = sanitizedDateValue.substring(8);
                 setTempDateValue(datePart);
                 setTempTimeValue(timePart);
 
@@ -347,10 +350,10 @@ const TDatePicker = ({
                     setDisplayDateObject({year, month, day: null});
                 }
             } else {
-                setTempDateValue(dateValue);
+                setTempDateValue(sanitizedDateValue);
                 setTempTimeValue(timeValue);
 
-                const {year, month} = TDatePickerHelpers.convertToDateValue(dateValue);
+                const {year, month} = TDatePickerHelpers.convertToDateValue(sanitizedDateValue);
                 if (year !== 0 && month !== 0) {
                     setDisplayDateObject({year, month, day: null});
                 }
