@@ -339,6 +339,10 @@ const TDatePicker = ({
         e.stopPropagation();
     }, []);
 
+    const onFocusTextField = useCallback(() => {
+        validator.clearValidation();
+    }, [validator]);
+
     // endregion
 
     // region [Effects]
@@ -399,6 +403,7 @@ const TDatePicker = ({
                 value={TDatePickerHelpers.addDateSeparator(displayValue, separator)}
                 onChange={onChangeDisplayDateValue}
                 onBlur={onBlurTextField}
+                onFocus={onFocusTextField}
                 width={width}
                 disabled={disabled}
                 customAction={
