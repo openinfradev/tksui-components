@@ -27,6 +27,7 @@ import TDatePickerHelpers from '~/input/date-picker/TDatePickerHelpers';
 const TDatePicker = ({
     value = '',
     valueType = 'date',
+    hint,
     width = '170px',
     separator = '-',
     rules,
@@ -89,9 +90,15 @@ const TDatePicker = ({
         if (disabled) {
             clazz.push('t-date-picker--disabled');
         }
+        if (!validator.result) {
+            clazz.push('t-date-picker--failure');
+        }
+        if (validator.result && validator.message) {
+            clazz.push('t-date-picker--success');
+        }
 
         return clazz.join(' ');
-    }, [className, disabled]);
+    }, [className, disabled, validator.message, validator.result]);
 
     const rootStyle = useMemo((): CSSProperties => {
         return style ? style : {};
@@ -338,7 +345,7 @@ const TDatePicker = ({
         if (valueType === 'date-time' && dateValue) {
             // dateValue를 sanitize 처리 후 사용
             const sanitizedDateValue = TDatePickerHelpers.sanitizeDateInput(dateValue, valueType);
-            
+
             if (sanitizedDateValue.length > 8) {
                 const datePart = sanitizedDateValue.substring(0, 8);
                 const timePart = sanitizedDateValue.substring(8);
@@ -442,6 +449,11 @@ const TDatePicker = ({
                     </TDropHolder>
                 }
             />
+            <div className={'t-date-picker__details'}>
+                <div className={'t-date-picker__details__message'} data-testid={'date-picker-message'}>
+                    {validator.message || hint}
+                </div>
+            </div>
         </div>
     );
     // endregion

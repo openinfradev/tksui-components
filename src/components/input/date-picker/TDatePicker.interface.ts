@@ -16,6 +16,7 @@ export type TDatePickerMode = 'time' | 'date' | 'date-time' | 'month' | 'year';
 export interface TDatePickerProps extends TBaseProps, TValidatorProps {
     value?: string;
     valueType?: TDatePickerMode;
+    hint?: string;
 
     width?: string;
     disabled?: boolean;

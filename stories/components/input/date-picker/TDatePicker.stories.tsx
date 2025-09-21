@@ -35,6 +35,7 @@ const Item = ({label, value, children}: {label: string; value: string; children:
 
 // region [Normal]
 
+// TODO. TimePicker 관련 내용 추가, 새로 추가한 기능들 test code 작성
 const NormalTemplate = (args: TDatePickerProps) => {
     const dateValue1 = useInputState(args.value);
     const dateValue2 = useInputState(args.value);

@@ -12,6 +12,9 @@
                 caret-color: dt.$t-primary-color;
             }
         }
+        .t-text-field__details {
+            display: none;
+        }
     }
 
     .t-drop-holder.t-date-picker__drop-holder {
@@ -24,6 +27,33 @@
     &.t-date-picker--disabled {
         .t-drop-holder.t-date-picker__drop-holder {
             pointer-events: none;
+        }
+    }
+
+    &.t-date-picker--failure {
+        @include dt.animation-shake();
+        .t-text-field__container {border-color: dt.$t-status-color-error; color: dt.$t-status-color-error;}
+        .t-date-picker__details  {color: dt.$t-status-color-error;}
+    }
+
+    &.t-date-picker--success  {
+        .t-text-field__container {border-color: dt.$t-status-color-success;}
+        .t-date-picker__details {color: dt.$t-status-color-success;}
+    }
+
+    .t-date-picker__details {
+        display: flex;
+        @include dt.typo-element-3;
+        height: 18px;
+        line-height: 18px;
+        color: dt.$t-gray-color-4;
+        margin-top: 2px;
+        position: absolute;
+        width: 100%;
+        .t-number-field__details__message {
+            flex: 1 1 auto;
+            margin-right: dt.$t-spacing-16;
+            @include dt.ellipsis;
         }
     }
 }
