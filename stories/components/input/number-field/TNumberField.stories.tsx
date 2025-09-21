@@ -156,3 +156,59 @@ export const LazyValidation: Story = {
 };
 
 // endregion
+
+// region [NoButtons]
+
+const NoButtonsTemplate = (args: TNumberFieldProps) => {
+    const numberField1 = useInputState('');
+    const numberField2 = useInputState('');
+
+    const containerStyle: CSSProperties = {
+        width: '500px',
+        border: '1px solid lightgray',
+        padding: '16px',
+        marginTop: '16px',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '16px',
+    };
+
+    return (
+        <>
+            <div style={{display: 'flex', gap: '24px'}}>
+                <div style={containerStyle}>
+                    <TNumberField
+                        {...args}
+                        label={'No Buttons - Outline'}
+                        {...numberField1}
+                        type={'outline'}
+                        noButtons
+                        min={0}
+                        max={100}
+                        step={1}
+                    />
+
+                    <TNumberField
+                        {...args}
+                        label={'No Buttons - Underline'}
+                        {...numberField2}
+                        type={'underline'}
+                        noButtons
+                        min={0}
+                        max={100}
+                        step={1}
+                    />
+                </div>
+            </div>
+        </>
+    );
+};
+
+export const NoButtons: Story = {
+    render: NoButtonsTemplate,
+    args: {
+        noButtons: true,
+    },
+};
+
+// endregion

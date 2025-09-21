@@ -1,4 +1,4 @@
-import {act, render, screen} from '@testing-library/react';
+import {render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import type {CSSProperties} from 'react';
 import {useState} from 'react';
@@ -19,6 +19,7 @@ describe('TNumberField', () => {
         required?: boolean;
         label?: string;
         placeholder?: string;
+        noButtons?: boolean;
     }) => {
         const [numberField, setNumberField] = useState<string>(props.initialValue);
         return <TNumberField value={numberField} onChange={setNumberField} {...props} />;
@@ -290,6 +291,44 @@ describe('TNumberField', () => {
 
             // Assert
             expect(inputElement).toHaveValue(6);
+        });
+    });
+
+    describe('noButtons', () => {
+        it('When noButtons is true, action buttons should not be rendered', () => {
+            // Arrange
+            render(<NumberField noButtons />);
+
+            // Assert
+            const incrementButton = screen.queryByTestId('number-field__increment-button');
+            const decrementButton = screen.queryByTestId('number-field__decrement-button');
+
+            expect(incrementButton).not.toBeInTheDocument();
+            expect(decrementButton).not.toBeInTheDocument();
+        });
+
+        it('When noButtons is false or undefined, action buttons should be rendered', () => {
+            // Arrange
+            render(<NumberField noButtons={false} />);
+
+            // Assert
+            const incrementButton = screen.getByTestId('number-field__increment-button');
+            const decrementButton = screen.getByTestId('number-field__decrement-button');
+
+            expect(incrementButton).toBeInTheDocument();
+            expect(decrementButton).toBeInTheDocument();
+        });
+
+        it('When noButtons is undefined (default), action buttons should be rendered', () => {
+            // Arrange
+            render(<NumberField />);
+
+            // Assert
+            const incrementButton = screen.getByTestId('number-field__increment-button');
+            const decrementButton = screen.getByTestId('number-field__decrement-button');
+
+            expect(incrementButton).toBeInTheDocument();
+            expect(decrementButton).toBeInTheDocument();
         });
     });
 });
