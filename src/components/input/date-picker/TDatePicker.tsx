@@ -69,6 +69,9 @@ const TDatePicker = ({
         validate() {
             return validator.validate();
         },
+        clearValidation() {
+            validator.clearValidation();
+        },
         getDate() {
             return dateValue;
         },

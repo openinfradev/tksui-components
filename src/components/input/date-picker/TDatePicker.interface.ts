@@ -35,6 +35,7 @@ export interface TDatePickerRef {
     focus(): void;
     open(): void;
     validate(): true | string;
+    clearValidation(): void;
     getDate(): string;
     scrollToComponent(): void;
 }
