@@ -230,6 +230,8 @@ const TDatePicker = ({
     }, [openFrom, valueType, openTo, currentSelector]);
 
     const initializeDisplayDate = useCallback((): void => {
+        validator.clearValidation();
+
         setCurrentSelector(valueType);
         const {year, month} = TDatePickerHelpers.convertToDateValue(dateValue);
 
