@@ -3,6 +3,34 @@ import themeToken from '~style/designToken/ThemeToken.module.scss';
 // prettier-ignore
 const TOriginalImage = {
     // region [Gaia]
+    t_resource_temp: (
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g opacity="0.5">
+                <path d="M21 58H19V54H21V58Z" fill="currentColor"/>
+                <path d="M27 58H25V54H27V58Z" fill="currentColor"/>
+                <path d="M33 58H31V54H33V58Z" fill="currentColor"/>
+                <path d="M39 58H37V54H39V58Z" fill="currentColor"/>
+                <path d="M45 58H43V54H45V58Z" fill="currentColor"/>
+                <path d="M10 45H6V43H10V45Z" fill="currentColor"/>
+                <path d="M58 45H54V43H58V45Z" fill="currentColor"/>
+                <path d="M10 39H6V37H10V39Z" fill="currentColor"/>
+                <path d="M58 39H54V37H58V39Z" fill="currentColor"/>
+                <path d="M10 33H6V31H10V33Z" fill="currentColor"/>
+                <path d="M58 33H54V31H58V33Z" fill="currentColor"/>
+                <path d="M10 27H6V25H10V27Z" fill="currentColor"/>
+                <path d="M58 27H54V25H58V27Z" fill="currentColor"/>
+                <path d="M10 21H6V19H10V21Z" fill="currentColor"/>
+                <path d="M58 21H54V19H58V21Z" fill="currentColor"/>
+                <path d="M21 10H19V6H21V10Z" fill="currentColor"/>
+                <path d="M27 10H25V6H27V10Z" fill="currentColor"/>
+                <path d="M33 10H31V6H33V10Z" fill="currentColor"/>
+                <path d="M39 10H37V6H39V10Z" fill="currentColor"/>
+                <path d="M45 10H43V6H45V10Z" fill="currentColor"/>
+            </g>
+            <path d="M22.5 21C23.3284 21 24 21.6716 24 22.5C24 23.3284 23.3284 24 22.5 24C21.6716 24 21 23.3284 21 22.5C21 21.6716 21.6716 21 22.5 21Z" fill="currentColor"/>
+            <path fillRule="evenodd" clipRule="evenodd" d="M46.7783 13C49.1101 13.0002 51 14.8909 51 17.2227V46.7773C51 49.1091 49.1101 50.9998 46.7783 51H17.2227C14.8908 51 13 49.1092 13 46.7773V17.2227C13 14.8908 14.8908 13 17.2227 13H46.7783ZM32.75 23.3633C27.9004 23.3633 24.1934 26.8164 24.1934 32.8086C24.1934 38.8008 27.8242 42.2539 32.75 42.2539C37.4219 42.2539 40.2656 39.1562 40.6973 35.7539L36.8379 35.7285C36.457 37.709 34.9082 38.877 32.8008 38.877C29.9824 38.877 28.0781 36.7695 28.0781 32.8086C28.0781 28.9492 29.957 26.7402 32.8262 26.7402C34.959 26.7402 36.5332 27.9844 36.8379 30.0156H40.6973C40.1895 25.8008 36.9902 23.3633 32.75 23.3633ZM22.5 19C20.567 19 19 20.567 19 22.5C19 24.433 20.567 26 22.5 26C24.433 26 26 24.433 26 22.5C26 20.567 24.433 19 22.5 19Z" fill="currentColor"/>
+        </svg>
+    ),
     t_pencil: (
         <svg viewBox='0 0 18 18'>
             <path
