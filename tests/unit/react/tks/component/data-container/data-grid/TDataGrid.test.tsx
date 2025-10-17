@@ -175,5 +175,35 @@ describe('TDataGrid', () => {
             // Assert
             expect(root.parentElement).toHaveClass('t-action-bar__container__right-action');
         });
+
+        it('Default totalRowsLabels are displayed correctly', () => {
+            // Arrange
+            render(<TDataGrid {...baseProps} />);
+            const paginationElement = screen.getByTestId('data-grid-header-root')
+                .querySelector('.t-data-grid__header__pagination');
+
+            // Assert
+            expect(paginationElement).toBeInTheDocument();
+            expect(paginationElement?.textContent).toContain('총');
+            expect(paginationElement?.textContent).toContain('건');
+            expect(paginationElement?.textContent).toContain('2');
+        });
+
+        it('Custom totalRowsLabels are displayed correctly', () => {
+            // Arrange
+            const customLabels = {
+                prefix: 'Total',
+                suffix: 'items',
+            };
+            render(<TDataGrid {...baseProps} totalRowsLabels={customLabels} />);
+            const paginationElement = screen.getByTestId('data-grid-header-root')
+                .querySelector('.t-data-grid__header__pagination');
+
+            // Assert
+            expect(paginationElement).toBeInTheDocument();
+            expect(paginationElement?.textContent).toContain('Total');
+            expect(paginationElement?.textContent).toContain('items');
+            expect(paginationElement?.textContent).toContain('2');
+        });
     });
 });

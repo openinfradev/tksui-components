@@ -7,14 +7,18 @@ export interface TDateValue {
     year: number | null;
     month: number | null;
     day: number | null;
+    hour?: number | null;
+    minute?: number | null;
 }
 
-export type TDatePickerMode = 'date' | 'month' | 'year';
+export type TDatePickerMode = 'time' | 'date' | 'date-time' | 'month' | 'year';
 
 export interface TDatePickerProps extends TBaseProps, TValidatorProps {
     value?: string;
     valueType?: TDatePickerMode;
+    hint?: string;
 
+    width?: string;
     disabled?: boolean;
     openFrom?: string;
     openTo?: string;
@@ -31,6 +35,7 @@ export interface TDatePickerRef {
     focus(): void;
     open(): void;
     validate(): true | string;
+    clearValidation(): void;
     getDate(): string;
     scrollToComponent(): void;
 }

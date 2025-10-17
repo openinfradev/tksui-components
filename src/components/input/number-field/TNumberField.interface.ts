@@ -14,6 +14,7 @@ export interface TNumberFieldProps extends TBaseProps, TValidatorProps {
 
     disabled?: boolean;
     required?: boolean;
+    noButtons?: boolean;
 
     placeholder?: string;
     label?: string;

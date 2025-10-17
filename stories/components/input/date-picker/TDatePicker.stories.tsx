@@ -1,10 +1,11 @@
 import type {Meta, StoryObj} from '@storybook/react';
 import type {ReactNode} from 'react';
-import React from 'react';
+import React, {useState} from 'react';
 
 import useInputState from '@/common/hook/UseInputState';
 
 import type {TDatePickerProps} from '~/input/date-picker';
+import TTimeSelector from '~/input/date-picker/selector/TTimeSelector';
 import TDatePicker from '~/input/date-picker/TDatePicker';
 
 const meta: Meta<typeof TDatePicker> = {
@@ -34,6 +35,7 @@ const Item = ({label, value, children}: {label: string; value: string; children:
 
 // region [Normal]
 
+// TODO. TimePicker 관련 내용 추가, 새로 추가한 기능들 test code 작성
 const NormalTemplate = (args: TDatePickerProps) => {
     const dateValue1 = useInputState(args.value);
     const dateValue2 = useInputState(args.value);
@@ -78,6 +80,38 @@ const NormalTemplate = (args: TDatePickerProps) => {
             </Container>
         </Wrapper>
     );
+};
+
+const TimeTemplate = (args: TDatePickerProps) => {
+    const [time, setTime] = useState(args.value);
+
+    return (
+        <Wrapper>
+            <Container>
+                <TTimeSelector value={time} onChange={setTime} />
+            </Container>
+        </Wrapper>
+    );
+};
+
+export const TimeType: Story = {
+    render: TimeTemplate,
+    args: {
+        valueType: 'time',
+        value: '20240212',
+        openFrom: '20240210',
+        openTo: '20240320',
+    },
+};
+
+export const DateTimeType: Story = {
+    render: NormalTemplate,
+    args: {
+        valueType: 'date-time',
+        value: '20240212',
+        openFrom: '20240210',
+        openTo: '20240320',
+    },
 };
 
 export const DateType: Story = {

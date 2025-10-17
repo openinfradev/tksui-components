@@ -25,6 +25,10 @@ const TDataGrid = ({
     enableCellTextSelection = true,
     headerHeight = DEFAULT_HEADER_HEIGHT,
     rowHeight = DEFAULT_ROW_HEIGHT,
+    totalRowsLabels = {
+        prefix: '총',
+        suffix: '건',
+    },
     onChange,
     onSelectionChanged,
     ref,
@@ -40,6 +44,7 @@ const TDataGrid = ({
         enableCellTextSelection,
         headerHeight,
         rowHeight,
+        totalRowsLabels,
         onChange,
         onSelectionChanged,
         ...restProps,
@@ -144,11 +149,11 @@ const TDataGrid = ({
                 <div className={'t-data-grid__header'} data-testid={'data-grid-header-root'}>
                     {!props.noTotalRows && (
                         <div className={'t-data-grid__header__pagination'}>
-                            총{' '}
+                            {totalRowsLabels.prefix}{' '}
                             <strong>
                                 {NumberUtil.toLocaleString(props.paging?.totalRows ?? props.rowData.length)}
                             </strong>
-                            건
+                            {totalRowsLabels.suffix}
                         </div>
                     )}
                     {selectedRows.length > 0 && (

@@ -5,6 +5,7 @@ import themeToken from '~style/designToken/ThemeToken.module.scss';
 import TButton from '~/button/button/TButton';
 import TIcon from '~/icon/TIcon';
 import type {TDateValue} from '~/input/date-picker';
+import TTimeSelector from '~/input/date-picker/selector/TTimeSelector';
 import datePickerConText from '~/input/date-picker/TDatePickerContext';
 
 const weekList = ['일', '월', '화', '수', '목', '금', '토'];
@@ -24,14 +25,23 @@ const TDaySelector = () => {
         nowDate,
         parseDateString,
         validDateRange,
+        showTime,
+        onChangeTempDate,
+        tempDateValue,
+        tempTimeValue,
+        onConfirm,
+        onCancel,
     } = use(datePickerConText);
 
     const selectedDateObject = useMemo((): TDateValue => {
-        if (dateValue === '') {
+        // showTime이 true일 때는 tempDateValue 우선, 아니면 dateValue 사용
+        const targetValue = showTime && tempDateValue ? tempDateValue : dateValue;
+
+        if (targetValue === '') {
             return {year: null, month: null, day: null};
         }
 
-        const {year, month, day} = parseDateString(dateValue);
+        const {year, month, day} = parseDateString(targetValue);
 
         if (year !== 0 && month !== 0 && day !== 0) {
             return {year, month, day};
@@ -39,7 +49,7 @@ const TDaySelector = () => {
 
         return {year: null, month: null, day: null};
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dateValue]);
+    }, [dateValue, tempDateValue, showTime]);
 
     // endregion
 
@@ -85,6 +95,10 @@ const TDaySelector = () => {
         [validDateRange, selectedDateObject, displayDateObject, nowDate]
     );
 
+    const confirmButtonDisabled = useMemo(() => {
+        return !(tempDateValue && tempTimeValue);
+    }, [tempDateValue, tempTimeValue]);
+
     // endregion
 
     // region [Events]
@@ -96,11 +110,17 @@ const TDaySelector = () => {
 
             const dateStr = `${displayDateObject.year}${twoDigitMonth}${twoDigitDate}`;
 
-            if (onChangeValue) {
-                onChangeValue(dateStr);
+            if (showTime) {
+                // date-time 모드: 임시값으로 저장 (드롭다운 닫지 않음)
+                onChangeTempDate(dateStr);
+            } else {
+                // date 모드: 즉시 적용 (기존 동작)
+                if (onChangeValue) {
+                    onChangeValue(dateStr);
+                }
             }
         },
-        [onChangeValue, displayDateObject]
+        [onChangeValue, onChangeTempDate, displayDateObject, showTime]
     );
 
     const onMoveMonth = useCallback((move: 'next' | 'prev' | 'today') => {
@@ -128,87 +148,103 @@ const TDaySelector = () => {
 
     return (
         <div className={'t-day-selector'} data-testid={'t-day-selector'}>
-            <div className={'t-day-selector__header'}>
-                <div className={'t-day-selector__header__current-display-date'}>
-                    <div
-                        className={'t-day-selector-display-year-month'}
-                        data-testid={'t-day-selector-display-year-month'}
-                        onClick={() => {
-                            changeViewMode('month');
-                        }}
-                    >
-                        {`${displayDateObject.year}년 ${displayDateObject.month}월`}
-                    </div>
-                    <TIcon
-                        onClick={() => {
-                            changeViewMode('year');
-                        }}
-                        xsmall
-                        className={'t-day-selector-display-date__icon'}
-                    >
-                        arrow_drop_down
-                    </TIcon>
-                </div>
-
-                <div className={'t-day-selector__header__control'} data-testid={'t-day-selector-control'}>
-                    <TButton
-                        onClick={() => {
-                            onMoveMonth('prev');
-                        }}
-                        xsmall
-                        className={'t-day-selector__header__control__icon-button'}
-                    >
-                        <TIcon xsmall color={themeToken.tGrayColor5}>
-                            arrow_left
-                        </TIcon>
-                    </TButton>
-                    <TButton
-                        onClick={() => {
-                            onMoveMonth('today');
-                        }}
-                        xsmall
-                        className={'t-day-selector__header__control__today-button'}
-                    >
-                        오늘
-                    </TButton>
-                    <TButton
-                        onClick={() => {
-                            onMoveMonth('next');
-                        }}
-                        xsmall
-                        className={'t-day-selector__header__control__icon-button'}
-                    >
-                        <TIcon xsmall color={themeToken.tGrayColor5}>
-                            arrow_right
-                        </TIcon>
-                    </TButton>
-                </div>
-            </div>
-
-            <div className={'t-day-selector__content'}>
-                <div className={'t-day-selector__content__weekday'}>
-                    {weekList?.map((day) => <MemoizedDaySpan key={day} day={day} />)}
-                </div>
-
-                <div className={'t-day-selector__content__day-container'}>
-                    {daysInMonth?.map((a) => (
+            <div className={'t-day-selector__date-section'}>
+                <div className={'t-day-selector__header'}>
+                    <div className={'t-day-selector__header__current-display-date'}>
                         <div
-                            key={a}
-                            className={'t-day-selector__content__day-container__item'}
-                            style={a === 0 ? {gridColumn: firstDayOfWeek} : {}}
+                            className={'t-day-selector-display-year-month'}
+                            data-testid={'t-day-selector-display-year-month'}
                             onClick={() => {
-                                onClickDate(a + 1);
+                                changeViewMode('month');
                             }}
                         >
-                            <div
-                                className={`t-day-selector__content__day-container__item__day ${dateLabelClass(a + 1)}`}
-                            >
-                                {a + 1}
-                            </div>
+                            {`${displayDateObject.year}년 ${displayDateObject.month}월`}
                         </div>
-                    ))}
+                        <TIcon
+                            onClick={() => {
+                                changeViewMode('year');
+                            }}
+                            xsmall
+                            className={'t-day-selector-display-date__icon'}
+                        >
+                            arrow_drop_down
+                        </TIcon>
+                    </div>
+
+                    <div className={'t-day-selector__header__control'} data-testid={'t-day-selector-control'}>
+                        <TButton
+                            onClick={() => {
+                                onMoveMonth('prev');
+                            }}
+                            xsmall
+                            className={'t-day-selector__header__control__icon-button'}
+                        >
+                            <TIcon xsmall color={themeToken.tGrayColor5}>
+                                arrow_left
+                            </TIcon>
+                        </TButton>
+                        <TButton
+                            onClick={() => {
+                                onMoveMonth('today');
+                            }}
+                            xsmall
+                            className={'t-day-selector__header__control__today-button'}
+                        >
+                            오늘
+                        </TButton>
+                        <TButton
+                            onClick={() => {
+                                onMoveMonth('next');
+                            }}
+                            xsmall
+                            className={'t-day-selector__header__control__icon-button'}
+                        >
+                            <TIcon xsmall color={themeToken.tGrayColor5}>
+                                arrow_right
+                            </TIcon>
+                        </TButton>
+                    </div>
+                </div>
+
+                <div className={'t-day-selector__content'}>
+                    <div className={'t-day-selector__content__weekday'}>
+                        {weekList?.map((day) => <MemoizedDaySpan key={day} day={day} />)}
+                    </div>
+
+                    <div className={'t-day-selector__content__day-container'}>
+                        {daysInMonth?.map((a) => (
+                            <div
+                                key={a}
+                                className={'t-day-selector__content__day-container__item'}
+                                style={a === 0 ? {gridColumn: firstDayOfWeek} : {}}
+                                onClick={() => {
+                                    onClickDate(a + 1);
+                                }}
+                            >
+                                <div
+                                    className={`t-day-selector__content__day-container__item__day ${dateLabelClass(a + 1)}`}
+                                >
+                                    {a + 1}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
+
+            {showTime && (
+                <div className={'t-day-selector__time-section'}>
+                    <TTimeSelector />
+                    <div className={'t-day-selector__time-section__actions'}>
+                        <TButton small onClick={onCancel}>
+                            cancel
+                        </TButton>
+                        <TButton small main onClick={onConfirm} disabled={confirmButtonDisabled}>
+                            confirm
+                        </TButton>
+                    </div>
+                </div>
+            )}
         </div>
     );
     // endregion

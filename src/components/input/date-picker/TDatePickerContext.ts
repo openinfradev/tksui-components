@@ -27,6 +27,20 @@ export interface TDatePickerContext {
 
     parseDateString: (date: string) => TDateValue;
     parseDateObject: (dateObj: TDateValue) => string;
+
+    showTime: boolean;
+    timeValue: string;
+    onChangeTimeValue: (time: string) => void;
+
+    // 임시값들 (date-time 모드용)
+    tempDateValue: string;
+    tempTimeValue: string;
+    
+    // 새로운 이벤트 핸들러들
+    onChangeTempDate: (date: string) => void;
+    onChangeTempTime: (time: string) => void;
+    onConfirm: () => void;
+    onCancel: () => void;
 }
 
 export const datePickerConText = createContext<TDatePickerContext>({
@@ -46,5 +60,19 @@ export const datePickerConText = createContext<TDatePickerContext>({
     validDateRange: null,
     parseDateString: null,
     parseDateObject: null,
+
+    showTime: false,
+    timeValue: '',
+    onChangeTimeValue: (time) => time,
+
+    // 임시값들
+    tempDateValue: '',
+    tempTimeValue: '',
+    
+    // 새로운 이벤트 핸들러들
+    onChangeTempDate: (date) => date,
+    onChangeTempTime: (time) => time,
+    onConfirm: () => {},
+    onCancel: () => {},
 });
 export default datePickerConText;

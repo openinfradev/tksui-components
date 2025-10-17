@@ -27,6 +27,8 @@ import TDatePickerHelpers from '~/input/date-picker/TDatePickerHelpers';
 const TDatePicker = ({
     value = '',
     valueType = 'date',
+    hint,
+    width = '170px',
     separator = '-',
     rules,
     successMessage,
@@ -49,6 +51,9 @@ const TDatePicker = ({
     const [currentSelector, setCurrentSelector] = useState<TDatePickerMode>(valueType);
     const [displayValue, setDisplayValue] = useState('');
     const [dateValue, setDateValue] = useState(value);
+    const [timeValue, setTimeValue] = useState('');
+    const [tempDateValue, setTempDateValue] = useState('');
+    const [tempTimeValue, setTempTimeValue] = useState('');
     const [displayDateObject, setDisplayDateObject] = useState<TDateValue>({
         ...TDatePickerHelpers.currentDateValue(),
     });
@@ -63,6 +68,9 @@ const TDatePicker = ({
         },
         validate() {
             return validator.validate();
+        },
+        clearValidation() {
+            validator.clearValidation();
         },
         getDate() {
             return dateValue;
@@ -85,9 +93,15 @@ const TDatePicker = ({
         if (disabled) {
             clazz.push('t-date-picker--disabled');
         }
+        if (!validator.result) {
+            clazz.push('t-date-picker--failure');
+        }
+        if (validator.result && validator.message) {
+            clazz.push('t-date-picker--success');
+        }
 
         return clazz.join(' ');
-    }, [className, disabled]);
+    }, [className, disabled, validator.message, validator.result]);
 
     const rootStyle = useMemo((): CSSProperties => {
         return style ? style : {};
@@ -106,7 +120,7 @@ const TDatePicker = ({
 
     const modifyCurrentSelector = useCallback(
         (val: TDatePickerMode) => {
-            if (valueType === 'date') {
+            if (valueType === 'date' || valueType === 'date-time') {
                 setCurrentSelector(val);
             } else if (valueType === 'month' && val !== 'date') {
                 setCurrentSelector(val);
@@ -126,6 +140,60 @@ const TDatePicker = ({
         },
         [onChange, separator]
     );
+
+    const onChangeTimeValue = useCallback(
+        (time: string) => {
+            setTimeValue(time);
+
+            // If we have both date and time, combine them
+            if (dateValue && valueType === 'date-time') {
+                const combinedDateTime = `${dateValue}${time}`;
+                setDisplayValue(combinedDateTime);
+                onChange?.(TDatePickerHelpers.addDateSeparator(combinedDateTime, separator));
+            }
+        },
+        [dateValue, valueType, onChange, separator]
+    );
+
+    const onChangeTempDate = useCallback((date: string) => {
+        setTempDateValue(date);
+    }, []);
+
+    const onChangeTempTime = useCallback((time: string) => {
+        setTempTimeValue(time);
+    }, []);
+
+    const onConfirm = useCallback(() => {
+        if (valueType === 'date-time') {
+            let finalDate = tempDateValue || dateValue;
+            const finalTime = tempTimeValue || timeValue;
+
+            if (finalDate.length > 8) {
+                finalDate = finalDate.substring(0, 8);
+            }
+
+            if (finalDate) {
+                let finalValue = finalDate;
+                if (finalTime) {
+                    finalValue = `${finalDate}${finalTime}`;
+                }
+
+                setDateValue(finalDate);
+                setTimeValue(finalTime);
+                setDisplayValue(finalValue);
+                onChange?.(TDatePickerHelpers.addDateSeparator(finalValue, separator));
+            }
+        }
+
+        dropHolderRef.current?.close();
+    }, [valueType, dateValue, timeValue, tempDateValue, tempTimeValue, onChange, separator]);
+
+    const onCancel = useCallback(() => {
+        setTempDateValue(dateValue);
+        setTempTimeValue(timeValue);
+
+        dropHolderRef.current?.close();
+    }, [dateValue, timeValue]);
 
     const clearDate = useCallback(() => {
         setDisplayValue('');
@@ -162,6 +230,8 @@ const TDatePicker = ({
     }, [openFrom, valueType, openTo, currentSelector]);
 
     const initializeDisplayDate = useCallback((): void => {
+        validator.clearValidation();
+
         setCurrentSelector(valueType);
         const {year, month} = TDatePickerHelpers.convertToDateValue(dateValue);
 
@@ -199,13 +269,24 @@ const TDatePicker = ({
             const isValidDate: boolean = TDatePickerHelpers.validateDateFormat(sanitizedDate, currentSelector);
             const isValidRange: boolean = validateDateRange(sanitizedDate);
 
-            const {year, month, day} = TDatePickerHelpers.convertToDateValue(sanitizedDate);
+            const {year, month, day, hour, minute} = TDatePickerHelpers.convertToDateValue(sanitizedDate);
             const formattedDateStr: string = TDatePickerHelpers.convertToDateString({year, month, day});
 
             if (isValidDate && isValidRange) {
                 switch (currentSelector) {
                     case 'date': {
                         setDate(formattedDateStr);
+                        break;
+                    }
+                    case 'date-time': {
+                        const formattedDateTimeStr = TDatePickerHelpers.convertToDateString({
+                            year,
+                            month,
+                            day,
+                            hour,
+                            minute,
+                        });
+                        setDate(formattedDateTimeStr);
                         break;
                     }
                     case 'month': {
@@ -236,6 +317,18 @@ const TDatePicker = ({
         (dateStr: string) => {
             const sanitizeDate = TDatePickerHelpers.sanitizeDateInput(dateStr, valueType);
             setDisplayValue(sanitizeDate);
+
+            if (valueType === 'date-time') {
+                if (sanitizeDate.length > 8) {
+                    const datePart = sanitizeDate.substring(0, 8);
+                    const timePart = sanitizeDate.substring(8);
+                    setTempDateValue(datePart);
+                    setTempTimeValue(timePart);
+                } else {
+                    setTempDateValue(sanitizeDate);
+                    setTempTimeValue('');
+                }
+            }
         },
         [valueType]
     );
@@ -248,9 +341,42 @@ const TDatePicker = ({
         e.stopPropagation();
     }, []);
 
+    const onFocusTextField = useCallback(() => {
+        validator.clearValidation();
+    }, [validator]);
+
     // endregion
 
     // region [Effects]
+
+    // 컴포넌트 마운트 시 tempValue 초기화
+    useEffect(() => {
+        if (valueType === 'date-time' && dateValue) {
+            // dateValue를 sanitize 처리 후 사용
+            const sanitizedDateValue = TDatePickerHelpers.sanitizeDateInput(dateValue, valueType);
+
+            if (sanitizedDateValue.length > 8) {
+                const datePart = sanitizedDateValue.substring(0, 8);
+                const timePart = sanitizedDateValue.substring(8);
+                setTempDateValue(datePart);
+                setTempTimeValue(timePart);
+
+                const {year, month} = TDatePickerHelpers.convertToDateValue(datePart);
+                if (year !== 0 && month !== 0) {
+                    setDisplayDateObject({year, month, day: null});
+                }
+            } else {
+                setTempDateValue(sanitizedDateValue);
+                setTempTimeValue(timeValue);
+
+                const {year, month} = TDatePickerHelpers.convertToDateValue(sanitizedDateValue);
+                if (year !== 0 && month !== 0) {
+                    setDisplayDateObject({year, month, day: null});
+                }
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     useEffect(() => {
         updateDateValueIfValid(value);
@@ -279,7 +405,8 @@ const TDatePicker = ({
                 value={TDatePickerHelpers.addDateSeparator(displayValue, separator)}
                 onChange={onChangeDisplayDateValue}
                 onBlur={onBlurTextField}
-                width={'156px'}
+                onFocus={onFocusTextField}
+                width={width}
                 disabled={disabled}
                 customAction={
                     <TDropHolder
@@ -302,6 +429,15 @@ const TDatePicker = ({
                                         nowDate: TDatePickerHelpers.currentDateValue,
                                         parseDateString: TDatePickerHelpers.convertToDateValue,
                                         parseDateObject: TDatePickerHelpers.convertToDateString,
+                                        showTime: valueType === 'date-time',
+                                        timeValue,
+                                        onChangeTimeValue,
+                                        tempDateValue,
+                                        tempTimeValue,
+                                        onChangeTempDate,
+                                        onChangeTempTime,
+                                        onConfirm,
+                                        onCancel,
                                     }}
                                 >
                                     <div
@@ -309,6 +445,7 @@ const TDatePicker = ({
                                         onClick={onClickDropHolder}
                                     >
                                         {currentSelector === 'date' && <TDaySelector />}
+                                        {currentSelector === 'date-time' && <TDaySelector />}
                                         {currentSelector === 'month' && <TMonthSelector />}
                                         {currentSelector === 'year' && <TYearSelector />}
                                     </div>
@@ -322,6 +459,11 @@ const TDatePicker = ({
                     </TDropHolder>
                 }
             />
+            <div className={'t-date-picker__details'}>
+                <div className={'t-date-picker__details__message'} data-testid={'date-picker-message'}>
+                    {validator.message || hint}
+                </div>
+            </div>
         </div>
     );
     // endregion

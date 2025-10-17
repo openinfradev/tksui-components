@@ -1,17 +1,32 @@
 import type {TDatePickerBounds, TDatePickerMode, TDateValue} from '@/components';
 
 const convertToDateValue = (date: string): TDateValue => {
-    // YYYY-MM-DD -> {year: '2024', month: '02', date: '29'}
+    // YYYY-MM-DD HH:MM -> {year: '2024', month: '02', day: '29', hour: '14', minute: '30'}
     const yearPart = date?.substring(0, 4);
     const monthPart = date?.substring(4, 6);
     const dayPart = date?.substring(6, 8);
+    const hourPart = date?.substring(8, 10);
+    const minutePart = date?.substring(10, 12);
 
-    return {year: Number(yearPart), month: Number(monthPart), day: Number(dayPart)};
+    return {
+        year: Number(yearPart),
+        month: Number(monthPart),
+        day: Number(dayPart),
+        hour: hourPart ? Number(hourPart) : null,
+        minute: minutePart ? Number(minutePart) : null,
+    };
 };
 
-const convertToDateString = ({year, month, day}: TDateValue): string => {
+const convertToDateString = ({year, month, day, hour, minute}: TDateValue): string => {
     const pad = (num: number) => String(num).padStart(2, '0');
-    return `${year}${pad(month)}${pad(day)}`;
+    let result = `${year}${pad(month)}${pad(day)}`;
+
+    if (hour !== null && hour !== undefined) {
+        result += pad(hour);
+        result += pad(minute || 0);
+    }
+
+    return result;
 };
 
 const addDateSeparator = (date: string, separator: string) => {
@@ -19,6 +34,8 @@ const addDateSeparator = (date: string, separator: string) => {
     const yearStr = date.substring(0, 4);
     const monthStr = date.substring(4, 6);
     const dayStr = date.substring(6, 8);
+    const hourStr = date.substring(8, 10);
+    const minuteStr = date.substring(10, 12);
 
     if (dateLength < 5) {
         return yearStr;
@@ -26,13 +43,21 @@ const addDateSeparator = (date: string, separator: string) => {
     if (dateLength < 7) {
         return `${yearStr}${separator}${monthStr}`;
     }
-    return `${yearStr}${separator}${monthStr}${separator}${dayStr}`;
+    if (dateLength < 9) {
+        return `${yearStr}${separator}${monthStr}${separator}${dayStr}`;
+    }
+    if (dateLength < 11) {
+        return `${yearStr}${separator}${monthStr}${separator}${dayStr} ${hourStr}`;
+    }
+    return `${yearStr}${separator}${monthStr}${separator}${dayStr} ${hourStr}:${minuteStr}`;
 };
 
 const sanitizeDateInput = (dateStr: string, valueType: TDatePickerMode) => {
     let maxAllowedLength = 8;
 
-    if (valueType === 'month') {
+    if (valueType === 'date-time') {
+        maxAllowedLength = 12;
+    } else if (valueType === 'month') {
         maxAllowedLength = 6;
     } else if (valueType === 'year') {
         maxAllowedLength = 4;
@@ -42,25 +67,23 @@ const sanitizeDateInput = (dateStr: string, valueType: TDatePickerMode) => {
 };
 
 const validateFormat = (dateStr: string, valueType: TDatePickerMode): boolean => {
-    const {year, month, day} = convertToDateValue(dateStr);
+    const {year, month, day, hour, minute} = convertToDateValue(dateStr);
     const lastDayOfMonth = new Date(year, month, 0).getDate();
 
     const isValidYear = year > 999;
     const isValidMonth = month > 0 && month < 13;
     const isValidDate = day > 0 && day <= lastDayOfMonth;
+    const isValidHour = hour === null || (hour >= 0 && hour <= 23);
+    const isValidMinute = minute === null || (minute >= 0 && minute <= 59);
 
-    if (valueType === 'date') {
-        if (isValidYear && isValidMonth && isValidDate) {
-            return true;
-        }
+    if (valueType === 'date-time') {
+        return isValidYear && isValidMonth && isValidDate && isValidHour && isValidMinute;
+    } else if (valueType === 'date') {
+        return isValidYear && isValidMonth && isValidDate;
     } else if (valueType === 'month') {
-        if (isValidYear && isValidMonth) {
-            return true;
-        }
+        return isValidYear && isValidMonth;
     } else if (valueType === 'year') {
-        if (isValidYear) {
-            return true;
-        }
+        return isValidYear;
     }
     return false;
 };
@@ -90,7 +113,20 @@ const currentDateValue = (): TDateValue => {
         year: now.getFullYear(),
         month: now.getMonth() + 1,
         day: now.getDate(),
+        hour: now.getHours(),
+        minute: now.getMinutes(),
     };
+};
+
+const generateTimeOptions = (): string[] => {
+    const options: string[] = [];
+    for (let hour = 0; hour < 24; hour++) {
+        for (let minute = 0; minute < 60; minute += 30) {
+            const pad = (num: number) => String(num).padStart(2, '0');
+            options.push(`${pad(hour)}:${pad(minute)}`);
+        }
+    }
+    return options;
 };
 
 export default {
@@ -101,4 +137,5 @@ export default {
     validateDateFormat: validateFormat,
     validateDateRange: validDateRange,
     currentDateValue,
+    generateTimeOptions,
 };

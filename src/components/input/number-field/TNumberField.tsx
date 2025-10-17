@@ -12,6 +12,7 @@ const TNumberField = ({
     min = -100000000000,
     max = 100000000000,
     step = 1,
+    noButtons = false,
     onChange,
     onKeyDown,
     onKeyDownEnter,
@@ -26,6 +27,7 @@ const TNumberField = ({
         min,
         max,
         step,
+        noButtons,
         onChange,
         onKeyDown,
         onKeyDownEnter,
@@ -262,7 +264,7 @@ const TNumberField = ({
                     onBlur={onBlur}
                     data-testid={'number-field-input-root'}
                 />
-                {
+                {!props.noButtons && (
                     <div className={'t-number-field__container__action-icon'}>
                         <div
                             className={`t-number-field__container__action-icon__increment ${incrementButtonClass}`}
@@ -276,7 +278,7 @@ const TNumberField = ({
                             data-testid={'number-field__decrement-button'}
                         />
                     </div>
-                }
+                )}
             </div>
             <div className={'t-number-field__details'}>
                 <div className={'t-number-field__details__message'} data-testid={'number-field-message'}>
