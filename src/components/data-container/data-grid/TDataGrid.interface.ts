@@ -46,6 +46,11 @@ export interface TDataGridProps extends TBaseProps, AgGridReactProps {
         addButtonHandler(): void;
     };
 
+    totalRowsLabels?: {
+        prefix: string;
+        suffix: string;
+    };
+
     ref?: Ref<AgGridReact>;
 
     onChangePageNumber?(value): void;
